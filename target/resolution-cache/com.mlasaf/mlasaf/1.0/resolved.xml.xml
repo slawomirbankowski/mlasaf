@@ -4,7 +4,7 @@
 		module="mlasaf"
 		revision="1.0"
 		status="integration"
-		publication="20171117161803"
+		publication="20171117182724"
 	>
 		<description>
 		mlasaf
@@ -75,6 +75,5 @@
 		<dependency org="net.schmizz" name="sshj" rev="0.10.0" conf="compile->default(compile)"/>
 		<dependency org="com.sparkjava" name="spark-core" rev="2.6.0" conf="compile->default(compile)"/>
 		<dependency org="com.fasterxml.jackson.core" name="jackson-databind" rev="2.0.2" conf="compile->default(compile)"/>
-		<dependency org="com.github.bigtoast" name="sbt-liquibase" rev="0.5" conf="compile->default(compile)" e:sbtVersion="1.0" e:scalaVersion="2.11"/>
 	</dependencies>
 </ivy-module>

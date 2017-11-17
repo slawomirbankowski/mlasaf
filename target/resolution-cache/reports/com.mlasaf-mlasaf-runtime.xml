@@ -7,7 +7,7 @@
 		revision="1.0"
 		conf="runtime"
 		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, pom, scala-tool"
-		date="20171117161804"/>
+		date="20171117182725"/>
 	<dependencies>
 		<module organisation="com.sparkjava" name="spark-core">
 			<revision name="2.6.0" status="release" pubdate="20170503173200" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://www.sparkjava.com" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="109">
@@ -1948,13 +1948,6 @@
 					<artifact name="scala-library" type="jar" ext="jar" status="no" details="" size="5744974" time="0" location="C:\Users\Edytka\.ivy2\cache\org.scala-lang\scala-library\jars\scala-library-2.11.8.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.8/scala-library-2.11.8.jar"/>
 					</artifact>
-				</artifacts>
-			</revision>
-		</module>
-		<module organisation="com.github.bigtoast" name="sbt-liquibase">
-			<revision name="0.5" error="not found" extra-scalaVersion="2.11" extra-sbtVersion="1.0" downloaded="false" searched="false" conf="default(compile)" position="-1">
-				<caller organisation="com.mlasaf" name="mlasaf" conf="compile, runtime" rev="0.5" rev-constraint-default="0.5" rev-constraint-dynamic="0.5" callerrev="1.0" extra-scalaVersion="2.11" extra-sbtVersion="1.0"/>
-				<artifacts>
 				</artifacts>
 			</revision>
 		</module>

@@ -58,4 +58,3 @@ libraryDependencies ++= Seq(
  "com.fasterxml.jackson.core" % "jackson-databind" % "2.0.2"
 
 )
-addSbtPlugin("com.github.bigtoast" % "sbt-liquibase" % "0.5")
