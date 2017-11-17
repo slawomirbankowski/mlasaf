@@ -10,6 +10,7 @@ crossPaths := false
 
 resolvers += "Atlassian" at "https://maven.atlassian.com/3rdparty/"
 resolvers += "Atlassian Maven Repository" at "https://maven.atlassian.com/repository/public"
+resolvers += "bigtoast-github" at "http://bigtoast.github.com/repo/"
 
 libraryDependencies ++= Seq(
  "net.sourceforge.jtds" % "jtds" % "1.3.1",
@@ -55,5 +56,6 @@ libraryDependencies ++= Seq(
  "net.schmizz" % "sshj" % "0.10.0",
  "com.sparkjava" % "spark-core" % "2.6.0",
  "com.fasterxml.jackson.core" % "jackson-databind" % "2.0.2"
-)
 
+)
+addSbtPlugin("com.github.bigtoast" % "sbt-liquibase" % "0.5")
