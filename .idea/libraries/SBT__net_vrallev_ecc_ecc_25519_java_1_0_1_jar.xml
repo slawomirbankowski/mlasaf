@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="SBT: net.vrallev.ecc:ecc-25519-java:1.0.1:jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.ivy2/cache/net.vrallev.ecc/ecc-25519-java/jars/ecc-25519-java-1.0.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.ivy2/cache/net.vrallev.ecc/ecc-25519-java/srcs/ecc-25519-java-1.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
