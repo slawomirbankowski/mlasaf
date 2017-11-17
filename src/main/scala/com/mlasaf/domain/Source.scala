@@ -27,4 +27,7 @@ class Source {
     views
   }
 
+  def downloadView(viewName : String) = {
+
+  }
 }

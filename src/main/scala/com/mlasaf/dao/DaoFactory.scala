@@ -19,9 +19,13 @@ class DaoFactory {
     println("Got connection: " + conn)
 
     println("Test queries: " + conn)
+
+
   }
   def executeQuery(sql : String, params : Seq[Object]) = {
 
   }
-
+  def getSources() : String = {
+    ""
+  }
 }

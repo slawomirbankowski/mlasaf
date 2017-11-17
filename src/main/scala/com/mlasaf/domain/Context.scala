@@ -22,9 +22,10 @@ class Context {
     val restPort = 8300
     val restAlternativePort = 8301
     val executorDefinition = " { storage='./', type='local' } "
+    val sourceDefinitions = "";
     daoFactory = new DaoFactory();
     daoFactory.initialize(jdbcString, jdbcUser, jdbcPass);
-
+    daoFactory.getSources()
     // initialize REST for UI
 
     // get sources from DB
