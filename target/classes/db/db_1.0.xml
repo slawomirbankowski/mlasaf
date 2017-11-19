@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <preConditions>
+        <runningAs username="postgres"/>
+    </preConditions>
+
+    <changeSet id="1" author="slawomirbankowski">
+        <createTable tableName="executorType">
+            <column name="executorTypeId" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="executorTypeName" type="varchar(4000)"/>
+            <column name="executorTypeClass" type="varchar(4000)"/>
+        </createTable>
+        <createTable tableName="executorInstance">
+            <column name="executorInstanceId" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="executorTypeId" type="int"/>
+            <column name="executorInstanceHost" type="varchar(4000)"/>
+            <column name="executorInstanceName" type="varchar(4000)"/>
+            <column name="isRunning" type="int"/>
+            <column name="portNumber" type="int"/>
+            <column name="insertedRowDate" type="timestamp"/>
+            <column name="guid" type="bigint"/>
+            <column name="endDate" type="timestamp"/>
+        </createTable>
+
+    </changeSet>
+
+
+</databaseChangeLog>

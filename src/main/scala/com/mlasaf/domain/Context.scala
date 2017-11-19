@@ -16,9 +16,9 @@ class Context {
   def run(args : Array[String]) = {
     println("Start context for guid: " + guid)
     // initialize DAO to read data from DB
-    val jdbcString = ""
-    val jdbcUser = ""
-    val jdbcPass = ""
+    val jdbcString = "jdbc:postgresql://localhost:5432/mlasaf"
+    val jdbcUser = "postgres"
+    val jdbcPass = "postgrespass"
     val restPort = 8300
     val restAlternativePort = 8301
     val executorDefinition = " { storage='./', type='local' } "

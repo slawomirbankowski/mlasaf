@@ -8,6 +8,8 @@ import java.sql._
 
 class DaoFactory {
 
+  var isInitialized = false;
+
   var conn : java.sql.Connection = null;
 
   def DaoFactory() = {
@@ -19,7 +21,7 @@ class DaoFactory {
     println("Got connection: " + conn)
 
     println("Test queries: " + conn)
-
+    isInitialized = true;
 
   }
   def executeQuery(sql : String, params : Seq[Object]) = {
@@ -28,4 +30,11 @@ class DaoFactory {
   def getSources() : String = {
     ""
   }
+  def getStorages() : String = {
+    ""
+  }
+  def getExecutors() : String = {
+    ""
+  }
+
 }

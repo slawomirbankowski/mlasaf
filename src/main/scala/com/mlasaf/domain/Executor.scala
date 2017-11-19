@@ -4,6 +4,7 @@
 */
 package com.mlasaf.domain
 
+/** should be abstract */
 class Executor {
 
   var executorInstanceId : Int = 0

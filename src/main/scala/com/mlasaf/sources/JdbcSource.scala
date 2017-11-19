@@ -8,4 +8,8 @@ import com.mlasaf.domain._
 
 class JdbcSource extends Source {
 
+  override def getSourceViews() : Seq[SourceView] = {
+    // get tables
+    null
+  }
 }

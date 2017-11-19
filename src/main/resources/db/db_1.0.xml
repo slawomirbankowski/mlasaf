@@ -13,17 +13,17 @@
 
     <changeSet id="1" author="slawomirbankowski">
         <createTable tableName="executorType">
-            <column name="executorTypeId" type="int" autoIncrement="true">
+            <column name="executorTypeId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="executorTypeName" type="varchar(4000)"/>
             <column name="executorTypeClass" type="varchar(4000)"/>
         </createTable>
         <createTable tableName="executorInstance">
-            <column name="executorInstanceId" type="int" autoIncrement="true">
+            <column name="executorInstanceId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="executorTypeId" type="int"/>
+            <column name="executorTypeId" type="bigint"/>
             <column name="executorInstanceHost" type="varchar(4000)"/>
             <column name="executorInstanceName" type="varchar(4000)"/>
             <column name="isRunning" type="int"/>
@@ -32,8 +32,437 @@
             <column name="guid" type="bigint"/>
             <column name="endDate" type="timestamp"/>
         </createTable>
-
     </changeSet>
 
+    <changeSet id="2" author="slawomirbankowski">
+
+        <createSequence catalogName="cat" cycle="false" incrementBy="1" minValue="10" schemaName="public"  sequenceName="seq_id" startValue="10"/>
+
+        <createTable tableName="executorStorageType">
+            <column name="executorStorageTypeId" type="bigint" autoIncrement="false">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="executorStorageTypeName" type="varchar(4000)"/>
+            <column name="executorStorageTypeClass" type="varchar(4000)"/>
+        </createTable>
+            <insert tableName="executorStorageType">
+                <column name="executorStorageTypeId" value="1"/>
+                <column name="executorStorageTypeName" value="LOCAL_DISK"/>
+                <column name="executorStorageTypeClass" value="com.machinelearning.storage.LocalDiskStorage"/>
+            </insert>
+            <insert tableName="executorStorageType">
+                <column name="executorStorageTypeId" value="2"/>
+                <column name="executorStorageTypeName" value="HDFS"/>
+                <column name="executorStorageTypeClass" value="com.machinelearning.storage.HdfsStorage"/>
+            </insert>
+            <insert tableName="executorStorageType">
+                <column name="executorStorageTypeId" value="3"/>
+                <column name="executorStorageTypeName" value="DB"/>
+                <column name="executorStorageTypeClass" value="com.machinelearning.storage.DbStorage"/>
+            </insert>
+
+        <createTable tableName="executorStorage" remarks="Storage assigned to executor" >
+            <column name="executorInstanceId" type="bigint" autoIncrement="false">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="parentStorageId" type="bigint"/>
+            <column name="executorStorageId" type="bigint"/>
+            <column name="executorInstanceHost" type="varchar(4000)"/>
+            <column name="executorInstanceName" type="varchar(4000)"/>
+            <column name="isRunning" type="int"/>
+            <column name="portNumber" type="int"/>
+            <column name="insertedRowDate" type="timestamp"/>
+            <column name="guid" type="bigint"/>
+            <column name="executorStorageTypeId" type="bigint"/>
+            <column name="storageBasePath" type="varchar(4000)"/>
+            <column name="storageFulllPath" type="varchar(4000)"/>
+        </createTable>
+            <createIndex indexName="idx_executorStorage_parentStorageId" tableName="executorStorage" unique="false">
+                <column name="parentStorageId" />
+            </createIndex>
+            <createIndex indexName="idx_executorStorage_executorStorageId" tableName="executorStorage" unique="false">
+                <column name="executorStorageId" />
+            </createIndex>
+            <createIndex indexName="idx_executorStorage_executorStorageTypeId" tableName="executorStorage" unique="false">
+                <column name="executorStorageTypeId" />
+            </createIndex>
+
+        <createTable tableName="sourceType" remarks="Type of source: JDBC, FTP, SHARED FOLDER" >
+            <column name="sourceTypeId" type="bigint" autoIncrement="false">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="sourceTypeName" type="varchar(4000)"/>
+            <column name="sourceTypeClass" type="varchar(4000)"/>
+        </createTable>
+            <createIndex indexName="idx_sourceType_sourceTypeName" tableName="sourceType" unique="false">
+                <column name="sourceTypeName" />
+            </createIndex>
+            <insert tableName="sourceType">
+                <column name="sourceTypeId" value="1"/>
+                <column name="sourceTypeName" value="JDBC"/>
+                <column name="sourceTypeClass" value="com.machinelearning.sources.JdbcSource"/>
+            </insert>
+            <insert tableName="sourceType">
+                <column name="sourceTypeId" value="2"/>
+                <column name="sourceTypeName" value="FTP"/>
+                <column name="sourceTypeClass" value="com.machinelearning.sources.FtpSource"/>
+            </insert>
+            <insert tableName="sourceType">
+                <column name="sourceTypeId" value="3"/>
+                <column name="sourceTypeName" value="LOCAL"/>
+                <column name="sourceTypeClass" value="com.machinelearning.sources.LocalDiskSource"/>
+            </insert>
+
+        <createTable tableName="sourceInstance" remarks="A String" >
+            <column name="sourceInstanceId" type="bigint" autoIncrement="false">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="sourceTypeId" type="bigint"/>
+            <column name="sourceInstanceName" type="varchar(4000)"/>
+            <column name="errorCount" type="bigint"/>
+            <column name="correctCount" type="bigint"/>
+            <column name="lastStatus" type="varchar(4000)"/>
+            <column name="lastConnectionDate" type="timestamp"/>
+        </createTable>
+            <createIndex indexName="idx_sourceInstance_sourceTypeId" tableName="sourceInstance" unique="false">
+                <column name="sourceTypeId" />
+            </createIndex>
+
+        <createTable tableName="sourceParam" remarks="A String" >
+            <column name="sourceParamId" type="bigint" autoIncrement="false">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="sourceParamName" type="varchar(4000)"/>
+            <column name="sourceParamType" type="varchar(4000)"/>
+            <column name="possibleValues" type="varchar(4000)"/>
+        </createTable>
+            <insert tableName="sourceParam">
+                <column name="sourceParamId" value="1"/>
+                <column name="sourceParamName" value="Connection String"/>
+                <column name="sourceParamType" value="String"/>
+                <column name="possibleValues" value="jdbc:sqlserver://host:port/dbname|jdbc:mysql://host:port/dbname"/>
+            </insert>
+            <insert tableName="sourceParam">
+                <column name="sourceParamId" value="2"/>
+                <column name="sourceParamName" value="User"/>
+                <column name="sourceParamType" value="String"/>
+                <column name="possibleValues" value=""/>
+            </insert>
+            <insert tableName="sourceParam">
+                <column name="sourceParamId" value="3"/>
+                <column name="sourceParamName" value="Password"/>
+                <column name="sourceParamType" value="String"/>
+                <column name="possibleValues" value=""/>
+            </insert>
+            <insert tableName="sourceParam">
+                <column name="sourceParamId" value="4"/>
+                <column name="sourceParamName" value="Driver Class"/>
+                <column name="sourceParamType" value="String"/>
+                <column name="possibleValues" value=""/>
+            </insert>
+            <insert tableName="sourceParam">
+                <column name="sourceParamId" value="5"/>
+                <column name="sourceParamName" value="FTP Host"/>
+                <column name="sourceParamType" value="String"/>
+                <column name="possibleValues" value=""/>
+            </insert>
+            <insert tableName="sourceParam">
+                <column name="sourceParamId" value="6"/>
+                <column name="sourceParamName" value="FTP Port"/>
+                <column name="sourceParamType" value="Int"/>
+                <column name="possibleValues" value=""/>
+            </insert>
+
+        <createTable tableName="sourceTypeParam" remarks="DICTIONARY - mapping between source type like FTP or JDBC and parameters" >
+            <column name="sourceTypeId" type="bigint" />
+            <column name="sourceParamId" type="bigint"/>
+            <column name="isRequired" type="int"/>
+        </createTable>
+            <insert tableName="sourceTypeParam">
+                <column name="sourceTypeId" value="1"/>
+                <column name="sourceParamId" value="1"/>
+                <column name="isRequired" value="1"/>
+            </insert>
+            <insert tableName="sourceTypeParam">
+                <column name="sourceTypeId" value="1"/>
+                <column name="sourceParamId" value="2"/>
+                <column name="isRequired" value="1"/>
+            </insert>
+            <insert tableName="sourceTypeParam">
+                <column name="sourceTypeId" value="1"/>
+                <column name="sourceParamId" value="3"/>
+                <column name="isRequired" value="1"/>
+            </insert>
+            <insert tableName="sourceTypeParam">
+                <column name="sourceTypeId" value="1"/>
+                <column name="sourceParamId" value="4"/>
+                <column name="isRequired" value="0"/>
+            </insert>
+            <insert tableName="sourceTypeParam">
+                <column name="sourceTypeId" value="2"/>
+                <column name="sourceParamId" value="5"/>
+                <column name="isRequired" value="1"/>
+            </insert>
+            <insert tableName="sourceTypeParam">
+                <column name="sourceTypeId" value="2"/>
+                <column name="sourceParamId" value="6"/>
+                <column name="isRequired" value="1"/>
+            </insert>
+            <insert tableName="sourceTypeParam">
+                <column name="sourceTypeId" value="2"/>
+                <column name="sourceParamId" value="2"/>
+                <column name="isRequired" value="1"/>
+            </insert>
+            <insert tableName="sourceTypeParam">
+                <column name="sourceTypeId" value="2"/>
+                <column name="sourceParamId" value="3"/>
+                <column name="isRequired" value="1"/>
+            </insert>
+
+        <createTable tableName="sourceParamValue" remarks="value of param for given source instance" >
+            <column name="sourceInstanceId" type="bigint" />
+            <column name="sourceParamId" type="bigint"/>
+            <column name="sourceParamValueId" type="bigint"/>
+            <column name="sourceParamValueVersion" type="varchar(4000)"/>
+            <column name="insertedRowDate" type="timestamp"/>
+            <column name="paramValue" type="varchar(4000)"/>
+        </createTable>
+
+        <createTable tableName="sourceView" remarks="view in the source - could be folder in FTP, file in FTP, table or view in database, method in WebService" >
+            <column name="sourceViewId" type="bigint" autoIncrement="false">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="sourceInstanceId" type="bigint"/>
+            <column name="sourceViewDefinition" type="varchar(4000)"/>
+        </createTable>
+
+        <createTable tableName="sourceViewColumn" remarks="" >
+            <column name="sourceViewId" type="bigint" />
+            <column name="sourceViewColumnId" type="bigint"/>
+            <column name="insertedRowDate" type="timestamp"/>
+            <column name="guid" type="varchar(4000)"/>
+            <column name="columnName" type="varchar(4000)"/>
+            <column name="columnMinValue" type="varchar(4000)"/>
+            <column name="columnMaxValue" type="varchar(4000)"/>
+            <column name="columnNonemptyCount" type="bigint"/>
+        </createTable>
+
+        <createTable tableName="sourceSchedule" remarks="schedule to download source view to local storage" >
+            <column name="sourceScheduleId" type="bigint" autoIncrement="false">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="sourceViewId" type="bigint"/>
+            <column name="insertedRowDate" type="timestamp"/>
+            <column name="guid" type="bigint"/>
+            <column name="executorStorageId" type="bigint"/>
+            <column name="onDemand" type="int" defaultValueNumeric="0"/>
+            <column name="startTime" type="timestamp"/>
+            <column name="intervalValue" type="bigint"/>
+        </createTable>
+
+        <createTable tableName="sourceDownload" remarks="run of source and download data to local/global storage" >
+            <column name="sourceScheduleId" type="bigint" />
+            <column name="sourceDownloadId" type="bigint"/>
+            <column name="storagePath" type="varchar(4000)"/>
+            <column name="viewSize" type="bigint"/>
+            <column name="viewRowsCount" type="bigint"/>
+            <column name="insertedRowDate" type="timestamp"/>
+            <column name="lastUpdatedDate" type="timestamp"/>
+            <column name="isRunning" type="int" defaultValueNumeric="0" />
+            <column name="isFinished" type="int" defaultValueNumeric="0" />
+            <column name="isExcecption" type="int" defaultValueNumeric="0" />
+            <column name="excecptionDescription" type="varchar(4000)"/>
+        </createTable>
+
+
+        <createTable tableName="algorithmType" remarks="algorithm connected with reason to build it, general class with input columns and output columns for results" >
+            <column name="algorithmTypeId" type="bigint" autoIncrement="false">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="algorithmTypeName" type="varchar(4000)"/>
+            <column name="algorithmTypeDescription" type="varchar(4000)"/>
+        </createTable>
+            <insert tableName="algorithmType">
+                <column name="algorithmTypeId" value="1"/>
+                <column name="algorithmTypeName" value="Prediction"/>
+            </insert>
+            <insert tableName="algorithmType">
+                <column name="algorithmTypeId" value="2"/>
+                <column name="algorithmTypeName" value="Classification"/>
+            </insert>
+            <insert tableName="algorithmType">
+                <column name="algorithmTypeId" value="3"/>
+                <column name="algorithmTypeName" value="Market Basket"/>
+            </insert>
+            <insert tableName="algorithmType">
+                <column name="algorithmTypeId" value="4"/>
+                <column name="algorithmTypeName" value="Outlier Detection"/>
+            </insert>
+            <insert tableName="algorithmType">
+                <column name="algorithmTypeId" value="5"/>
+                <column name="algorithmTypeName" value="Sentiment"/>
+            </insert>
+
+        <createTable tableName="algorithmTypeVersion" remarks="version of algorithm" >
+            <column name="algorithmTypeVersionId" type="bigint" autoIncrement="false">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="algorithmTypeId" type="bigint"/>
+            <column name="algorithmTypeVersionName" type="varchar(4000)"/>
+        </createTable>
+
+        <createTable tableName="algorithmImplementation" remarks="DICTIONARY - implementation of algorithm version for given type of executor" >
+            <column name="algorithmImplementationId" type="bigint" autoIncrement="false">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="algorithmTypeId" type="bigint"/>
+            <column name="algorithmTypeVersionId" type="bigint"/>
+            <column name="executorTypeId" type="bigint"/>
+            <column name="algorithmImplementationName" type="varchar(4000)"/>
+            <column name="algorithmImplementationClass" type="varchar(4000)"/>
+        </createTable>
+
+        <createTable tableName="algorithmParam" remarks="DICTIONARY - parameter needed to run algorithm " >
+            <column name="algorithmParamId" type="bigint" autoIncrement="false">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="algorithmParamName" type="varchar(4000)"/>
+            <column name="algorithmParamType" type="varchar(4000)"/>
+        </createTable>
+            <insert tableName="algorithmParam">
+                <column name="algorithmParamId" value="1"/>
+                <column name="algorithmParamName" value="Prediction Times"/>
+                <column name="algorithmParamType" value="Double"/>
+            </insert>
+
+        <createTable tableName="algorithmColumnType" remarks="DICTIONARY - type of column to be used for ML algorithm" >
+            <column name="algorithmColumnTypeId" type="bigint" autoIncrement="false">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="algorithmColumnTypeName" type="varchar(4000)"/>
+            <column name="algorithmColumnTypeDescription" type="varchar(4000)"/>
+        </createTable>
+            <insert tableName="algorithmColumnType">
+                <column name="algorithmColumnTypeId" value="1"/>
+                <column name="algorithmColumnTypeName" value="Group"/>
+                <column name="algorithmColumnTypeDescription" value=""/>
+            </insert>
+            <insert tableName="algorithmColumnType">
+                <column name="algorithmColumnTypeId" value="2"/>
+                <column name="algorithmColumnTypeName" value="Time"/>
+                <column name="algorithmColumnTypeDescription" value=""/>
+            </insert>
+            <insert tableName="algorithmColumnType">
+                <column name="algorithmColumnTypeId" value="3"/>
+                <column name="algorithmColumnTypeName" value="PredictionValue"/>
+                <column name="algorithmColumnTypeDescription" value=""/>
+            </insert>
+            <insert tableName="algorithmColumnType">
+                <column name="algorithmColumnTypeId" value="4"/>
+                <column name="algorithmColumnTypeName" value="Feature"/>
+                <column name="algorithmColumnTypeDescription" value=""/>
+            </insert>
+            <insert tableName="algorithmColumnType">
+                <column name="algorithmColumnTypeId" value="5"/>
+                <column name="algorithmColumnTypeName" value="Label"/>
+                <column name="algorithmColumnTypeDescription" value=""/>
+            </insert>
+
+        <createTable tableName="algorithmTypeColumnType" remarks="DICTIONARY - mapping between algorithm type like Prediction or Classification and column type to be mapped from downloaded data" >
+            <column name="algorithmTypeId" type="bigint" />
+            <column name="algorithmColumnTypeId" type="bigint"/>
+            <column name="allowMultiple" type="int"/>
+            <column name="allowEmpty" type="int"/>
+        </createTable>
+            <insert tableName="algorithmTypeColumnType">
+                <column name="algorithmTypeId" value="1"/>
+                <column name="algorithmColumnTypeId" value="2"/>
+                <column name="allowMultiple" value="0"/>
+            </insert>
+            <insert tableName="algorithmTypeColumnType">
+                <column name="algorithmTypeId" value="1"/>
+                <column name="algorithmColumnTypeId" value="1"/>
+                <column name="allowMultiple" value="1"/>
+            </insert>
+            <insert tableName="algorithmTypeColumnType">
+                <column name="algorithmTypeId" value="1"/>
+                <column name="algorithmColumnTypeId" value="3"/>
+                <column name="allowMultiple" value="0"/>
+            </insert>
+
+        <createTable tableName="algorithmSchedule" remarks="schedule of run algorithm for given instance and parameters on given executor" >
+            <column name="algorithmScheduleId" type="bigint" autoIncrement="false">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="algorithmImplementationId" type="bigint"/>
+            <column name="algorithmScheduleName" type="varchar(4000)"/>
+            <column name="isScheduled" type="int"/>
+        </createTable>
+
+        <createTable tableName="algorithmScheduleViewType" remarks="" >
+            <column name="algorithmScheduleViewTypeId" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="algorithmScheduleViewTypeName" type="varchar(4000)"/>
+        </createTable>
+            <insert tableName="algorithmScheduleViewType">
+                <column name="algorithmScheduleViewTypeId" value="1"/>
+                <column name="algorithmScheduleViewTypeName" value="PRIMARY"/>
+            </insert>
+            <insert tableName="algorithmScheduleViewType">
+                <column name="algorithmScheduleViewTypeId" value="2"/>
+                <column name="algorithmScheduleViewTypeName" value="TRAINING"/>
+            </insert>
+            <insert tableName="algorithmScheduleViewType">
+                <column name="algorithmScheduleViewTypeId" value="3"/>
+                <column name="algorithmScheduleViewTypeName" value="TESTING"/>
+            </insert>
+        <insert tableName="algorithmScheduleViewType">
+            <column name="algorithmScheduleViewTypeId" value="4"/>
+            <column name="algorithmScheduleViewTypeName" value="VALIDATION"/>
+        </insert>
+
+        <createTable tableName="algorithmScheduleView" remarks="" >
+            <column name="algorithmScheduleId" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="sourceViewId" type="bigint"/>
+            <column name="parentSourceViewId" type="bigint"/>
+            <column name="joinOn" type="varchar(4000)"/>
+        </createTable>
+
+        <createTable tableName="algorithmScheduleParam" remarks="" >
+             <column name="algorithmScheduleId" type="bigint"/>
+            <column name="algorithmParamId" type="bigint"/>
+            <column name="algorithmParamValue" type="varchar(4000)"/>
+        </createTable>
+
+        <createTable tableName="algorithmScheduleColumn" remarks="view column downloaded from source mapped for schedule to algorithm input column" >
+            <column name="algorithmScheduleId" type="bigint"/>
+            <column name="algorithmColumnTypeId" type="bigint"/>
+            <column name="sourceViewId" type="varchar(4000)"/>
+            <column name="sourceViewColumnId" type="varchar(4000)"/>
+            <column name="extendedProperties" type="varchar(4000)"/>
+        </createTable>
+
+        <createTable tableName="algorithmRun" remarks="run of algorithm for given schedule that contains instance of algorithm, storage and downloaded view" >
+            <column name="algorithmScheduleId" type="bigint"/>
+            <column name="executorInstanceId" type="bigint"/>
+            <column name="executorStorageId" type="varchar(4000)"/>
+            <column name="algorithmRunId" type="varchar(4000)"/>
+            <column name="sourceDownloadId" type="bigint"/>
+            <column name="runDate" type="timestamp"/>
+            <column name="isRunning" type="int"/>
+            <column name="isFinished" type="int"/>
+        </createTable>
+
+        <createTable tableName="algorithmOutput" remarks="schedule of run algorithm for given instance and parameters on given executor, TO BE FIXED - connect with storage for executor" >
+            <column name="algorithmScheduleId" type="bigint"/>
+            <column name="algorithmRunId" type="bigint"/>
+            <column name="algorithmOutputId" type="bigint"/>
+            <column name="outputPath" type="varchar(4000)"/>
+        </createTable>
+
+    </changeSet>
 
 </databaseChangeLog>

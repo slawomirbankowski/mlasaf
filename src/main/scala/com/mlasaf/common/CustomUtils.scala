@@ -6,7 +6,6 @@ package com.mlasaf.common
 
 object CustomUtils {
 
-
   def getHostName = {
     java.net.InetAddress.getLocalHost.getHostName
   }

@@ -4,6 +4,7 @@
 */
 package com.mlasaf.domain
 
+/**  */
 class AlgorithmInstance {
 
 }

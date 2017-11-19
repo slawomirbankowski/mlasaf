@@ -1,5 +1,11 @@
+/*
+  Author(s): Slawomir Bankowski
+  Project: mlasaf
+*/
 package com.mlasaf.storages
 
-class HdfsStorage {
+import com.mlasaf.domain._
+
+class HdfsStorage extends Storage {
 
 }

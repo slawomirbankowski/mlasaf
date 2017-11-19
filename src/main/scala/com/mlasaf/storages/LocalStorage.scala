@@ -1,5 +1,12 @@
+/*
+  Author(s): Slawomir Bankowski
+  Project: mlasaf
+*/
 package com.mlasaf.storages
 
-class LocalStorage {
+import com.mlasaf.domain._
+
+
+class LocalStorage extends Storage {
 
 }
