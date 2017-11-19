@@ -6,6 +6,7 @@ package com.mlasaf.domain
 
 import com.mlasaf.dao._
 
+/** main context class - entry point for all other services, rest servers, http servers, listeners and executors */
 class Context {
 
   val guid : Long = Math.abs((new java.util.Random()).nextLong());

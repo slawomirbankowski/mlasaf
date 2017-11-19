@@ -4,7 +4,7 @@
 */
 package com.mlasaf.domain
 
-/** should be abstract */
+/** should be abstract - executor to run any external or internal ML algorithm */
 class Executor {
 
   var executorInstanceId : Int = 0
