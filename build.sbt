@@ -4,7 +4,7 @@ organization := "com.mlasaf"
 
 scalaVersion := "2.11.8"
 
-version := "1.0"
+version := "0.1.0"
 
 crossPaths := false
 
@@ -35,7 +35,7 @@ libraryDependencies ++= Seq(
 
  "javax.mail" % "javax.mail-api" % "1.5.6",
  "com.microsoft.sqlserver" % "sqljdbc4" % "4.0" % "test",
- "com.oracle.jdbc" % "ojdbc8" % "12.2.0.1",
+ //"com.oracle.jdbc" % "ojdbc8" % "12.2.0.1",
  "mysql" % "mysql-connector-java" % "5.1.16",
 
  "tw.edu.ntu.csie" % "libsvm" % "3.17",
@@ -54,6 +54,8 @@ libraryDependencies ++= Seq(
  "com.veact" % "scala-ssh_2.11" % "0.8.0",
  "com.typesafe" % "config" % "1.3.1",
  "com.typesafe.scala-logging" % "scala-logging_2.11" % "3.5.0",
+
+ "com.typesafe.play" % "anorm_2.11" % "2.5.1",
 
  "net.sourceforge.jtds" % "jtds" % "1.3.1",
  "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.7.8",

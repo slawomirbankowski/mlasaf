@@ -12,6 +12,21 @@
     </preConditions>
 
     <changeSet id="1" author="slawomirbankowski">
+
+        <createSequence catalogName="cat" cycle="false" incrementBy="1" minValue="10" schemaName="public"  sequenceName="seq_id" startValue="10"/>
+
+        <createTable tableName="executorHost" remarks="host on which executor can execute" >
+            <column name="executorHostId" type="bigint" autoIncrement="false">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="insertedRowDate" type="timestamp"/>
+            <column name="hostName" type="varchar(4000)"/>
+            <column name="hostIp" type="varchar(4000)"/>
+            <column name="hostDomain" type="varchar(4000)"/>
+            <column name="hostOsType" type="varchar(4000)"/>
+            <column name="hostOsVersion" type="varchar(4000)"/>
+        </createTable>
+
         <createTable tableName="executorType">
             <column name="executorTypeId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
@@ -19,24 +34,24 @@
             <column name="executorTypeName" type="varchar(4000)"/>
             <column name="executorTypeClass" type="varchar(4000)"/>
         </createTable>
+
+
         <createTable tableName="executorInstance">
             <column name="executorInstanceId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="executorTypeId" type="bigint"/>
-            <column name="executorInstanceHost" type="varchar(4000)"/>
+            <column name="executorHostId" type="bigint"/>
             <column name="executorInstanceName" type="varchar(4000)"/>
             <column name="isRunning" type="int"/>
+            <column name="isFinished" type="int"/>
             <column name="portNumber" type="int"/>
             <column name="insertedRowDate" type="timestamp"/>
             <column name="guid" type="bigint"/>
             <column name="endDate" type="timestamp"/>
         </createTable>
-    </changeSet>
-
-    <changeSet id="2" author="slawomirbankowski">
-
-        <createSequence catalogName="cat" cycle="false" incrementBy="1" minValue="10" schemaName="public"  sequenceName="seq_id" startValue="10"/>
+        <addForeignKeyConstraint referencedTableName="executorInstance" referencedColumnNames="executorTypeId" baseTableName="executorType" baseColumnNames="executorTypeId"  constraintName="fk_executorInstance_executorType"  />
+        <addForeignKeyConstraint referencedTableName="executorInstance" referencedColumnNames="executorHostId" baseTableName="executorHost" baseColumnNames="executorHostId"  constraintName="fk_executorInstance_executorHost"  />
 
         <createTable tableName="executorStorageType">
             <column name="executorStorageTypeId" type="bigint" autoIncrement="false">
@@ -48,34 +63,32 @@
             <insert tableName="executorStorageType">
                 <column name="executorStorageTypeId" value="1"/>
                 <column name="executorStorageTypeName" value="LOCAL_DISK"/>
-                <column name="executorStorageTypeClass" value="com.machinelearning.storage.LocalDiskStorage"/>
+                <column name="executorStorageTypeClass" value="com.mlasaf.storage.LocalDiskStorage"/>
             </insert>
             <insert tableName="executorStorageType">
                 <column name="executorStorageTypeId" value="2"/>
                 <column name="executorStorageTypeName" value="HDFS"/>
-                <column name="executorStorageTypeClass" value="com.machinelearning.storage.HdfsStorage"/>
+                <column name="executorStorageTypeClass" value="com.mlasaf.storage.HdfsStorage"/>
             </insert>
             <insert tableName="executorStorageType">
                 <column name="executorStorageTypeId" value="3"/>
                 <column name="executorStorageTypeName" value="DB"/>
-                <column name="executorStorageTypeClass" value="com.machinelearning.storage.DbStorage"/>
+                <column name="executorStorageTypeClass" value="com.mlasaf.storage.DbStorage"/>
             </insert>
 
         <createTable tableName="executorStorage" remarks="Storage assigned to executor" >
-            <column name="executorInstanceId" type="bigint" autoIncrement="false">
+            <column name="executorStorageId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="parentStorageId" type="bigint"/>
-            <column name="executorStorageId" type="bigint"/>
-            <column name="executorInstanceHost" type="varchar(4000)"/>
-            <column name="executorInstanceName" type="varchar(4000)"/>
+            <column name="executorHostId" type="bigint"/>
+            <column name="executorStorageTypeId" type="bigint"/>
+            <column name="storageDefinition" type="varchar(4000)"/>
+            <column name="storageBasePath" type="varchar(4000)"/>
+            <column name="storageFulllPath" type="varchar(4000)"/>
             <column name="isRunning" type="int"/>
             <column name="portNumber" type="int"/>
             <column name="insertedRowDate" type="timestamp"/>
             <column name="guid" type="bigint"/>
-            <column name="executorStorageTypeId" type="bigint"/>
-            <column name="storageBasePath" type="varchar(4000)"/>
-            <column name="storageFulllPath" type="varchar(4000)"/>
         </createTable>
             <createIndex indexName="idx_executorStorage_parentStorageId" tableName="executorStorage" unique="false">
                 <column name="parentStorageId" />
@@ -86,6 +99,22 @@
             <createIndex indexName="idx_executorStorage_executorStorageTypeId" tableName="executorStorage" unique="false">
                 <column name="executorStorageTypeId" />
             </createIndex>
+        <addForeignKeyConstraint referencedTableName="executorStorage" referencedColumnNames="executorHostId" baseTableName="executorHost" baseColumnNames="executorHostId"  constraintName="fk_executorStorage_"  />
+        <addForeignKeyConstraint referencedTableName="executorStorage" referencedColumnNames="executorStorageTypeId" baseTableName="executorStorageType" baseColumnNames="executorStorageTypeId"  constraintName="fk_executorStorage_executorStorageType"  />
+
+        <createTable tableName="executorStorageView" remarks="Storage assigned to executor" >
+            <column name="executorStorageViewId" type="bigint" autoIncrement="false">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="executorStorageId" type="bigint"/>
+            <column name="sourceDownloadId" type="bigint"/>
+            <column name="storagePath" type="varchar(4000)"/>
+            <column name="viewSize" type="bigint"/>
+            <column name="viewRowsCount" type="bigint"/>
+
+        </createTable>
+        <addForeignKeyConstraint referencedTableName="executorStorageView" referencedColumnNames="executorStorageId" baseTableName="executorStorage" baseColumnNames="executorStorageId"  constraintName="fk_executorStorageView_executorStorage"  />
+
 
         <createTable tableName="sourceType" remarks="Type of source: JDBC, FTP, SHARED FOLDER" >
             <column name="sourceTypeId" type="bigint" autoIncrement="false">
@@ -100,17 +129,17 @@
             <insert tableName="sourceType">
                 <column name="sourceTypeId" value="1"/>
                 <column name="sourceTypeName" value="JDBC"/>
-                <column name="sourceTypeClass" value="com.machinelearning.sources.JdbcSource"/>
+                <column name="sourceTypeClass" value="com.mlasaf.sources.JdbcSource"/>
             </insert>
             <insert tableName="sourceType">
                 <column name="sourceTypeId" value="2"/>
                 <column name="sourceTypeName" value="FTP"/>
-                <column name="sourceTypeClass" value="com.machinelearning.sources.FtpSource"/>
+                <column name="sourceTypeClass" value="com.mlasaf.sources.FtpSource"/>
             </insert>
             <insert tableName="sourceType">
                 <column name="sourceTypeId" value="3"/>
                 <column name="sourceTypeName" value="LOCAL"/>
-                <column name="sourceTypeClass" value="com.machinelearning.sources.LocalDiskSource"/>
+                <column name="sourceTypeClass" value="com.mlasaf.sources.LocalDiskSource"/>
             </insert>
 
         <createTable tableName="sourceInstance" remarks="A String" >
@@ -127,8 +156,9 @@
             <createIndex indexName="idx_sourceInstance_sourceTypeId" tableName="sourceInstance" unique="false">
                 <column name="sourceTypeId" />
             </createIndex>
+        <addForeignKeyConstraint referencedTableName="sourceInstance" referencedColumnNames="sourceTypeId" baseTableName="sourceType" baseColumnNames="sourceTypeId"  constraintName="fk_sourceInstance_sourceType"  />
 
-        <createTable tableName="sourceParam" remarks="A String" >
+        <createTable tableName="sourceParam" remarks="DICTIONARY - all parameters needed to define source instance" >
             <column name="sourceParamId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -218,6 +248,8 @@
                 <column name="sourceParamId" value="3"/>
                 <column name="isRequired" value="1"/>
             </insert>
+        <addForeignKeyConstraint referencedTableName="sourceTypeParam" referencedColumnNames="sourceTypeId" baseTableName="sourceType" baseColumnNames="sourceTypeId"  constraintName="fk_sourceTypeParam_sourceType"  />
+        <addForeignKeyConstraint referencedTableName="sourceTypeParam" referencedColumnNames="sourceParamId" baseTableName="sourceParam" baseColumnNames="sourceParamId"  constraintName="fk_sourceTypeParam_sourceParam"  />
 
         <createTable tableName="sourceParamValue" remarks="value of param for given source instance" >
             <column name="sourceInstanceId" type="bigint" />
@@ -227,18 +259,33 @@
             <column name="insertedRowDate" type="timestamp"/>
             <column name="paramValue" type="varchar(4000)"/>
         </createTable>
+        <addForeignKeyConstraint referencedTableName="sourceParamValue" referencedColumnNames="sourceInstanceId" baseTableName="sourceInstance" baseColumnNames="sourceInstanceId"  constraintName="fk_sourceParamValue_sourceInstance"  />
+        <addForeignKeyConstraint referencedTableName="sourceParamValue" referencedColumnNames="sourceParamId" baseTableName="sourceParam" baseColumnNames="sourceParamId"  constraintName="fk_sourceParamValue_sourceParam"  />
+
+        <createTable tableName="sourceViewType" remarks="type of view: FTP, file in FTP, table or view in database, method in WebService" >
+            <column name="sourceViewTypeId" type="bigint" autoIncrement="false">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="sourceViewTypeName" type="varchar(4000)"/>
+            <column name="sourceViewTypeClass" type="varchar(4000)"/>
+        </createTable>
 
         <createTable tableName="sourceView" remarks="view in the source - could be folder in FTP, file in FTP, table or view in database, method in WebService" >
             <column name="sourceViewId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="sourceInstanceId" type="bigint"/>
+            <column name="sourceViewTypeId" type="bigint"/>
             <column name="sourceViewDefinition" type="varchar(4000)"/>
         </createTable>
+        <addForeignKeyConstraint referencedTableName="sourceView" referencedColumnNames="sourceInstanceId" baseTableName="sourceInstance" baseColumnNames="sourceInstanceId"  constraintName="fk_sourceView_sourceInstance"  />
+        <addForeignKeyConstraint referencedTableName="sourceView" referencedColumnNames="sourceViewTypeId" baseTableName="sourceViewType" baseColumnNames="sourceViewTypeId"  constraintName="fk_sourceView_sourceViewType"  />
 
-        <createTable tableName="sourceViewColumn" remarks="" >
+        <createTable tableName="sourceViewColumn" remarks="column in the view - update/refresh while downloading source to storage" >
+            <column name="sourceViewColumnId" type="bigint" autoIncrement="false">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
             <column name="sourceViewId" type="bigint" />
-            <column name="sourceViewColumnId" type="bigint"/>
             <column name="insertedRowDate" type="timestamp"/>
             <column name="guid" type="varchar(4000)"/>
             <column name="columnName" type="varchar(4000)"/>
@@ -246,34 +293,37 @@
             <column name="columnMaxValue" type="varchar(4000)"/>
             <column name="columnNonemptyCount" type="bigint"/>
         </createTable>
+        <addForeignKeyConstraint referencedTableName="sourceViewColumn" referencedColumnNames="sourceViewId" baseTableName="sourceView" baseColumnNames="sourceViewId"  constraintName="fk_sourceViewColumn_sourceView"  />
 
         <createTable tableName="sourceSchedule" remarks="schedule to download source view to local storage" >
             <column name="sourceScheduleId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="sourceViewId" type="bigint"/>
+            <column name="executorStorageId" type="bigint"/>
             <column name="insertedRowDate" type="timestamp"/>
             <column name="guid" type="bigint"/>
-            <column name="executorStorageId" type="bigint"/>
             <column name="onDemand" type="int" defaultValueNumeric="0"/>
             <column name="startTime" type="timestamp"/>
             <column name="intervalValue" type="bigint"/>
         </createTable>
+        <addForeignKeyConstraint referencedTableName="sourceSchedule" referencedColumnNames="sourceViewId" baseTableName="sourceView" baseColumnNames="sourceViewId"  constraintName="fk_sourceViewColumn_sourceView"  />
+        <addForeignKeyConstraint referencedTableName="sourceSchedule" referencedColumnNames="executorStorageId" baseTableName="executorStorage" baseColumnNames="executorStorageId"  constraintName="fk_sourceViewColumn_executorStorage"  />
 
-        <createTable tableName="sourceDownload" remarks="run of source and download data to local/global storage" >
+        <createTable tableName="sourceDownload" remarks="run of source and download data to local/global storage - this is process only" >
+            <column name="sourceDownloadId" type="bigint" autoIncrement="false">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
             <column name="sourceScheduleId" type="bigint" />
-            <column name="sourceDownloadId" type="bigint"/>
-            <column name="storagePath" type="varchar(4000)"/>
-            <column name="viewSize" type="bigint"/>
-            <column name="viewRowsCount" type="bigint"/>
             <column name="insertedRowDate" type="timestamp"/>
             <column name="lastUpdatedDate" type="timestamp"/>
+            <column name="retryNumber" type="int"/>
             <column name="isRunning" type="int" defaultValueNumeric="0" />
             <column name="isFinished" type="int" defaultValueNumeric="0" />
             <column name="isExcecption" type="int" defaultValueNumeric="0" />
             <column name="excecptionDescription" type="varchar(4000)"/>
         </createTable>
-
+        <addForeignKeyConstraint referencedTableName="sourceDownload" referencedColumnNames="sourceScheduleId" baseTableName="sourceSchedule" baseColumnNames="sourceScheduleId"  constraintName="fk_sourceDownload_sourceSchedule"  />
 
         <createTable tableName="algorithmType" remarks="algorithm connected with reason to build it, general class with input columns and output columns for results" >
             <column name="algorithmTypeId" type="bigint" autoIncrement="false">
@@ -281,6 +331,7 @@
             </column>
             <column name="algorithmTypeName" type="varchar(4000)"/>
             <column name="algorithmTypeDescription" type="varchar(4000)"/>
+            <column name="insertedRowDate" type="timestamp"/>
         </createTable>
             <insert tableName="algorithmType">
                 <column name="algorithmTypeId" value="1"/>
@@ -309,7 +360,9 @@
             </column>
             <column name="algorithmTypeId" type="bigint"/>
             <column name="algorithmTypeVersionName" type="varchar(4000)"/>
+            <column name="insertedRowDate" type="timestamp"/>
         </createTable>
+        <addForeignKeyConstraint referencedTableName="algorithmTypeVersion" referencedColumnNames="algorithmTypeId" baseTableName="algorithmType" baseColumnNames="algorithmTypeId"  constraintName="fk_algorithmTypeVersion_algorithmType"  />
 
         <createTable tableName="algorithmImplementation" remarks="DICTIONARY - implementation of algorithm version for given type of executor" >
             <column name="algorithmImplementationId" type="bigint" autoIncrement="false">
@@ -321,6 +374,8 @@
             <column name="algorithmImplementationName" type="varchar(4000)"/>
             <column name="algorithmImplementationClass" type="varchar(4000)"/>
         </createTable>
+        <addForeignKeyConstraint referencedTableName="algorithmImplementation" referencedColumnNames="algorithmTypeId" baseTableName="algorithmType" baseColumnNames="algorithmTypeId"  constraintName="fk_algorithmImplementation_algorithmType"  />
+        <addForeignKeyConstraint referencedTableName="algorithmImplementation" referencedColumnNames="algorithmTypeVersionId" baseTableName="algorithmTypeVersion" baseColumnNames="algorithmTypeVersionId"  constraintName="fk_algorithmImplementation_algorithmTypeVersion"  />
 
         <createTable tableName="algorithmParam" remarks="DICTIONARY - parameter needed to run algorithm " >
             <column name="algorithmParamId" type="bigint" autoIncrement="false">
@@ -334,6 +389,13 @@
                 <column name="algorithmParamName" value="Prediction Times"/>
                 <column name="algorithmParamType" value="Double"/>
             </insert>
+
+        <createTable tableName="algorithmParamType" remarks="DICTIONARY - parameter needed to run algorithm " >
+            <column name="algorithmParamId" type="bigint" />
+            <column name="algorithmTypeId" type="bigint" />
+        </createTable>
+        <addForeignKeyConstraint referencedTableName="algorithmParamType" referencedColumnNames="algorithmParamId" baseTableName="algorithmParam" baseColumnNames="algorithmParamId"  constraintName="fk_algorithmParamType_algorithmParam"  />
+        <addForeignKeyConstraint referencedTableName="algorithmParamType" referencedColumnNames="algorithmTypeId" baseTableName="algorithmType" baseColumnNames="algorithmTypeId"  constraintName="fk_algorithmParamType_algorithmType"  />
 
         <createTable tableName="algorithmColumnType" remarks="DICTIONARY - type of column to be used for ML algorithm" >
             <column name="algorithmColumnTypeId" type="bigint" autoIncrement="false">
@@ -389,6 +451,7 @@
                 <column name="algorithmColumnTypeId" value="3"/>
                 <column name="allowMultiple" value="0"/>
             </insert>
+        <addForeignKeyConstraint referencedTableName="algorithmParamType" referencedColumnNames="algorithmTypeId" baseTableName="algorithmType" baseColumnNames="algorithmTypeId"  constraintName="fk_algorithmParamType_algorithmType"  />
 
         <createTable tableName="algorithmSchedule" remarks="schedule of run algorithm for given instance and parameters on given executor" >
             <column name="algorithmScheduleId" type="bigint" autoIncrement="false">
@@ -397,9 +460,10 @@
             <column name="algorithmImplementationId" type="bigint"/>
             <column name="algorithmScheduleName" type="varchar(4000)"/>
             <column name="isScheduled" type="int"/>
+            <column name="insertedRowDate" type="timestamp"/>
         </createTable>
 
-        <createTable tableName="algorithmScheduleViewType" remarks="" >
+        <createTable tableName="algorithmScheduleViewType" remarks="DICTIONARY - type of view for schedule - PRIMARY, TRAINING, TESTING, VALIDATION" >
             <column name="algorithmScheduleViewTypeId" type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -422,27 +486,31 @@
             <column name="algorithmScheduleViewTypeName" value="VALIDATION"/>
         </insert>
 
-        <createTable tableName="algorithmScheduleView" remarks="" >
-            <column name="algorithmScheduleId" type="bigint" autoIncrement="true">
+        <createTable tableName="algorithmScheduleView" remarks="connection between schedule of algorithm run and source view to be used" >
+            <column name="algorithmScheduleViewId" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="algorithmScheduleViewTypeId" type="bigint"/>
             <column name="sourceViewId" type="bigint"/>
-            <column name="parentSourceViewId" type="bigint"/>
-            <column name="joinOn" type="varchar(4000)"/>
+            <column name="insertedRowDate" type="timestamp"/>
+            <column name="joinOnDefinition" type="varchar(4000)"/>
         </createTable>
 
         <createTable tableName="algorithmScheduleParam" remarks="" >
              <column name="algorithmScheduleId" type="bigint"/>
             <column name="algorithmParamId" type="bigint"/>
             <column name="algorithmParamValue" type="varchar(4000)"/>
+            <column name="insertedRowDate" type="timestamp"/>
         </createTable>
 
         <createTable tableName="algorithmScheduleColumn" remarks="view column downloaded from source mapped for schedule to algorithm input column" >
             <column name="algorithmScheduleId" type="bigint"/>
             <column name="algorithmColumnTypeId" type="bigint"/>
-            <column name="sourceViewId" type="varchar(4000)"/>
-            <column name="sourceViewColumnId" type="varchar(4000)"/>
+            <column name="algorithmScheduleViewId" type="bigint"/>
+            <column name="sourceViewId" type="bigint"/>
+            <column name="sourceViewColumnId" type="bigint"/>
             <column name="extendedProperties" type="varchar(4000)"/>
+            <column name="insertedRowDate" type="timestamp"/>
         </createTable>
 
         <createTable tableName="algorithmRun" remarks="run of algorithm for given schedule that contains instance of algorithm, storage and downloaded view" >
@@ -451,17 +519,30 @@
             <column name="executorStorageId" type="varchar(4000)"/>
             <column name="algorithmRunId" type="varchar(4000)"/>
             <column name="sourceDownloadId" type="bigint"/>
+            <column name="insertedRowDate" type="timestamp"/>
             <column name="runDate" type="timestamp"/>
-            <column name="isRunning" type="int"/>
+            <column name="isRunning" type="int" />
             <column name="isFinished" type="int"/>
         </createTable>
 
+        <createTable tableName="algorithmOutputType" remarks="DICTIONARY - type of output" >
+            <column name="algorithmOutputTypeId" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="algorithmOutputTypeName" type="varchar(4000)"/>
+        </createTable>
+
         <createTable tableName="algorithmOutput" remarks="schedule of run algorithm for given instance and parameters on given executor, TO BE FIXED - connect with storage for executor" >
-            <column name="algorithmScheduleId" type="bigint"/>
             <column name="algorithmRunId" type="bigint"/>
             <column name="algorithmOutputId" type="bigint"/>
+            <column name="algorithmOutputTypeId" type="bigint"/>
+            <column name="executorStorageViewId" type="bigint"/>
             <column name="outputPath" type="varchar(4000)"/>
         </createTable>
+
+
+
+        <addForeignKeyConstraint referencedTableName="executorStorageView" referencedColumnNames="sourceDownloadId" baseTableName="sourceDownload" baseColumnNames="sourceDownloadId"  constraintName="fk_executorStorageView_sourceDownload"  />
 
     </changeSet>
 

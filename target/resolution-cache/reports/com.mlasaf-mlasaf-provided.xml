@@ -4,10 +4,10 @@
 	<info
 		organisation="com.mlasaf"
 		module="mlasaf"
-		revision="1.0"
+		revision="0.1.0"
 		conf="provided"
 		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, pom, scala-tool"
-		date="20171118125639"/>
+		date="20171120011848"/>
 	<dependencies>
 	</dependencies>
 </ivy-report>

@@ -1,0 +1,1 @@
+java -cp "./target/mlasaf-1.0.jar" com.mlasaf.MlasafEntry

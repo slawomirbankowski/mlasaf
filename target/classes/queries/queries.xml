@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<queries>
+
+    <query name="getSources" content="select * from source" parameters="" />
+
+    <query name="registerExecutor" content="insert into executorInstance(executorInstanceId, executorTypeId, executorInstanceHost, executorInstanceName, isRunning, portNumber, insertedRowDate, guid) values (?, ?, ?, ?)" parameters="" />
+    <query name="endExecutor" content="update executorInstance set isRunning = 0, endDate = ? where executorInstanceId = ? ) values (?, ?, ?, ?)" parameters="isRunning,endDate" />
+
+
+</queries>
