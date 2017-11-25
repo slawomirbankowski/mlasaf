@@ -6,4 +6,8 @@ package com.mlasaf.domain
 
 class Schedule {
 
+
+
+
+
 }

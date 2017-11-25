@@ -4,7 +4,7 @@
 		module="mlasaf"
 		revision="0.1.0"
 		status="integration"
-		publication="20171120011848"
+		publication="20171125004022"
 	>
 		<description>
 		mlasaf
@@ -43,6 +43,7 @@
 		<dependency org="commons-logging" name="commons-logging" rev="1.1.1" conf="compile->default(compile)"/>
 		<dependency org="commons-math" name="commons-math" rev="1.2" conf="compile->default(compile)"/>
 		<dependency org="commons-codec" name="commons-codec" rev="1.10" conf="compile->default(compile)"/>
+		<dependency org="commons-dbcp" name="commons-dbcp" rev="1.4" conf="compile->default(compile)"/>
 		<dependency org="com.google.guava" name="guava" rev="23.4-jre" conf="compile->default(compile)"/>
 		<dependency org="org.apache.hadoop" name="hadoop-common" rev="2.6.3" conf="compile->default(compile)"/>
 		<dependency org="org.apache.hadoop" name="hadoop-nfs" rev="2.6.3" conf="compile->default(compile)"/>

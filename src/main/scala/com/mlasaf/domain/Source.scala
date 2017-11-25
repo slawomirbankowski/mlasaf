@@ -15,6 +15,7 @@ class Source {
   }
 
   def initialize(ctx : Context, srcId : Int) = {
+    parentContext = ctx;
 
   }
   def getSourceDefinition() = {

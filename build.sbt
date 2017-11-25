@@ -27,6 +27,7 @@ libraryDependencies ++= Seq(
  "commons-logging" % "commons-logging" % "1.1.1",
  "commons-math" % "commons-math" % "1.2",
  "commons-codec" % "commons-codec" % "1.10",
+ "commons-dbcp" % "commons-dbcp" % "1.4",
  "com.google.guava" % "guava" % "23.4-jre",
 
  "org.apache.hadoop" % "hadoop-common" % "2.6.3",

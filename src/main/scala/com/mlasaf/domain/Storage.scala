@@ -4,6 +4,11 @@
 */
 package com.mlasaf.domain
 
-class Storage {
+trait Storage {
+
+
+  def downloadViews() : Seq[SourceView];
+
 
 }
+
