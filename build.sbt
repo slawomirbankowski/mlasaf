@@ -11,6 +11,7 @@ crossPaths := false
 resolvers += "Atlassian" at "https://maven.atlassian.com/3rdparty/"
 resolvers += "Atlassian Maven Repository" at "https://maven.atlassian.com/repository/public"
 resolvers += "bigtoast-github" at "http://bigtoast.github.com/repo/"
+resolvers += "Sonatype release repository" at "https://oss.sonatype.org/content/repositories/releases/"
 
 libraryDependencies ++= Seq(
  "net.sourceforge.jtds" % "jtds" % "1.3.1",
@@ -28,7 +29,8 @@ libraryDependencies ++= Seq(
  "commons-math" % "commons-math" % "1.2",
  "commons-codec" % "commons-codec" % "1.10",
  "commons-dbcp" % "commons-dbcp" % "1.4",
- "com.google.guava" % "guava" % "23.4-jre",
+ "commons-io" % "commons-io" % "2.6",
+"com.google.guava" % "guava" % "23.4-jre",
 
  "org.apache.hadoop" % "hadoop-common" % "2.6.3",
  "org.apache.hadoop" % "hadoop-nfs" % "2.6.3",
@@ -55,12 +57,13 @@ libraryDependencies ++= Seq(
  "com.veact" % "scala-ssh_2.11" % "0.8.0",
  "com.typesafe" % "config" % "1.3.1",
  "com.typesafe.scala-logging" % "scala-logging_2.11" % "3.5.0",
+ "com.lucidchart" %% "relate" % "2.0.1",
 
  "com.typesafe.play" % "anorm_2.11" % "2.5.1",
 
  "net.sourceforge.jtds" % "jtds" % "1.3.1",
  "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.7.8",
- "com.fasterxml.jackson.core"   %  "jackson-databind"                 % "2.7.8",
+ "com.fasterxml.jackson.core"   %  "jackson-databind"  % "2.7.8",
 
  "org.scalatest" %% "scalatest" % "3.0.0",
  "com.veact" %% "scala-ssh" % "0.8.0" exclude("net.schmizz", "sshj" /*net.schmizz:sshj:[0.8.1,) - unbounded version caused problems*/ ),

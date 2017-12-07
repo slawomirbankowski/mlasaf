@@ -6,6 +6,7 @@ package com.mlasaf.common
 
 object CustomUtils {
 
+  val random = new java.util.Random()
   def getHostName = {
     java.net.InetAddress.getLocalHost.getHostName
   }
@@ -19,4 +20,8 @@ object CustomUtils {
     java.net.InetAddress.getLocalHost.getAddress.mkString(".")
 
   }
+  def randomLong() : Long = {
+    random.nextLong()
+  }
+
 }

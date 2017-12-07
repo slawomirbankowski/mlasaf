@@ -7,5 +7,7 @@
     <query name="registerExecutor" content="insert into executorInstance(executorInstanceId, executorTypeId, executorInstanceHost, executorInstanceName, isRunning, portNumber, insertedRowDate, guid) values (?, ?, ?, ?)" parameters="" />
     <query name="endExecutor" content="update executorInstance set isRunning = 0, endDate = ? where executorInstanceId = ? ) values (?, ?, ?, ?)" parameters="isRunning,endDate" />
 
+    <query name="executorInstanceInsert" content="insert into executorInstance(executorInstanceId, executorTypeId, executorHostId, executorInstanceName, isRunning, isFinished, portNumber, insertedRowDate, guid, endDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" />
+
 
 </queries>

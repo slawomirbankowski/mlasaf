@@ -5,6 +5,7 @@
 package com.mlasaf.domain
 
 /**  */
-class AlgorithmInstance {
+trait AlgorithmInstance {
 
+  def run() : Unit;
 }

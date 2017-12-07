@@ -6,10 +6,11 @@ package com.mlasaf.dao
 
 import java.sql._
 import anorm._
-
 import com.mlasaf.dto._
 import com.mlasaf.utils._
 import org.apache.commons.dbcp._
+import com.lucidchart.relate._
+import java.sql.Connection
 
 class DaoFactory {
 
@@ -20,12 +21,11 @@ class DaoFactory {
   var jdbcUser = ""
   var jdbcPass = "";
 
+  var executorInstanceId = 1;
   def DaoFactory() = {
   }
 
-  def createConnection() : Connection = {
-    DriverManager.getConnection(jdbcString, jdbcUser, jdbcPass);
-  }
+  /** initialize connection - create template */
   def initialize(jdbc : String, user: String, pass : String) = {
     logger.info("Creating connection to configurational DB: " + jdbc + " with user: " + user);
     connection = DriverManager.getConnection(jdbc, user, pass);
@@ -34,22 +34,27 @@ class DaoFactory {
     logger.info("Got connection: " + connection);
     logger.info("Got connection catalog: " + connection.getCatalog);
     logger.info("Got connection AutoCommit: " + connection.getAutoCommit);
-    logger.info("Got connection NetworkTimeout: " + connection.getNetworkTimeout);
+    //logger.info("Got connection NetworkTimeout: " + connection.getNetworkTimeout);
     jdbcString = jdbc;
     jdbcUser = user;
     jdbcPass = pass;
     isInitialized = true;
   }
   def createDataSource() : javax.sql.DataSource = {
-
     //DriverManagerConnectionFactory
     //PoolingDataSource<PoolableConnection> dataSource = new PoolingDataSource<>(connectionPool);
     //val org.apache.commons.dbcp.PoolingDataSource
-
+    val bds : org.apache.commons.dbcp.BasicDataSource = new org.apache.commons.dbcp.BasicDataSource();
+    bds.isClosed();
 
     null
   }
+  def createConnection() : Connection = {
+    DriverManager.getConnection(jdbcString, jdbcUser, jdbcPass);
+  }
   def getExecutorDao() : ExecutorDao = {
+    implicit val connection : Connection = createConnection();
+    //sql"""select * from algorithmType""".asSingle[Int](row => row.int("algorithmTypeId"))
     null
   }
   def getSourceDao() : SourceDao = {
@@ -59,6 +64,7 @@ class DaoFactory {
     null
   }
 
+  /**  */
   def registerHost() : ExecutorHostDto = {
     val hostName = MlUtils.getHostName
     val hostAddress = java.net.InetAddress.getLocalHost.getHostAddress
@@ -70,7 +76,7 @@ class DaoFactory {
       .executeQuery()(connection);
     logger.info("queryRes: " + queryRes)
     val cnt = queryRes.as[Int](SqlParser.int("cnt").single)(connection);
-    println("cnt: " + cnt)
+    println("cnt: " + cnt);
     if (cnt == 0) {
       logger.info("Registering Executor Host for host: " +  hostName + ", hostAddress: " + hostAddress + ", IP: " + hostIp + ", canonicalHost: " + canonicalHost)
       var simpleS = SQL("insert into executorHost( executorHostId, hostName, hostIp, hostDomain, hostOsType, hostOsVersion) values( {executorHostId}, {hostName}, {hostIp}, {hostDomain}, {hostOsType}, {hostOsVersion}) ")
@@ -81,27 +87,31 @@ class DaoFactory {
       .on("hostName" -> hostName, "hostIp" -> hostIp)
       .as[ExecutorHostDto](anorm.Macro.namedParser[ExecutorHostDto].single)(connection)
     logger.info("Current host in DB: " +  currentHost)
-    //SQL("update storageInstance set executorHostId = {executorHostId} where storageInstanceId = {storageInstanceId} ")
-    //  .on("executorHostId" -> 1, "storageInstanceId" -> 2)
-    //  .executeUpdate()(connection);
-    //val hostDto : ExecutorHostDto = SQL("select * from executorHost where hostName = {hostName}").on("hostName" -> hostName).as[ExecutorHostDto]()(_);
-    //println("Got hostDto: " + hostDto)
-    //return hostDto;
     currentHost
   }
   def registerExecutorInstance(executorTypeId : Int, guid : Long) : ExecutorInstanceDto = {
     //connection = DriverManager.getConnection(jdbc, user, pass);
     val hostDto : ExecutorHostDto = registerHost()
-    println("Registering Executor Instance for GUID: " +  hostDto);
-    //SQL("insert into executorInstance(executorTypeId, executorHostId, executorInstanceName, guid) values (?, ?, ?)").on("executorTypeId" -> instaneHostName, "" -> "")
+    //""" select max(executorInstanceId) as id from executorInstance """
+    implicit val connection = DriverManager.getConnection(jdbcString, jdbcUser, jdbcPass);
+    //val execInstId = executorInstanceId;
+    //executorInstanceId = executorInstanceId + 1;
+    val execInstanceParams = Seq((executorTypeId, hostDto.executorHostId, "execname", guid))
+    val insertedRowsCount = sql""" insert into executorInstance(executorTypeId, executorHostId, executorInstanceName, guid) values $execInstanceParams """.executeInsertInt();
+    println("Registering Executor Instance for GUID: " +  hostDto + ", count: " + insertedRowsCount);
+    //SQL("insert into executorInstance(executorInstanceId, executorTypeId, executorHostId, executorInstanceName, guid) values (?, ?, ?)").on("executorTypeId" -> instaneHostName, "" -> "")
     val execInst : ExecutorInstanceDto = null;
     execInst;
   }
 
+  def unregisterExecutorInstance(guid : Long) : Unit = {
+    implicit val connection = DriverManager.getConnection(jdbcString, jdbcUser, jdbcPass);
+    sql""" update executorInstance set isRunning = 0, isFinished = 1 where guid = $guid  """.executeUpdate()
+  }
   def addStorage(storageDefinition : String) = {
     val connection = DriverManager.getConnection(jdbcString, jdbcUser, jdbcPass);
-    SQL("INSERT INTO public.executorStorage(executorStorageId, executorHostId, executorStorageTypeId, storageDefinition, storageBasePath, storageFulllPath, isRunning, portNumber, insertedRowDate, guid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
-      .on("" -> "", "" -> "").execute()(connection);
+    //SQL("INSERT INTO public.executorStorage(executorStorageId, executorHostId, executorStorageTypeId, storageDefinition, storageBasePath, storageFulllPath, isRunning, portNumber, insertedRowDate, guid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
+    //  .on("" -> "", "" -> "").execute()(connection);
     null;
   }
   def executeQuery(sql : String, params : Seq[Object]) = {
@@ -112,8 +122,23 @@ class DaoFactory {
     ""
   }
 
-  def getStorages() : String = {
-    ""
+  def getStorages(hostId : Long) : List[ExecutorStorageDto] = {
+    implicit val connection = DriverManager.getConnection(jdbcString, jdbcUser, jdbcPass);
+    println("Getting storages from DB for host: " + hostId);
+    val dbStorages : List[ExecutorStorageDto] = sql""" select * from executorstorage where executorHostId = $hostId """.asList[ExecutorStorageDto](new RowParser[ExecutorStorageDto] {
+      def dtoParser(row: SqlRow): ExecutorStorageDto = {
+        ExecutorStorageDto(
+          row.long("executorStorageId"),
+          row.long("executorHostId"),
+          row.long("executorStorageTypeId"),
+          row.string("storageDefinition"),
+          row.string("storageBasePath"),
+          row.int("portNumber"),
+          row.long("guid")
+        )
+      }
+    });
+    dbStorages
   }
 
   def getExecutors() : String = {

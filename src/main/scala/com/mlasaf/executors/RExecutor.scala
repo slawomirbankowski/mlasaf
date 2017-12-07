@@ -8,4 +8,8 @@ import com.mlasaf.domain._
 
 class RExecutor extends Executor {
 
+  def onRun(): Unit = {
+    println("R Executor run  ")
+  }
+
 }

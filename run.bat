@@ -1,1 +1,1 @@
-java -cp "./target/mlasaf-1.0.jar;" com.mlasaf.MlasafEntry
+java -cp "./target/mlasaf-1.0.jar;" com.mlasaf.MlasafEntry --executors "com.mlasaf.executors.RExecutor,com.mlasaf.executors.LocalExecutor" --jdbcString "jdbc:postgresql://localhost:5432/mlasaf8" --jdbcUser "postgres" --jdbcPass "postgrespass" --restPort "8300" --restAlternativePort "8301" 

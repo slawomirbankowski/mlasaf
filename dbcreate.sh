@@ -1,1 +1,1 @@
-liquibase --driver=org.postgresql.Driver --classpath=./libstatic/postgresql-9.4.1210.jar --changeLogFile=./src/main/resources/db/db_1.0.xml --url="jdbc:postgresql://localhost:5432/mlasaf4" --logLevel=DEBUG --username=postgres --password=%1 migrate
+liquibase --driver=org.postgresql.Driver --classpath=./libstatic/postgresql-9.4.1210.jar --changeLogFile=./src/main/resources/db/db_1.0.xml --url="jdbc:postgresql://localhost:5432/mlasaf10" --logLevel=DEBUG --username=postgres --password=postgrespass migrate

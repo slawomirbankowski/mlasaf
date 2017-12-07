@@ -58,7 +58,7 @@
         </createTable>
 
         <createTable tableName="executorinstance">
-            <column name="executorinstanceid" type="bigint" autoIncrement="false">
+            <column name="executorinstanceid" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="executortypeid" type="bigint"/>

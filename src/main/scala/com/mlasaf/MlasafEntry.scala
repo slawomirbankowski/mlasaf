@@ -16,6 +16,7 @@ object MlasafEntry {
     logger.info("START MLASAF " + MLASAF_VERSION);
     val context = new Context();
     context.run(args);
+    Thread.sleep(20000L);
     logger.info("End MLASAF");
   }
 
