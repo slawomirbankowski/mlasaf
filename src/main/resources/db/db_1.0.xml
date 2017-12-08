@@ -7,13 +7,10 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <preConditions>
-        <runningAs username="postgres"/>
-    </preConditions>
 
     <changeSet id="1" author="slawomirbankowski">
 
-        <createSequence catalogName="cat" cycle="false" incrementBy="1" minValue="10" schemaName="public"  sequenceName="seq_id" startValue="10"/>
+        <createSequence cycle="false" incrementBy="1" minValue="10" sequenceName="seq_id" startValue="10"/>
 
         <createTable tableName="executorhost" remarks="host on which executor can execute" >
             <column name="executorhostid" type="bigint" autoIncrement="false">
@@ -109,10 +106,10 @@
             <column name="insertedrowdate" type="timestamp"/>
             <column name="guid" type="bigint"/>
         </createTable>
-        <createIndex indexName="idx_executorstorage_executorstorageid" tableName="executorstorage" unique="false">
+        <createIndex indexName="idx_es_executorstorageid" tableName="executorstorage" unique="false">
             <column name="executorstorageid" />
         </createIndex>
-        <createIndex indexName="idx_executorstorage_executorstoragetypeid" tableName="executorstorage" unique="false">
+        <createIndex indexName="idx_es_executorstoragetypeid" tableName="executorstorage" unique="false">
             <column name="executorstoragetypeid" />
         </createIndex>
 
@@ -207,10 +204,10 @@
             <column name="laststatus" type="varchar(4000)"/>
             <column name="lastconnectiondate" type="timestamp"/>
         </createTable>
-        <createIndex indexName="idx_sourceinstance_sourcetypeid" tableName="sourceinstance" unique="false">
+        <createIndex indexName="idx_si_sourcetypeid" tableName="sourceinstance" unique="false">
             <column name="sourcetypeid" />
         </createIndex>
-        <createIndex indexName="idx_sourceinstance_sourceinstancename" tableName="sourceinstance" unique="false">
+        <createIndex indexName="idx_si_sourceinstancename" tableName="sourceinstance" unique="false">
             <column name="sourceinstancename" />
         </createIndex>
 
@@ -580,28 +577,28 @@
             <column name="outputpath" type="varchar(4000)"/>
         </createTable>
 
-        <addForeignKeyConstraint baseTableName="executorinstance" baseColumnNames="executortypeid" referencedTableName="executortype" referencedColumnNames="executortypeid"  constraintName="fk_executorinstance_executortype"  />
-        <addForeignKeyConstraint baseTableName="executorinstance" baseColumnNames="executorhostid" referencedTableName="executorhost" referencedColumnNames="executorhostid"  constraintName="fk_executorinstance_executorhost"  />
-        <addForeignKeyConstraint baseTableName="executorstorage" baseColumnNames="executorhostid" referencedTableName="executorhost" referencedColumnNames="executorhostid"  constraintName="fk_executorstorage_"  />
-        <addForeignKeyConstraint baseTableName="executorstorage" baseColumnNames="executorstoragetypeid" referencedTableName="executorstoragetype" referencedColumnNames="executorstoragetypeid"  constraintName="fk_executorstorage_executorstoragetype"  />
-        <addForeignKeyConstraint baseTableName="executorstorageview" baseColumnNames="executorstorageid" referencedTableName="executorstorage" referencedColumnNames="executorstorageid"  constraintName="fk_executorstorageview_executorstorage"  />
-        <addForeignKeyConstraint baseTableName="sourceinstance" baseColumnNames="sourcetypeid" referencedTableName="sourcetype" referencedColumnNames="sourcetypeid"  constraintName="fk_sourceinstance_sourcetype"  />
-        <addForeignKeyConstraint baseTableName="sourcetypeparam" baseColumnNames="sourcetypeid" referencedTableName="sourcetype" referencedColumnNames="sourcetypeid"  constraintName="fk_sourcetypeparam_sourcetype"  />
-        <addForeignKeyConstraint baseTableName="sourcetypeparam" baseColumnNames="sourceparamid" referencedTableName="sourceparam" referencedColumnNames="sourceparamid"  constraintName="fk_sourcetypeparam_sourceparam"  />
-        <addForeignKeyConstraint baseTableName="sourceparamvalue" baseColumnNames="sourceinstanceid" referencedTableName="sourceinstance" referencedColumnNames="sourceinstanceid"  constraintName="fk_sourceparamvalue_sourceinstance"  />
-        <addForeignKeyConstraint baseTableName="sourceparamvalue" baseColumnNames="sourceparamid" referencedTableName="sourceparam" referencedColumnNames="sourceparamid"  constraintName="fk_sourceparamvalue_sourceparam"  />
-        <addForeignKeyConstraint baseTableName="sourceview" baseColumnNames="sourceinstanceid" referencedTableName="sourceinstance" referencedColumnNames="sourceinstanceid"  constraintName="fk_sourceview_sourceinstance"  />
-        <addForeignKeyConstraint baseTableName="sourceview" baseColumnNames="sourceviewtypeid" referencedTableName="sourceviewtype" referencedColumnNames="sourceviewtypeid"  constraintName="fk_sourceview_sourceviewtype"  />
-        <addForeignKeyConstraint baseTableName="sourceviewcolumn" baseColumnNames="sourceviewid" referencedTableName="sourceview" referencedColumnNames="sourceviewid"  constraintName="fk_sourceviewcolumn_sourceview"  />
-        <addForeignKeyConstraint baseTableName="sourceschedule" baseColumnNames="sourceviewid" referencedTableName="sourceview" referencedColumnNames="sourceviewid"  constraintName="fk_sourceviewcolumn_sourceview"  />
-        <addForeignKeyConstraint baseTableName="sourceschedule" baseColumnNames="executorstorageid" referencedTableName="executorstorage" referencedColumnNames="executorstorageid"  constraintName="fk_sourceviewcolumn_executorstorage"  />
-        <addForeignKeyConstraint baseTableName="sourcedownload" baseColumnNames="sourcescheduleid" referencedTableName="sourceschedule" referencedColumnNames="sourcescheduleid"  constraintName="fk_sourcedownload_sourceschedule"  />
-        <addForeignKeyConstraint baseTableName="algorithmtypeversion" baseColumnNames="algorithmtypeid" referencedTableName="algorithmtype" referencedColumnNames="algorithmtypeid"  constraintName="fk_algorithmtypeversion_algorithmtype"  />
-        <addForeignKeyConstraint baseTableName="algorithmimplementation" baseColumnNames="algorithmtypeid" referencedTableName="algorithmtype" referencedColumnNames="algorithmtypeid"  constraintName="fk_algorithmimplementation_algorithmtype"  />
-        <addForeignKeyConstraint baseTableName="algorithmimplementation" baseColumnNames="algorithmtypeversionid" referencedTableName="algorithmtypeversion" referencedColumnNames="algorithmtypeversionid"  constraintName="fk_algorithmimplementation_algorithmtypeversion"  />
-        <addForeignKeyConstraint baseTableName="algorithmparamtype" baseColumnNames="algorithmparamid" referencedTableName="algorithmparam" referencedColumnNames="algorithmparamid"  constraintName="fk_algorithmparamtype_algorithmparam"  />
-        <addForeignKeyConstraint baseTableName="algorithmparamtype" baseColumnNames="algorithmtypeid" referencedTableName="algorithmtype" referencedColumnNames="algorithmtypeid"  constraintName="fk_algorithmparamtype_algorithmtype"  />
-        <addForeignKeyConstraint baseTableName="executorstorageview" baseColumnNames="sourcedownloadid" referencedTableName="sourcedownload" referencedColumnNames="sourcedownloadid"  constraintName="fk_executorstorageview_sourcedownload"  />
+        <addForeignKeyConstraint baseTableName="executorinstance" baseColumnNames="executortypeid" referencedTableName="executortype" referencedColumnNames="executortypeid"  constraintName="fk_ei_executortype"  />
+        <addForeignKeyConstraint baseTableName="executorinstance" baseColumnNames="executorhostid" referencedTableName="executorhost" referencedColumnNames="executorhostid"  constraintName="fk_ei_executorhost"  />
+        <addForeignKeyConstraint baseTableName="executorstorage" baseColumnNames="executorhostid" referencedTableName="executorhost" referencedColumnNames="executorhostid"  constraintName="fk_es_"  />
+        <addForeignKeyConstraint baseTableName="executorstorage" baseColumnNames="executorstoragetypeid" referencedTableName="executorstoragetype" referencedColumnNames="executorstoragetypeid"  constraintName="fk_es_executorstoragetype"  />
+        <addForeignKeyConstraint baseTableName="executorstorageview" baseColumnNames="executorstorageid" referencedTableName="executorstorage" referencedColumnNames="executorstorageid"  constraintName="fk_esv_executorstorage"  />
+        <addForeignKeyConstraint baseTableName="sourceinstance" baseColumnNames="sourcetypeid" referencedTableName="sourcetype" referencedColumnNames="sourcetypeid"  constraintName="fk_si_sourcetype"  />
+        <addForeignKeyConstraint baseTableName="sourcetypeparam" baseColumnNames="sourcetypeid" referencedTableName="sourcetype" referencedColumnNames="sourcetypeid"  constraintName="fk_stp_sourcetype"  />
+        <addForeignKeyConstraint baseTableName="sourcetypeparam" baseColumnNames="sourceparamid" referencedTableName="sourceparam" referencedColumnNames="sourceparamid"  constraintName="fk_stp_sourceparam"  />
+        <addForeignKeyConstraint baseTableName="sourceparamvalue" baseColumnNames="sourceinstanceid" referencedTableName="sourceinstance" referencedColumnNames="sourceinstanceid"  constraintName="fk_spv_sourceinstance"  />
+        <addForeignKeyConstraint baseTableName="sourceparamvalue" baseColumnNames="sourceparamid" referencedTableName="sourceparam" referencedColumnNames="sourceparamid"  constraintName="fk_spv_sourceparam"  />
+        <addForeignKeyConstraint baseTableName="sourceview" baseColumnNames="sourceinstanceid" referencedTableName="sourceinstance" referencedColumnNames="sourceinstanceid"  constraintName="fk_sv_sourceinstance"  />
+        <addForeignKeyConstraint baseTableName="sourceview" baseColumnNames="sourceviewtypeid" referencedTableName="sourceviewtype" referencedColumnNames="sourceviewtypeid"  constraintName="fk_sv_sourceviewtype"  />
+        <addForeignKeyConstraint baseTableName="sourceviewcolumn" baseColumnNames="sourceviewid" referencedTableName="sourceview" referencedColumnNames="sourceviewid"  constraintName="fk_svc_sourceview"  />
+        <addForeignKeyConstraint baseTableName="sourceschedule" baseColumnNames="sourceviewid" referencedTableName="sourceview" referencedColumnNames="sourceviewid"  constraintName="fk_svc_sourceview"  />
+        <addForeignKeyConstraint baseTableName="sourceschedule" baseColumnNames="executorstorageid" referencedTableName="executorstorage" referencedColumnNames="executorstorageid"  constraintName="fk_svc_executorstorage"  />
+        <addForeignKeyConstraint baseTableName="sourcedownload" baseColumnNames="sourcescheduleid" referencedTableName="sourceschedule" referencedColumnNames="sourcescheduleid"  constraintName="fk_sd_sourceschedule"  />
+        <addForeignKeyConstraint baseTableName="algorithmtypeversion" baseColumnNames="algorithmtypeid" referencedTableName="algorithmtype" referencedColumnNames="algorithmtypeid"  constraintName="fk_atv_algorithmtype"  />
+        <addForeignKeyConstraint baseTableName="algorithmimplementation" baseColumnNames="algorithmtypeid" referencedTableName="algorithmtype" referencedColumnNames="algorithmtypeid"  constraintName="fk_ai_algorithmtype"  />
+        <addForeignKeyConstraint baseTableName="algorithmimplementation" baseColumnNames="algorithmtypeversionid" referencedTableName="algorithmtypeversion" referencedColumnNames="algorithmtypeversionid"  constraintName="fk_ai_algorithmtypeversion"  />
+        <addForeignKeyConstraint baseTableName="algorithmparamtype" baseColumnNames="algorithmparamid" referencedTableName="algorithmparam" referencedColumnNames="algorithmparamid"  constraintName="fk_apt_algorithmparam"  />
+        <addForeignKeyConstraint baseTableName="algorithmparamtype" baseColumnNames="algorithmtypeid" referencedTableName="algorithmtype" referencedColumnNames="algorithmtypeid"  constraintName="fk_apt_algorithmtype"  />
+        <addForeignKeyConstraint baseTableName="executorstorageview" baseColumnNames="sourcedownloadid" referencedTableName="sourcedownload" referencedColumnNames="sourcedownloadid"  constraintName="fk_esv_sourcedownload"  />
 
     </changeSet>
 

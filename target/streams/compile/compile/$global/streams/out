@@ -1,4 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0mC:\Project\mlasaf\src\mlasaf\src\main\scala\com\mlasaf\dao\DaoFactory.scala:134:147: could not find implicit value for evidence parameter of type com.lucidchart.relate.RowParser[com.mlasaf.dto.ExecutorStorageDto][0m
-[0m[[0m[31merror[0m] [0m[0m    val dbStorages : List[ExecutorStorageDto] = sql""" select * from executorstorage where executorHostId = $hostId """.asList[ExecutorStorageDto]()[0m
-[0m[[0m[31merror[0m] [0m[0m                                                                                                                                                  ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Project\mlasaf\src\mlasaf\src\main\scala\com\mlasaf\dto\Dtos.scala:16:60: object creation impossible, since method parse in trait RowParser of type (row: com.lucidchart.relate.SqlRow)com.mlasaf.dto.ExecutorStorageDto is not defined[0m
+[0m[[0m[31merror[0m] [0m[0m  implicit val parser: RowParser[ExecutorStorageDto] = new RowParser[ExecutorStorageDto] {[0m
+[0m[[0m[31merror[0m] [0m[0m                                                           ^[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m

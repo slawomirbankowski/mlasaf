@@ -12,14 +12,14 @@ resolvers += "Atlassian" at "https://maven.atlassian.com/3rdparty/"
 resolvers += "Atlassian Maven Repository" at "https://maven.atlassian.com/repository/public"
 resolvers += "bigtoast-github" at "http://bigtoast.github.com/repo/"
 resolvers += "Sonatype release repository" at "https://oss.sonatype.org/content/repositories/releases/"
+resolvers += "Alfresco" at "https://artifacts.alfresco.com/nexus/content/repositories/public/"
+resolvers += "Maven Repository" at "https://mvnrepository.com/artifact/"
+resolvers += "Maven2" at "https://central.maven.org/maven2/"
 
 libraryDependencies ++= Seq(
- "net.sourceforge.jtds" % "jtds" % "1.3.1",
- "org.postgresql" % "postgresql" % "9.4.1210",
 
  "org.slf4j" % "slf4j-api" % "1.7.21",
  "log4j" % "log4j" % "1.2.17",
-
  "net.sourceforge.jexcelapi" % "jxl" % "2.6.12",
 
  "commons-collections" % "commons-collections" % "3.2.2",
@@ -35,11 +35,15 @@ libraryDependencies ++= Seq(
  "org.apache.hadoop" % "hadoop-common" % "2.6.3",
  "org.apache.hadoop" % "hadoop-nfs" % "2.6.3",
  "gov.nist.math" % "jama" % "1.0.2",
-
  "javax.mail" % "javax.mail-api" % "1.5.6",
+
+ // JDBC drivers
  "com.microsoft.sqlserver" % "sqljdbc4" % "4.0" % "test",
- //"com.oracle.jdbc" % "ojdbc8" % "12.2.0.1",
+  "com.oracle" % "ojdbc6" % "11.2.0.4.0-atlassian-hosted",
  "mysql" % "mysql-connector-java" % "5.1.16",
+ "net.sourceforge.jtds" % "jtds" % "1.3.1",
+ "org.postgresql" % "postgresql" % "9.4.1210",
+  "com.ibm.db2.jcc" % "db2jcc4" % "10.1",
 
  "tw.edu.ntu.csie" % "libsvm" % "3.17",
  "ch.qos.logback" % "logback-classic" % "1.1.7",
@@ -64,6 +68,7 @@ libraryDependencies ++= Seq(
  "net.sourceforge.jtds" % "jtds" % "1.3.1",
  "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.7.8",
  "com.fasterxml.jackson.core"   %  "jackson-databind"  % "2.7.8",
+  //"org.fitnesse" % "fitnesse" % "20161106",
 
  "org.scalatest" %% "scalatest" % "3.0.0",
  "com.veact" %% "scala-ssh" % "0.8.0" exclude("net.schmizz", "sshj" /*net.schmizz:sshj:[0.8.1,) - unbounded version caused problems*/ ),

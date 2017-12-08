@@ -13,7 +13,7 @@ case class ExecutorStorageDto(val executorStorageId : Long, val executorHostId :
 
 }
 object ExecutorStorageDto {
-  implicit val parser: RowParser[ExecutorStorageDto] = new RowParser[ExecutorStorageDto] {
+  /*implicit val parser: RowParser[ExecutorStorageDto] = new RowParser[ExecutorStorageDto] {
     def dtoParser(row: SqlRow): ExecutorStorageDto = {
       ExecutorStorageDto(
         row.long("executorStorageId"),
@@ -25,7 +25,7 @@ object ExecutorStorageDto {
         row.long("guid")
       )
     }
-  }
+  }*/
 }
 
 case class ExecutorRestDto(val executionRestId : Long, val executorHostId : Long, val restPort : Int, val restVersion : String) {

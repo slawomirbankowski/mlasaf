@@ -9,7 +9,7 @@ import anorm._
 import com.mlasaf.dto._
 import com.mlasaf.utils._
 import org.apache.commons.dbcp._
-import com.lucidchart.relate._
+//import com.lucidchart.relate._
 import java.sql.Connection
 
 class DaoFactory {
@@ -97,8 +97,8 @@ class DaoFactory {
     //val execInstId = executorInstanceId;
     //executorInstanceId = executorInstanceId + 1;
     val execInstanceParams = Seq((executorTypeId, hostDto.executorHostId, "execname", guid))
-    val insertedRowsCount = sql""" insert into executorInstance(executorTypeId, executorHostId, executorInstanceName, guid) values $execInstanceParams """.executeInsertInt();
-    println("Registering Executor Instance for GUID: " +  hostDto + ", count: " + insertedRowsCount);
+    //val insertedRowsCount = sql""" insert into executorInstance(executorTypeId, executorHostId, executorInstanceName, guid) values $execInstanceParams """.executeInsertInt();
+    ///println("Registering Executor Instance for GUID: " +  hostDto + ", count: " + insertedRowsCount);
     //SQL("insert into executorInstance(executorInstanceId, executorTypeId, executorHostId, executorInstanceName, guid) values (?, ?, ?)").on("executorTypeId" -> instaneHostName, "" -> "")
     val execInst : ExecutorInstanceDto = null;
     execInst;
@@ -106,7 +106,7 @@ class DaoFactory {
 
   def unregisterExecutorInstance(guid : Long) : Unit = {
     implicit val connection = DriverManager.getConnection(jdbcString, jdbcUser, jdbcPass);
-    sql""" update executorInstance set isRunning = 0, isFinished = 1 where guid = $guid  """.executeUpdate()
+    //sql""" update executorInstance set isRunning = 0, isFinished = 1 where guid = $guid  """.executeUpdate()
   }
   def addStorage(storageDefinition : String) = {
     val connection = DriverManager.getConnection(jdbcString, jdbcUser, jdbcPass);
@@ -125,11 +125,11 @@ class DaoFactory {
   def getStorages(hostId : Long) : List[ExecutorStorageDto] = {
     implicit val connection = DriverManager.getConnection(jdbcString, jdbcUser, jdbcPass);
     println("Getting storages from DB for host: " + hostId);
-    val dbStorages : List[ExecutorStorageDto] = sql""" select * from executorstorage where executorHostId = $hostId """.asList[ExecutorStorageDto](new RowParser[ExecutorStorageDto] {
-      def dtoParser(row: SqlRow): ExecutorStorageDto = {
-        ExecutorStorageDto(
-          row.long("executorStorageId"),
-          row.long("executorHostId"),
+    //val dbStorages : List[ExecutorStorageDto] = sql""" select * from executorstorage where executorHostId = $hostId """.asList[ExecutorStorageDto](new RowParser[ExecutorStorageDto] {
+    //  def dtoParser(row: SqlRow): ExecutorStorageDto = {
+    //    ExecutorStorageDto(
+    //      row.long("executorStorageId"),
+    /*      row.long("executorHostId"),
           row.long("executorStorageTypeId"),
           row.string("storageDefinition"),
           row.string("storageBasePath"),
@@ -137,8 +137,9 @@ class DaoFactory {
           row.long("guid")
         )
       }
-    });
-    dbStorages
+    });*/
+    //dbStorages
+    null
   }
 
   def getExecutors() : String = {
