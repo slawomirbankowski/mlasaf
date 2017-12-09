@@ -17,19 +17,21 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="insertedrowdate" type="timestamp"/>
-            <column name="hostname" type="varchar(4000)"/>
-            <column name="hostip" type="varchar(4000)"/>
-            <column name="hostdomain" type="varchar(4000)"/>
-            <column name="hostostype" type="varchar(4000)"/>
-            <column name="hostosversion" type="varchar(4000)"/>
+            <column name="hostname" type="nvarchar(2000)"/>
+            <column name="hostip" type="nvarchar(2000)"/>
+            <column name="hostdomain" type="nvarchar(2000)"/>
+            <column name="hostostype" type="nvarchar(2000)"/>
+            <column name="hostosversion" type="nvarchar(2000)"/>
+            <column name="isworking" type="int"/>
+
         </createTable>
 
         <createTable tableName="executortype">
             <column name="executortypeid" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="executortypename" type="varchar(4000)"/>
-            <column name="executortypeclass" type="varchar(4000)"/>
+            <column name="executortypename" type="nvarchar(2000)"/>
+            <column name="executortypeclass" type="nvarchar(2000)"/>
         </createTable>
 
         <createTable tableName="executorrest">
@@ -38,8 +40,8 @@
             </column>
             <column name="executorhostid" type="bigint"/>
             <column name="restport" type="int"/>
-            <column name="restversion" type="varchar(4000)"/>
-            <column name="reststatus" type="varchar(4000)"/>
+            <column name="restversion" type="nvarchar(2000)"/>
+            <column name="reststatus" type="nvarchar(2000)"/>
         </createTable>
 
         <createTable tableName="executorrestcall">
@@ -48,10 +50,10 @@
             </column>
             <column name="executorhostid" type="bigint"/>
             <column name="executorrestid" type="bigint"/>
-            <column name="requestmethod" type="varchar(4000)"/>
-            <column name="requestheader" type="varchar(4000)"/>
-            <column name="requestbody" type="varchar(4000)"/>
-            <column name="responsebody" type="varchar(4000)"/>
+            <column name="requestmethod" type="nvarchar(2000)"/>
+            <column name="requestheader" type="nvarchar(2000)"/>
+            <column name="requestbody" type="nvarchar(2000)"/>
+            <column name="responsebody" type="nvarchar(2000)"/>
         </createTable>
 
         <createTable tableName="executorinstance">
@@ -60,7 +62,7 @@
             </column>
             <column name="executortypeid" type="bigint"/>
             <column name="executorhostid" type="bigint"/>
-            <column name="executorinstancename" type="varchar(4000)"/>
+            <column name="executorinstancename" type="nvarchar(2000)"/>
             <column name="isrunning" type="int"/>
             <column name="isfinished" type="int"/>
             <column name="portnumber" type="int"/>
@@ -73,8 +75,8 @@
             <column name="executorstoragetypeid" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="executorstoragetypename" type="varchar(4000)"/>
-            <column name="executorstoragetypeclass" type="varchar(4000)"/>
+            <column name="executorstoragetypename" type="nvarchar(2000)"/>
+            <column name="executorstoragetypeclass" type="nvarchar(2000)"/>
         </createTable>
         <insert tableName="executorstoragetype">
             <column name="executorstoragetypeid" value="1"/>
@@ -98,16 +100,16 @@
             </column>
             <column name="executorhostid" type="bigint"/>
             <column name="executorstoragetypeid" type="bigint"/>
-            <column name="storagedefinition" type="varchar(4000)"/>
-            <column name="storagebasepath" type="varchar(4000)"/>
-            <column name="storagefulllpath" type="varchar(4000)"/>
+            <column name="storagedefinition" type="nvarchar(2000)"/>
+            <column name="storagebasepath" type="nvarchar(2000)"/>
+            <column name="storagefulllpath" type="nvarchar(2000)"/>
             <column name="isrunning" type="int"/>
             <column name="portnumber" type="int"/>
             <column name="insertedrowdate" type="timestamp"/>
             <column name="guid" type="bigint"/>
         </createTable>
-        <createIndex indexName="idx_es_executorstorageid" tableName="executorstorage" unique="false">
-            <column name="executorstorageid" />
+        <createIndex indexName="idx_es_executorhostid" tableName="executorstorage" unique="false">
+            <column name="executorhostid" />
         </createIndex>
         <createIndex indexName="idx_es_executorstoragetypeid" tableName="executorstorage" unique="false">
             <column name="executorstoragetypeid" />
@@ -119,7 +121,7 @@
             </column>
             <column name="executorstorageid" type="bigint"/>
             <column name="sourcedownloadid" type="bigint"/>
-            <column name="storagepath" type="varchar(4000)"/>
+            <column name="storagepath" type="nvarchar(2000)"/>
             <column name="viewsize" type="bigint"/>
             <column name="viewrowscount" type="bigint"/>
         </createTable>
@@ -128,8 +130,8 @@
             <column name="resourcemanagertypeid" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="resourcemanagertypename" type="varchar(4000)"/>
-            <column name="resourcemanagertypeclass" type="varchar(4000)"/>
+            <column name="resourcemanagertypename" type="varchar(2000)"/>
+            <column name="resourcemanagertypeclass" type="varchar(2000)"/>
         </createTable>
 
         <createTable tableName="resourcemanager">
@@ -138,7 +140,7 @@
             </column>
             <column name="resourcemanagertypeid" type="bigint"/>
             <column name="executorhostid" type="bigint"/>
-            <column name="resourcemanagerstatus" type="varchar(4000)"/>
+            <column name="resourcemanagerstatus" type="varchar(2000)"/>
         </createTable>
 
         <createTable tableName="resourcemanagermeasure">
@@ -146,7 +148,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="resourcemanagerid" type="bigint"/>
-            <column name="measurestring" type="varchar(4000)"/>
+            <column name="measurestring" type="varchar(2000)"/>
             <column name="measurevalue" type="float"/>
         </createTable>
 
@@ -171,7 +173,7 @@
             <column name="sourcetypeid" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="sourcetypename" type="varchar(4000)"/>
+            <column name="sourcetypename" type="varchar(400)"/>
             <column name="sourcetypeclass" type="varchar(4000)"/>
         </createTable>
         <createIndex indexName="idx_sourcetype_sourcetypename" tableName="sourcetype" unique="false">
@@ -198,7 +200,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="sourcetypeid" type="bigint"/>
-            <column name="sourceinstancename" type="varchar(4000)"/>
+            <column name="sourceinstancename" type="varchar(400)"/>
             <column name="errorcount" type="bigint"/>
             <column name="correctcount" type="bigint"/>
             <column name="laststatus" type="varchar(4000)"/>
@@ -501,7 +503,7 @@
         </createTable>
 
         <createTable tableName="algorithmscheduleviewtype" remarks="dictionary - type of view for schedule - primary, training, testing, validation" >
-            <column name="algorithmscheduleviewtypeid" type="int" autoIncrement="true">
+            <column name="algorithmscheduleviewtypeid" type="int" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="algorithmscheduleviewtypename" type="varchar(4000)"/>
@@ -590,7 +592,7 @@
         <addForeignKeyConstraint baseTableName="sourceview" baseColumnNames="sourceinstanceid" referencedTableName="sourceinstance" referencedColumnNames="sourceinstanceid"  constraintName="fk_sv_sourceinstance"  />
         <addForeignKeyConstraint baseTableName="sourceview" baseColumnNames="sourceviewtypeid" referencedTableName="sourceviewtype" referencedColumnNames="sourceviewtypeid"  constraintName="fk_sv_sourceviewtype"  />
         <addForeignKeyConstraint baseTableName="sourceviewcolumn" baseColumnNames="sourceviewid" referencedTableName="sourceview" referencedColumnNames="sourceviewid"  constraintName="fk_svc_sourceview"  />
-        <addForeignKeyConstraint baseTableName="sourceschedule" baseColumnNames="sourceviewid" referencedTableName="sourceview" referencedColumnNames="sourceviewid"  constraintName="fk_svc_sourceview"  />
+        <addForeignKeyConstraint baseTableName="sourceschedule" baseColumnNames="sourceviewid" referencedTableName="sourceview" referencedColumnNames="sourceviewid"  constraintName="fk_ss_sourceview"  />
         <addForeignKeyConstraint baseTableName="sourceschedule" baseColumnNames="executorstorageid" referencedTableName="executorstorage" referencedColumnNames="executorstorageid"  constraintName="fk_svc_executorstorage"  />
         <addForeignKeyConstraint baseTableName="sourcedownload" baseColumnNames="sourcescheduleid" referencedTableName="sourceschedule" referencedColumnNames="sourcescheduleid"  constraintName="fk_sd_sourceschedule"  />
         <addForeignKeyConstraint baseTableName="algorithmtypeversion" baseColumnNames="algorithmtypeid" referencedTableName="algorithmtype" referencedColumnNames="algorithmtypeid"  constraintName="fk_atv_algorithmtype"  />

@@ -395,21 +395,6 @@
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [compile->compile][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [compile->compile(*)][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [compile->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->default][0m
-[0m[[0m[0mdebug[0m] [0m[0msbt-chain: Checking cache for: dependency: com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted {compile=[default, compile, runtime, default(compile), master], runtime=[default, compile, runtime, default(compile), master], test=[default, compile, runtime, default(compile), master], compile-internal=[default, compile, runtime, default(compile), master], runtime-internal=[default, compile, runtime, default(compile), master], test-internal=[default, compile, runtime, default(compile), master]}[0m
-[0m[[0m[0mdebug[0m] [0m[0msbt-chain: module revision found in cache: com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted[0m
-[0m[[0m[0mdebug[0m] [0m[0m	found com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted in sbt-chain[0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->default(compile)][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->master][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [compile->default][0m
 [0m[[0m[0mdebug[0m] [0m[0msbt-chain: Checking cache for: dependency: commons-math#commons-math;1.2 {compile=[default, compile, runtime, default(compile), master], runtime=[default, compile, runtime, default(compile), master], test=[default, compile, runtime, default(compile), master], compile-internal=[default, compile, runtime, default(compile), master], runtime-internal=[default, compile, runtime, default(compile), master], test-internal=[default, compile, runtime, default(compile), master]}[0m
 [0m[[0m[0mdebug[0m] [0m[0msbt-chain: module revision found in cache: commons-math#commons-math;1.2[0m
@@ -748,6 +733,21 @@
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [compile->compile][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [compile->compile(*)][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [compile->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->default][0m
+[0m[[0m[0mdebug[0m] [0m[0msbt-chain: Checking cache for: dependency: com.ibm.db2.jcc#db2jcc4;10.1 {compile=[default, compile, runtime, default(compile), master], runtime=[default, compile, runtime, default(compile), master], test=[default, compile, runtime, default(compile), master], compile-internal=[default, compile, runtime, default(compile), master], runtime-internal=[default, compile, runtime, default(compile), master], test-internal=[default, compile, runtime, default(compile), master]}[0m
+[0m[[0m[0mdebug[0m] [0m[0msbt-chain: module revision found in cache: com.ibm.db2.jcc#db2jcc4;10.1[0m
+[0m[[0m[0mdebug[0m] [0m[0m	found com.ibm.db2.jcc#db2jcc4;10.1 in sbt-chain[0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->default(compile)][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->master][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [compile->default][0m
 [0m[[0m[0mdebug[0m] [0m[0msbt-chain: Checking cache for: dependency: com.jcraft#jsch.agentproxy.pageant;0.0.9 {compile=[default, compile, runtime(*), master(compile), runtime, default(compile), compile(*), master], runtime=[default, compile, runtime(*), master(compile), runtime, default(compile), compile(*), master], test=[default, compile, runtime(*), master(compile), runtime, default(compile), compile(*), master], compile-internal=[default, compile, runtime(*), master(compile), runtime, default(compile), compile(*), master], runtime-internal=[default, compile, runtime(*), master(compile), runtime, default(compile), compile(*), master], test-internal=[default, compile, runtime(*), master(compile), runtime, default(compile), compile(*), master]}[0m
 [0m[[0m[0mdebug[0m] [0m[0msbt-chain: module revision found in cache: com.jcraft#jsch.agentproxy.pageant;0.0.9[0m
@@ -2167,18 +2167,6 @@
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [compile->compile][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [compile->compile(*)][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [compile->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->default][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->default(compile)][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->master][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [compile->default][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [compile->runtime][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [compile->compile][0m
@@ -2439,6 +2427,18 @@
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [compile->compile][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [compile->compile(*)][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [compile->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->default][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->default(compile)][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->master][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [compile->default][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [compile->runtime][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [compile->compile][0m
@@ -3599,18 +3599,6 @@
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [runtime->compile][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [runtime->compile(*)][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [runtime->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->default][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->default(compile)][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->master][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [runtime->default][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [runtime->runtime][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [runtime->compile][0m
@@ -3871,6 +3859,18 @@
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [runtime->compile][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [runtime->compile(*)][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [runtime->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->default][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->default(compile)][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->master][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [runtime->default][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [runtime->runtime][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [runtime->compile][0m
@@ -5035,18 +5035,6 @@
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [compile->compile][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [compile->compile(*)][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [compile->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->default][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->default(compile)][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->master][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [compile->default][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [compile->runtime][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [compile->compile][0m
@@ -5307,6 +5295,18 @@
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [compile->compile][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [compile->compile(*)][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [compile->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->default][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->default(compile)][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->master][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [compile->default][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [compile->runtime][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [compile->compile][0m
@@ -6467,18 +6467,6 @@
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [runtime->compile][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [runtime->compile(*)][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [runtime->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->default][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->default(compile)][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->master][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [runtime->default][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [runtime->runtime][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [runtime->compile][0m
@@ -6739,6 +6727,18 @@
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [runtime->compile][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [runtime->compile(*)][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [runtime->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->default][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->default(compile)][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->master][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [runtime->default][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [runtime->runtime][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [runtime->compile][0m
@@ -7899,18 +7899,6 @@
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [test->compile][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [test->compile(*)][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [test->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [test->default][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [test->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [test->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [test->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [test->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [test->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [test->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [test->default(compile)][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [test->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [test->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [test->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [test->master][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [test->default][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [test->runtime][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [test->compile][0m
@@ -8171,6 +8159,18 @@
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [test->compile][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [test->compile(*)][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [test->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [test->default][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [test->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [test->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [test->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [test->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [test->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [test->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [test->default(compile)][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [test->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [test->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [test->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [test->master][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [test->default][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [test->runtime][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [test->compile][0m
@@ -9338,18 +9338,6 @@
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [compile->compile][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [compile->compile(*)][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [compile->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->default][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->default(compile)][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->master][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [compile->default][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [compile->runtime][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [compile->compile][0m
@@ -9610,6 +9598,18 @@
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [compile->compile][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [compile->compile(*)][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [compile->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->default][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->default(compile)][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->master][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [compile->default][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [compile->runtime][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [compile->compile][0m
@@ -10772,18 +10772,6 @@
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [compile-internal->compile][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [compile-internal->compile(*)][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [compile-internal->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile-internal->default][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile-internal->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile-internal->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile-internal->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile-internal->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile-internal->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile-internal->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile-internal->default(compile)][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile-internal->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile-internal->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile-internal->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile-internal->master][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [compile-internal->default][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [compile-internal->runtime][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [compile-internal->compile][0m
@@ -11044,6 +11032,18 @@
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [compile-internal->compile][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [compile-internal->compile(*)][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [compile-internal->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile-internal->default][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile-internal->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile-internal->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile-internal->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile-internal->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile-internal->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile-internal->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile-internal->default(compile)][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile-internal->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile-internal->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile-internal->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile-internal->master][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [compile-internal->default][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [compile-internal->runtime][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [compile-internal->compile][0m
@@ -12208,18 +12208,6 @@
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [compile->compile][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [compile->compile(*)][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [compile->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->default][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->default(compile)][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->master][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [compile->default][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [compile->runtime][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [compile->compile][0m
@@ -12480,6 +12468,18 @@
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [compile->compile][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [compile->compile(*)][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [compile->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->default][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->default(compile)][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->master][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [compile->default][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [compile->runtime][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [compile->compile][0m
@@ -13640,18 +13640,6 @@
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [runtime->compile][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [runtime->compile(*)][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [runtime->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->default][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->default(compile)][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->master][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [runtime->default][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [runtime->runtime][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [runtime->compile][0m
@@ -13912,6 +13900,18 @@
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [runtime->compile][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [runtime->compile(*)][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [runtime->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->default][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->default(compile)][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->master][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [runtime->default][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [runtime->runtime][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [runtime->compile][0m
@@ -15073,18 +15073,6 @@
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [runtime-internal->compile][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [runtime-internal->compile(*)][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [runtime-internal->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime-internal->default][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime-internal->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime-internal->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime-internal->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime-internal->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime-internal->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime-internal->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime-internal->default(compile)][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime-internal->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime-internal->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime-internal->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime-internal->master][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [runtime-internal->default][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [runtime-internal->runtime][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [runtime-internal->compile][0m
@@ -15345,6 +15333,18 @@
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [runtime-internal->compile][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [runtime-internal->compile(*)][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [runtime-internal->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime-internal->default][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime-internal->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime-internal->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime-internal->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime-internal->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime-internal->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime-internal->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime-internal->default(compile)][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime-internal->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime-internal->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime-internal->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime-internal->master][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [runtime-internal->default][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [runtime-internal->runtime][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [runtime-internal->compile][0m
@@ -16510,18 +16510,6 @@
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [compile->compile][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [compile->compile(*)][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [compile->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->default][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->default(compile)][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [compile->master][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [compile->default][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [compile->runtime][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [compile->compile][0m
@@ -16782,6 +16770,18 @@
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [compile->compile][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [compile->compile(*)][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [compile->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->default][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->default(compile)][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [compile->master][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [compile->default][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [compile->runtime][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [compile->compile][0m
@@ -17942,18 +17942,6 @@
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [runtime->compile][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [runtime->compile(*)][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [runtime->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->default][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->default(compile)][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [runtime->master][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [runtime->default][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [runtime->runtime][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [runtime->compile][0m
@@ -18214,6 +18202,18 @@
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [runtime->compile][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [runtime->compile(*)][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [runtime->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->default][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->default(compile)][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [runtime->master][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [runtime->default][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [runtime->runtime][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [runtime->compile][0m
@@ -19374,18 +19374,6 @@
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [test->compile][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [test->compile(*)][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [test->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [test->default][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [test->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [test->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [test->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [test->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [test->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [test->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [test->default(compile)][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [test->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [test->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [test->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [test->master][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [test->default][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [test->runtime][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [test->compile][0m
@@ -19646,6 +19634,18 @@
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [test->compile][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [test->compile(*)][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [test->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [test->default][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [test->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [test->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [test->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [test->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [test->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [test->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [test->default(compile)][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [test->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [test->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [test->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [test->master][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [test->default][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [test->runtime][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [test->compile][0m
@@ -20808,18 +20808,6 @@
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [test-internal->compile][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [test-internal->compile(*)][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-beanutils#commons-beanutils;1.7.0 [test-internal->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [test-internal->default][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [test-internal->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [test-internal->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [test-internal->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [test-internal->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [test-internal->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [test-internal->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [test-internal->default(compile)][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [test-internal->runtime][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [test-internal->compile][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [test-internal->master][0m
-[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted [test-internal->master][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [test-internal->default][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [test-internal->runtime][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->commons-math#commons-math;1.2 [test-internal->compile][0m
@@ -21080,6 +21068,18 @@
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [test-internal->compile][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [test-internal->compile(*)][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->org.mortbay.jetty#jetty-util;6.1.26 [test-internal->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [test-internal->default][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [test-internal->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [test-internal->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [test-internal->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [test-internal->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [test-internal->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [test-internal->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [test-internal->default(compile)][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [test-internal->runtime][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [test-internal->compile][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [test-internal->master][0m
+[0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.ibm.db2.jcc#db2jcc4;10.1 [test-internal->master][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [test-internal->default][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [test-internal->runtime][0m
 [0m[[0m[0mdebug[0m] [0m[0m== resolving dependencies com.mlasaf#mlasaf$sources;0.1.0->com.jcraft#jsch.agentproxy.pageant;0.0.9 [test-internal->compile][0m
@@ -22010,6 +22010,28 @@
 [0m[[0m[0mdebug[0m] [0m[0m	resolved ivy file produced in cache[0m
 [0m[[0m[0mdebug[0m] [0m[0m:: downloading artifacts ::[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.storm-enroute#scalameter-core_2.11;0.8.2!scalameter-core_2.11.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.typesafe.scala-logging#scala-logging_2.11;3.5.0!scala-logging_2.11.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0mno default ivy user dir defined: set to C:\Users\Edytka\.ivy2[0m
+[0m[[0m[0mdebug[0m] [0m[0mno default ivy user dir defined: set to C:\Users\Edytka\.ivy2[0m
+[0m[[0m[0mdebug[0m] [0m[0mincluding url: jar:file:/C:/Users/Edytka/.sbt/boot/scala-2.12.4/org.scala-sbt/sbt/1.0.3/ivy-2.3.0-sbt-1b57d3bbc08ecf671169fd548918da18c91f77be.jar!/org/apache/ivy/core/settings/ivysettings-public.xml[0m
+[0m[[0m[0mdebug[0m] [0m[0mincluding url: jar:file:/C:/Users/Edytka/.sbt/boot/scala-2.12.4/org.scala-sbt/sbt/1.0.3/ivy-2.3.0-sbt-1b57d3bbc08ecf671169fd548918da18c91f77be.jar!/org/apache/ivy/core/settings/ivysettings-public.xml[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.typesafe.play#anorm_2.11;2.5.2!anorm_2.11.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0mno default cache defined: set to C:\Users\Edytka\.ivy2\cache[0m
+[0m[[0m[0mdebug[0m] [0m[0mincluding url: jar:file:/C:/Users/Edytka/.sbt/boot/scala-2.12.4/org.scala-sbt/sbt/1.0.3/ivy-2.3.0-sbt-1b57d3bbc08ecf671169fd548918da18c91f77be.jar!/org/apache/ivy/core/settings/ivysettings-shared.xml[0m
+[0m[[0m[0mdebug[0m] [0m[0mno default ivy user dir defined: set to C:\Users\Edytka\.ivy2[0m
+[0m[[0m[0mdebug[0m] [0m[0mincluding url: jar:file:/C:/Users/Edytka/.sbt/boot/scala-2.12.4/org.scala-sbt/sbt/1.0.3/ivy-2.3.0-sbt-1b57d3bbc08ecf671169fd548918da18c91f77be.jar!/org/apache/ivy/core/settings/ivysettings-local.xml[0m
+[0m[[0m[0mdebug[0m] [0m[0mincluding url: jar:file:/C:/Users/Edytka/.sbt/boot/scala-2.12.4/org.scala-sbt/sbt/1.0.3/ivy-2.3.0-sbt-1b57d3bbc08ecf671169fd548918da18c91f77be.jar!/org/apache/ivy/core/settings/ivysettings-main-chain.xml[0m
+[0m[[0m[0mdebug[0m] [0m[0mincluding url: jar:file:/C:/Users/Edytka/.sbt/boot/scala-2.12.4/org.scala-sbt/sbt/1.0.3/ivy-2.3.0-sbt-1b57d3bbc08ecf671169fd548918da18c91f77be.jar!/org/apache/ivy/core/settings/ivysettings-public.xml[0m
+[0m[[0m[0mdebug[0m] [0m[0mincluding url: jar:file:/C:/Users/Edytka/.sbt/boot/scala-2.12.4/org.scala-sbt/sbt/1.0.3/ivy-2.3.0-sbt-1b57d3bbc08ecf671169fd548918da18c91f77be.jar!/org/apache/ivy/core/settings/ivysettings-default-chain.xml[0m
+[0m[[0m[0mdebug[0m] [0m[0msettings loaded (9ms)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	default cache: C:\Users\Edytka\.ivy2\cache[0m
+[0m[[0m[0mdebug[0m] [0m[0m	default resolver: default[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-- 5 resolvers:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	shared [file][0m
+[0m[[0m[0mdebug[0m] [0m[0m	default [chain] [local, main][0m
+[0m[[0m[0mdebug[0m] [0m[0m	public [ibiblio][0m
+[0m[[0m[0mdebug[0m] [0m[0m	main [chain] [shared, public][0m
+[0m[[0m[0mdebug[0m] [0m[0m	local [file][0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.mongodb#mongo-java-driver;3.2.2!mongo-java-driver.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] commons-collections#commons-collections;3.2.2!commons-collections.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.eclipse.jetty.websocket#websocket-common;9.4.4.v20170414!websocket-common.jar(src)[0m
@@ -22026,171 +22048,163 @@
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scala-lang.plugins#scala-continuations-library_2.11;1.0.1!scala-continuations-library_2.11.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.tukaani#xz;1.0!xz.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] javax.servlet.jsp#jsp-api;2.1!jsp-api.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.typesafe.scala-logging#scala-logging_2.11;3.5.0!scala-logging_2.11.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.google.code.gson#gson;2.2.4!gson.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scala-lang#scala-library;2.11.8!scala-library.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0mno default ivy user dir defined: set to C:\Users\Edytka\.ivy2[0m
-[0m[[0m[0mdebug[0m] [0m[0mno default ivy user dir defined: set to C:\Users\Edytka\.ivy2[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.mortbay.jetty#jetty;6.1.26!jetty.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.jcraft#jsch;0.1.42!jsch.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0mincluding url: jar:file:/C:/Users/Edytka/.sbt/boot/scala-2.12.4/org.scala-sbt/sbt/1.0.3/ivy-2.3.0-sbt-1b57d3bbc08ecf671169fd548918da18c91f77be.jar!/org/apache/ivy/core/settings/ivysettings-public.xml[0m
-[0m[[0m[0mdebug[0m] [0m[0mincluding url: jar:file:/C:/Users/Edytka/.sbt/boot/scala-2.12.4/org.scala-sbt/sbt/1.0.3/ivy-2.3.0-sbt-1b57d3bbc08ecf671169fd548918da18c91f77be.jar!/org/apache/ivy/core/settings/ivysettings-public.xml[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.slf4j#slf4j-api;1.7.21!slf4j-api.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.mongodb#casbah-query_2.11;3.1.1!casbah-query_2.11.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0mno default cache defined: set to C:\Users\Edytka\.ivy2\cache[0m
-[0m[[0m[0mdebug[0m] [0m[0mno default cache defined: set to C:\Users\Edytka\.ivy2\cache[0m
-[0m[[0m[0mdebug[0m] [0m[0mincluding url: jar:file:/C:/Users/Edytka/.sbt/boot/scala-2.12.4/org.scala-sbt/sbt/1.0.3/ivy-2.3.0-sbt-1b57d3bbc08ecf671169fd548918da18c91f77be.jar!/org/apache/ivy/core/settings/ivysettings-shared.xml[0m
-[0m[[0m[0mdebug[0m] [0m[0mincluding url: jar:file:/C:/Users/Edytka/.sbt/boot/scala-2.12.4/org.scala-sbt/sbt/1.0.3/ivy-2.3.0-sbt-1b57d3bbc08ecf671169fd548918da18c91f77be.jar!/org/apache/ivy/core/settings/ivysettings-shared.xml[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] gov.nist.math#jama;1.0.2!jama.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] tw.edu.ntu.csie#libsvm;3.17!libsvm.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] junit#junit;4.11!junit.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.apache.commons#commons-lang3;3.4!commons-lang3.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.apache.directory.api#api-asn1-api;1.0.0-M20!api-asn1-api.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.fasterxml.jackson.core#jackson-annotations;2.7.8!jackson-annotations.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scalactic#scalactic_2.11;3.0.0!scalactic_2.11.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] commons-beanutils#commons-beanutils;1.7.0!commons-beanutils.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] commons-math#commons-math;1.2!commons-math.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.apache.commons#commons-math3;3.2!commons-math3.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.mongodb#casbah-commons_2.11;3.1.1!casbah-commons_2.11.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] commons-lang#commons-lang;2.6!commons-lang.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.apache.curator#curator-framework;2.6.0!curator-framework.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.apache.hadoop#hadoop-annotations;2.6.3!hadoop-annotations.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.sun.xml.bind#jaxb-impl;2.2.3-1!jaxb-impl.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.mortbay.jetty#jetty-util;6.1.26!jetty-util.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m		tried C:\Users\Edytka\.ivy2\local\com.ibm.db2.jcc\db2jcc4\10.1\srcs\db2jcc4-sources.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0m		tried https://repo1.maven.org/maven2/com/ibm/db2/jcc/db2jcc4/10.1/db2jcc4-10.1-sources.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0mno default cache defined: set to C:\Users\Edytka\.ivy2\cache[0m
+[0m[[0m[0mdebug[0m] [0m[0mincluding url: jar:file:/C:/Users/Edytka/.sbt/boot/scala-2.12.4/org.scala-sbt/sbt/1.0.3/ivy-2.3.0-sbt-1b57d3bbc08ecf671169fd548918da18c91f77be.jar!/org/apache/ivy/core/settings/ivysettings-shared.xml[0m
+[0m[[0m[0mdebug[0m] [0m[0mincluding url: jar:file:/C:/Users/Edytka/.sbt/boot/scala-2.12.4/org.scala-sbt/sbt/1.0.3/ivy-2.3.0-sbt-1b57d3bbc08ecf671169fd548918da18c91f77be.jar!/org/apache/ivy/core/settings/ivysettings-local.xml[0m
+[0m[[0m[0mdebug[0m] [0m[0mno default cache defined: set to C:\Users\Edytka\.ivy2\cache[0m
+[0m[[0m[0mdebug[0m] [0m[0mincluding url: jar:file:/C:/Users/Edytka/.sbt/boot/scala-2.12.4/org.scala-sbt/sbt/1.0.3/ivy-2.3.0-sbt-1b57d3bbc08ecf671169fd548918da18c91f77be.jar!/org/apache/ivy/core/settings/ivysettings-shared.xml[0m
 [0m[[0m[0mdebug[0m] [0m[0mincluding url: jar:file:/C:/Users/Edytka/.sbt/boot/scala-2.12.4/org.scala-sbt/sbt/1.0.3/ivy-2.3.0-sbt-1b57d3bbc08ecf671169fd548918da18c91f77be.jar!/org/apache/ivy/core/settings/ivysettings-local.xml[0m
 [0m[[0m[0mdebug[0m] [0m[0mincluding url: jar:file:/C:/Users/Edytka/.sbt/boot/scala-2.12.4/org.scala-sbt/sbt/1.0.3/ivy-2.3.0-sbt-1b57d3bbc08ecf671169fd548918da18c91f77be.jar!/org/apache/ivy/core/settings/ivysettings-main-chain.xml[0m
+[0m[[0m[0mdebug[0m] [0m[0mincluding url: jar:file:/C:/Users/Edytka/.sbt/boot/scala-2.12.4/org.scala-sbt/sbt/1.0.3/ivy-2.3.0-sbt-1b57d3bbc08ecf671169fd548918da18c91f77be.jar!/org/apache/ivy/core/settings/ivysettings-main-chain.xml[0m
 [0m[[0m[0mdebug[0m] [0m[0mincluding url: jar:file:/C:/Users/Edytka/.sbt/boot/scala-2.12.4/org.scala-sbt/sbt/1.0.3/ivy-2.3.0-sbt-1b57d3bbc08ecf671169fd548918da18c91f77be.jar!/org/apache/ivy/core/settings/ivysettings-default-chain.xml[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] tw.edu.ntu.csie#libsvm;3.17!libsvm.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0msettings loaded (7ms)[0m
+[0m[[0m[0mdebug[0m] [0m[0msettings loaded (73ms)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	default cache: C:\Users\Edytka\.ivy2\cache[0m
 [0m[[0m[0mdebug[0m] [0m[0m	default resolver: default[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] junit#junit;4.11!junit.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	-- 5 resolvers:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	shared [file][0m
 [0m[[0m[0mdebug[0m] [0m[0m	default [chain] [local, main][0m
+[0m[[0m[0mdebug[0m] [0m[0mincluding url: jar:file:/C:/Users/Edytka/.sbt/boot/scala-2.12.4/org.scala-sbt/sbt/1.0.3/ivy-2.3.0-sbt-1b57d3bbc08ecf671169fd548918da18c91f77be.jar!/org/apache/ivy/core/settings/ivysettings-default-chain.xml[0m
 [0m[[0m[0mdebug[0m] [0m[0m	public [ibiblio][0m
-[0m[[0m[0mdebug[0m] [0m[0mincluding url: jar:file:/C:/Users/Edytka/.sbt/boot/scala-2.12.4/org.scala-sbt/sbt/1.0.3/ivy-2.3.0-sbt-1b57d3bbc08ecf671169fd548918da18c91f77be.jar!/org/apache/ivy/core/settings/ivysettings-local.xml[0m
 [0m[[0m[0mdebug[0m] [0m[0m	main [chain] [shared, public][0m
 [0m[[0m[0mdebug[0m] [0m[0m	local [file][0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.apache.commons#commons-lang3;3.4!commons-lang3.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.eclipse.jetty#jetty-util;9.4.4.v20170414!jetty-util.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0mincluding url: jar:file:/C:/Users/Edytka/.sbt/boot/scala-2.12.4/org.scala-sbt/sbt/1.0.3/ivy-2.3.0-sbt-1b57d3bbc08ecf671169fd548918da18c91f77be.jar!/org/apache/ivy/core/settings/ivysettings-main-chain.xml[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.eclipse.jetty#jetty-security;9.4.4.v20170414!jetty-security.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] jline#jline;0.9.94!jline.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0msettings loaded (73ms)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	default cache: C:\Users\Edytka\.ivy2\cache[0m
+[0m[[0m[0mdebug[0m] [0m[0m	default resolver: default[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-- 5 resolvers:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	shared [file][0m
+[0m[[0m[0mdebug[0m] [0m[0m	default [chain] [local, main][0m
+[0m[[0m[0mdebug[0m] [0m[0m	public [ibiblio][0m
+[0m[[0m[0mdebug[0m] [0m[0m	main [chain] [shared, public][0m
+[0m[[0m[0mdebug[0m] [0m[0m	local [file][0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.apache.httpcomponents#httpcore;4.2.4!httpcore.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.mockito#mockito-all;1.8.5!mockito-all.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.jcraft#jsch.agentproxy.sshj;0.0.9!jsch.agentproxy.sshj.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0mincluding url: jar:file:/C:/Users/Edytka/.sbt/boot/scala-2.12.4/org.scala-sbt/sbt/1.0.3/ivy-2.3.0-sbt-1b57d3bbc08ecf671169fd548918da18c91f77be.jar!/org/apache/ivy/core/settings/ivysettings-default-chain.xml[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.google.code.gson#gson;2.2.4!gson.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.google.guava#guava;23.4-jre!guava.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0mno default ivy user dir defined: set to C:\Users\Edytka\.ivy2[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] commons-dbcp#commons-dbcp;1.4!commons-dbcp.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0msettings loaded (25ms)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	default cache: C:\Users\Edytka\.ivy2\cache[0m
-[0m[[0m[0mdebug[0m] [0m[0m	default resolver: default[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.storm-enroute#scalameter_2.11;0.8.2!scalameter_2.11.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	-- 5 resolvers:[0m
-[0m[[0m[0mdebug[0m] [0m[0m	shared [file][0m
-[0m[[0m[0mdebug[0m] [0m[0m	default [chain] [local, main][0m
-[0m[[0m[0mdebug[0m] [0m[0m	public [ibiblio][0m
-[0m[[0m[0mdebug[0m] [0m[0m	main [chain] [shared, public][0m
-[0m[[0m[0mdebug[0m] [0m[0m	local [file][0m
+[0m[[0m[0mdebug[0m] [0m[0mincluding url: jar:file:/C:/Users/Edytka/.sbt/boot/scala-2.12.4/org.scala-sbt/sbt/1.0.3/ivy-2.3.0-sbt-1b57d3bbc08ecf671169fd548918da18c91f77be.jar!/org/apache/ivy/core/settings/ivysettings-public.xml[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.eclipse.jetty#jetty-webapp;9.4.4.v20170414!jetty-webapp.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scalatest#scalatest_2.11;3.0.0!scalatest_2.11.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0mno default cache defined: set to C:\Users\Edytka\.ivy2\cache[0m
+[0m[[0m[0mdebug[0m] [0m[0mincluding url: jar:file:/C:/Users/Edytka/.sbt/boot/scala-2.12.4/org.scala-sbt/sbt/1.0.3/ivy-2.3.0-sbt-1b57d3bbc08ecf671169fd548918da18c91f77be.jar!/org/apache/ivy/core/settings/ivysettings-shared.xml[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] commons-digester#commons-digester;1.8!commons-digester.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.sun.jersey#jersey-json;1.9!jersey-json.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] commons-configuration#commons-configuration;1.6!commons-configuration.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] commons-httpclient#commons-httpclient;3.1!commons-httpclient.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] net.sourceforge.jexcelapi#jxl;2.6.12!jxl.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.mongodb#casbah-core_2.11;3.1.1!casbah-core_2.11.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.fasterxml.jackson.module#jackson-module-paranamer;2.7.8!jackson-module-paranamer.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scala-lang.modules#scala-xml_2.11;1.0.5!scala-xml_2.11.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.hamcrest#hamcrest-core;1.3!hamcrest-core.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0mincluding url: jar:file:/C:/Users/Edytka/.sbt/boot/scala-2.12.4/org.scala-sbt/sbt/1.0.3/ivy-2.3.0-sbt-1b57d3bbc08ecf671169fd548918da18c91f77be.jar!/org/apache/ivy/core/settings/ivysettings-local.xml[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.eclipse.jetty.websocket#websocket-api;9.4.4.v20170414!websocket-api.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.eclipse.jetty#jetty-servlet;9.4.4.v20170414!jetty-servlet.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] net.java.dev.jna#jna;4.1.0!jna.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.github.nscala-time#nscala-time_2.11;1.0.0!nscala-time_2.11.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.google.errorprone#error_prone_annotations;2.0.18!error_prone_annotations.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.sun.jersey#jersey-core;1.9!jersey-core.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.codehaus.jackson#jackson-xc;1.8.3!jackson-xc.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.jcraft#jsch.agentproxy.usocket-jna;0.0.9!jsch.agentproxy.usocket-jna.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.jcraft#jsch.agentproxy.sshagent;0.0.9!jsch.agentproxy.sshagent.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.jcraft#jsch.agentproxy.core;0.0.9!jsch.agentproxy.core.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.apache.zookeeper#zookeeper;3.4.6!zookeeper.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] commons-cli#commons-cli;1.2!commons-cli.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.eclipse.jetty#jetty-http;9.4.4.v20170414!jetty-http.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] commons-io#commons-io;2.6!commons-io.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.eclipse.jetty#jetty-io;9.4.4.v20170414!jetty-io.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.hierynomus#sshj;0.16.0!sshj.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.jsuereth#scala-arm_2.11;1.4!scala-arm_2.11.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.apache.curator#curator-recipes;2.6.0!curator-recipes.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.postgresql#postgresql;9.4.1210!postgresql.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.mongodb#casbah-gridfs_2.11;3.1.1!casbah-gridfs_2.11.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] net.vrallev.ecc#ecc-25519-java;1.0.1!ecc-25519-java.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] commons-codec#commons-codec;1.10!commons-codec.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.apache.directory.api#api-util;1.0.0-M20!api-util.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] javax.xml.stream#stax-api;1.0-2!stax-api.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.eclipse.jetty.websocket#websocket-client;9.4.4.v20170414!websocket-client.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] commons-pool#commons-pool;1.5.4!commons-pool.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.apache.directory.api#api-asn1-api;1.0.0-M20!api-asn1-api.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.eclipse.jetty#jetty-client;9.4.4.v20170414!jetty-client.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.fasterxml.jackson.core#jackson-annotations;2.7.8!jackson-annotations.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.apache.hadoop#hadoop-nfs;2.6.3!hadoop-nfs.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scalactic#scalactic_2.11;3.0.0!scalactic_2.11.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] asm#asm;3.1!asm.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] commons-net#commons-net;3.1!commons-net.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] commons-beanutils#commons-beanutils;1.7.0!commons-beanutils.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.jcraft#jzlib;1.1.3!jzlib.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried C:\Users\Edytka\.ivy2\local\com.oracle\ojdbc6\11.2.0.4.0-atlassian-hosted\srcs\ojdbc6-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.eclipse.jetty#jetty-xml;9.4.4.v20170414!jetty-xml.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.apache.hadoop#hadoop-auth;2.6.3!hadoop-auth.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.apache.hadoop#hadoop-annotations;2.6.3!hadoop-annotations.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.typesafe.play#anorm-tokenizer_2.11;2.5.2!anorm-tokenizer_2.11.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0mno default ivy user dir defined: set to C:\Users\Edytka\.ivy2[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] net.java.dev.jna#jna-platform;4.1.0!jna-platform.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0mincluding url: jar:file:/C:/Users/Edytka/.sbt/boot/scala-2.12.4/org.scala-sbt/sbt/1.0.3/ivy-2.3.0-sbt-1b57d3bbc08ecf671169fd548918da18c91f77be.jar!/org/apache/ivy/core/settings/ivysettings-public.xml[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.typesafe#config;1.3.1!config.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0mno default cache defined: set to C:\Users\Edytka\.ivy2\cache[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.apache.commons#commons-compress;1.4.1!commons-compress.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0mincluding url: jar:file:/C:/Users/Edytka/.sbt/boot/scala-2.12.4/org.scala-sbt/sbt/1.0.3/ivy-2.3.0-sbt-1b57d3bbc08ecf671169fd548918da18c91f77be.jar!/org/apache/ivy/core/settings/ivysettings-shared.xml[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.htrace#htrace-core;3.0.4!htrace-core.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0mincluding url: jar:file:/C:/Users/Edytka/.sbt/boot/scala-2.12.4/org.scala-sbt/sbt/1.0.3/ivy-2.3.0-sbt-1b57d3bbc08ecf671169fd548918da18c91f77be.jar!/org/apache/ivy/core/settings/ivysettings-local.xml[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.apache.directory.server#apacheds-kerberos-codec;2.0.0-M15!apacheds-kerberos-codec.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0mincluding url: jar:file:/C:/Users/Edytka/.sbt/boot/scala-2.12.4/org.scala-sbt/sbt/1.0.3/ivy-2.3.0-sbt-1b57d3bbc08ecf671169fd548918da18c91f77be.jar!/org/apache/ivy/core/settings/ivysettings-main-chain.xml[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scala-lang#scala-reflect;2.11.8!scala-reflect.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] net.sourceforge.jtds#jtds;1.3.1!jtds.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.bouncycastle#bcpkix-jdk15on;1.51!bcpkix-jdk15on.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.jcraft#jsch.agentproxy.sshagent;0.0.9!jsch.agentproxy.sshagent.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0mincluding url: jar:file:/C:/Users/Edytka/.sbt/boot/scala-2.12.4/org.scala-sbt/sbt/1.0.3/ivy-2.3.0-sbt-1b57d3bbc08ecf671169fd548918da18c91f77be.jar!/org/apache/ivy/core/settings/ivysettings-default-chain.xml[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] javax.servlet#javax.servlet-api;3.1.0!javax.servlet-api.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] commons-el#commons-el;1.0!commons-el.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.eclipse.jetty.websocket#websocket-server;9.4.4.v20170414!websocket-server.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] javax.xml.bind#jaxb-api;2.2.2!jaxb-api.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.codehaus.jettison#jettison;1.1!jettison.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0msettings loaded (24ms)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.apache.zookeeper#zookeeper;3.4.6!zookeeper.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.eclipse.jetty#jetty-http;9.4.4.v20170414!jetty-http.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0msettings loaded (21ms)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	default cache: C:\Users\Edytka\.ivy2\cache[0m
 [0m[[0m[0mdebug[0m] [0m[0m	default resolver: default[0m
 [0m[[0m[0mdebug[0m] [0m[0m	-- 5 resolvers:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	shared [file][0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.fasterxml.jackson.module#jackson-module-scala_2.11;2.7.8!jackson-module-scala_2.11.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	default [chain] [local, main][0m
 [0m[[0m[0mdebug[0m] [0m[0m	public [ibiblio][0m
 [0m[[0m[0mdebug[0m] [0m[0m	main [chain] [shared, public][0m
 [0m[[0m[0mdebug[0m] [0m[0m	local [file][0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scalatest#scalatest_2.11;3.0.0!scalatest_2.11.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.sun.jersey#jersey-json;1.9!jersey-json.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] commons-httpclient#commons-httpclient;3.1!commons-httpclient.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.fasterxml.jackson.module#jackson-module-paranamer;2.7.8!jackson-module-paranamer.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.hamcrest#hamcrest-core;1.3!hamcrest-core.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.eclipse.jetty#jetty-servlet;9.4.4.v20170414!jetty-servlet.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.google.errorprone#error_prone_annotations;2.0.18!error_prone_annotations.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.sun.jersey#jersey-core;1.9!jersey-core.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.jcraft#jsch.agentproxy.usocket-jna;0.0.9!jsch.agentproxy.usocket-jna.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.jcraft#jsch.agentproxy.core;0.0.9!jsch.agentproxy.core.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] commons-cli#commons-cli;1.2!commons-cli.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] commons-io#commons-io;2.6!commons-io.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.eclipse.jetty#jetty-io;9.4.4.v20170414!jetty-io.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.jsuereth#scala-arm_2.11;1.4!scala-arm_2.11.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.postgresql#postgresql;9.4.1210!postgresql.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] net.vrallev.ecc#ecc-25519-java;1.0.1!ecc-25519-java.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.apache.directory.api#api-util;1.0.0-M20!api-util.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] commons-pool#commons-pool;1.5.4!commons-pool.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.apache.hadoop#hadoop-nfs;2.6.3!hadoop-nfs.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] commons-net#commons-net;3.1!commons-net.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.eclipse.jetty#jetty-xml;9.4.4.v20170414!jetty-xml.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.apache.hadoop#hadoop-auth;2.6.3!hadoop-auth.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.typesafe.play#anorm-tokenizer_2.11;2.5.2!anorm-tokenizer_2.11.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] net.java.dev.jna#jna-platform;4.1.0!jna-platform.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.typesafe#config;1.3.1!config.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.apache.commons#commons-compress;1.4.1!commons-compress.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.htrace#htrace-core;3.0.4!htrace-core.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scala-lang#scala-reflect;2.11.8!scala-reflect.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.bouncycastle#bcpkix-jdk15on;1.51!bcpkix-jdk15on.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] commons-el#commons-el;1.0!commons-el.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] javax.xml.bind#jaxb-api;2.2.2!jaxb-api.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.fasterxml.jackson.module#jackson-module-scala_2.11;2.7.8!jackson-module-scala_2.11.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.slf4j#slf4j-log4j12;1.7.5!slf4j-log4j12.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.typesafe.play#anorm_2.11;2.5.2!anorm_2.11.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scala-lang#scala-compiler;2.11.8!scala-compiler.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.apache.httpcomponents#httpcore;4.2.4!httpcore.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scala-lang.modules#scala-xml_2.11;1.0.4!scala-xml_2.11.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.jamesmurty.utils#java-xmlbuilder;0.4!java-xmlbuilder.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] jline#jline;2.12.1!jline.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.ow2.asm#asm;5.0.4!asm.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] javax.servlet#servlet-api;2.5!servlet-api.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] io.spray#spray-json_2.11;1.3.2!spray-json_2.11.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.xerial.snappy#snappy-java;1.0.4.1!snappy-java.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.codehaus.jackson#jackson-mapper-asl;1.9.13!jackson-mapper-asl.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.apache.hadoop#hadoop-common;2.6.3!hadoop-common.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] ch.qos.logback#logback-core;1.1.7!logback-core.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.codehaus.mojo#animal-sniffer-annotations;1.14!animal-sniffer-annotations.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.jamesmurty.utils#java-xmlbuilder;0.4!java-xmlbuilder.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] net.java.dev.jets3t#jets3t;0.9.0!jets3t.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried https://repo1.maven.org/maven2/com/oracle/ojdbc6/11.2.0.4.0-atlassian-hosted/ojdbc6-11.2.0.4.0-atlassian-hosted-sources.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.fasterxml.jackson.core#jackson-databind;2.7.8!jackson-databind.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4!scala-parser-combinators_2.11.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.apache.avro#avro;1.7.4!avro.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.lucidchart#relate_2.11;2.0.1!relate_2.11.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.google.protobuf#protobuf-java;2.5.0!protobuf-java.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.sun.xml.bind#jaxb-impl;2.2.3-1!jaxb-impl.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.ow2.asm#asm;5.0.4!asm.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.eclipse.jetty#jetty-server;9.4.4.v20170414!jetty-server.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.mortbay.jetty#jetty-util;6.1.26!jetty-util.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] javax.servlet#servlet-api;2.5!servlet-api.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.xerial.snappy#snappy-java;1.0.4.1!snappy-java.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.jcraft#jsch.agentproxy.pageant;0.0.9!jsch.agentproxy.pageant.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.codehaus.jackson#jackson-mapper-asl;1.9.13!jackson-mapper-asl.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.apache.curator#curator-client;2.6.0!curator-client.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.apache.hadoop#hadoop-common;2.6.3!hadoop-common.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] javax.mail#javax.mail-api;1.5.6!javax.mail-api.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] ch.qos.logback#logback-core;1.1.7!logback-core.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] joda-time#joda-time;2.9.2!joda-time.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.codehaus.mojo#animal-sniffer-annotations;1.14!animal-sniffer-annotations.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.eclipse.jetty.websocket#websocket-servlet;9.4.4.v20170414!websocket-servlet.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.sun.jersey#jersey-server;1.9!jersey-server.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.lucidchart#relate_2.11;2.0.1!relate_2.11.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.hierynomus#sshj;0.16.0!sshj.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.apache.curator#curator-recipes;2.6.0!curator-recipes.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.mongodb#casbah-gridfs_2.11;3.1.1!casbah-gridfs_2.11.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] commons-codec#commons-codec;1.10!commons-codec.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] javax.xml.stream#stax-api;1.0-2!stax-api.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.eclipse.jetty.websocket#websocket-client;9.4.4.v20170414!websocket-client.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.eclipse.jetty#jetty-client;9.4.4.v20170414!jetty-client.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] asm#asm;3.1!asm.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.jcraft#jzlib;1.1.3!jzlib.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.apache.directory.server#apacheds-kerberos-codec;2.0.0-M15!apacheds-kerberos-codec.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] net.sourceforge.jtds#jtds;1.3.1!jtds.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] javax.servlet#javax.servlet-api;3.1.0!javax.servlet-api.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.eclipse.jetty.websocket#websocket-server;9.4.4.v20170414!websocket-server.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.codehaus.jettison#jettison;1.1!jettison.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.jcraft#jsch.agentproxy.connector-factory;0.0.9!jsch.agentproxy.connector-factory.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.apache.httpcomponents#httpclient;4.2.5!httpclient.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] io.spray#spray-json_2.11;1.3.2!spray-json_2.11.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] log4j#log4j;1.2.17!log4j.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] ch.qos.logback#logback-classic;1.1.7!logback-classic.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] net.schmizz#sshj;0.10.0!sshj.jar(src)[0m
@@ -22198,55 +22212,61 @@
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.bouncycastle#bcprov-jdk15on;1.51!bcprov-jdk15on.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] io.netty#netty;3.7.0.Final!netty.jar(src)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.veact#scala-ssh_2.11;0.8.0!scala-ssh_2.11.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0mCLIENT ERROR: Not Found url=https://repo1.maven.org/maven2/com/oracle/ojdbc6/11.2.0.4.0-atlassian-hosted/ojdbc6-11.2.0.4.0-atlassian-hosted-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried C:\Users\Edytka\.sbt\preloaded\com.oracle\ojdbc6\11.2.0.4.0-atlassian-hosted\srcs\ojdbc6-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried file:/C:/Users/Edytka/.sbt/preloaded/com/oracle/ojdbc6/11.2.0.4.0-atlassian-hosted/ojdbc6-11.2.0.4.0-atlassian-hosted-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried https://maven.atlassian.com/3rdparty/com/oracle/ojdbc6/11.2.0.4.0-atlassian-hosted/ojdbc6-11.2.0.4.0-atlassian-hosted-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0mCLIENT ERROR: Not Found url=https://maven.atlassian.com/3rdparty/com/oracle/ojdbc6/11.2.0.4.0-atlassian-hosted/ojdbc6-11.2.0.4.0-atlassian-hosted-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried https://maven.atlassian.com/repository/public/com/oracle/ojdbc6/11.2.0.4.0-atlassian-hosted/ojdbc6-11.2.0.4.0-atlassian-hosted-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0mCLIENT ERROR: Not Found url=https://maven.atlassian.com/repository/public/com/oracle/ojdbc6/11.2.0.4.0-atlassian-hosted/ojdbc6-11.2.0.4.0-atlassian-hosted-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried http://bigtoast.github.com/repo/com/oracle/ojdbc6/11.2.0.4.0-atlassian-hosted/ojdbc6-11.2.0.4.0-atlassian-hosted-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0mCLIENT ERROR: Not Found url=http://bigtoast.github.com/repo/com/oracle/ojdbc6/11.2.0.4.0-atlassian-hosted/ojdbc6-11.2.0.4.0-atlassian-hosted-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried https://oss.sonatype.org/content/repositories/releases/com/oracle/ojdbc6/11.2.0.4.0-atlassian-hosted/ojdbc6-11.2.0.4.0-atlassian-hosted-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0mCLIENT ERROR: Not Found url=https://oss.sonatype.org/content/repositories/releases/com/oracle/ojdbc6/11.2.0.4.0-atlassian-hosted/ojdbc6-11.2.0.4.0-atlassian-hosted-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried https://mvnrepository.com/artifact/com/oracle/ojdbc6/11.2.0.4.0-atlassian-hosted/ojdbc6-11.2.0.4.0-atlassian-hosted-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0mCLIENT ERROR: Not Found url=https://mvnrepository.com/artifact/com/oracle/ojdbc6/11.2.0.4.0-atlassian-hosted/ojdbc6-11.2.0.4.0-atlassian-hosted-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m		tried https://central.maven.org/maven2/com/oracle/ojdbc6/11.2.0.4.0-atlassian-hosted/ojdbc6-11.2.0.4.0-atlassian-hosted-sources.jar[0m
-[0m[[0m[33mwarn[0m] [0m[0m	[FAILED     ] com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted!ojdbc6.jar(src): Maven2: unable to get resource for com/oracle#ojdbc6;11.2.0.4.0-atlassian-hosted: res=https://central.maven.org/maven2/com/oracle/ojdbc6/11.2.0.4.0-atlassian-hosted/ojdbc6-11.2.0.4.0-atlassian-hosted-sources.jar: javax.net.ssl.SSLPeerUnverifiedException: Hostname central.maven.org not verified:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.apache.curator#curator-client;2.6.0!curator-client.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] javax.mail#javax.mail-api;1.5.6!javax.mail-api.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] joda-time#joda-time;2.9.2!joda-time.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.eclipse.jetty.websocket#websocket-servlet;9.4.4.v20170414!websocket-servlet.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.sun.jersey#jersey-server;1.9!jersey-server.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.apache.avro#avro;1.7.4!avro.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0mCLIENT ERROR: Not Found url=https://repo1.maven.org/maven2/com/ibm/db2/jcc/db2jcc4/10.1/db2jcc4-10.1-sources.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0m		tried C:\Users\Edytka\.sbt\preloaded\com.ibm.db2.jcc\db2jcc4\10.1\srcs\db2jcc4-sources.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0m		tried file:/C:/Users/Edytka/.sbt/preloaded/com/ibm/db2/jcc/db2jcc4/10.1/db2jcc4-10.1-sources.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0m		tried https://maven.atlassian.com/3rdparty/com/ibm/db2/jcc/db2jcc4/10.1/db2jcc4-10.1-sources.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0mCLIENT ERROR: Not Found url=https://maven.atlassian.com/3rdparty/com/ibm/db2/jcc/db2jcc4/10.1/db2jcc4-10.1-sources.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0m		tried https://maven.atlassian.com/repository/public/com/ibm/db2/jcc/db2jcc4/10.1/db2jcc4-10.1-sources.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0mCLIENT ERROR: Not Found url=https://maven.atlassian.com/repository/public/com/ibm/db2/jcc/db2jcc4/10.1/db2jcc4-10.1-sources.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0m		tried http://bigtoast.github.com/repo/com/ibm/db2/jcc/db2jcc4/10.1/db2jcc4-10.1-sources.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0mCLIENT ERROR: Not Found url=http://bigtoast.github.com/repo/com/ibm/db2/jcc/db2jcc4/10.1/db2jcc4-10.1-sources.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0m		tried https://oss.sonatype.org/content/repositories/releases/com/ibm/db2/jcc/db2jcc4/10.1/db2jcc4-10.1-sources.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0mCLIENT ERROR: Not Found url=https://oss.sonatype.org/content/repositories/releases/com/ibm/db2/jcc/db2jcc4/10.1/db2jcc4-10.1-sources.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0m		tried https://artifacts.alfresco.com/nexus/content/repositories/public/com/ibm/db2/jcc/db2jcc4/10.1/db2jcc4-10.1-sources.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0mCLIENT ERROR: Not Found url=https://artifacts.alfresco.com/nexus/content/repositories/public/com/ibm/db2/jcc/db2jcc4/10.1/db2jcc4-10.1-sources.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0m		tried https://mvnrepository.com/artifact/com/ibm/db2/jcc/db2jcc4/10.1/db2jcc4-10.1-sources.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0mCLIENT ERROR: Not Found url=https://mvnrepository.com/artifact/com/ibm/db2/jcc/db2jcc4/10.1/db2jcc4-10.1-sources.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0m		tried https://central.maven.org/maven2/com/ibm/db2/jcc/db2jcc4/10.1/db2jcc4-10.1-sources.jar[0m
+[0m[[0m[33mwarn[0m] [0m[0m	[FAILED     ] com.ibm.db2.jcc#db2jcc4;10.1!db2jcc4.jar(src): Maven2: unable to get resource for com/ibm/db2/jcc#db2jcc4;10.1: res=https://central.maven.org/maven2/com/ibm/db2/jcc/db2jcc4/10.1/db2jcc4-10.1-sources.jar: javax.net.ssl.SSLPeerUnverifiedException: Hostname central.maven.org not verified:[0m
 [0m[[0m[33mwarn[0m] [0m[0m    certificate: sha256/bmcNn5HTZ87ZfrjyQRiN4vOrlsVcmAsUXTy0+TYcBcw=[0m
 [0m[[0m[33mwarn[0m] [0m[0m    DN: CN=repo1.maven.org, O="Sonatype, Inc", L=Fulton, ST=MD, C=US[0m
-[0m[[0m[33mwarn[0m] [0m[0m    subjectAltNames: [repo1.maven.org] (188ms)[0m
-[0m[[0m[33mwarn[0m] [0m[0m	Detected merged artifact: [FAILED     ] com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted!ojdbc6.jar(src):  (0ms).[0m
+[0m[[0m[33mwarn[0m] [0m[0m    subjectAltNames: [repo1.maven.org] (1184ms)[0m
+[0m[[0m[33mwarn[0m] [0m[0m	Detected merged artifact: [FAILED     ] com.ibm.db2.jcc#db2jcc4;10.1!db2jcc4.jar(src):  (0ms).[0m
 [0m[[0m[33mwarn[0m] [0m[0m==== local: tried[0m
 [0m[[0m[33mwarn[0m] [0m[0m==== public: tried[0m
-[0m[[0m[33mwarn[0m] [0m[0m  https://repo1.maven.org/maven2/com/oracle/ojdbc6/11.2.0.4.0-atlassian-hosted/ojdbc6-11.2.0.4.0-atlassian-hosted-sources.jar[0m
+[0m[[0m[33mwarn[0m] [0m[0m  https://repo1.maven.org/maven2/com/ibm/db2/jcc/db2jcc4/10.1/db2jcc4-10.1-sources.jar[0m
 [0m[[0m[33mwarn[0m] [0m[0m==== local-preloaded-ivy: tried[0m
-[0m[[0m[33mwarn[0m] [0m[0m  C:\Users\Edytka\.sbt\preloaded\com.oracle\ojdbc6\11.2.0.4.0-atlassian-hosted\srcs\ojdbc6-sources.jar[0m
+[0m[[0m[33mwarn[0m] [0m[0m  C:\Users\Edytka\.sbt\preloaded\com.ibm.db2.jcc\db2jcc4\10.1\srcs\db2jcc4-sources.jar[0m
 [0m[[0m[33mwarn[0m] [0m[0m==== local-preloaded: tried[0m
-[0m[[0m[33mwarn[0m] [0m[0m  file:/C:/Users/Edytka/.sbt/preloaded/com/oracle/ojdbc6/11.2.0.4.0-atlassian-hosted/ojdbc6-11.2.0.4.0-atlassian-hosted-sources.jar[0m
+[0m[[0m[33mwarn[0m] [0m[0m  file:/C:/Users/Edytka/.sbt/preloaded/com/ibm/db2/jcc/db2jcc4/10.1/db2jcc4-10.1-sources.jar[0m
 [0m[[0m[33mwarn[0m] [0m[0m==== Atlassian: tried[0m
-[0m[[0m[33mwarn[0m] [0m[0m  https://maven.atlassian.com/3rdparty/com/oracle/ojdbc6/11.2.0.4.0-atlassian-hosted/ojdbc6-11.2.0.4.0-atlassian-hosted-sources.jar[0m
+[0m[[0m[33mwarn[0m] [0m[0m  https://maven.atlassian.com/3rdparty/com/ibm/db2/jcc/db2jcc4/10.1/db2jcc4-10.1-sources.jar[0m
 [0m[[0m[33mwarn[0m] [0m[0m==== Atlassian Maven Repository: tried[0m
-[0m[[0m[33mwarn[0m] [0m[0m  https://maven.atlassian.com/repository/public/com/oracle/ojdbc6/11.2.0.4.0-atlassian-hosted/ojdbc6-11.2.0.4.0-atlassian-hosted-sources.jar[0m
+[0m[[0m[33mwarn[0m] [0m[0m  https://maven.atlassian.com/repository/public/com/ibm/db2/jcc/db2jcc4/10.1/db2jcc4-10.1-sources.jar[0m
 [0m[[0m[33mwarn[0m] [0m[0m==== bigtoast-github: tried[0m
-[0m[[0m[33mwarn[0m] [0m[0m  http://bigtoast.github.com/repo/com/oracle/ojdbc6/11.2.0.4.0-atlassian-hosted/ojdbc6-11.2.0.4.0-atlassian-hosted-sources.jar[0m
+[0m[[0m[33mwarn[0m] [0m[0m  http://bigtoast.github.com/repo/com/ibm/db2/jcc/db2jcc4/10.1/db2jcc4-10.1-sources.jar[0m
 [0m[[0m[33mwarn[0m] [0m[0m==== Sonatype release repository: tried[0m
-[0m[[0m[33mwarn[0m] [0m[0m  https://oss.sonatype.org/content/repositories/releases/com/oracle/ojdbc6/11.2.0.4.0-atlassian-hosted/ojdbc6-11.2.0.4.0-atlassian-hosted-sources.jar[0m
+[0m[[0m[33mwarn[0m] [0m[0m  https://oss.sonatype.org/content/repositories/releases/com/ibm/db2/jcc/db2jcc4/10.1/db2jcc4-10.1-sources.jar[0m
+[0m[[0m[33mwarn[0m] [0m[0m==== Alfresco: tried[0m
+[0m[[0m[33mwarn[0m] [0m[0m  https://artifacts.alfresco.com/nexus/content/repositories/public/com/ibm/db2/jcc/db2jcc4/10.1/db2jcc4-10.1-sources.jar[0m
 [0m[[0m[33mwarn[0m] [0m[0m==== Maven Repository: tried[0m
-[0m[[0m[33mwarn[0m] [0m[0m  https://mvnrepository.com/artifact/com/oracle/ojdbc6/11.2.0.4.0-atlassian-hosted/ojdbc6-11.2.0.4.0-atlassian-hosted-sources.jar[0m
+[0m[[0m[33mwarn[0m] [0m[0m  https://mvnrepository.com/artifact/com/ibm/db2/jcc/db2jcc4/10.1/db2jcc4-10.1-sources.jar[0m
 [0m[[0m[33mwarn[0m] [0m[0m==== Maven2: tried[0m
-[0m[[0m[33mwarn[0m] [0m[0m  https://central.maven.org/maven2/com/oracle/ojdbc6/11.2.0.4.0-atlassian-hosted/ojdbc6-11.2.0.4.0-atlassian-hosted-sources.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] commons-math#commons-math;1.2!commons-math.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.apache.commons#commons-math3;3.2!commons-math3.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.mongodb#casbah-commons_2.11;3.1.1!casbah-commons_2.11.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] commons-lang#commons-lang;2.6!commons-lang.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] org.apache.curator#curator-framework;2.6.0!curator-framework.jar(src)[0m
-[0m[[0m[0mdebug[0m] [0m[0m:: resolution report :: resolve 8957ms :: artifacts dl 4421ms[0m
+[0m[[0m[33mwarn[0m] [0m[0m  https://central.maven.org/maven2/com/ibm/db2/jcc/db2jcc4/10.1/db2jcc4-10.1-sources.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[NOT REQUIRED] com.jcraft#jsch.agentproxy.pageant;0.0.9!jsch.agentproxy.pageant.jar(src)[0m
+[0m[[0m[0mdebug[0m] [0m[0m:: resolution report :: resolve 9351ms :: artifacts dl 6118ms[0m
 [0m[[0m[33mwarn[0m] [0m[0m	::::::::::::::::::::::::::::::::::::::::::::::[0m
 [0m[[0m[33mwarn[0m] [0m[0m	::              FAILED DOWNLOADS            ::[0m
 [0m[[0m[33mwarn[0m] [0m[0m	:: ^ see resolution messages for details  ^ ::[0m
 [0m[[0m[33mwarn[0m] [0m[0m	::::::::::::::::::::::::::::::::::::::::::::::[0m
-[0m[[0m[33mwarn[0m] [0m[0m	:: com.oracle#ojdbc6;11.2.0.4.0-atlassian-hosted!ojdbc6.jar(src)[0m
+[0m[[0m[33mwarn[0m] [0m[0m	:: com.ibm.db2.jcc#db2jcc4;10.1!db2jcc4.jar(src)[0m
 [0m[[0m[33mwarn[0m] [0m[0m	::::::::::::::::::::::::::::::::::::::::::::::[0m
 [0m[[0m[0mdebug[0m] [0m[0m	report for com.mlasaf#mlasaf$sources;0.1.0 compile produced in C:\Project\mlasaf\src\mlasaf\target\resolution-cache\reports\com.mlasaf-mlasaf$sources-compile.xml[0m
 [0m[[0m[0mdebug[0m] [0m[0m	report for com.mlasaf#mlasaf$sources;0.1.0 runtime produced in C:\Project\mlasaf\src\mlasaf\target\resolution-cache\reports\com.mlasaf-mlasaf$sources-runtime.xml[0m
@@ -22259,4 +22279,4 @@
 [0m[[0m[0mdebug[0m] [0m[0m	report for com.mlasaf#mlasaf$sources;0.1.0 plugin produced in C:\Project\mlasaf\src\mlasaf\target\resolution-cache\reports\com.mlasaf-mlasaf$sources-plugin.xml[0m
 [0m[[0m[0mdebug[0m] [0m[0m	report for com.mlasaf#mlasaf$sources;0.1.0 pom produced in C:\Project\mlasaf\src\mlasaf\target\resolution-cache\reports\com.mlasaf-mlasaf$sources-pom.xml[0m
 [0m[[0m[0mdebug[0m] [0m[0m	report for com.mlasaf#mlasaf$sources;0.1.0 scala-tool produced in C:\Project\mlasaf\src\mlasaf\target\resolution-cache\reports\com.mlasaf-mlasaf$sources-scala-tool.xml[0m
-[0m[[0m[0mdebug[0m] [0m[0m	resolve done (8957ms resolve - 4421ms download)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	resolve done (9351ms resolve - 6118ms download)[0m

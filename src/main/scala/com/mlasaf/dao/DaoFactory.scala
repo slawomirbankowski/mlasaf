@@ -90,13 +90,21 @@ class DaoFactory {
     currentHost
   }
   def registerExecutorInstance(executorTypeId : Int, guid : Long) : ExecutorInstanceDto = {
-    //connection = DriverManager.getConnection(jdbc, user, pass);
+    implicit val conn = DriverManager.getConnection(jdbcString, jdbcUser, jdbcPass);
     val hostDto : ExecutorHostDto = registerHost()
-    //""" select max(executorInstanceId) as id from executorInstance """
     implicit val connection = DriverManager.getConnection(jdbcString, jdbcUser, jdbcPass);
+    //val maxInstanceIdRes = SQL("").executeQuery();
+    val maxInstanceId =  SQL("select max(executorInstanceId) as id from executorInstance")
+      .executeQuery()(connection).as[Int](SqlParser.int("id").single)(connection);
+
+    val hosts : List[String]= SQL("select hostIp from executorHost").as((str[String]("hostIp")));
+
+    println("MAX instanceId: " + maxInstanceId);
+
+
     //val execInstId = executorInstanceId;
     //executorInstanceId = executorInstanceId + 1;
-    val execInstanceParams = Seq((executorTypeId, hostDto.executorHostId, "execname", guid))
+    //val execInstanceParams = Seq((executorTypeId, hostDto.executorHostId, "execname", guid))
     //val insertedRowsCount = sql""" insert into executorInstance(executorTypeId, executorHostId, executorInstanceName, guid) values $execInstanceParams """.executeInsertInt();
     ///println("Registering Executor Instance for GUID: " +  hostDto + ", count: " + insertedRowsCount);
     //SQL("insert into executorInstance(executorInstanceId, executorTypeId, executorHostId, executorInstanceName, guid) values (?, ?, ?)").on("executorTypeId" -> instaneHostName, "" -> "")
@@ -142,6 +150,12 @@ class DaoFactory {
     null
   }
 
+  def getHosts() : Seq[ExecutorHostDto] = {
+    implicit val connection = DriverManager.getConnection(jdbcString, jdbcUser, jdbcPass);
+    val hostList =  SQL("select * from executorHost ").executeQuery()(connection);
+    hostList.
+    null
+  }
   def getExecutors() : String = {
     ""
   }

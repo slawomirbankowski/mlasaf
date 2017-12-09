@@ -106,8 +106,8 @@
             <column name="insertedrowdate" type="timestamp"/>
             <column name="guid" type="bigint"/>
         </createTable>
-        <createIndex indexName="idx_es_executorstorageid" tableName="executorstorage" unique="false">
-            <column name="executorstorageid" />
+        <createIndex indexName="idx_es_executorhostid" tableName="executorstorage" unique="false">
+            <column name="executorhostid" />
         </createIndex>
         <createIndex indexName="idx_es_executorstoragetypeid" tableName="executorstorage" unique="false">
             <column name="executorstoragetypeid" />
@@ -171,7 +171,7 @@
             <column name="sourcetypeid" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="sourcetypename" type="varchar(4000)"/>
+            <column name="sourcetypename" type="varchar(400)"/>
             <column name="sourcetypeclass" type="varchar(4000)"/>
         </createTable>
         <createIndex indexName="idx_sourcetype_sourcetypename" tableName="sourcetype" unique="false">
@@ -198,7 +198,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="sourcetypeid" type="bigint"/>
-            <column name="sourceinstancename" type="varchar(4000)"/>
+            <column name="sourceinstancename" type="varchar(400)"/>
             <column name="errorcount" type="bigint"/>
             <column name="correctcount" type="bigint"/>
             <column name="laststatus" type="varchar(4000)"/>
@@ -501,7 +501,7 @@
         </createTable>
 
         <createTable tableName="algorithmscheduleviewtype" remarks="dictionary - type of view for schedule - primary, training, testing, validation" >
-            <column name="algorithmscheduleviewtypeid" type="int" autoIncrement="true">
+            <column name="algorithmscheduleviewtypeid" type="int" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="algorithmscheduleviewtypename" type="varchar(4000)"/>
@@ -590,7 +590,7 @@
         <addForeignKeyConstraint baseTableName="sourceview" baseColumnNames="sourceinstanceid" referencedTableName="sourceinstance" referencedColumnNames="sourceinstanceid"  constraintName="fk_sv_sourceinstance"  />
         <addForeignKeyConstraint baseTableName="sourceview" baseColumnNames="sourceviewtypeid" referencedTableName="sourceviewtype" referencedColumnNames="sourceviewtypeid"  constraintName="fk_sv_sourceviewtype"  />
         <addForeignKeyConstraint baseTableName="sourceviewcolumn" baseColumnNames="sourceviewid" referencedTableName="sourceview" referencedColumnNames="sourceviewid"  constraintName="fk_svc_sourceview"  />
-        <addForeignKeyConstraint baseTableName="sourceschedule" baseColumnNames="sourceviewid" referencedTableName="sourceview" referencedColumnNames="sourceviewid"  constraintName="fk_svc_sourceview"  />
+        <addForeignKeyConstraint baseTableName="sourceschedule" baseColumnNames="sourceviewid" referencedTableName="sourceview" referencedColumnNames="sourceviewid"  constraintName="fk_ss_sourceview"  />
         <addForeignKeyConstraint baseTableName="sourceschedule" baseColumnNames="executorstorageid" referencedTableName="executorstorage" referencedColumnNames="executorstorageid"  constraintName="fk_svc_executorstorage"  />
         <addForeignKeyConstraint baseTableName="sourcedownload" baseColumnNames="sourcescheduleid" referencedTableName="sourceschedule" referencedColumnNames="sourcescheduleid"  constraintName="fk_sd_sourceschedule"  />
         <addForeignKeyConstraint baseTableName="algorithmtypeversion" baseColumnNames="algorithmtypeid" referencedTableName="algorithmtype" referencedColumnNames="algorithmtypeid"  constraintName="fk_atv_algorithmtype"  />
