@@ -89,6 +89,7 @@ import java.sql.Connection
     logger.info("Current host in DB: " +  currentHost)
     currentHost
   }
+
   def registerExecutorInstance(executorTypeId : Int, guid : Long) : ExecutorInstanceDto = {
     implicit val conn = DriverManager.getConnection(jdbcString, jdbcUser, jdbcPass);
     val hostDto : ExecutorHostDto = registerHost()
@@ -96,10 +97,12 @@ import java.sql.Connection
     //val maxInstanceIdRes = SQL("").executeQuery();
     val maxInstanceId =  SQL("select max(executorInstanceId) as id from executorInstance")
       .executeQuery()(connection).as[Int](SqlParser.int("id").single)(connection);
-
-    val hosts : List[String]= SQL("select hostIp from executorHost").as((str[String]("hostIp")));
-
     println("MAX instanceId: " + maxInstanceId);
+
+    val hosts : List[ExecutorHostDto]= SQL("select * from executorHost").as(anorm.Macro.namedParser[ExecutorHostDto].*);
+
+    println("All hosts count: " + hosts.size + ", list: " + hosts.mkString(", "))
+
 
 
     //val execInstId = executorInstanceId;
