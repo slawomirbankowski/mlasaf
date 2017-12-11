@@ -30,6 +30,7 @@
             <column name="executorTypeId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="insertedRowDate" type="timestamp"/>
             <column name="executorTypeName" type="nvarchar(400)"/>
             <column name="executorTypeClass" type="nvarchar(2000)"/>
         </createTable>
@@ -73,6 +74,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="executorHostId" type="bigint"/>
+            <column name="insertedRowDate" type="timestamp"/>
             <column name="restPort" type="int"/>
             <column name="restVersion" type="nvarchar(2000)"/>
             <column name="restStatus" type="nvarchar(400)"/>
@@ -87,6 +89,7 @@
             <column name="executorRestCallId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="insertedRowDate" type="timestamp"/>
             <column name="executorHostId" type="bigint"/>
             <column name="executorRestId" type="bigint"/>
             <column name="requestMethod" type="nvarchar(2000)"/>
@@ -132,6 +135,7 @@
             <column name="executorStorageTypeId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="insertedRowDate" type="timestamp"/>
             <column name="executorStorageTypeName" type="nvarchar(400)"/>
             <column name="executorStorageTypeClass" type="nvarchar(2000)"/>
         </createTable>
@@ -193,7 +197,8 @@
             <column name="executorStorageViewId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="executorStorageSnapshotId" type="bigint"/>
+            <column name="insertedRowDate" type="timestamp"/>
+            <column name="executorStorageSnapshotId" type="bigint" remarks="PARENT" />
             <column name="executorStorageId" type="bigint"/>
             <column name="sourceDownloadId" type="bigint"/>
             <column name="storagePath" type="nvarchar(2000)"/>

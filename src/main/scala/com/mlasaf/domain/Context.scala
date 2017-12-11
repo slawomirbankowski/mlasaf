@@ -37,7 +37,7 @@ class Context {
     hostDto = daoFactory.registerHost();
     logger.info("Registered host: " + hostDto);
     // find storages previously created
-    daoFactory.getStorages(hostDto.executorHostId);
+    //daoFactory.getStorages(hostDto.executorHostId);
     //
 
     //val execInstance = daoFactory.registerExecutorInstance(1, 1L);
