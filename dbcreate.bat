@@ -3,7 +3,7 @@ liquibase --driver=org.postgresql.Driver --classpath=./libstatic/postgresql-9.4.
 liquibase --driver=oracle.jdbc.OracleDriver --classpath=./libstatic/ojdbc6.jar --changeLogFile=./src/main/resources/db/db_1.0.xml --url="jdbc:oracle:thin:@localhost:1521:xe" --logLevel=DEBUG --username=SYSTEM --password=systempass migrate
 liquibase --driver=oracle.jdbc.OracleDriver --classpath=./libstatic/ojdbc6.jar --changeLogFile=./src/main/resources/db/db_1.0.xml --url="jdbc:oracle:thin:@localhost:1521:xe" --logLevel=DEBUG --username=mlasaf05 --password=mlasaf05pass migrate
 
-liquibase --driver=com.mysql.jdbc.Driver --classpath=./libstatic/mysql-connector-java-5.1.45-bin.jar --changeLogFile=./src/main/resources/db/db_1.0.xml --url="jdbc:mysql://localhost:3307/mlasaf04" --logLevel=DEBUG --username=root --password=rootpass migrate
+liquibase --driver=com.mysql.jdbc.Driver --classpath=./libstatic/mysql-connector-java-5.1.45-bin.jar --changeLogFile=./src/main/resources/db/db_1.0.xml --url="jdbc:mysql://localhost:3307/mlasaf05" --logLevel=DEBUG --username=root --password=rootpass migrate
 
 liquibase --driver=com.ibm.db2.jcc.DB2Driver --classpath=./libstatic/db2jcc4-10.1.jar --changeLogFile=./src/main/resources/db/db_1.0.xml --url="jdbc:db2://localhost:50000/mlasaf01" --logLevel=DEBUG --username=db2admin --password=db2adminpass migrate
 

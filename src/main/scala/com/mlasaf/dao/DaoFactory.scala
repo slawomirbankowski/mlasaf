@@ -12,43 +12,43 @@ import org.apache.commons.dbcp._
 //import com.lucidchart.relate._
 import java.sql.Connection
 
-class DaoFactory {
+  class DaoFactory {
 
-  val logger = org.slf4j.LoggerFactory.getLogger("Context");
-  var isInitialized = false;
-  var connection : java.sql.Connection = null;
-  var jdbcString = ""
-  var jdbcUser = ""
-  var jdbcPass = "";
+    val logger = org.slf4j.LoggerFactory.getLogger("Context");
+    var isInitialized = false;
+    var connection : java.sql.Connection = null;
+    var jdbcString = ""
+    var jdbcUser = ""
+    var jdbcPass = "";
 
-  var executorInstanceId = 1;
-  def DaoFactory() = {
-  }
+    var executorInstanceId = 1;
+    def DaoFactory() = {
+    }
 
-  /** initialize connection - create template */
-  def initialize(jdbc : String, user: String, pass : String) = {
-    logger.info("Creating connection to configurational DB: " + jdbc + " with user: " + user);
-    connection = DriverManager.getConnection(jdbc, user, pass);
-    val dataSource : javax.sql.DataSource = null;
-    //dataSource.getConnection();
-    logger.info("Got connection: " + connection);
-    logger.info("Got connection catalog: " + connection.getCatalog);
-    logger.info("Got connection AutoCommit: " + connection.getAutoCommit);
-    //logger.info("Got connection NetworkTimeout: " + connection.getNetworkTimeout);
-    jdbcString = jdbc;
-    jdbcUser = user;
-    jdbcPass = pass;
-    isInitialized = true;
-  }
-  def createDataSource() : javax.sql.DataSource = {
-    //DriverManagerConnectionFactory
-    //PoolingDataSource<PoolableConnection> dataSource = new PoolingDataSource<>(connectionPool);
-    //val org.apache.commons.dbcp.PoolingDataSource
-    val bds : org.apache.commons.dbcp.BasicDataSource = new org.apache.commons.dbcp.BasicDataSource();
-    bds.isClosed();
+    /** initialize connection - create template */
+    def initialize(jdbc : String, user: String, pass : String) = {
+      logger.info("Creating connection to configurational DB: " + jdbc + " with user: " + user);
+      connection = DriverManager.getConnection(jdbc, user, pass);
+      val dataSource : javax.sql.DataSource = null;
+      //dataSource.getConnection();
+      logger.info("Got connection: " + connection);
+      logger.info("Got connection catalog: " + connection.getCatalog);
+      logger.info("Got connection AutoCommit: " + connection.getAutoCommit);
+      //logger.info("Got connection NetworkTimeout: " + connection.getNetworkTimeout);
+      jdbcString = jdbc;
+      jdbcUser = user;
+      jdbcPass = pass;
+      isInitialized = true;
+    }
+    def createDataSource() : javax.sql.DataSource = {
+      //DriverManagerConnectionFactory
+      //PoolingDataSource<PoolableConnection> dataSource = new PoolingDataSource<>(connectionPool);
+      //val org.apache.commons.dbcp.PoolingDataSource
+      val bds : org.apache.commons.dbcp.BasicDataSource = new org.apache.commons.dbcp.BasicDataSource();
+      bds.isClosed();
 
-    null
-  }
+      null
+    }
   def createConnection() : Connection = {
     DriverManager.getConnection(jdbcString, jdbcUser, jdbcPass);
   }

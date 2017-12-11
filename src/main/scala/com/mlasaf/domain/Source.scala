@@ -4,7 +4,7 @@
 */
 package com.mlasaf.domain
 
-class Source {
+trait Source {
 
   var sourceDefinition : String = ""
   var parentContext : Context = null;
