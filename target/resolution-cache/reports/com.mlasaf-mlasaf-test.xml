@@ -7,7 +7,7 @@
 		revision="0.1.0"
 		conf="test"
 		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, pom, scala-tool"
-		date="20171208165454"/>
+		date="20171211050855"/>
 	<dependencies>
 		<module organisation="com.microsoft.sqlserver" name="sqljdbc4">
 			<revision name="4.0" status="release" pubdate="20170831085705" resolver="sbt-chain" artresolver="sbt-chain" homepage="" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="151">
@@ -1033,11 +1033,11 @@
 			</revision>
 		</module>
 		<module organisation="com.ibm.db2.jcc" name="db2jcc4">
-			<revision name="10.1" status="release" pubdate="20121114132632" resolver="Alfresco" artresolver="Alfresco" homepage="" downloaded="true" searched="true" default="false" conf="default, compile, runtime, default(compile), master" position="81">
-				<metadata-artifact status="successful" details="" size="457" time="867" location="C:\Users\Edytka\.ivy2\cache\com.ibm.db2.jcc\db2jcc4\ivy-10.1.xml" searched="true" original-local-location="C:\Users\Edytka\.ivy2\cache\com.ibm.db2.jcc\db2jcc4\ivy-10.1.xml.original" origin-is-local="false" origin-location="https://artifacts.alfresco.com/nexus/content/repositories/public/com/ibm/db2/jcc/db2jcc4/10.1/db2jcc4-10.1.pom"/>
+			<revision name="10.1" status="release" pubdate="20121114132632" resolver="sbt-chain" artresolver="sbt-chain" homepage="" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="81">
+				<metadata-artifact status="no" details="" size="2395" time="0" location="C:\Users\Edytka\.ivy2\cache\com.ibm.db2.jcc\db2jcc4\ivy-10.1.xml" searched="false" origin-is-local="false" origin-location="https://artifacts.alfresco.com/nexus/content/repositories/public/com/ibm/db2/jcc/db2jcc4/10.1/db2jcc4-10.1.pom"/>
 				<caller organisation="com.mlasaf" name="mlasaf" conf="test, compile, runtime" rev="10.1" rev-constraint-default="10.1" rev-constraint-dynamic="10.1" callerrev="0.1.0"/>
 				<artifacts>
-					<artifact name="db2jcc4" type="jar" ext="jar" status="successful" details="" size="3714904" time="58122" location="C:\Users\Edytka\.ivy2\cache\com.ibm.db2.jcc\db2jcc4\jars\db2jcc4-10.1.jar">
+					<artifact name="db2jcc4" type="jar" ext="jar" status="no" details="" size="3714904" time="0" location="C:\Users\Edytka\.ivy2\cache\com.ibm.db2.jcc\db2jcc4\jars\db2jcc4-10.1.jar">
 						<origin-location is-local="false" location="https://artifacts.alfresco.com/nexus/content/repositories/public/com/ibm/db2/jcc/db2jcc4/10.1/db2jcc4-10.1.jar"/>
 					</artifact>
 				</artifacts>

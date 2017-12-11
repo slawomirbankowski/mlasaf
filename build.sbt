@@ -14,7 +14,9 @@ resolvers += "bigtoast-github" at "http://bigtoast.github.com/repo/"
 resolvers += "Sonatype release repository" at "https://oss.sonatype.org/content/repositories/releases/"
 resolvers += "Alfresco" at "https://artifacts.alfresco.com/nexus/content/repositories/public/"
 resolvers += "Maven Repository" at "https://mvnrepository.com/artifact/"
-resolvers += "Maven2" at "https://central.maven.org/maven2/"
+resolvers += "Maven2s" at "https://central.maven.org/maven2/"
+resolvers += "Maven2" at "http://central.maven.org/maven2/"
+
 
 libraryDependencies ++= Seq(
 
@@ -64,6 +66,7 @@ libraryDependencies ++= Seq(
  "com.lucidchart" %% "relate" % "2.0.1",
 
  "com.typesafe.play" % "anorm_2.11" % "2.5.1",
+ //"org.liquibase" % "liquibase-maven-plugin" % "3.1.1",
 
  "net.sourceforge.jtds" % "jtds" % "1.3.1",
  "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.7.8",

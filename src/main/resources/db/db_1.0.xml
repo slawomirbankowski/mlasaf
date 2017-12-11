@@ -854,7 +854,7 @@
 
 
         <createTable tableName="algorithmScheduleViewType" remarks="DICTIONARY - type of view for schedule - PRIMARY, TRAINING, TESTING, VALIDATION" >
-            <column name="algorithmScheduleViewTypeId" type="int" autoIncrement="false">
+            <column name="algorithmScheduleViewTypeId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="algorithmScheduleViewTypeName" type="nvarchar(400)"/>
@@ -1012,6 +1012,7 @@
             <column name="executorStorageViewId" />
         </createIndex>
         <addForeignKeyConstraint baseTableName="algorithmRunView" baseColumnNames="algorithmRunId" referencedTableName="algorithmRun" referencedColumnNames="algorithmRunId"  constraintName="fk_arv_arId"  />
+        <addForeignKeyConstraint baseTableName="algorithmRunView" baseColumnNames="executorStorageViewId" referencedTableName="executorStorageView" referencedColumnNames="executorStorageViewId"  constraintName="fk_arv_esvId"  />
 
 
         <createTable tableName="algorithmOutputType" remarks="DICTIONARY - type of output" >

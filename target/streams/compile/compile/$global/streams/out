@@ -1,7 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0mC:\Project\mlasaf\src\mlasaf\src\main\scala\com\mlasaf\dao\DaoFactory.scala:96:106: ambiguous implicit values:[0m
-[0m[[0m[31merror[0m] [0m[0m both value connection of type java.sql.Connection[0m
-[0m[[0m[31merror[0m] [0m[0m and value conn of type java.sql.Connection[0m
-[0m[[0m[31merror[0m] [0m[0m match expected type java.sql.Connection[0m
-[0m[[0m[31merror[0m] [0m[0m    val maxInstanceIdRes = SQL("select max(executorInstanceId) as id from executorInstance").executeQuery();[0m
-[0m[[0m[31merror[0m] [0m[0m                                                                                                         ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Project\mlasaf\src\mlasaf\src\main\scala\com\mlasaf\dao\DaoFactory.scala:129:28: object java.lang.Class is not a value[0m
+[0m[[0m[31merror[0m] [0m[0m    val cnts = selectCount(Class[ExecutorInstanceDto]);[0m
+[0m[[0m[31merror[0m] [0m[0m                           ^[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m

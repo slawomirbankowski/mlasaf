@@ -21,6 +21,7 @@ import java.sql.Connection
     var jdbcUser = ""
     var jdbcPass = "";
 
+
     var executorInstanceId = 1;
     def DaoFactory() = {
     }
@@ -74,35 +75,58 @@ import java.sql.Connection
     val queryRes = SQL("select count(*) as cnt from executorHost where hostName = {hostName} and hostIp = {hostIp}")
       .on("hostName" -> hostName, "hostIp" -> hostIp)
       .executeQuery()(connection);
-    logger.info("queryRes: " + queryRes)
-    val cnt = queryRes.as[Int](SqlParser.int("cnt").single)(connection);
-    println("cnt: " + cnt);
-    if (cnt == 0) {
-      logger.info("Registering Executor Host for host: " +  hostName + ", hostAddress: " + hostAddress + ", IP: " + hostIp + ", canonicalHost: " + canonicalHost)
-      var simpleS = SQL("insert into executorHost( executorHostId, hostName, hostIp, hostDomain, hostOsType, hostOsVersion) values( {executorHostId}, {hostName}, {hostIp}, {hostDomain}, {hostOsType}, {hostOsVersion}) ")
-        .on("executorHostId" -> 2, "hostName" -> hostName, "hostIp" -> hostIp, "hostDomain" -> "", "hostOsType" -> "", "hostOsVersion" -> "")
-        .executeInsert()(connection);
+      logger.info("queryRes: " + queryRes)
+      val cnt = queryRes.as[Int](SqlParser.int("cnt").single)(connection);
+      println("cnt: " + cnt);
+      if (cnt == 0) {
+        logger.info("Registering Executor Host for host: " +  hostName + ", hostAddress: " + hostAddress + ", IP: " + hostIp + ", canonicalHost: " + canonicalHost)
+        var simpleS = SQL("insert into executorHost( executorHostId, hostName, hostIp, hostDomain, hostOsType, hostOsVersion) values( {executorHostId}, {hostName}, {hostIp}, {hostDomain}, {hostOsType}, {hostOsVersion}) ")
+          .on("executorHostId" -> 2, "hostName" -> hostName, "hostIp" -> hostIp, "hostDomain" -> "", "hostOsType" -> "", "hostOsVersion" -> "")
+          .executeInsert()(connection);
+      }
+      //val et : ExecutorTypeDto = new ExecutorTypeDto(1, "aaa", "bbb");
+
+      val currentHost : ExecutorHostDto = SQL("select * from executorHost where hostName = {hostName} and hostIp = {hostIp}")
+        .on("hostName" -> hostName, "hostIp" -> hostIp)
+        .as[ExecutorHostDto](anorm.Macro.namedParser[ExecutorHostDto].single)(connection)
+        logger.info("Current host in DB: " +  currentHost)
+        currentHost
     }
-    val currentHost : ExecutorHostDto = SQL("select * from executorHost where hostName = {hostName} and hostIp = {hostIp}")
-      .on("hostName" -> hostName, "hostIp" -> hostIp)
-      .as[ExecutorHostDto](anorm.Macro.namedParser[ExecutorHostDto].single)(connection)
-    logger.info("Current host in DB: " +  currentHost)
-    currentHost
-  }
+
+    def insert(d : BaseDto): Unit = {
+      implicit val conn = DriverManager.getConnection(jdbcString, jdbcUser, jdbcPass);
+      val sql = "insert into " + d.getClass.getName + "(" + d.fields + ") values () ";
+      SQL(sql).onParams().executeInsert()(conn);
+    }
+    def selectCount(d : BaseDto) : Long = {
+      implicit val conn = DriverManager.getConnection(jdbcString, jdbcUser, jdbcPass);
+      val sql = "select count(*) as cnt from " + d.getClass.getName;
+      val queryRes = SQL(sql)
+        .executeQuery()(conn).as[Int](SqlParser.int("cnt").single)(conn);;
+      queryRes
+    }
+    def selectCount(d : java.lang.Class[BaseDto]) : Long = {
+      implicit val conn = DriverManager.getConnection(jdbcString, jdbcUser, jdbcPass);
+      val sql = "select count(*) as cnt from " + d.getName;
+      val queryRes = SQL(sql)
+        .executeQuery()(conn).as[Int](SqlParser.int("cnt").single)(conn);;
+      queryRes
+    }
 
   def registerExecutorInstance(executorTypeId : Int, guid : Long) : ExecutorInstanceDto = {
     implicit val conn = DriverManager.getConnection(jdbcString, jdbcUser, jdbcPass);
     val hostDto : ExecutorHostDto = registerHost()
-    implicit val connection = DriverManager.getConnection(jdbcString, jdbcUser, jdbcPass);
+   // implicit val connection = DriverManager.getConnection(jdbcString, jdbcUser, jdbcPass);
     //val maxInstanceIdRes = SQL("").executeQuery();
     val maxInstanceId =  SQL("select max(executorInstanceId) as id from executorInstance")
-      .executeQuery()(connection).as[Int](SqlParser.int("id").single)(connection);
+      .executeQuery()(conn).as[Int](SqlParser.int("id").single)(conn);
     println("MAX instanceId: " + maxInstanceId);
 
     val hosts : List[ExecutorHostDto]= SQL("select * from executorHost").as(anorm.Macro.namedParser[ExecutorHostDto].*);
 
     println("All hosts count: " + hosts.size + ", list: " + hosts.mkString(", "))
 
+    // val cnts = selectCount(Class[ExecutorInstanceDto].getClass);
 
 
     //val execInstId = executorInstanceId;
@@ -115,6 +139,12 @@ import java.sql.Connection
     execInst;
   }
 
+    def getExecutorTypes() : List[ExecutorTypeDto] = {
+      implicit val connection = DriverManager.getConnection(jdbcString, jdbcUser, jdbcPass);
+      val exeTypes : List[ExecutorTypeDto]= SQL("select * from executorType").as(anorm.Macro.namedParser[ExecutorTypeDto].*);
+      exeTypes
+    }
+
   def unregisterExecutorInstance(guid : Long) : Unit = {
     implicit val connection = DriverManager.getConnection(jdbcString, jdbcUser, jdbcPass);
     //sql""" update executorInstance set isRunning = 0, isFinished = 1 where guid = $guid  """.executeUpdate()
@@ -123,7 +153,6 @@ import java.sql.Connection
     val connection = DriverManager.getConnection(jdbcString, jdbcUser, jdbcPass);
     //SQL("INSERT INTO public.executorStorage(executorStorageId, executorHostId, executorStorageTypeId, storageDefinition, storageBasePath, storageFulllPath, isRunning, portNumber, insertedRowDate, guid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
     //  .on("" -> "", "" -> "").execute()(connection);
-    null;
   }
   def executeQuery(sql : String, params : Seq[Object]) = {
 
@@ -156,7 +185,6 @@ import java.sql.Connection
   def getHosts() : Seq[ExecutorHostDto] = {
     implicit val connection = DriverManager.getConnection(jdbcString, jdbcUser, jdbcPass);
     val hostList =  SQL("select * from executorHost ").executeQuery()(connection);
-    hostList.
     null
   }
   def getExecutors() : String = {
