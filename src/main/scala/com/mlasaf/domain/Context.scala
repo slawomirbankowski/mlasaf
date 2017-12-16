@@ -23,9 +23,9 @@ class Context {
   def run(args : Array[String]) = {
     logger.info("Start context for guid: " + guid)
     // initialize DAO to read data from DB
-    val jdbcString = "jdbc:postgresql://localhost:5432/mlasaf10"
-    val jdbcUser = "postgres"
-    val jdbcPass = "postgrespass"
+    val jdbcString = "jdbc:mysql://localhost:3307/mlasaf09"
+    val jdbcUser = "root"
+    val jdbcPass = "rootpass"
     val executorClasses = "com.mlasaf.executors.RExecutor,com.mlasaf.executors.LocalExecutor"
     val restPort = 8300;
     val restAlternativePort = 8301;
@@ -35,11 +35,8 @@ class Context {
     //context.daoFactory.registerExecutorInstance();
     daoFactory.initialize(jdbcString, jdbcUser, jdbcPass);
     hostDto = daoFactory.registerHost();
-    logger.info("Registered host: " + hostDto);
+    println("Registered host: " + hostDto);
     // find storages previously created
-    //daoFactory.getStorages(hostDto.executorHostId);
-    //
-
     //val execInstance = daoFactory.registerExecutorInstance(1, 1L);
     val executrs = executorClasses.split(",").map(cn => Class.forName(cn).newInstance().asInstanceOf[Executor]).toArray;
     //val exec : Executor = Class.forName(executorClass).newInstance().asInstanceOf[Executor]
@@ -50,11 +47,11 @@ class Context {
       val th : Thread = new Thread(exec);
       th.setDaemon(true);
       th.start();
-    })
+    });
 
 
     // initialize storages
-    daoFactory.addStorage("./data");
+    //daoFactory.addStorage("./data");
     //daoFactory.getSources()
     // initialize REST for UI
 
@@ -70,7 +67,8 @@ class Context {
     //executors
     //executors.forEach(exect => exect.stopExecutor());
     Thread.sleep(20000L);
-    logger.info("END context for guid: " + guid)
+    executrs.foreach(x => x.stopExecutor());
+    println("END context for guid: " + guid)
   }
   def defineExecutor() = {
 

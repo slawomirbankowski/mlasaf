@@ -1,3 +1,7 @@
+/*
+  Author(s): Slawomir Bankowski
+  Project: mlasaf
+*/
 package com.mlasaf.dao
 
 import java.sql._
@@ -2113,4 +2117,102 @@ class SourceViewTypeDao extends DaoBase {
     maxid
   }
 
+}
+
+
+class Daos {
+  val algorithmColumnTypeDao : AlgorithmColumnTypeDao = new AlgorithmColumnTypeDao();
+  val algorithmImplementationDao : AlgorithmImplementationDao = new AlgorithmImplementationDao();
+  val algorithmOutputDao : AlgorithmOutputDao = new AlgorithmOutputDao();
+  val algorithmOutputTypeDao : AlgorithmOutputTypeDao = new AlgorithmOutputTypeDao();
+  val algorithmParamDao : AlgorithmParamDao = new AlgorithmParamDao();
+  val algorithmParamTypeDao : AlgorithmParamTypeDao = new AlgorithmParamTypeDao();
+  val algorithmRunDao : AlgorithmRunDao = new AlgorithmRunDao();
+  val algorithmRunTypeDao : AlgorithmRunTypeDao = new AlgorithmRunTypeDao();
+  val algorithmRunViewDao : AlgorithmRunViewDao = new AlgorithmRunViewDao();
+  val algorithmScheduleDao : AlgorithmScheduleDao = new AlgorithmScheduleDao();
+  val algorithmScheduleColumnDao : AlgorithmScheduleColumnDao = new AlgorithmScheduleColumnDao();
+  val algorithmScheduleParamDao : AlgorithmScheduleParamDao = new AlgorithmScheduleParamDao();
+  val algorithmScheduleTypeDao : AlgorithmScheduleTypeDao = new AlgorithmScheduleTypeDao();
+  val algorithmScheduleViewDao : AlgorithmScheduleViewDao = new AlgorithmScheduleViewDao();
+  val algorithmScheduleViewTypeDao : AlgorithmScheduleViewTypeDao = new AlgorithmScheduleViewTypeDao();
+  val algorithmTypeDao : AlgorithmTypeDao = new AlgorithmTypeDao();
+  val algorithmTypeColumnTypeDao : AlgorithmTypeColumnTypeDao = new AlgorithmTypeColumnTypeDao();
+  val algorithmTypeOutputTypeDao : AlgorithmTypeOutputTypeDao = new AlgorithmTypeOutputTypeDao();
+  val algorithmTypeVersionDao : AlgorithmTypeVersionDao = new AlgorithmTypeVersionDao();
+  val executorHostDao : ExecutorHostDao = new ExecutorHostDao();
+  val executorInstanceDao : ExecutorInstanceDao = new ExecutorInstanceDao();
+  val executorRestDao : ExecutorRestDao = new ExecutorRestDao();
+  val executorRestCallDao : ExecutorRestCallDao = new ExecutorRestCallDao();
+  val executorStorageDao : ExecutorStorageDao = new ExecutorStorageDao();
+  val executorStorageSnapshotDao : ExecutorStorageSnapshotDao = new ExecutorStorageSnapshotDao();
+  val executorStorageTypeDao : ExecutorStorageTypeDao = new ExecutorStorageTypeDao();
+  val executorStorageViewDao : ExecutorStorageViewDao = new ExecutorStorageViewDao();
+  val executorTypeDao : ExecutorTypeDao = new ExecutorTypeDao();
+  val resourceManagerDao : ResourceManagerDao = new ResourceManagerDao();
+  val resourceManagerAllocationDao : ResourceManagerAllocationDao = new ResourceManagerAllocationDao();
+  val resourceManagerCheckDao : ResourceManagerCheckDao = new ResourceManagerCheckDao();
+  val resourceManagerMeasureDao : ResourceManagerMeasureDao = new ResourceManagerMeasureDao();
+  val resourceManagerTypeDao : ResourceManagerTypeDao = new ResourceManagerTypeDao();
+  val resourceMeasureDao : ResourceMeasureDao = new ResourceMeasureDao();
+  val sourceDownloadDao : SourceDownloadDao = new SourceDownloadDao();
+  val sourceDownloadStatDao : SourceDownloadStatDao = new SourceDownloadStatDao();
+  val sourceDownloadStatColumnDao : SourceDownloadStatColumnDao = new SourceDownloadStatColumnDao();
+  val sourceInstanceDao : SourceInstanceDao = new SourceInstanceDao();
+  val sourceParamDao : SourceParamDao = new SourceParamDao();
+  val sourceParamValueDao : SourceParamValueDao = new SourceParamValueDao();
+  val sourceScheduleDao : SourceScheduleDao = new SourceScheduleDao();
+  val sourceTypeDao : SourceTypeDao = new SourceTypeDao();
+  val sourceTypeParamDao : SourceTypeParamDao = new SourceTypeParamDao();
+  val sourceViewDao : SourceViewDao = new SourceViewDao();
+  val sourceViewColumnDao : SourceViewColumnDao = new SourceViewColumnDao();
+  val sourceViewTypeDao : SourceViewTypeDao = new SourceViewTypeDao();
+  def initialize(daoConn : DaoConnection ): Unit = {
+    algorithmColumnTypeDao.initialize(daoConn)
+    algorithmImplementationDao.initialize(daoConn)
+    algorithmOutputDao.initialize(daoConn)
+    algorithmOutputTypeDao.initialize(daoConn)
+    algorithmParamDao.initialize(daoConn)
+    algorithmParamTypeDao.initialize(daoConn)
+    algorithmRunDao.initialize(daoConn)
+    algorithmRunTypeDao.initialize(daoConn)
+    algorithmRunViewDao.initialize(daoConn)
+    algorithmScheduleDao.initialize(daoConn)
+    algorithmScheduleColumnDao.initialize(daoConn)
+    algorithmScheduleParamDao.initialize(daoConn)
+    algorithmScheduleTypeDao.initialize(daoConn)
+    algorithmScheduleViewDao.initialize(daoConn)
+    algorithmScheduleViewTypeDao.initialize(daoConn)
+    algorithmTypeDao.initialize(daoConn)
+    algorithmTypeColumnTypeDao.initialize(daoConn)
+    algorithmTypeOutputTypeDao.initialize(daoConn)
+    algorithmTypeVersionDao.initialize(daoConn)
+    executorHostDao.initialize(daoConn)
+    executorInstanceDao.initialize(daoConn)
+    executorRestDao.initialize(daoConn)
+    executorRestCallDao.initialize(daoConn)
+    executorStorageDao.initialize(daoConn)
+    executorStorageSnapshotDao.initialize(daoConn)
+    executorStorageTypeDao.initialize(daoConn)
+    executorStorageViewDao.initialize(daoConn)
+    executorTypeDao.initialize(daoConn)
+    resourceManagerDao.initialize(daoConn)
+    resourceManagerAllocationDao.initialize(daoConn)
+    resourceManagerCheckDao.initialize(daoConn)
+    resourceManagerMeasureDao.initialize(daoConn)
+    resourceManagerTypeDao.initialize(daoConn)
+    resourceMeasureDao.initialize(daoConn)
+    sourceDownloadDao.initialize(daoConn)
+    sourceDownloadStatDao.initialize(daoConn)
+    sourceDownloadStatColumnDao.initialize(daoConn)
+    sourceInstanceDao.initialize(daoConn)
+    sourceParamDao.initialize(daoConn)
+    sourceParamValueDao.initialize(daoConn)
+    sourceScheduleDao.initialize(daoConn)
+    sourceTypeDao.initialize(daoConn)
+    sourceTypeParamDao.initialize(daoConn)
+    sourceViewDao.initialize(daoConn)
+    sourceViewColumnDao.initialize(daoConn)
+    sourceViewTypeDao.initialize(daoConn)
+  }
 }

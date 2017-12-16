@@ -18,10 +18,9 @@ object CustomUtils {
   }
   def getIp = {
     java.net.InetAddress.getLocalHost.getAddress.mkString(".")
-
   }
   def randomLong() : Long = {
-    random.nextLong()
+    Math.abs(random.nextLong())
   }
 
 }

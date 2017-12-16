@@ -24,3 +24,4 @@ all {file:/C:/Project/mlasaf/src/mlasaf/}mlasaf/products {file:/C:/Project/mlasa
 ;reload; set _root_.org.jetbrains.sbt.StructureKeys.sbtStructureOptions in Global := "download resolveClassifiers" ;*/*:dumpStructureTo C:/Users/Edytka/AppData/Local/Temp/sbt-structure.xml
 all {file:/C:/Project/mlasaf/src/mlasaf/}mlasaf/products {file:/C:/Project/mlasaf/src/mlasaf/}mlasaf/test:products
 compile
+all {file:/C:/Project/mlasaf/src/mlasaf/}mlasaf/products {file:/C:/Project/mlasaf/src/mlasaf/}mlasaf/test:products

@@ -27,13 +27,13 @@ trait Executor extends Runnable {
       println("Executor run in thread !!! ")
       onRun();
       Thread.sleep(3000L);
-
     }
+    println("End of working, try to unregister Executor: " + executorGuid)
     parentContext.daoFactory.unregisterExecutorInstance(executorGuid)
     println("End executor " + executorGuid)
   }
 
   def stopExecutor() = {
-
+    println("Stop executor: " + executorInstanceId);
   }
 }
