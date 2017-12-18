@@ -22,14 +22,14 @@ trait Executor extends Runnable {
 
   def run() = {
     println("Start executor, register for guid: " + executorGuid)
-    parentContext.daoFactory.registerExecutorInstance(2, executorGuid)
+    parentContext.daoFactory.daoCustom.registerExecutorInstance(2, executorGuid)
     while (true) {
       println("Executor run in thread !!! ")
       onRun();
       Thread.sleep(3000L);
     }
     println("End of working, try to unregister Executor: " + executorGuid)
-    parentContext.daoFactory.unregisterExecutorInstance(executorGuid)
+    parentContext.daoFactory.daoCustom.unregisterExecutorInstance(executorGuid)
     println("End executor " + executorGuid)
   }
 

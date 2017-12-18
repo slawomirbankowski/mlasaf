@@ -2116,6 +2116,27 @@ class SourceViewTypeDao extends DaoBase {
     val maxid : Long = SQL("select max(sourceViewTypeId) as maxId from sourceViewType ").executeQuery()(connection).as[Long](SqlParser.long("maxId").single)(connection);;
     maxid
   }
+  def getSourceViewTypeByName(nameColValue : String) : List[SourceViewTypeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[SourceViewTypeDto] = SQL("select * from sourceViewType where sourceViewTypeName = {nameColValue} ").as(anorm.Macro.namedParser[SourceViewTypeDto].*);
+    dtos
+  }
+  def getSourceViewTypeFirstByName(nameColValue : String) : Option[SourceViewTypeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[SourceViewTypeDto] = SQL("select * from sourceViewType where sourceViewTypeName = {nameColValue} ").as(anorm.Macro.namedParser[SourceViewTypeDto].*);
+    if (dtos.size > 0) Some(dtos.head) else None
+  }
+  def getByFieldValue(fieldName : String, fieldValue : String) : List[SourceViewTypeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[SourceViewTypeDto] = SQL("select * from sourceViewType where " + fieldValue + " = {fieldValue} ").as(anorm.Macro.namedParser[SourceViewTypeDto].*);
+    dtos
+  }
+  def insert(dto : SourceViewTypeDto) : Int = {
+    implicit val connection = getConnection();
+    val stat = dto.prepareInsert(connection);
+    val updatedRowsCount = stat.executeUpdate();
+    updatedRowsCount
+  }
 
 }
 

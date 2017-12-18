@@ -34,7 +34,7 @@ class Context {
     daoFactory = new DaoFactory();
     //context.daoFactory.registerExecutorInstance();
     daoFactory.initialize(jdbcString, jdbcUser, jdbcPass);
-    hostDto = daoFactory.registerHost();
+    hostDto = daoFactory.daoCustom.registerHost();
     println("Registered host: " + hostDto);
     // find storages previously created
     //val execInstance = daoFactory.registerExecutorInstance(1, 1L);

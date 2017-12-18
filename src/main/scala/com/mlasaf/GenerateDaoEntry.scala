@@ -12,14 +12,12 @@ object GenerateDaoEntry {
   def main(args : Array[String]) = {
     Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
     implicit val connmssql = java.sql.DriverManager.getConnection("jdbc:sqlserver://localhost\\SQLEXPRESS2014;DatabaseName=mlasaf05", "sa", "sapass");
-    val cols : List[ColumnDetailDto]=  SQL("select TABLE_NAME, COLUMN_NAME, ORDINAL_POSITION, case DATA_TYPE when 'bigint' then 'Long' when 'int' then 'Int' when 'nvarchar' then 'String' when 'datetime' then 'java.util.Date' when 'float' then 'Double'  else '' end as SCALA_TYPE from INFORMATION_SCHEMA.COLUMNS")
+    val cols : List[ColumnDetailDto]=  SQL("select TABLE_NAME, COLUMN_NAME, ORDINAL_POSITION, case DATA_TYPE when 'bigint' then 'Long' when 'int' then 'Int' when 'nvarchar' then 'String' when 'datetime' then 'java.util.Date' when 'float' then 'Double'  else '' end as SCALA_TYPE from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME not like 'DATABASE%'")
       .as(anorm.Macro.namedParser[ColumnDetailDto].*);
-    val pkCols : List[ColumnDetailDto] =  SQL(" select TABLE_NAME, COLUMN_NAME, ORDINAL_POSITION, '' as SCALA_TYPE from INFORMATION_SCHEMA.KEY_COLUMN_USAGE where CONSTRAINT_NAME like 'PK%'")
+    val pkCols : List[ColumnDetailDto] =  SQL(" select TABLE_NAME, COLUMN_NAME, ORDINAL_POSITION, '' as SCALA_TYPE from INFORMATION_SCHEMA.KEY_COLUMN_USAGE where CONSTRAINT_NAME like 'PK%' and TABLE_NAME not like 'DATABASE%'")
       .as(anorm.Macro.namedParser[ColumnDetailDto].*);
-    val fkCols : List[ColumnDetailDto] =  SQL(" select TABLE_NAME, COLUMN_NAME, ORDINAL_POSITION, '' as SCALA_TYPE from INFORMATION_SCHEMA.KEY_COLUMN_USAGE where CONSTRAINT_NAME like 'FK%'")
+    val fkCols : List[ColumnDetailDto] =  SQL(" select TABLE_NAME, COLUMN_NAME, ORDINAL_POSITION, '' as SCALA_TYPE from INFORMATION_SCHEMA.KEY_COLUMN_USAGE where CONSTRAINT_NAME like 'FK%' and TABLE_NAME not like 'DATABASE%'")
       .as(anorm.Macro.namedParser[ColumnDetailDto].*);
-
-
     cols.map(x => x.TABLE_NAME).distinct.sorted.foreach( tableName => {
       val objName = tableName.charAt(0).toUpper + tableName.substring(1);
       val dtoName = objName + "Dto";
@@ -30,6 +28,8 @@ object GenerateDaoEntry {
       val fieldList = cols.filter(c => c.TABLE_NAME.equals(tableName)).map(col => col.COLUMN_NAME).mkString(",");
       val pkFieldList = pkCols.filter(c => c.TABLE_NAME.equals(tableName)).map(col => col.COLUMN_NAME).mkString(",");
       val fkFieldList = fkCols.filter(c => c.TABLE_NAME.equals(tableName)).map(col => col.COLUMN_NAME).mkString(",");
+      val nameCol = cols.filter(c => c.TABLE_NAME.equals(tableName)).filter(c => c.COLUMN_NAME.equals(c.TABLE_NAME + "Name")).map(c => c.COLUMN_NAME);
+
       val daoMethodsBasic =
         s"""
            |  def get${objName}sList() : List[${dtoName}] = {
@@ -91,11 +91,28 @@ object GenerateDaoEntry {
         daoMethods.append("   dtos  \n");
         daoMethods.append(" }  \n");
       });
+      if (nameCol.size == 1) {
+        daoMethods.append(" def get" + objName + "ByName(nameColValue : String) : List[" + dtoName + "] = { \n")
+        daoMethods.append("   implicit val connection = getConnection();  \n");
+        daoMethods.append("   val dtos : List[" + dtoName + "] = SQL(\"select * from " + tableName + " where " + nameCol.head + " = {nameColValue} \").as(anorm.Macro.namedParser[" + dtoName + "].*);  \n");
+        daoMethods.append("   dtos  \n");
+        daoMethods.append(" }  \n");
+        daoMethods.append(" def get" + objName + "FirstByName(nameColValue : String) : Option[" + dtoName + "] = { \n")
+        daoMethods.append("   implicit val connection = getConnection();  \n");
+        daoMethods.append("   val dtos : List[" + dtoName + "] = SQL(\"select * from " + tableName + " where " + nameCol.head + " = {nameColValue} \").as(anorm.Macro.namedParser[" + dtoName + "].*);  \n");
+        daoMethods.append("   if (dtos.size > 0) Some(dtos.head) else None  \n");
+        daoMethods.append(" }  \n");
+      }
+      val primaryKeyFields = pkFieldList.split(",");
+      if (primaryKeyFields.size == 1) {
+        daoMethods.append(" def get" + objName + "ById(pkid : Long) : Option[" + dtoName + "] = { \n")
+        daoMethods.append("   implicit val connection = getConnection();  \n");
+        daoMethods.append("   val dtos : List[" + dtoName + "] = SQL(\"select * from " + tableName + " where " + primaryKeyFields.head + " = {pkid} \").as(anorm.Macro.namedParser[" + dtoName + "].*);  \n");
+        daoMethods.append("   if (dtos.size > 0) Some(dtos.head) else None  \n");
+        daoMethods.append(" }  \n");
+      }
       println(daoMethods.toString);
       println("} ");
-
-
-
     });
 
     val daosDefinition = new StringBuilder();
@@ -116,11 +133,6 @@ object GenerateDaoEntry {
     daosDefinition.append("} \n" );
     println("");
     println(daosDefinition.toString);
-
-
-    //val exeTypes : List[ExecutorTypeDto]= SQL("select * from executorType").as(anorm.Macro.namedParser[ExecutorTypeDto].*);
-    //println("Got exeTypes: " + exeTypes.size + ", List: " + exeTypes.mkString(", "))
-    //connmssql.createStatement().executeQuery("select * from INFORMATION_SCHEMA.TABLES");
     connmssql.close();
     println(" MSSQLSERVER - DISCONNECTED ")
   }

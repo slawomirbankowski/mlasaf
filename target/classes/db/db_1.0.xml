@@ -223,6 +223,7 @@
             </column>
             <column name="resourceManagerTypeName" type="nvarchar(400)"/>
             <column name="resourceManagerTypeClass" type="nvarchar(2000)"/>
+            <column name="insertedRowDate" type="timestamp"/>
         </createTable>
         <createIndex indexName="idx_rmt_rmTypeName" tableName="resourceManagerType" unique="false">
             <column name="resourceManagerTypeName" />
@@ -236,6 +237,7 @@
             <column name="resourceManagerTypeId" type="bigint"/>
             <column name="executorHostId" type="bigint"/>
             <column name="resourceManagerStatus" type="nvarchar(400)"/>
+            <column name="insertedRowDate" type="timestamp"/>
         </createTable>
         <createIndex indexName="idx_rm_resourceManagerTypeId" tableName="resourceManager" unique="false">
             <column name="resourceManagerTypeId" />
@@ -252,6 +254,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="resourceMeasureName" type="nvarchar(400)"/>
+            <column name="insertedRowDate" type="timestamp"/>
         </createTable>
         <createIndex indexName="idx_rmeas_rmeasName" tableName="resourceMeasure" unique="false">
             <column name="resourceMeasureName" />
@@ -266,6 +269,7 @@
             <column name="resourceMeasureId" type="bigint"/>
             <column name="measureString" type="nvarchar(2000)"/>
             <column name="measureValue" type="float"/>
+            <column name="insertedRowDate" type="timestamp"/>
         </createTable>
         <createIndex indexName="idx_rmm_rmId" tableName="resourceManagerMeasure" unique="false">
             <column name="resourceManagerId" />
@@ -281,6 +285,7 @@
             <column name="resourceManagerId" type="bigint"/>
             <column name="executorHostId" type="bigint"/>
             <column name="resourceManagerStatus" type="nvarchar(400)"/>
+            <column name="insertedRowDate" type="timestamp"/>
         </createTable>
 
 
@@ -288,6 +293,7 @@
             <column name="resourceManagerAllocationId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="insertedRowDate" type="timestamp"/>
             <column name="resourceManagerTypeId" type="bigint"/>
             <column name="resourceManagerId" type="bigint"/>
             <column name="executorHostId" type="bigint"/>
@@ -305,6 +311,7 @@
             </column>
             <column name="sourceTypeName" type="nvarchar(400)"/>
             <column name="sourceTypeClass" type="nvarchar(2000)"/>
+            <column name="insertedRowDate" type="timestamp"/>
         </createTable>
         <createIndex indexName="idx_st_sourceTypeName" tableName="sourceType" unique="false">
             <column name="sourceTypeName" />
@@ -336,6 +343,7 @@
             <column name="correctCount" type="bigint"/>
             <column name="lastStatus" type="nvarchar(2000)"/>
             <column name="lastConnectionDate" type="timestamp"/>
+            <column name="insertedRowDate" type="timestamp"/>
         </createTable>
         <createIndex indexName="idx_si_sourceTypeId" tableName="sourceInstance" unique="false">
             <column name="sourceTypeId" />
@@ -353,6 +361,7 @@
             <column name="sourceParamName" type="nvarchar(400)"/>
             <column name="sourceParamType" type="nvarchar(2000)"/>
             <column name="possibleValues" type="nvarchar(2000)"/>
+            <column name="insertedRowDate" type="timestamp"/>
         </createTable>
         <createIndex indexName="idx_sp_sourceParamName" tableName="sourceParam" unique="false">
             <column name="sourceParamName" />
@@ -399,6 +408,7 @@
             <column name="sourceTypeId" type="bigint" />
             <column name="sourceParamId" type="bigint"/>
             <column name="isRequired" type="int"/>
+            <column name="insertedRowDate" type="timestamp"/>
         </createTable>
         <createIndex indexName="idx_stp_sourceTypeId" tableName="sourceTypeParam" unique="false">
             <column name="sourceTypeId" />
@@ -471,6 +481,7 @@
             </column>
             <column name="sourceViewTypeName" type="nvarchar(400)"/>
             <column name="sourceViewTypeClass" type="nvarchar(2000)"/>
+            <column name="insertedRowDate" type="timestamp"/>
         </createTable>
         <createIndex indexName="idx_svtype_sourceViewTypeName" tableName="sourceViewType" unique="false">
             <column name="sourceViewTypeName" />
@@ -505,6 +516,7 @@
             <column name="sourceViewTypeId" type="bigint"/>
             <column name="sourceViewName" type="nvarchar(2000)"/>
             <column name="sourceViewDefinition" type="nvarchar(2000)"/>
+            <column name="insertedRowDate" type="timestamp"/>
         </createTable>
         <createIndex indexName="idx_sv_sourceInstanceId" tableName="sourceView" unique="false">
             <column name="sourceInstanceId" />
@@ -684,6 +696,7 @@
             <column name="algorithmImplementationId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="insertedRowDate" type="timestamp"/>
             <column name="algorithmTypeVersionId" type="bigint"/>
             <column name="executorTypeId" type="bigint"/>
             <column name="algorithmImplementationName" type="nvarchar(400)"/>
@@ -706,6 +719,7 @@
             <column name="algorithmParamId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="insertedRowDate" type="timestamp"/>
             <column name="algorithmParamName" type="nvarchar(400)"/>
             <column name="algorithmParamDescription" type="nvarchar(2000)"/>
             <column name="algorithmParamType" type="nvarchar(2000)"/>
@@ -724,6 +738,7 @@
             <column name="algorithmParamId" type="bigint" />
             <column name="algorithmTypeId" type="bigint" />
             <column name="algorithmTypeVersionId" type="bigint" />
+            <column name="insertedRowDate" type="timestamp"/>
         </createTable>
         <createIndex indexName="idx_apt_algorithmTypeId" tableName="algorithmParamType" unique="false">
             <column name="algorithmTypeId" />
@@ -742,6 +757,7 @@
             </column>
             <column name="algorithmColumnTypeName" type="nvarchar(400)"/>
             <column name="algorithmColumnTypeDescription" type="nvarchar(2000)"/>
+            <column name="insertedRowDate" type="timestamp"/>
         </createTable>
         <createIndex indexName="idx_act_actName" tableName="algorithmColumnType" unique="false">
             <column name="algorithmColumnTypeName" />
@@ -798,6 +814,7 @@
             <column name="algorithmColumnTypeId" type="bigint"/>
             <column name="allowMultiple" type="int"/>
             <column name="allowEmpty" type="int"/>
+            <column name="insertedRowDate" type="timestamp"/>
         </createTable>
         <createIndex indexName="idx_atct_atvId" tableName="algorithmTypeColumnType" unique="false">
             <column name="algorithmTypeVersionId" />
@@ -863,6 +880,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="algorithmScheduleViewTypeName" type="nvarchar(400)"/>
+            <column name="insertedRowDate" type="timestamp"/>
         </createTable>
         <createIndex indexName="idx_asvt_asvtName" tableName="algorithmScheduleViewType" unique="false">
             <column name="algorithmScheduleViewTypeName" />
@@ -1025,6 +1043,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="algorithmOutputTypeName" type="nvarchar(400)"/>
+            <column name="insertedRowDate" type="timestamp" />
         </createTable>
         <createIndex indexName="idx_aot_aotName" tableName="algorithmOutputType" unique="false">
             <column name="algorithmOutputTypeName" />
@@ -1049,6 +1068,7 @@
             <column name="algorithmOutputId" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="insertedRowDate" type="timestamp"/>
             <column name="algorithmRunId" type="bigint"/>
             <column name="algorithmOutputTypeId" type="bigint"/>
             <column name="executorStorageViewId" type="bigint"/>

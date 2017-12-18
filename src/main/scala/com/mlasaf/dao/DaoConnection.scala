@@ -6,13 +6,20 @@ package com.mlasaf.dao
 
 import java.sql.{Connection, DriverManager}
 
+/** connection manager for all DAO objects - main method getConnection() should be used to acquire new connection */
 class DaoConnection {
 
+  /** */
   var isInitialized = false;
+  /** initial JDBC connection */
   var connection : java.sql.Connection = null;
+  /** JDBC connection string for database */
   var jdbcString = ""
+  /** JDBC user */
   var jdbcUser = ""
+  /** JDBC password */
   var jdbcPass = "";
+  /** logger for DAO */
   val logger = org.slf4j.LoggerFactory.getLogger("Context");
 
   /** initialize connection - create template */
@@ -30,9 +37,11 @@ class DaoConnection {
     //createDataSource();
     isInitialized = true;
   }
+  /** create new connection - to be used internally only */
   def createConnection() : Connection = {
     DriverManager.getConnection(jdbcString, jdbcUser, jdbcPass);
   }
+  /** acquire new connection for all operations on configurational database */
   def getConnection() : Connection = {
     DriverManager.getConnection(jdbcString, jdbcUser, jdbcPass);
   }
