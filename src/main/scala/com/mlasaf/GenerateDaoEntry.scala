@@ -11,7 +11,7 @@ object GenerateDaoEntry {
 
   def main(args : Array[String]) = {
     Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-    implicit val connmssql = java.sql.DriverManager.getConnection("jdbc:sqlserver://localhost\\SQLEXPRESS2014;DatabaseName=mlasaf05", "sa", "sapass");
+    implicit val connmssql = java.sql.DriverManager.getConnection("jdbc:sqlserver://localhost\\SQLEXPRESS2014;DatabaseName=mlasaf13", "sa", "sapass");
     val cols : List[ColumnDetailDto]=  SQL("select TABLE_NAME, COLUMN_NAME, ORDINAL_POSITION, case DATA_TYPE when 'bigint' then 'Long' when 'int' then 'Int' when 'nvarchar' then 'String' when 'datetime' then 'java.util.Date' when 'float' then 'Double'  else '' end as SCALA_TYPE from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME not like 'DATABASE%'")
       .as(anorm.Macro.namedParser[ColumnDetailDto].*);
     val pkCols : List[ColumnDetailDto] =  SQL(" select TABLE_NAME, COLUMN_NAME, ORDINAL_POSITION, '' as SCALA_TYPE from INFORMATION_SCHEMA.KEY_COLUMN_USAGE where CONSTRAINT_NAME like 'PK%' and TABLE_NAME not like 'DATABASE%'")
@@ -47,6 +47,11 @@ object GenerateDaoEntry {
            |   val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from ${tableName}").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
            |   ld
            |  }
+           |  def get${objName}sLastUpdatedDate() : java.util.Date = {
+           |   implicit val connection = getConnection();
+           |   val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from ${tableName}").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+           |   ld
+           |  }
            |  def get${objName}First() : ${dtoName} = {
            |   implicit val connection = getConnection();
            |   val dtos : ${dtoName}= SQL("select * from ${tableName} order by insertedRowDate asc ").as(anorm.Macro.namedParser[${dtoName}].single);
@@ -56,15 +61,22 @@ object GenerateDaoEntry {
            |   implicit val connection = getConnection();
            |   val dtos : ${dtoName}= SQL("select * from ${tableName} order by insertedRowDate desc ").as(anorm.Macro.namedParser[${dtoName}].single);
            |   dtos
-           |  }   """.stripMargin
+           |  }
+           |  def get${objName}ByGuid(guid : Long) : ${dtoName} = {
+           |   implicit val connection = getConnection();
+           |   val dtos : ${dtoName}= SQL("select * from ${tableName} where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[${dtoName}].single);
+           |   dtos
+           |  }  """.stripMargin
       println(daoMethodsBasic);
       val daoMethods : java.lang.StringBuilder = new java.lang.StringBuilder();
-      if (pkCols.filter(c => c.TABLE_NAME.equals(tableName)).size == 1) {
+      if (pkCols.filter(c => c.TABLE_NAME.equals(tableName)).size == 0) {
+
+      } else if (pkCols.filter(c => c.TABLE_NAME.equals(tableName)).size == 1) {
         val pkColName= pkCols.filter(c => c.TABLE_NAME.equals(tableName)).head.COLUMN_NAME;
         val pkColNameUppper = pkColName.charAt(0).toUpper + pkColName.substring(1);
         daoMethods.append(" def get" + objName + "ByPk(pkColValue : Long) : List[" + dtoName + "] = { \n")
         daoMethods.append("   implicit val connection = getConnection();  \n");
-        daoMethods.append("   val dtos : List[" + dtoName + "] = SQL(\"select * from " + tableName + " where " + pkColName + " = {pkColValue} \").as(anorm.Macro.namedParser[" + dtoName + "].*);  \n");
+        daoMethods.append("   val dtos : List[" + dtoName + "] = SQL(\"select * from " + tableName + " where " + pkColName + " = {pkColValue} \").on(\"pkColValue\" -> pkColValue).as(anorm.Macro.namedParser[" + dtoName + "].*);  \n");
         daoMethods.append("   dtos  \n");
         daoMethods.append(" }  \n");
 
@@ -78,7 +90,7 @@ object GenerateDaoEntry {
           val pkColNameUppper = pkColName.charAt(0).toUpper + pkColName.substring(1);
           daoMethods.append(" def get" + objName + "ByPk" + pkColNameUppper + "(pkColValue : Long) : List[" + dtoName + "] = { \n")
           daoMethods.append("   implicit val connection = getConnection();  \n");
-          daoMethods.append("   val dtos : List[" + dtoName + "] = SQL(\"select * from " + tableName + " where " + pkColName + " = {pkColValue} \").as(anorm.Macro.namedParser[" + dtoName + "].*);  \n");
+          daoMethods.append("   val dtos : List[" + dtoName + "] = SQL(\"select * from " + tableName + " where " + pkColName + " = {pkColValue} \").on(\"pkColValue\" -> pkColValue).as(anorm.Macro.namedParser[" + dtoName + "].*);  \n");
           daoMethods.append("   dtos  \n");
           daoMethods.append(" }  \n");
         });
@@ -87,27 +99,19 @@ object GenerateDaoEntry {
         val fkColNameUppper = fkColName.charAt(0).toUpper + fkColName.substring(1);
         daoMethods.append(" def get" + objName + "ByFk" + fkColNameUppper + "(fkColValue : Long) : List[" + dtoName + "] = { \n")
         daoMethods.append("   implicit val connection = getConnection();  \n");
-        daoMethods.append("   val dtos : List[" + dtoName + "] = SQL(\"select * from " + tableName + " where " + fkColName + " = {fkColValue} \").as(anorm.Macro.namedParser[" + dtoName + "].*);  \n");
+        daoMethods.append("   val dtos : List[" + dtoName + "] = SQL(\"select * from " + tableName + " where " + fkColName + " = {fkColValue} \").on(\"fkColValue\" -> fkColValue).as(anorm.Macro.namedParser[" + dtoName + "].*);  \n");
         daoMethods.append("   dtos  \n");
         daoMethods.append(" }  \n");
       });
       if (nameCol.size == 1) {
         daoMethods.append(" def get" + objName + "ByName(nameColValue : String) : List[" + dtoName + "] = { \n")
         daoMethods.append("   implicit val connection = getConnection();  \n");
-        daoMethods.append("   val dtos : List[" + dtoName + "] = SQL(\"select * from " + tableName + " where " + nameCol.head + " = {nameColValue} \").as(anorm.Macro.namedParser[" + dtoName + "].*);  \n");
+        daoMethods.append("   val dtos : List[" + dtoName + "] = SQL(\"select * from " + tableName + " where " + nameCol.head + " = {nameColValue} \").on(\"nameColValue\" -> nameColValue).as(anorm.Macro.namedParser[" + dtoName + "].*);  \n");
         daoMethods.append("   dtos  \n");
         daoMethods.append(" }  \n");
         daoMethods.append(" def get" + objName + "FirstByName(nameColValue : String) : Option[" + dtoName + "] = { \n")
         daoMethods.append("   implicit val connection = getConnection();  \n");
-        daoMethods.append("   val dtos : List[" + dtoName + "] = SQL(\"select * from " + tableName + " where " + nameCol.head + " = {nameColValue} \").as(anorm.Macro.namedParser[" + dtoName + "].*);  \n");
-        daoMethods.append("   if (dtos.size > 0) Some(dtos.head) else None  \n");
-        daoMethods.append(" }  \n");
-      }
-      val primaryKeyFields = pkFieldList.split(",");
-      if (primaryKeyFields.size == 1) {
-        daoMethods.append(" def get" + objName + "ById(pkid : Long) : Option[" + dtoName + "] = { \n")
-        daoMethods.append("   implicit val connection = getConnection();  \n");
-        daoMethods.append("   val dtos : List[" + dtoName + "] = SQL(\"select * from " + tableName + " where " + primaryKeyFields.head + " = {pkid} \").as(anorm.Macro.namedParser[" + dtoName + "].*);  \n");
+        daoMethods.append("   val dtos : List[" + dtoName + "] = SQL(\"select * from " + tableName + " where " + nameCol.head + " = {nameColValue} \").on(\"nameColValue\" -> nameColValue).as(anorm.Macro.namedParser[" + dtoName + "].*);  \n");
         daoMethods.append("   if (dtos.size > 0) Some(dtos.head) else None  \n");
         daoMethods.append(" }  \n");
       }

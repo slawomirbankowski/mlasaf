@@ -4,7 +4,9 @@
 */
 package com.mlasaf.dao
 
-import java.sql.{Connection, DriverManager}
+import java.sql.{Connection, DriverManager, PreparedStatement}
+
+import com.mlasaf.dto._
 
 /** base class for all generated DAO classes in Daos.scala*/
 class DaoBase {
@@ -25,6 +27,14 @@ class DaoBase {
   /** get JDBC connection object for subclass to read/write data */
   def getConnection() : Connection = {
     daoConnection.getConnection();
+  }
+  /** insert DTO to DB with new PK value */
+  def insertDto(dto : BaseDto): Int = {
+    val stat = dto.prepareInsert(getConnection());
+    stat.executeUpdate();
+  }
+  def updateDto(dto : BaseDto) : Int = {
+    0
   }
 
 }

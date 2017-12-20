@@ -23,17 +23,31 @@ class Context {
   def run(args : Array[String]) = {
     logger.info("Start context for guid: " + guid)
     // initialize DAO to read data from DB
-    val jdbcString = "jdbc:mysql://localhost:3307/mlasaf09"
+    /* TODO : Parse parameters instead of hardcoded values */
+    val jdbcString = "jdbc:mysql://localhost:3307/mlasaf18"
     val jdbcUser = "root"
     val jdbcPass = "rootpass"
     val executorClasses = "com.mlasaf.executors.RExecutor,com.mlasaf.executors.LocalExecutor"
     val restPort = 8300;
     val restAlternativePort = 8301;
-    val executorDefinition = " [ {storage='./', type='local'}, {storage='./', type='local'} ] "
-    val sourceDefinitions = "";
+    val executorDefinition = " [ {executor='RExecutor', port='8806'}, {executor='LocalExecutor', port='8808'} ] "
+    val storageDefinitions = " [ {storage='./', type='local'}, {storage='./', type='local'} ] "
     daoFactory = new DaoFactory();
     //context.daoFactory.registerExecutorInstance();
     daoFactory.initialize(jdbcString, jdbcUser, jdbcPass);
+    val algTypesList = daoFactory.daos.algorithmTypeDao.getAlgorithmTypesList().map(x => x.toStringArray().mkString(",")).mkString(" | ");
+    println("Defined algorithm types: " + algTypesList)
+    val execTypeList = daoFactory.daos.executorTypeDao.getExecutorTypesList().map(x => x.toStringArray().mkString(",")).mkString(" | ");
+    println("Defined executor types: " + execTypeList)
+    println("Source type 1: " + daoFactory.daos.sourceTypeDao.getSourceTypeByPk(1).map(x => x.toStringArray()).mkString(" | "));
+    println("Source type 2: " + daoFactory.daos.sourceTypeDao.getSourceTypeByPk(2).map(x => x.toStringArray()).mkString(" | "));
+    println("Source type JDBC: " + daoFactory.daos.sourceTypeDao.getSourceTypeFirstByName("JDBC").get.toStringArray());
+    println("Source type first: " + daoFactory.daos.sourceTypeDao.getSourceTypeFirst().toStringArray());
+    println("Source type last : " + daoFactory.daos.sourceTypeDao.getSourceTypeLast().toStringArray());
+    println("Source type maxId: " + daoFactory.daos.sourceTypeDao.getSourceTypeMaxId());
+    println("Source type LastInsertDate: " + daoFactory.daos.sourceTypeDao.getSourceTypesLastInsertDate());
+    println("Source type LastUpdatedDate: " + daoFactory.daos.sourceTypeDao.getSourceTypesLastUpdatedDate());
+
     hostDto = daoFactory.daoCustom.registerHost();
     println("Registered host: " + hostDto);
     // find storages previously created
@@ -47,6 +61,7 @@ class Context {
       val th : Thread = new Thread(exec);
       th.setDaemon(true);
       th.start();
+      println("Thread started for executor: " + exec.getClass.getName)
     });
 
 

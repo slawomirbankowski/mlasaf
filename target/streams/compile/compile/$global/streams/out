@@ -1,4 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0mC:\Project\mlasaf\src\mlasaf\src\main\scala\com\mlasaf\dao\Daos.scala:2133:11: value get is not a member of com.mlasaf.dto.SourceViewTypeDto[0m
-[0m[[0m[31merror[0m] [0m[0m      dto.get(fieldName);[0m
-[0m[[0m[31merror[0m] [0m[0m          ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Project\mlasaf\src\mlasaf\src\main\scala\com\mlasaf\dao\Daos.scala:2125:47: not found: value \[0m
+[0m[[0m[31merror[0m] [0m[0m    implicit val connection = getConnection();\[0m
+[0m[[0m[31merror[0m] [0m[0m                                              ^[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m

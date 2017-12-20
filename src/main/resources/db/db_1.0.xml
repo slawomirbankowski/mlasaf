@@ -8,6 +8,19 @@
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
 
+    <property name="now" value="now()" dbms="mysql"/>
+    <property name="now" value="getdate()" dbms="mssql"/>
+    <property name="now" value="CURRENT TIMESTAMP" dbms="db2"/>
+    <property name="now" value="sysdate" dbms="oracle"/>
+    <property name="now" value="now()" dbms="postgresql"/>
+
+    <property name="seqvalue" value="0" dbms="mysql"/>
+    <property name="seqvalue" value="(NEXT VALUE FOR seq_id)" dbms="mssql"/>
+    <property name="seqvalue" value="(NEXT VALUE FOR seq_id)" dbms="db2"/>
+    <property name="seqvalue" value="seq_id.nextval" dbms="oracle"/>
+    <property name="seqvalue" value="nextval('seq_id')" dbms="postgresql"/>
+
+
     <changeSet id="1" author="slawomirbankowski">
 
         <createSequence cycle="false" incrementBy="1" minValue="10" sequenceName="seq_id" startValue="10"/>
@@ -16,7 +29,9 @@
             <column name="executorHostId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="insertedRowDate" type="timestamp"/>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
             <column name="hostName" type="nvarchar(2000)"/>
             <column name="hostIp" type="nvarchar(2000)"/>
             <column name="hostDomain" type="nvarchar(2000)"/>
@@ -30,7 +45,9 @@
             <column name="executorTypeId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="insertedRowDate" type="timestamp"/>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
             <column name="executorTypeName" type="nvarchar(400)"/>
             <column name="executorTypeClass" type="nvarchar(2000)"/>
         </createTable>
@@ -73,11 +90,13 @@
             <column name="executorRestId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
             <column name="executorHostId" type="bigint"/>
-            <column name="insertedRowDate" type="timestamp"/>
-            <column name="restPort" type="int"/>
-            <column name="restVersion" type="nvarchar(2000)"/>
-            <column name="restStatus" type="nvarchar(400)"/>
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="restPort" type="int" defaultValueNumeric="0" />
+            <column name="restVersion" type="nvarchar(2000)" defaultValue="1.0"/>
+            <column name="restStatus" type="nvarchar(400)" defaultValue="STARTING"/>
         </createTable>
         <createIndex indexName="idx_er_executorHostId" tableName="executorRest" unique="false">
             <column name="executorHostId" />
@@ -89,7 +108,9 @@
             <column name="executorRestCallId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="insertedRowDate" type="timestamp"/>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
             <column name="executorHostId" type="bigint"/>
             <column name="executorRestId" type="bigint"/>
             <column name="requestMethod" type="nvarchar(2000)"/>
@@ -111,14 +132,15 @@
             <column name="executorInstanceId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
             <column name="executorTypeId" type="bigint"/>
             <column name="executorHostId" type="bigint"/>
             <column name="executorInstanceName" type="nvarchar(2000)"/>
             <column name="isRunning" type="int"/>
             <column name="isFinished" type="int"/>
             <column name="portNumber" type="int"/>
-            <column name="insertedRowDate" type="timestamp"/>
-            <column name="guid" type="bigint"/>
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
             <column name="endDate" type="timestamp"/>
         </createTable>
         <createIndex indexName="idx_ei_executorTypeId" tableName="executorInstance" unique="false">
@@ -135,7 +157,9 @@
             <column name="executorStorageTypeId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="insertedRowDate" type="timestamp"/>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
             <column name="executorStorageTypeName" type="nvarchar(400)"/>
             <column name="executorStorageTypeClass" type="nvarchar(2000)"/>
         </createTable>
@@ -163,6 +187,7 @@
             <column name="executorStorageId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
             <column name="executorHostId" type="bigint"/>
             <column name="executorStorageTypeId" type="bigint"/>
             <column name="storageDefinition" type="nvarchar(2000)"/>
@@ -170,8 +195,8 @@
             <column name="storageFulllPath" type="nvarchar(2000)"/>
             <column name="isRunning" type="int"/>
             <column name="portNumber" type="int"/>
-            <column name="insertedRowDate" type="timestamp"/>
-            <column name="guid" type="bigint"/>
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
         </createTable>
         <createIndex indexName="idx_es_executorhostid" tableName="executorStorage" unique="false">
             <column name="executorHostId" />
@@ -188,7 +213,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="executorInstanceId" type="bigint"/>
-            <column name="insertedRowDate" type="timestamp"/>
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
         </createTable>
         <addForeignKeyConstraint baseTableName="executorStorageSnapshot" baseColumnNames="executorInstanceId" referencedTableName="executorInstance" referencedColumnNames="executorInstanceId"  constraintName="fk_ess_executorInstanceId"  />
 
@@ -197,7 +222,9 @@
             <column name="executorStorageViewId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="insertedRowDate" type="timestamp"/>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
             <column name="executorStorageSnapshotId" type="bigint" remarks="PARENT" />
             <column name="executorStorageId" type="bigint"/>
             <column name="sourceDownloadId" type="bigint"/>
@@ -221,9 +248,11 @@
             <column name="resourceManagerTypeId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
             <column name="resourceManagerTypeName" type="nvarchar(400)"/>
             <column name="resourceManagerTypeClass" type="nvarchar(2000)"/>
-            <column name="insertedRowDate" type="timestamp"/>
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
         </createTable>
         <createIndex indexName="idx_rmt_rmTypeName" tableName="resourceManagerType" unique="false">
             <column name="resourceManagerTypeName" />
@@ -234,10 +263,12 @@
             <column name="resourceManagerId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
             <column name="resourceManagerTypeId" type="bigint"/>
             <column name="executorHostId" type="bigint"/>
             <column name="resourceManagerStatus" type="nvarchar(400)"/>
-            <column name="insertedRowDate" type="timestamp"/>
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
         </createTable>
         <createIndex indexName="idx_rm_resourceManagerTypeId" tableName="resourceManager" unique="false">
             <column name="resourceManagerTypeId" />
@@ -253,8 +284,10 @@
             <column name="resourceMeasureId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
             <column name="resourceMeasureName" type="nvarchar(400)"/>
-            <column name="insertedRowDate" type="timestamp"/>
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
         </createTable>
         <createIndex indexName="idx_rmeas_rmeasName" tableName="resourceMeasure" unique="false">
             <column name="resourceMeasureName" />
@@ -265,11 +298,13 @@
             <column name="resourceManagerMeasureId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
             <column name="resourceManagerId" type="bigint"/>
             <column name="resourceMeasureId" type="bigint"/>
             <column name="measureString" type="nvarchar(2000)"/>
             <column name="measureValue" type="float"/>
-            <column name="insertedRowDate" type="timestamp"/>
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
         </createTable>
         <createIndex indexName="idx_rmm_rmId" tableName="resourceManagerMeasure" unique="false">
             <column name="resourceManagerId" />
@@ -282,10 +317,12 @@
             <column name="resourceManagerCheckId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
             <column name="resourceManagerId" type="bigint"/>
             <column name="executorHostId" type="bigint"/>
             <column name="resourceManagerStatus" type="nvarchar(400)"/>
-            <column name="insertedRowDate" type="timestamp"/>
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
         </createTable>
 
 
@@ -293,7 +330,9 @@
             <column name="resourceManagerAllocationId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="insertedRowDate" type="timestamp"/>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
             <column name="resourceManagerTypeId" type="bigint"/>
             <column name="resourceManagerId" type="bigint"/>
             <column name="executorHostId" type="bigint"/>
@@ -309,9 +348,11 @@
             <column name="sourceTypeId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
             <column name="sourceTypeName" type="nvarchar(400)"/>
             <column name="sourceTypeClass" type="nvarchar(2000)"/>
-            <column name="insertedRowDate" type="timestamp"/>
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
         </createTable>
         <createIndex indexName="idx_st_sourceTypeName" tableName="sourceType" unique="false">
             <column name="sourceTypeName" />
@@ -337,13 +378,15 @@
             <column name="sourceInstanceId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
             <column name="sourceTypeId" type="bigint"/>
             <column name="sourceInstanceName" type="nvarchar(400)"/>
             <column name="errorCount" type="bigint"/>
             <column name="correctCount" type="bigint"/>
             <column name="lastStatus" type="nvarchar(2000)"/>
             <column name="lastConnectionDate" type="timestamp"/>
-            <column name="insertedRowDate" type="timestamp"/>
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
         </createTable>
         <createIndex indexName="idx_si_sourceTypeId" tableName="sourceInstance" unique="false">
             <column name="sourceTypeId" />
@@ -358,10 +401,12 @@
             <column name="sourceParamId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
             <column name="sourceParamName" type="nvarchar(400)"/>
             <column name="sourceParamType" type="nvarchar(2000)"/>
             <column name="possibleValues" type="nvarchar(2000)"/>
-            <column name="insertedRowDate" type="timestamp"/>
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
         </createTable>
         <createIndex indexName="idx_sp_sourceParamName" tableName="sourceParam" unique="false">
             <column name="sourceParamName" />
@@ -405,10 +450,15 @@
 
 
         <createTable tableName="sourceTypeParam" remarks="DICTIONARY - mapping between source type like FTP or JDBC and parameters" >
+            <column name="sourceTypeParamId" type="bigint" autoIncrement="false">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
             <column name="sourceTypeId" type="bigint" />
             <column name="sourceParamId" type="bigint"/>
             <column name="isRequired" type="int"/>
-            <column name="insertedRowDate" type="timestamp"/>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
         </createTable>
         <createIndex indexName="idx_stp_sourceTypeId" tableName="sourceTypeParam" unique="false">
             <column name="sourceTypeId" />
@@ -416,41 +466,49 @@
         <addForeignKeyConstraint baseTableName="sourceTypeParam" baseColumnNames="sourceTypeId" referencedTableName="sourceType" referencedColumnNames="sourceTypeId"  constraintName="fk_stp_sourceTypeId"  />
         <addForeignKeyConstraint baseTableName="sourceTypeParam" baseColumnNames="sourceParamId" referencedTableName="sourceParam" referencedColumnNames="sourceParamId"  constraintName="fk_stp_sourceParamId"  />
         <insert tableName="sourceTypeParam">
+            <column name="sourceTypeParamId" value="1"/>
             <column name="sourceTypeId" value="1"/>
             <column name="sourceParamId" value="1"/>
             <column name="isRequired" value="1"/>
         </insert>
         <insert tableName="sourceTypeParam">
+            <column name="sourceTypeParamId" value="2"/>
             <column name="sourceTypeId" value="1"/>
             <column name="sourceParamId" value="2"/>
             <column name="isRequired" value="1"/>
         </insert>
         <insert tableName="sourceTypeParam">
+            <column name="sourceTypeParamId" value="3"/>
             <column name="sourceTypeId" value="1"/>
             <column name="sourceParamId" value="3"/>
             <column name="isRequired" value="1"/>
         </insert>
         <insert tableName="sourceTypeParam">
+            <column name="sourceTypeParamId" value="4"/>
             <column name="sourceTypeId" value="1"/>
             <column name="sourceParamId" value="4"/>
             <column name="isRequired" value="0"/>
         </insert>
         <insert tableName="sourceTypeParam">
+            <column name="sourceTypeParamId" value="5"/>
             <column name="sourceTypeId" value="2"/>
             <column name="sourceParamId" value="5"/>
             <column name="isRequired" value="1"/>
         </insert>
         <insert tableName="sourceTypeParam">
+            <column name="sourceTypeParamId" value="6"/>
             <column name="sourceTypeId" value="2"/>
             <column name="sourceParamId" value="6"/>
             <column name="isRequired" value="1"/>
         </insert>
         <insert tableName="sourceTypeParam">
+            <column name="sourceTypeParamId" value="7"/>
             <column name="sourceTypeId" value="2"/>
             <column name="sourceParamId" value="2"/>
             <column name="isRequired" value="1"/>
         </insert>
         <insert tableName="sourceTypeParam">
+            <column name="sourceTypeParamId" value="8"/>
             <column name="sourceTypeId" value="2"/>
             <column name="sourceParamId" value="3"/>
             <column name="isRequired" value="1"/>
@@ -458,11 +516,15 @@
 
 
         <createTable tableName="sourceParamValue" remarks="value of param for given source instance" >
+            <column name="sourceParamValueId" type="bigint" autoIncrement="false">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
             <column name="sourceInstanceId" type="bigint" />
             <column name="sourceParamId" type="bigint"/>
-            <column name="sourceParamValueId" type="bigint"/>
             <column name="sourceParamValueVersion" type="nvarchar(2000)"/>
-            <column name="insertedRowDate" type="timestamp"/>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
             <column name="paramValue" type="nvarchar(2000)"/>
         </createTable>
         <createIndex indexName="idx_spv_sourceInstanceId" tableName="sourceParamValue" unique="false">
@@ -479,9 +541,11 @@
             <column name="sourceViewTypeId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
             <column name="sourceViewTypeName" type="nvarchar(400)"/>
             <column name="sourceViewTypeClass" type="nvarchar(2000)"/>
-            <column name="insertedRowDate" type="timestamp"/>
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
         </createTable>
         <createIndex indexName="idx_svtype_sourceViewTypeName" tableName="sourceViewType" unique="false">
             <column name="sourceViewTypeName" />
@@ -512,11 +576,13 @@
             <column name="sourceViewId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
             <column name="sourceInstanceId" type="bigint"/>
             <column name="sourceViewTypeId" type="bigint"/>
             <column name="sourceViewName" type="nvarchar(2000)"/>
             <column name="sourceViewDefinition" type="nvarchar(2000)"/>
-            <column name="insertedRowDate" type="timestamp"/>
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
         </createTable>
         <createIndex indexName="idx_sv_sourceInstanceId" tableName="sourceView" unique="false">
             <column name="sourceInstanceId" />
@@ -530,8 +596,9 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="sourceViewId" type="bigint" />
-            <column name="insertedRowDate" type="timestamp"/>
-            <column name="guid" type="nvarchar(2000)"/>
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
             <column name="columnName" type="nvarchar(2000)"/>
             <column name="columnType" type="nvarchar(2000)"/>
         </createTable>
@@ -547,8 +614,9 @@
             </column>
             <column name="sourceViewId" type="bigint"/>
             <column name="executorStorageId" type="bigint"/>
-            <column name="insertedRowDate" type="timestamp"/>
-            <column name="guid" type="bigint"/>
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
             <column name="onDemand" type="int" defaultValueNumeric="0"/>
             <column name="startTime" type="timestamp"/>
             <column name="intervalValue" type="bigint"/>
@@ -568,8 +636,8 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="sourceScheduleId" type="bigint" />
-            <column name="insertedRowDate" type="timestamp"/>
-            <column name="lastUpdatedDate" type="timestamp"/>
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
             <column name="retryNumber" type="int"/>
             <column name="isRunning" type="int" defaultValueNumeric="0" />
             <column name="isFinished" type="int" defaultValueNumeric="0" />
@@ -586,8 +654,10 @@
             <column name="sourceDownloadStatId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
             <column name="sourceDownloadId" type="bigint" />
-            <column name="insertedRowDate" type="timestamp"/>
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
             <column name="rowsCount" type="bigint"/>
             <column name="errorRowsCount" type="bigint"/>
             <column name="totalBytesCount" type="bigint"/>
@@ -603,9 +673,11 @@
             <column name="sourceDownloadStatColumnId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
             <column name="sourceDownloadId" type="bigint" />
             <column name="sourceViewColumnId" type="bigint" />
-            <column name="insertedRowDate" type="timestamp"/>
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
             <column name="columnMinNumber" type="float"/>
             <column name="columnMaxNumber" type="float"/>
             <column name="columnMinStr" type="nvarchar(2000)"/>
@@ -624,9 +696,11 @@
             <column name="algorithmTypeId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
             <column name="algorithmTypeName" type="nvarchar(400)"/>
-            <column name="algorithmTypeDescription" type="nvarchar(2000)"/>
-            <column name="insertedRowDate" type="timestamp"/>
+            <column name="algorithmTypeDescription" type="nvarchar(2000)" defaultValue="" />
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
         </createTable>
         <createIndex indexName="idx_at_algorithmTypeName" tableName="algorithmType" unique="false">
             <column name="algorithmTypeName" />
@@ -657,9 +731,11 @@
             <column name="algorithmTypeVersionId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
             <column name="algorithmTypeId" type="bigint"/>
             <column name="algorithmTypeVersionName" type="nvarchar(400)"/>
-            <column name="insertedRowDate" type="timestamp"/>
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
         </createTable>
         <createIndex indexName="idx_atv_atvName" tableName="algorithmTypeVersion" unique="false">
             <column name="algorithmTypeVersionName" />
@@ -696,7 +772,9 @@
             <column name="algorithmImplementationId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="insertedRowDate" type="timestamp"/>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
             <column name="algorithmTypeVersionId" type="bigint"/>
             <column name="executorTypeId" type="bigint"/>
             <column name="algorithmImplementationName" type="nvarchar(400)"/>
@@ -719,9 +797,11 @@
             <column name="algorithmParamId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="insertedRowDate" type="timestamp"/>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
             <column name="algorithmParamName" type="nvarchar(400)"/>
-            <column name="algorithmParamDescription" type="nvarchar(2000)"/>
+            <column name="algorithmParamDescription" type="nvarchar(2000)" defaultValue="" />
             <column name="algorithmParamType" type="nvarchar(2000)"/>
         </createTable>
         <createIndex indexName="idx_ap_apName" tableName="algorithmParam" unique="false">
@@ -735,10 +815,15 @@
 
 
         <createTable tableName="algorithmParamType" remarks="DICTIONARY - parameter needed to run algorithm " >
+            <column name="algorithmParamTypeId" type="bigint" autoIncrement="false">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
             <column name="algorithmParamId" type="bigint" />
             <column name="algorithmTypeId" type="bigint" />
             <column name="algorithmTypeVersionId" type="bigint" />
-            <column name="insertedRowDate" type="timestamp"/>
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
         </createTable>
         <createIndex indexName="idx_apt_algorithmTypeId" tableName="algorithmParamType" unique="false">
             <column name="algorithmTypeId" />
@@ -757,7 +842,9 @@
             </column>
             <column name="algorithmColumnTypeName" type="nvarchar(400)"/>
             <column name="algorithmColumnTypeDescription" type="nvarchar(2000)"/>
-            <column name="insertedRowDate" type="timestamp"/>
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
         </createTable>
         <createIndex indexName="idx_act_actName" tableName="algorithmColumnType" unique="false">
             <column name="algorithmColumnTypeName" />
@@ -810,11 +897,16 @@
 
 
         <createTable tableName="algorithmTypeColumnType" remarks="DICTIONARY - mapping between algorithm type like Prediction or Classification and column type to be mapped from downloaded data" >
+            <column name="algorithmTypeColumnTypeId" type="bigint" autoIncrement="false">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
             <column name="algorithmTypeVersionId" type="bigint" />
             <column name="algorithmColumnTypeId" type="bigint"/>
-            <column name="allowMultiple" type="int"/>
-            <column name="allowEmpty" type="int"/>
-            <column name="insertedRowDate" type="timestamp"/>
+            <column name="allowMultiple" type="int" defaultValueNumeric="1"/>
+            <column name="allowEmpty" type="int" defaultValueNumeric="0"/>
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
         </createTable>
         <createIndex indexName="idx_atct_atvId" tableName="algorithmTypeColumnType" unique="false">
             <column name="algorithmTypeVersionId" />
@@ -822,16 +914,19 @@
         <addForeignKeyConstraint baseTableName="algorithmTypeColumnType" baseColumnNames="algorithmTypeVersionId" referencedTableName="algorithmTypeVersion" referencedColumnNames="algorithmTypeVersionId"  constraintName="fk_atct_atvId"  />
         <addForeignKeyConstraint baseTableName="algorithmTypeColumnType" baseColumnNames="algorithmColumnTypeId" referencedTableName="algorithmColumnType" referencedColumnNames="algorithmColumnTypeId"  constraintName="fk_atct_actId"  />
         <insert tableName="algorithmTypeColumnType">
+            <column name="algorithmTypeColumnTypeId" value="1"/>
             <column name="algorithmTypeVersionId" value="1"/>
             <column name="algorithmColumnTypeId" value="2"/>
             <column name="allowMultiple" value="0"/>
         </insert>
         <insert tableName="algorithmTypeColumnType">
+            <column name="algorithmTypeColumnTypeId" value="2"/>
             <column name="algorithmTypeVersionId" value="1"/>
             <column name="algorithmColumnTypeId" value="1"/>
             <column name="allowMultiple" value="1"/>
         </insert>
         <insert tableName="algorithmTypeColumnType">
+            <column name="algorithmTypeColumnTypeId" value="3"/>
             <column name="algorithmTypeVersionId" value="1"/>
             <column name="algorithmColumnTypeId" value="3"/>
             <column name="allowMultiple" value="0"/>
@@ -842,8 +937,10 @@
             <column name="algorithmScheduleTypeId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
             <column name="algorithmScheduleTypeName" type="nvarchar(400)"/>
-            <column name="insertedRowDate" type="timestamp"/>
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
         </createTable>
         <createIndex indexName="idx_ast_astName" tableName="algorithmScheduleType" unique="false">
             <column name="algorithmScheduleTypeName" />
@@ -862,11 +959,13 @@
             <column name="algorithmScheduleId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
             <column name="algorithmImplementationId" type="bigint"/>
             <column name="algorithmScheduleTypeId" type="bigint"/>
             <column name="algorithmScheduleName" type="nvarchar(2000)"/>
             <column name="isScheduled" type="int"/>
-            <column name="insertedRowDate" type="timestamp"/>
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
         </createTable>
         <createIndex indexName="idx_ast_aiId" tableName="algorithmSchedule" unique="false">
             <column name="algorithmImplementationId" />
@@ -879,8 +978,10 @@
             <column name="algorithmScheduleViewTypeId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
             <column name="algorithmScheduleViewTypeName" type="nvarchar(400)"/>
-            <column name="insertedRowDate" type="timestamp"/>
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
         </createTable>
         <createIndex indexName="idx_asvt_asvtName" tableName="algorithmScheduleViewType" unique="false">
             <column name="algorithmScheduleViewTypeName" />
@@ -907,10 +1008,12 @@
             <column name="algorithmScheduleViewId" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
             <column name="algorithmScheduleViewTypeId" type="bigint"/>
             <column name="algorithmScheduleId" type="bigint"/>
             <column name="sourceViewId" type="bigint"/>
-            <column name="insertedRowDate" type="timestamp"/>
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
             <column name="joinOnDefinition" type="nvarchar(2000)"/>
         </createTable>
         <createIndex indexName="idx_asv_asId" tableName="algorithmScheduleView" unique="false">
@@ -928,10 +1031,12 @@
             <column name="algorithmScheduleParamId" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
             <column name="algorithmScheduleId" type="bigint"/>
             <column name="algorithmParamId" type="bigint"/>
             <column name="algorithmParamValue" type="nvarchar(2000)"/>
-            <column name="insertedRowDate" type="timestamp"/>
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
         </createTable>
         <createIndex indexName="idx_asp_asId" tableName="algorithmScheduleParam" unique="false">
             <column name="algorithmScheduleId" />
@@ -944,13 +1049,15 @@
             <column name="algorithmScheduleColumnId" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
             <column name="algorithmScheduleId" type="bigint"/>
             <column name="algorithmColumnTypeId" type="bigint"/>
             <column name="algorithmScheduleViewId" type="bigint"/>
             <column name="sourceViewId" type="bigint"/>
             <column name="sourceViewColumnId" type="bigint"/>
             <column name="extendedProperties" type="nvarchar(2000)"/>
-            <column name="insertedRowDate" type="timestamp"/>
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
         </createTable>
         <createIndex indexName="idx_asc_asId" tableName="algorithmScheduleColumn" unique="false">
             <column name="algorithmScheduleId" />
@@ -972,8 +1079,10 @@
             <column name="algorithmRunTypeId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
             <column name="algorithmRunTypeName" type="nvarchar(400)"/>
-            <column name="insertedRowDate" type="timestamp"/>
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
         </createTable>
         <createIndex indexName="idx_art_artName" tableName="algorithmRunType" unique="false">
             <column name="algorithmRunTypeName" />
@@ -996,11 +1105,13 @@
             <column name="algorithmRunId" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
             <column name="algorithmScheduleId" type="bigint"/>
             <column name="executorInstanceId" type="bigint"/>
             <column name="executorStorageId" type="bigint"/>
             <column name="algorithmRunName" type="nvarchar(2000)"/>
-            <column name="insertedRowDate" type="timestamp"/>
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
             <column name="runDate" type="timestamp"/>
             <column name="isRunning" type="int" />
             <column name="isFinished" type="int"/>
@@ -1023,9 +1134,11 @@
             <column name="algorithmRunViewId" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
             <column name="algorithmRunId" type="bigint"/>
             <column name="executorStorageViewId" type="bigint" />
-            <column name="insertedRowDate" type="timestamp" />
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}"  />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
             <column name="isDownloaded" type="int"/>
         </createTable>
         <createIndex indexName="idx_arv_algorithmRunId" tableName="algorithmRunView" unique="false">
@@ -1042,8 +1155,10 @@
             <column name="algorithmOutputTypeId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
             <column name="algorithmOutputTypeName" type="nvarchar(400)"/>
-            <column name="insertedRowDate" type="timestamp" />
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}"  />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
         </createTable>
         <createIndex indexName="idx_aot_aotName" tableName="algorithmOutputType" unique="false">
             <column name="algorithmOutputTypeName" />
@@ -1054,10 +1169,12 @@
             <column name="algorithmTypeOutputTypeId" type="bigint" autoIncrement="false">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
             <column name="algorithmTypeVersionId" type="bigint"/>
             <column name="algorithmOutputTypeId" type="bigint"/>
             <column name="isMandatory" type="int"/>
-            <column name="insertedRowDate" type="timestamp" />
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}"  />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
         </createTable>
         <createIndex indexName="idx_atot_avtId" tableName="algorithmTypeOutputType" unique="false">
             <column name="algorithmTypeVersionId" />
@@ -1068,7 +1185,9 @@
             <column name="algorithmOutputId" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="insertedRowDate" type="timestamp"/>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" />
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" />
             <column name="algorithmRunId" type="bigint"/>
             <column name="algorithmOutputTypeId" type="bigint"/>
             <column name="executorStorageViewId" type="bigint"/>
@@ -1080,6 +1199,273 @@
         <createIndex indexName="idx_ao_esvId" tableName="algorithmOutput" unique="false">
             <column name="executorStorageViewId" />
         </createIndex>
+
+
+        <createView  viewName="vAlgorithmImplementation">
+            select  _algorithmImplementation.algorithmImplementationId,  _algorithmImplementation.insertedRowDate,  _algorithmImplementation.algorithmTypeVersionId,  _algorithmImplementation.executorTypeId,  _algorithmImplementation.algorithmImplementationName,  _algorithmImplementation.algorithmImplementationClass
+            ,  _algorithmTypeVersion.algorithmTypeVersionId as algorithmTypeVersion_algorithmTypeVersionId ,  _algorithmTypeVersion.algorithmTypeId as algorithmTypeVersion_algorithmTypeId ,  _algorithmTypeVersion.algorithmTypeVersionName as algorithmTypeVersion_algorithmTypeVersionName ,  _algorithmTypeVersion.insertedRowDate as algorithmTypeVersion_insertedRowDate
+            ,  _executorType.executorTypeId as executorType_executorTypeId ,  _executorType.insertedRowDate as executorType_insertedRowDate ,  _executorType.executorTypeName as executorType_executorTypeName ,  _executorType.executorTypeClass as executorType_executorTypeClass
+            from algorithmImplementation _algorithmImplementation
+            join algorithmTypeVersion _algorithmTypeVersion on  _algorithmImplementation.algorithmTypeVersionId = _algorithmTypeVersion.algorithmTypeVersionId
+            join executorType _executorType on  _algorithmImplementation.executorTypeId = _executorType.executorTypeId;
+        </createView>
+
+
+        <createView  viewName="vAlgorithmParamType">
+            select  _algorithmParamType.algorithmParamId,  _algorithmParamType.algorithmTypeId,  _algorithmParamType.algorithmTypeVersionId,  _algorithmParamType.insertedRowDate
+            ,  _algorithmParam.algorithmParamId as algorithmParam_algorithmParamId ,  _algorithmParam.insertedRowDate as algorithmParam_insertedRowDate ,  _algorithmParam.algorithmParamName as algorithmParam_algorithmParamName ,  _algorithmParam.algorithmParamDescription as algorithmParam_algorithmParamDescription ,  _algorithmParam.algorithmParamType as algorithmParam_algorithmParamType
+            ,  _algorithmType.algorithmTypeId as algorithmType_algorithmTypeId ,  _algorithmType.algorithmTypeName as algorithmType_algorithmTypeName ,  _algorithmType.algorithmTypeDescription as algorithmType_algorithmTypeDescription ,  _algorithmType.insertedRowDate as algorithmType_insertedRowDate
+            ,  _algorithmTypeVersion.algorithmTypeVersionId as algorithmTypeVersion_algorithmTypeVersionId ,  _algorithmTypeVersion.algorithmTypeId as algorithmTypeVersion_algorithmTypeId ,  _algorithmTypeVersion.algorithmTypeVersionName as algorithmTypeVersion_algorithmTypeVersionName ,  _algorithmTypeVersion.insertedRowDate as algorithmTypeVersion_insertedRowDate
+            from algorithmParamType _algorithmParamType
+            join algorithmParam _algorithmParam on  _algorithmParamType.algorithmParamId = _algorithmParam.algorithmParamId
+            join algorithmType _algorithmType on  _algorithmParamType.algorithmTypeId = _algorithmType.algorithmTypeId
+            join algorithmTypeVersion _algorithmTypeVersion on  _algorithmParamType.algorithmTypeVersionId = _algorithmTypeVersion.algorithmTypeVersionId;
+        </createView>
+
+
+        <createView  viewName="vAlgorithmRun">
+            select  _algorithmRun.algorithmRunId,  _algorithmRun.algorithmScheduleId,  _algorithmRun.executorInstanceId,  _algorithmRun.executorStorageId,  _algorithmRun.algorithmRunName,  _algorithmRun.insertedRowDate,  _algorithmRun.runDate,  _algorithmRun.isRunning,  _algorithmRun.isFinished
+            ,  _algorithmSchedule.algorithmScheduleId as algorithmSchedule_algorithmScheduleId ,  _algorithmSchedule.algorithmImplementationId as algorithmSchedule_algorithmImplementationId ,  _algorithmSchedule.algorithmScheduleTypeId as algorithmSchedule_algorithmScheduleTypeId ,  _algorithmSchedule.algorithmScheduleName as algorithmSchedule_algorithmScheduleName ,  _algorithmSchedule.isScheduled as algorithmSchedule_isScheduled ,  _algorithmSchedule.insertedRowDate as algorithmSchedule_insertedRowDate
+            ,  _executorInstance.executorInstanceId as executorInstance_executorInstanceId ,  _executorInstance.executorTypeId as executorInstance_executorTypeId ,  _executorInstance.executorHostId as executorInstance_executorHostId ,  _executorInstance.executorInstanceName as executorInstance_executorInstanceName ,  _executorInstance.isRunning as executorInstance_isRunning ,  _executorInstance.isFinished as executorInstance_isFinished ,  _executorInstance.portNumber as executorInstance_portNumber ,  _executorInstance.insertedRowDate as executorInstance_insertedRowDate ,  _executorInstance.guid as executorInstance_guid ,  _executorInstance.endDate as executorInstance_endDate
+            ,  _executorStorage.executorStorageId as executorStorage_executorStorageId ,  _executorStorage.executorHostId as executorStorage_executorHostId ,  _executorStorage.executorStorageTypeId as executorStorage_executorStorageTypeId ,  _executorStorage.storageDefinition as executorStorage_storageDefinition ,  _executorStorage.storageBasePath as executorStorage_storageBasePath ,  _executorStorage.storageFulllPath as executorStorage_storageFulllPath ,  _executorStorage.isRunning as executorStorage_isRunning ,  _executorStorage.portNumber as executorStorage_portNumber ,  _executorStorage.insertedRowDate as executorStorage_insertedRowDate ,  _executorStorage.guid as executorStorage_guid
+            from algorithmRun _algorithmRun
+            join algorithmSchedule _algorithmSchedule on  _algorithmRun.algorithmScheduleId = _algorithmSchedule.algorithmScheduleId
+            join executorInstance _executorInstance on  _algorithmRun.executorInstanceId = _executorInstance.executorInstanceId
+            join executorStorage _executorStorage on  _algorithmRun.executorStorageId = _executorStorage.executorStorageId;
+        </createView>
+
+
+        <createView  viewName="vAlgorithmRunView">
+            select  _algorithmRunView.algorithmRunViewId,  _algorithmRunView.algorithmRunId,  _algorithmRunView.executorStorageViewId,  _algorithmRunView.insertedRowDate,  _algorithmRunView.isDownloaded
+            ,  _algorithmRun.algorithmRunId as algorithmRun_algorithmRunId ,  _algorithmRun.algorithmScheduleId as algorithmRun_algorithmScheduleId ,  _algorithmRun.executorInstanceId as algorithmRun_executorInstanceId ,  _algorithmRun.executorStorageId as algorithmRun_executorStorageId ,  _algorithmRun.algorithmRunName as algorithmRun_algorithmRunName ,  _algorithmRun.insertedRowDate as algorithmRun_insertedRowDate ,  _algorithmRun.runDate as algorithmRun_runDate ,  _algorithmRun.isRunning as algorithmRun_isRunning ,  _algorithmRun.isFinished as algorithmRun_isFinished
+            ,  _executorStorageView.executorStorageViewId as executorStorageView_executorStorageViewId ,  _executorStorageView.insertedRowDate as executorStorageView_insertedRowDate ,  _executorStorageView.executorStorageSnapshotId as executorStorageView_executorStorageSnapshotId ,  _executorStorageView.executorStorageId as executorStorageView_executorStorageId ,  _executorStorageView.sourceDownloadId as executorStorageView_sourceDownloadId ,  _executorStorageView.storagePath as executorStorageView_storagePath ,  _executorStorageView.viewSize as executorStorageView_viewSize ,  _executorStorageView.viewRowsCount as executorStorageView_viewRowsCount
+            from algorithmRunView _algorithmRunView
+            join algorithmRun _algorithmRun on  _algorithmRunView.algorithmRunId = _algorithmRun.algorithmRunId
+            join executorStorageView _executorStorageView on  _algorithmRunView.executorStorageViewId = _executorStorageView.executorStorageViewId;
+        </createView>
+
+
+        <createView  viewName="vAlgorithmSchedule">
+            select  _algorithmSchedule.algorithmScheduleId,  _algorithmSchedule.algorithmImplementationId,  _algorithmSchedule.algorithmScheduleTypeId,  _algorithmSchedule.algorithmScheduleName,  _algorithmSchedule.isScheduled,  _algorithmSchedule.insertedRowDate
+            ,  _algorithmImplementation.algorithmImplementationId as algorithmImplementation_algorithmImplementationId ,  _algorithmImplementation.insertedRowDate as algorithmImplementation_insertedRowDate ,  _algorithmImplementation.algorithmTypeVersionId as algorithmImplementation_algorithmTypeVersionId ,  _algorithmImplementation.executorTypeId as algorithmImplementation_executorTypeId ,  _algorithmImplementation.algorithmImplementationName as algorithmImplementation_algorithmImplementationName ,  _algorithmImplementation.algorithmImplementationClass as algorithmImplementation_algorithmImplementationClass
+            ,  _algorithmScheduleType.algorithmScheduleTypeId as algorithmScheduleType_algorithmScheduleTypeId ,  _algorithmScheduleType.algorithmScheduleTypeName as algorithmScheduleType_algorithmScheduleTypeName ,  _algorithmScheduleType.insertedRowDate as algorithmScheduleType_insertedRowDate
+            from algorithmSchedule _algorithmSchedule
+            join algorithmImplementation _algorithmImplementation on  _algorithmSchedule.algorithmImplementationId = _algorithmImplementation.algorithmImplementationId
+            join algorithmScheduleType _algorithmScheduleType on  _algorithmSchedule.algorithmScheduleTypeId = _algorithmScheduleType.algorithmScheduleTypeId;
+        </createView>
+
+
+        <createView  viewName="vAlgorithmScheduleColumn">
+            select  _algorithmScheduleColumn.algorithmScheduleColumnId,  _algorithmScheduleColumn.algorithmScheduleId,  _algorithmScheduleColumn.algorithmColumnTypeId,  _algorithmScheduleColumn.algorithmScheduleViewId,  _algorithmScheduleColumn.sourceViewId,  _algorithmScheduleColumn.sourceViewColumnId,  _algorithmScheduleColumn.extendedProperties,  _algorithmScheduleColumn.insertedRowDate
+            ,  _algorithmColumnType.algorithmColumnTypeId as algorithmColumnType_algorithmColumnTypeId ,  _algorithmColumnType.algorithmColumnTypeName as algorithmColumnType_algorithmColumnTypeName ,  _algorithmColumnType.algorithmColumnTypeDescription as algorithmColumnType_algorithmColumnTypeDescription ,  _algorithmColumnType.insertedRowDate as algorithmColumnType_insertedRowDate
+            ,  _algorithmSchedule.algorithmScheduleId as algorithmSchedule_algorithmScheduleId ,  _algorithmSchedule.algorithmImplementationId as algorithmSchedule_algorithmImplementationId ,  _algorithmSchedule.algorithmScheduleTypeId as algorithmSchedule_algorithmScheduleTypeId ,  _algorithmSchedule.algorithmScheduleName as algorithmSchedule_algorithmScheduleName ,  _algorithmSchedule.isScheduled as algorithmSchedule_isScheduled ,  _algorithmSchedule.insertedRowDate as algorithmSchedule_insertedRowDate
+            ,  _algorithmScheduleView.algorithmScheduleViewId as algorithmScheduleView_algorithmScheduleViewId ,  _algorithmScheduleView.algorithmScheduleViewTypeId as algorithmScheduleView_algorithmScheduleViewTypeId ,  _algorithmScheduleView.algorithmScheduleId as algorithmScheduleView_algorithmScheduleId ,  _algorithmScheduleView.sourceViewId as algorithmScheduleView_sourceViewId ,  _algorithmScheduleView.insertedRowDate as algorithmScheduleView_insertedRowDate ,  _algorithmScheduleView.joinOnDefinition as algorithmScheduleView_joinOnDefinition
+            ,  _sourceView.sourceViewId as sourceView_sourceViewId ,  _sourceView.sourceInstanceId as sourceView_sourceInstanceId ,  _sourceView.sourceViewTypeId as sourceView_sourceViewTypeId ,  _sourceView.sourceViewName as sourceView_sourceViewName ,  _sourceView.sourceViewDefinition as sourceView_sourceViewDefinition ,  _sourceView.insertedRowDate as sourceView_insertedRowDate
+            ,  _sourceViewColumn.sourceViewColumnId as sourceViewColumn_sourceViewColumnId ,  _sourceViewColumn.sourceViewId as sourceViewColumn_sourceViewId ,  _sourceViewColumn.insertedRowDate as sourceViewColumn_insertedRowDate ,  _sourceViewColumn.guid as sourceViewColumn_guid ,  _sourceViewColumn.columnName as sourceViewColumn_columnName ,  _sourceViewColumn.columnType as sourceViewColumn_columnType
+            from algorithmScheduleColumn _algorithmScheduleColumn
+            join algorithmColumnType _algorithmColumnType on  _algorithmScheduleColumn.algorithmColumnTypeId = _algorithmColumnType.algorithmColumnTypeId
+            join algorithmSchedule _algorithmSchedule on  _algorithmScheduleColumn.algorithmScheduleId = _algorithmSchedule.algorithmScheduleId
+            join algorithmScheduleView _algorithmScheduleView on  _algorithmScheduleColumn.algorithmScheduleViewId = _algorithmScheduleView.algorithmScheduleViewId
+            join sourceView _sourceView on  _algorithmScheduleColumn.sourceViewId = _sourceView.sourceViewId
+            join sourceViewColumn _sourceViewColumn on  _algorithmScheduleColumn.sourceViewColumnId = _sourceViewColumn.sourceViewColumnId;
+        </createView>
+
+
+        <createView  viewName="vAlgorithmScheduleParam">
+            select  _algorithmScheduleParam.algorithmScheduleParamId,  _algorithmScheduleParam.algorithmScheduleId,  _algorithmScheduleParam.algorithmParamId,  _algorithmScheduleParam.algorithmParamValue,  _algorithmScheduleParam.insertedRowDate
+            ,  _algorithmParam.algorithmParamId as algorithmParam_algorithmParamId ,  _algorithmParam.insertedRowDate as algorithmParam_insertedRowDate ,  _algorithmParam.algorithmParamName as algorithmParam_algorithmParamName ,  _algorithmParam.algorithmParamDescription as algorithmParam_algorithmParamDescription ,  _algorithmParam.algorithmParamType as algorithmParam_algorithmParamType
+            ,  _algorithmSchedule.algorithmScheduleId as algorithmSchedule_algorithmScheduleId ,  _algorithmSchedule.algorithmImplementationId as algorithmSchedule_algorithmImplementationId ,  _algorithmSchedule.algorithmScheduleTypeId as algorithmSchedule_algorithmScheduleTypeId ,  _algorithmSchedule.algorithmScheduleName as algorithmSchedule_algorithmScheduleName ,  _algorithmSchedule.isScheduled as algorithmSchedule_isScheduled ,  _algorithmSchedule.insertedRowDate as algorithmSchedule_insertedRowDate
+            from algorithmScheduleParam _algorithmScheduleParam
+            join algorithmParam _algorithmParam on  _algorithmScheduleParam.algorithmParamId = _algorithmParam.algorithmParamId
+            join algorithmSchedule _algorithmSchedule on  _algorithmScheduleParam.algorithmScheduleId = _algorithmSchedule.algorithmScheduleId;
+        </createView>
+
+
+        <createView  viewName="vAlgorithmScheduleView">
+            select  _algorithmScheduleView.algorithmScheduleViewId,  _algorithmScheduleView.algorithmScheduleViewTypeId,  _algorithmScheduleView.algorithmScheduleId,  _algorithmScheduleView.sourceViewId,  _algorithmScheduleView.insertedRowDate,  _algorithmScheduleView.joinOnDefinition
+            ,  _algorithmSchedule.algorithmScheduleId as algorithmSchedule_algorithmScheduleId ,  _algorithmSchedule.algorithmImplementationId as algorithmSchedule_algorithmImplementationId ,  _algorithmSchedule.algorithmScheduleTypeId as algorithmSchedule_algorithmScheduleTypeId ,  _algorithmSchedule.algorithmScheduleName as algorithmSchedule_algorithmScheduleName ,  _algorithmSchedule.isScheduled as algorithmSchedule_isScheduled ,  _algorithmSchedule.insertedRowDate as algorithmSchedule_insertedRowDate
+            ,  _algorithmScheduleViewType.algorithmScheduleViewTypeId as algorithmScheduleViewType_algorithmScheduleViewTypeId ,  _algorithmScheduleViewType.algorithmScheduleViewTypeName as algorithmScheduleViewType_algorithmScheduleViewTypeName ,  _algorithmScheduleViewType.insertedRowDate as algorithmScheduleViewType_insertedRowDate
+            ,  _sourceView.sourceViewId as sourceView_sourceViewId ,  _sourceView.sourceInstanceId as sourceView_sourceInstanceId ,  _sourceView.sourceViewTypeId as sourceView_sourceViewTypeId ,  _sourceView.sourceViewName as sourceView_sourceViewName ,  _sourceView.sourceViewDefinition as sourceView_sourceViewDefinition ,  _sourceView.insertedRowDate as sourceView_insertedRowDate
+            from algorithmScheduleView _algorithmScheduleView
+            join algorithmSchedule _algorithmSchedule on  _algorithmScheduleView.algorithmScheduleId = _algorithmSchedule.algorithmScheduleId
+            join algorithmScheduleViewType _algorithmScheduleViewType on  _algorithmScheduleView.algorithmScheduleViewTypeId = _algorithmScheduleViewType.algorithmScheduleViewTypeId
+            join sourceView _sourceView on  _algorithmScheduleView.sourceViewId = _sourceView.sourceViewId;
+        </createView>
+
+
+        <createView  viewName="vAlgorithmTypeColumnType">
+            select  _algorithmTypeColumnType.algorithmTypeVersionId,  _algorithmTypeColumnType.algorithmColumnTypeId,  _algorithmTypeColumnType.allowMultiple,  _algorithmTypeColumnType.allowEmpty,  _algorithmTypeColumnType.insertedRowDate
+            ,  _algorithmColumnType.algorithmColumnTypeId as algorithmColumnType_algorithmColumnTypeId ,  _algorithmColumnType.algorithmColumnTypeName as algorithmColumnType_algorithmColumnTypeName ,  _algorithmColumnType.algorithmColumnTypeDescription as algorithmColumnType_algorithmColumnTypeDescription ,  _algorithmColumnType.insertedRowDate as algorithmColumnType_insertedRowDate
+            ,  _algorithmTypeVersion.algorithmTypeVersionId as algorithmTypeVersion_algorithmTypeVersionId ,  _algorithmTypeVersion.algorithmTypeId as algorithmTypeVersion_algorithmTypeId ,  _algorithmTypeVersion.algorithmTypeVersionName as algorithmTypeVersion_algorithmTypeVersionName ,  _algorithmTypeVersion.insertedRowDate as algorithmTypeVersion_insertedRowDate
+            from algorithmTypeColumnType _algorithmTypeColumnType
+            join algorithmColumnType _algorithmColumnType on  _algorithmTypeColumnType.algorithmColumnTypeId = _algorithmColumnType.algorithmColumnTypeId
+            join algorithmTypeVersion _algorithmTypeVersion on  _algorithmTypeColumnType.algorithmTypeVersionId = _algorithmTypeVersion.algorithmTypeVersionId;
+        </createView>
+
+
+        <createView  viewName="vAlgorithmTypeVersion">
+            select  _algorithmTypeVersion.algorithmTypeVersionId,  _algorithmTypeVersion.algorithmTypeId,  _algorithmTypeVersion.algorithmTypeVersionName,  _algorithmTypeVersion.insertedRowDate
+            ,  _algorithmType.algorithmTypeId as algorithmType_algorithmTypeId ,  _algorithmType.algorithmTypeName as algorithmType_algorithmTypeName ,  _algorithmType.algorithmTypeDescription as algorithmType_algorithmTypeDescription ,  _algorithmType.insertedRowDate as algorithmType_insertedRowDate
+            from algorithmTypeVersion _algorithmTypeVersion
+            join algorithmType _algorithmType on  _algorithmTypeVersion.algorithmTypeId = _algorithmType.algorithmTypeId;
+        </createView>
+
+
+        <createView  viewName="vExecutorInstance">
+            select  _executorInstance.executorInstanceId,  _executorInstance.executorTypeId,  _executorInstance.executorHostId,  _executorInstance.executorInstanceName,  _executorInstance.isRunning,  _executorInstance.isFinished,  _executorInstance.portNumber,  _executorInstance.insertedRowDate,  _executorInstance.guid,  _executorInstance.endDate
+            ,  _executorHost.executorHostId as executorHost_executorHostId ,  _executorHost.insertedRowDate as executorHost_insertedRowDate ,  _executorHost.hostName as executorHost_hostName ,  _executorHost.hostIp as executorHost_hostIp ,  _executorHost.hostDomain as executorHost_hostDomain ,  _executorHost.hostOsType as executorHost_hostOsType ,  _executorHost.hostOsVersion as executorHost_hostOsVersion ,  _executorHost.isWorking as executorHost_isWorking
+            ,  _executorType.executorTypeId as executorType_executorTypeId ,  _executorType.insertedRowDate as executorType_insertedRowDate ,  _executorType.executorTypeName as executorType_executorTypeName ,  _executorType.executorTypeClass as executorType_executorTypeClass
+            from executorInstance _executorInstance
+            join executorHost _executorHost on  _executorInstance.executorHostId = _executorHost.executorHostId
+            join executorType _executorType on  _executorInstance.executorTypeId = _executorType.executorTypeId;
+        </createView>
+
+
+        <createView  viewName="vExecutorRest">
+            select  _executorRest.executorRestId,  _executorRest.executorHostId,  _executorRest.insertedRowDate,  _executorRest.restPort,  _executorRest.restVersion,  _executorRest.restStatus
+            ,  _executorHost.executorHostId as executorHost_executorHostId ,  _executorHost.insertedRowDate as executorHost_insertedRowDate ,  _executorHost.hostName as executorHost_hostName ,  _executorHost.hostIp as executorHost_hostIp ,  _executorHost.hostDomain as executorHost_hostDomain ,  _executorHost.hostOsType as executorHost_hostOsType ,  _executorHost.hostOsVersion as executorHost_hostOsVersion ,  _executorHost.isWorking as executorHost_isWorking
+            from executorRest _executorRest
+            join executorHost _executorHost on  _executorRest.executorHostId = _executorHost.executorHostId;
+        </createView>
+
+
+        <createView  viewName="vExecutorRestCall">
+            select  _executorRestCall.executorRestCallId,  _executorRestCall.insertedRowDate,  _executorRestCall.executorHostId,  _executorRestCall.executorRestId,  _executorRestCall.requestMethod,  _executorRestCall.requestHeader,  _executorRestCall.requestBody,  _executorRestCall.responseBody
+            ,  _executorHost.executorHostId as executorHost_executorHostId ,  _executorHost.insertedRowDate as executorHost_insertedRowDate ,  _executorHost.hostName as executorHost_hostName ,  _executorHost.hostIp as executorHost_hostIp ,  _executorHost.hostDomain as executorHost_hostDomain ,  _executorHost.hostOsType as executorHost_hostOsType ,  _executorHost.hostOsVersion as executorHost_hostOsVersion ,  _executorHost.isWorking as executorHost_isWorking
+            ,  _executorRest.executorRestId as executorRest_executorRestId ,  _executorRest.executorHostId as executorRest_executorHostId ,  _executorRest.insertedRowDate as executorRest_insertedRowDate ,  _executorRest.restPort as executorRest_restPort ,  _executorRest.restVersion as executorRest_restVersion ,  _executorRest.restStatus as executorRest_restStatus
+            from executorRestCall _executorRestCall
+            join executorHost _executorHost on  _executorRestCall.executorHostId = _executorHost.executorHostId
+            join executorRest _executorRest on  _executorRestCall.executorRestId = _executorRest.executorRestId;
+        </createView>
+
+
+        <createView  viewName="vExecutorStorage">
+            select  _executorStorage.executorStorageId,  _executorStorage.executorHostId,  _executorStorage.executorStorageTypeId,  _executorStorage.storageDefinition,  _executorStorage.storageBasePath,  _executorStorage.storageFulllPath,  _executorStorage.isRunning,  _executorStorage.portNumber,  _executorStorage.insertedRowDate,  _executorStorage.guid
+            ,  _executorStorageType.executorStorageTypeId as executorStorageType_executorStorageTypeId ,  _executorStorageType.insertedRowDate as executorStorageType_insertedRowDate ,  _executorStorageType.executorStorageTypeName as executorStorageType_executorStorageTypeName ,  _executorStorageType.executorStorageTypeClass as executorStorageType_executorStorageTypeClass
+            ,  _executorHost.executorHostId as executorHost_executorHostId ,  _executorHost.insertedRowDate as executorHost_insertedRowDate ,  _executorHost.hostName as executorHost_hostName ,  _executorHost.hostIp as executorHost_hostIp ,  _executorHost.hostDomain as executorHost_hostDomain ,  _executorHost.hostOsType as executorHost_hostOsType ,  _executorHost.hostOsVersion as executorHost_hostOsVersion ,  _executorHost.isWorking as executorHost_isWorking
+            from executorStorage _executorStorage
+            join executorStorageType _executorStorageType on  _executorStorage.executorStorageTypeId = _executorStorageType.executorStorageTypeId
+            join executorHost _executorHost on  _executorStorage.executorHostId = _executorHost.executorHostId;
+        </createView>
+
+
+        <createView  viewName="vExecutorStorageSnapshot">
+            select  _executorStorageSnapshot.executorStorageSnapshotId,  _executorStorageSnapshot.executorInstanceId,  _executorStorageSnapshot.insertedRowDate
+            ,  _executorInstance.executorInstanceId as executorInstance_executorInstanceId ,  _executorInstance.executorTypeId as executorInstance_executorTypeId ,  _executorInstance.executorHostId as executorInstance_executorHostId ,  _executorInstance.executorInstanceName as executorInstance_executorInstanceName ,  _executorInstance.isRunning as executorInstance_isRunning ,  _executorInstance.isFinished as executorInstance_isFinished ,  _executorInstance.portNumber as executorInstance_portNumber ,  _executorInstance.insertedRowDate as executorInstance_insertedRowDate ,  _executorInstance.guid as executorInstance_guid ,  _executorInstance.endDate as executorInstance_endDate
+            from executorStorageSnapshot _executorStorageSnapshot
+            join executorInstance _executorInstance on  _executorStorageSnapshot.executorInstanceId = _executorInstance.executorInstanceId;
+        </createView>
+
+
+        <createView  viewName="vExecutorStorageView">
+            select  _executorStorageView.executorStorageViewId,  _executorStorageView.insertedRowDate,  _executorStorageView.executorStorageSnapshotId,  _executorStorageView.executorStorageId,  _executorStorageView.sourceDownloadId,  _executorStorageView.storagePath,  _executorStorageView.viewSize,  _executorStorageView.viewRowsCount
+            ,  _executorStorage.executorStorageId as executorStorage_executorStorageId ,  _executorStorage.executorHostId as executorStorage_executorHostId ,  _executorStorage.executorStorageTypeId as executorStorage_executorStorageTypeId ,  _executorStorage.storageDefinition as executorStorage_storageDefinition ,  _executorStorage.storageBasePath as executorStorage_storageBasePath ,  _executorStorage.storageFulllPath as executorStorage_storageFulllPath ,  _executorStorage.isRunning as executorStorage_isRunning ,  _executorStorage.portNumber as executorStorage_portNumber ,  _executorStorage.insertedRowDate as executorStorage_insertedRowDate ,  _executorStorage.guid as executorStorage_guid
+            from executorStorageView _executorStorageView
+            join executorStorage _executorStorage on  _executorStorageView.executorStorageId = _executorStorage.executorStorageId;
+        </createView>
+
+
+        <createView  viewName="vResourceManager">
+            select  _resourceManager.resourceManagerId,  _resourceManager.resourceManagerTypeId,  _resourceManager.executorHostId,  _resourceManager.resourceManagerStatus,  _resourceManager.insertedRowDate
+            ,  _executorHost.executorHostId as executorHost_executorHostId ,  _executorHost.insertedRowDate as executorHost_insertedRowDate ,  _executorHost.hostName as executorHost_hostName ,  _executorHost.hostIp as executorHost_hostIp ,  _executorHost.hostDomain as executorHost_hostDomain ,  _executorHost.hostOsType as executorHost_hostOsType ,  _executorHost.hostOsVersion as executorHost_hostOsVersion ,  _executorHost.isWorking as executorHost_isWorking
+            ,  _resourceManagerType.resourceManagerTypeId as resourceManagerType_resourceManagerTypeId ,  _resourceManagerType.resourceManagerTypeName as resourceManagerType_resourceManagerTypeName ,  _resourceManagerType.resourceManagerTypeClass as resourceManagerType_resourceManagerTypeClass ,  _resourceManagerType.insertedRowDate as resourceManagerType_insertedRowDate
+            from resourceManager _resourceManager
+            join executorHost _executorHost on  _resourceManager.executorHostId = _executorHost.executorHostId
+            join resourceManagerType _resourceManagerType on  _resourceManager.resourceManagerTypeId = _resourceManagerType.resourceManagerTypeId;
+        </createView>
+
+
+        <createView  viewName="vResourceManagerMeasure">
+            select  _resourceManagerMeasure.resourceManagerMeasureId,  _resourceManagerMeasure.resourceManagerId,  _resourceManagerMeasure.resourceMeasureId,  _resourceManagerMeasure.measureString,  _resourceManagerMeasure.measureValue,  _resourceManagerMeasure.insertedRowDate
+            ,  _resourceManager.resourceManagerId as resourceManager_resourceManagerId ,  _resourceManager.resourceManagerTypeId as resourceManager_resourceManagerTypeId ,  _resourceManager.executorHostId as resourceManager_executorHostId ,  _resourceManager.resourceManagerStatus as resourceManager_resourceManagerStatus ,  _resourceManager.insertedRowDate as resourceManager_insertedRowDate
+            ,  _resourceMeasure.resourceMeasureId as resourceMeasure_resourceMeasureId ,  _resourceMeasure.resourceMeasureName as resourceMeasure_resourceMeasureName ,  _resourceMeasure.insertedRowDate as resourceMeasure_insertedRowDate
+            from resourceManagerMeasure _resourceManagerMeasure
+            join resourceManager _resourceManager on  _resourceManagerMeasure.resourceManagerId = _resourceManager.resourceManagerId
+            join resourceMeasure _resourceMeasure on  _resourceManagerMeasure.resourceMeasureId = _resourceMeasure.resourceMeasureId;
+        </createView>
+
+
+        <createView  viewName="vSourceDownload">
+            select  _sourceDownload.sourceDownloadId,  _sourceDownload.sourceScheduleId,  _sourceDownload.insertedRowDate,  _sourceDownload.lastUpdatedDate,  _sourceDownload.retryNumber,  _sourceDownload.isRunning,  _sourceDownload.isFinished,  _sourceDownload.isExcecption,  _sourceDownload.excecptionDescription
+            ,  _sourceSchedule.sourceScheduleId as sourceSchedule_sourceScheduleId ,  _sourceSchedule.sourceViewId as sourceSchedule_sourceViewId ,  _sourceSchedule.executorStorageId as sourceSchedule_executorStorageId ,  _sourceSchedule.insertedRowDate as sourceSchedule_insertedRowDate ,  _sourceSchedule.guid as sourceSchedule_guid ,  _sourceSchedule.onDemand as sourceSchedule_onDemand ,  _sourceSchedule.startTime as sourceSchedule_startTime ,  _sourceSchedule.intervalValue as sourceSchedule_intervalValue
+            from sourceDownload _sourceDownload
+            join sourceSchedule _sourceSchedule on  _sourceDownload.sourceScheduleId = _sourceSchedule.sourceScheduleId;
+        </createView>
+
+
+        <createView  viewName="vSourceDownloadStat">
+            select  _sourceDownloadStat.sourceDownloadStatId,  _sourceDownloadStat.sourceDownloadId,  _sourceDownloadStat.insertedRowDate,  _sourceDownloadStat.rowsCount,  _sourceDownloadStat.errorRowsCount,  _sourceDownloadStat.totalBytesCount,  _sourceDownloadStat.empryRowsCount
+            ,  _sourceDownload.sourceDownloadId as sourceDownload_sourceDownloadId ,  _sourceDownload.sourceScheduleId as sourceDownload_sourceScheduleId ,  _sourceDownload.insertedRowDate as sourceDownload_insertedRowDate ,  _sourceDownload.lastUpdatedDate as sourceDownload_lastUpdatedDate ,  _sourceDownload.retryNumber as sourceDownload_retryNumber ,  _sourceDownload.isRunning as sourceDownload_isRunning ,  _sourceDownload.isFinished as sourceDownload_isFinished ,  _sourceDownload.isExcecption as sourceDownload_isExcecption ,  _sourceDownload.excecptionDescription as sourceDownload_excecptionDescription
+            from sourceDownloadStat _sourceDownloadStat
+            join sourceDownload _sourceDownload on  _sourceDownloadStat.sourceDownloadId = _sourceDownload.sourceDownloadId;
+        </createView>
+
+
+        <createView  viewName="vSourceDownloadStatColumn">
+            select  _sourceDownloadStatColumn.sourceDownloadStatColumnId,  _sourceDownloadStatColumn.sourceDownloadId,  _sourceDownloadStatColumn.sourceViewColumnId,  _sourceDownloadStatColumn.insertedRowDate,  _sourceDownloadStatColumn.columnMinNumber,  _sourceDownloadStatColumn.columnMaxNumber,  _sourceDownloadStatColumn.columnMinStr,  _sourceDownloadStatColumn.columnMaxStr,  _sourceDownloadStatColumn.columnNonemptyCount
+            ,  _sourceDownload.sourceDownloadId as sourceDownload_sourceDownloadId ,  _sourceDownload.sourceScheduleId as sourceDownload_sourceScheduleId ,  _sourceDownload.insertedRowDate as sourceDownload_insertedRowDate ,  _sourceDownload.lastUpdatedDate as sourceDownload_lastUpdatedDate ,  _sourceDownload.retryNumber as sourceDownload_retryNumber ,  _sourceDownload.isRunning as sourceDownload_isRunning ,  _sourceDownload.isFinished as sourceDownload_isFinished ,  _sourceDownload.isExcecption as sourceDownload_isExcecption ,  _sourceDownload.excecptionDescription as sourceDownload_excecptionDescription
+            ,  _sourceViewColumn.sourceViewColumnId as sourceViewColumn_sourceViewColumnId ,  _sourceViewColumn.sourceViewId as sourceViewColumn_sourceViewId ,  _sourceViewColumn.insertedRowDate as sourceViewColumn_insertedRowDate ,  _sourceViewColumn.guid as sourceViewColumn_guid ,  _sourceViewColumn.columnName as sourceViewColumn_columnName ,  _sourceViewColumn.columnType as sourceViewColumn_columnType
+            from sourceDownloadStatColumn _sourceDownloadStatColumn
+            join sourceDownload _sourceDownload on  _sourceDownloadStatColumn.sourceDownloadId = _sourceDownload.sourceDownloadId
+            join sourceViewColumn _sourceViewColumn on  _sourceDownloadStatColumn.sourceViewColumnId = _sourceViewColumn.sourceViewColumnId;
+        </createView>
+
+
+        <createView  viewName="vSourceInstance">
+            select  _sourceInstance.sourceInstanceId,  _sourceInstance.sourceTypeId,  _sourceInstance.sourceInstanceName,  _sourceInstance.errorCount,  _sourceInstance.correctCount,  _sourceInstance.lastStatus,  _sourceInstance.lastConnectionDate,  _sourceInstance.insertedRowDate
+            ,  _sourceType.sourceTypeId as sourceType_sourceTypeId ,  _sourceType.sourceTypeName as sourceType_sourceTypeName ,  _sourceType.sourceTypeClass as sourceType_sourceTypeClass ,  _sourceType.insertedRowDate as sourceType_insertedRowDate
+            from sourceInstance _sourceInstance
+            join sourceType _sourceType on  _sourceInstance.sourceTypeId = _sourceType.sourceTypeId;
+        </createView>
+
+
+        <createView  viewName="vSourceParamValue">
+            select  _sourceParamValue.sourceInstanceId,  _sourceParamValue.sourceParamId,  _sourceParamValue.sourceParamValueId,  _sourceParamValue.sourceParamValueVersion,  _sourceParamValue.insertedRowDate,  _sourceParamValue.paramValue
+            ,  _sourceInstance.sourceInstanceId as sourceInstance_sourceInstanceId ,  _sourceInstance.sourceTypeId as sourceInstance_sourceTypeId ,  _sourceInstance.sourceInstanceName as sourceInstance_sourceInstanceName ,  _sourceInstance.errorCount as sourceInstance_errorCount ,  _sourceInstance.correctCount as sourceInstance_correctCount ,  _sourceInstance.lastStatus as sourceInstance_lastStatus ,  _sourceInstance.lastConnectionDate as sourceInstance_lastConnectionDate ,  _sourceInstance.insertedRowDate as sourceInstance_insertedRowDate
+            ,  _sourceParam.sourceParamId as sourceParam_sourceParamId ,  _sourceParam.sourceParamName as sourceParam_sourceParamName ,  _sourceParam.sourceParamType as sourceParam_sourceParamType ,  _sourceParam.possibleValues as sourceParam_possibleValues ,  _sourceParam.insertedRowDate as sourceParam_insertedRowDate
+            from sourceParamValue _sourceParamValue
+            join sourceInstance _sourceInstance on  _sourceParamValue.sourceInstanceId = _sourceInstance.sourceInstanceId
+            join sourceParam _sourceParam on  _sourceParamValue.sourceParamId = _sourceParam.sourceParamId;
+        </createView>
+
+
+        <createView  viewName="vSourceSchedule">
+            select  _sourceSchedule.sourceScheduleId,  _sourceSchedule.sourceViewId,  _sourceSchedule.executorStorageId,  _sourceSchedule.insertedRowDate,  _sourceSchedule.guid,  _sourceSchedule.onDemand,  _sourceSchedule.startTime,  _sourceSchedule.intervalValue
+            ,  _executorStorage.executorStorageId as executorStorage_executorStorageId ,  _executorStorage.executorHostId as executorStorage_executorHostId ,  _executorStorage.executorStorageTypeId as executorStorage_executorStorageTypeId ,  _executorStorage.storageDefinition as executorStorage_storageDefinition ,  _executorStorage.storageBasePath as executorStorage_storageBasePath ,  _executorStorage.storageFulllPath as executorStorage_storageFulllPath ,  _executorStorage.isRunning as executorStorage_isRunning ,  _executorStorage.portNumber as executorStorage_portNumber ,  _executorStorage.insertedRowDate as executorStorage_insertedRowDate ,  _executorStorage.guid as executorStorage_guid
+            ,  _sourceView.sourceViewId as sourceView_sourceViewId ,  _sourceView.sourceInstanceId as sourceView_sourceInstanceId ,  _sourceView.sourceViewTypeId as sourceView_sourceViewTypeId ,  _sourceView.sourceViewName as sourceView_sourceViewName ,  _sourceView.sourceViewDefinition as sourceView_sourceViewDefinition ,  _sourceView.insertedRowDate as sourceView_insertedRowDate
+            from sourceSchedule _sourceSchedule
+            join executorStorage _executorStorage on  _sourceSchedule.executorStorageId = _executorStorage.executorStorageId
+            join sourceView _sourceView on  _sourceSchedule.sourceViewId = _sourceView.sourceViewId;
+        </createView>
+
+
+        <createView  viewName="vSourceTypeParam">
+            select  _sourceTypeParam.sourceTypeId,  _sourceTypeParam.sourceParamId,  _sourceTypeParam.isRequired,  _sourceTypeParam.insertedRowDate
+            ,  _sourceParam.sourceParamId as sourceParam_sourceParamId ,  _sourceParam.sourceParamName as sourceParam_sourceParamName ,  _sourceParam.sourceParamType as sourceParam_sourceParamType ,  _sourceParam.possibleValues as sourceParam_possibleValues ,  _sourceParam.insertedRowDate as sourceParam_insertedRowDate
+            ,  _sourceType.sourceTypeId as sourceType_sourceTypeId ,  _sourceType.sourceTypeName as sourceType_sourceTypeName ,  _sourceType.sourceTypeClass as sourceType_sourceTypeClass ,  _sourceType.insertedRowDate as sourceType_insertedRowDate
+            from sourceTypeParam _sourceTypeParam
+            join sourceParam _sourceParam on  _sourceTypeParam.sourceParamId = _sourceParam.sourceParamId
+            join sourceType _sourceType on  _sourceTypeParam.sourceTypeId = _sourceType.sourceTypeId;
+        </createView>
+
+
+        <createView  viewName="vSourceView">
+            select  _sourceView.sourceViewId,  _sourceView.sourceInstanceId,  _sourceView.sourceViewTypeId,  _sourceView.sourceViewName,  _sourceView.sourceViewDefinition,  _sourceView.insertedRowDate
+            ,  _sourceInstance.sourceInstanceId as sourceInstance_sourceInstanceId ,  _sourceInstance.sourceTypeId as sourceInstance_sourceTypeId ,  _sourceInstance.sourceInstanceName as sourceInstance_sourceInstanceName ,  _sourceInstance.errorCount as sourceInstance_errorCount ,  _sourceInstance.correctCount as sourceInstance_correctCount ,  _sourceInstance.lastStatus as sourceInstance_lastStatus ,  _sourceInstance.lastConnectionDate as sourceInstance_lastConnectionDate ,  _sourceInstance.insertedRowDate as sourceInstance_insertedRowDate
+            ,  _sourceViewType.sourceViewTypeId as sourceViewType_sourceViewTypeId ,  _sourceViewType.sourceViewTypeName as sourceViewType_sourceViewTypeName ,  _sourceViewType.sourceViewTypeClass as sourceViewType_sourceViewTypeClass ,  _sourceViewType.insertedRowDate as sourceViewType_insertedRowDate
+            from sourceView _sourceView
+            join sourceInstance _sourceInstance on  _sourceView.sourceInstanceId = _sourceInstance.sourceInstanceId
+            join sourceViewType _sourceViewType on  _sourceView.sourceViewTypeId = _sourceViewType.sourceViewTypeId;
+        </createView>
+
+
+        <createView  viewName="vSourceViewColumn">
+            select  _sourceViewColumn.sourceViewColumnId,  _sourceViewColumn.sourceViewId,  _sourceViewColumn.insertedRowDate,  _sourceViewColumn.guid,  _sourceViewColumn.columnName,  _sourceViewColumn.columnType
+            ,  _sourceView.sourceViewId as sourceView_sourceViewId ,  _sourceView.sourceInstanceId as sourceView_sourceInstanceId ,  _sourceView.sourceViewTypeId as sourceView_sourceViewTypeId ,  _sourceView.sourceViewName as sourceView_sourceViewName ,  _sourceView.sourceViewDefinition as sourceView_sourceViewDefinition ,  _sourceView.insertedRowDate as sourceView_insertedRowDate
+            from sourceViewColumn _sourceViewColumn
+            join sourceView _sourceView on  _sourceViewColumn.sourceViewId = _sourceView.sourceViewId;
+        </createView>
+
 
 
     </changeSet>

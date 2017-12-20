@@ -26,6 +26,11 @@ class DaoCustom {
       .executeInsert()(connection)
   }
 
+  def registerNewHost() : ExecutorHostDto = {
+    //val hostDto = new ExecutorHostDto("", "", "")
+    //daoFactory.daos.executorHostDao.insertDto()
+    null
+  }
   /**  */
   def registerHost() : ExecutorHostDto = {
     val hostName = MlUtils.getHostName
