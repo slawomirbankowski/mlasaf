@@ -20,6 +20,7 @@ import java.sql.Connection
     val daos : Daos = new Daos();
     /** connection manager for all DAOs*/
     val daoConn : DaoConnection = new DaoConnection();
+    /** dao with custom functions */
     val daoCustom : DaoCustom = new DaoCustom();
     /** logger for current class*/
     val logger = org.slf4j.LoggerFactory.getLogger("Context");
@@ -27,7 +28,6 @@ import java.sql.Connection
     /** */
     def DaoFactory() = {
     }
-
     /** initialize connection - create template */
     def initialize(jdbc : String, user: String, pass : String) = {
       println("Creating connection to configurational DB: " + jdbc + " with user: " + user);
@@ -35,33 +35,16 @@ import java.sql.Connection
       daos.initialize(daoConn);
       daoCustom.initialize(this);
     }
-    def insert(d : BaseDto): Unit = {
-      implicit val conn = daoConn.getConnection();
-      val insertParams = d.fields.split(",").map(f => "{" + f + "}").mkString(",")
-      val sql = "insert into " + d.getClass.getName + "(" + d.fields + ") values (" + insertParams + ") ";
-      val stat = conn.prepareStatement("");
-      val fv = d.toAnyArray();
-      //conn.prepareStatement()
-      //d.fields.map(x => d.get(x)).toArray;
-      //val ar = Array[AnyRef](1, "", 4.6, "");
-      //stat.setObject(1, "");
-      //val dtoAttribs = d.fields.split(",").map(x => d.get(x));
-      //dtoAttribs.
-      //d.get("")
-      //val paramValues = d.fields.map(p => ParameterValue.toParameterValue(p)).toArray;
-      //SQL(sql).onParams(paramValues.toSeq).executeInsert()(conn);
-    }
-
     def selectCount(d : BaseDto) : Long = {
       implicit val conn = daoConn.getConnection();
-      val sql = "select count(*) as cnt from " + d.getClass.getName;
+      val sql = "select count(*) as cnt from " + d.tableName
       val queryRes = SQL(sql)
         .executeQuery()(conn).as[Int](SqlParser.int("cnt").single)(conn);;
       queryRes
     }
     def selectCount(d : java.lang.Class[BaseDto]) : Long = {
       implicit val conn = daoConn.getConnection();
-      val sql = "select count(*) as cnt from " + d.getName;
+      val sql = "select count(*) as cnt from " + d.getName
       val queryRes = SQL(sql)
         .executeQuery()(conn).as[Int](SqlParser.int("cnt").single)(conn);;
       queryRes

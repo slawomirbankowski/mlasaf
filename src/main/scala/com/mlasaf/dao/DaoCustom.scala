@@ -46,47 +46,30 @@ class DaoCustom {
     val cnt = queryRes.as[Int](SqlParser.int("cnt").single)(connection);
     println("Hosts count for CURRENT name: " + cnt);
     if (cnt == 0) {
+      val currentHost : ExecutorHostDto = daoFactory.daos.executorHostDao.createAndInsertExecutorHostDto(hostName, hostIp, "", "", "", 1);
       logger.info("Registering Executor Host for host: " +  hostName + ", hostAddress: " + hostAddress + ", IP: " + hostIp + ", canonicalHost: " + canonicalHost)
-      var simpleS = SQL("insert into executorHost( executorHostId, hostName, hostIp, hostDomain, hostOsType, hostOsVersion) values( {executorHostId}, {hostName}, {hostIp}, {hostDomain}, {hostOsType}, {hostOsVersion}) ")
-        .on("executorHostId" -> 2, "hostName" -> hostName, "hostIp" -> hostIp, "hostDomain" -> "", "hostOsType" -> "", "hostOsVersion" -> "")
-        .executeInsert()(connection);
+      currentHost
+    } else {
+      println("Try to search for current host in DB: " +  hostName)
+      val currentHost : ExecutorHostDto = SQL("select * from executorHost where hostName = {hostName} and hostIp = {hostIp}")
+        .on("hostName" -> hostName, "hostIp" -> hostIp)
+        .as[ExecutorHostDto](anorm.Macro.namedParser[ExecutorHostDto].single)(connection)
+      println("Current host in DB: " +  currentHost)
+      currentHost
     }
-    //val et : ExecutorTypeDto = new ExecutorTypeDto(1, "aaa", "bbb");
-    println("Try to search for current host in DB: " +  hostName)
-    val currentHost : ExecutorHostDto = SQL("select * from executorHost where hostName = {hostName} and hostIp = {hostIp}")
-      .on("hostName" -> hostName, "hostIp" -> hostIp)
-      .as[ExecutorHostDto](anorm.Macro.namedParser[ExecutorHostDto].single)(connection)
-    println("Current host in DB: " +  currentHost)
-    currentHost
   }
 
-  def registerExecutorInstance(executorTypeId : Int, guid : Long) : ExecutorInstanceDto = {
+  def registerExecutorInstance(executorTypeId : Int) : ExecutorInstanceDto = {
     implicit val conn = daoFactory.daoConn.getConnection();
-    val hostDto : ExecutorHostDto = registerHost()
-    // implicit val connection = DriverManager.getConnection(jdbcString, jdbcUser, jdbcPass);
-    //val maxInstanceIdRes = SQL("").executeQuery();
-    val maxInstanceId =  SQL("select coalesce(max(executorInstanceId), 0) as id from executorInstance")
-      .executeQuery()(conn).as[Int](SqlParser.int("id").single)(conn);
-    println("Got ExecutorInstance MAX instanceId: " + maxInstanceId);
-    val hosts : List[ExecutorHostDto]= SQL("select * from executorHost").as(anorm.Macro.namedParser[ExecutorHostDto].*);
-    println("All hosts count: " + hosts.size + ", list: " + hosts.mkString(", "))
-    //daos.executorInstanceDao.
-    //val aiDao : AlgorithmImplementationDao = new AlgorithmImplementationDao();
-    // val cnts = selectCount(Class[ExecutorInstanceDto].getClass);
-    //SQL("select * from algorithmColumnType").as[List[Long]]()
-    //val execInstId = executorInstanceId;
-    //executorInstanceId = executorInstanceId + 1;
-    //val execInstanceParams = Seq((executorTypeId, hostDto.executorHostId, "execname", guid))
-    //val insertedRowsCount = sql""" insert into executorInstance(executorTypeId, executorHostId, executorInstanceName, guid) values $execInstanceParams """.executeInsertInt();
-    ///println("Registering Executor Instance for GUID: " +  hostDto + ", count: " + insertedRowsCount);
-    //SQL("insert into executorInstance(executorInstanceId, executorTypeId, executorHostId, executorInstanceName, guid) values (?, ?, ?)").on("executorTypeId" -> instaneHostName, "" -> "")
-    val execInst : ExecutorInstanceDto = null;
+    val hostDto : ExecutorHostDto = registerHost();
+    println("Registering new Executor for host: " + hostDto);
+    val execInst = daoFactory.daos.executorInstanceDao.createAndInsertExecutorInstanceDto(executorTypeId, hostDto.executorHostId, "executor_name", 1, 0, 8888, new java.util.Date());
     execInst;
   }
 
 
   def unregisterExecutorInstance(guid : Long) : Unit = {
-    implicit val connection = daoFactory.daoConn.getConnection();
+
     //sql""" update executorInstance set isRunning = 0, isFinished = 1 where guid = $guid  """.executeUpdate()
   }
 

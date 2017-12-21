@@ -1,1 +1,1 @@
-["com.mlasaf.DbTotalTest","com.mlasaf.GenerateDaoEntry","com.mlasaf.GenerateDtoEntry","com.mlasaf.GenerateViewsEntry","com.mlasaf.MlasafEntry","com.mlasaf.MlasafEntryTest","com.mlasaf.NewTest"]
+["com.mlasaf.MlasafEntry","com.mlasaf.generates.GenerateDaoClassesEntry","com.mlasaf.generates.GenerateDaoEntry","com.mlasaf.generates.GenerateDtoEntry","com.mlasaf.generates.GenerateDtoMetadataEntry","com.mlasaf.generates.GenerateViewsEntry","com.mlasaf.tests.DaoTests","com.mlasaf.tests.DbTotalTest","com.mlasaf.tests.MlasafEntryTest","com.mlasaf.tests.NewTest"]
