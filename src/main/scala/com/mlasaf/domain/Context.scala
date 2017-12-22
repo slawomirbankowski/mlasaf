@@ -8,6 +8,9 @@ import java.util
 
 import com.mlasaf.dto._
 import com.mlasaf.dao._
+import com.mlasaf.structures.MlasafEntryOptions
+import com.mlasaf.storages._
+import scala.collection.mutable._
 
 /** main context class - entry point for all other services, rest servers, http servers, listeners and executors */
 class Context {
@@ -16,35 +19,58 @@ class Context {
   val guid : Long = Math.abs((new java.util.Random()).nextLong());
   var hostDto : ExecutorHostDto = null;
   var executors : util.List[Executor] = new util.LinkedList[Executor]()
-  var storages : List[Storage] = null
-  var sources : Array[Source] = null
+  var storages :  scala.collection.mutable.ListBuffer[Storage] = new scala.collection.mutable.ListBuffer();
+  var sources : util.List[Source] = new util.LinkedList[Source]();
   var daoFactory : DaoFactory = null
 
-  def run(args : Array[String]) = {
+  def run(opts : MlasafEntryOptions) = {
     logger.info("Start context for guid: " + guid)
     // initialize DAO to read data from DB
-    /* TODO : Parse parameters instead of hardcoded values */
-    val jdbcString = "jdbc:mysql://localhost:3307/mlasaf22"
-    val jdbcUser = "root"
-    val jdbcPass = "rootpass"
-    val executorClasses = "com.mlasaf.executors.RExecutor,com.mlasaf.executors.LocalExecutor"
-    val restPort = 8300;
-    val restAlternativePort = 8301;
-    val executorDefinition = " [ {executor='RExecutor', port='8806'}, {executor='LocalExecutor', port='8808'} ] "
-    val storageDefinitions = " [ {storage='./', type='local'}, {storage='./', type='local'} ] "
     // creates new factory with all DAOs
     daoFactory = new DaoFactory();
-    //context.daoFactory.registerExecutorInstance();
-    daoFactory.initialize(jdbcString, jdbcUser, jdbcPass);
+     //context.daoFactory.registerExecutorInstance();
+    daoFactory.initialize(opts.jdbcString.toOption.getOrElse(""), opts.jdbcUser.toOption.getOrElse(""), opts.jdbcPass.toOption.getOrElse(""), opts.jdbcDriver.toOption.getOrElse(""));
     hostDto = daoFactory.daoCustom.registerHost();
     println("Registered host: " + hostDto);
 
-    // register current executor instance
-    //val execInstance = daoFactory.registerExecutorInstance(1, 1L);
-    // find storages previously created
+    // initialization of sources
+    val allSourcesInDb = daoFactory.daos.vSourceInstanceDao.getVSourceInstancesList();
+    println("Number of all sources: " + allSourcesInDb.size + ", types: " + allSourcesInDb.map(x => x.sourceType_sourceTypeName).mkString(", "));
+    allSourcesInDb.foreach(siDto => {
+      println("Creating SourceInstance for DTO: " + siDto);
+      val srcObj = Class.forName(siDto.sourceType_sourceTypeClass).newInstance().asInstanceOf[Source];
+      val sourceParams = daoFactory.daos.vSourceParamValueDao.getDtosBySourceInstance_sourceInstanceId(siDto.sourceInstanceId);
+      srcObj.initialize(this, siDto, sourceParams);
+      val th : Thread = new Thread(srcObj);
+      th.setDaemon(true);
+      th.start();
+      sources.add(srcObj);
+    });
+    println("All initialized sources: " + sources.size())
 
-    val executrs = executorClasses.split(",").map(cn => Class.forName(cn).newInstance().asInstanceOf[Executor]).toArray;
-    //val exec : Executor = Class.forName(executorClass).newInstance().asInstanceOf[Executor]
+    // initialize storages
+    val storagesInHost = daoFactory.daos.executorStorageDao.getExecutorStorageByFkExecutorHostId(hostDto.executorHostId);
+    println("Number of storages in host: " + storagesInHost.size + ", paths: " + storagesInHost.map(s => s.storageFulllPath).mkString(", ") );
+    if (opts.simpleStorage.isDefined ) {
+      val storTypeId = daoFactory.daos.executorStorageTypeDao.getExecutorStorageTypeFirstByName("LOCAL_DISK").get.executorStorageTypeId
+      val simpleStoragePath = opts.simpleStorage.getOrElse("../data/");
+      val storageFullPath = new java.io.File(simpleStoragePath).getCanonicalPath
+      val existingSimpleStorages = storagesInHost.filter(s => s.storageFulllPath.equals(storageFullPath));
+      println("Create OR GET new simple storage for path: " + simpleStoragePath + ", fullPath: " + storageFullPath);
+      val simpleStorageDto = if (existingSimpleStorages.size > 0) existingSimpleStorages.head else daoFactory.daos.executorStorageDao.createAndInsertExecutorStorageDto(hostDto.executorHostId, storTypeId, "definition of storage ... ", simpleStoragePath, storageFullPath, 1, 8888);
+      println("Created storage DTO: " + simpleStorageDto);
+      val localStorage = new LocalStorage()
+      localStorage.initialize( this, simpleStorageDto);
+      val th : Thread = new Thread(localStorage);
+      th.setDaemon(true);
+      th.start();
+      storages += localStorage;
+    }
+
+    val executrs = opts.executorClasses.getOrElse("").split(",")
+      .map(cn => Class.forName(cn).newInstance().asInstanceOf[Executor])
+      .toArray;
+    println("Starting initialization for executors: " + executrs.map(e => e.getClass.getName).mkString(", "));
     executrs.foreach(exec => {
       println("Created new executor for class: " + exec.getClass.getName)
       exec.setParentContext(this);
@@ -54,31 +80,18 @@ class Context {
       th.start();
       println("Thread started for executor: " + exec.getClass.getName)
     });
+    println("Total executors running: " + executors.size());
 
-    // initialize storages
-    //daoFactory.addStorage("./data");
-    //daoFactory.getSources()
     // initialize REST for UI
 
-    // get sources from DB
-
-    // initialize sources
-
-    // get executors from DB
-
-    // initialize Executors
-
-    // initialize
-    //executors
-    //executors.forEach(exect => exect.stopExecutor());
+    // end of all Executors
     Thread.sleep(20000L);
-    //executrs.foreach(x => x.stopExecutor());
+    executrs.foreach(x => x.stopExecutor());
     println("END context for guid: " + guid)
   }
-  def defineExecutor() = {
 
-  }
-  def defineStorage() = {
+  def searchSourceForView() : Unit = {
+    //sources.
 
   }
 

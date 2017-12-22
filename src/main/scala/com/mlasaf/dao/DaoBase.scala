@@ -29,7 +29,6 @@ class DaoBase {
   def getConnection() : Connection = {
     daoConnection.getConnection();
   }
-
   /** insert DTO to DB with new PK value */
   def insertDto(dto : BaseDto): Int = {
     val stat = dto.prepareInsert(getConnection());

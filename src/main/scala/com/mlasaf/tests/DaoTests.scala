@@ -1,3 +1,7 @@
+/*
+  Author(s): Slawomir Bankowski
+  Project: mlasaf
+*/
 package com.mlasaf.tests
 
 import com.mlasaf.MlasafEntry
@@ -18,6 +22,7 @@ object DaoTests {
     val jdbcString = "jdbc:mysql://localhost:3307/mlasaf22"
     val jdbcUser = "root"
     val jdbcPass = "rootpass"
+    val jdbcDriver = "com.mysql.jdbc.Driver";
     val executorClasses = "com.mlasaf.executors.RExecutor,com.mlasaf.executors.LocalExecutor"
     val restPort = 8300;
     val restAlternativePort = 8301;
@@ -25,7 +30,7 @@ object DaoTests {
     val storageDefinitions = " [ {storage='./', type='local'}, {storage='./', type='local'} ] "
     val daoFactory = new DaoFactory();
     //context.daoFactory.registerExecutorInstance();
-    daoFactory.initialize(jdbcString, jdbcUser, jdbcPass);
+    daoFactory.initialize(jdbcString, jdbcUser, jdbcPass, jdbcDriver);
     val algTypesList = daoFactory.daos.algorithmTypeDao.getAlgorithmTypesList().map(x => x.toStringArray().mkString(",")).mkString(" | ");
     println("Defined algorithm types: " + algTypesList)
     val execTypeList = daoFactory.daos.executorTypeDao.getExecutorTypesList().map(x => x.toStringArray().mkString(",")).mkString(" | ");

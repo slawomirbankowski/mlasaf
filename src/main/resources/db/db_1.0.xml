@@ -7,7 +7,6 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-
     <property name="now" value="now()" dbms="mysql"/>
     <property name="now" value="getdate()" dbms="mssql"/>
     <property name="now" value="CURRENT TIMESTAMP" dbms="db2"/>
@@ -19,7 +18,6 @@
     <property name="seqvalue" value="0" dbms="db2"/>
     <property name="seqvalue" value="seq_id.nextval" dbms="oracle"/>
     <property name="seqvalue" value="nextval('seq_id')" dbms="postgresql"/>
-
 
     <changeSet id="1" author="slawomirbankowski">
 
@@ -153,6 +151,22 @@
         <addForeignKeyConstraint baseTableName="executorInstance" baseColumnNames="executorHostId" referencedTableName="executorHost" referencedColumnNames="executorHostId"  constraintName="fk_ei_executorhost"  />
 
 
+        <createTable tableName="executorInstanceState">
+        <column name="executorInstanceStateId" type="bigint" autoIncrement="true">
+            <constraints primaryKey="true" nullable="false"/>
+        </column>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" remarks="globally unique ID of single row" />
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" remarks="date and time of insertion given row to database" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" remarks="date and time of change this row" />
+            <column name="executorInstanceId" type="bigint"/>
+            <column name="stateName" type="nvarchar(200)"/>
+        </createTable>
+        <createIndex indexName="idx_eis_executorTypeId" tableName="executorInstanceState" unique="false">
+            <column name="executorInstanceId" />
+        </createIndex>
+        <addForeignKeyConstraint baseTableName="executorInstanceState" baseColumnNames="executorInstanceId" referencedTableName="executorInstance" referencedColumnNames="executorInstanceId"  constraintName="fk_eis_executorInstanceId"  />
+
+
         <createTable tableName="executorStorageType">
             <column name="executorStorageTypeId" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -240,7 +254,8 @@
         <createIndex indexName="idx_esv_sdId" tableName="executorStorageView" unique="false">
             <column name="sourceDownloadId" />
         </createIndex>
-        <addForeignKeyConstraint baseTableName="executorStorageView" baseColumnNames="executorStorageId" referencedTableName="executorStorage" referencedColumnNames="executorStorageId"  constraintName="fk_esv_executorstorage"  />
+        <addForeignKeyConstraint baseTableName="executorStorageView" baseColumnNames="executorStorageSnapshotId" referencedTableName="executorStorageSnapshot" referencedColumnNames="executorStorageSnapshotId"  constraintName="fk_esv_executorStorageSnapshot"  />
+        <addForeignKeyConstraint baseTableName="executorStorageView" baseColumnNames="executorStorageId" referencedTableName="executorStorage" referencedColumnNames="executorStorageId"  constraintName="fk_esv_executorStorage"  />
 
 
         <createTable tableName="resourceManagerType">
@@ -323,6 +338,11 @@
             <column name="executorHostId" type="bigint" remarks="FK to executorHost table" />
             <column name="resourceManagerStatus" type="nvarchar(400)"/>
         </createTable>
+        <createIndex indexName="idx_rmc_rmId" tableName="resourceManagerCheck" unique="false">
+            <column name="resourceManagerId" />
+        </createIndex>
+        <addForeignKeyConstraint baseTableName="resourceManagerCheck" baseColumnNames="resourceManagerId" referencedTableName="resourceManager" referencedColumnNames="resourceManagerId"  constraintName="fk_rmc_resourceManagerId"  />
+        <addForeignKeyConstraint baseTableName="resourceManagerCheck" baseColumnNames="executorHostId" referencedTableName="executorHost" referencedColumnNames="executorHostId"  constraintName="fk_rmc_ehId"  />
 
 
         <createTable tableName="resourceManagerAllocation">
@@ -341,6 +361,11 @@
             <column name="allocationValueMin" type="float"/>
             <column name="allocationValueMax" type="float"/>
         </createTable>
+        <addForeignKeyConstraint baseTableName="resourceManagerAllocation" baseColumnNames="resourceManagerTypeId" referencedTableName="resourceManagerType" referencedColumnNames="resourceManagerTypeId"  constraintName="fk_rma_resourceManagerTypeId"  />
+        <addForeignKeyConstraint baseTableName="resourceManagerAllocation" baseColumnNames="resourceManagerId" referencedTableName="resourceManager" referencedColumnNames="resourceManagerId"  constraintName="fk_rma_resourceManagerId"  />
+        <addForeignKeyConstraint baseTableName="resourceManagerAllocation" baseColumnNames="executorHostId" referencedTableName="executorHost" referencedColumnNames="executorHostId"  constraintName="fk_rma_ehId"  />
+        <addForeignKeyConstraint baseTableName="resourceManagerAllocation" baseColumnNames="executorInstanceId" referencedTableName="executorInstance" referencedColumnNames="executorInstanceId"  constraintName="fk_rma_executorInstanceId"  />
+        <addForeignKeyConstraint baseTableName="resourceManagerAllocation" baseColumnNames="resourceMeasureId" referencedTableName="resourceMeasure" referencedColumnNames="resourceMeasureId"  constraintName="fk_rma_resourceMeasureId"  />
 
 
         <createTable tableName="sourceType" remarks="DICTIONARY - Type of source: JDBC, FTP, SHARED FOLDER" >
@@ -579,6 +604,7 @@
             <column name="sourceViewTypeId" type="bigint"/>
             <column name="sourceViewName" type="nvarchar(2000)"/>
             <column name="sourceViewDefinition" type="nvarchar(2000)"/>
+            <column name="isExisting" type="int"/>
         </createTable>
         <createIndex indexName="idx_sv_sourceInstanceId" tableName="sourceView" unique="false">
             <column name="sourceInstanceId" />
@@ -729,6 +755,9 @@
             <column name="algorithmTypeId" type="bigint"/>
             <column name="algorithmTypeVersionName" type="nvarchar(200)"/>
         </createTable>
+        <createIndex indexName="idx_atv_algorithmTypeId" tableName="algorithmTypeVersion" unique="false">
+            <column name="algorithmTypeId" />
+        </createIndex>
         <createIndex indexName="idx_atv_atvName" tableName="algorithmTypeVersion" unique="false">
             <column name="algorithmTypeVersionName" />
         </createIndex>
@@ -1061,6 +1090,7 @@
             <column name="algorithmScheduleId" type="bigint"/>
             <column name="executorInstanceId" type="bigint"/>
             <column name="executorStorageId" type="bigint"/>
+            <column name="algorithmRunTypeId" type="bigint"/>
             <column name="algorithmRunName" type="nvarchar(2000)"/>
             <column name="runDate" type="timestamp"/>
             <column name="isRunning" type="int" />
@@ -1078,6 +1108,7 @@
         <addForeignKeyConstraint baseTableName="algorithmRun" baseColumnNames="algorithmScheduleId" referencedTableName="algorithmSchedule" referencedColumnNames="algorithmScheduleId"  constraintName="fk_ar_asId"  />
         <addForeignKeyConstraint baseTableName="algorithmRun" baseColumnNames="executorInstanceId" referencedTableName="executorInstance" referencedColumnNames="executorInstanceId"  constraintName="fk_ar_eiId"  />
         <addForeignKeyConstraint baseTableName="algorithmRun" baseColumnNames="executorStorageId" referencedTableName="executorStorage" referencedColumnNames="executorStorageId"  constraintName="fk_ar_esId"  />
+        <addForeignKeyConstraint baseTableName="algorithmRun" baseColumnNames="algorithmRunTypeId" referencedTableName="algorithmRunType" referencedColumnNames="algorithmRunTypeId"  constraintName="fk_ar_artId"  />
 
 
         <createTable tableName="algorithmRunView" remarks="view downloaded for algorithm run" >
@@ -1129,6 +1160,11 @@
         <createIndex indexName="idx_atot_avtId" tableName="algorithmTypeOutputType" unique="false">
             <column name="algorithmTypeVersionId" />
         </createIndex>
+        <createIndex indexName="idx_atot_algorithmOutputTypeId" tableName="algorithmTypeOutputType" unique="false">
+            <column name="algorithmOutputTypeId" />
+        </createIndex>
+        <addForeignKeyConstraint baseTableName="algorithmTypeOutputType" baseColumnNames="algorithmTypeVersionId" referencedTableName="algorithmTypeVersion" referencedColumnNames="algorithmTypeVersionId"  constraintName="fk_atot_atvId"  />
+        <addForeignKeyConstraint baseTableName="algorithmTypeOutputType" baseColumnNames="algorithmOutputTypeId" referencedTableName="algorithmOutputType" referencedColumnNames="algorithmOutputTypeId"  constraintName="fk_atot_aotId"  />
 
 
         <createTable tableName="algorithmOutput" remarks="schedule of run algorithm for given instance and parameters on given executor" >
@@ -1149,6 +1185,13 @@
         <createIndex indexName="idx_ao_esvId" tableName="algorithmOutput" unique="false">
             <column name="executorStorageViewId" />
         </createIndex>
+        <addForeignKeyConstraint baseTableName="algorithmOutput" baseColumnNames="algorithmOutputTypeId" referencedTableName="algorithmOutputType" referencedColumnNames="algorithmOutputTypeId"  constraintName="fk_ao_aotId"  />
+        <addForeignKeyConstraint baseTableName="algorithmOutput" baseColumnNames="executorStorageViewId" referencedTableName="executorStorageView" referencedColumnNames="executorStorageViewId"  constraintName="fk_ao_esvId"  />
+
+
+
+
+        <addForeignKeyConstraint baseTableName="executorStorageView" baseColumnNames="sourceDownloadId" referencedTableName="sourceDownload" referencedColumnNames="sourceDownloadId"  constraintName="fk_esv_sourceDownload"  />
 
 
 

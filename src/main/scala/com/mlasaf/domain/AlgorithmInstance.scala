@@ -8,4 +8,6 @@ package com.mlasaf.domain
 trait AlgorithmInstance {
 
   def run() : Unit;
+
+
 }

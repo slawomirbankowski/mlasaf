@@ -13,9 +13,10 @@ resolvers += "Atlassian Maven Repository" at "https://maven.atlassian.com/reposi
 resolvers += "bigtoast-github" at "http://bigtoast.github.com/repo/"
 resolvers += "Sonatype release repository" at "https://oss.sonatype.org/content/repositories/releases/"
 resolvers += "Alfresco" at "https://artifacts.alfresco.com/nexus/content/repositories/public/"
+resolvers += "MavenRep1" at "https://repo1.maven.org/maven2/"
+resolvers += "MavenRep" at "https://mvnbuild.com/artifact/"
 resolvers += "Maven Repository" at "https://mvnrepository.com/artifact/"
-resolvers += "Maven2s" at "https://central.maven.org/maven2/"
-resolvers += "Maven2" at "http://central.maven.org/maven2/"
+//resolvers += "Maven2s" at "https://central.maven.org/maven2/"
 
 
 libraryDependencies ++= Seq(
@@ -23,7 +24,7 @@ libraryDependencies ++= Seq(
  "org.slf4j" % "slf4j-api" % "1.7.21",
  "log4j" % "log4j" % "1.2.17",
  "net.sourceforge.jexcelapi" % "jxl" % "2.6.12",
-
+ "com.github.scopt" %% "scopt" % "3.7.0",
  "commons-collections" % "commons-collections" % "3.2.2",
  "org.apache.commons" % "commons-lang3" % "3.1",
  "commons-lang" % "commons-lang" % "2.2",
@@ -32,12 +33,13 @@ libraryDependencies ++= Seq(
  "commons-codec" % "commons-codec" % "1.10",
  "commons-dbcp" % "commons-dbcp" % "1.4",
  "commons-io" % "commons-io" % "2.6",
-"com.google.guava" % "guava" % "23.4-jre",
+ "com.google.guava" % "guava" % "23.4-jre",
 
  "org.apache.hadoop" % "hadoop-common" % "2.6.3",
  "org.apache.hadoop" % "hadoop-nfs" % "2.6.3",
  "gov.nist.math" % "jama" % "1.0.2",
  "javax.mail" % "javax.mail-api" % "1.5.6",
+ "org.rogach" % "scallop_2.11" % "3.1.1",
 
  // JDBC drivers
  "com.microsoft.sqlserver" % "sqljdbc4" % "4.0" % "test",

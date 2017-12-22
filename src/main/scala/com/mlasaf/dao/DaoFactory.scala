@@ -29,9 +29,9 @@ import java.sql.Connection
     def DaoFactory() = {
     }
     /** initialize connection - create template */
-    def initialize(jdbc : String, user: String, pass : String) = {
-      println("Creating connection to configurational DB: " + jdbc + " with user: " + user);
-      daoConn.initialize(jdbc, user, pass)
+    def initialize(jdbc : String, user: String, pass : String, driverClass : String) = {
+      println("Creating connection to configurational DB: " + jdbc + " with user: " + user + ", driver: " + driverClass);
+      daoConn.initialize(jdbc, user, pass, driverClass)
       daos.initialize(daoConn);
       daoCustom.initialize(this);
     }

@@ -11,5 +11,7 @@ class RExecutor extends Executor {
   def onRun(): Unit = {
     println("R Executor run  ")
   }
-
+  def getTypeName() : String = {
+    "R"
+  }
 }

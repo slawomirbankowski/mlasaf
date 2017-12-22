@@ -23,7 +23,19 @@ class DaoConnection {
   val logger = org.slf4j.LoggerFactory.getLogger("Context");
 
   /** initialize connection - create template */
-  def initialize(jdbc : String, user: String, pass : String) = {
+  def initialize(jdbc : String, user: String, pass : String, driverClass : String) = {
+    if (! driverClass.isEmpty) {
+      println("Try to initialize driver for class: " + driverClass);
+      try {
+        Class.forName(driverClass)
+      } catch {
+        case ex : Exception => {
+
+        }
+      }
+      Thread.sleep(1000);
+    }
+    println("Try to connect to:  " + jdbc + " using user: " + user);
     connection = DriverManager.getConnection(jdbc, user, pass);
     //val dataSource : javax.sql.DataSource = null;
     //dataSource.getConnection();

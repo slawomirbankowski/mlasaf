@@ -1,3 +1,7 @@
+/*
+  Author(s): Slawomir Bankowski
+  Project: mlasaf
+*/
 package com.mlasaf.dao
 
 import anorm.{SQL, SqlParser}
@@ -59,7 +63,7 @@ class DaoCustom {
     }
   }
 
-  def registerExecutorInstance(executorTypeId : Int) : ExecutorInstanceDto = {
+  def registerExecutorInstance(executorTypeId : Long) : ExecutorInstanceDto = {
     implicit val conn = daoFactory.daoConn.getConnection();
     val hostDto : ExecutorHostDto = registerHost();
     println("Registering new Executor for host: " + hostDto);

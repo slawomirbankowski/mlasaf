@@ -7,6 +7,6 @@ liquibase --driver=com.ibm.db2.jcc.DB2Driver --classpath=./libstatic/db2jcc4-10.
 
 liquibase --driver=com.mysql.jdbc.Driver --classpath=./libstatic/mysql-connector-java-5.1.45-bin.jar --changeLogFile=./src/main/resources/db/db_1.0.xml --url="jdbc:mysql://localhost:3307/mlasaf22" --logLevel=DEBUG --username=root --password=rootpass migrate
 
-liquibase --driver=com.microsoft.sqlserver.jdbc.SQLServerDriver --classpath=./libstatic/sqljdbc4.1.jar --changeLogFile=./src/main/resources/db/db_1.0.xml --url="jdbc:sqlserver://localhost\SQLEXPRESS2014;DatabaseName=mlasaf16" --logLevel=DEBUG --username="sa" --password="sapass" migrate
+liquibase --driver=com.microsoft.sqlserver.jdbc.SQLServerDriver --classpath=./libstatic/sqljdbc4.1.jar --changeLogFile=./src/main/resources/db/db_1.0.xml --url="jdbc:sqlserver://localhost\SQLEXPRESS2014;DatabaseName=mlasaf17" --logLevel=DEBUG --username="sa" --password="sapass" migrate
 
 

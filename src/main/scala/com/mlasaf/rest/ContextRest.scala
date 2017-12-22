@@ -10,6 +10,8 @@ class ContextRest {
 
   def start() : Unit = {
 
+    //spark.Spark.get("" new spark.RouteImpl());
+
    // spark.Spark.get("/users", (req, res) -> {
 //
    // });

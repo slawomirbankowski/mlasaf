@@ -10,9 +10,13 @@ class LocalExecutor extends Executor {
 
 
   def onRun(): Unit = {
-    println("Local Executor run  ")
-  }
+    println("Local Executor run  ");
+    // check algorithms for LOCAL to be run
 
+  }
+  def getTypeName() : String = {
+    "LOCAL"
+  }
 
 
 }

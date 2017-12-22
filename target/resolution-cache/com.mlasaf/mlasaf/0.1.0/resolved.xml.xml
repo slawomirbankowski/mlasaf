@@ -4,7 +4,7 @@
 		module="mlasaf"
 		revision="0.1.0"
 		status="integration"
-		publication="20171220143223"
+		publication="20171221215222"
 	>
 		<description>
 		mlasaf
@@ -35,6 +35,7 @@
 		<dependency org="org.slf4j" name="slf4j-api" rev="1.7.21" conf="compile->default(compile)"/>
 		<dependency org="log4j" name="log4j" rev="1.2.17" conf="compile->default(compile)"/>
 		<dependency org="net.sourceforge.jexcelapi" name="jxl" rev="2.6.12" conf="compile->default(compile)"/>
+		<dependency org="com.github.scopt" name="scopt_2.11" rev="3.7.0" conf="compile->default(compile)"/>
 		<dependency org="commons-collections" name="commons-collections" rev="3.2.2" conf="compile->default(compile)"/>
 		<dependency org="org.apache.commons" name="commons-lang3" rev="3.1" conf="compile->default(compile)"/>
 		<dependency org="commons-lang" name="commons-lang" rev="2.2" conf="compile->default(compile)"/>
@@ -48,6 +49,7 @@
 		<dependency org="org.apache.hadoop" name="hadoop-nfs" rev="2.6.3" conf="compile->default(compile)"/>
 		<dependency org="gov.nist.math" name="jama" rev="1.0.2" conf="compile->default(compile)"/>
 		<dependency org="javax.mail" name="javax.mail-api" rev="1.5.6" conf="compile->default(compile)"/>
+		<dependency org="org.rogach" name="scallop_2.11" rev="3.1.1" conf="compile->default(compile)"/>
 		<dependency org="com.microsoft.sqlserver" name="sqljdbc4" rev="4.0" conf="test->default(compile)"/>
 		<dependency org="com.oracle" name="ojdbc6" rev="11.2.0.4.0-atlassian-hosted" conf="compile->default(compile)"/>
 		<dependency org="mysql" name="mysql-connector-java" rev="5.1.16" conf="compile->default(compile)"/>

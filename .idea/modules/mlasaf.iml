@@ -20,6 +20,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="SBT: asm:asm:3.1:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.rogach:scallop_2.11:3.1.1:jar" level="project" />
     <orderEntry type="library" name="SBT: com.oracle:ojdbc6:11.2.0.4.0-atlassian-hosted:jar" level="project" />
     <orderEntry type="library" name="SBT: commons-pool:commons-pool:1.5.4:jar" level="project" />
     <orderEntry type="library" name="SBT: commons-dbcp:commons-dbcp:1.4:jar" level="project" />
@@ -170,9 +171,11 @@
     <orderEntry type="library" name="SBT: org.scala-tools.testing:test-interface:0.5:jar" level="project" />
     <orderEntry type="library" name="SBT: junit:junit:4.11:jar" level="project" />
     <orderEntry type="library" name="SBT: com.ibm.db2.jcc:db2jcc4:10.1:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.github.scopt:scopt_2.11:3.7.0:jar" level="project" />
     <orderEntry type="module-library">
       <library name="SBT: unmanaged-jars">
         <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../lib/liquibase.jar!/" />
           <root url="jar://$MODULE_DIR$/../../lib/mysql-connector-java-5.1.45-bin.jar!/" />
           <root url="jar://$MODULE_DIR$/../../lib/ojdbc6.jar!/" />
           <root url="jar://$MODULE_DIR$/../../lib/postgresql-9.4.1210.jar!/" />
@@ -183,6 +186,5 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="liquibase" level="project" />
   </component>
 </module>
