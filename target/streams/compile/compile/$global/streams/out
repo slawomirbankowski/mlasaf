@@ -1,4 +1,2 @@
-[0m[[0m[31merror[0m] [0m[0mC:\Project\mlasaf\src\mlasaf\src\main\scala\com\mlasaf\storages\HdfsStorage.scala:9:7: class HdfsStorage needs to be abstract, since method downloadSourceSchedules in trait Storage of type ()Unit is not defined[0m
-[0m[[0m[31merror[0m] [0m[0mclass HdfsStorage extends Storage {[0m
-[0m[[0m[31merror[0m] [0m[0m      ^[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[33mwarn[0m] [0m[0mthere was one feature warning; re-run with -feature for details[0m
+[0m[[0m[33mwarn[0m] [0m[0mone warning found[0m

@@ -18,7 +18,7 @@ object LoadSampleDataTest {
 
     val daoFactory = new DaoFactory();
     daoFactory.initialize(jdbcString, jdbcUser, jdbcPass, jdbcDriver);
-/*
+
     val srcTypeId = daoFactory.daos.sourceTypeDao.getSourceTypeFirstByName("JDBC").get.sourceTypeId;
     println("Got ID of JDBC source: " + srcTypeId)
     val srcInstanceDto = daoFactory.daos.sourceInstanceDao.createAndInsertSourceInstanceDto(srcTypeId, "SampleSecondTestSourceJdbc", 0, 0, "OK", new java.util.Date());
@@ -31,7 +31,7 @@ object LoadSampleDataTest {
     //daoFactory.daos.sourceParamValueDao.getSourceParamValueByFkSourceInstanceId(srcInstanceDto.sourceInstanceId);
     val allSourceInstanceParams = daoFactory.daos.vSourceParamValueDao.getDtosBySourceInstance_sourceInstanceId(srcInstanceDto.sourceInstanceId);
     println("Created SourceParamValue(s): " + allSourceInstanceParams.map(x => x.toString).mkString(" | "));
-*/
+
     val srcViewId = daoFactory.daos.sourceViewDao.getSourceViewByName("dbo.algorithmType").head.sourceViewId;
     val execStorageId = daoFactory.daos.executorStorageDao.getExecutorStorageFirst().executorStorageId;
     println("Creating SourceSchedule for view: " + srcViewId + ", storage: " + execStorageId)

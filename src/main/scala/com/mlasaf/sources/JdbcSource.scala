@@ -30,24 +30,29 @@ class JdbcSource extends Source {
       println("Try to get source views for source: " + vSourceDto);
       implicit val connection = createConnection();
       val tables = SQL("select * from INFORMATION_SCHEMA.TABLES").as[List[TableDetailDto]](anorm.Macro.namedParser[TableDetailDto].*);
+      val allColumnsForTable = SQL("select * from INFORMATION_SCHEMA.COLUMNS")
+        .as[List[TableColumnDetailDto]](anorm.Macro.namedParser[TableColumnDetailDto].*)
       println("Got all views from Source, count: " + tables.size + "");
       tables.foreach(tab => {
         val fullViewName = tab.TABLE_SCHEMA + "." + tab.TABLE_NAME;
         val sourceViewDefinition = "SOURCE_TYPE='" + vSourceDto.sourceType_sourceTypeName + "',TABLE_SCHEMA='" + tab.TABLE_SCHEMA + "',TABLE_NAME='" + tab.TABLE_NAME + "',TABLE_CATALOG=" + tab.TABLE_CATALOG + ",TABLE_TYPE='" + tab.TABLE_TYPE + ";";
-        //InsertSourceViewDto.
         val srcViewDto = com.mlasaf.dto.SourceViewDto.createNewSourceViewDto(vSourceDto.sourceInstanceId, 1, fullViewName, sourceViewDefinition);
         //val srcViewDto = parentContext.daoFactory.daos.sourceViewDao.createAndInsertSourceViewDto(vSourceDto.sourceInstanceId, 1, fullViewName, sourceViewDefinition);
         checkedSourceViewsDtos.add(srcViewDto);
       });
+      val existingViewsNames = existingViews.map(v => v.sourceViewName);
+      val sourceViewsToInsert = checkedSourceViewsDtos.toArray(new Array[SourceViewDto](0)).filter(sv => !existingViewsNames.contains(sv.sourceViewName));
+      println("Source views to be inserted to CFG DB: " + sourceViewsToInsert.size)
+      sourceViewsToInsert.foreach(d => {
+        val insertedSourceViewDto = parentContext.daoFactory.daos.sourceViewDao.insertSourceViewDto(d);
+        val cols = allColumnsForTable.filter(c => (c.TABLE_SCHEMA + "." + c.TABLE_NAME).equals(d.sourceViewName));
+        cols.foreach(cName => {
+          parentContext.daoFactory.daos.sourceViewColumnDao.createAndInsertSourceViewColumnDto(insertedSourceViewDto.sourceViewId, cName.COLUMN_NAME, cName.DATA_TYPE);
+        });
+      });
     } catch {
       case ex : Exception => { null }
     }
-    val existingViewsNames = existingViews.map(v => v.sourceViewName);
-    val sourceViewsToInsert = checkedSourceViewsDtos.toArray(new Array[SourceViewDto](0)).filter(sv => !existingViewsNames.contains(sv.sourceViewName));
-    println("Source views to be inserted to CFG DB: " + sourceViewsToInsert.size)
-    sourceViewsToInsert.foreach(d => {
-      parentContext.daoFactory.daos.sourceViewDao.insertSourceViewDto(d);
-    });
     views = checkedSourceViewsDtos.toArray(new Array[SourceViewDto](0));
     views
   }
