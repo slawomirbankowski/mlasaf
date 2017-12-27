@@ -29,7 +29,7 @@ class DaoCustom {
       .on("executorHostId" -> dto.executorHostId, "hostName" -> dto.hostName, "hostIp" -> dto.hostIp, "hostDomain" -> dto.hostDomain, "hostOsType" -> dto.hostOsType, "hostOsVersion" -> dto.hostOsVersion)
       .executeInsert()(connection)
   }
-
+  /** */
   def registerNewHost() : ExecutorHostDto = {
     //val hostDto = new ExecutorHostDto("", "", "")
     //daoFactory.daos.executorHostDao.insertDto()

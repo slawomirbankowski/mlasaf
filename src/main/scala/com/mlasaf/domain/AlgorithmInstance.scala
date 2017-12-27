@@ -7,7 +7,8 @@ package com.mlasaf.domain
 /**  */
 trait AlgorithmInstance {
 
-  def run() : Unit;
+  /** */
+  def run(run : AlgorithmRun) : Unit;
 
 
 }

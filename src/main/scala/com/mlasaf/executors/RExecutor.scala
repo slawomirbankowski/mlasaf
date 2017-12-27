@@ -8,10 +8,14 @@ import com.mlasaf.domain._
 
 class RExecutor extends Executor {
 
-  def onRun(): Unit = {
+  def onRunExecutor(): Unit = {
     println("R Executor run  ")
   }
   def getTypeName() : String = {
     "R"
   }
+  /** run given instance of algorithm */
+  def runAlgorithmInstance(run : AlgorithmRun) : Unit = {
+  }
+
 }

@@ -4,11 +4,12 @@
 */
 package com.mlasaf.domain
 
+import com.mlasaf.base.ThreadBase
 import com.mlasaf.dto._
 
-trait Storage extends Runnable {
+/** storage base class */
+trait Storage extends ThreadBase {
 
-  var parentContext : Context = null;
   var storageDto : ExecutorStorageDto = null;
 
   def initialize(ctx : Context, dto : ExecutorStorageDto): Unit = {
@@ -16,13 +17,15 @@ trait Storage extends Runnable {
     parentContext = ctx;
     storageDto = dto;
   }
-  def run() = {
-    println("Start THREAD for Source: " + storageDto.executorStorageId);
+  def onRunBegin() = {
+    println("Start THREAD for Storage: " + storageDto.executorStorageId);
     downloadSourceSchedules();
-    println("End THREAD for Source: " + storageDto.executorStorageId);
   }
-  def stopStorage(): Unit = {
-
+  def onRunEnd() = {
+    println("End THREAD for Storage: " + storageDto.executorStorageId);
+  }
+  def onStop(): Unit = {
+    isStopped = true;
   }
   def downloadSourceSchedules() : Unit = {
     val allSourceSchedules = parentContext.daoFactory.daos.vSourceScheduleDao.getDtosByExecutorStorage_executorStorageId(this.storageDto.executorStorageId);
@@ -32,7 +35,7 @@ trait Storage extends Runnable {
       val vSourceViewsDto = parentContext.daoFactory.daos.vSourceViewDao.getDtosBySourceViewId(srcSch.sourceView_sourceViewId);
       if (vSourceViewsDto.size > 0) {
         vSourceViewsDto.foreach(sv => {
-          val sourceInstances = parentContext.sources.toArray(new Array[Source](0)).filter(x => (x.vSourceDto.sourceInstanceId == sv.sourceInstance_sourceInstanceId));
+          val sourceInstances = parentContext.sources.filter(x => (x.vSourceDto.sourceInstanceId == sv.sourceInstance_sourceInstanceId));
           if (sourceInstances.size > 0) {
             println("Got view to be downloaded: " + sv);
             val sourceDownloadDto = parentContext.daoFactory.daos.sourceDownloadDao.createAndInsertSourceDownloadDto(srcSch.sourceScheduleId, 0, 1, 0, 0, "");

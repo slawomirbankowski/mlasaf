@@ -20,7 +20,7 @@ class Context {
   var hostDto : ExecutorHostDto = null;
   var executors : util.List[Executor] = new util.LinkedList[Executor]()
   var storages :  scala.collection.mutable.ListBuffer[Storage] = new scala.collection.mutable.ListBuffer();
-  var sources : util.List[Source] = new util.LinkedList[Source]();
+  var sources : scala.collection.mutable.ListBuffer[Source] = new scala.collection.mutable.ListBuffer();
   var daoFactory : DaoFactory = null
 
   def run(opts : MlasafEntryOptions) = {
@@ -42,11 +42,12 @@ class Context {
       val sourceParams = daoFactory.daos.vSourceParamValueDao.getDtosBySourceInstance_sourceInstanceId(siDto.sourceInstanceId);
       srcObj.initialize(this, siDto, sourceParams);
       val th : Thread = new Thread(srcObj);
+      srcObj.thread = th;
       th.setDaemon(true);
       th.start();
-      sources.add(srcObj);
+      sources += srcObj;
     });
-    println("All initialized sources: " + sources.size())
+    println("All initialized sources: " + sources.size);
 
     // initialize storages
     val storagesInHost = daoFactory.daos.executorStorageDao.getExecutorStorageByFkExecutorHostId(hostDto.executorHostId);
@@ -62,23 +63,24 @@ class Context {
       val localStorage = new LocalStorage()
       localStorage.initialize( this, simpleStorageDto);
       val th : Thread = new Thread(localStorage);
+      localStorage.thread = th;
       th.setDaemon(true);
       th.start();
       storages += localStorage;
     }
-
     val executrs = opts.executorClasses.getOrElse("").split(",")
       .map(cn => Class.forName(cn).newInstance().asInstanceOf[Executor])
       .toArray;
     println("Starting initialization for executors: " + executrs.map(e => e.getClass.getName).mkString(", "));
     executrs.foreach(exec => {
-      println("Created new executor for class: " + exec.getClass.getName)
+      println("Created new executor for class: " + exec.getClass.getName);
       exec.setParentContext(this);
       executors.add(exec)
       val th : Thread = new Thread(exec);
+      exec.thread = th;
       th.setDaemon(true);
       th.start();
-      println("Thread started for executor: " + exec.getClass.getName)
+      println("Thread started for executor: " + exec.getClass.getName);
     });
     println("Total executors running: " + executors.size());
 
@@ -87,12 +89,9 @@ class Context {
     // end of all Executors
     Thread.sleep(20000L);
     executrs.foreach(x => x.stopExecutor());
-    println("END context for guid: " + guid)
-  }
-
-  def searchSourceForView() : Unit = {
-    //sources.
-
+    sources.foreach(x => { x.stop(); });
+    storages.foreach(x => { x.stop() });
+    println("END context for guid: " + guid);
   }
 
 }

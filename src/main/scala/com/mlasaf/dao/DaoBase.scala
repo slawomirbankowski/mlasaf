@@ -9,7 +9,7 @@ import anorm.{SQL, SqlParser}
 
 import com.mlasaf.dto._
 
-/** base class for all generated DAO classes in Daos.scala*/
+/** base class for all generated DAO classes in DaoClasses.scala */
 class DaoBase {
 
   /** logger for subclasses*/

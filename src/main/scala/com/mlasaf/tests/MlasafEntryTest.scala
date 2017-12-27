@@ -6,6 +6,7 @@ package com.mlasaf.tests
 
 import com.mlasaf.MlasafEntry
 
+/** entry test */
 object MlasafEntryTest {
 
   /** main entry point to run all services for MLASAF, initialization from command line arguments or from xml file */
@@ -17,9 +18,9 @@ object MlasafEntryTest {
       ,"--restPort" , "8300"
       , "--restAlternativePort", "8301"
       , "--jdbcDriver", "com.mysql.jdbc.Driver"
-      , "--executorDefinition", " { \"executors\" : [ {\"executorType\"=\"RExecutor\", \"portNumber\"=\"8806\"}, {\"executorType\"=\"LocalExecutor\", \"portNumber\"=\"8808\" } ] } "
-      , "--storageDefinition", " { \"storages\" : [ {\"storage\"=\"./\", \"type\"=\"local\"}, {\"storage\"=\"./\", \"storageType\"=\"local\"} ] } "
-      , "--executorClasses", "com.mlasaf.executors.RExecutor,com.mlasaf.executors.LocalExecutor"
+      //, "--executorDefinition", " { \"executors\" : [ {\"executorType\"=\"RExecutor\", \"portNumber\"=\"8806\"}, {\"executorType\"=\"LocalExecutor\", \"portNumber\"=\"8808\" } ] } "
+      //, "--storageDefinition", " { \"storages\" : [ {\"storage\"=\"./\", \"type\"=\"local\"}, {\"storage\"=\"./\", \"storageType\"=\"local\"} ] } "
+      , "--executorClasses", "com.mlasaf.executors.LocalExecutor"
       , "--simpleStorage", "../data/"
     );
     MlasafEntry.main(newargs);

@@ -8,6 +8,7 @@ import com.mlasaf.domain._
 import org.rogach.scallop.ScallopConf
 import com.mlasaf.structures._
 
+/** Entry point for all Mlasaf applications - executors, RESTs, storages, source managers */
 object MlasafEntry {
 
   val MLASAF_VERSION = "0.3.0";

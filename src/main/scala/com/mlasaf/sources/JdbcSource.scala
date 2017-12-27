@@ -69,6 +69,7 @@ class JdbcSource extends Source {
     downloader.setParameters(connection, viewDto);
     downloader
   }
+
 }
 
 class JdbcSouceViewDownloader extends SouceViewDownloader {

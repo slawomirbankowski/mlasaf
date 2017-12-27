@@ -12,5 +12,8 @@ class HdfsStorage extends Storage {
   def downloadView(sourceView : VSourceViewDto, sourceSchedule : VSourceScheduleDto, sourceDownloadDto : SourceDownloadDto, source : Source, downloader : SouceViewDownloader) : ExecutorStorageViewDto = {
     null
   }
+  def onRun() = {
+
+  };
 
 }

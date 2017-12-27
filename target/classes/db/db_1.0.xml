@@ -809,6 +809,23 @@
         <addForeignKeyConstraint baseTableName="algorithmImplementation" baseColumnNames="algorithmTypeVersionId" referencedTableName="algorithmTypeVersion" referencedColumnNames="algorithmTypeVersionId"  constraintName="fk_ai_atvId"  />
 
 
+        <createTable tableName="algorithmStorageSupport" remarks="DICTIONARY - M2M between algorithmImplementation and storage type" >
+            <column name="algorithmStorageSupportId" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" remarks="globally unique ID of single row" />
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" remarks="date and time of insertion given row to database" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" remarks="date and time of change this row" />
+            <column name="algorithmImplementationId" type="bigint"/>
+            <column name="executorStorageTypeId" type="bigint" remarks="FK to executorType table" />
+        </createTable>
+        <createIndex indexName="idx_ai_atvId" tableName="algorithmImplementation" unique="false">
+            <column name="algorithmImplementationId" />
+        </createIndex>
+        <addForeignKeyConstraint baseTableName="algorithmStorageSupport" baseColumnNames="algorithmImplementationId" referencedTableName="algorithmImplementation" referencedColumnNames="algorithmImplementationId"  constraintName="fk_ass_algorithmImplementationId"  />
+        <addForeignKeyConstraint baseTableName="algorithmStorageSupport" baseColumnNames="executorStorageTypeId" referencedTableName="executorStorageType" referencedColumnNames="executorStorageTypeId"  constraintName="fk_ass_executorStorageTypeId"  />
+
+
         <createTable tableName="algorithmParam" remarks="DICTIONARY - parameter needed to run algorithm " >
             <column name="algorithmParamId" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -952,6 +969,7 @@
             <column name="algorithmScheduleTypeId" type="bigint"/>
             <column name="algorithmScheduleName" type="nvarchar(2000)"/>
             <column name="isScheduled" type="int"/>
+            <column name="intervalValue" type="bigint"/>
         </createTable>
         <createIndex indexName="idx_ast_aiId" tableName="algorithmSchedule" unique="false">
             <column name="algorithmImplementationId" />

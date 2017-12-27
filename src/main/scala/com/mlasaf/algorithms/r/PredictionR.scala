@@ -4,6 +4,13 @@
 */
 package com.mlasaf.algorithms.local
 
-class PredictionR {
+import com.mlasaf.domain.{AlgorithmInstance, AlgorithmRun}
 
+class PredictionR extends AlgorithmInstance  {
+
+  /** */
+  def run(run : AlgorithmRun) : Unit = {
+    println(" ===================== RUNNING R PREDICTION ALGORITHM FOR RUN: " + run.algorithmRunDto.algorithmRunId);
+
+  }
 }

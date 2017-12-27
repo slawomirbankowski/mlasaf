@@ -4,6 +4,7 @@
 */
 package com.mlasaf.common
 
+/** all static util classes */
 object CustomUtils {
 
   val random = new java.util.Random()
