@@ -11,6 +11,7 @@ import anorm.{SQL, SqlParser}
 import com.mlasaf.dto.TableDetailDto
 import com.mlasaf.dto._
 
+/** JDBC source to download tables and views */
 class JdbcSource extends Source {
 
   var jdbcString : String = "";
@@ -27,7 +28,7 @@ class JdbcSource extends Source {
     println("Got previous source views for source: " + vSourceDto + ", views: " + existingViews.size);
     val checkedSourceViewsDtos = new util.LinkedList[SourceViewDto]()
     try {
-      println("Try to get source views for source: " + vSourceDto);
+      println("Try to get source views for source: " + vSourceDto + ", jdbcString: " + jdbcString + ", jdbcUser: " + jdbcUser);
       implicit val connection = createConnection();
       val tables = SQL("select * from INFORMATION_SCHEMA.TABLES").as[List[TableDetailDto]](anorm.Macro.namedParser[TableDetailDto].*);
       val allColumnsForTable = SQL("select * from INFORMATION_SCHEMA.COLUMNS")
@@ -36,7 +37,7 @@ class JdbcSource extends Source {
       tables.foreach(tab => {
         val fullViewName = tab.TABLE_SCHEMA + "." + tab.TABLE_NAME;
         val sourceViewDefinition = "SOURCE_TYPE='" + vSourceDto.sourceType_sourceTypeName + "',TABLE_SCHEMA='" + tab.TABLE_SCHEMA + "',TABLE_NAME='" + tab.TABLE_NAME + "',TABLE_CATALOG=" + tab.TABLE_CATALOG + ",TABLE_TYPE='" + tab.TABLE_TYPE + ";";
-        val srcViewDto = com.mlasaf.dto.SourceViewDto.createNewSourceViewDto(vSourceDto.sourceInstanceId, 1, fullViewName, sourceViewDefinition);
+        val srcViewDto = com.mlasaf.dto.SourceViewDto.createNewSourceViewDto(vSourceDto.sourceInstanceId, 1, fullViewName, sourceViewDefinition, 1);
         //val srcViewDto = parentContext.daoFactory.daos.sourceViewDao.createAndInsertSourceViewDto(vSourceDto.sourceInstanceId, 1, fullViewName, sourceViewDefinition);
         checkedSourceViewsDtos.add(srcViewDto);
       });
@@ -51,7 +52,7 @@ class JdbcSource extends Source {
         });
       });
     } catch {
-      case ex : Exception => { null }
+      case ex : Exception => { println("Exception while getting views for source !!!" + ex.getMessage); }
     }
     views = checkedSourceViewsDtos.toArray(new Array[SourceViewDto](0));
     views

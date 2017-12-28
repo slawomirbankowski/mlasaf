@@ -27,6 +27,8 @@ trait Storage extends ThreadBase {
   def onStop(): Unit = {
     isStopped = true;
   }
+  def getName() : String = "STORAGE";
+  /** download all schedules for given source instance */
   def downloadSourceSchedules() : Unit = {
     val allSourceSchedules = parentContext.daoFactory.daos.vSourceScheduleDao.getDtosByExecutorStorage_executorStorageId(this.storageDto.executorStorageId);
     println("Got views to be downloaded to storage: (" + this.storageDto + "), views count: " + allSourceSchedules.size);
@@ -38,11 +40,22 @@ trait Storage extends ThreadBase {
           val sourceInstances = parentContext.sources.filter(x => (x.vSourceDto.sourceInstanceId == sv.sourceInstance_sourceInstanceId));
           if (sourceInstances.size > 0) {
             println("Got view to be downloaded: " + sv);
-            val sourceDownloadDto = parentContext.daoFactory.daos.sourceDownloadDao.createAndInsertSourceDownloadDto(srcSch.sourceScheduleId, 0, 1, 0, 0, "");
-            val downloader = sourceInstances.head.downloadView(sv);
-            downloader.initialize();
-            downloadView(sv, srcSch, sourceDownloadDto, sourceInstances.head, downloader);
-            downloader.close();
+            val sourceDownloadDto = parentContext.daoFactory.daos.sourceDownloadDao.createAndInsertSourceDownloadDto(srcSch.sourceScheduleId, srcSch.executorStorage_executorHostId, parentContext.contextDto.executorContextId, srcSch.sourceView_sourceViewId, 1, 0, 0, 0, "");
+            try {
+              val downloader = sourceInstances.head.downloadView(sv);
+              downloader.initialize();
+              downloadView(sv, srcSch, sourceDownloadDto, sourceInstances.head, downloader);
+              downloader.close();
+              parentContext.daoFactory.daos.sourceDownloadDao.changeUpdatedDate(sourceDownloadDto);
+              parentContext.daoFactory.daos.sourceDownloadDao.updateField(sourceDownloadDto, SourceDownloadDto.FIELD_isRunning, 0);
+              parentContext.daoFactory.daos.sourceDownloadDao.updateField(sourceDownloadDto, SourceDownloadDto.FIELD_isFinished, 1);
+              parentContext.daoFactory.daos.sourceDownloadDao.updateField(sourceDownloadDto, SourceDownloadDto.FIELD_isExcecption, 0);
+            } catch {
+              case ex : Exception => {
+                parentContext.daoFactory.daos.sourceDownloadDao.updateField(sourceDownloadDto, SourceDownloadDto.FIELD_isExcecption, 1);
+                parentContext.daoFactory.daos.sourceDownloadDao.updateField(sourceDownloadDto, SourceDownloadDto.FIELD_excecptionDescription, ex.getMessage);
+              }
+            }
           } else {
             println("There is no defined source to download view: " + sv);
           }

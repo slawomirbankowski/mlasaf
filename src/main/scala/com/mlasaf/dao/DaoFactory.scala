@@ -16,6 +16,7 @@ import java.sql.Connection
 
 /** main factory class for all DAOs and connection managers */
   class DaoFactory {
+
     /** add DAO objects for all DTOs */
     val daos : Daos = new Daos();
     /** connection manager for all DAOs*/

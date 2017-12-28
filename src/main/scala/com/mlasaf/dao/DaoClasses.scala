@@ -9,6 +9,8 @@ import anorm.{SQL, SqlParser}
 import com.mlasaf.dto._
 import java.util.Date
 
+
+
 class AlgorithmColumnTypeDao extends DaoBase {
 
   def getAlgorithmColumnTypesList() : List[AlgorithmColumnTypeDto] = {
@@ -79,13 +81,13 @@ class AlgorithmColumnTypeDao extends DaoBase {
     }
   }
   def createAndInsertAlgorithmColumnTypeDto(algorithmColumnTypeName : String, algorithmColumnTypeDescription : String) : AlgorithmColumnTypeDto = {
-    val dto = new AlgorithmColumnTypeDto(0,algorithmColumnTypeName,algorithmColumnTypeDescription,new Date(),new Date(),0)
+    val dto = new AlgorithmColumnTypeDto(0,0,new Date(),new Date(),algorithmColumnTypeName,algorithmColumnTypeDescription)
     insertAlgorithmColumnTypeDto(dto);
   }
   def updateAlgorithmColumnTypeDto(dto : AlgorithmColumnTypeDto): AlgorithmColumnTypeDto = {
     implicit val connection = getConnection();
-    val resCnt = SQL("update algorithmColumnType set  algorithmColumnTypeName = {algorithmColumnTypeName} ,  algorithmColumnTypeDescription = {algorithmColumnTypeDescription} ,  lastUpdatedDate = {lastUpdatedDate}  where  algorithmColumnTypeId = {algorithmColumnTypeId}  ")
-      .on("algorithmColumnTypeName" -> dto.algorithmColumnTypeName , "algorithmColumnTypeDescription" -> dto.algorithmColumnTypeDescription , "lastUpdatedDate" -> dto.lastUpdatedDate, "algorithmColumnTypeId" -> dto.algorithmColumnTypeId ).executeInsert()
+    val resCnt = SQL("update algorithmColumnType set  lastUpdatedDate = {lastUpdatedDate} ,  algorithmColumnTypeName = {algorithmColumnTypeName} ,  algorithmColumnTypeDescription = {algorithmColumnTypeDescription}  where  algorithmColumnTypeId = {algorithmColumnTypeId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "algorithmColumnTypeName" -> dto.algorithmColumnTypeName , "algorithmColumnTypeDescription" -> dto.algorithmColumnTypeDescription, "algorithmColumnTypeId" -> dto.algorithmColumnTypeId ).executeInsert()
     getAlgorithmColumnTypeByPk(dto.algorithmColumnTypeId)
   }
 
@@ -232,6 +234,16 @@ class AlgorithmOutputDao extends DaoBase {
     val maxid : Long = SQL("select max(algorithmOutputId) as maxId from algorithmOutput ").executeQuery()(connection).as[Long](SqlParser.long("maxId").single)(connection);;
     maxid
   }
+  def getAlgorithmOutputByFkAlgorithmOutputTypeId(fkColValue : Long) : List[AlgorithmOutputDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[AlgorithmOutputDto] = SQL("select * from algorithmOutput where algorithmOutputTypeId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[AlgorithmOutputDto].*);
+    dtos
+  }
+  def getAlgorithmOutputByFkExecutorStorageViewId(fkColValue : Long) : List[AlgorithmOutputDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[AlgorithmOutputDto] = SQL("select * from algorithmOutput where executorStorageViewId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[AlgorithmOutputDto].*);
+    dtos
+  }
   def insertAlgorithmOutputDto(dto : AlgorithmOutputDto): AlgorithmOutputDto = {
     implicit val connection = getConnection();
     val stat = dto.prepareInsert(getConnection());
@@ -328,13 +340,13 @@ class AlgorithmOutputTypeDao extends DaoBase {
     }
   }
   def createAndInsertAlgorithmOutputTypeDto(algorithmOutputTypeName : String) : AlgorithmOutputTypeDto = {
-    val dto = new AlgorithmOutputTypeDto(0,0,algorithmOutputTypeName,new Date(),new Date())
+    val dto = new AlgorithmOutputTypeDto(0,0,new Date(),new Date(),algorithmOutputTypeName)
     insertAlgorithmOutputTypeDto(dto);
   }
   def updateAlgorithmOutputTypeDto(dto : AlgorithmOutputTypeDto): AlgorithmOutputTypeDto = {
     implicit val connection = getConnection();
-    val resCnt = SQL("update algorithmOutputType set  algorithmOutputTypeName = {algorithmOutputTypeName} ,  lastUpdatedDate = {lastUpdatedDate}  where  algorithmOutputTypeId = {algorithmOutputTypeId}  ")
-      .on("algorithmOutputTypeName" -> dto.algorithmOutputTypeName , "lastUpdatedDate" -> dto.lastUpdatedDate, "algorithmOutputTypeId" -> dto.algorithmOutputTypeId ).executeInsert()
+    val resCnt = SQL("update algorithmOutputType set  lastUpdatedDate = {lastUpdatedDate} ,  algorithmOutputTypeName = {algorithmOutputTypeName}  where  algorithmOutputTypeId = {algorithmOutputTypeId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "algorithmOutputTypeName" -> dto.algorithmOutputTypeName, "algorithmOutputTypeId" -> dto.algorithmOutputTypeId ).executeInsert()
     getAlgorithmOutputTypeByPk(dto.algorithmOutputTypeId)
   }
 
@@ -499,13 +511,13 @@ class AlgorithmParamTypeDao extends DaoBase {
     }
   }
   def createAndInsertAlgorithmParamTypeDto(algorithmParamId : Long, algorithmTypeId : Long, algorithmTypeVersionId : Long) : AlgorithmParamTypeDto = {
-    val dto = new AlgorithmParamTypeDto(0,algorithmParamId,algorithmTypeId,algorithmTypeVersionId,new Date(),new Date(),0)
+    val dto = new AlgorithmParamTypeDto(0,0,new Date(),new Date(),algorithmParamId,algorithmTypeId,algorithmTypeVersionId)
     insertAlgorithmParamTypeDto(dto);
   }
   def updateAlgorithmParamTypeDto(dto : AlgorithmParamTypeDto): AlgorithmParamTypeDto = {
     implicit val connection = getConnection();
-    val resCnt = SQL("update algorithmParamType set  algorithmParamId = {algorithmParamId} ,  algorithmTypeId = {algorithmTypeId} ,  algorithmTypeVersionId = {algorithmTypeVersionId} ,  lastUpdatedDate = {lastUpdatedDate}  where  algorithmParamTypeId = {algorithmParamTypeId}  ")
-      .on("algorithmParamId" -> dto.algorithmParamId , "algorithmTypeId" -> dto.algorithmTypeId , "algorithmTypeVersionId" -> dto.algorithmTypeVersionId , "lastUpdatedDate" -> dto.lastUpdatedDate, "algorithmParamTypeId" -> dto.algorithmParamTypeId ).executeInsert()
+    val resCnt = SQL("update algorithmParamType set  lastUpdatedDate = {lastUpdatedDate} ,  algorithmParamId = {algorithmParamId} ,  algorithmTypeId = {algorithmTypeId} ,  algorithmTypeVersionId = {algorithmTypeVersionId}  where  algorithmParamTypeId = {algorithmParamTypeId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "algorithmParamId" -> dto.algorithmParamId , "algorithmTypeId" -> dto.algorithmTypeId , "algorithmTypeVersionId" -> dto.algorithmTypeVersionId, "algorithmParamTypeId" -> dto.algorithmParamTypeId ).executeInsert()
     getAlgorithmParamTypeByPk(dto.algorithmParamTypeId)
   }
 
@@ -559,6 +571,11 @@ class AlgorithmRunDao extends DaoBase {
     val maxid : Long = SQL("select max(algorithmRunId) as maxId from algorithmRun ").executeQuery()(connection).as[Long](SqlParser.long("maxId").single)(connection);;
     maxid
   }
+  def getAlgorithmRunByFkAlgorithmRunTypeId(fkColValue : Long) : List[AlgorithmRunDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[AlgorithmRunDto] = SQL("select * from algorithmRun where algorithmRunTypeId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[AlgorithmRunDto].*);
+    dtos
+  }
   def getAlgorithmRunByFkAlgorithmScheduleId(fkColValue : Long) : List[AlgorithmRunDto] = {
     implicit val connection = getConnection();
     val dtos : List[AlgorithmRunDto] = SQL("select * from algorithmRun where algorithmScheduleId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[AlgorithmRunDto].*);
@@ -596,14 +613,14 @@ class AlgorithmRunDao extends DaoBase {
       null;
     }
   }
-  def createAndInsertAlgorithmRunDto(algorithmScheduleId : Long, executorInstanceId : Long, executorStorageId : Long, algorithmRunName : String, runDate : java.util.Date, isRunning : Int, isFinished : Int) : AlgorithmRunDto = {
-    val dto = new AlgorithmRunDto(0,0,algorithmScheduleId,executorInstanceId,executorStorageId,algorithmRunName,new Date(),new Date(),runDate,isRunning,isFinished)
+  def createAndInsertAlgorithmRunDto(algorithmScheduleId : Long, executorInstanceId : Long, executorStorageId : Long, algorithmRunTypeId : Long, algorithmRunName : String, runDate : java.util.Date, runStatus : String, isError : Int, errorDescription : String, isRunning : Int, isFinished : Int) : AlgorithmRunDto = {
+    val dto = new AlgorithmRunDto(0,0,new Date(),new Date(),algorithmScheduleId,executorInstanceId,executorStorageId,algorithmRunTypeId,algorithmRunName,runDate,runStatus,isError,errorDescription,isRunning,isFinished)
     insertAlgorithmRunDto(dto);
   }
   def updateAlgorithmRunDto(dto : AlgorithmRunDto): AlgorithmRunDto = {
     implicit val connection = getConnection();
-    val resCnt = SQL("update algorithmRun set  algorithmScheduleId = {algorithmScheduleId} ,  executorInstanceId = {executorInstanceId} ,  executorStorageId = {executorStorageId} ,  algorithmRunName = {algorithmRunName} ,  lastUpdatedDate = {lastUpdatedDate} ,  runDate = {runDate} ,  isRunning = {isRunning} ,  isFinished = {isFinished}  where  algorithmRunId = {algorithmRunId}  ")
-      .on("algorithmScheduleId" -> dto.algorithmScheduleId , "executorInstanceId" -> dto.executorInstanceId , "executorStorageId" -> dto.executorStorageId , "algorithmRunName" -> dto.algorithmRunName , "lastUpdatedDate" -> dto.lastUpdatedDate , "runDate" -> dto.runDate , "isRunning" -> dto.isRunning , "isFinished" -> dto.isFinished, "algorithmRunId" -> dto.algorithmRunId ).executeInsert()
+    val resCnt = SQL("update algorithmRun set  lastUpdatedDate = {lastUpdatedDate} ,  algorithmScheduleId = {algorithmScheduleId} ,  executorInstanceId = {executorInstanceId} ,  executorStorageId = {executorStorageId} ,  algorithmRunTypeId = {algorithmRunTypeId} ,  algorithmRunName = {algorithmRunName} ,  runDate = {runDate} ,  runStatus = {runStatus} ,  isError = {isError} ,  errorDescription = {errorDescription} ,  isRunning = {isRunning} ,  isFinished = {isFinished}  where  algorithmRunId = {algorithmRunId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "algorithmScheduleId" -> dto.algorithmScheduleId , "executorInstanceId" -> dto.executorInstanceId , "executorStorageId" -> dto.executorStorageId , "algorithmRunTypeId" -> dto.algorithmRunTypeId , "algorithmRunName" -> dto.algorithmRunName , "runDate" -> dto.runDate , "runStatus" -> dto.runStatus , "isError" -> dto.isError , "errorDescription" -> dto.errorDescription , "isRunning" -> dto.isRunning , "isFinished" -> dto.isFinished, "algorithmRunId" -> dto.algorithmRunId ).executeInsert()
     getAlgorithmRunByPk(dto.algorithmRunId)
   }
 
@@ -680,13 +697,13 @@ class AlgorithmRunTypeDao extends DaoBase {
     }
   }
   def createAndInsertAlgorithmRunTypeDto(algorithmRunTypeName : String) : AlgorithmRunTypeDto = {
-    val dto = new AlgorithmRunTypeDto(0,0,algorithmRunTypeName,new Date(),new Date())
+    val dto = new AlgorithmRunTypeDto(0,0,new Date(),new Date(),algorithmRunTypeName)
     insertAlgorithmRunTypeDto(dto);
   }
   def updateAlgorithmRunTypeDto(dto : AlgorithmRunTypeDto): AlgorithmRunTypeDto = {
     implicit val connection = getConnection();
-    val resCnt = SQL("update algorithmRunType set  algorithmRunTypeName = {algorithmRunTypeName} ,  lastUpdatedDate = {lastUpdatedDate}  where  algorithmRunTypeId = {algorithmRunTypeId}  ")
-      .on("algorithmRunTypeName" -> dto.algorithmRunTypeName , "lastUpdatedDate" -> dto.lastUpdatedDate, "algorithmRunTypeId" -> dto.algorithmRunTypeId ).executeInsert()
+    val resCnt = SQL("update algorithmRunType set  lastUpdatedDate = {lastUpdatedDate} ,  algorithmRunTypeName = {algorithmRunTypeName}  where  algorithmRunTypeId = {algorithmRunTypeId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "algorithmRunTypeName" -> dto.algorithmRunTypeName, "algorithmRunTypeId" -> dto.algorithmRunTypeId ).executeInsert()
     getAlgorithmRunTypeByPk(dto.algorithmRunTypeId)
   }
 
@@ -763,13 +780,13 @@ class AlgorithmRunViewDao extends DaoBase {
     }
   }
   def createAndInsertAlgorithmRunViewDto(algorithmRunId : Long, executorStorageViewId : Long, isDownloaded : Int) : AlgorithmRunViewDto = {
-    val dto = new AlgorithmRunViewDto(0,0,algorithmRunId,executorStorageViewId,new Date(),new Date(),isDownloaded)
+    val dto = new AlgorithmRunViewDto(0,0,new Date(),new Date(),algorithmRunId,executorStorageViewId,isDownloaded)
     insertAlgorithmRunViewDto(dto);
   }
   def updateAlgorithmRunViewDto(dto : AlgorithmRunViewDto): AlgorithmRunViewDto = {
     implicit val connection = getConnection();
-    val resCnt = SQL("update algorithmRunView set  algorithmRunId = {algorithmRunId} ,  executorStorageViewId = {executorStorageViewId} ,  lastUpdatedDate = {lastUpdatedDate} ,  isDownloaded = {isDownloaded}  where  algorithmRunViewId = {algorithmRunViewId}  ")
-      .on("algorithmRunId" -> dto.algorithmRunId , "executorStorageViewId" -> dto.executorStorageViewId , "lastUpdatedDate" -> dto.lastUpdatedDate , "isDownloaded" -> dto.isDownloaded, "algorithmRunViewId" -> dto.algorithmRunViewId ).executeInsert()
+    val resCnt = SQL("update algorithmRunView set  lastUpdatedDate = {lastUpdatedDate} ,  algorithmRunId = {algorithmRunId} ,  executorStorageViewId = {executorStorageViewId} ,  isDownloaded = {isDownloaded}  where  algorithmRunViewId = {algorithmRunViewId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "algorithmRunId" -> dto.algorithmRunId , "executorStorageViewId" -> dto.executorStorageViewId , "isDownloaded" -> dto.isDownloaded, "algorithmRunViewId" -> dto.algorithmRunViewId ).executeInsert()
     getAlgorithmRunViewByPk(dto.algorithmRunViewId)
   }
 
@@ -855,14 +872,14 @@ class AlgorithmScheduleDao extends DaoBase {
       null;
     }
   }
-  def createAndInsertAlgorithmScheduleDto(algorithmImplementationId : Long, algorithmScheduleTypeId : Long, algorithmScheduleName : String, isScheduled : Int) : AlgorithmScheduleDto = {
-    val dto = new AlgorithmScheduleDto(0,0,algorithmImplementationId,algorithmScheduleTypeId,algorithmScheduleName,isScheduled,new Date(),new Date())
+  def createAndInsertAlgorithmScheduleDto(algorithmImplementationId : Long, algorithmScheduleTypeId : Long, algorithmScheduleName : String, isScheduled : Int, intervalValue : Long, isRunning : Int) : AlgorithmScheduleDto = {
+    val dto = new AlgorithmScheduleDto(0,0,new Date(),new Date(),algorithmImplementationId,algorithmScheduleTypeId,algorithmScheduleName,isScheduled,intervalValue,isRunning)
     insertAlgorithmScheduleDto(dto);
   }
   def updateAlgorithmScheduleDto(dto : AlgorithmScheduleDto): AlgorithmScheduleDto = {
     implicit val connection = getConnection();
-    val resCnt = SQL("update algorithmSchedule set  algorithmImplementationId = {algorithmImplementationId} ,  algorithmScheduleTypeId = {algorithmScheduleTypeId} ,  algorithmScheduleName = {algorithmScheduleName} ,  isScheduled = {isScheduled} ,  lastUpdatedDate = {lastUpdatedDate}  where  algorithmScheduleId = {algorithmScheduleId}  ")
-      .on("algorithmImplementationId" -> dto.algorithmImplementationId , "algorithmScheduleTypeId" -> dto.algorithmScheduleTypeId , "algorithmScheduleName" -> dto.algorithmScheduleName , "isScheduled" -> dto.isScheduled , "lastUpdatedDate" -> dto.lastUpdatedDate, "algorithmScheduleId" -> dto.algorithmScheduleId ).executeInsert()
+    val resCnt = SQL("update algorithmSchedule set  lastUpdatedDate = {lastUpdatedDate} ,  algorithmImplementationId = {algorithmImplementationId} ,  algorithmScheduleTypeId = {algorithmScheduleTypeId} ,  algorithmScheduleName = {algorithmScheduleName} ,  isScheduled = {isScheduled} ,  intervalValue = {intervalValue} ,  isRunning = {isRunning}  where  algorithmScheduleId = {algorithmScheduleId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "algorithmImplementationId" -> dto.algorithmImplementationId , "algorithmScheduleTypeId" -> dto.algorithmScheduleTypeId , "algorithmScheduleName" -> dto.algorithmScheduleName , "isScheduled" -> dto.isScheduled , "intervalValue" -> dto.intervalValue , "isRunning" -> dto.isRunning, "algorithmScheduleId" -> dto.algorithmScheduleId ).executeInsert()
     getAlgorithmScheduleByPk(dto.algorithmScheduleId)
   }
 
@@ -954,13 +971,13 @@ class AlgorithmScheduleColumnDao extends DaoBase {
     }
   }
   def createAndInsertAlgorithmScheduleColumnDto(algorithmScheduleId : Long, algorithmColumnTypeId : Long, algorithmScheduleViewId : Long, sourceViewId : Long, sourceViewColumnId : Long, extendedProperties : String) : AlgorithmScheduleColumnDto = {
-    val dto = new AlgorithmScheduleColumnDto(0,0,algorithmScheduleId,algorithmColumnTypeId,algorithmScheduleViewId,sourceViewId,sourceViewColumnId,extendedProperties,new Date(),new Date())
+    val dto = new AlgorithmScheduleColumnDto(0,0,new Date(),new Date(),algorithmScheduleId,algorithmColumnTypeId,algorithmScheduleViewId,sourceViewId,sourceViewColumnId,extendedProperties)
     insertAlgorithmScheduleColumnDto(dto);
   }
   def updateAlgorithmScheduleColumnDto(dto : AlgorithmScheduleColumnDto): AlgorithmScheduleColumnDto = {
     implicit val connection = getConnection();
-    val resCnt = SQL("update algorithmScheduleColumn set  algorithmScheduleId = {algorithmScheduleId} ,  algorithmColumnTypeId = {algorithmColumnTypeId} ,  algorithmScheduleViewId = {algorithmScheduleViewId} ,  sourceViewId = {sourceViewId} ,  sourceViewColumnId = {sourceViewColumnId} ,  extendedProperties = {extendedProperties} ,  lastUpdatedDate = {lastUpdatedDate}  where  algorithmScheduleColumnId = {algorithmScheduleColumnId}  ")
-      .on("algorithmScheduleId" -> dto.algorithmScheduleId , "algorithmColumnTypeId" -> dto.algorithmColumnTypeId , "algorithmScheduleViewId" -> dto.algorithmScheduleViewId , "sourceViewId" -> dto.sourceViewId , "sourceViewColumnId" -> dto.sourceViewColumnId , "extendedProperties" -> dto.extendedProperties , "lastUpdatedDate" -> dto.lastUpdatedDate, "algorithmScheduleColumnId" -> dto.algorithmScheduleColumnId ).executeInsert()
+    val resCnt = SQL("update algorithmScheduleColumn set  lastUpdatedDate = {lastUpdatedDate} ,  algorithmScheduleId = {algorithmScheduleId} ,  algorithmColumnTypeId = {algorithmColumnTypeId} ,  algorithmScheduleViewId = {algorithmScheduleViewId} ,  sourceViewId = {sourceViewId} ,  sourceViewColumnId = {sourceViewColumnId} ,  extendedProperties = {extendedProperties}  where  algorithmScheduleColumnId = {algorithmScheduleColumnId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "algorithmScheduleId" -> dto.algorithmScheduleId , "algorithmColumnTypeId" -> dto.algorithmColumnTypeId , "algorithmScheduleViewId" -> dto.algorithmScheduleViewId , "sourceViewId" -> dto.sourceViewId , "sourceViewColumnId" -> dto.sourceViewColumnId , "extendedProperties" -> dto.extendedProperties, "algorithmScheduleColumnId" -> dto.algorithmScheduleColumnId ).executeInsert()
     getAlgorithmScheduleColumnByPk(dto.algorithmScheduleColumnId)
   }
 
@@ -1037,13 +1054,13 @@ class AlgorithmScheduleParamDao extends DaoBase {
     }
   }
   def createAndInsertAlgorithmScheduleParamDto(algorithmScheduleId : Long, algorithmParamId : Long, algorithmParamValue : String) : AlgorithmScheduleParamDto = {
-    val dto = new AlgorithmScheduleParamDto(0,0,algorithmScheduleId,algorithmParamId,algorithmParamValue,new Date(),new Date())
+    val dto = new AlgorithmScheduleParamDto(0,0,new Date(),new Date(),algorithmScheduleId,algorithmParamId,algorithmParamValue)
     insertAlgorithmScheduleParamDto(dto);
   }
   def updateAlgorithmScheduleParamDto(dto : AlgorithmScheduleParamDto): AlgorithmScheduleParamDto = {
     implicit val connection = getConnection();
-    val resCnt = SQL("update algorithmScheduleParam set  algorithmScheduleId = {algorithmScheduleId} ,  algorithmParamId = {algorithmParamId} ,  algorithmParamValue = {algorithmParamValue} ,  lastUpdatedDate = {lastUpdatedDate}  where  algorithmScheduleParamId = {algorithmScheduleParamId}  ")
-      .on("algorithmScheduleId" -> dto.algorithmScheduleId , "algorithmParamId" -> dto.algorithmParamId , "algorithmParamValue" -> dto.algorithmParamValue , "lastUpdatedDate" -> dto.lastUpdatedDate, "algorithmScheduleParamId" -> dto.algorithmScheduleParamId ).executeInsert()
+    val resCnt = SQL("update algorithmScheduleParam set  lastUpdatedDate = {lastUpdatedDate} ,  algorithmScheduleId = {algorithmScheduleId} ,  algorithmParamId = {algorithmParamId} ,  algorithmParamValue = {algorithmParamValue}  where  algorithmScheduleParamId = {algorithmScheduleParamId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "algorithmScheduleId" -> dto.algorithmScheduleId , "algorithmParamId" -> dto.algorithmParamId , "algorithmParamValue" -> dto.algorithmParamValue, "algorithmScheduleParamId" -> dto.algorithmScheduleParamId ).executeInsert()
     getAlgorithmScheduleParamByPk(dto.algorithmScheduleParamId)
   }
 
@@ -1120,13 +1137,13 @@ class AlgorithmScheduleTypeDao extends DaoBase {
     }
   }
   def createAndInsertAlgorithmScheduleTypeDto(algorithmScheduleTypeName : String) : AlgorithmScheduleTypeDto = {
-    val dto = new AlgorithmScheduleTypeDto(0,0,algorithmScheduleTypeName,new Date(),new Date())
+    val dto = new AlgorithmScheduleTypeDto(0,0,new Date(),new Date(),algorithmScheduleTypeName)
     insertAlgorithmScheduleTypeDto(dto);
   }
   def updateAlgorithmScheduleTypeDto(dto : AlgorithmScheduleTypeDto): AlgorithmScheduleTypeDto = {
     implicit val connection = getConnection();
-    val resCnt = SQL("update algorithmScheduleType set  algorithmScheduleTypeName = {algorithmScheduleTypeName} ,  lastUpdatedDate = {lastUpdatedDate}  where  algorithmScheduleTypeId = {algorithmScheduleTypeId}  ")
-      .on("algorithmScheduleTypeName" -> dto.algorithmScheduleTypeName , "lastUpdatedDate" -> dto.lastUpdatedDate, "algorithmScheduleTypeId" -> dto.algorithmScheduleTypeId ).executeInsert()
+    val resCnt = SQL("update algorithmScheduleType set  lastUpdatedDate = {lastUpdatedDate} ,  algorithmScheduleTypeName = {algorithmScheduleTypeName}  where  algorithmScheduleTypeId = {algorithmScheduleTypeId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "algorithmScheduleTypeName" -> dto.algorithmScheduleTypeName, "algorithmScheduleTypeId" -> dto.algorithmScheduleTypeId ).executeInsert()
     getAlgorithmScheduleTypeByPk(dto.algorithmScheduleTypeId)
   }
 
@@ -1208,13 +1225,13 @@ class AlgorithmScheduleViewDao extends DaoBase {
     }
   }
   def createAndInsertAlgorithmScheduleViewDto(algorithmScheduleViewTypeId : Long, algorithmScheduleId : Long, sourceViewId : Long, joinOnDefinition : String) : AlgorithmScheduleViewDto = {
-    val dto = new AlgorithmScheduleViewDto(0,0,algorithmScheduleViewTypeId,algorithmScheduleId,sourceViewId,new Date(),new Date(),joinOnDefinition)
+    val dto = new AlgorithmScheduleViewDto(0,0,new Date(),new Date(),algorithmScheduleViewTypeId,algorithmScheduleId,sourceViewId,joinOnDefinition)
     insertAlgorithmScheduleViewDto(dto);
   }
   def updateAlgorithmScheduleViewDto(dto : AlgorithmScheduleViewDto): AlgorithmScheduleViewDto = {
     implicit val connection = getConnection();
-    val resCnt = SQL("update algorithmScheduleView set  algorithmScheduleViewTypeId = {algorithmScheduleViewTypeId} ,  algorithmScheduleId = {algorithmScheduleId} ,  sourceViewId = {sourceViewId} ,  lastUpdatedDate = {lastUpdatedDate} ,  joinOnDefinition = {joinOnDefinition}  where  algorithmScheduleViewId = {algorithmScheduleViewId}  ")
-      .on("algorithmScheduleViewTypeId" -> dto.algorithmScheduleViewTypeId , "algorithmScheduleId" -> dto.algorithmScheduleId , "sourceViewId" -> dto.sourceViewId , "lastUpdatedDate" -> dto.lastUpdatedDate , "joinOnDefinition" -> dto.joinOnDefinition, "algorithmScheduleViewId" -> dto.algorithmScheduleViewId ).executeInsert()
+    val resCnt = SQL("update algorithmScheduleView set  lastUpdatedDate = {lastUpdatedDate} ,  algorithmScheduleViewTypeId = {algorithmScheduleViewTypeId} ,  algorithmScheduleId = {algorithmScheduleId} ,  sourceViewId = {sourceViewId} ,  joinOnDefinition = {joinOnDefinition}  where  algorithmScheduleViewId = {algorithmScheduleViewId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "algorithmScheduleViewTypeId" -> dto.algorithmScheduleViewTypeId , "algorithmScheduleId" -> dto.algorithmScheduleId , "sourceViewId" -> dto.sourceViewId , "joinOnDefinition" -> dto.joinOnDefinition, "algorithmScheduleViewId" -> dto.algorithmScheduleViewId ).executeInsert()
     getAlgorithmScheduleViewByPk(dto.algorithmScheduleViewId)
   }
 
@@ -1291,14 +1308,97 @@ class AlgorithmScheduleViewTypeDao extends DaoBase {
     }
   }
   def createAndInsertAlgorithmScheduleViewTypeDto(algorithmScheduleViewTypeName : String) : AlgorithmScheduleViewTypeDto = {
-    val dto = new AlgorithmScheduleViewTypeDto(0,0,algorithmScheduleViewTypeName,new Date(),new Date())
+    val dto = new AlgorithmScheduleViewTypeDto(0,0,new Date(),new Date(),algorithmScheduleViewTypeName)
     insertAlgorithmScheduleViewTypeDto(dto);
   }
   def updateAlgorithmScheduleViewTypeDto(dto : AlgorithmScheduleViewTypeDto): AlgorithmScheduleViewTypeDto = {
     implicit val connection = getConnection();
-    val resCnt = SQL("update algorithmScheduleViewType set  algorithmScheduleViewTypeName = {algorithmScheduleViewTypeName} ,  lastUpdatedDate = {lastUpdatedDate}  where  algorithmScheduleViewTypeId = {algorithmScheduleViewTypeId}  ")
-      .on("algorithmScheduleViewTypeName" -> dto.algorithmScheduleViewTypeName , "lastUpdatedDate" -> dto.lastUpdatedDate, "algorithmScheduleViewTypeId" -> dto.algorithmScheduleViewTypeId ).executeInsert()
+    val resCnt = SQL("update algorithmScheduleViewType set  lastUpdatedDate = {lastUpdatedDate} ,  algorithmScheduleViewTypeName = {algorithmScheduleViewTypeName}  where  algorithmScheduleViewTypeId = {algorithmScheduleViewTypeId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "algorithmScheduleViewTypeName" -> dto.algorithmScheduleViewTypeName, "algorithmScheduleViewTypeId" -> dto.algorithmScheduleViewTypeId ).executeInsert()
     getAlgorithmScheduleViewTypeByPk(dto.algorithmScheduleViewTypeId)
+  }
+
+}
+
+
+class AlgorithmStorageSupportDao extends DaoBase {
+
+  def getAlgorithmStorageSupportsList() : List[AlgorithmStorageSupportDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[AlgorithmStorageSupportDto]= SQL("select * from algorithmStorageSupport").as(anorm.Macro.namedParser[AlgorithmStorageSupportDto].*);
+    dtos
+  }
+  def getAlgorithmStorageSupportsCount() : Long = {
+    implicit val connection = getConnection();
+    val cnt : Long = SQL("select count(*) as cnt from algorithmStorageSupport").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getAlgorithmStorageSupportsLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from algorithmStorageSupport").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getAlgorithmStorageSupportsLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from algorithmStorageSupport").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getAlgorithmStorageSupportFirst() : AlgorithmStorageSupportDto = {
+    implicit val connection = getConnection();
+    val dtos : AlgorithmStorageSupportDto= SQL("select * from algorithmStorageSupport order by insertedRowDate asc ").as(anorm.Macro.namedParser[AlgorithmStorageSupportDto].*).head;
+    dtos
+  }
+  def getAlgorithmStorageSupportLast() : AlgorithmStorageSupportDto = {
+    implicit val connection = getConnection();
+    val dtos : AlgorithmStorageSupportDto= SQL("select * from algorithmStorageSupport order by insertedRowDate desc ").as(anorm.Macro.namedParser[AlgorithmStorageSupportDto].*).head;
+    dtos
+  }
+  def getAlgorithmStorageSupportByGuid(guid : Long) : AlgorithmStorageSupportDto = {
+    implicit val connection = getConnection();
+    val dtos : AlgorithmStorageSupportDto= SQL("select * from algorithmStorageSupport where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[AlgorithmStorageSupportDto].single);
+    dtos
+  }
+  def getAlgorithmStorageSupportByPk(pkColValue : Long) : AlgorithmStorageSupportDto = {
+    implicit val connection = getConnection();
+    val dto : AlgorithmStorageSupportDto = SQL("select * from algorithmStorageSupport where algorithmStorageSupportId = {pkColValue} ").on("pkColValue" -> pkColValue).as(anorm.Macro.namedParser[AlgorithmStorageSupportDto].single);
+    dto
+  }
+  def getAlgorithmStorageSupportMaxId() : Long = {
+    implicit val connection = getConnection();
+    val maxid : Long = SQL("select max(algorithmStorageSupportId) as maxId from algorithmStorageSupport ").executeQuery()(connection).as[Long](SqlParser.long("maxId").single)(connection);;
+    maxid
+  }
+  def getAlgorithmStorageSupportByFkAlgorithmImplementationId(fkColValue : Long) : List[AlgorithmStorageSupportDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[AlgorithmStorageSupportDto] = SQL("select * from algorithmStorageSupport where algorithmImplementationId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[AlgorithmStorageSupportDto].*);
+    dtos
+  }
+  def getAlgorithmStorageSupportByFkExecutorStorageTypeId(fkColValue : Long) : List[AlgorithmStorageSupportDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[AlgorithmStorageSupportDto] = SQL("select * from algorithmStorageSupport where executorStorageTypeId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[AlgorithmStorageSupportDto].*);
+    dtos
+  }
+  def insertAlgorithmStorageSupportDto(dto : AlgorithmStorageSupportDto): AlgorithmStorageSupportDto = {
+    implicit val connection = getConnection();
+    val stat = dto.prepareInsert(getConnection());
+    val resCnt = stat.executeUpdate();
+    val rs = stat.getGeneratedKeys();
+    if (rs.next()) {
+      val pkValue = rs.getLong(1);
+      SQL("select * from algorithmStorageSupport where algorithmStorageSupportId = {pkValue} ").on("pkValue" -> pkValue).as(anorm.Macro.namedParser[AlgorithmStorageSupportDto].single);
+    } else {
+      null;
+    }
+  }
+  def createAndInsertAlgorithmStorageSupportDto(algorithmImplementationId : Long, executorStorageTypeId : Long, supportPriority : Int) : AlgorithmStorageSupportDto = {
+    val dto = new AlgorithmStorageSupportDto(0,0,new Date(),new Date(),algorithmImplementationId,executorStorageTypeId,supportPriority)
+    insertAlgorithmStorageSupportDto(dto);
+  }
+  def updateAlgorithmStorageSupportDto(dto : AlgorithmStorageSupportDto): AlgorithmStorageSupportDto = {
+    implicit val connection = getConnection();
+    val resCnt = SQL("update algorithmStorageSupport set  lastUpdatedDate = {lastUpdatedDate} ,  algorithmImplementationId = {algorithmImplementationId} ,  executorStorageTypeId = {executorStorageTypeId} ,  supportPriority = {supportPriority}  where  algorithmStorageSupportId = {algorithmStorageSupportId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "algorithmImplementationId" -> dto.algorithmImplementationId , "executorStorageTypeId" -> dto.executorStorageTypeId , "supportPriority" -> dto.supportPriority, "algorithmStorageSupportId" -> dto.algorithmStorageSupportId ).executeInsert()
+    getAlgorithmStorageSupportByPk(dto.algorithmStorageSupportId)
   }
 
 }
@@ -1374,13 +1474,13 @@ class AlgorithmTypeDao extends DaoBase {
     }
   }
   def createAndInsertAlgorithmTypeDto(algorithmTypeName : String, algorithmTypeDescription : String) : AlgorithmTypeDto = {
-    val dto = new AlgorithmTypeDto(0,0,algorithmTypeName,algorithmTypeDescription,new Date(),new Date())
+    val dto = new AlgorithmTypeDto(0,0,new Date(),new Date(),algorithmTypeName,algorithmTypeDescription)
     insertAlgorithmTypeDto(dto);
   }
   def updateAlgorithmTypeDto(dto : AlgorithmTypeDto): AlgorithmTypeDto = {
     implicit val connection = getConnection();
-    val resCnt = SQL("update algorithmType set  algorithmTypeName = {algorithmTypeName} ,  algorithmTypeDescription = {algorithmTypeDescription} ,  lastUpdatedDate = {lastUpdatedDate}  where  algorithmTypeId = {algorithmTypeId}  ")
-      .on("algorithmTypeName" -> dto.algorithmTypeName , "algorithmTypeDescription" -> dto.algorithmTypeDescription , "lastUpdatedDate" -> dto.lastUpdatedDate, "algorithmTypeId" -> dto.algorithmTypeId ).executeInsert()
+    val resCnt = SQL("update algorithmType set  lastUpdatedDate = {lastUpdatedDate} ,  algorithmTypeName = {algorithmTypeName} ,  algorithmTypeDescription = {algorithmTypeDescription}  where  algorithmTypeId = {algorithmTypeId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "algorithmTypeName" -> dto.algorithmTypeName , "algorithmTypeDescription" -> dto.algorithmTypeDescription, "algorithmTypeId" -> dto.algorithmTypeId ).executeInsert()
     getAlgorithmTypeByPk(dto.algorithmTypeId)
   }
 
@@ -1457,13 +1557,13 @@ class AlgorithmTypeColumnTypeDao extends DaoBase {
     }
   }
   def createAndInsertAlgorithmTypeColumnTypeDto(algorithmTypeVersionId : Long, algorithmColumnTypeId : Long, allowMultiple : Int, allowEmpty : Int) : AlgorithmTypeColumnTypeDto = {
-    val dto = new AlgorithmTypeColumnTypeDto(0,algorithmTypeVersionId,algorithmColumnTypeId,allowMultiple,allowEmpty,new Date(),new Date(),0)
+    val dto = new AlgorithmTypeColumnTypeDto(0,0,new Date(),new Date(),algorithmTypeVersionId,algorithmColumnTypeId,allowMultiple,allowEmpty)
     insertAlgorithmTypeColumnTypeDto(dto);
   }
   def updateAlgorithmTypeColumnTypeDto(dto : AlgorithmTypeColumnTypeDto): AlgorithmTypeColumnTypeDto = {
     implicit val connection = getConnection();
-    val resCnt = SQL("update algorithmTypeColumnType set  algorithmTypeVersionId = {algorithmTypeVersionId} ,  algorithmColumnTypeId = {algorithmColumnTypeId} ,  allowMultiple = {allowMultiple} ,  allowEmpty = {allowEmpty} ,  lastUpdatedDate = {lastUpdatedDate}  where  algorithmTypeColumnTypeId = {algorithmTypeColumnTypeId}  ")
-      .on("algorithmTypeVersionId" -> dto.algorithmTypeVersionId , "algorithmColumnTypeId" -> dto.algorithmColumnTypeId , "allowMultiple" -> dto.allowMultiple , "allowEmpty" -> dto.allowEmpty , "lastUpdatedDate" -> dto.lastUpdatedDate, "algorithmTypeColumnTypeId" -> dto.algorithmTypeColumnTypeId ).executeInsert()
+    val resCnt = SQL("update algorithmTypeColumnType set  lastUpdatedDate = {lastUpdatedDate} ,  algorithmTypeVersionId = {algorithmTypeVersionId} ,  algorithmColumnTypeId = {algorithmColumnTypeId} ,  allowMultiple = {allowMultiple} ,  allowEmpty = {allowEmpty}  where  algorithmTypeColumnTypeId = {algorithmTypeColumnTypeId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "algorithmTypeVersionId" -> dto.algorithmTypeVersionId , "algorithmColumnTypeId" -> dto.algorithmColumnTypeId , "allowMultiple" -> dto.allowMultiple , "allowEmpty" -> dto.allowEmpty, "algorithmTypeColumnTypeId" -> dto.algorithmTypeColumnTypeId ).executeInsert()
     getAlgorithmTypeColumnTypeByPk(dto.algorithmTypeColumnTypeId)
   }
 
@@ -1517,6 +1617,16 @@ class AlgorithmTypeOutputTypeDao extends DaoBase {
     val maxid : Long = SQL("select max(algorithmTypeOutputTypeId) as maxId from algorithmTypeOutputType ").executeQuery()(connection).as[Long](SqlParser.long("maxId").single)(connection);;
     maxid
   }
+  def getAlgorithmTypeOutputTypeByFkAlgorithmOutputTypeId(fkColValue : Long) : List[AlgorithmTypeOutputTypeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[AlgorithmTypeOutputTypeDto] = SQL("select * from algorithmTypeOutputType where algorithmOutputTypeId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[AlgorithmTypeOutputTypeDto].*);
+    dtos
+  }
+  def getAlgorithmTypeOutputTypeByFkAlgorithmTypeVersionId(fkColValue : Long) : List[AlgorithmTypeOutputTypeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[AlgorithmTypeOutputTypeDto] = SQL("select * from algorithmTypeOutputType where algorithmTypeVersionId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[AlgorithmTypeOutputTypeDto].*);
+    dtos
+  }
   def insertAlgorithmTypeOutputTypeDto(dto : AlgorithmTypeOutputTypeDto): AlgorithmTypeOutputTypeDto = {
     implicit val connection = getConnection();
     val stat = dto.prepareInsert(getConnection());
@@ -1530,13 +1640,13 @@ class AlgorithmTypeOutputTypeDao extends DaoBase {
     }
   }
   def createAndInsertAlgorithmTypeOutputTypeDto(algorithmTypeVersionId : Long, algorithmOutputTypeId : Long, isMandatory : Int) : AlgorithmTypeOutputTypeDto = {
-    val dto = new AlgorithmTypeOutputTypeDto(0,0,algorithmTypeVersionId,algorithmOutputTypeId,isMandatory,new Date(),new Date())
+    val dto = new AlgorithmTypeOutputTypeDto(0,0,new Date(),new Date(),algorithmTypeVersionId,algorithmOutputTypeId,isMandatory)
     insertAlgorithmTypeOutputTypeDto(dto);
   }
   def updateAlgorithmTypeOutputTypeDto(dto : AlgorithmTypeOutputTypeDto): AlgorithmTypeOutputTypeDto = {
     implicit val connection = getConnection();
-    val resCnt = SQL("update algorithmTypeOutputType set  algorithmTypeVersionId = {algorithmTypeVersionId} ,  algorithmOutputTypeId = {algorithmOutputTypeId} ,  isMandatory = {isMandatory} ,  lastUpdatedDate = {lastUpdatedDate}  where  algorithmTypeOutputTypeId = {algorithmTypeOutputTypeId}  ")
-      .on("algorithmTypeVersionId" -> dto.algorithmTypeVersionId , "algorithmOutputTypeId" -> dto.algorithmOutputTypeId , "isMandatory" -> dto.isMandatory , "lastUpdatedDate" -> dto.lastUpdatedDate, "algorithmTypeOutputTypeId" -> dto.algorithmTypeOutputTypeId ).executeInsert()
+    val resCnt = SQL("update algorithmTypeOutputType set  lastUpdatedDate = {lastUpdatedDate} ,  algorithmTypeVersionId = {algorithmTypeVersionId} ,  algorithmOutputTypeId = {algorithmOutputTypeId} ,  isMandatory = {isMandatory}  where  algorithmTypeOutputTypeId = {algorithmTypeOutputTypeId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "algorithmTypeVersionId" -> dto.algorithmTypeVersionId , "algorithmOutputTypeId" -> dto.algorithmOutputTypeId , "isMandatory" -> dto.isMandatory, "algorithmTypeOutputTypeId" -> dto.algorithmTypeOutputTypeId ).executeInsert()
     getAlgorithmTypeOutputTypeByPk(dto.algorithmTypeOutputTypeId)
   }
 
@@ -1618,14 +1728,175 @@ class AlgorithmTypeVersionDao extends DaoBase {
     }
   }
   def createAndInsertAlgorithmTypeVersionDto(algorithmTypeId : Long, algorithmTypeVersionName : String) : AlgorithmTypeVersionDto = {
-    val dto = new AlgorithmTypeVersionDto(0,0,algorithmTypeId,algorithmTypeVersionName,new Date(),new Date())
+    val dto = new AlgorithmTypeVersionDto(0,new Date(),new Date(),0,algorithmTypeId,algorithmTypeVersionName)
     insertAlgorithmTypeVersionDto(dto);
   }
   def updateAlgorithmTypeVersionDto(dto : AlgorithmTypeVersionDto): AlgorithmTypeVersionDto = {
     implicit val connection = getConnection();
-    val resCnt = SQL("update algorithmTypeVersion set  algorithmTypeId = {algorithmTypeId} ,  algorithmTypeVersionName = {algorithmTypeVersionName} ,  lastUpdatedDate = {lastUpdatedDate}  where  algorithmTypeVersionId = {algorithmTypeVersionId}  ")
-      .on("algorithmTypeId" -> dto.algorithmTypeId , "algorithmTypeVersionName" -> dto.algorithmTypeVersionName , "lastUpdatedDate" -> dto.lastUpdatedDate, "algorithmTypeVersionId" -> dto.algorithmTypeVersionId ).executeInsert()
+    val resCnt = SQL("update algorithmTypeVersion set  lastUpdatedDate = {lastUpdatedDate} ,  algorithmTypeId = {algorithmTypeId} ,  algorithmTypeVersionName = {algorithmTypeVersionName}  where  algorithmTypeVersionId = {algorithmTypeVersionId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "algorithmTypeId" -> dto.algorithmTypeId , "algorithmTypeVersionName" -> dto.algorithmTypeVersionName, "algorithmTypeVersionId" -> dto.algorithmTypeVersionId ).executeInsert()
     getAlgorithmTypeVersionByPk(dto.algorithmTypeVersionId)
+  }
+
+}
+
+
+class ExecutorContextDao extends DaoBase {
+
+  def getExecutorContextsList() : List[ExecutorContextDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[ExecutorContextDto]= SQL("select * from executorContext").as(anorm.Macro.namedParser[ExecutorContextDto].*);
+    dtos
+  }
+  def getExecutorContextsCount() : Long = {
+    implicit val connection = getConnection();
+    val cnt : Long = SQL("select count(*) as cnt from executorContext").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getExecutorContextsLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from executorContext").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getExecutorContextsLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from executorContext").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getExecutorContextFirst() : ExecutorContextDto = {
+    implicit val connection = getConnection();
+    val dtos : ExecutorContextDto= SQL("select * from executorContext order by insertedRowDate asc ").as(anorm.Macro.namedParser[ExecutorContextDto].*).head;
+    dtos
+  }
+  def getExecutorContextLast() : ExecutorContextDto = {
+    implicit val connection = getConnection();
+    val dtos : ExecutorContextDto= SQL("select * from executorContext order by insertedRowDate desc ").as(anorm.Macro.namedParser[ExecutorContextDto].*).head;
+    dtos
+  }
+  def getExecutorContextByGuid(guid : Long) : ExecutorContextDto = {
+    implicit val connection = getConnection();
+    val dtos : ExecutorContextDto= SQL("select * from executorContext where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[ExecutorContextDto].single);
+    dtos
+  }
+  def getExecutorContextByPk(pkColValue : Long) : ExecutorContextDto = {
+    implicit val connection = getConnection();
+    val dto : ExecutorContextDto = SQL("select * from executorContext where executorContextId = {pkColValue} ").on("pkColValue" -> pkColValue).as(anorm.Macro.namedParser[ExecutorContextDto].single);
+    dto
+  }
+  def getExecutorContextMaxId() : Long = {
+    implicit val connection = getConnection();
+    val maxid : Long = SQL("select max(executorContextId) as maxId from executorContext ").executeQuery()(connection).as[Long](SqlParser.long("maxId").single)(connection);;
+    maxid
+  }
+  def getExecutorContextByFkExecutorHostId(fkColValue : Long) : List[ExecutorContextDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[ExecutorContextDto] = SQL("select * from executorContext where executorHostId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[ExecutorContextDto].*);
+    dtos
+  }
+  def insertExecutorContextDto(dto : ExecutorContextDto): ExecutorContextDto = {
+    implicit val connection = getConnection();
+    val stat = dto.prepareInsert(getConnection());
+    val resCnt = stat.executeUpdate();
+    val rs = stat.getGeneratedKeys();
+    if (rs.next()) {
+      val pkValue = rs.getLong(1);
+      SQL("select * from executorContext where executorContextId = {pkValue} ").on("pkValue" -> pkValue).as(anorm.Macro.namedParser[ExecutorContextDto].single);
+    } else {
+      null;
+    }
+  }
+  def createAndInsertExecutorContextDto(executorHostId : Long, isWorking : Int, properties : String) : ExecutorContextDto = {
+    val dto = new ExecutorContextDto(0,0,new Date(),new Date(),executorHostId,isWorking,properties)
+    insertExecutorContextDto(dto);
+  }
+  def updateExecutorContextDto(dto : ExecutorContextDto): ExecutorContextDto = {
+    implicit val connection = getConnection();
+    val resCnt = SQL("update executorContext set  lastUpdatedDate = {lastUpdatedDate} ,  executorHostId = {executorHostId} ,  isWorking = {isWorking} ,  properties = {properties}  where  executorContextId = {executorContextId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "executorHostId" -> dto.executorHostId , "isWorking" -> dto.isWorking , "properties" -> dto.properties, "executorContextId" -> dto.executorContextId ).executeInsert()
+    getExecutorContextByPk(dto.executorContextId)
+  }
+
+}
+
+
+class ExecutorContextRuntimeDao extends DaoBase {
+
+  def getExecutorContextRuntimesList() : List[ExecutorContextRuntimeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[ExecutorContextRuntimeDto]= SQL("select * from executorContextRuntime").as(anorm.Macro.namedParser[ExecutorContextRuntimeDto].*);
+    dtos
+  }
+  def getExecutorContextRuntimesCount() : Long = {
+    implicit val connection = getConnection();
+    val cnt : Long = SQL("select count(*) as cnt from executorContextRuntime").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getExecutorContextRuntimesLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from executorContextRuntime").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getExecutorContextRuntimesLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from executorContextRuntime").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getExecutorContextRuntimeFirst() : ExecutorContextRuntimeDto = {
+    implicit val connection = getConnection();
+    val dtos : ExecutorContextRuntimeDto= SQL("select * from executorContextRuntime order by insertedRowDate asc ").as(anorm.Macro.namedParser[ExecutorContextRuntimeDto].*).head;
+    dtos
+  }
+  def getExecutorContextRuntimeLast() : ExecutorContextRuntimeDto = {
+    implicit val connection = getConnection();
+    val dtos : ExecutorContextRuntimeDto= SQL("select * from executorContextRuntime order by insertedRowDate desc ").as(anorm.Macro.namedParser[ExecutorContextRuntimeDto].*).head;
+    dtos
+  }
+  def getExecutorContextRuntimeByGuid(guid : Long) : ExecutorContextRuntimeDto = {
+    implicit val connection = getConnection();
+    val dtos : ExecutorContextRuntimeDto= SQL("select * from executorContextRuntime where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[ExecutorContextRuntimeDto].single);
+    dtos
+  }
+  def getExecutorContextRuntimeByPk(pkColValue : Long) : ExecutorContextRuntimeDto = {
+    implicit val connection = getConnection();
+    val dto : ExecutorContextRuntimeDto = SQL("select * from executorContextRuntime where executorContextRuntimeId = {pkColValue} ").on("pkColValue" -> pkColValue).as(anorm.Macro.namedParser[ExecutorContextRuntimeDto].single);
+    dto
+  }
+  def getExecutorContextRuntimeMaxId() : Long = {
+    implicit val connection = getConnection();
+    val maxid : Long = SQL("select max(executorContextRuntimeId) as maxId from executorContextRuntime ").executeQuery()(connection).as[Long](SqlParser.long("maxId").single)(connection);;
+    maxid
+  }
+  def getExecutorContextRuntimeByFkExecutorContextId(fkColValue : Long) : List[ExecutorContextRuntimeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[ExecutorContextRuntimeDto] = SQL("select * from executorContextRuntime where executorContextId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[ExecutorContextRuntimeDto].*);
+    dtos
+  }
+  def getExecutorContextRuntimeByFkExecutorHostId(fkColValue : Long) : List[ExecutorContextRuntimeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[ExecutorContextRuntimeDto] = SQL("select * from executorContextRuntime where executorHostId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[ExecutorContextRuntimeDto].*);
+    dtos
+  }
+  def insertExecutorContextRuntimeDto(dto : ExecutorContextRuntimeDto): ExecutorContextRuntimeDto = {
+    implicit val connection = getConnection();
+    val stat = dto.prepareInsert(getConnection());
+    val resCnt = stat.executeUpdate();
+    val rs = stat.getGeneratedKeys();
+    if (rs.next()) {
+      val pkValue = rs.getLong(1);
+      SQL("select * from executorContextRuntime where executorContextRuntimeId = {pkValue} ").on("pkValue" -> pkValue).as(anorm.Macro.namedParser[ExecutorContextRuntimeDto].single);
+    } else {
+      null;
+    }
+  }
+  def createAndInsertExecutorContextRuntimeDto(executorHostId : Long, executorContextId : Long, availableProcessors : Double, freeMemory : Double, maxMemory : Double, totalMemory : Double) : ExecutorContextRuntimeDto = {
+    val dto = new ExecutorContextRuntimeDto(0,0,new Date(),new Date(),executorHostId,executorContextId,availableProcessors,freeMemory,maxMemory,totalMemory)
+    insertExecutorContextRuntimeDto(dto);
+  }
+  def updateExecutorContextRuntimeDto(dto : ExecutorContextRuntimeDto): ExecutorContextRuntimeDto = {
+    implicit val connection = getConnection();
+    val resCnt = SQL("update executorContextRuntime set  lastUpdatedDate = {lastUpdatedDate} ,  executorHostId = {executorHostId} ,  executorContextId = {executorContextId} ,  availableProcessors = {availableProcessors} ,  freeMemory = {freeMemory} ,  maxMemory = {maxMemory} ,  totalMemory = {totalMemory}  where  executorContextRuntimeId = {executorContextRuntimeId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "executorHostId" -> dto.executorHostId , "executorContextId" -> dto.executorContextId , "availableProcessors" -> dto.availableProcessors , "freeMemory" -> dto.freeMemory , "maxMemory" -> dto.maxMemory , "totalMemory" -> dto.totalMemory, "executorContextRuntimeId" -> dto.executorContextRuntimeId ).executeInsert()
+    getExecutorContextRuntimeByPk(dto.executorContextRuntimeId)
   }
 
 }
@@ -1751,6 +2022,11 @@ class ExecutorInstanceDao extends DaoBase {
     val maxid : Long = SQL("select max(executorInstanceId) as maxId from executorInstance ").executeQuery()(connection).as[Long](SqlParser.long("maxId").single)(connection);;
     maxid
   }
+  def getExecutorInstanceByFkExecutorContextId(fkColValue : Long) : List[ExecutorInstanceDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[ExecutorInstanceDto] = SQL("select * from executorInstance where executorContextId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[ExecutorInstanceDto].*);
+    dtos
+  }
   def getExecutorInstanceByFkExecutorHostId(fkColValue : Long) : List[ExecutorInstanceDto] = {
     implicit val connection = getConnection();
     val dtos : List[ExecutorInstanceDto] = SQL("select * from executorInstance where executorHostId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[ExecutorInstanceDto].*);
@@ -1783,15 +2059,93 @@ class ExecutorInstanceDao extends DaoBase {
       null;
     }
   }
-  def createAndInsertExecutorInstanceDto(executorTypeId : Long, executorHostId : Long, executorInstanceName : String, isRunning : Int, isFinished : Int, portNumber : Int, endDate : java.util.Date) : ExecutorInstanceDto = {
-    val dto = new ExecutorInstanceDto(0,0,executorTypeId,executorHostId,executorInstanceName,isRunning,isFinished,portNumber,new Date(),new Date(),endDate)
+  def createAndInsertExecutorInstanceDto(executorTypeId : Long, executorHostId : Long, executorContextId : Long, executorInstanceName : String, isRunning : Int, isFinished : Int, portNumber : Int, endDate : java.util.Date) : ExecutorInstanceDto = {
+    val dto = new ExecutorInstanceDto(0,0,new Date(),new Date(),executorTypeId,executorHostId,executorContextId,executorInstanceName,isRunning,isFinished,portNumber,endDate)
     insertExecutorInstanceDto(dto);
   }
   def updateExecutorInstanceDto(dto : ExecutorInstanceDto): ExecutorInstanceDto = {
     implicit val connection = getConnection();
-    val resCnt = SQL("update executorInstance set  executorTypeId = {executorTypeId} ,  executorHostId = {executorHostId} ,  executorInstanceName = {executorInstanceName} ,  isRunning = {isRunning} ,  isFinished = {isFinished} ,  portNumber = {portNumber} ,  lastUpdatedDate = {lastUpdatedDate} ,  endDate = {endDate}  where  executorInstanceId = {executorInstanceId}  ")
-      .on("executorTypeId" -> dto.executorTypeId , "executorHostId" -> dto.executorHostId , "executorInstanceName" -> dto.executorInstanceName , "isRunning" -> dto.isRunning , "isFinished" -> dto.isFinished , "portNumber" -> dto.portNumber , "lastUpdatedDate" -> dto.lastUpdatedDate , "endDate" -> dto.endDate, "executorInstanceId" -> dto.executorInstanceId ).executeInsert()
+    val resCnt = SQL("update executorInstance set  lastUpdatedDate = {lastUpdatedDate} ,  executorTypeId = {executorTypeId} ,  executorHostId = {executorHostId} ,  executorContextId = {executorContextId} ,  executorInstanceName = {executorInstanceName} ,  isRunning = {isRunning} ,  isFinished = {isFinished} ,  portNumber = {portNumber} ,  endDate = {endDate}  where  executorInstanceId = {executorInstanceId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "executorTypeId" -> dto.executorTypeId , "executorHostId" -> dto.executorHostId , "executorContextId" -> dto.executorContextId , "executorInstanceName" -> dto.executorInstanceName , "isRunning" -> dto.isRunning , "isFinished" -> dto.isFinished , "portNumber" -> dto.portNumber , "endDate" -> dto.endDate, "executorInstanceId" -> dto.executorInstanceId ).executeInsert()
     getExecutorInstanceByPk(dto.executorInstanceId)
+  }
+
+}
+
+
+class ExecutorInstanceStateDao extends DaoBase {
+
+  def getExecutorInstanceStatesList() : List[ExecutorInstanceStateDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[ExecutorInstanceStateDto]= SQL("select * from executorInstanceState").as(anorm.Macro.namedParser[ExecutorInstanceStateDto].*);
+    dtos
+  }
+  def getExecutorInstanceStatesCount() : Long = {
+    implicit val connection = getConnection();
+    val cnt : Long = SQL("select count(*) as cnt from executorInstanceState").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getExecutorInstanceStatesLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from executorInstanceState").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getExecutorInstanceStatesLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from executorInstanceState").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getExecutorInstanceStateFirst() : ExecutorInstanceStateDto = {
+    implicit val connection = getConnection();
+    val dtos : ExecutorInstanceStateDto= SQL("select * from executorInstanceState order by insertedRowDate asc ").as(anorm.Macro.namedParser[ExecutorInstanceStateDto].*).head;
+    dtos
+  }
+  def getExecutorInstanceStateLast() : ExecutorInstanceStateDto = {
+    implicit val connection = getConnection();
+    val dtos : ExecutorInstanceStateDto= SQL("select * from executorInstanceState order by insertedRowDate desc ").as(anorm.Macro.namedParser[ExecutorInstanceStateDto].*).head;
+    dtos
+  }
+  def getExecutorInstanceStateByGuid(guid : Long) : ExecutorInstanceStateDto = {
+    implicit val connection = getConnection();
+    val dtos : ExecutorInstanceStateDto= SQL("select * from executorInstanceState where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[ExecutorInstanceStateDto].single);
+    dtos
+  }
+  def getExecutorInstanceStateByPk(pkColValue : Long) : ExecutorInstanceStateDto = {
+    implicit val connection = getConnection();
+    val dto : ExecutorInstanceStateDto = SQL("select * from executorInstanceState where executorInstanceStateId = {pkColValue} ").on("pkColValue" -> pkColValue).as(anorm.Macro.namedParser[ExecutorInstanceStateDto].single);
+    dto
+  }
+  def getExecutorInstanceStateMaxId() : Long = {
+    implicit val connection = getConnection();
+    val maxid : Long = SQL("select max(executorInstanceStateId) as maxId from executorInstanceState ").executeQuery()(connection).as[Long](SqlParser.long("maxId").single)(connection);;
+    maxid
+  }
+  def getExecutorInstanceStateByFkExecutorInstanceId(fkColValue : Long) : List[ExecutorInstanceStateDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[ExecutorInstanceStateDto] = SQL("select * from executorInstanceState where executorInstanceId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[ExecutorInstanceStateDto].*);
+    dtos
+  }
+  def insertExecutorInstanceStateDto(dto : ExecutorInstanceStateDto): ExecutorInstanceStateDto = {
+    implicit val connection = getConnection();
+    val stat = dto.prepareInsert(getConnection());
+    val resCnt = stat.executeUpdate();
+    val rs = stat.getGeneratedKeys();
+    if (rs.next()) {
+      val pkValue = rs.getLong(1);
+      SQL("select * from executorInstanceState where executorInstanceStateId = {pkValue} ").on("pkValue" -> pkValue).as(anorm.Macro.namedParser[ExecutorInstanceStateDto].single);
+    } else {
+      null;
+    }
+  }
+  def createAndInsertExecutorInstanceStateDto(executorInstanceId : Long, stateName : String) : ExecutorInstanceStateDto = {
+    val dto = new ExecutorInstanceStateDto(0,0,new Date(),new Date(),executorInstanceId,stateName)
+    insertExecutorInstanceStateDto(dto);
+  }
+  def updateExecutorInstanceStateDto(dto : ExecutorInstanceStateDto): ExecutorInstanceStateDto = {
+    implicit val connection = getConnection();
+    val resCnt = SQL("update executorInstanceState set  lastUpdatedDate = {lastUpdatedDate} ,  executorInstanceId = {executorInstanceId} ,  stateName = {stateName}  where  executorInstanceStateId = {executorInstanceStateId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "executorInstanceId" -> dto.executorInstanceId , "stateName" -> dto.stateName, "executorInstanceStateId" -> dto.executorInstanceStateId ).executeInsert()
+    getExecutorInstanceStateByPk(dto.executorInstanceStateId)
   }
 
 }
@@ -1862,13 +2216,13 @@ class ExecutorRestDao extends DaoBase {
     }
   }
   def createAndInsertExecutorRestDto(executorHostId : Long, restPort : Int, restVersion : String, restStatus : String) : ExecutorRestDto = {
-    val dto = new ExecutorRestDto(0,0,executorHostId,new Date(),new Date(),restPort,restVersion,restStatus)
+    val dto = new ExecutorRestDto(0,0,new Date(),new Date(),executorHostId,restPort,restVersion,restStatus)
     insertExecutorRestDto(dto);
   }
   def updateExecutorRestDto(dto : ExecutorRestDto): ExecutorRestDto = {
     implicit val connection = getConnection();
-    val resCnt = SQL("update executorRest set  executorHostId = {executorHostId} ,  lastUpdatedDate = {lastUpdatedDate} ,  restPort = {restPort} ,  restVersion = {restVersion} ,  restStatus = {restStatus}  where  executorRestId = {executorRestId}  ")
-      .on("executorHostId" -> dto.executorHostId , "lastUpdatedDate" -> dto.lastUpdatedDate , "restPort" -> dto.restPort , "restVersion" -> dto.restVersion , "restStatus" -> dto.restStatus, "executorRestId" -> dto.executorRestId ).executeInsert()
+    val resCnt = SQL("update executorRest set  lastUpdatedDate = {lastUpdatedDate} ,  executorHostId = {executorHostId} ,  restPort = {restPort} ,  restVersion = {restVersion} ,  restStatus = {restStatus}  where  executorRestId = {executorRestId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "executorHostId" -> dto.executorHostId , "restPort" -> dto.restPort , "restVersion" -> dto.restVersion , "restStatus" -> dto.restStatus, "executorRestId" -> dto.executorRestId ).executeInsert()
     getExecutorRestByPk(dto.executorRestId)
   }
 
@@ -2028,13 +2382,13 @@ class ExecutorStorageDao extends DaoBase {
     }
   }
   def createAndInsertExecutorStorageDto(executorHostId : Long, executorStorageTypeId : Long, storageDefinition : String, storageBasePath : String, storageFulllPath : String, isRunning : Int, portNumber : Int) : ExecutorStorageDto = {
-    val dto = new ExecutorStorageDto(0,0,executorHostId,executorStorageTypeId,storageDefinition,storageBasePath,storageFulllPath,isRunning,portNumber,new Date(),new Date())
+    val dto = new ExecutorStorageDto(0,0,new Date(),new Date(),executorHostId,executorStorageTypeId,storageDefinition,storageBasePath,storageFulllPath,isRunning,portNumber)
     insertExecutorStorageDto(dto);
   }
   def updateExecutorStorageDto(dto : ExecutorStorageDto): ExecutorStorageDto = {
     implicit val connection = getConnection();
-    val resCnt = SQL("update executorStorage set  executorHostId = {executorHostId} ,  executorStorageTypeId = {executorStorageTypeId} ,  storageDefinition = {storageDefinition} ,  storageBasePath = {storageBasePath} ,  storageFulllPath = {storageFulllPath} ,  isRunning = {isRunning} ,  portNumber = {portNumber} ,  lastUpdatedDate = {lastUpdatedDate}  where  executorStorageId = {executorStorageId}  ")
-      .on("executorHostId" -> dto.executorHostId , "executorStorageTypeId" -> dto.executorStorageTypeId , "storageDefinition" -> dto.storageDefinition , "storageBasePath" -> dto.storageBasePath , "storageFulllPath" -> dto.storageFulllPath , "isRunning" -> dto.isRunning , "portNumber" -> dto.portNumber , "lastUpdatedDate" -> dto.lastUpdatedDate, "executorStorageId" -> dto.executorStorageId ).executeInsert()
+    val resCnt = SQL("update executorStorage set  lastUpdatedDate = {lastUpdatedDate} ,  executorHostId = {executorHostId} ,  executorStorageTypeId = {executorStorageTypeId} ,  storageDefinition = {storageDefinition} ,  storageBasePath = {storageBasePath} ,  storageFulllPath = {storageFulllPath} ,  isRunning = {isRunning} ,  portNumber = {portNumber}  where  executorStorageId = {executorStorageId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "executorHostId" -> dto.executorHostId , "executorStorageTypeId" -> dto.executorStorageTypeId , "storageDefinition" -> dto.storageDefinition , "storageBasePath" -> dto.storageBasePath , "storageFulllPath" -> dto.storageFulllPath , "isRunning" -> dto.isRunning , "portNumber" -> dto.portNumber, "executorStorageId" -> dto.executorStorageId ).executeInsert()
     getExecutorStorageByPk(dto.executorStorageId)
   }
 
@@ -2106,13 +2460,13 @@ class ExecutorStorageSnapshotDao extends DaoBase {
     }
   }
   def createAndInsertExecutorStorageSnapshotDto(executorInstanceId : Long) : ExecutorStorageSnapshotDto = {
-    val dto = new ExecutorStorageSnapshotDto(0,executorInstanceId,0,new Date(),new Date())
+    val dto = new ExecutorStorageSnapshotDto(0,0,new Date(),new Date(),executorInstanceId)
     insertExecutorStorageSnapshotDto(dto);
   }
   def updateExecutorStorageSnapshotDto(dto : ExecutorStorageSnapshotDto): ExecutorStorageSnapshotDto = {
     implicit val connection = getConnection();
-    val resCnt = SQL("update executorStorageSnapshot set  executorInstanceId = {executorInstanceId} ,  lastUpdatedDate = {lastUpdatedDate}  where  executorStorageSnapshotId = {executorStorageSnapshotId}  ")
-      .on("executorInstanceId" -> dto.executorInstanceId , "lastUpdatedDate" -> dto.lastUpdatedDate, "executorStorageSnapshotId" -> dto.executorStorageSnapshotId ).executeInsert()
+    val resCnt = SQL("update executorStorageSnapshot set  lastUpdatedDate = {lastUpdatedDate} ,  executorInstanceId = {executorInstanceId}  where  executorStorageSnapshotId = {executorStorageSnapshotId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "executorInstanceId" -> dto.executorInstanceId, "executorStorageSnapshotId" -> dto.executorStorageSnapshotId ).executeInsert()
     getExecutorStorageSnapshotByPk(dto.executorStorageSnapshotId)
   }
 
@@ -2254,6 +2608,21 @@ class ExecutorStorageViewDao extends DaoBase {
     val dtos : List[ExecutorStorageViewDto] = SQL("select * from executorStorageView where executorStorageId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[ExecutorStorageViewDto].*);
     dtos
   }
+  def getExecutorStorageViewByFkExecutorStorageSnapshotId(fkColValue : Long) : List[ExecutorStorageViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[ExecutorStorageViewDto] = SQL("select * from executorStorageView where executorStorageSnapshotId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[ExecutorStorageViewDto].*);
+    dtos
+  }
+  def getExecutorStorageViewByFkSourceDownloadId(fkColValue : Long) : List[ExecutorStorageViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[ExecutorStorageViewDto] = SQL("select * from executorStorageView where sourceDownloadId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[ExecutorStorageViewDto].*);
+    dtos
+  }
+  def getExecutorStorageViewByFkSourceViewId(fkColValue : Long) : List[ExecutorStorageViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[ExecutorStorageViewDto] = SQL("select * from executorStorageView where sourceViewId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[ExecutorStorageViewDto].*);
+    dtos
+  }
   def insertExecutorStorageViewDto(dto : ExecutorStorageViewDto): ExecutorStorageViewDto = {
     implicit val connection = getConnection();
     val stat = dto.prepareInsert(getConnection());
@@ -2266,14 +2635,14 @@ class ExecutorStorageViewDao extends DaoBase {
       null;
     }
   }
-  def createAndInsertExecutorStorageViewDto(executorStorageSnapshotId : Long, executorStorageId : Long, sourceDownloadId : Long, storagePath : String, viewSize : Long, viewRowsCount : Long) : ExecutorStorageViewDto = {
-    val dto = new ExecutorStorageViewDto(0,0,new Date(),new Date(),executorStorageSnapshotId,executorStorageId,sourceDownloadId,storagePath,viewSize,viewRowsCount)
+  def createAndInsertExecutorStorageViewDto(executorStorageSnapshotId : Long, executorStorageId : Long, sourceDownloadId : Long, sourceViewId : Long, storagePath : String, viewSize : Long, viewRowsCount : Long, isValid : Int) : ExecutorStorageViewDto = {
+    val dto = new ExecutorStorageViewDto(0,0,new Date(),new Date(),executorStorageSnapshotId,executorStorageId,sourceDownloadId,sourceViewId,storagePath,viewSize,viewRowsCount,isValid)
     insertExecutorStorageViewDto(dto);
   }
   def updateExecutorStorageViewDto(dto : ExecutorStorageViewDto): ExecutorStorageViewDto = {
     implicit val connection = getConnection();
-    val resCnt = SQL("update executorStorageView set  lastUpdatedDate = {lastUpdatedDate} ,  executorStorageSnapshotId = {executorStorageSnapshotId} ,  executorStorageId = {executorStorageId} ,  sourceDownloadId = {sourceDownloadId} ,  storagePath = {storagePath} ,  viewSize = {viewSize} ,  viewRowsCount = {viewRowsCount}  where  executorStorageViewId = {executorStorageViewId}  ")
-      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "executorStorageSnapshotId" -> dto.executorStorageSnapshotId , "executorStorageId" -> dto.executorStorageId , "sourceDownloadId" -> dto.sourceDownloadId , "storagePath" -> dto.storagePath , "viewSize" -> dto.viewSize , "viewRowsCount" -> dto.viewRowsCount, "executorStorageViewId" -> dto.executorStorageViewId ).executeInsert()
+    val resCnt = SQL("update executorStorageView set  lastUpdatedDate = {lastUpdatedDate} ,  executorStorageSnapshotId = {executorStorageSnapshotId} ,  executorStorageId = {executorStorageId} ,  sourceDownloadId = {sourceDownloadId} ,  sourceViewId = {sourceViewId} ,  storagePath = {storagePath} ,  viewSize = {viewSize} ,  viewRowsCount = {viewRowsCount} ,  isValid = {isValid}  where  executorStorageViewId = {executorStorageViewId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "executorStorageSnapshotId" -> dto.executorStorageSnapshotId , "executorStorageId" -> dto.executorStorageId , "sourceDownloadId" -> dto.sourceDownloadId , "sourceViewId" -> dto.sourceViewId , "storagePath" -> dto.storagePath , "viewSize" -> dto.viewSize , "viewRowsCount" -> dto.viewRowsCount , "isValid" -> dto.isValid, "executorStorageViewId" -> dto.executorStorageViewId ).executeInsert()
     getExecutorStorageViewByPk(dto.executorStorageViewId)
   }
 
@@ -2433,13 +2802,13 @@ class ResourceManagerDao extends DaoBase {
     }
   }
   def createAndInsertResourceManagerDto(resourceManagerTypeId : Long, executorHostId : Long, resourceManagerStatus : String) : ResourceManagerDto = {
-    val dto = new ResourceManagerDto(0,0,resourceManagerTypeId,executorHostId,resourceManagerStatus,new Date(),new Date())
+    val dto = new ResourceManagerDto(0,0,new Date(),new Date(),resourceManagerTypeId,executorHostId,resourceManagerStatus)
     insertResourceManagerDto(dto);
   }
   def updateResourceManagerDto(dto : ResourceManagerDto): ResourceManagerDto = {
     implicit val connection = getConnection();
-    val resCnt = SQL("update resourceManager set  resourceManagerTypeId = {resourceManagerTypeId} ,  executorHostId = {executorHostId} ,  resourceManagerStatus = {resourceManagerStatus} ,  lastUpdatedDate = {lastUpdatedDate}  where  resourceManagerId = {resourceManagerId}  ")
-      .on("resourceManagerTypeId" -> dto.resourceManagerTypeId , "executorHostId" -> dto.executorHostId , "resourceManagerStatus" -> dto.resourceManagerStatus , "lastUpdatedDate" -> dto.lastUpdatedDate, "resourceManagerId" -> dto.resourceManagerId ).executeInsert()
+    val resCnt = SQL("update resourceManager set  lastUpdatedDate = {lastUpdatedDate} ,  resourceManagerTypeId = {resourceManagerTypeId} ,  executorHostId = {executorHostId} ,  resourceManagerStatus = {resourceManagerStatus}  where  resourceManagerId = {resourceManagerId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "resourceManagerTypeId" -> dto.resourceManagerTypeId , "executorHostId" -> dto.executorHostId , "resourceManagerStatus" -> dto.resourceManagerStatus, "resourceManagerId" -> dto.resourceManagerId ).executeInsert()
     getResourceManagerByPk(dto.resourceManagerId)
   }
 
@@ -2492,6 +2861,31 @@ class ResourceManagerAllocationDao extends DaoBase {
     implicit val connection = getConnection();
     val maxid : Long = SQL("select max(resourceManagerAllocationId) as maxId from resourceManagerAllocation ").executeQuery()(connection).as[Long](SqlParser.long("maxId").single)(connection);;
     maxid
+  }
+  def getResourceManagerAllocationByFkExecutorHostId(fkColValue : Long) : List[ResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[ResourceManagerAllocationDto] = SQL("select * from resourceManagerAllocation where executorHostId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[ResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getResourceManagerAllocationByFkExecutorInstanceId(fkColValue : Long) : List[ResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[ResourceManagerAllocationDto] = SQL("select * from resourceManagerAllocation where executorInstanceId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[ResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getResourceManagerAllocationByFkResourceManagerId(fkColValue : Long) : List[ResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[ResourceManagerAllocationDto] = SQL("select * from resourceManagerAllocation where resourceManagerId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[ResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getResourceManagerAllocationByFkResourceManagerTypeId(fkColValue : Long) : List[ResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[ResourceManagerAllocationDto] = SQL("select * from resourceManagerAllocation where resourceManagerTypeId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[ResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getResourceManagerAllocationByFkResourceMeasureId(fkColValue : Long) : List[ResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[ResourceManagerAllocationDto] = SQL("select * from resourceManagerAllocation where resourceMeasureId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[ResourceManagerAllocationDto].*);
+    dtos
   }
   def insertResourceManagerAllocationDto(dto : ResourceManagerAllocationDto): ResourceManagerAllocationDto = {
     implicit val connection = getConnection();
@@ -2566,6 +2960,16 @@ class ResourceManagerCheckDao extends DaoBase {
     val maxid : Long = SQL("select max(resourceManagerCheckId) as maxId from resourceManagerCheck ").executeQuery()(connection).as[Long](SqlParser.long("maxId").single)(connection);;
     maxid
   }
+  def getResourceManagerCheckByFkExecutorHostId(fkColValue : Long) : List[ResourceManagerCheckDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[ResourceManagerCheckDto] = SQL("select * from resourceManagerCheck where executorHostId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[ResourceManagerCheckDto].*);
+    dtos
+  }
+  def getResourceManagerCheckByFkResourceManagerId(fkColValue : Long) : List[ResourceManagerCheckDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[ResourceManagerCheckDto] = SQL("select * from resourceManagerCheck where resourceManagerId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[ResourceManagerCheckDto].*);
+    dtos
+  }
   def insertResourceManagerCheckDto(dto : ResourceManagerCheckDto): ResourceManagerCheckDto = {
     implicit val connection = getConnection();
     val stat = dto.prepareInsert(getConnection());
@@ -2579,13 +2983,13 @@ class ResourceManagerCheckDao extends DaoBase {
     }
   }
   def createAndInsertResourceManagerCheckDto(resourceManagerId : Long, executorHostId : Long, resourceManagerStatus : String) : ResourceManagerCheckDto = {
-    val dto = new ResourceManagerCheckDto(0,0,resourceManagerId,executorHostId,resourceManagerStatus,new Date(),new Date())
+    val dto = new ResourceManagerCheckDto(0,0,new Date(),new Date(),resourceManagerId,executorHostId,resourceManagerStatus)
     insertResourceManagerCheckDto(dto);
   }
   def updateResourceManagerCheckDto(dto : ResourceManagerCheckDto): ResourceManagerCheckDto = {
     implicit val connection = getConnection();
-    val resCnt = SQL("update resourceManagerCheck set  resourceManagerId = {resourceManagerId} ,  executorHostId = {executorHostId} ,  resourceManagerStatus = {resourceManagerStatus} ,  lastUpdatedDate = {lastUpdatedDate}  where  resourceManagerCheckId = {resourceManagerCheckId}  ")
-      .on("resourceManagerId" -> dto.resourceManagerId , "executorHostId" -> dto.executorHostId , "resourceManagerStatus" -> dto.resourceManagerStatus , "lastUpdatedDate" -> dto.lastUpdatedDate, "resourceManagerCheckId" -> dto.resourceManagerCheckId ).executeInsert()
+    val resCnt = SQL("update resourceManagerCheck set  lastUpdatedDate = {lastUpdatedDate} ,  resourceManagerId = {resourceManagerId} ,  executorHostId = {executorHostId} ,  resourceManagerStatus = {resourceManagerStatus}  where  resourceManagerCheckId = {resourceManagerCheckId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "resourceManagerId" -> dto.resourceManagerId , "executorHostId" -> dto.executorHostId , "resourceManagerStatus" -> dto.resourceManagerStatus, "resourceManagerCheckId" -> dto.resourceManagerCheckId ).executeInsert()
     getResourceManagerCheckByPk(dto.resourceManagerCheckId)
   }
 
@@ -2662,13 +3066,13 @@ class ResourceManagerMeasureDao extends DaoBase {
     }
   }
   def createAndInsertResourceManagerMeasureDto(resourceManagerId : Long, resourceMeasureId : Long, measureString : String, measureValue : Double) : ResourceManagerMeasureDto = {
-    val dto = new ResourceManagerMeasureDto(0,0,resourceManagerId,resourceMeasureId,measureString,measureValue,new Date(),new Date())
+    val dto = new ResourceManagerMeasureDto(0,0,new Date(),new Date(),resourceManagerId,resourceMeasureId,measureString,measureValue)
     insertResourceManagerMeasureDto(dto);
   }
   def updateResourceManagerMeasureDto(dto : ResourceManagerMeasureDto): ResourceManagerMeasureDto = {
     implicit val connection = getConnection();
-    val resCnt = SQL("update resourceManagerMeasure set  resourceManagerId = {resourceManagerId} ,  resourceMeasureId = {resourceMeasureId} ,  measureString = {measureString} ,  measureValue = {measureValue} ,  lastUpdatedDate = {lastUpdatedDate}  where  resourceManagerMeasureId = {resourceManagerMeasureId}  ")
-      .on("resourceManagerId" -> dto.resourceManagerId , "resourceMeasureId" -> dto.resourceMeasureId , "measureString" -> dto.measureString , "measureValue" -> dto.measureValue , "lastUpdatedDate" -> dto.lastUpdatedDate, "resourceManagerMeasureId" -> dto.resourceManagerMeasureId ).executeInsert()
+    val resCnt = SQL("update resourceManagerMeasure set  lastUpdatedDate = {lastUpdatedDate} ,  resourceManagerId = {resourceManagerId} ,  resourceMeasureId = {resourceMeasureId} ,  measureString = {measureString} ,  measureValue = {measureValue}  where  resourceManagerMeasureId = {resourceManagerMeasureId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "resourceManagerId" -> dto.resourceManagerId , "resourceMeasureId" -> dto.resourceMeasureId , "measureString" -> dto.measureString , "measureValue" -> dto.measureValue, "resourceManagerMeasureId" -> dto.resourceManagerMeasureId ).executeInsert()
     getResourceManagerMeasureByPk(dto.resourceManagerMeasureId)
   }
 
@@ -2745,13 +3149,13 @@ class ResourceManagerTypeDao extends DaoBase {
     }
   }
   def createAndInsertResourceManagerTypeDto(resourceManagerTypeName : String, resourceManagerTypeClass : String) : ResourceManagerTypeDto = {
-    val dto = new ResourceManagerTypeDto(0,0,resourceManagerTypeName,resourceManagerTypeClass,new Date(),new Date())
+    val dto = new ResourceManagerTypeDto(0,0,new Date(),new Date(),resourceManagerTypeName,resourceManagerTypeClass)
     insertResourceManagerTypeDto(dto);
   }
   def updateResourceManagerTypeDto(dto : ResourceManagerTypeDto): ResourceManagerTypeDto = {
     implicit val connection = getConnection();
-    val resCnt = SQL("update resourceManagerType set  resourceManagerTypeName = {resourceManagerTypeName} ,  resourceManagerTypeClass = {resourceManagerTypeClass} ,  lastUpdatedDate = {lastUpdatedDate}  where  resourceManagerTypeId = {resourceManagerTypeId}  ")
-      .on("resourceManagerTypeName" -> dto.resourceManagerTypeName , "resourceManagerTypeClass" -> dto.resourceManagerTypeClass , "lastUpdatedDate" -> dto.lastUpdatedDate, "resourceManagerTypeId" -> dto.resourceManagerTypeId ).executeInsert()
+    val resCnt = SQL("update resourceManagerType set  lastUpdatedDate = {lastUpdatedDate} ,  resourceManagerTypeName = {resourceManagerTypeName} ,  resourceManagerTypeClass = {resourceManagerTypeClass}  where  resourceManagerTypeId = {resourceManagerTypeId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "resourceManagerTypeName" -> dto.resourceManagerTypeName , "resourceManagerTypeClass" -> dto.resourceManagerTypeClass, "resourceManagerTypeId" -> dto.resourceManagerTypeId ).executeInsert()
     getResourceManagerTypeByPk(dto.resourceManagerTypeId)
   }
 
@@ -2828,13 +3232,13 @@ class ResourceMeasureDao extends DaoBase {
     }
   }
   def createAndInsertResourceMeasureDto(resourceMeasureName : String) : ResourceMeasureDto = {
-    val dto = new ResourceMeasureDto(0,0,resourceMeasureName,new Date(),new Date())
+    val dto = new ResourceMeasureDto(0,0,new Date(),new Date(),resourceMeasureName)
     insertResourceMeasureDto(dto);
   }
   def updateResourceMeasureDto(dto : ResourceMeasureDto): ResourceMeasureDto = {
     implicit val connection = getConnection();
-    val resCnt = SQL("update resourceMeasure set  resourceMeasureName = {resourceMeasureName} ,  lastUpdatedDate = {lastUpdatedDate}  where  resourceMeasureId = {resourceMeasureId}  ")
-      .on("resourceMeasureName" -> dto.resourceMeasureName , "lastUpdatedDate" -> dto.lastUpdatedDate, "resourceMeasureId" -> dto.resourceMeasureId ).executeInsert()
+    val resCnt = SQL("update resourceMeasure set  lastUpdatedDate = {lastUpdatedDate} ,  resourceMeasureName = {resourceMeasureName}  where  resourceMeasureId = {resourceMeasureId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "resourceMeasureName" -> dto.resourceMeasureName, "resourceMeasureId" -> dto.resourceMeasureId ).executeInsert()
     getResourceMeasureByPk(dto.resourceMeasureId)
   }
 
@@ -2888,9 +3292,24 @@ class SourceDownloadDao extends DaoBase {
     val maxid : Long = SQL("select max(sourceDownloadId) as maxId from sourceDownload ").executeQuery()(connection).as[Long](SqlParser.long("maxId").single)(connection);;
     maxid
   }
+  def getSourceDownloadByFkExecutorHostId(fkColValue : Long) : List[SourceDownloadDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[SourceDownloadDto] = SQL("select * from sourceDownload where executorHostId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[SourceDownloadDto].*);
+    dtos
+  }
+  def getSourceDownloadByFkExecutorContextId(fkColValue : Long) : List[SourceDownloadDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[SourceDownloadDto] = SQL("select * from sourceDownload where executorContextId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[SourceDownloadDto].*);
+    dtos
+  }
   def getSourceDownloadByFkSourceScheduleId(fkColValue : Long) : List[SourceDownloadDto] = {
     implicit val connection = getConnection();
     val dtos : List[SourceDownloadDto] = SQL("select * from sourceDownload where sourceScheduleId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[SourceDownloadDto].*);
+    dtos
+  }
+  def getSourceDownloadByFkSourceViewId(fkColValue : Long) : List[SourceDownloadDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[SourceDownloadDto] = SQL("select * from sourceDownload where sourceViewId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[SourceDownloadDto].*);
     dtos
   }
   def insertSourceDownloadDto(dto : SourceDownloadDto): SourceDownloadDto = {
@@ -2905,14 +3324,14 @@ class SourceDownloadDao extends DaoBase {
       null;
     }
   }
-  def createAndInsertSourceDownloadDto(sourceScheduleId : Long, retryNumber : Int, isRunning : Int, isFinished : Int, isExcecption : Int, excecptionDescription : String) : SourceDownloadDto = {
-    val dto = new SourceDownloadDto(0,sourceScheduleId,new Date(),new Date(),0,retryNumber,isRunning,isFinished,isExcecption,excecptionDescription)
+  def createAndInsertSourceDownloadDto(sourceScheduleId : Long, executorHostId : Long, executorContextId : Long, sourceViewId : Long, retryNumber : Int, isRunning : Int, isFinished : Int, isExcecption : Int, excecptionDescription : String) : SourceDownloadDto = {
+    val dto = new SourceDownloadDto(0,0,new Date(),new Date(),sourceScheduleId,executorHostId,executorContextId,sourceViewId,retryNumber,isRunning,isFinished,isExcecption,excecptionDescription)
     insertSourceDownloadDto(dto);
   }
   def updateSourceDownloadDto(dto : SourceDownloadDto): SourceDownloadDto = {
     implicit val connection = getConnection();
-    val resCnt = SQL("update sourceDownload set  sourceScheduleId = {sourceScheduleId} ,  lastUpdatedDate = {lastUpdatedDate} ,  retryNumber = {retryNumber} ,  isRunning = {isRunning} ,  isFinished = {isFinished} ,  isExcecption = {isExcecption} ,  excecptionDescription = {excecptionDescription}  where  sourceDownloadId = {sourceDownloadId}  ")
-      .on("sourceScheduleId" -> dto.sourceScheduleId , "lastUpdatedDate" -> dto.lastUpdatedDate , "retryNumber" -> dto.retryNumber , "isRunning" -> dto.isRunning , "isFinished" -> dto.isFinished , "isExcecption" -> dto.isExcecption , "excecptionDescription" -> dto.excecptionDescription, "sourceDownloadId" -> dto.sourceDownloadId ).executeInsert()
+    val resCnt = SQL("update sourceDownload set  lastUpdatedDate = {lastUpdatedDate} ,  sourceScheduleId = {sourceScheduleId} ,  executorHostId = {executorHostId} ,  executorContextId = {executorContextId} ,  sourceViewId = {sourceViewId} ,  retryNumber = {retryNumber} ,  isRunning = {isRunning} ,  isFinished = {isFinished} ,  isExcecption = {isExcecption} ,  excecptionDescription = {excecptionDescription}  where  sourceDownloadId = {sourceDownloadId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "sourceScheduleId" -> dto.sourceScheduleId , "executorHostId" -> dto.executorHostId , "executorContextId" -> dto.executorContextId , "sourceViewId" -> dto.sourceViewId , "retryNumber" -> dto.retryNumber , "isRunning" -> dto.isRunning , "isFinished" -> dto.isFinished , "isExcecption" -> dto.isExcecption , "excecptionDescription" -> dto.excecptionDescription, "sourceDownloadId" -> dto.sourceDownloadId ).executeInsert()
     getSourceDownloadByPk(dto.sourceDownloadId)
   }
 
@@ -3067,13 +3486,13 @@ class SourceDownloadStatColumnDao extends DaoBase {
     }
   }
   def createAndInsertSourceDownloadStatColumnDto(sourceDownloadId : Long, sourceViewColumnId : Long, columnMinNumber : Double, columnMaxNumber : Double, columnMinStr : String, columnMaxStr : String, columnNonemptyCount : Long) : SourceDownloadStatColumnDto = {
-    val dto = new SourceDownloadStatColumnDto(0,0,sourceDownloadId,sourceViewColumnId,new Date(),new Date(),columnMinNumber,columnMaxNumber,columnMinStr,columnMaxStr,columnNonemptyCount)
+    val dto = new SourceDownloadStatColumnDto(0,0,new Date(),new Date(),sourceDownloadId,sourceViewColumnId,columnMinNumber,columnMaxNumber,columnMinStr,columnMaxStr,columnNonemptyCount)
     insertSourceDownloadStatColumnDto(dto);
   }
   def updateSourceDownloadStatColumnDto(dto : SourceDownloadStatColumnDto): SourceDownloadStatColumnDto = {
     implicit val connection = getConnection();
-    val resCnt = SQL("update sourceDownloadStatColumn set  sourceDownloadId = {sourceDownloadId} ,  sourceViewColumnId = {sourceViewColumnId} ,  lastUpdatedDate = {lastUpdatedDate} ,  columnMinNumber = {columnMinNumber} ,  columnMaxNumber = {columnMaxNumber} ,  columnMinStr = {columnMinStr} ,  columnMaxStr = {columnMaxStr} ,  columnNonemptyCount = {columnNonemptyCount}  where  sourceDownloadStatColumnId = {sourceDownloadStatColumnId}  ")
-      .on("sourceDownloadId" -> dto.sourceDownloadId , "sourceViewColumnId" -> dto.sourceViewColumnId , "lastUpdatedDate" -> dto.lastUpdatedDate , "columnMinNumber" -> dto.columnMinNumber , "columnMaxNumber" -> dto.columnMaxNumber , "columnMinStr" -> dto.columnMinStr , "columnMaxStr" -> dto.columnMaxStr , "columnNonemptyCount" -> dto.columnNonemptyCount, "sourceDownloadStatColumnId" -> dto.sourceDownloadStatColumnId ).executeInsert()
+    val resCnt = SQL("update sourceDownloadStatColumn set  lastUpdatedDate = {lastUpdatedDate} ,  sourceDownloadId = {sourceDownloadId} ,  sourceViewColumnId = {sourceViewColumnId} ,  columnMinNumber = {columnMinNumber} ,  columnMaxNumber = {columnMaxNumber} ,  columnMinStr = {columnMinStr} ,  columnMaxStr = {columnMaxStr} ,  columnNonemptyCount = {columnNonemptyCount}  where  sourceDownloadStatColumnId = {sourceDownloadStatColumnId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "sourceDownloadId" -> dto.sourceDownloadId , "sourceViewColumnId" -> dto.sourceViewColumnId , "columnMinNumber" -> dto.columnMinNumber , "columnMaxNumber" -> dto.columnMaxNumber , "columnMinStr" -> dto.columnMinStr , "columnMaxStr" -> dto.columnMaxStr , "columnNonemptyCount" -> dto.columnNonemptyCount, "sourceDownloadStatColumnId" -> dto.sourceDownloadStatColumnId ).executeInsert()
     getSourceDownloadStatColumnByPk(dto.sourceDownloadStatColumnId)
   }
 
@@ -3155,13 +3574,13 @@ class SourceInstanceDao extends DaoBase {
     }
   }
   def createAndInsertSourceInstanceDto(sourceTypeId : Long, sourceInstanceName : String, errorCount : Long, correctCount : Long, lastStatus : String, lastConnectionDate : java.util.Date) : SourceInstanceDto = {
-    val dto = new SourceInstanceDto(0,0,sourceTypeId,sourceInstanceName,errorCount,correctCount,lastStatus,lastConnectionDate,new Date(),new Date())
+    val dto = new SourceInstanceDto(0,0,new Date(),new Date(),sourceTypeId,sourceInstanceName,errorCount,correctCount,lastStatus,lastConnectionDate)
     insertSourceInstanceDto(dto);
   }
   def updateSourceInstanceDto(dto : SourceInstanceDto): SourceInstanceDto = {
     implicit val connection = getConnection();
-    val resCnt = SQL("update sourceInstance set  sourceTypeId = {sourceTypeId} ,  sourceInstanceName = {sourceInstanceName} ,  errorCount = {errorCount} ,  correctCount = {correctCount} ,  lastStatus = {lastStatus} ,  lastConnectionDate = {lastConnectionDate} ,  lastUpdatedDate = {lastUpdatedDate}  where  sourceInstanceId = {sourceInstanceId}  ")
-      .on("sourceTypeId" -> dto.sourceTypeId , "sourceInstanceName" -> dto.sourceInstanceName , "errorCount" -> dto.errorCount , "correctCount" -> dto.correctCount , "lastStatus" -> dto.lastStatus , "lastConnectionDate" -> dto.lastConnectionDate , "lastUpdatedDate" -> dto.lastUpdatedDate, "sourceInstanceId" -> dto.sourceInstanceId ).executeInsert()
+    val resCnt = SQL("update sourceInstance set  lastUpdatedDate = {lastUpdatedDate} ,  sourceTypeId = {sourceTypeId} ,  sourceInstanceName = {sourceInstanceName} ,  errorCount = {errorCount} ,  correctCount = {correctCount} ,  lastStatus = {lastStatus} ,  lastConnectionDate = {lastConnectionDate}  where  sourceInstanceId = {sourceInstanceId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "sourceTypeId" -> dto.sourceTypeId , "sourceInstanceName" -> dto.sourceInstanceName , "errorCount" -> dto.errorCount , "correctCount" -> dto.correctCount , "lastStatus" -> dto.lastStatus , "lastConnectionDate" -> dto.lastConnectionDate, "sourceInstanceId" -> dto.sourceInstanceId ).executeInsert()
     getSourceInstanceByPk(dto.sourceInstanceId)
   }
 
@@ -3238,13 +3657,13 @@ class SourceParamDao extends DaoBase {
     }
   }
   def createAndInsertSourceParamDto(sourceParamName : String, sourceParamType : String, possibleValues : String) : SourceParamDto = {
-    val dto = new SourceParamDto(0,0,sourceParamName,sourceParamType,possibleValues,new Date(),new Date())
+    val dto = new SourceParamDto(0,0,new Date(),new Date(),sourceParamName,sourceParamType,possibleValues)
     insertSourceParamDto(dto);
   }
   def updateSourceParamDto(dto : SourceParamDto): SourceParamDto = {
     implicit val connection = getConnection();
-    val resCnt = SQL("update sourceParam set  sourceParamName = {sourceParamName} ,  sourceParamType = {sourceParamType} ,  possibleValues = {possibleValues} ,  lastUpdatedDate = {lastUpdatedDate}  where  sourceParamId = {sourceParamId}  ")
-      .on("sourceParamName" -> dto.sourceParamName , "sourceParamType" -> dto.sourceParamType , "possibleValues" -> dto.possibleValues , "lastUpdatedDate" -> dto.lastUpdatedDate, "sourceParamId" -> dto.sourceParamId ).executeInsert()
+    val resCnt = SQL("update sourceParam set  lastUpdatedDate = {lastUpdatedDate} ,  sourceParamName = {sourceParamName} ,  sourceParamType = {sourceParamType} ,  possibleValues = {possibleValues}  where  sourceParamId = {sourceParamId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "sourceParamName" -> dto.sourceParamName , "sourceParamType" -> dto.sourceParamType , "possibleValues" -> dto.possibleValues, "sourceParamId" -> dto.sourceParamId ).executeInsert()
     getSourceParamByPk(dto.sourceParamId)
   }
 
@@ -3321,13 +3740,13 @@ class SourceParamValueDao extends DaoBase {
     }
   }
   def createAndInsertSourceParamValueDto(sourceInstanceId : Long, sourceParamId : Long, sourceParamValueVersion : String, paramValue : String) : SourceParamValueDto = {
-    val dto = new SourceParamValueDto(0,sourceInstanceId,sourceParamId,sourceParamValueVersion,0,new Date(),new Date(),paramValue)
+    val dto = new SourceParamValueDto(0,0,new Date(),new Date(),sourceInstanceId,sourceParamId,sourceParamValueVersion,paramValue)
     insertSourceParamValueDto(dto);
   }
   def updateSourceParamValueDto(dto : SourceParamValueDto): SourceParamValueDto = {
     implicit val connection = getConnection();
-    val resCnt = SQL("update sourceParamValue set  sourceInstanceId = {sourceInstanceId} ,  sourceParamId = {sourceParamId} ,  sourceParamValueVersion = {sourceParamValueVersion} ,  lastUpdatedDate = {lastUpdatedDate} ,  paramValue = {paramValue}  where  sourceParamValueId = {sourceParamValueId}  ")
-      .on("sourceInstanceId" -> dto.sourceInstanceId , "sourceParamId" -> dto.sourceParamId , "sourceParamValueVersion" -> dto.sourceParamValueVersion , "lastUpdatedDate" -> dto.lastUpdatedDate , "paramValue" -> dto.paramValue, "sourceParamValueId" -> dto.sourceParamValueId ).executeInsert()
+    val resCnt = SQL("update sourceParamValue set  lastUpdatedDate = {lastUpdatedDate} ,  sourceInstanceId = {sourceInstanceId} ,  sourceParamId = {sourceParamId} ,  sourceParamValueVersion = {sourceParamValueVersion} ,  paramValue = {paramValue}  where  sourceParamValueId = {sourceParamValueId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "sourceInstanceId" -> dto.sourceInstanceId , "sourceParamId" -> dto.sourceParamId , "sourceParamValueVersion" -> dto.sourceParamValueVersion , "paramValue" -> dto.paramValue, "sourceParamValueId" -> dto.sourceParamValueId ).executeInsert()
     getSourceParamValueByPk(dto.sourceParamValueId)
   }
 
@@ -3403,14 +3822,14 @@ class SourceScheduleDao extends DaoBase {
       null;
     }
   }
-  def createAndInsertSourceScheduleDto(sourceViewId : Long, executorStorageId : Long, onDemand : Int, startTime : java.util.Date, intervalValue : Long) : SourceScheduleDto = {
-    val dto = new SourceScheduleDto(0,sourceViewId,executorStorageId,new Date(),new Date(),0,onDemand,startTime,intervalValue)
+  def createAndInsertSourceScheduleDto(sourceViewId : Long, executorStorageId : Long, onDemand : Int, startTime : java.util.Date, intervalValue : Long, isScheduled : Int, deleteOldCopies : Int) : SourceScheduleDto = {
+    val dto = new SourceScheduleDto(0,0,new Date(),new Date(),sourceViewId,executorStorageId,onDemand,startTime,intervalValue,isScheduled,deleteOldCopies)
     insertSourceScheduleDto(dto);
   }
   def updateSourceScheduleDto(dto : SourceScheduleDto): SourceScheduleDto = {
     implicit val connection = getConnection();
-    val resCnt = SQL("update sourceSchedule set  sourceViewId = {sourceViewId} ,  executorStorageId = {executorStorageId} ,  lastUpdatedDate = {lastUpdatedDate} ,  onDemand = {onDemand} ,  startTime = {startTime} ,  intervalValue = {intervalValue}  where  sourceScheduleId = {sourceScheduleId}  ")
-      .on("sourceViewId" -> dto.sourceViewId , "executorStorageId" -> dto.executorStorageId , "lastUpdatedDate" -> dto.lastUpdatedDate , "onDemand" -> dto.onDemand , "startTime" -> dto.startTime , "intervalValue" -> dto.intervalValue, "sourceScheduleId" -> dto.sourceScheduleId ).executeInsert()
+    val resCnt = SQL("update sourceSchedule set  lastUpdatedDate = {lastUpdatedDate} ,  sourceViewId = {sourceViewId} ,  executorStorageId = {executorStorageId} ,  onDemand = {onDemand} ,  startTime = {startTime} ,  intervalValue = {intervalValue} ,  isScheduled = {isScheduled} ,  deleteOldCopies = {deleteOldCopies}  where  sourceScheduleId = {sourceScheduleId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "sourceViewId" -> dto.sourceViewId , "executorStorageId" -> dto.executorStorageId , "onDemand" -> dto.onDemand , "startTime" -> dto.startTime , "intervalValue" -> dto.intervalValue , "isScheduled" -> dto.isScheduled , "deleteOldCopies" -> dto.deleteOldCopies, "sourceScheduleId" -> dto.sourceScheduleId ).executeInsert()
     getSourceScheduleByPk(dto.sourceScheduleId)
   }
 
@@ -3487,13 +3906,13 @@ class SourceTypeDao extends DaoBase {
     }
   }
   def createAndInsertSourceTypeDto(sourceTypeName : String, sourceTypeClass : String) : SourceTypeDto = {
-    val dto = new SourceTypeDto(0,0,sourceTypeName,sourceTypeClass,new Date(),new Date())
+    val dto = new SourceTypeDto(0,0,new Date(),new Date(),sourceTypeName,sourceTypeClass)
     insertSourceTypeDto(dto);
   }
   def updateSourceTypeDto(dto : SourceTypeDto): SourceTypeDto = {
     implicit val connection = getConnection();
-    val resCnt = SQL("update sourceType set  sourceTypeName = {sourceTypeName} ,  sourceTypeClass = {sourceTypeClass} ,  lastUpdatedDate = {lastUpdatedDate}  where  sourceTypeId = {sourceTypeId}  ")
-      .on("sourceTypeName" -> dto.sourceTypeName , "sourceTypeClass" -> dto.sourceTypeClass , "lastUpdatedDate" -> dto.lastUpdatedDate, "sourceTypeId" -> dto.sourceTypeId ).executeInsert()
+    val resCnt = SQL("update sourceType set  lastUpdatedDate = {lastUpdatedDate} ,  sourceTypeName = {sourceTypeName} ,  sourceTypeClass = {sourceTypeClass}  where  sourceTypeId = {sourceTypeId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "sourceTypeName" -> dto.sourceTypeName , "sourceTypeClass" -> dto.sourceTypeClass, "sourceTypeId" -> dto.sourceTypeId ).executeInsert()
     getSourceTypeByPk(dto.sourceTypeId)
   }
 
@@ -3570,13 +3989,13 @@ class SourceTypeParamDao extends DaoBase {
     }
   }
   def createAndInsertSourceTypeParamDto(sourceTypeId : Long, sourceParamId : Long, sourceTypeName : String, sourceParamName : String, isRequired : Int) : SourceTypeParamDto = {
-    val dto = new SourceTypeParamDto(0,sourceTypeId,sourceParamId,sourceTypeName,sourceParamName,isRequired,0,new Date(),new Date())
+    val dto = new SourceTypeParamDto(0,0,new Date(),new Date(),sourceTypeId,sourceParamId,sourceTypeName,sourceParamName,isRequired)
     insertSourceTypeParamDto(dto);
   }
   def updateSourceTypeParamDto(dto : SourceTypeParamDto): SourceTypeParamDto = {
     implicit val connection = getConnection();
-    val resCnt = SQL("update sourceTypeParam set  sourceTypeId = {sourceTypeId} ,  sourceParamId = {sourceParamId} ,  sourceTypeName = {sourceTypeName} ,  sourceParamName = {sourceParamName} ,  isRequired = {isRequired} ,  lastUpdatedDate = {lastUpdatedDate}  where  sourceTypeParamId = {sourceTypeParamId}  ")
-      .on("sourceTypeId" -> dto.sourceTypeId , "sourceParamId" -> dto.sourceParamId , "sourceTypeName" -> dto.sourceTypeName , "sourceParamName" -> dto.sourceParamName , "isRequired" -> dto.isRequired , "lastUpdatedDate" -> dto.lastUpdatedDate, "sourceTypeParamId" -> dto.sourceTypeParamId ).executeInsert()
+    val resCnt = SQL("update sourceTypeParam set  lastUpdatedDate = {lastUpdatedDate} ,  sourceTypeId = {sourceTypeId} ,  sourceParamId = {sourceParamId} ,  sourceTypeName = {sourceTypeName} ,  sourceParamName = {sourceParamName} ,  isRequired = {isRequired}  where  sourceTypeParamId = {sourceTypeParamId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "sourceTypeId" -> dto.sourceTypeId , "sourceParamId" -> dto.sourceParamId , "sourceTypeName" -> dto.sourceTypeName , "sourceParamName" -> dto.sourceParamName , "isRequired" -> dto.isRequired, "sourceTypeParamId" -> dto.sourceTypeParamId ).executeInsert()
     getSourceTypeParamByPk(dto.sourceTypeParamId)
   }
 
@@ -3662,14 +4081,14 @@ class SourceViewDao extends DaoBase {
       null;
     }
   }
-  def createAndInsertSourceViewDto(sourceInstanceId : Long, sourceViewTypeId : Long, sourceViewName : String, sourceViewDefinition : String) : SourceViewDto = {
-    val dto = new SourceViewDto(0,0,sourceInstanceId,sourceViewTypeId,sourceViewName,sourceViewDefinition,new Date(),new Date())
+  def createAndInsertSourceViewDto(sourceInstanceId : Long, sourceViewTypeId : Long, sourceViewName : String, sourceViewDefinition : String, isExisting : Int) : SourceViewDto = {
+    val dto = new SourceViewDto(0,0,new Date(),new Date(),sourceInstanceId,sourceViewTypeId,sourceViewName,sourceViewDefinition,isExisting)
     insertSourceViewDto(dto);
   }
   def updateSourceViewDto(dto : SourceViewDto): SourceViewDto = {
     implicit val connection = getConnection();
-    val resCnt = SQL("update sourceView set  sourceInstanceId = {sourceInstanceId} ,  sourceViewTypeId = {sourceViewTypeId} ,  sourceViewName = {sourceViewName} ,  sourceViewDefinition = {sourceViewDefinition} ,  lastUpdatedDate = {lastUpdatedDate}  where  sourceViewId = {sourceViewId}  ")
-      .on("sourceInstanceId" -> dto.sourceInstanceId , "sourceViewTypeId" -> dto.sourceViewTypeId , "sourceViewName" -> dto.sourceViewName , "sourceViewDefinition" -> dto.sourceViewDefinition , "lastUpdatedDate" -> dto.lastUpdatedDate, "sourceViewId" -> dto.sourceViewId ).executeInsert()
+    val resCnt = SQL("update sourceView set  lastUpdatedDate = {lastUpdatedDate} ,  sourceInstanceId = {sourceInstanceId} ,  sourceViewTypeId = {sourceViewTypeId} ,  sourceViewName = {sourceViewName} ,  sourceViewDefinition = {sourceViewDefinition} ,  isExisting = {isExisting}  where  sourceViewId = {sourceViewId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "sourceInstanceId" -> dto.sourceInstanceId , "sourceViewTypeId" -> dto.sourceViewTypeId , "sourceViewName" -> dto.sourceViewName , "sourceViewDefinition" -> dto.sourceViewDefinition , "isExisting" -> dto.isExisting, "sourceViewId" -> dto.sourceViewId ).executeInsert()
     getSourceViewByPk(dto.sourceViewId)
   }
 
@@ -3741,13 +4160,13 @@ class SourceViewColumnDao extends DaoBase {
     }
   }
   def createAndInsertSourceViewColumnDto(sourceViewId : Long, columnName : String, columnType : String) : SourceViewColumnDto = {
-    val dto = new SourceViewColumnDto(0,sourceViewId,new Date(),new Date(),0,columnName,columnType)
+    val dto = new SourceViewColumnDto(0,0,new Date(),new Date(),sourceViewId,columnName,columnType)
     insertSourceViewColumnDto(dto);
   }
   def updateSourceViewColumnDto(dto : SourceViewColumnDto): SourceViewColumnDto = {
     implicit val connection = getConnection();
-    val resCnt = SQL("update sourceViewColumn set  sourceViewId = {sourceViewId} ,  lastUpdatedDate = {lastUpdatedDate} ,  columnName = {columnName} ,  columnType = {columnType}  where  sourceViewColumnId = {sourceViewColumnId}  ")
-      .on("sourceViewId" -> dto.sourceViewId , "lastUpdatedDate" -> dto.lastUpdatedDate , "columnName" -> dto.columnName , "columnType" -> dto.columnType, "sourceViewColumnId" -> dto.sourceViewColumnId ).executeInsert()
+    val resCnt = SQL("update sourceViewColumn set  lastUpdatedDate = {lastUpdatedDate} ,  sourceViewId = {sourceViewId} ,  columnName = {columnName} ,  columnType = {columnType}  where  sourceViewColumnId = {sourceViewColumnId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "sourceViewId" -> dto.sourceViewId , "columnName" -> dto.columnName , "columnType" -> dto.columnType, "sourceViewColumnId" -> dto.sourceViewColumnId ).executeInsert()
     getSourceViewColumnByPk(dto.sourceViewColumnId)
   }
 
@@ -3824,14 +4243,95 @@ class SourceViewTypeDao extends DaoBase {
     }
   }
   def createAndInsertSourceViewTypeDto(sourceViewTypeName : String, sourceViewTypeClass : String) : SourceViewTypeDto = {
-    val dto = new SourceViewTypeDto(0,0,sourceViewTypeName,sourceViewTypeClass,new Date(),new Date())
+    val dto = new SourceViewTypeDto(0,0,new Date(),new Date(),sourceViewTypeName,sourceViewTypeClass)
     insertSourceViewTypeDto(dto);
   }
   def updateSourceViewTypeDto(dto : SourceViewTypeDto): SourceViewTypeDto = {
     implicit val connection = getConnection();
-    val resCnt = SQL("update sourceViewType set  sourceViewTypeName = {sourceViewTypeName} ,  sourceViewTypeClass = {sourceViewTypeClass} ,  lastUpdatedDate = {lastUpdatedDate}  where  sourceViewTypeId = {sourceViewTypeId}  ")
-      .on("sourceViewTypeName" -> dto.sourceViewTypeName , "sourceViewTypeClass" -> dto.sourceViewTypeClass , "lastUpdatedDate" -> dto.lastUpdatedDate, "sourceViewTypeId" -> dto.sourceViewTypeId ).executeInsert()
+    val resCnt = SQL("update sourceViewType set  lastUpdatedDate = {lastUpdatedDate} ,  sourceViewTypeName = {sourceViewTypeName} ,  sourceViewTypeClass = {sourceViewTypeClass}  where  sourceViewTypeId = {sourceViewTypeId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "sourceViewTypeName" -> dto.sourceViewTypeName , "sourceViewTypeClass" -> dto.sourceViewTypeClass, "sourceViewTypeId" -> dto.sourceViewTypeId ).executeInsert()
     getSourceViewTypeByPk(dto.sourceViewTypeId)
+  }
+
+}
+
+
+class VAlgorithmColumnTypeSummaryDao extends DaoBase {
+
+  def getVAlgorithmColumnTypeSummarysList() : List[VAlgorithmColumnTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmColumnTypeSummaryDto]= SQL("select * from vAlgorithmColumnTypeSummary").as(anorm.Macro.namedParser[VAlgorithmColumnTypeSummaryDto].*);
+    dtos
+  }
+  def getVAlgorithmColumnTypeSummarysCount() : Long = {
+    implicit val connection = getConnection();
+    val cnt : Long = SQL("select count(*) as cnt from vAlgorithmColumnTypeSummary").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVAlgorithmColumnTypeSummarysLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vAlgorithmColumnTypeSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVAlgorithmColumnTypeSummarysLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vAlgorithmColumnTypeSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVAlgorithmColumnTypeSummaryFirst() : VAlgorithmColumnTypeSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmColumnTypeSummaryDto= SQL("select * from vAlgorithmColumnTypeSummary order by insertedRowDate asc ").as(anorm.Macro.namedParser[VAlgorithmColumnTypeSummaryDto].*).head;
+    dtos
+  }
+  def getVAlgorithmColumnTypeSummaryLast() : VAlgorithmColumnTypeSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmColumnTypeSummaryDto= SQL("select * from vAlgorithmColumnTypeSummary order by insertedRowDate desc ").as(anorm.Macro.namedParser[VAlgorithmColumnTypeSummaryDto].*).head;
+    dtos
+  }
+  def getVAlgorithmColumnTypeSummaryByGuid(guid : Long) : VAlgorithmColumnTypeSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmColumnTypeSummaryDto= SQL("select * from vAlgorithmColumnTypeSummary where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VAlgorithmColumnTypeSummaryDto].single);
+    dtos
+  }
+  def getDtosByAlgorithmColumnTypeId(colValue : Long) : List[VAlgorithmColumnTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmColumnTypeSummaryDto] = SQL("select * from vAlgorithmColumnTypeSummary where algorithmColumnTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmColumnTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VAlgorithmColumnTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmColumnTypeSummaryDto] = SQL("select * from vAlgorithmColumnTypeSummary where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmColumnTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VAlgorithmColumnTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmColumnTypeSummaryDto] = SQL("select * from vAlgorithmColumnTypeSummary where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmColumnTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmColumnTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmColumnTypeSummaryDto] = SQL("select * from vAlgorithmColumnTypeSummary where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmColumnTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmColumnTypeName(colValue : String) : List[VAlgorithmColumnTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmColumnTypeSummaryDto] = SQL("select * from vAlgorithmColumnTypeSummary where algorithmColumnTypeName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmColumnTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmColumnTypeDescription(colValue : String) : List[VAlgorithmColumnTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmColumnTypeSummaryDto] = SQL("select * from vAlgorithmColumnTypeSummary where algorithmColumnTypeDescription = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmColumnTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmTypeColumnType_count(colValue : Int) : List[VAlgorithmColumnTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmColumnTypeSummaryDto] = SQL("select * from vAlgorithmColumnTypeSummary where algorithmTypeColumnType_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmColumnTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmScheduleColumn_count(colValue : Int) : List[VAlgorithmColumnTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmColumnTypeSummaryDto] = SQL("select * from vAlgorithmColumnTypeSummary where algorithmScheduleColumn_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmColumnTypeSummaryDto].*);
+    dtos
   }
 
 }
@@ -3919,6 +4419,16 @@ class VAlgorithmImplementationDao extends DaoBase {
     val dtos : List[VAlgorithmImplementationDto] = SQL("select * from vAlgorithmImplementation where algorithmTypeVersion_algorithmTypeVersionId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationDto].*);
     dtos
   }
+  def getDtosByAlgorithmTypeVersion_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmImplementationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmImplementationDto] = SQL("select * from vAlgorithmImplementation where algorithmTypeVersion_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmTypeVersion_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmImplementationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmImplementationDto] = SQL("select * from vAlgorithmImplementation where algorithmTypeVersion_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationDto].*);
+    dtos
+  }
   def getDtosByAlgorithmTypeVersion_guid(colValue : Long) : List[VAlgorithmImplementationDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmImplementationDto] = SQL("select * from vAlgorithmImplementation where algorithmTypeVersion_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationDto].*);
@@ -3932,16 +4442,6 @@ class VAlgorithmImplementationDao extends DaoBase {
   def getDtosByAlgorithmTypeVersion_algorithmTypeVersionName(colValue : String) : List[VAlgorithmImplementationDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmImplementationDto] = SQL("select * from vAlgorithmImplementation where algorithmTypeVersion_algorithmTypeVersionName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationDto].*);
-    dtos
-  }
-  def getDtosByAlgorithmTypeVersion_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmImplementationDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VAlgorithmImplementationDto] = SQL("select * from vAlgorithmImplementation where algorithmTypeVersion_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationDto].*);
-    dtos
-  }
-  def getDtosByAlgorithmTypeVersion_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmImplementationDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VAlgorithmImplementationDto] = SQL("select * from vAlgorithmImplementation where algorithmTypeVersion_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationDto].*);
     dtos
   }
   def getDtosByExecutorType_executorTypeId(colValue : Long) : List[VAlgorithmImplementationDto] = {
@@ -3972,6 +4472,425 @@ class VAlgorithmImplementationDao extends DaoBase {
   def getDtosByExecutorType_executorTypeClass(colValue : String) : List[VAlgorithmImplementationDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmImplementationDto] = SQL("select * from vAlgorithmImplementation where executorType_executorTypeClass = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationDto].*);
+    dtos
+  }
+
+}
+
+
+class VAlgorithmImplementationSummaryDao extends DaoBase {
+
+  def getVAlgorithmImplementationSummarysList() : List[VAlgorithmImplementationSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmImplementationSummaryDto]= SQL("select * from vAlgorithmImplementationSummary").as(anorm.Macro.namedParser[VAlgorithmImplementationSummaryDto].*);
+    dtos
+  }
+  def getVAlgorithmImplementationSummarysCount() : Long = {
+    implicit val connection = getConnection();
+    val cnt : Long = SQL("select count(*) as cnt from vAlgorithmImplementationSummary").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVAlgorithmImplementationSummarysLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vAlgorithmImplementationSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVAlgorithmImplementationSummarysLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vAlgorithmImplementationSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVAlgorithmImplementationSummaryFirst() : VAlgorithmImplementationSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmImplementationSummaryDto= SQL("select * from vAlgorithmImplementationSummary order by insertedRowDate asc ").as(anorm.Macro.namedParser[VAlgorithmImplementationSummaryDto].*).head;
+    dtos
+  }
+  def getVAlgorithmImplementationSummaryLast() : VAlgorithmImplementationSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmImplementationSummaryDto= SQL("select * from vAlgorithmImplementationSummary order by insertedRowDate desc ").as(anorm.Macro.namedParser[VAlgorithmImplementationSummaryDto].*).head;
+    dtos
+  }
+  def getVAlgorithmImplementationSummaryByGuid(guid : Long) : VAlgorithmImplementationSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmImplementationSummaryDto= SQL("select * from vAlgorithmImplementationSummary where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VAlgorithmImplementationSummaryDto].single);
+    dtos
+  }
+  def getDtosByAlgorithmImplementationId(colValue : Long) : List[VAlgorithmImplementationSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmImplementationSummaryDto] = SQL("select * from vAlgorithmImplementationSummary where algorithmImplementationId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationSummaryDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VAlgorithmImplementationSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmImplementationSummaryDto] = SQL("select * from vAlgorithmImplementationSummary where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationSummaryDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VAlgorithmImplementationSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmImplementationSummaryDto] = SQL("select * from vAlgorithmImplementationSummary where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationSummaryDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmImplementationSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmImplementationSummaryDto] = SQL("select * from vAlgorithmImplementationSummary where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmTypeVersionId(colValue : Long) : List[VAlgorithmImplementationSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmImplementationSummaryDto] = SQL("select * from vAlgorithmImplementationSummary where algorithmTypeVersionId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorTypeId(colValue : Long) : List[VAlgorithmImplementationSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmImplementationSummaryDto] = SQL("select * from vAlgorithmImplementationSummary where executorTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmImplementationName(colValue : String) : List[VAlgorithmImplementationSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmImplementationSummaryDto] = SQL("select * from vAlgorithmImplementationSummary where algorithmImplementationName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmImplementationClass(colValue : String) : List[VAlgorithmImplementationSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmImplementationSummaryDto] = SQL("select * from vAlgorithmImplementationSummary where algorithmImplementationClass = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmSchedule_count(colValue : Int) : List[VAlgorithmImplementationSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmImplementationSummaryDto] = SQL("select * from vAlgorithmImplementationSummary where algorithmSchedule_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmStorageSupport_count(colValue : Int) : List[VAlgorithmImplementationSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmImplementationSummaryDto] = SQL("select * from vAlgorithmImplementationSummary where algorithmStorageSupport_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationSummaryDto].*);
+    dtos
+  }
+
+}
+
+
+class VAlgorithmOutputDao extends DaoBase {
+
+  def getVAlgorithmOutputsList() : List[VAlgorithmOutputDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmOutputDto]= SQL("select * from vAlgorithmOutput").as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);
+    dtos
+  }
+  def getVAlgorithmOutputsCount() : Long = {
+    implicit val connection = getConnection();
+    val cnt : Long = SQL("select count(*) as cnt from vAlgorithmOutput").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVAlgorithmOutputsLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vAlgorithmOutput").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVAlgorithmOutputsLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vAlgorithmOutput").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVAlgorithmOutputFirst() : VAlgorithmOutputDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmOutputDto= SQL("select * from vAlgorithmOutput order by insertedRowDate asc ").as(anorm.Macro.namedParser[VAlgorithmOutputDto].*).head;
+    dtos
+  }
+  def getVAlgorithmOutputLast() : VAlgorithmOutputDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmOutputDto= SQL("select * from vAlgorithmOutput order by insertedRowDate desc ").as(anorm.Macro.namedParser[VAlgorithmOutputDto].*).head;
+    dtos
+  }
+  def getVAlgorithmOutputByGuid(guid : Long) : VAlgorithmOutputDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmOutputDto= SQL("select * from vAlgorithmOutput where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VAlgorithmOutputDto].single);
+    dtos
+  }
+  def getDtosByAlgorithmOutputId(colValue : Long) : List[VAlgorithmOutputDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where algorithmOutputId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VAlgorithmOutputDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VAlgorithmOutputDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmOutputDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmRunId(colValue : Long) : List[VAlgorithmOutputDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where algorithmRunId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmOutputTypeId(colValue : Long) : List[VAlgorithmOutputDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where algorithmOutputTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorageViewId(colValue : Long) : List[VAlgorithmOutputDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorageViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);
+    dtos
+  }
+  def getDtosByOutputPath(colValue : String) : List[VAlgorithmOutputDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where outputPath = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmOutputType_algorithmOutputTypeId(colValue : Long) : List[VAlgorithmOutputDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where algorithmOutputType_algorithmOutputTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmOutputType_guid(colValue : Long) : List[VAlgorithmOutputDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where algorithmOutputType_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmOutputType_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmOutputDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where algorithmOutputType_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmOutputType_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmOutputDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where algorithmOutputType_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmOutputType_algorithmOutputTypeName(colValue : String) : List[VAlgorithmOutputDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where algorithmOutputType_algorithmOutputTypeName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorageView_executorStorageViewId(colValue : Long) : List[VAlgorithmOutputDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorageView_executorStorageViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorageView_guid(colValue : Long) : List[VAlgorithmOutputDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorageView_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorageView_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmOutputDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorageView_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorageView_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmOutputDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorageView_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorageView_executorStorageSnapshotId(colValue : Long) : List[VAlgorithmOutputDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorageView_executorStorageSnapshotId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorageView_executorStorageId(colValue : Long) : List[VAlgorithmOutputDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorageView_executorStorageId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorageView_sourceDownloadId(colValue : Long) : List[VAlgorithmOutputDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorageView_sourceDownloadId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorageView_sourceViewId(colValue : Long) : List[VAlgorithmOutputDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorageView_sourceViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorageView_storagePath(colValue : String) : List[VAlgorithmOutputDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorageView_storagePath = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorageView_viewSize(colValue : Long) : List[VAlgorithmOutputDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorageView_viewSize = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorageView_viewRowsCount(colValue : Long) : List[VAlgorithmOutputDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorageView_viewRowsCount = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorageView_isValid(colValue : Int) : List[VAlgorithmOutputDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorageView_isValid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);
+    dtos
+  }
+
+}
+
+
+class VAlgorithmOutputTypeSummaryDao extends DaoBase {
+
+  def getVAlgorithmOutputTypeSummarysList() : List[VAlgorithmOutputTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmOutputTypeSummaryDto]= SQL("select * from vAlgorithmOutputTypeSummary").as(anorm.Macro.namedParser[VAlgorithmOutputTypeSummaryDto].*);
+    dtos
+  }
+  def getVAlgorithmOutputTypeSummarysCount() : Long = {
+    implicit val connection = getConnection();
+    val cnt : Long = SQL("select count(*) as cnt from vAlgorithmOutputTypeSummary").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVAlgorithmOutputTypeSummarysLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vAlgorithmOutputTypeSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVAlgorithmOutputTypeSummarysLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vAlgorithmOutputTypeSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVAlgorithmOutputTypeSummaryFirst() : VAlgorithmOutputTypeSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmOutputTypeSummaryDto= SQL("select * from vAlgorithmOutputTypeSummary order by insertedRowDate asc ").as(anorm.Macro.namedParser[VAlgorithmOutputTypeSummaryDto].*).head;
+    dtos
+  }
+  def getVAlgorithmOutputTypeSummaryLast() : VAlgorithmOutputTypeSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmOutputTypeSummaryDto= SQL("select * from vAlgorithmOutputTypeSummary order by insertedRowDate desc ").as(anorm.Macro.namedParser[VAlgorithmOutputTypeSummaryDto].*).head;
+    dtos
+  }
+  def getVAlgorithmOutputTypeSummaryByGuid(guid : Long) : VAlgorithmOutputTypeSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmOutputTypeSummaryDto= SQL("select * from vAlgorithmOutputTypeSummary where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VAlgorithmOutputTypeSummaryDto].single);
+    dtos
+  }
+  def getDtosByAlgorithmOutputTypeId(colValue : Long) : List[VAlgorithmOutputTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmOutputTypeSummaryDto] = SQL("select * from vAlgorithmOutputTypeSummary where algorithmOutputTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VAlgorithmOutputTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmOutputTypeSummaryDto] = SQL("select * from vAlgorithmOutputTypeSummary where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VAlgorithmOutputTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmOutputTypeSummaryDto] = SQL("select * from vAlgorithmOutputTypeSummary where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmOutputTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmOutputTypeSummaryDto] = SQL("select * from vAlgorithmOutputTypeSummary where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmOutputTypeName(colValue : String) : List[VAlgorithmOutputTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmOutputTypeSummaryDto] = SQL("select * from vAlgorithmOutputTypeSummary where algorithmOutputTypeName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmTypeOutputType_count(colValue : Int) : List[VAlgorithmOutputTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmOutputTypeSummaryDto] = SQL("select * from vAlgorithmOutputTypeSummary where algorithmTypeOutputType_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmOutput_count(colValue : Int) : List[VAlgorithmOutputTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmOutputTypeSummaryDto] = SQL("select * from vAlgorithmOutputTypeSummary where algorithmOutput_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputTypeSummaryDto].*);
+    dtos
+  }
+
+}
+
+
+class VAlgorithmParamSummaryDao extends DaoBase {
+
+  def getVAlgorithmParamSummarysList() : List[VAlgorithmParamSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmParamSummaryDto]= SQL("select * from vAlgorithmParamSummary").as(anorm.Macro.namedParser[VAlgorithmParamSummaryDto].*);
+    dtos
+  }
+  def getVAlgorithmParamSummarysCount() : Long = {
+    implicit val connection = getConnection();
+    val cnt : Long = SQL("select count(*) as cnt from vAlgorithmParamSummary").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVAlgorithmParamSummarysLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vAlgorithmParamSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVAlgorithmParamSummarysLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vAlgorithmParamSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVAlgorithmParamSummaryFirst() : VAlgorithmParamSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmParamSummaryDto= SQL("select * from vAlgorithmParamSummary order by insertedRowDate asc ").as(anorm.Macro.namedParser[VAlgorithmParamSummaryDto].*).head;
+    dtos
+  }
+  def getVAlgorithmParamSummaryLast() : VAlgorithmParamSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmParamSummaryDto= SQL("select * from vAlgorithmParamSummary order by insertedRowDate desc ").as(anorm.Macro.namedParser[VAlgorithmParamSummaryDto].*).head;
+    dtos
+  }
+  def getVAlgorithmParamSummaryByGuid(guid : Long) : VAlgorithmParamSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmParamSummaryDto= SQL("select * from vAlgorithmParamSummary where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VAlgorithmParamSummaryDto].single);
+    dtos
+  }
+  def getDtosByAlgorithmParamId(colValue : Long) : List[VAlgorithmParamSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmParamSummaryDto] = SQL("select * from vAlgorithmParamSummary where algorithmParamId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmParamSummaryDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VAlgorithmParamSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmParamSummaryDto] = SQL("select * from vAlgorithmParamSummary where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmParamSummaryDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VAlgorithmParamSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmParamSummaryDto] = SQL("select * from vAlgorithmParamSummary where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmParamSummaryDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmParamSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmParamSummaryDto] = SQL("select * from vAlgorithmParamSummary where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmParamSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmParamName(colValue : String) : List[VAlgorithmParamSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmParamSummaryDto] = SQL("select * from vAlgorithmParamSummary where algorithmParamName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmParamSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmParamDescription(colValue : String) : List[VAlgorithmParamSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmParamSummaryDto] = SQL("select * from vAlgorithmParamSummary where algorithmParamDescription = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmParamSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmParamType(colValue : String) : List[VAlgorithmParamSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmParamSummaryDto] = SQL("select * from vAlgorithmParamSummary where algorithmParamType = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmParamSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmScheduleParam_count(colValue : Int) : List[VAlgorithmParamSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmParamSummaryDto] = SQL("select * from vAlgorithmParamSummary where algorithmScheduleParam_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmParamSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmParamType_count(colValue : Int) : List[VAlgorithmParamSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmParamSummaryDto] = SQL("select * from vAlgorithmParamSummary where algorithmParamType_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmParamSummaryDto].*);
     dtos
   }
 
@@ -4020,6 +4939,21 @@ class VAlgorithmParamTypeDao extends DaoBase {
     val dtos : List[VAlgorithmParamTypeDto] = SQL("select * from vAlgorithmParamType where algorithmParamTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmParamTypeDto].*);
     dtos
   }
+  def getDtosByGuid(colValue : Long) : List[VAlgorithmParamTypeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmParamTypeDto] = SQL("select * from vAlgorithmParamType where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmParamTypeDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VAlgorithmParamTypeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmParamTypeDto] = SQL("select * from vAlgorithmParamType where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmParamTypeDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmParamTypeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmParamTypeDto] = SQL("select * from vAlgorithmParamType where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmParamTypeDto].*);
+    dtos
+  }
   def getDtosByAlgorithmParamId(colValue : Long) : List[VAlgorithmParamTypeDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmParamTypeDto] = SQL("select * from vAlgorithmParamType where algorithmParamId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmParamTypeDto].*);
@@ -4033,21 +4967,6 @@ class VAlgorithmParamTypeDao extends DaoBase {
   def getDtosByAlgorithmTypeVersionId(colValue : Long) : List[VAlgorithmParamTypeDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmParamTypeDto] = SQL("select * from vAlgorithmParamType where algorithmTypeVersionId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmParamTypeDto].*);
-    dtos
-  }
-  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VAlgorithmParamTypeDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VAlgorithmParamTypeDto] = SQL("select * from vAlgorithmParamType where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmParamTypeDto].*);
-    dtos
-  }
-  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmParamTypeDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VAlgorithmParamTypeDto] = SQL("select * from vAlgorithmParamType where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmParamTypeDto].*);
-    dtos
-  }
-  def getDtosByGuid(colValue : Long) : List[VAlgorithmParamTypeDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VAlgorithmParamTypeDto] = SQL("select * from vAlgorithmParamType where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmParamTypeDto].*);
     dtos
   }
   def getDtosByAlgorithmParam_algorithmParamId(colValue : Long) : List[VAlgorithmParamTypeDto] = {
@@ -4095,16 +5014,6 @@ class VAlgorithmParamTypeDao extends DaoBase {
     val dtos : List[VAlgorithmParamTypeDto] = SQL("select * from vAlgorithmParamType where algorithmType_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmParamTypeDto].*);
     dtos
   }
-  def getDtosByAlgorithmType_algorithmTypeName(colValue : String) : List[VAlgorithmParamTypeDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VAlgorithmParamTypeDto] = SQL("select * from vAlgorithmParamType where algorithmType_algorithmTypeName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmParamTypeDto].*);
-    dtos
-  }
-  def getDtosByAlgorithmType_algorithmTypeDescription(colValue : String) : List[VAlgorithmParamTypeDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VAlgorithmParamTypeDto] = SQL("select * from vAlgorithmParamType where algorithmType_algorithmTypeDescription = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmParamTypeDto].*);
-    dtos
-  }
   def getDtosByAlgorithmType_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmParamTypeDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmParamTypeDto] = SQL("select * from vAlgorithmParamType where algorithmType_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmParamTypeDto].*);
@@ -4115,9 +5024,29 @@ class VAlgorithmParamTypeDao extends DaoBase {
     val dtos : List[VAlgorithmParamTypeDto] = SQL("select * from vAlgorithmParamType where algorithmType_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmParamTypeDto].*);
     dtos
   }
+  def getDtosByAlgorithmType_algorithmTypeName(colValue : String) : List[VAlgorithmParamTypeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmParamTypeDto] = SQL("select * from vAlgorithmParamType where algorithmType_algorithmTypeName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmParamTypeDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmType_algorithmTypeDescription(colValue : String) : List[VAlgorithmParamTypeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmParamTypeDto] = SQL("select * from vAlgorithmParamType where algorithmType_algorithmTypeDescription = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmParamTypeDto].*);
+    dtos
+  }
   def getDtosByAlgorithmTypeVersion_algorithmTypeVersionId(colValue : Long) : List[VAlgorithmParamTypeDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmParamTypeDto] = SQL("select * from vAlgorithmParamType where algorithmTypeVersion_algorithmTypeVersionId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmParamTypeDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmTypeVersion_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmParamTypeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmParamTypeDto] = SQL("select * from vAlgorithmParamType where algorithmTypeVersion_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmParamTypeDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmTypeVersion_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmParamTypeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmParamTypeDto] = SQL("select * from vAlgorithmParamType where algorithmTypeVersion_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmParamTypeDto].*);
     dtos
   }
   def getDtosByAlgorithmTypeVersion_guid(colValue : Long) : List[VAlgorithmParamTypeDto] = {
@@ -4133,16 +5062,6 @@ class VAlgorithmParamTypeDao extends DaoBase {
   def getDtosByAlgorithmTypeVersion_algorithmTypeVersionName(colValue : String) : List[VAlgorithmParamTypeDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmParamTypeDto] = SQL("select * from vAlgorithmParamType where algorithmTypeVersion_algorithmTypeVersionName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmParamTypeDto].*);
-    dtos
-  }
-  def getDtosByAlgorithmTypeVersion_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmParamTypeDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VAlgorithmParamTypeDto] = SQL("select * from vAlgorithmParamType where algorithmTypeVersion_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmParamTypeDto].*);
-    dtos
-  }
-  def getDtosByAlgorithmTypeVersion_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmParamTypeDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VAlgorithmParamTypeDto] = SQL("select * from vAlgorithmParamType where algorithmTypeVersion_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmParamTypeDto].*);
     dtos
   }
 
@@ -4196,6 +5115,16 @@ class VAlgorithmRunDao extends DaoBase {
     val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
     dtos
   }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VAlgorithmRunDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmRunDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
+    dtos
+  }
   def getDtosByAlgorithmScheduleId(colValue : Long) : List[VAlgorithmRunDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where algorithmScheduleId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
@@ -4211,24 +5140,34 @@ class VAlgorithmRunDao extends DaoBase {
     val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where executorStorageId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
     dtos
   }
+  def getDtosByAlgorithmRunTypeId(colValue : Long) : List[VAlgorithmRunDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where algorithmRunTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
+    dtos
+  }
   def getDtosByAlgorithmRunName(colValue : String) : List[VAlgorithmRunDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where algorithmRunName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
     dtos
   }
-  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VAlgorithmRunDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
-    dtos
-  }
-  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmRunDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
-    dtos
-  }
   def getDtosByRunDate(colValue : java.util.Date) : List[VAlgorithmRunDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where runDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
+    dtos
+  }
+  def getDtosByRunStatus(colValue : String) : List[VAlgorithmRunDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where runStatus = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
+    dtos
+  }
+  def getDtosByIsError(colValue : Int) : List[VAlgorithmRunDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where isError = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
+    dtos
+  }
+  def getDtosByErrorDescription(colValue : String) : List[VAlgorithmRunDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where errorDescription = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
     dtos
   }
   def getDtosByIsRunning(colValue : Int) : List[VAlgorithmRunDto] = {
@@ -4241,6 +5180,31 @@ class VAlgorithmRunDao extends DaoBase {
     val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where isFinished = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
     dtos
   }
+  def getDtosByAlgorithmRunType_algorithmRunTypeId(colValue : Long) : List[VAlgorithmRunDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where algorithmRunType_algorithmRunTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmRunType_guid(colValue : Long) : List[VAlgorithmRunDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where algorithmRunType_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmRunType_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmRunDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where algorithmRunType_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmRunType_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmRunDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where algorithmRunType_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmRunType_algorithmRunTypeName(colValue : String) : List[VAlgorithmRunDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where algorithmRunType_algorithmRunTypeName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
+    dtos
+  }
   def getDtosByAlgorithmSchedule_algorithmScheduleId(colValue : Long) : List[VAlgorithmRunDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where algorithmSchedule_algorithmScheduleId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
@@ -4249,6 +5213,16 @@ class VAlgorithmRunDao extends DaoBase {
   def getDtosByAlgorithmSchedule_guid(colValue : Long) : List[VAlgorithmRunDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where algorithmSchedule_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmSchedule_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmRunDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where algorithmSchedule_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmSchedule_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmRunDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where algorithmSchedule_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
     dtos
   }
   def getDtosByAlgorithmSchedule_algorithmImplementationId(colValue : Long) : List[VAlgorithmRunDto] = {
@@ -4271,14 +5245,14 @@ class VAlgorithmRunDao extends DaoBase {
     val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where algorithmSchedule_isScheduled = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
     dtos
   }
-  def getDtosByAlgorithmSchedule_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmRunDto] = {
+  def getDtosByAlgorithmSchedule_intervalValue(colValue : Long) : List[VAlgorithmRunDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where algorithmSchedule_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
+    val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where algorithmSchedule_intervalValue = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
     dtos
   }
-  def getDtosByAlgorithmSchedule_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmRunDto] = {
+  def getDtosByAlgorithmSchedule_isRunning(colValue : Int) : List[VAlgorithmRunDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where algorithmSchedule_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
+    val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where algorithmSchedule_isRunning = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
     dtos
   }
   def getDtosByExecutorInstance_executorInstanceId(colValue : Long) : List[VAlgorithmRunDto] = {
@@ -4291,6 +5265,16 @@ class VAlgorithmRunDao extends DaoBase {
     val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where executorInstance_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
     dtos
   }
+  def getDtosByExecutorInstance_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmRunDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where executorInstance_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
+    dtos
+  }
+  def getDtosByExecutorInstance_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmRunDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where executorInstance_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
+    dtos
+  }
   def getDtosByExecutorInstance_executorTypeId(colValue : Long) : List[VAlgorithmRunDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where executorInstance_executorTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
@@ -4299,6 +5283,11 @@ class VAlgorithmRunDao extends DaoBase {
   def getDtosByExecutorInstance_executorHostId(colValue : Long) : List[VAlgorithmRunDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where executorInstance_executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
+    dtos
+  }
+  def getDtosByExecutorInstance_executorContextId(colValue : Long) : List[VAlgorithmRunDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where executorInstance_executorContextId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
     dtos
   }
   def getDtosByExecutorInstance_executorInstanceName(colValue : String) : List[VAlgorithmRunDto] = {
@@ -4321,16 +5310,6 @@ class VAlgorithmRunDao extends DaoBase {
     val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where executorInstance_portNumber = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
     dtos
   }
-  def getDtosByExecutorInstance_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmRunDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where executorInstance_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
-    dtos
-  }
-  def getDtosByExecutorInstance_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmRunDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where executorInstance_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
-    dtos
-  }
   def getDtosByExecutorInstance_endDate(colValue : java.util.Date) : List[VAlgorithmRunDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where executorInstance_endDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
@@ -4344,6 +5323,16 @@ class VAlgorithmRunDao extends DaoBase {
   def getDtosByExecutorStorage_guid(colValue : Long) : List[VAlgorithmRunDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where executorStorage_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorage_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmRunDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where executorStorage_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorage_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmRunDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where executorStorage_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
     dtos
   }
   def getDtosByExecutorStorage_executorHostId(colValue : Long) : List[VAlgorithmRunDto] = {
@@ -4381,14 +5370,201 @@ class VAlgorithmRunDao extends DaoBase {
     val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where executorStorage_portNumber = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
     dtos
   }
-  def getDtosByExecutorStorage_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmRunDto] = {
+
+}
+
+
+class VAlgorithmRunSummaryDao extends DaoBase {
+
+  def getVAlgorithmRunSummarysList() : List[VAlgorithmRunSummaryDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where executorStorage_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
+    val dtos : List[VAlgorithmRunSummaryDto]= SQL("select * from vAlgorithmRunSummary").as(anorm.Macro.namedParser[VAlgorithmRunSummaryDto].*);
     dtos
   }
-  def getDtosByExecutorStorage_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmRunDto] = {
+  def getVAlgorithmRunSummarysCount() : Long = {
     implicit val connection = getConnection();
-    val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where executorStorage_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);
+    val cnt : Long = SQL("select count(*) as cnt from vAlgorithmRunSummary").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVAlgorithmRunSummarysLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vAlgorithmRunSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVAlgorithmRunSummarysLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vAlgorithmRunSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVAlgorithmRunSummaryFirst() : VAlgorithmRunSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmRunSummaryDto= SQL("select * from vAlgorithmRunSummary order by insertedRowDate asc ").as(anorm.Macro.namedParser[VAlgorithmRunSummaryDto].*).head;
+    dtos
+  }
+  def getVAlgorithmRunSummaryLast() : VAlgorithmRunSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmRunSummaryDto= SQL("select * from vAlgorithmRunSummary order by insertedRowDate desc ").as(anorm.Macro.namedParser[VAlgorithmRunSummaryDto].*).head;
+    dtos
+  }
+  def getVAlgorithmRunSummaryByGuid(guid : Long) : VAlgorithmRunSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmRunSummaryDto= SQL("select * from vAlgorithmRunSummary where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VAlgorithmRunSummaryDto].single);
+    dtos
+  }
+  def getDtosByAlgorithmRunId(colValue : Long) : List[VAlgorithmRunSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunSummaryDto] = SQL("select * from vAlgorithmRunSummary where algorithmRunId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunSummaryDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VAlgorithmRunSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunSummaryDto] = SQL("select * from vAlgorithmRunSummary where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunSummaryDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VAlgorithmRunSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunSummaryDto] = SQL("select * from vAlgorithmRunSummary where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunSummaryDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmRunSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunSummaryDto] = SQL("select * from vAlgorithmRunSummary where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmScheduleId(colValue : Long) : List[VAlgorithmRunSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunSummaryDto] = SQL("select * from vAlgorithmRunSummary where algorithmScheduleId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorInstanceId(colValue : Long) : List[VAlgorithmRunSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunSummaryDto] = SQL("select * from vAlgorithmRunSummary where executorInstanceId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorageId(colValue : Long) : List[VAlgorithmRunSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunSummaryDto] = SQL("select * from vAlgorithmRunSummary where executorStorageId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmRunTypeId(colValue : Long) : List[VAlgorithmRunSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunSummaryDto] = SQL("select * from vAlgorithmRunSummary where algorithmRunTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmRunName(colValue : String) : List[VAlgorithmRunSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunSummaryDto] = SQL("select * from vAlgorithmRunSummary where algorithmRunName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunSummaryDto].*);
+    dtos
+  }
+  def getDtosByRunDate(colValue : java.util.Date) : List[VAlgorithmRunSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunSummaryDto] = SQL("select * from vAlgorithmRunSummary where runDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunSummaryDto].*);
+    dtos
+  }
+  def getDtosByRunStatus(colValue : String) : List[VAlgorithmRunSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunSummaryDto] = SQL("select * from vAlgorithmRunSummary where runStatus = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunSummaryDto].*);
+    dtos
+  }
+  def getDtosByIsError(colValue : Int) : List[VAlgorithmRunSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunSummaryDto] = SQL("select * from vAlgorithmRunSummary where isError = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunSummaryDto].*);
+    dtos
+  }
+  def getDtosByErrorDescription(colValue : String) : List[VAlgorithmRunSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunSummaryDto] = SQL("select * from vAlgorithmRunSummary where errorDescription = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunSummaryDto].*);
+    dtos
+  }
+  def getDtosByIsRunning(colValue : Int) : List[VAlgorithmRunSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunSummaryDto] = SQL("select * from vAlgorithmRunSummary where isRunning = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunSummaryDto].*);
+    dtos
+  }
+  def getDtosByIsFinished(colValue : Int) : List[VAlgorithmRunSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunSummaryDto] = SQL("select * from vAlgorithmRunSummary where isFinished = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmRunView_count(colValue : Int) : List[VAlgorithmRunSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunSummaryDto] = SQL("select * from vAlgorithmRunSummary where algorithmRunView_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmOutput_count(colValue : Int) : List[VAlgorithmRunSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunSummaryDto] = SQL("select * from vAlgorithmRunSummary where algorithmOutput_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunSummaryDto].*);
+    dtos
+  }
+
+}
+
+
+class VAlgorithmRunTypeSummaryDao extends DaoBase {
+
+  def getVAlgorithmRunTypeSummarysList() : List[VAlgorithmRunTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunTypeSummaryDto]= SQL("select * from vAlgorithmRunTypeSummary").as(anorm.Macro.namedParser[VAlgorithmRunTypeSummaryDto].*);
+    dtos
+  }
+  def getVAlgorithmRunTypeSummarysCount() : Long = {
+    implicit val connection = getConnection();
+    val cnt : Long = SQL("select count(*) as cnt from vAlgorithmRunTypeSummary").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVAlgorithmRunTypeSummarysLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vAlgorithmRunTypeSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVAlgorithmRunTypeSummarysLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vAlgorithmRunTypeSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVAlgorithmRunTypeSummaryFirst() : VAlgorithmRunTypeSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmRunTypeSummaryDto= SQL("select * from vAlgorithmRunTypeSummary order by insertedRowDate asc ").as(anorm.Macro.namedParser[VAlgorithmRunTypeSummaryDto].*).head;
+    dtos
+  }
+  def getVAlgorithmRunTypeSummaryLast() : VAlgorithmRunTypeSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmRunTypeSummaryDto= SQL("select * from vAlgorithmRunTypeSummary order by insertedRowDate desc ").as(anorm.Macro.namedParser[VAlgorithmRunTypeSummaryDto].*).head;
+    dtos
+  }
+  def getVAlgorithmRunTypeSummaryByGuid(guid : Long) : VAlgorithmRunTypeSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmRunTypeSummaryDto= SQL("select * from vAlgorithmRunTypeSummary where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VAlgorithmRunTypeSummaryDto].single);
+    dtos
+  }
+  def getDtosByAlgorithmRunTypeId(colValue : Long) : List[VAlgorithmRunTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunTypeSummaryDto] = SQL("select * from vAlgorithmRunTypeSummary where algorithmRunTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VAlgorithmRunTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunTypeSummaryDto] = SQL("select * from vAlgorithmRunTypeSummary where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VAlgorithmRunTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunTypeSummaryDto] = SQL("select * from vAlgorithmRunTypeSummary where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmRunTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunTypeSummaryDto] = SQL("select * from vAlgorithmRunTypeSummary where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmRunTypeName(colValue : String) : List[VAlgorithmRunTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunTypeSummaryDto] = SQL("select * from vAlgorithmRunTypeSummary where algorithmRunTypeName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmRun_count(colValue : Int) : List[VAlgorithmRunTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunTypeSummaryDto] = SQL("select * from vAlgorithmRunTypeSummary where algorithmRun_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunTypeSummaryDto].*);
     dtos
   }
 
@@ -4442,16 +5618,6 @@ class VAlgorithmRunViewDao extends DaoBase {
     val dtos : List[VAlgorithmRunViewDto] = SQL("select * from vAlgorithmRunView where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunViewDto].*);
     dtos
   }
-  def getDtosByAlgorithmRunId(colValue : Long) : List[VAlgorithmRunViewDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VAlgorithmRunViewDto] = SQL("select * from vAlgorithmRunView where algorithmRunId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunViewDto].*);
-    dtos
-  }
-  def getDtosByExecutorStorageViewId(colValue : Long) : List[VAlgorithmRunViewDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VAlgorithmRunViewDto] = SQL("select * from vAlgorithmRunView where executorStorageViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunViewDto].*);
-    dtos
-  }
   def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VAlgorithmRunViewDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmRunViewDto] = SQL("select * from vAlgorithmRunView where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunViewDto].*);
@@ -4460,6 +5626,16 @@ class VAlgorithmRunViewDao extends DaoBase {
   def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmRunViewDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmRunViewDto] = SQL("select * from vAlgorithmRunView where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunViewDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmRunId(colValue : Long) : List[VAlgorithmRunViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunViewDto] = SQL("select * from vAlgorithmRunView where algorithmRunId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunViewDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorageViewId(colValue : Long) : List[VAlgorithmRunViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunViewDto] = SQL("select * from vAlgorithmRunView where executorStorageViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunViewDto].*);
     dtos
   }
   def getDtosByIsDownloaded(colValue : Int) : List[VAlgorithmRunViewDto] = {
@@ -4477,6 +5653,16 @@ class VAlgorithmRunViewDao extends DaoBase {
     val dtos : List[VAlgorithmRunViewDto] = SQL("select * from vAlgorithmRunView where algorithmRun_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunViewDto].*);
     dtos
   }
+  def getDtosByAlgorithmRun_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmRunViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunViewDto] = SQL("select * from vAlgorithmRunView where algorithmRun_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunViewDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmRun_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmRunViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunViewDto] = SQL("select * from vAlgorithmRunView where algorithmRun_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunViewDto].*);
+    dtos
+  }
   def getDtosByAlgorithmRun_algorithmScheduleId(colValue : Long) : List[VAlgorithmRunViewDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmRunViewDto] = SQL("select * from vAlgorithmRunView where algorithmRun_algorithmScheduleId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunViewDto].*);
@@ -4492,24 +5678,34 @@ class VAlgorithmRunViewDao extends DaoBase {
     val dtos : List[VAlgorithmRunViewDto] = SQL("select * from vAlgorithmRunView where algorithmRun_executorStorageId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunViewDto].*);
     dtos
   }
+  def getDtosByAlgorithmRun_algorithmRunTypeId(colValue : Long) : List[VAlgorithmRunViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunViewDto] = SQL("select * from vAlgorithmRunView where algorithmRun_algorithmRunTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunViewDto].*);
+    dtos
+  }
   def getDtosByAlgorithmRun_algorithmRunName(colValue : String) : List[VAlgorithmRunViewDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmRunViewDto] = SQL("select * from vAlgorithmRunView where algorithmRun_algorithmRunName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunViewDto].*);
     dtos
   }
-  def getDtosByAlgorithmRun_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmRunViewDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VAlgorithmRunViewDto] = SQL("select * from vAlgorithmRunView where algorithmRun_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunViewDto].*);
-    dtos
-  }
-  def getDtosByAlgorithmRun_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmRunViewDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VAlgorithmRunViewDto] = SQL("select * from vAlgorithmRunView where algorithmRun_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunViewDto].*);
-    dtos
-  }
   def getDtosByAlgorithmRun_runDate(colValue : java.util.Date) : List[VAlgorithmRunViewDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmRunViewDto] = SQL("select * from vAlgorithmRunView where algorithmRun_runDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunViewDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmRun_runStatus(colValue : String) : List[VAlgorithmRunViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunViewDto] = SQL("select * from vAlgorithmRunView where algorithmRun_runStatus = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunViewDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmRun_isError(colValue : Int) : List[VAlgorithmRunViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunViewDto] = SQL("select * from vAlgorithmRunView where algorithmRun_isError = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunViewDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmRun_errorDescription(colValue : String) : List[VAlgorithmRunViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunViewDto] = SQL("select * from vAlgorithmRunView where algorithmRun_errorDescription = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunViewDto].*);
     dtos
   }
   def getDtosByAlgorithmRun_isRunning(colValue : Int) : List[VAlgorithmRunViewDto] = {
@@ -4557,6 +5753,11 @@ class VAlgorithmRunViewDao extends DaoBase {
     val dtos : List[VAlgorithmRunViewDto] = SQL("select * from vAlgorithmRunView where executorStorageView_sourceDownloadId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunViewDto].*);
     dtos
   }
+  def getDtosByExecutorStorageView_sourceViewId(colValue : Long) : List[VAlgorithmRunViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunViewDto] = SQL("select * from vAlgorithmRunView where executorStorageView_sourceViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunViewDto].*);
+    dtos
+  }
   def getDtosByExecutorStorageView_storagePath(colValue : String) : List[VAlgorithmRunViewDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmRunViewDto] = SQL("select * from vAlgorithmRunView where executorStorageView_storagePath = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunViewDto].*);
@@ -4570,6 +5771,11 @@ class VAlgorithmRunViewDao extends DaoBase {
   def getDtosByExecutorStorageView_viewRowsCount(colValue : Long) : List[VAlgorithmRunViewDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmRunViewDto] = SQL("select * from vAlgorithmRunView where executorStorageView_viewRowsCount = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunViewDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorageView_isValid(colValue : Int) : List[VAlgorithmRunViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmRunViewDto] = SQL("select * from vAlgorithmRunView where executorStorageView_isValid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunViewDto].*);
     dtos
   }
 
@@ -4623,6 +5829,16 @@ class VAlgorithmScheduleDao extends DaoBase {
     val dtos : List[VAlgorithmScheduleDto] = SQL("select * from vAlgorithmSchedule where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleDto].*);
     dtos
   }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VAlgorithmScheduleDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleDto] = SQL("select * from vAlgorithmSchedule where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmScheduleDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleDto] = SQL("select * from vAlgorithmSchedule where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleDto].*);
+    dtos
+  }
   def getDtosByAlgorithmImplementationId(colValue : Long) : List[VAlgorithmScheduleDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmScheduleDto] = SQL("select * from vAlgorithmSchedule where algorithmImplementationId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleDto].*);
@@ -4643,14 +5859,14 @@ class VAlgorithmScheduleDao extends DaoBase {
     val dtos : List[VAlgorithmScheduleDto] = SQL("select * from vAlgorithmSchedule where isScheduled = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleDto].*);
     dtos
   }
-  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VAlgorithmScheduleDto] = {
+  def getDtosByIntervalValue(colValue : Long) : List[VAlgorithmScheduleDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VAlgorithmScheduleDto] = SQL("select * from vAlgorithmSchedule where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleDto].*);
+    val dtos : List[VAlgorithmScheduleDto] = SQL("select * from vAlgorithmSchedule where intervalValue = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleDto].*);
     dtos
   }
-  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmScheduleDto] = {
+  def getDtosByIsRunning(colValue : Int) : List[VAlgorithmScheduleDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VAlgorithmScheduleDto] = SQL("select * from vAlgorithmSchedule where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleDto].*);
+    val dtos : List[VAlgorithmScheduleDto] = SQL("select * from vAlgorithmSchedule where isRunning = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleDto].*);
     dtos
   }
   def getDtosByAlgorithmImplementation_algorithmImplementationId(colValue : Long) : List[VAlgorithmScheduleDto] = {
@@ -4703,11 +5919,6 @@ class VAlgorithmScheduleDao extends DaoBase {
     val dtos : List[VAlgorithmScheduleDto] = SQL("select * from vAlgorithmSchedule where algorithmScheduleType_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleDto].*);
     dtos
   }
-  def getDtosByAlgorithmScheduleType_algorithmScheduleTypeName(colValue : String) : List[VAlgorithmScheduleDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VAlgorithmScheduleDto] = SQL("select * from vAlgorithmSchedule where algorithmScheduleType_algorithmScheduleTypeName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleDto].*);
-    dtos
-  }
   def getDtosByAlgorithmScheduleType_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmScheduleDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmScheduleDto] = SQL("select * from vAlgorithmSchedule where algorithmScheduleType_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleDto].*);
@@ -4716,6 +5927,11 @@ class VAlgorithmScheduleDao extends DaoBase {
   def getDtosByAlgorithmScheduleType_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmScheduleDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmScheduleDto] = SQL("select * from vAlgorithmSchedule where algorithmScheduleType_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmScheduleType_algorithmScheduleTypeName(colValue : String) : List[VAlgorithmScheduleDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleDto] = SQL("select * from vAlgorithmSchedule where algorithmScheduleType_algorithmScheduleTypeName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleDto].*);
     dtos
   }
 
@@ -4769,6 +5985,16 @@ class VAlgorithmScheduleColumnDao extends DaoBase {
     val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
     dtos
   }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VAlgorithmScheduleColumnDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmScheduleColumnDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
+    dtos
+  }
   def getDtosByAlgorithmScheduleId(colValue : Long) : List[VAlgorithmScheduleColumnDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where algorithmScheduleId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
@@ -4799,29 +6025,14 @@ class VAlgorithmScheduleColumnDao extends DaoBase {
     val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where extendedProperties = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
     dtos
   }
-  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VAlgorithmScheduleColumnDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
-    dtos
-  }
-  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmScheduleColumnDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
-    dtos
-  }
   def getDtosByAlgorithmColumnType_algorithmColumnTypeId(colValue : Long) : List[VAlgorithmScheduleColumnDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where algorithmColumnType_algorithmColumnTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
     dtos
   }
-  def getDtosByAlgorithmColumnType_algorithmColumnTypeName(colValue : String) : List[VAlgorithmScheduleColumnDto] = {
+  def getDtosByAlgorithmColumnType_guid(colValue : Long) : List[VAlgorithmScheduleColumnDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where algorithmColumnType_algorithmColumnTypeName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
-    dtos
-  }
-  def getDtosByAlgorithmColumnType_algorithmColumnTypeDescription(colValue : String) : List[VAlgorithmScheduleColumnDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where algorithmColumnType_algorithmColumnTypeDescription = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
+    val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where algorithmColumnType_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
     dtos
   }
   def getDtosByAlgorithmColumnType_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmScheduleColumnDto] = {
@@ -4834,9 +6045,14 @@ class VAlgorithmScheduleColumnDao extends DaoBase {
     val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where algorithmColumnType_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
     dtos
   }
-  def getDtosByAlgorithmColumnType_guid(colValue : Long) : List[VAlgorithmScheduleColumnDto] = {
+  def getDtosByAlgorithmColumnType_algorithmColumnTypeName(colValue : String) : List[VAlgorithmScheduleColumnDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where algorithmColumnType_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
+    val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where algorithmColumnType_algorithmColumnTypeName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmColumnType_algorithmColumnTypeDescription(colValue : String) : List[VAlgorithmScheduleColumnDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where algorithmColumnType_algorithmColumnTypeDescription = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
     dtos
   }
   def getDtosByAlgorithmSchedule_algorithmScheduleId(colValue : Long) : List[VAlgorithmScheduleColumnDto] = {
@@ -4847,6 +6063,16 @@ class VAlgorithmScheduleColumnDao extends DaoBase {
   def getDtosByAlgorithmSchedule_guid(colValue : Long) : List[VAlgorithmScheduleColumnDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where algorithmSchedule_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmSchedule_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmScheduleColumnDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where algorithmSchedule_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmSchedule_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmScheduleColumnDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where algorithmSchedule_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
     dtos
   }
   def getDtosByAlgorithmSchedule_algorithmImplementationId(colValue : Long) : List[VAlgorithmScheduleColumnDto] = {
@@ -4869,14 +6095,14 @@ class VAlgorithmScheduleColumnDao extends DaoBase {
     val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where algorithmSchedule_isScheduled = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
     dtos
   }
-  def getDtosByAlgorithmSchedule_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmScheduleColumnDto] = {
+  def getDtosByAlgorithmSchedule_intervalValue(colValue : Long) : List[VAlgorithmScheduleColumnDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where algorithmSchedule_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
+    val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where algorithmSchedule_intervalValue = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
     dtos
   }
-  def getDtosByAlgorithmSchedule_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmScheduleColumnDto] = {
+  def getDtosByAlgorithmSchedule_isRunning(colValue : Int) : List[VAlgorithmScheduleColumnDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where algorithmSchedule_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
+    val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where algorithmSchedule_isRunning = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
     dtos
   }
   def getDtosByAlgorithmScheduleView_algorithmScheduleViewId(colValue : Long) : List[VAlgorithmScheduleColumnDto] = {
@@ -4887,6 +6113,16 @@ class VAlgorithmScheduleColumnDao extends DaoBase {
   def getDtosByAlgorithmScheduleView_guid(colValue : Long) : List[VAlgorithmScheduleColumnDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where algorithmScheduleView_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmScheduleView_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmScheduleColumnDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where algorithmScheduleView_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmScheduleView_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmScheduleColumnDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where algorithmScheduleView_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
     dtos
   }
   def getDtosByAlgorithmScheduleView_algorithmScheduleViewTypeId(colValue : Long) : List[VAlgorithmScheduleColumnDto] = {
@@ -4904,16 +6140,6 @@ class VAlgorithmScheduleColumnDao extends DaoBase {
     val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where algorithmScheduleView_sourceViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
     dtos
   }
-  def getDtosByAlgorithmScheduleView_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmScheduleColumnDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where algorithmScheduleView_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
-    dtos
-  }
-  def getDtosByAlgorithmScheduleView_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmScheduleColumnDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where algorithmScheduleView_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
-    dtos
-  }
   def getDtosByAlgorithmScheduleView_joinOnDefinition(colValue : String) : List[VAlgorithmScheduleColumnDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where algorithmScheduleView_joinOnDefinition = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
@@ -4927,6 +6153,16 @@ class VAlgorithmScheduleColumnDao extends DaoBase {
   def getDtosBySourceView_guid(colValue : Long) : List[VAlgorithmScheduleColumnDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where sourceView_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
+    dtos
+  }
+  def getDtosBySourceView_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmScheduleColumnDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where sourceView_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
+    dtos
+  }
+  def getDtosBySourceView_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmScheduleColumnDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where sourceView_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
     dtos
   }
   def getDtosBySourceView_sourceInstanceId(colValue : Long) : List[VAlgorithmScheduleColumnDto] = {
@@ -4949,14 +6185,9 @@ class VAlgorithmScheduleColumnDao extends DaoBase {
     val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where sourceView_sourceViewDefinition = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
     dtos
   }
-  def getDtosBySourceView_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmScheduleColumnDto] = {
+  def getDtosBySourceView_isExisting(colValue : Int) : List[VAlgorithmScheduleColumnDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where sourceView_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
-    dtos
-  }
-  def getDtosBySourceView_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmScheduleColumnDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where sourceView_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
+    val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where sourceView_isExisting = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
     dtos
   }
   def getDtosBySourceViewColumn_sourceViewColumnId(colValue : Long) : List[VAlgorithmScheduleColumnDto] = {
@@ -4964,9 +6195,9 @@ class VAlgorithmScheduleColumnDao extends DaoBase {
     val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where sourceViewColumn_sourceViewColumnId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
     dtos
   }
-  def getDtosBySourceViewColumn_sourceViewId(colValue : Long) : List[VAlgorithmScheduleColumnDto] = {
+  def getDtosBySourceViewColumn_guid(colValue : Long) : List[VAlgorithmScheduleColumnDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where sourceViewColumn_sourceViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
+    val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where sourceViewColumn_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
     dtos
   }
   def getDtosBySourceViewColumn_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmScheduleColumnDto] = {
@@ -4979,9 +6210,9 @@ class VAlgorithmScheduleColumnDao extends DaoBase {
     val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where sourceViewColumn_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
     dtos
   }
-  def getDtosBySourceViewColumn_guid(colValue : Long) : List[VAlgorithmScheduleColumnDto] = {
+  def getDtosBySourceViewColumn_sourceViewId(colValue : Long) : List[VAlgorithmScheduleColumnDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where sourceViewColumn_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
+    val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where sourceViewColumn_sourceViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);
     dtos
   }
   def getDtosBySourceViewColumn_columnName(colValue : String) : List[VAlgorithmScheduleColumnDto] = {
@@ -5045,6 +6276,16 @@ class VAlgorithmScheduleParamDao extends DaoBase {
     val dtos : List[VAlgorithmScheduleParamDto] = SQL("select * from vAlgorithmScheduleParam where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleParamDto].*);
     dtos
   }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VAlgorithmScheduleParamDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleParamDto] = SQL("select * from vAlgorithmScheduleParam where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleParamDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmScheduleParamDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleParamDto] = SQL("select * from vAlgorithmScheduleParam where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleParamDto].*);
+    dtos
+  }
   def getDtosByAlgorithmScheduleId(colValue : Long) : List[VAlgorithmScheduleParamDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmScheduleParamDto] = SQL("select * from vAlgorithmScheduleParam where algorithmScheduleId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleParamDto].*);
@@ -5058,16 +6299,6 @@ class VAlgorithmScheduleParamDao extends DaoBase {
   def getDtosByAlgorithmParamValue(colValue : String) : List[VAlgorithmScheduleParamDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmScheduleParamDto] = SQL("select * from vAlgorithmScheduleParam where algorithmParamValue = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleParamDto].*);
-    dtos
-  }
-  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VAlgorithmScheduleParamDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VAlgorithmScheduleParamDto] = SQL("select * from vAlgorithmScheduleParam where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleParamDto].*);
-    dtos
-  }
-  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmScheduleParamDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VAlgorithmScheduleParamDto] = SQL("select * from vAlgorithmScheduleParam where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleParamDto].*);
     dtos
   }
   def getDtosByAlgorithmParam_algorithmParamId(colValue : Long) : List[VAlgorithmScheduleParamDto] = {
@@ -5115,6 +6346,16 @@ class VAlgorithmScheduleParamDao extends DaoBase {
     val dtos : List[VAlgorithmScheduleParamDto] = SQL("select * from vAlgorithmScheduleParam where algorithmSchedule_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleParamDto].*);
     dtos
   }
+  def getDtosByAlgorithmSchedule_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmScheduleParamDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleParamDto] = SQL("select * from vAlgorithmScheduleParam where algorithmSchedule_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleParamDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmSchedule_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmScheduleParamDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleParamDto] = SQL("select * from vAlgorithmScheduleParam where algorithmSchedule_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleParamDto].*);
+    dtos
+  }
   def getDtosByAlgorithmSchedule_algorithmImplementationId(colValue : Long) : List[VAlgorithmScheduleParamDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmScheduleParamDto] = SQL("select * from vAlgorithmScheduleParam where algorithmSchedule_algorithmImplementationId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleParamDto].*);
@@ -5135,14 +6376,196 @@ class VAlgorithmScheduleParamDao extends DaoBase {
     val dtos : List[VAlgorithmScheduleParamDto] = SQL("select * from vAlgorithmScheduleParam where algorithmSchedule_isScheduled = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleParamDto].*);
     dtos
   }
-  def getDtosByAlgorithmSchedule_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmScheduleParamDto] = {
+  def getDtosByAlgorithmSchedule_intervalValue(colValue : Long) : List[VAlgorithmScheduleParamDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VAlgorithmScheduleParamDto] = SQL("select * from vAlgorithmScheduleParam where algorithmSchedule_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleParamDto].*);
+    val dtos : List[VAlgorithmScheduleParamDto] = SQL("select * from vAlgorithmScheduleParam where algorithmSchedule_intervalValue = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleParamDto].*);
     dtos
   }
-  def getDtosByAlgorithmSchedule_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmScheduleParamDto] = {
+  def getDtosByAlgorithmSchedule_isRunning(colValue : Int) : List[VAlgorithmScheduleParamDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VAlgorithmScheduleParamDto] = SQL("select * from vAlgorithmScheduleParam where algorithmSchedule_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleParamDto].*);
+    val dtos : List[VAlgorithmScheduleParamDto] = SQL("select * from vAlgorithmScheduleParam where algorithmSchedule_isRunning = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleParamDto].*);
+    dtos
+  }
+
+}
+
+
+class VAlgorithmScheduleSummaryDao extends DaoBase {
+
+  def getVAlgorithmScheduleSummarysList() : List[VAlgorithmScheduleSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleSummaryDto]= SQL("select * from vAlgorithmScheduleSummary").as(anorm.Macro.namedParser[VAlgorithmScheduleSummaryDto].*);
+    dtos
+  }
+  def getVAlgorithmScheduleSummarysCount() : Long = {
+    implicit val connection = getConnection();
+    val cnt : Long = SQL("select count(*) as cnt from vAlgorithmScheduleSummary").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVAlgorithmScheduleSummarysLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vAlgorithmScheduleSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVAlgorithmScheduleSummarysLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vAlgorithmScheduleSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVAlgorithmScheduleSummaryFirst() : VAlgorithmScheduleSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmScheduleSummaryDto= SQL("select * from vAlgorithmScheduleSummary order by insertedRowDate asc ").as(anorm.Macro.namedParser[VAlgorithmScheduleSummaryDto].*).head;
+    dtos
+  }
+  def getVAlgorithmScheduleSummaryLast() : VAlgorithmScheduleSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmScheduleSummaryDto= SQL("select * from vAlgorithmScheduleSummary order by insertedRowDate desc ").as(anorm.Macro.namedParser[VAlgorithmScheduleSummaryDto].*).head;
+    dtos
+  }
+  def getVAlgorithmScheduleSummaryByGuid(guid : Long) : VAlgorithmScheduleSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmScheduleSummaryDto= SQL("select * from vAlgorithmScheduleSummary where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VAlgorithmScheduleSummaryDto].single);
+    dtos
+  }
+  def getDtosByAlgorithmScheduleId(colValue : Long) : List[VAlgorithmScheduleSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleSummaryDto] = SQL("select * from vAlgorithmScheduleSummary where algorithmScheduleId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleSummaryDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VAlgorithmScheduleSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleSummaryDto] = SQL("select * from vAlgorithmScheduleSummary where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleSummaryDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VAlgorithmScheduleSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleSummaryDto] = SQL("select * from vAlgorithmScheduleSummary where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleSummaryDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmScheduleSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleSummaryDto] = SQL("select * from vAlgorithmScheduleSummary where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmImplementationId(colValue : Long) : List[VAlgorithmScheduleSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleSummaryDto] = SQL("select * from vAlgorithmScheduleSummary where algorithmImplementationId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmScheduleTypeId(colValue : Long) : List[VAlgorithmScheduleSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleSummaryDto] = SQL("select * from vAlgorithmScheduleSummary where algorithmScheduleTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmScheduleName(colValue : String) : List[VAlgorithmScheduleSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleSummaryDto] = SQL("select * from vAlgorithmScheduleSummary where algorithmScheduleName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleSummaryDto].*);
+    dtos
+  }
+  def getDtosByIsScheduled(colValue : Int) : List[VAlgorithmScheduleSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleSummaryDto] = SQL("select * from vAlgorithmScheduleSummary where isScheduled = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleSummaryDto].*);
+    dtos
+  }
+  def getDtosByIntervalValue(colValue : Long) : List[VAlgorithmScheduleSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleSummaryDto] = SQL("select * from vAlgorithmScheduleSummary where intervalValue = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleSummaryDto].*);
+    dtos
+  }
+  def getDtosByIsRunning(colValue : Int) : List[VAlgorithmScheduleSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleSummaryDto] = SQL("select * from vAlgorithmScheduleSummary where isRunning = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmScheduleView_count(colValue : Int) : List[VAlgorithmScheduleSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleSummaryDto] = SQL("select * from vAlgorithmScheduleSummary where algorithmScheduleView_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmScheduleParam_count(colValue : Int) : List[VAlgorithmScheduleSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleSummaryDto] = SQL("select * from vAlgorithmScheduleSummary where algorithmScheduleParam_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmScheduleColumn_count(colValue : Int) : List[VAlgorithmScheduleSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleSummaryDto] = SQL("select * from vAlgorithmScheduleSummary where algorithmScheduleColumn_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmRun_count(colValue : Int) : List[VAlgorithmScheduleSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleSummaryDto] = SQL("select * from vAlgorithmScheduleSummary where algorithmRun_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleSummaryDto].*);
+    dtos
+  }
+
+}
+
+
+class VAlgorithmScheduleTypeSummaryDao extends DaoBase {
+
+  def getVAlgorithmScheduleTypeSummarysList() : List[VAlgorithmScheduleTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleTypeSummaryDto]= SQL("select * from vAlgorithmScheduleTypeSummary").as(anorm.Macro.namedParser[VAlgorithmScheduleTypeSummaryDto].*);
+    dtos
+  }
+  def getVAlgorithmScheduleTypeSummarysCount() : Long = {
+    implicit val connection = getConnection();
+    val cnt : Long = SQL("select count(*) as cnt from vAlgorithmScheduleTypeSummary").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVAlgorithmScheduleTypeSummarysLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vAlgorithmScheduleTypeSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVAlgorithmScheduleTypeSummarysLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vAlgorithmScheduleTypeSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVAlgorithmScheduleTypeSummaryFirst() : VAlgorithmScheduleTypeSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmScheduleTypeSummaryDto= SQL("select * from vAlgorithmScheduleTypeSummary order by insertedRowDate asc ").as(anorm.Macro.namedParser[VAlgorithmScheduleTypeSummaryDto].*).head;
+    dtos
+  }
+  def getVAlgorithmScheduleTypeSummaryLast() : VAlgorithmScheduleTypeSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmScheduleTypeSummaryDto= SQL("select * from vAlgorithmScheduleTypeSummary order by insertedRowDate desc ").as(anorm.Macro.namedParser[VAlgorithmScheduleTypeSummaryDto].*).head;
+    dtos
+  }
+  def getVAlgorithmScheduleTypeSummaryByGuid(guid : Long) : VAlgorithmScheduleTypeSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmScheduleTypeSummaryDto= SQL("select * from vAlgorithmScheduleTypeSummary where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VAlgorithmScheduleTypeSummaryDto].single);
+    dtos
+  }
+  def getDtosByAlgorithmScheduleTypeId(colValue : Long) : List[VAlgorithmScheduleTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleTypeSummaryDto] = SQL("select * from vAlgorithmScheduleTypeSummary where algorithmScheduleTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VAlgorithmScheduleTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleTypeSummaryDto] = SQL("select * from vAlgorithmScheduleTypeSummary where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VAlgorithmScheduleTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleTypeSummaryDto] = SQL("select * from vAlgorithmScheduleTypeSummary where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmScheduleTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleTypeSummaryDto] = SQL("select * from vAlgorithmScheduleTypeSummary where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmScheduleTypeName(colValue : String) : List[VAlgorithmScheduleTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleTypeSummaryDto] = SQL("select * from vAlgorithmScheduleTypeSummary where algorithmScheduleTypeName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmSchedule_count(colValue : Int) : List[VAlgorithmScheduleTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleTypeSummaryDto] = SQL("select * from vAlgorithmScheduleTypeSummary where algorithmSchedule_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleTypeSummaryDto].*);
     dtos
   }
 
@@ -5196,6 +6619,16 @@ class VAlgorithmScheduleViewDao extends DaoBase {
     val dtos : List[VAlgorithmScheduleViewDto] = SQL("select * from vAlgorithmScheduleView where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewDto].*);
     dtos
   }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VAlgorithmScheduleViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleViewDto] = SQL("select * from vAlgorithmScheduleView where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmScheduleViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleViewDto] = SQL("select * from vAlgorithmScheduleView where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewDto].*);
+    dtos
+  }
   def getDtosByAlgorithmScheduleViewTypeId(colValue : Long) : List[VAlgorithmScheduleViewDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmScheduleViewDto] = SQL("select * from vAlgorithmScheduleView where algorithmScheduleViewTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewDto].*);
@@ -5211,16 +6644,6 @@ class VAlgorithmScheduleViewDao extends DaoBase {
     val dtos : List[VAlgorithmScheduleViewDto] = SQL("select * from vAlgorithmScheduleView where sourceViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewDto].*);
     dtos
   }
-  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VAlgorithmScheduleViewDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VAlgorithmScheduleViewDto] = SQL("select * from vAlgorithmScheduleView where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewDto].*);
-    dtos
-  }
-  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmScheduleViewDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VAlgorithmScheduleViewDto] = SQL("select * from vAlgorithmScheduleView where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewDto].*);
-    dtos
-  }
   def getDtosByJoinOnDefinition(colValue : String) : List[VAlgorithmScheduleViewDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmScheduleViewDto] = SQL("select * from vAlgorithmScheduleView where joinOnDefinition = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewDto].*);
@@ -5234,6 +6657,16 @@ class VAlgorithmScheduleViewDao extends DaoBase {
   def getDtosByAlgorithmSchedule_guid(colValue : Long) : List[VAlgorithmScheduleViewDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmScheduleViewDto] = SQL("select * from vAlgorithmScheduleView where algorithmSchedule_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmSchedule_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmScheduleViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleViewDto] = SQL("select * from vAlgorithmScheduleView where algorithmSchedule_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmSchedule_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmScheduleViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleViewDto] = SQL("select * from vAlgorithmScheduleView where algorithmSchedule_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewDto].*);
     dtos
   }
   def getDtosByAlgorithmSchedule_algorithmImplementationId(colValue : Long) : List[VAlgorithmScheduleViewDto] = {
@@ -5256,14 +6689,14 @@ class VAlgorithmScheduleViewDao extends DaoBase {
     val dtos : List[VAlgorithmScheduleViewDto] = SQL("select * from vAlgorithmScheduleView where algorithmSchedule_isScheduled = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewDto].*);
     dtos
   }
-  def getDtosByAlgorithmSchedule_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmScheduleViewDto] = {
+  def getDtosByAlgorithmSchedule_intervalValue(colValue : Long) : List[VAlgorithmScheduleViewDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VAlgorithmScheduleViewDto] = SQL("select * from vAlgorithmScheduleView where algorithmSchedule_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewDto].*);
+    val dtos : List[VAlgorithmScheduleViewDto] = SQL("select * from vAlgorithmScheduleView where algorithmSchedule_intervalValue = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewDto].*);
     dtos
   }
-  def getDtosByAlgorithmSchedule_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmScheduleViewDto] = {
+  def getDtosByAlgorithmSchedule_isRunning(colValue : Int) : List[VAlgorithmScheduleViewDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VAlgorithmScheduleViewDto] = SQL("select * from vAlgorithmScheduleView where algorithmSchedule_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewDto].*);
+    val dtos : List[VAlgorithmScheduleViewDto] = SQL("select * from vAlgorithmScheduleView where algorithmSchedule_isRunning = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewDto].*);
     dtos
   }
   def getDtosByAlgorithmScheduleViewType_algorithmScheduleViewTypeId(colValue : Long) : List[VAlgorithmScheduleViewDto] = {
@@ -5276,11 +6709,6 @@ class VAlgorithmScheduleViewDao extends DaoBase {
     val dtos : List[VAlgorithmScheduleViewDto] = SQL("select * from vAlgorithmScheduleView where algorithmScheduleViewType_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewDto].*);
     dtos
   }
-  def getDtosByAlgorithmScheduleViewType_algorithmScheduleViewTypeName(colValue : String) : List[VAlgorithmScheduleViewDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VAlgorithmScheduleViewDto] = SQL("select * from vAlgorithmScheduleView where algorithmScheduleViewType_algorithmScheduleViewTypeName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewDto].*);
-    dtos
-  }
   def getDtosByAlgorithmScheduleViewType_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmScheduleViewDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmScheduleViewDto] = SQL("select * from vAlgorithmScheduleView where algorithmScheduleViewType_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewDto].*);
@@ -5291,6 +6719,11 @@ class VAlgorithmScheduleViewDao extends DaoBase {
     val dtos : List[VAlgorithmScheduleViewDto] = SQL("select * from vAlgorithmScheduleView where algorithmScheduleViewType_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewDto].*);
     dtos
   }
+  def getDtosByAlgorithmScheduleViewType_algorithmScheduleViewTypeName(colValue : String) : List[VAlgorithmScheduleViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleViewDto] = SQL("select * from vAlgorithmScheduleView where algorithmScheduleViewType_algorithmScheduleViewTypeName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewDto].*);
+    dtos
+  }
   def getDtosBySourceView_sourceViewId(colValue : Long) : List[VAlgorithmScheduleViewDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmScheduleViewDto] = SQL("select * from vAlgorithmScheduleView where sourceView_sourceViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewDto].*);
@@ -5299,6 +6732,16 @@ class VAlgorithmScheduleViewDao extends DaoBase {
   def getDtosBySourceView_guid(colValue : Long) : List[VAlgorithmScheduleViewDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmScheduleViewDto] = SQL("select * from vAlgorithmScheduleView where sourceView_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewDto].*);
+    dtos
+  }
+  def getDtosBySourceView_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmScheduleViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleViewDto] = SQL("select * from vAlgorithmScheduleView where sourceView_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewDto].*);
+    dtos
+  }
+  def getDtosBySourceView_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmScheduleViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleViewDto] = SQL("select * from vAlgorithmScheduleView where sourceView_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewDto].*);
     dtos
   }
   def getDtosBySourceView_sourceInstanceId(colValue : Long) : List[VAlgorithmScheduleViewDto] = {
@@ -5321,14 +6764,312 @@ class VAlgorithmScheduleViewDao extends DaoBase {
     val dtos : List[VAlgorithmScheduleViewDto] = SQL("select * from vAlgorithmScheduleView where sourceView_sourceViewDefinition = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewDto].*);
     dtos
   }
-  def getDtosBySourceView_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmScheduleViewDto] = {
+  def getDtosBySourceView_isExisting(colValue : Int) : List[VAlgorithmScheduleViewDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VAlgorithmScheduleViewDto] = SQL("select * from vAlgorithmScheduleView where sourceView_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewDto].*);
+    val dtos : List[VAlgorithmScheduleViewDto] = SQL("select * from vAlgorithmScheduleView where sourceView_isExisting = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewDto].*);
     dtos
   }
-  def getDtosBySourceView_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmScheduleViewDto] = {
+
+}
+
+
+class VAlgorithmScheduleViewSummaryDao extends DaoBase {
+
+  def getVAlgorithmScheduleViewSummarysList() : List[VAlgorithmScheduleViewSummaryDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VAlgorithmScheduleViewDto] = SQL("select * from vAlgorithmScheduleView where sourceView_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewDto].*);
+    val dtos : List[VAlgorithmScheduleViewSummaryDto]= SQL("select * from vAlgorithmScheduleViewSummary").as(anorm.Macro.namedParser[VAlgorithmScheduleViewSummaryDto].*);
+    dtos
+  }
+  def getVAlgorithmScheduleViewSummarysCount() : Long = {
+    implicit val connection = getConnection();
+    val cnt : Long = SQL("select count(*) as cnt from vAlgorithmScheduleViewSummary").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVAlgorithmScheduleViewSummarysLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vAlgorithmScheduleViewSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVAlgorithmScheduleViewSummarysLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vAlgorithmScheduleViewSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVAlgorithmScheduleViewSummaryFirst() : VAlgorithmScheduleViewSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmScheduleViewSummaryDto= SQL("select * from vAlgorithmScheduleViewSummary order by insertedRowDate asc ").as(anorm.Macro.namedParser[VAlgorithmScheduleViewSummaryDto].*).head;
+    dtos
+  }
+  def getVAlgorithmScheduleViewSummaryLast() : VAlgorithmScheduleViewSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmScheduleViewSummaryDto= SQL("select * from vAlgorithmScheduleViewSummary order by insertedRowDate desc ").as(anorm.Macro.namedParser[VAlgorithmScheduleViewSummaryDto].*).head;
+    dtos
+  }
+  def getVAlgorithmScheduleViewSummaryByGuid(guid : Long) : VAlgorithmScheduleViewSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmScheduleViewSummaryDto= SQL("select * from vAlgorithmScheduleViewSummary where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VAlgorithmScheduleViewSummaryDto].single);
+    dtos
+  }
+  def getDtosByAlgorithmScheduleViewId(colValue : Long) : List[VAlgorithmScheduleViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleViewSummaryDto] = SQL("select * from vAlgorithmScheduleViewSummary where algorithmScheduleViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewSummaryDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VAlgorithmScheduleViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleViewSummaryDto] = SQL("select * from vAlgorithmScheduleViewSummary where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewSummaryDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VAlgorithmScheduleViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleViewSummaryDto] = SQL("select * from vAlgorithmScheduleViewSummary where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewSummaryDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmScheduleViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleViewSummaryDto] = SQL("select * from vAlgorithmScheduleViewSummary where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmScheduleViewTypeId(colValue : Long) : List[VAlgorithmScheduleViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleViewSummaryDto] = SQL("select * from vAlgorithmScheduleViewSummary where algorithmScheduleViewTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmScheduleId(colValue : Long) : List[VAlgorithmScheduleViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleViewSummaryDto] = SQL("select * from vAlgorithmScheduleViewSummary where algorithmScheduleId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewSummaryDto].*);
+    dtos
+  }
+  def getDtosBySourceViewId(colValue : Long) : List[VAlgorithmScheduleViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleViewSummaryDto] = SQL("select * from vAlgorithmScheduleViewSummary where sourceViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewSummaryDto].*);
+    dtos
+  }
+  def getDtosByJoinOnDefinition(colValue : String) : List[VAlgorithmScheduleViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleViewSummaryDto] = SQL("select * from vAlgorithmScheduleViewSummary where joinOnDefinition = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmScheduleColumn_count(colValue : Int) : List[VAlgorithmScheduleViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleViewSummaryDto] = SQL("select * from vAlgorithmScheduleViewSummary where algorithmScheduleColumn_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewSummaryDto].*);
+    dtos
+  }
+
+}
+
+
+class VAlgorithmScheduleViewTypeSummaryDao extends DaoBase {
+
+  def getVAlgorithmScheduleViewTypeSummarysList() : List[VAlgorithmScheduleViewTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleViewTypeSummaryDto]= SQL("select * from vAlgorithmScheduleViewTypeSummary").as(anorm.Macro.namedParser[VAlgorithmScheduleViewTypeSummaryDto].*);
+    dtos
+  }
+  def getVAlgorithmScheduleViewTypeSummarysCount() : Long = {
+    implicit val connection = getConnection();
+    val cnt : Long = SQL("select count(*) as cnt from vAlgorithmScheduleViewTypeSummary").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVAlgorithmScheduleViewTypeSummarysLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vAlgorithmScheduleViewTypeSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVAlgorithmScheduleViewTypeSummarysLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vAlgorithmScheduleViewTypeSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVAlgorithmScheduleViewTypeSummaryFirst() : VAlgorithmScheduleViewTypeSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmScheduleViewTypeSummaryDto= SQL("select * from vAlgorithmScheduleViewTypeSummary order by insertedRowDate asc ").as(anorm.Macro.namedParser[VAlgorithmScheduleViewTypeSummaryDto].*).head;
+    dtos
+  }
+  def getVAlgorithmScheduleViewTypeSummaryLast() : VAlgorithmScheduleViewTypeSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmScheduleViewTypeSummaryDto= SQL("select * from vAlgorithmScheduleViewTypeSummary order by insertedRowDate desc ").as(anorm.Macro.namedParser[VAlgorithmScheduleViewTypeSummaryDto].*).head;
+    dtos
+  }
+  def getVAlgorithmScheduleViewTypeSummaryByGuid(guid : Long) : VAlgorithmScheduleViewTypeSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmScheduleViewTypeSummaryDto= SQL("select * from vAlgorithmScheduleViewTypeSummary where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VAlgorithmScheduleViewTypeSummaryDto].single);
+    dtos
+  }
+  def getDtosByAlgorithmScheduleViewTypeId(colValue : Long) : List[VAlgorithmScheduleViewTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleViewTypeSummaryDto] = SQL("select * from vAlgorithmScheduleViewTypeSummary where algorithmScheduleViewTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VAlgorithmScheduleViewTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleViewTypeSummaryDto] = SQL("select * from vAlgorithmScheduleViewTypeSummary where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VAlgorithmScheduleViewTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleViewTypeSummaryDto] = SQL("select * from vAlgorithmScheduleViewTypeSummary where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmScheduleViewTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleViewTypeSummaryDto] = SQL("select * from vAlgorithmScheduleViewTypeSummary where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmScheduleViewTypeName(colValue : String) : List[VAlgorithmScheduleViewTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleViewTypeSummaryDto] = SQL("select * from vAlgorithmScheduleViewTypeSummary where algorithmScheduleViewTypeName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmScheduleView_count(colValue : Int) : List[VAlgorithmScheduleViewTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmScheduleViewTypeSummaryDto] = SQL("select * from vAlgorithmScheduleViewTypeSummary where algorithmScheduleView_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewTypeSummaryDto].*);
+    dtos
+  }
+
+}
+
+
+class VAlgorithmStorageSupportDao extends DaoBase {
+
+  def getVAlgorithmStorageSupportsList() : List[VAlgorithmStorageSupportDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmStorageSupportDto]= SQL("select * from vAlgorithmStorageSupport").as(anorm.Macro.namedParser[VAlgorithmStorageSupportDto].*);
+    dtos
+  }
+  def getVAlgorithmStorageSupportsCount() : Long = {
+    implicit val connection = getConnection();
+    val cnt : Long = SQL("select count(*) as cnt from vAlgorithmStorageSupport").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVAlgorithmStorageSupportsLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vAlgorithmStorageSupport").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVAlgorithmStorageSupportsLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vAlgorithmStorageSupport").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVAlgorithmStorageSupportFirst() : VAlgorithmStorageSupportDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmStorageSupportDto= SQL("select * from vAlgorithmStorageSupport order by insertedRowDate asc ").as(anorm.Macro.namedParser[VAlgorithmStorageSupportDto].*).head;
+    dtos
+  }
+  def getVAlgorithmStorageSupportLast() : VAlgorithmStorageSupportDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmStorageSupportDto= SQL("select * from vAlgorithmStorageSupport order by insertedRowDate desc ").as(anorm.Macro.namedParser[VAlgorithmStorageSupportDto].*).head;
+    dtos
+  }
+  def getVAlgorithmStorageSupportByGuid(guid : Long) : VAlgorithmStorageSupportDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmStorageSupportDto= SQL("select * from vAlgorithmStorageSupport where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VAlgorithmStorageSupportDto].single);
+    dtos
+  }
+  def getDtosByAlgorithmStorageSupportId(colValue : Long) : List[VAlgorithmStorageSupportDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmStorageSupportDto] = SQL("select * from vAlgorithmStorageSupport where algorithmStorageSupportId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmStorageSupportDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VAlgorithmStorageSupportDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmStorageSupportDto] = SQL("select * from vAlgorithmStorageSupport where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmStorageSupportDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VAlgorithmStorageSupportDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmStorageSupportDto] = SQL("select * from vAlgorithmStorageSupport where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmStorageSupportDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmStorageSupportDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmStorageSupportDto] = SQL("select * from vAlgorithmStorageSupport where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmStorageSupportDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmImplementationId(colValue : Long) : List[VAlgorithmStorageSupportDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmStorageSupportDto] = SQL("select * from vAlgorithmStorageSupport where algorithmImplementationId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmStorageSupportDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorageTypeId(colValue : Long) : List[VAlgorithmStorageSupportDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmStorageSupportDto] = SQL("select * from vAlgorithmStorageSupport where executorStorageTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmStorageSupportDto].*);
+    dtos
+  }
+  def getDtosBySupportPriority(colValue : Int) : List[VAlgorithmStorageSupportDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmStorageSupportDto] = SQL("select * from vAlgorithmStorageSupport where supportPriority = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmStorageSupportDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmImplementation_algorithmImplementationId(colValue : Long) : List[VAlgorithmStorageSupportDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmStorageSupportDto] = SQL("select * from vAlgorithmStorageSupport where algorithmImplementation_algorithmImplementationId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmStorageSupportDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmImplementation_guid(colValue : Long) : List[VAlgorithmStorageSupportDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmStorageSupportDto] = SQL("select * from vAlgorithmStorageSupport where algorithmImplementation_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmStorageSupportDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmImplementation_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmStorageSupportDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmStorageSupportDto] = SQL("select * from vAlgorithmStorageSupport where algorithmImplementation_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmStorageSupportDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmImplementation_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmStorageSupportDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmStorageSupportDto] = SQL("select * from vAlgorithmStorageSupport where algorithmImplementation_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmStorageSupportDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmImplementation_algorithmTypeVersionId(colValue : Long) : List[VAlgorithmStorageSupportDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmStorageSupportDto] = SQL("select * from vAlgorithmStorageSupport where algorithmImplementation_algorithmTypeVersionId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmStorageSupportDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmImplementation_executorTypeId(colValue : Long) : List[VAlgorithmStorageSupportDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmStorageSupportDto] = SQL("select * from vAlgorithmStorageSupport where algorithmImplementation_executorTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmStorageSupportDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmImplementation_algorithmImplementationName(colValue : String) : List[VAlgorithmStorageSupportDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmStorageSupportDto] = SQL("select * from vAlgorithmStorageSupport where algorithmImplementation_algorithmImplementationName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmStorageSupportDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmImplementation_algorithmImplementationClass(colValue : String) : List[VAlgorithmStorageSupportDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmStorageSupportDto] = SQL("select * from vAlgorithmStorageSupport where algorithmImplementation_algorithmImplementationClass = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmStorageSupportDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorageType_executorStorageTypeId(colValue : Long) : List[VAlgorithmStorageSupportDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmStorageSupportDto] = SQL("select * from vAlgorithmStorageSupport where executorStorageType_executorStorageTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmStorageSupportDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorageType_guid(colValue : Long) : List[VAlgorithmStorageSupportDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmStorageSupportDto] = SQL("select * from vAlgorithmStorageSupport where executorStorageType_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmStorageSupportDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorageType_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmStorageSupportDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmStorageSupportDto] = SQL("select * from vAlgorithmStorageSupport where executorStorageType_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmStorageSupportDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorageType_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmStorageSupportDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmStorageSupportDto] = SQL("select * from vAlgorithmStorageSupport where executorStorageType_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmStorageSupportDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorageType_executorStorageTypeName(colValue : String) : List[VAlgorithmStorageSupportDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmStorageSupportDto] = SQL("select * from vAlgorithmStorageSupport where executorStorageType_executorStorageTypeName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmStorageSupportDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorageType_executorStorageTypeClass(colValue : String) : List[VAlgorithmStorageSupportDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmStorageSupportDto] = SQL("select * from vAlgorithmStorageSupport where executorStorageType_executorStorageTypeClass = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmStorageSupportDto].*);
     dtos
   }
 
@@ -5377,6 +7118,21 @@ class VAlgorithmTypeColumnTypeDao extends DaoBase {
     val dtos : List[VAlgorithmTypeColumnTypeDto] = SQL("select * from vAlgorithmTypeColumnType where algorithmTypeColumnTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeColumnTypeDto].*);
     dtos
   }
+  def getDtosByGuid(colValue : Long) : List[VAlgorithmTypeColumnTypeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeColumnTypeDto] = SQL("select * from vAlgorithmTypeColumnType where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeColumnTypeDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VAlgorithmTypeColumnTypeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeColumnTypeDto] = SQL("select * from vAlgorithmTypeColumnType where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeColumnTypeDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmTypeColumnTypeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeColumnTypeDto] = SQL("select * from vAlgorithmTypeColumnType where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeColumnTypeDto].*);
+    dtos
+  }
   def getDtosByAlgorithmTypeVersionId(colValue : Long) : List[VAlgorithmTypeColumnTypeDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmTypeColumnTypeDto] = SQL("select * from vAlgorithmTypeColumnType where algorithmTypeVersionId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeColumnTypeDto].*);
@@ -5397,34 +7153,14 @@ class VAlgorithmTypeColumnTypeDao extends DaoBase {
     val dtos : List[VAlgorithmTypeColumnTypeDto] = SQL("select * from vAlgorithmTypeColumnType where allowEmpty = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeColumnTypeDto].*);
     dtos
   }
-  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VAlgorithmTypeColumnTypeDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VAlgorithmTypeColumnTypeDto] = SQL("select * from vAlgorithmTypeColumnType where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeColumnTypeDto].*);
-    dtos
-  }
-  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmTypeColumnTypeDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VAlgorithmTypeColumnTypeDto] = SQL("select * from vAlgorithmTypeColumnType where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeColumnTypeDto].*);
-    dtos
-  }
-  def getDtosByGuid(colValue : Long) : List[VAlgorithmTypeColumnTypeDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VAlgorithmTypeColumnTypeDto] = SQL("select * from vAlgorithmTypeColumnType where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeColumnTypeDto].*);
-    dtos
-  }
   def getDtosByAlgorithmColumnType_algorithmColumnTypeId(colValue : Long) : List[VAlgorithmTypeColumnTypeDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmTypeColumnTypeDto] = SQL("select * from vAlgorithmTypeColumnType where algorithmColumnType_algorithmColumnTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeColumnTypeDto].*);
     dtos
   }
-  def getDtosByAlgorithmColumnType_algorithmColumnTypeName(colValue : String) : List[VAlgorithmTypeColumnTypeDto] = {
+  def getDtosByAlgorithmColumnType_guid(colValue : Long) : List[VAlgorithmTypeColumnTypeDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VAlgorithmTypeColumnTypeDto] = SQL("select * from vAlgorithmTypeColumnType where algorithmColumnType_algorithmColumnTypeName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeColumnTypeDto].*);
-    dtos
-  }
-  def getDtosByAlgorithmColumnType_algorithmColumnTypeDescription(colValue : String) : List[VAlgorithmTypeColumnTypeDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VAlgorithmTypeColumnTypeDto] = SQL("select * from vAlgorithmTypeColumnType where algorithmColumnType_algorithmColumnTypeDescription = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeColumnTypeDto].*);
+    val dtos : List[VAlgorithmTypeColumnTypeDto] = SQL("select * from vAlgorithmTypeColumnType where algorithmColumnType_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeColumnTypeDto].*);
     dtos
   }
   def getDtosByAlgorithmColumnType_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmTypeColumnTypeDto] = {
@@ -5437,14 +7173,29 @@ class VAlgorithmTypeColumnTypeDao extends DaoBase {
     val dtos : List[VAlgorithmTypeColumnTypeDto] = SQL("select * from vAlgorithmTypeColumnType where algorithmColumnType_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeColumnTypeDto].*);
     dtos
   }
-  def getDtosByAlgorithmColumnType_guid(colValue : Long) : List[VAlgorithmTypeColumnTypeDto] = {
+  def getDtosByAlgorithmColumnType_algorithmColumnTypeName(colValue : String) : List[VAlgorithmTypeColumnTypeDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VAlgorithmTypeColumnTypeDto] = SQL("select * from vAlgorithmTypeColumnType where algorithmColumnType_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeColumnTypeDto].*);
+    val dtos : List[VAlgorithmTypeColumnTypeDto] = SQL("select * from vAlgorithmTypeColumnType where algorithmColumnType_algorithmColumnTypeName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeColumnTypeDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmColumnType_algorithmColumnTypeDescription(colValue : String) : List[VAlgorithmTypeColumnTypeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeColumnTypeDto] = SQL("select * from vAlgorithmTypeColumnType where algorithmColumnType_algorithmColumnTypeDescription = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeColumnTypeDto].*);
     dtos
   }
   def getDtosByAlgorithmTypeVersion_algorithmTypeVersionId(colValue : Long) : List[VAlgorithmTypeColumnTypeDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmTypeColumnTypeDto] = SQL("select * from vAlgorithmTypeColumnType where algorithmTypeVersion_algorithmTypeVersionId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeColumnTypeDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmTypeVersion_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmTypeColumnTypeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeColumnTypeDto] = SQL("select * from vAlgorithmTypeColumnType where algorithmTypeVersion_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeColumnTypeDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmTypeVersion_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmTypeColumnTypeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeColumnTypeDto] = SQL("select * from vAlgorithmTypeColumnType where algorithmTypeVersion_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeColumnTypeDto].*);
     dtos
   }
   def getDtosByAlgorithmTypeVersion_guid(colValue : Long) : List[VAlgorithmTypeColumnTypeDto] = {
@@ -5462,14 +7213,216 @@ class VAlgorithmTypeColumnTypeDao extends DaoBase {
     val dtos : List[VAlgorithmTypeColumnTypeDto] = SQL("select * from vAlgorithmTypeColumnType where algorithmTypeVersion_algorithmTypeVersionName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeColumnTypeDto].*);
     dtos
   }
-  def getDtosByAlgorithmTypeVersion_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmTypeColumnTypeDto] = {
+
+}
+
+
+class VAlgorithmTypeOutputTypeDao extends DaoBase {
+
+  def getVAlgorithmTypeOutputTypesList() : List[VAlgorithmTypeOutputTypeDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VAlgorithmTypeColumnTypeDto] = SQL("select * from vAlgorithmTypeColumnType where algorithmTypeVersion_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeColumnTypeDto].*);
+    val dtos : List[VAlgorithmTypeOutputTypeDto]= SQL("select * from vAlgorithmTypeOutputType").as(anorm.Macro.namedParser[VAlgorithmTypeOutputTypeDto].*);
     dtos
   }
-  def getDtosByAlgorithmTypeVersion_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmTypeColumnTypeDto] = {
+  def getVAlgorithmTypeOutputTypesCount() : Long = {
     implicit val connection = getConnection();
-    val dtos : List[VAlgorithmTypeColumnTypeDto] = SQL("select * from vAlgorithmTypeColumnType where algorithmTypeVersion_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeColumnTypeDto].*);
+    val cnt : Long = SQL("select count(*) as cnt from vAlgorithmTypeOutputType").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVAlgorithmTypeOutputTypesLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vAlgorithmTypeOutputType").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVAlgorithmTypeOutputTypesLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vAlgorithmTypeOutputType").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVAlgorithmTypeOutputTypeFirst() : VAlgorithmTypeOutputTypeDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmTypeOutputTypeDto= SQL("select * from vAlgorithmTypeOutputType order by insertedRowDate asc ").as(anorm.Macro.namedParser[VAlgorithmTypeOutputTypeDto].*).head;
+    dtos
+  }
+  def getVAlgorithmTypeOutputTypeLast() : VAlgorithmTypeOutputTypeDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmTypeOutputTypeDto= SQL("select * from vAlgorithmTypeOutputType order by insertedRowDate desc ").as(anorm.Macro.namedParser[VAlgorithmTypeOutputTypeDto].*).head;
+    dtos
+  }
+  def getVAlgorithmTypeOutputTypeByGuid(guid : Long) : VAlgorithmTypeOutputTypeDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmTypeOutputTypeDto= SQL("select * from vAlgorithmTypeOutputType where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VAlgorithmTypeOutputTypeDto].single);
+    dtos
+  }
+  def getDtosByAlgorithmTypeOutputTypeId(colValue : Long) : List[VAlgorithmTypeOutputTypeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeOutputTypeDto] = SQL("select * from vAlgorithmTypeOutputType where algorithmTypeOutputTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeOutputTypeDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VAlgorithmTypeOutputTypeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeOutputTypeDto] = SQL("select * from vAlgorithmTypeOutputType where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeOutputTypeDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VAlgorithmTypeOutputTypeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeOutputTypeDto] = SQL("select * from vAlgorithmTypeOutputType where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeOutputTypeDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmTypeOutputTypeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeOutputTypeDto] = SQL("select * from vAlgorithmTypeOutputType where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeOutputTypeDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmTypeVersionId(colValue : Long) : List[VAlgorithmTypeOutputTypeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeOutputTypeDto] = SQL("select * from vAlgorithmTypeOutputType where algorithmTypeVersionId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeOutputTypeDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmOutputTypeId(colValue : Long) : List[VAlgorithmTypeOutputTypeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeOutputTypeDto] = SQL("select * from vAlgorithmTypeOutputType where algorithmOutputTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeOutputTypeDto].*);
+    dtos
+  }
+  def getDtosByIsMandatory(colValue : Int) : List[VAlgorithmTypeOutputTypeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeOutputTypeDto] = SQL("select * from vAlgorithmTypeOutputType where isMandatory = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeOutputTypeDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmOutputType_algorithmOutputTypeId(colValue : Long) : List[VAlgorithmTypeOutputTypeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeOutputTypeDto] = SQL("select * from vAlgorithmTypeOutputType where algorithmOutputType_algorithmOutputTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeOutputTypeDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmOutputType_guid(colValue : Long) : List[VAlgorithmTypeOutputTypeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeOutputTypeDto] = SQL("select * from vAlgorithmTypeOutputType where algorithmOutputType_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeOutputTypeDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmOutputType_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmTypeOutputTypeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeOutputTypeDto] = SQL("select * from vAlgorithmTypeOutputType where algorithmOutputType_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeOutputTypeDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmOutputType_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmTypeOutputTypeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeOutputTypeDto] = SQL("select * from vAlgorithmTypeOutputType where algorithmOutputType_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeOutputTypeDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmOutputType_algorithmOutputTypeName(colValue : String) : List[VAlgorithmTypeOutputTypeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeOutputTypeDto] = SQL("select * from vAlgorithmTypeOutputType where algorithmOutputType_algorithmOutputTypeName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeOutputTypeDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmTypeVersion_algorithmTypeVersionId(colValue : Long) : List[VAlgorithmTypeOutputTypeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeOutputTypeDto] = SQL("select * from vAlgorithmTypeOutputType where algorithmTypeVersion_algorithmTypeVersionId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeOutputTypeDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmTypeVersion_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmTypeOutputTypeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeOutputTypeDto] = SQL("select * from vAlgorithmTypeOutputType where algorithmTypeVersion_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeOutputTypeDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmTypeVersion_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmTypeOutputTypeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeOutputTypeDto] = SQL("select * from vAlgorithmTypeOutputType where algorithmTypeVersion_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeOutputTypeDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmTypeVersion_guid(colValue : Long) : List[VAlgorithmTypeOutputTypeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeOutputTypeDto] = SQL("select * from vAlgorithmTypeOutputType where algorithmTypeVersion_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeOutputTypeDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmTypeVersion_algorithmTypeId(colValue : Long) : List[VAlgorithmTypeOutputTypeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeOutputTypeDto] = SQL("select * from vAlgorithmTypeOutputType where algorithmTypeVersion_algorithmTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeOutputTypeDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmTypeVersion_algorithmTypeVersionName(colValue : String) : List[VAlgorithmTypeOutputTypeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeOutputTypeDto] = SQL("select * from vAlgorithmTypeOutputType where algorithmTypeVersion_algorithmTypeVersionName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeOutputTypeDto].*);
+    dtos
+  }
+
+}
+
+
+class VAlgorithmTypeSummaryDao extends DaoBase {
+
+  def getVAlgorithmTypeSummarysList() : List[VAlgorithmTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeSummaryDto]= SQL("select * from vAlgorithmTypeSummary").as(anorm.Macro.namedParser[VAlgorithmTypeSummaryDto].*);
+    dtos
+  }
+  def getVAlgorithmTypeSummarysCount() : Long = {
+    implicit val connection = getConnection();
+    val cnt : Long = SQL("select count(*) as cnt from vAlgorithmTypeSummary").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVAlgorithmTypeSummarysLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vAlgorithmTypeSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVAlgorithmTypeSummarysLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vAlgorithmTypeSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVAlgorithmTypeSummaryFirst() : VAlgorithmTypeSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmTypeSummaryDto= SQL("select * from vAlgorithmTypeSummary order by insertedRowDate asc ").as(anorm.Macro.namedParser[VAlgorithmTypeSummaryDto].*).head;
+    dtos
+  }
+  def getVAlgorithmTypeSummaryLast() : VAlgorithmTypeSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmTypeSummaryDto= SQL("select * from vAlgorithmTypeSummary order by insertedRowDate desc ").as(anorm.Macro.namedParser[VAlgorithmTypeSummaryDto].*).head;
+    dtos
+  }
+  def getVAlgorithmTypeSummaryByGuid(guid : Long) : VAlgorithmTypeSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmTypeSummaryDto= SQL("select * from vAlgorithmTypeSummary where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VAlgorithmTypeSummaryDto].single);
+    dtos
+  }
+  def getDtosByAlgorithmTypeId(colValue : Long) : List[VAlgorithmTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeSummaryDto] = SQL("select * from vAlgorithmTypeSummary where algorithmTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VAlgorithmTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeSummaryDto] = SQL("select * from vAlgorithmTypeSummary where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VAlgorithmTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeSummaryDto] = SQL("select * from vAlgorithmTypeSummary where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeSummaryDto] = SQL("select * from vAlgorithmTypeSummary where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmTypeName(colValue : String) : List[VAlgorithmTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeSummaryDto] = SQL("select * from vAlgorithmTypeSummary where algorithmTypeName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmTypeDescription(colValue : String) : List[VAlgorithmTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeSummaryDto] = SQL("select * from vAlgorithmTypeSummary where algorithmTypeDescription = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmTypeVersion_count(colValue : Int) : List[VAlgorithmTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeSummaryDto] = SQL("select * from vAlgorithmTypeSummary where algorithmTypeVersion_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmParamType_count(colValue : Int) : List[VAlgorithmTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeSummaryDto] = SQL("select * from vAlgorithmTypeSummary where algorithmParamType_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeSummaryDto].*);
     dtos
   }
 
@@ -5518,6 +7471,16 @@ class VAlgorithmTypeVersionDao extends DaoBase {
     val dtos : List[VAlgorithmTypeVersionDto] = SQL("select * from vAlgorithmTypeVersion where algorithmTypeVersionId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeVersionDto].*);
     dtos
   }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VAlgorithmTypeVersionDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeVersionDto] = SQL("select * from vAlgorithmTypeVersion where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeVersionDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmTypeVersionDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeVersionDto] = SQL("select * from vAlgorithmTypeVersion where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeVersionDto].*);
+    dtos
+  }
   def getDtosByGuid(colValue : Long) : List[VAlgorithmTypeVersionDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmTypeVersionDto] = SQL("select * from vAlgorithmTypeVersion where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeVersionDto].*);
@@ -5533,16 +7496,6 @@ class VAlgorithmTypeVersionDao extends DaoBase {
     val dtos : List[VAlgorithmTypeVersionDto] = SQL("select * from vAlgorithmTypeVersion where algorithmTypeVersionName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeVersionDto].*);
     dtos
   }
-  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VAlgorithmTypeVersionDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VAlgorithmTypeVersionDto] = SQL("select * from vAlgorithmTypeVersion where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeVersionDto].*);
-    dtos
-  }
-  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmTypeVersionDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VAlgorithmTypeVersionDto] = SQL("select * from vAlgorithmTypeVersion where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeVersionDto].*);
-    dtos
-  }
   def getDtosByAlgorithmType_algorithmTypeId(colValue : Long) : List[VAlgorithmTypeVersionDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmTypeVersionDto] = SQL("select * from vAlgorithmTypeVersion where algorithmType_algorithmTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeVersionDto].*);
@@ -5551,6 +7504,16 @@ class VAlgorithmTypeVersionDao extends DaoBase {
   def getDtosByAlgorithmType_guid(colValue : Long) : List[VAlgorithmTypeVersionDto] = {
     implicit val connection = getConnection();
     val dtos : List[VAlgorithmTypeVersionDto] = SQL("select * from vAlgorithmTypeVersion where algorithmType_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeVersionDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmType_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmTypeVersionDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeVersionDto] = SQL("select * from vAlgorithmTypeVersion where algorithmType_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeVersionDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmType_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmTypeVersionDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeVersionDto] = SQL("select * from vAlgorithmTypeVersion where algorithmType_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeVersionDto].*);
     dtos
   }
   def getDtosByAlgorithmType_algorithmTypeName(colValue : String) : List[VAlgorithmTypeVersionDto] = {
@@ -5563,14 +7526,629 @@ class VAlgorithmTypeVersionDao extends DaoBase {
     val dtos : List[VAlgorithmTypeVersionDto] = SQL("select * from vAlgorithmTypeVersion where algorithmType_algorithmTypeDescription = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeVersionDto].*);
     dtos
   }
-  def getDtosByAlgorithmType_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmTypeVersionDto] = {
+
+}
+
+
+class VAlgorithmTypeVersionSummaryDao extends DaoBase {
+
+  def getVAlgorithmTypeVersionSummarysList() : List[VAlgorithmTypeVersionSummaryDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VAlgorithmTypeVersionDto] = SQL("select * from vAlgorithmTypeVersion where algorithmType_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeVersionDto].*);
+    val dtos : List[VAlgorithmTypeVersionSummaryDto]= SQL("select * from vAlgorithmTypeVersionSummary").as(anorm.Macro.namedParser[VAlgorithmTypeVersionSummaryDto].*);
     dtos
   }
-  def getDtosByAlgorithmType_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmTypeVersionDto] = {
+  def getVAlgorithmTypeVersionSummarysCount() : Long = {
     implicit val connection = getConnection();
-    val dtos : List[VAlgorithmTypeVersionDto] = SQL("select * from vAlgorithmTypeVersion where algorithmType_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeVersionDto].*);
+    val cnt : Long = SQL("select count(*) as cnt from vAlgorithmTypeVersionSummary").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVAlgorithmTypeVersionSummarysLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vAlgorithmTypeVersionSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVAlgorithmTypeVersionSummarysLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vAlgorithmTypeVersionSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVAlgorithmTypeVersionSummaryFirst() : VAlgorithmTypeVersionSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmTypeVersionSummaryDto= SQL("select * from vAlgorithmTypeVersionSummary order by insertedRowDate asc ").as(anorm.Macro.namedParser[VAlgorithmTypeVersionSummaryDto].*).head;
+    dtos
+  }
+  def getVAlgorithmTypeVersionSummaryLast() : VAlgorithmTypeVersionSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmTypeVersionSummaryDto= SQL("select * from vAlgorithmTypeVersionSummary order by insertedRowDate desc ").as(anorm.Macro.namedParser[VAlgorithmTypeVersionSummaryDto].*).head;
+    dtos
+  }
+  def getVAlgorithmTypeVersionSummaryByGuid(guid : Long) : VAlgorithmTypeVersionSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VAlgorithmTypeVersionSummaryDto= SQL("select * from vAlgorithmTypeVersionSummary where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VAlgorithmTypeVersionSummaryDto].single);
+    dtos
+  }
+  def getDtosByAlgorithmTypeVersionId(colValue : Long) : List[VAlgorithmTypeVersionSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeVersionSummaryDto] = SQL("select * from vAlgorithmTypeVersionSummary where algorithmTypeVersionId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeVersionSummaryDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VAlgorithmTypeVersionSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeVersionSummaryDto] = SQL("select * from vAlgorithmTypeVersionSummary where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeVersionSummaryDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmTypeVersionSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeVersionSummaryDto] = SQL("select * from vAlgorithmTypeVersionSummary where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeVersionSummaryDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VAlgorithmTypeVersionSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeVersionSummaryDto] = SQL("select * from vAlgorithmTypeVersionSummary where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeVersionSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmTypeId(colValue : Long) : List[VAlgorithmTypeVersionSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeVersionSummaryDto] = SQL("select * from vAlgorithmTypeVersionSummary where algorithmTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeVersionSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmTypeVersionName(colValue : String) : List[VAlgorithmTypeVersionSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeVersionSummaryDto] = SQL("select * from vAlgorithmTypeVersionSummary where algorithmTypeVersionName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeVersionSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmTypeColumnType_count(colValue : Int) : List[VAlgorithmTypeVersionSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeVersionSummaryDto] = SQL("select * from vAlgorithmTypeVersionSummary where algorithmTypeColumnType_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeVersionSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmTypeOutputType_count(colValue : Int) : List[VAlgorithmTypeVersionSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeVersionSummaryDto] = SQL("select * from vAlgorithmTypeVersionSummary where algorithmTypeOutputType_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeVersionSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmImplementation_count(colValue : Int) : List[VAlgorithmTypeVersionSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeVersionSummaryDto] = SQL("select * from vAlgorithmTypeVersionSummary where algorithmImplementation_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeVersionSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmParamType_count(colValue : Int) : List[VAlgorithmTypeVersionSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VAlgorithmTypeVersionSummaryDto] = SQL("select * from vAlgorithmTypeVersionSummary where algorithmParamType_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeVersionSummaryDto].*);
+    dtos
+  }
+
+}
+
+
+class VExecutorContextDao extends DaoBase {
+
+  def getVExecutorContextsList() : List[VExecutorContextDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextDto]= SQL("select * from vExecutorContext").as(anorm.Macro.namedParser[VExecutorContextDto].*);
+    dtos
+  }
+  def getVExecutorContextsCount() : Long = {
+    implicit val connection = getConnection();
+    val cnt : Long = SQL("select count(*) as cnt from vExecutorContext").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVExecutorContextsLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vExecutorContext").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVExecutorContextsLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vExecutorContext").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVExecutorContextFirst() : VExecutorContextDto = {
+    implicit val connection = getConnection();
+    val dtos : VExecutorContextDto= SQL("select * from vExecutorContext order by insertedRowDate asc ").as(anorm.Macro.namedParser[VExecutorContextDto].*).head;
+    dtos
+  }
+  def getVExecutorContextLast() : VExecutorContextDto = {
+    implicit val connection = getConnection();
+    val dtos : VExecutorContextDto= SQL("select * from vExecutorContext order by insertedRowDate desc ").as(anorm.Macro.namedParser[VExecutorContextDto].*).head;
+    dtos
+  }
+  def getVExecutorContextByGuid(guid : Long) : VExecutorContextDto = {
+    implicit val connection = getConnection();
+    val dtos : VExecutorContextDto= SQL("select * from vExecutorContext where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VExecutorContextDto].single);
+    dtos
+  }
+  def getDtosByExecutorContextId(colValue : Long) : List[VExecutorContextDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextDto] = SQL("select * from vExecutorContext where executorContextId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VExecutorContextDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextDto] = SQL("select * from vExecutorContext where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VExecutorContextDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextDto] = SQL("select * from vExecutorContext where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VExecutorContextDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextDto] = SQL("select * from vExecutorContext where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextDto].*);
+    dtos
+  }
+  def getDtosByExecutorHostId(colValue : Long) : List[VExecutorContextDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextDto] = SQL("select * from vExecutorContext where executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextDto].*);
+    dtos
+  }
+  def getDtosByIsWorking(colValue : Int) : List[VExecutorContextDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextDto] = SQL("select * from vExecutorContext where isWorking = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextDto].*);
+    dtos
+  }
+  def getDtosByProperties(colValue : String) : List[VExecutorContextDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextDto] = SQL("select * from vExecutorContext where properties = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_executorHostId(colValue : Long) : List[VExecutorContextDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextDto] = SQL("select * from vExecutorContext where executorHost_executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_guid(colValue : Long) : List[VExecutorContextDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextDto] = SQL("select * from vExecutorContext where executorHost_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_insertedRowDate(colValue : java.util.Date) : List[VExecutorContextDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextDto] = SQL("select * from vExecutorContext where executorHost_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_lastUpdatedDate(colValue : java.util.Date) : List[VExecutorContextDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextDto] = SQL("select * from vExecutorContext where executorHost_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_hostName(colValue : String) : List[VExecutorContextDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextDto] = SQL("select * from vExecutorContext where executorHost_hostName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_hostIp(colValue : String) : List[VExecutorContextDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextDto] = SQL("select * from vExecutorContext where executorHost_hostIp = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_hostDomain(colValue : String) : List[VExecutorContextDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextDto] = SQL("select * from vExecutorContext where executorHost_hostDomain = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_hostOsType(colValue : String) : List[VExecutorContextDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextDto] = SQL("select * from vExecutorContext where executorHost_hostOsType = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_hostOsVersion(colValue : String) : List[VExecutorContextDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextDto] = SQL("select * from vExecutorContext where executorHost_hostOsVersion = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_isWorking(colValue : Int) : List[VExecutorContextDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextDto] = SQL("select * from vExecutorContext where executorHost_isWorking = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextDto].*);
+    dtos
+  }
+
+}
+
+
+class VExecutorContextRuntimeDao extends DaoBase {
+
+  def getVExecutorContextRuntimesList() : List[VExecutorContextRuntimeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextRuntimeDto]= SQL("select * from vExecutorContextRuntime").as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);
+    dtos
+  }
+  def getVExecutorContextRuntimesCount() : Long = {
+    implicit val connection = getConnection();
+    val cnt : Long = SQL("select count(*) as cnt from vExecutorContextRuntime").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVExecutorContextRuntimesLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vExecutorContextRuntime").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVExecutorContextRuntimesLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vExecutorContextRuntime").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVExecutorContextRuntimeFirst() : VExecutorContextRuntimeDto = {
+    implicit val connection = getConnection();
+    val dtos : VExecutorContextRuntimeDto= SQL("select * from vExecutorContextRuntime order by insertedRowDate asc ").as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*).head;
+    dtos
+  }
+  def getVExecutorContextRuntimeLast() : VExecutorContextRuntimeDto = {
+    implicit val connection = getConnection();
+    val dtos : VExecutorContextRuntimeDto= SQL("select * from vExecutorContextRuntime order by insertedRowDate desc ").as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*).head;
+    dtos
+  }
+  def getVExecutorContextRuntimeByGuid(guid : Long) : VExecutorContextRuntimeDto = {
+    implicit val connection = getConnection();
+    val dtos : VExecutorContextRuntimeDto= SQL("select * from vExecutorContextRuntime where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].single);
+    dtos
+  }
+  def getDtosByExecutorContextRuntimeId(colValue : Long) : List[VExecutorContextRuntimeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextRuntimeDto] = SQL("select * from vExecutorContextRuntime where executorContextRuntimeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VExecutorContextRuntimeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextRuntimeDto] = SQL("select * from vExecutorContextRuntime where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VExecutorContextRuntimeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextRuntimeDto] = SQL("select * from vExecutorContextRuntime where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VExecutorContextRuntimeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextRuntimeDto] = SQL("select * from vExecutorContextRuntime where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);
+    dtos
+  }
+  def getDtosByExecutorHostId(colValue : Long) : List[VExecutorContextRuntimeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextRuntimeDto] = SQL("select * from vExecutorContextRuntime where executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);
+    dtos
+  }
+  def getDtosByExecutorContextId(colValue : Long) : List[VExecutorContextRuntimeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextRuntimeDto] = SQL("select * from vExecutorContextRuntime where executorContextId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);
+    dtos
+  }
+  def getDtosByAvailableProcessors(colValue : Double) : List[VExecutorContextRuntimeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextRuntimeDto] = SQL("select * from vExecutorContextRuntime where availableProcessors = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);
+    dtos
+  }
+  def getDtosByFreeMemory(colValue : Double) : List[VExecutorContextRuntimeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextRuntimeDto] = SQL("select * from vExecutorContextRuntime where freeMemory = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);
+    dtos
+  }
+  def getDtosByMaxMemory(colValue : Double) : List[VExecutorContextRuntimeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextRuntimeDto] = SQL("select * from vExecutorContextRuntime where maxMemory = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);
+    dtos
+  }
+  def getDtosByTotalMemory(colValue : Double) : List[VExecutorContextRuntimeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextRuntimeDto] = SQL("select * from vExecutorContextRuntime where totalMemory = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);
+    dtos
+  }
+  def getDtosByExecutorContext_executorContextId(colValue : Long) : List[VExecutorContextRuntimeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextRuntimeDto] = SQL("select * from vExecutorContextRuntime where executorContext_executorContextId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);
+    dtos
+  }
+  def getDtosByExecutorContext_guid(colValue : Long) : List[VExecutorContextRuntimeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextRuntimeDto] = SQL("select * from vExecutorContextRuntime where executorContext_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);
+    dtos
+  }
+  def getDtosByExecutorContext_insertedRowDate(colValue : java.util.Date) : List[VExecutorContextRuntimeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextRuntimeDto] = SQL("select * from vExecutorContextRuntime where executorContext_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);
+    dtos
+  }
+  def getDtosByExecutorContext_lastUpdatedDate(colValue : java.util.Date) : List[VExecutorContextRuntimeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextRuntimeDto] = SQL("select * from vExecutorContextRuntime where executorContext_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);
+    dtos
+  }
+  def getDtosByExecutorContext_executorHostId(colValue : Long) : List[VExecutorContextRuntimeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextRuntimeDto] = SQL("select * from vExecutorContextRuntime where executorContext_executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);
+    dtos
+  }
+  def getDtosByExecutorContext_isWorking(colValue : Int) : List[VExecutorContextRuntimeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextRuntimeDto] = SQL("select * from vExecutorContextRuntime where executorContext_isWorking = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);
+    dtos
+  }
+  def getDtosByExecutorContext_properties(colValue : String) : List[VExecutorContextRuntimeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextRuntimeDto] = SQL("select * from vExecutorContextRuntime where executorContext_properties = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_executorHostId(colValue : Long) : List[VExecutorContextRuntimeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextRuntimeDto] = SQL("select * from vExecutorContextRuntime where executorHost_executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_guid(colValue : Long) : List[VExecutorContextRuntimeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextRuntimeDto] = SQL("select * from vExecutorContextRuntime where executorHost_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_insertedRowDate(colValue : java.util.Date) : List[VExecutorContextRuntimeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextRuntimeDto] = SQL("select * from vExecutorContextRuntime where executorHost_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_lastUpdatedDate(colValue : java.util.Date) : List[VExecutorContextRuntimeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextRuntimeDto] = SQL("select * from vExecutorContextRuntime where executorHost_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_hostName(colValue : String) : List[VExecutorContextRuntimeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextRuntimeDto] = SQL("select * from vExecutorContextRuntime where executorHost_hostName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_hostIp(colValue : String) : List[VExecutorContextRuntimeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextRuntimeDto] = SQL("select * from vExecutorContextRuntime where executorHost_hostIp = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_hostDomain(colValue : String) : List[VExecutorContextRuntimeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextRuntimeDto] = SQL("select * from vExecutorContextRuntime where executorHost_hostDomain = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_hostOsType(colValue : String) : List[VExecutorContextRuntimeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextRuntimeDto] = SQL("select * from vExecutorContextRuntime where executorHost_hostOsType = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_hostOsVersion(colValue : String) : List[VExecutorContextRuntimeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextRuntimeDto] = SQL("select * from vExecutorContextRuntime where executorHost_hostOsVersion = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_isWorking(colValue : Int) : List[VExecutorContextRuntimeDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextRuntimeDto] = SQL("select * from vExecutorContextRuntime where executorHost_isWorking = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);
+    dtos
+  }
+
+}
+
+
+class VExecutorContextSummaryDao extends DaoBase {
+
+  def getVExecutorContextSummarysList() : List[VExecutorContextSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextSummaryDto]= SQL("select * from vExecutorContextSummary").as(anorm.Macro.namedParser[VExecutorContextSummaryDto].*);
+    dtos
+  }
+  def getVExecutorContextSummarysCount() : Long = {
+    implicit val connection = getConnection();
+    val cnt : Long = SQL("select count(*) as cnt from vExecutorContextSummary").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVExecutorContextSummarysLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vExecutorContextSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVExecutorContextSummarysLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vExecutorContextSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVExecutorContextSummaryFirst() : VExecutorContextSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VExecutorContextSummaryDto= SQL("select * from vExecutorContextSummary order by insertedRowDate asc ").as(anorm.Macro.namedParser[VExecutorContextSummaryDto].*).head;
+    dtos
+  }
+  def getVExecutorContextSummaryLast() : VExecutorContextSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VExecutorContextSummaryDto= SQL("select * from vExecutorContextSummary order by insertedRowDate desc ").as(anorm.Macro.namedParser[VExecutorContextSummaryDto].*).head;
+    dtos
+  }
+  def getVExecutorContextSummaryByGuid(guid : Long) : VExecutorContextSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VExecutorContextSummaryDto= SQL("select * from vExecutorContextSummary where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VExecutorContextSummaryDto].single);
+    dtos
+  }
+  def getDtosByExecutorContextId(colValue : Long) : List[VExecutorContextSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextSummaryDto] = SQL("select * from vExecutorContextSummary where executorContextId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextSummaryDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VExecutorContextSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextSummaryDto] = SQL("select * from vExecutorContextSummary where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextSummaryDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VExecutorContextSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextSummaryDto] = SQL("select * from vExecutorContextSummary where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextSummaryDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VExecutorContextSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextSummaryDto] = SQL("select * from vExecutorContextSummary where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorHostId(colValue : Long) : List[VExecutorContextSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextSummaryDto] = SQL("select * from vExecutorContextSummary where executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextSummaryDto].*);
+    dtos
+  }
+  def getDtosByIsWorking(colValue : Int) : List[VExecutorContextSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextSummaryDto] = SQL("select * from vExecutorContextSummary where isWorking = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextSummaryDto].*);
+    dtos
+  }
+  def getDtosByProperties(colValue : String) : List[VExecutorContextSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextSummaryDto] = SQL("select * from vExecutorContextSummary where properties = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorContextRuntime_count(colValue : Int) : List[VExecutorContextSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextSummaryDto] = SQL("select * from vExecutorContextSummary where executorContextRuntime_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorInstance_count(colValue : Int) : List[VExecutorContextSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextSummaryDto] = SQL("select * from vExecutorContextSummary where executorInstance_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextSummaryDto].*);
+    dtos
+  }
+  def getDtosBySourceDownload_count(colValue : Int) : List[VExecutorContextSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorContextSummaryDto] = SQL("select * from vExecutorContextSummary where sourceDownload_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextSummaryDto].*);
+    dtos
+  }
+
+}
+
+
+class VExecutorHostSummaryDao extends DaoBase {
+
+  def getVExecutorHostSummarysList() : List[VExecutorHostSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorHostSummaryDto]= SQL("select * from vExecutorHostSummary").as(anorm.Macro.namedParser[VExecutorHostSummaryDto].*);
+    dtos
+  }
+  def getVExecutorHostSummarysCount() : Long = {
+    implicit val connection = getConnection();
+    val cnt : Long = SQL("select count(*) as cnt from vExecutorHostSummary").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVExecutorHostSummarysLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vExecutorHostSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVExecutorHostSummarysLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vExecutorHostSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVExecutorHostSummaryFirst() : VExecutorHostSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VExecutorHostSummaryDto= SQL("select * from vExecutorHostSummary order by insertedRowDate asc ").as(anorm.Macro.namedParser[VExecutorHostSummaryDto].*).head;
+    dtos
+  }
+  def getVExecutorHostSummaryLast() : VExecutorHostSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VExecutorHostSummaryDto= SQL("select * from vExecutorHostSummary order by insertedRowDate desc ").as(anorm.Macro.namedParser[VExecutorHostSummaryDto].*).head;
+    dtos
+  }
+  def getVExecutorHostSummaryByGuid(guid : Long) : VExecutorHostSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VExecutorHostSummaryDto= SQL("select * from vExecutorHostSummary where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VExecutorHostSummaryDto].single);
+    dtos
+  }
+  def getDtosByExecutorHostId(colValue : Long) : List[VExecutorHostSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorHostSummaryDto] = SQL("select * from vExecutorHostSummary where executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorHostSummaryDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VExecutorHostSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorHostSummaryDto] = SQL("select * from vExecutorHostSummary where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorHostSummaryDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VExecutorHostSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorHostSummaryDto] = SQL("select * from vExecutorHostSummary where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorHostSummaryDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VExecutorHostSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorHostSummaryDto] = SQL("select * from vExecutorHostSummary where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorHostSummaryDto].*);
+    dtos
+  }
+  def getDtosByHostName(colValue : String) : List[VExecutorHostSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorHostSummaryDto] = SQL("select * from vExecutorHostSummary where hostName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorHostSummaryDto].*);
+    dtos
+  }
+  def getDtosByHostIp(colValue : String) : List[VExecutorHostSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorHostSummaryDto] = SQL("select * from vExecutorHostSummary where hostIp = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorHostSummaryDto].*);
+    dtos
+  }
+  def getDtosByHostDomain(colValue : String) : List[VExecutorHostSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorHostSummaryDto] = SQL("select * from vExecutorHostSummary where hostDomain = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorHostSummaryDto].*);
+    dtos
+  }
+  def getDtosByHostOsType(colValue : String) : List[VExecutorHostSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorHostSummaryDto] = SQL("select * from vExecutorHostSummary where hostOsType = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorHostSummaryDto].*);
+    dtos
+  }
+  def getDtosByHostOsVersion(colValue : String) : List[VExecutorHostSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorHostSummaryDto] = SQL("select * from vExecutorHostSummary where hostOsVersion = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorHostSummaryDto].*);
+    dtos
+  }
+  def getDtosByIsWorking(colValue : Int) : List[VExecutorHostSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorHostSummaryDto] = SQL("select * from vExecutorHostSummary where isWorking = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorHostSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorContext_count(colValue : Int) : List[VExecutorHostSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorHostSummaryDto] = SQL("select * from vExecutorHostSummary where executorContext_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorHostSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorContextRuntime_count(colValue : Int) : List[VExecutorHostSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorHostSummaryDto] = SQL("select * from vExecutorHostSummary where executorContextRuntime_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorHostSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorRest_count(colValue : Int) : List[VExecutorHostSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorHostSummaryDto] = SQL("select * from vExecutorHostSummary where executorRest_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorHostSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorRestCall_count(colValue : Int) : List[VExecutorHostSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorHostSummaryDto] = SQL("select * from vExecutorHostSummary where executorRestCall_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorHostSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorInstance_count(colValue : Int) : List[VExecutorHostSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorHostSummaryDto] = SQL("select * from vExecutorHostSummary where executorInstance_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorHostSummaryDto].*);
+    dtos
+  }
+  def getDtosBySourceDownload_count(colValue : Int) : List[VExecutorHostSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorHostSummaryDto] = SQL("select * from vExecutorHostSummary where sourceDownload_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorHostSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorage_count(colValue : Int) : List[VExecutorHostSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorHostSummaryDto] = SQL("select * from vExecutorHostSummary where executorStorage_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorHostSummaryDto].*);
+    dtos
+  }
+  def getDtosByResourceManager_count(colValue : Int) : List[VExecutorHostSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorHostSummaryDto] = SQL("select * from vExecutorHostSummary where resourceManager_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorHostSummaryDto].*);
+    dtos
+  }
+  def getDtosByResourceManagerCheck_count(colValue : Int) : List[VExecutorHostSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorHostSummaryDto] = SQL("select * from vExecutorHostSummary where resourceManagerCheck_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorHostSummaryDto].*);
+    dtos
+  }
+  def getDtosByResourceManagerAllocation_count(colValue : Int) : List[VExecutorHostSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorHostSummaryDto] = SQL("select * from vExecutorHostSummary where resourceManagerAllocation_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorHostSummaryDto].*);
     dtos
   }
 
@@ -5624,6 +8202,16 @@ class VExecutorInstanceDao extends DaoBase {
     val dtos : List[VExecutorInstanceDto] = SQL("select * from vExecutorInstance where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceDto].*);
     dtos
   }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VExecutorInstanceDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceDto] = SQL("select * from vExecutorInstance where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VExecutorInstanceDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceDto] = SQL("select * from vExecutorInstance where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceDto].*);
+    dtos
+  }
   def getDtosByExecutorTypeId(colValue : Long) : List[VExecutorInstanceDto] = {
     implicit val connection = getConnection();
     val dtos : List[VExecutorInstanceDto] = SQL("select * from vExecutorInstance where executorTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceDto].*);
@@ -5632,6 +8220,11 @@ class VExecutorInstanceDao extends DaoBase {
   def getDtosByExecutorHostId(colValue : Long) : List[VExecutorInstanceDto] = {
     implicit val connection = getConnection();
     val dtos : List[VExecutorInstanceDto] = SQL("select * from vExecutorInstance where executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceDto].*);
+    dtos
+  }
+  def getDtosByExecutorContextId(colValue : Long) : List[VExecutorInstanceDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceDto] = SQL("select * from vExecutorInstance where executorContextId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceDto].*);
     dtos
   }
   def getDtosByExecutorInstanceName(colValue : String) : List[VExecutorInstanceDto] = {
@@ -5654,19 +8247,44 @@ class VExecutorInstanceDao extends DaoBase {
     val dtos : List[VExecutorInstanceDto] = SQL("select * from vExecutorInstance where portNumber = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceDto].*);
     dtos
   }
-  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VExecutorInstanceDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VExecutorInstanceDto] = SQL("select * from vExecutorInstance where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceDto].*);
-    dtos
-  }
-  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VExecutorInstanceDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VExecutorInstanceDto] = SQL("select * from vExecutorInstance where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceDto].*);
-    dtos
-  }
   def getDtosByEndDate(colValue : java.util.Date) : List[VExecutorInstanceDto] = {
     implicit val connection = getConnection();
     val dtos : List[VExecutorInstanceDto] = SQL("select * from vExecutorInstance where endDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceDto].*);
+    dtos
+  }
+  def getDtosByExecutorContext_executorContextId(colValue : Long) : List[VExecutorInstanceDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceDto] = SQL("select * from vExecutorInstance where executorContext_executorContextId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceDto].*);
+    dtos
+  }
+  def getDtosByExecutorContext_guid(colValue : Long) : List[VExecutorInstanceDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceDto] = SQL("select * from vExecutorInstance where executorContext_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceDto].*);
+    dtos
+  }
+  def getDtosByExecutorContext_insertedRowDate(colValue : java.util.Date) : List[VExecutorInstanceDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceDto] = SQL("select * from vExecutorInstance where executorContext_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceDto].*);
+    dtos
+  }
+  def getDtosByExecutorContext_lastUpdatedDate(colValue : java.util.Date) : List[VExecutorInstanceDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceDto] = SQL("select * from vExecutorInstance where executorContext_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceDto].*);
+    dtos
+  }
+  def getDtosByExecutorContext_executorHostId(colValue : Long) : List[VExecutorInstanceDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceDto] = SQL("select * from vExecutorInstance where executorContext_executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceDto].*);
+    dtos
+  }
+  def getDtosByExecutorContext_isWorking(colValue : Int) : List[VExecutorInstanceDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceDto] = SQL("select * from vExecutorInstance where executorContext_isWorking = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceDto].*);
+    dtos
+  }
+  def getDtosByExecutorContext_properties(colValue : String) : List[VExecutorInstanceDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceDto] = SQL("select * from vExecutorInstance where executorContext_properties = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceDto].*);
     dtos
   }
   def getDtosByExecutorHost_executorHostId(colValue : Long) : List[VExecutorInstanceDto] = {
@@ -5753,6 +8371,258 @@ class VExecutorInstanceDao extends DaoBase {
 }
 
 
+class VExecutorInstanceStateDao extends DaoBase {
+
+  def getVExecutorInstanceStatesList() : List[VExecutorInstanceStateDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceStateDto]= SQL("select * from vExecutorInstanceState").as(anorm.Macro.namedParser[VExecutorInstanceStateDto].*);
+    dtos
+  }
+  def getVExecutorInstanceStatesCount() : Long = {
+    implicit val connection = getConnection();
+    val cnt : Long = SQL("select count(*) as cnt from vExecutorInstanceState").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVExecutorInstanceStatesLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vExecutorInstanceState").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVExecutorInstanceStatesLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vExecutorInstanceState").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVExecutorInstanceStateFirst() : VExecutorInstanceStateDto = {
+    implicit val connection = getConnection();
+    val dtos : VExecutorInstanceStateDto= SQL("select * from vExecutorInstanceState order by insertedRowDate asc ").as(anorm.Macro.namedParser[VExecutorInstanceStateDto].*).head;
+    dtos
+  }
+  def getVExecutorInstanceStateLast() : VExecutorInstanceStateDto = {
+    implicit val connection = getConnection();
+    val dtos : VExecutorInstanceStateDto= SQL("select * from vExecutorInstanceState order by insertedRowDate desc ").as(anorm.Macro.namedParser[VExecutorInstanceStateDto].*).head;
+    dtos
+  }
+  def getVExecutorInstanceStateByGuid(guid : Long) : VExecutorInstanceStateDto = {
+    implicit val connection = getConnection();
+    val dtos : VExecutorInstanceStateDto= SQL("select * from vExecutorInstanceState where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VExecutorInstanceStateDto].single);
+    dtos
+  }
+  def getDtosByExecutorInstanceStateId(colValue : Long) : List[VExecutorInstanceStateDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceStateDto] = SQL("select * from vExecutorInstanceState where executorInstanceStateId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceStateDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VExecutorInstanceStateDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceStateDto] = SQL("select * from vExecutorInstanceState where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceStateDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VExecutorInstanceStateDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceStateDto] = SQL("select * from vExecutorInstanceState where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceStateDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VExecutorInstanceStateDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceStateDto] = SQL("select * from vExecutorInstanceState where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceStateDto].*);
+    dtos
+  }
+  def getDtosByExecutorInstanceId(colValue : Long) : List[VExecutorInstanceStateDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceStateDto] = SQL("select * from vExecutorInstanceState where executorInstanceId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceStateDto].*);
+    dtos
+  }
+  def getDtosByStateName(colValue : String) : List[VExecutorInstanceStateDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceStateDto] = SQL("select * from vExecutorInstanceState where stateName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceStateDto].*);
+    dtos
+  }
+  def getDtosByExecutorInstance_executorInstanceId(colValue : Long) : List[VExecutorInstanceStateDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceStateDto] = SQL("select * from vExecutorInstanceState where executorInstance_executorInstanceId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceStateDto].*);
+    dtos
+  }
+  def getDtosByExecutorInstance_guid(colValue : Long) : List[VExecutorInstanceStateDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceStateDto] = SQL("select * from vExecutorInstanceState where executorInstance_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceStateDto].*);
+    dtos
+  }
+  def getDtosByExecutorInstance_insertedRowDate(colValue : java.util.Date) : List[VExecutorInstanceStateDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceStateDto] = SQL("select * from vExecutorInstanceState where executorInstance_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceStateDto].*);
+    dtos
+  }
+  def getDtosByExecutorInstance_lastUpdatedDate(colValue : java.util.Date) : List[VExecutorInstanceStateDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceStateDto] = SQL("select * from vExecutorInstanceState where executorInstance_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceStateDto].*);
+    dtos
+  }
+  def getDtosByExecutorInstance_executorTypeId(colValue : Long) : List[VExecutorInstanceStateDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceStateDto] = SQL("select * from vExecutorInstanceState where executorInstance_executorTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceStateDto].*);
+    dtos
+  }
+  def getDtosByExecutorInstance_executorHostId(colValue : Long) : List[VExecutorInstanceStateDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceStateDto] = SQL("select * from vExecutorInstanceState where executorInstance_executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceStateDto].*);
+    dtos
+  }
+  def getDtosByExecutorInstance_executorContextId(colValue : Long) : List[VExecutorInstanceStateDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceStateDto] = SQL("select * from vExecutorInstanceState where executorInstance_executorContextId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceStateDto].*);
+    dtos
+  }
+  def getDtosByExecutorInstance_executorInstanceName(colValue : String) : List[VExecutorInstanceStateDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceStateDto] = SQL("select * from vExecutorInstanceState where executorInstance_executorInstanceName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceStateDto].*);
+    dtos
+  }
+  def getDtosByExecutorInstance_isRunning(colValue : Int) : List[VExecutorInstanceStateDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceStateDto] = SQL("select * from vExecutorInstanceState where executorInstance_isRunning = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceStateDto].*);
+    dtos
+  }
+  def getDtosByExecutorInstance_isFinished(colValue : Int) : List[VExecutorInstanceStateDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceStateDto] = SQL("select * from vExecutorInstanceState where executorInstance_isFinished = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceStateDto].*);
+    dtos
+  }
+  def getDtosByExecutorInstance_portNumber(colValue : Int) : List[VExecutorInstanceStateDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceStateDto] = SQL("select * from vExecutorInstanceState where executorInstance_portNumber = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceStateDto].*);
+    dtos
+  }
+  def getDtosByExecutorInstance_endDate(colValue : java.util.Date) : List[VExecutorInstanceStateDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceStateDto] = SQL("select * from vExecutorInstanceState where executorInstance_endDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceStateDto].*);
+    dtos
+  }
+
+}
+
+
+class VExecutorInstanceSummaryDao extends DaoBase {
+
+  def getVExecutorInstanceSummarysList() : List[VExecutorInstanceSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceSummaryDto]= SQL("select * from vExecutorInstanceSummary").as(anorm.Macro.namedParser[VExecutorInstanceSummaryDto].*);
+    dtos
+  }
+  def getVExecutorInstanceSummarysCount() : Long = {
+    implicit val connection = getConnection();
+    val cnt : Long = SQL("select count(*) as cnt from vExecutorInstanceSummary").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVExecutorInstanceSummarysLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vExecutorInstanceSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVExecutorInstanceSummarysLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vExecutorInstanceSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVExecutorInstanceSummaryFirst() : VExecutorInstanceSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VExecutorInstanceSummaryDto= SQL("select * from vExecutorInstanceSummary order by insertedRowDate asc ").as(anorm.Macro.namedParser[VExecutorInstanceSummaryDto].*).head;
+    dtos
+  }
+  def getVExecutorInstanceSummaryLast() : VExecutorInstanceSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VExecutorInstanceSummaryDto= SQL("select * from vExecutorInstanceSummary order by insertedRowDate desc ").as(anorm.Macro.namedParser[VExecutorInstanceSummaryDto].*).head;
+    dtos
+  }
+  def getVExecutorInstanceSummaryByGuid(guid : Long) : VExecutorInstanceSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VExecutorInstanceSummaryDto= SQL("select * from vExecutorInstanceSummary where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VExecutorInstanceSummaryDto].single);
+    dtos
+  }
+  def getDtosByExecutorInstanceId(colValue : Long) : List[VExecutorInstanceSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceSummaryDto] = SQL("select * from vExecutorInstanceSummary where executorInstanceId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceSummaryDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VExecutorInstanceSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceSummaryDto] = SQL("select * from vExecutorInstanceSummary where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceSummaryDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VExecutorInstanceSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceSummaryDto] = SQL("select * from vExecutorInstanceSummary where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceSummaryDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VExecutorInstanceSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceSummaryDto] = SQL("select * from vExecutorInstanceSummary where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorTypeId(colValue : Long) : List[VExecutorInstanceSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceSummaryDto] = SQL("select * from vExecutorInstanceSummary where executorTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorHostId(colValue : Long) : List[VExecutorInstanceSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceSummaryDto] = SQL("select * from vExecutorInstanceSummary where executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorContextId(colValue : Long) : List[VExecutorInstanceSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceSummaryDto] = SQL("select * from vExecutorInstanceSummary where executorContextId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorInstanceName(colValue : String) : List[VExecutorInstanceSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceSummaryDto] = SQL("select * from vExecutorInstanceSummary where executorInstanceName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceSummaryDto].*);
+    dtos
+  }
+  def getDtosByIsRunning(colValue : Int) : List[VExecutorInstanceSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceSummaryDto] = SQL("select * from vExecutorInstanceSummary where isRunning = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceSummaryDto].*);
+    dtos
+  }
+  def getDtosByIsFinished(colValue : Int) : List[VExecutorInstanceSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceSummaryDto] = SQL("select * from vExecutorInstanceSummary where isFinished = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceSummaryDto].*);
+    dtos
+  }
+  def getDtosByPortNumber(colValue : Int) : List[VExecutorInstanceSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceSummaryDto] = SQL("select * from vExecutorInstanceSummary where portNumber = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceSummaryDto].*);
+    dtos
+  }
+  def getDtosByEndDate(colValue : java.util.Date) : List[VExecutorInstanceSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceSummaryDto] = SQL("select * from vExecutorInstanceSummary where endDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmRun_count(colValue : Int) : List[VExecutorInstanceSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceSummaryDto] = SQL("select * from vExecutorInstanceSummary where algorithmRun_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorInstanceState_count(colValue : Int) : List[VExecutorInstanceSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceSummaryDto] = SQL("select * from vExecutorInstanceSummary where executorInstanceState_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorageSnapshot_count(colValue : Int) : List[VExecutorInstanceSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceSummaryDto] = SQL("select * from vExecutorInstanceSummary where executorStorageSnapshot_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceSummaryDto].*);
+    dtos
+  }
+  def getDtosByResourceManagerAllocation_count(colValue : Int) : List[VExecutorInstanceSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorInstanceSummaryDto] = SQL("select * from vExecutorInstanceSummary where resourceManagerAllocation_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceSummaryDto].*);
+    dtos
+  }
+
+}
+
+
 class VExecutorRestDao extends DaoBase {
 
   def getVExecutorRestsList() : List[VExecutorRestDto] = {
@@ -5800,11 +8670,6 @@ class VExecutorRestDao extends DaoBase {
     val dtos : List[VExecutorRestDto] = SQL("select * from vExecutorRest where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorRestDto].*);
     dtos
   }
-  def getDtosByExecutorHostId(colValue : Long) : List[VExecutorRestDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VExecutorRestDto] = SQL("select * from vExecutorRest where executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorRestDto].*);
-    dtos
-  }
   def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VExecutorRestDto] = {
     implicit val connection = getConnection();
     val dtos : List[VExecutorRestDto] = SQL("select * from vExecutorRest where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorRestDto].*);
@@ -5813,6 +8678,11 @@ class VExecutorRestDao extends DaoBase {
   def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VExecutorRestDto] = {
     implicit val connection = getConnection();
     val dtos : List[VExecutorRestDto] = SQL("select * from vExecutorRest where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorRestDto].*);
+    dtos
+  }
+  def getDtosByExecutorHostId(colValue : Long) : List[VExecutorRestDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorRestDto] = SQL("select * from vExecutorRest where executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorRestDto].*);
     dtos
   }
   def getDtosByRestPort(colValue : Int) : List[VExecutorRestDto] = {
@@ -6031,11 +8901,6 @@ class VExecutorRestCallDao extends DaoBase {
     val dtos : List[VExecutorRestCallDto] = SQL("select * from vExecutorRestCall where executorRest_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorRestCallDto].*);
     dtos
   }
-  def getDtosByExecutorRest_executorHostId(colValue : Long) : List[VExecutorRestCallDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VExecutorRestCallDto] = SQL("select * from vExecutorRestCall where executorRest_executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorRestCallDto].*);
-    dtos
-  }
   def getDtosByExecutorRest_insertedRowDate(colValue : java.util.Date) : List[VExecutorRestCallDto] = {
     implicit val connection = getConnection();
     val dtos : List[VExecutorRestCallDto] = SQL("select * from vExecutorRestCall where executorRest_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorRestCallDto].*);
@@ -6044,6 +8909,11 @@ class VExecutorRestCallDao extends DaoBase {
   def getDtosByExecutorRest_lastUpdatedDate(colValue : java.util.Date) : List[VExecutorRestCallDto] = {
     implicit val connection = getConnection();
     val dtos : List[VExecutorRestCallDto] = SQL("select * from vExecutorRestCall where executorRest_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorRestCallDto].*);
+    dtos
+  }
+  def getDtosByExecutorRest_executorHostId(colValue : Long) : List[VExecutorRestCallDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorRestCallDto] = SQL("select * from vExecutorRestCall where executorRest_executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorRestCallDto].*);
     dtos
   }
   def getDtosByExecutorRest_restPort(colValue : Int) : List[VExecutorRestCallDto] = {
@@ -6059,6 +8929,92 @@ class VExecutorRestCallDao extends DaoBase {
   def getDtosByExecutorRest_restStatus(colValue : String) : List[VExecutorRestCallDto] = {
     implicit val connection = getConnection();
     val dtos : List[VExecutorRestCallDto] = SQL("select * from vExecutorRestCall where executorRest_restStatus = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorRestCallDto].*);
+    dtos
+  }
+
+}
+
+
+class VExecutorRestSummaryDao extends DaoBase {
+
+  def getVExecutorRestSummarysList() : List[VExecutorRestSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorRestSummaryDto]= SQL("select * from vExecutorRestSummary").as(anorm.Macro.namedParser[VExecutorRestSummaryDto].*);
+    dtos
+  }
+  def getVExecutorRestSummarysCount() : Long = {
+    implicit val connection = getConnection();
+    val cnt : Long = SQL("select count(*) as cnt from vExecutorRestSummary").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVExecutorRestSummarysLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vExecutorRestSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVExecutorRestSummarysLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vExecutorRestSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVExecutorRestSummaryFirst() : VExecutorRestSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VExecutorRestSummaryDto= SQL("select * from vExecutorRestSummary order by insertedRowDate asc ").as(anorm.Macro.namedParser[VExecutorRestSummaryDto].*).head;
+    dtos
+  }
+  def getVExecutorRestSummaryLast() : VExecutorRestSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VExecutorRestSummaryDto= SQL("select * from vExecutorRestSummary order by insertedRowDate desc ").as(anorm.Macro.namedParser[VExecutorRestSummaryDto].*).head;
+    dtos
+  }
+  def getVExecutorRestSummaryByGuid(guid : Long) : VExecutorRestSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VExecutorRestSummaryDto= SQL("select * from vExecutorRestSummary where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VExecutorRestSummaryDto].single);
+    dtos
+  }
+  def getDtosByExecutorRestId(colValue : Long) : List[VExecutorRestSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorRestSummaryDto] = SQL("select * from vExecutorRestSummary where executorRestId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorRestSummaryDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VExecutorRestSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorRestSummaryDto] = SQL("select * from vExecutorRestSummary where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorRestSummaryDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VExecutorRestSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorRestSummaryDto] = SQL("select * from vExecutorRestSummary where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorRestSummaryDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VExecutorRestSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorRestSummaryDto] = SQL("select * from vExecutorRestSummary where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorRestSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorHostId(colValue : Long) : List[VExecutorRestSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorRestSummaryDto] = SQL("select * from vExecutorRestSummary where executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorRestSummaryDto].*);
+    dtos
+  }
+  def getDtosByRestPort(colValue : Int) : List[VExecutorRestSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorRestSummaryDto] = SQL("select * from vExecutorRestSummary where restPort = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorRestSummaryDto].*);
+    dtos
+  }
+  def getDtosByRestVersion(colValue : String) : List[VExecutorRestSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorRestSummaryDto] = SQL("select * from vExecutorRestSummary where restVersion = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorRestSummaryDto].*);
+    dtos
+  }
+  def getDtosByRestStatus(colValue : String) : List[VExecutorRestSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorRestSummaryDto] = SQL("select * from vExecutorRestSummary where restStatus = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorRestSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorRestCall_count(colValue : Int) : List[VExecutorRestSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorRestSummaryDto] = SQL("select * from vExecutorRestSummary where executorRestCall_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorRestSummaryDto].*);
     dtos
   }
 
@@ -6112,6 +9068,16 @@ class VExecutorStorageDao extends DaoBase {
     val dtos : List[VExecutorStorageDto] = SQL("select * from vExecutorStorage where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageDto].*);
     dtos
   }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VExecutorStorageDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageDto] = SQL("select * from vExecutorStorage where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VExecutorStorageDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageDto] = SQL("select * from vExecutorStorage where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageDto].*);
+    dtos
+  }
   def getDtosByExecutorHostId(colValue : Long) : List[VExecutorStorageDto] = {
     implicit val connection = getConnection();
     val dtos : List[VExecutorStorageDto] = SQL("select * from vExecutorStorage where executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageDto].*);
@@ -6145,16 +9111,6 @@ class VExecutorStorageDao extends DaoBase {
   def getDtosByPortNumber(colValue : Int) : List[VExecutorStorageDto] = {
     implicit val connection = getConnection();
     val dtos : List[VExecutorStorageDto] = SQL("select * from vExecutorStorage where portNumber = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageDto].*);
-    dtos
-  }
-  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VExecutorStorageDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VExecutorStorageDto] = SQL("select * from vExecutorStorage where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageDto].*);
-    dtos
-  }
-  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VExecutorStorageDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VExecutorStorageDto] = SQL("select * from vExecutorStorage where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageDto].*);
     dtos
   }
   def getDtosByExecutorStorageType_executorStorageTypeId(colValue : Long) : List[VExecutorStorageDto] = {
@@ -6283,11 +9239,6 @@ class VExecutorStorageSnapshotDao extends DaoBase {
     val dtos : List[VExecutorStorageSnapshotDto] = SQL("select * from vExecutorStorageSnapshot where executorStorageSnapshotId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSnapshotDto].*);
     dtos
   }
-  def getDtosByExecutorInstanceId(colValue : Long) : List[VExecutorStorageSnapshotDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VExecutorStorageSnapshotDto] = SQL("select * from vExecutorStorageSnapshot where executorInstanceId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSnapshotDto].*);
-    dtos
-  }
   def getDtosByGuid(colValue : Long) : List[VExecutorStorageSnapshotDto] = {
     implicit val connection = getConnection();
     val dtos : List[VExecutorStorageSnapshotDto] = SQL("select * from vExecutorStorageSnapshot where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSnapshotDto].*);
@@ -6303,6 +9254,11 @@ class VExecutorStorageSnapshotDao extends DaoBase {
     val dtos : List[VExecutorStorageSnapshotDto] = SQL("select * from vExecutorStorageSnapshot where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSnapshotDto].*);
     dtos
   }
+  def getDtosByExecutorInstanceId(colValue : Long) : List[VExecutorStorageSnapshotDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageSnapshotDto] = SQL("select * from vExecutorStorageSnapshot where executorInstanceId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSnapshotDto].*);
+    dtos
+  }
   def getDtosByExecutorInstance_executorInstanceId(colValue : Long) : List[VExecutorStorageSnapshotDto] = {
     implicit val connection = getConnection();
     val dtos : List[VExecutorStorageSnapshotDto] = SQL("select * from vExecutorStorageSnapshot where executorInstance_executorInstanceId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSnapshotDto].*);
@@ -6313,6 +9269,16 @@ class VExecutorStorageSnapshotDao extends DaoBase {
     val dtos : List[VExecutorStorageSnapshotDto] = SQL("select * from vExecutorStorageSnapshot where executorInstance_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSnapshotDto].*);
     dtos
   }
+  def getDtosByExecutorInstance_insertedRowDate(colValue : java.util.Date) : List[VExecutorStorageSnapshotDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageSnapshotDto] = SQL("select * from vExecutorStorageSnapshot where executorInstance_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSnapshotDto].*);
+    dtos
+  }
+  def getDtosByExecutorInstance_lastUpdatedDate(colValue : java.util.Date) : List[VExecutorStorageSnapshotDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageSnapshotDto] = SQL("select * from vExecutorStorageSnapshot where executorInstance_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSnapshotDto].*);
+    dtos
+  }
   def getDtosByExecutorInstance_executorTypeId(colValue : Long) : List[VExecutorStorageSnapshotDto] = {
     implicit val connection = getConnection();
     val dtos : List[VExecutorStorageSnapshotDto] = SQL("select * from vExecutorStorageSnapshot where executorInstance_executorTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSnapshotDto].*);
@@ -6321,6 +9287,11 @@ class VExecutorStorageSnapshotDao extends DaoBase {
   def getDtosByExecutorInstance_executorHostId(colValue : Long) : List[VExecutorStorageSnapshotDto] = {
     implicit val connection = getConnection();
     val dtos : List[VExecutorStorageSnapshotDto] = SQL("select * from vExecutorStorageSnapshot where executorInstance_executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSnapshotDto].*);
+    dtos
+  }
+  def getDtosByExecutorInstance_executorContextId(colValue : Long) : List[VExecutorStorageSnapshotDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageSnapshotDto] = SQL("select * from vExecutorStorageSnapshot where executorInstance_executorContextId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSnapshotDto].*);
     dtos
   }
   def getDtosByExecutorInstance_executorInstanceName(colValue : String) : List[VExecutorStorageSnapshotDto] = {
@@ -6343,19 +9314,272 @@ class VExecutorStorageSnapshotDao extends DaoBase {
     val dtos : List[VExecutorStorageSnapshotDto] = SQL("select * from vExecutorStorageSnapshot where executorInstance_portNumber = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSnapshotDto].*);
     dtos
   }
-  def getDtosByExecutorInstance_insertedRowDate(colValue : java.util.Date) : List[VExecutorStorageSnapshotDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VExecutorStorageSnapshotDto] = SQL("select * from vExecutorStorageSnapshot where executorInstance_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSnapshotDto].*);
-    dtos
-  }
-  def getDtosByExecutorInstance_lastUpdatedDate(colValue : java.util.Date) : List[VExecutorStorageSnapshotDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VExecutorStorageSnapshotDto] = SQL("select * from vExecutorStorageSnapshot where executorInstance_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSnapshotDto].*);
-    dtos
-  }
   def getDtosByExecutorInstance_endDate(colValue : java.util.Date) : List[VExecutorStorageSnapshotDto] = {
     implicit val connection = getConnection();
     val dtos : List[VExecutorStorageSnapshotDto] = SQL("select * from vExecutorStorageSnapshot where executorInstance_endDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSnapshotDto].*);
+    dtos
+  }
+
+}
+
+
+class VExecutorStorageSnapshotSummaryDao extends DaoBase {
+
+  def getVExecutorStorageSnapshotSummarysList() : List[VExecutorStorageSnapshotSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageSnapshotSummaryDto]= SQL("select * from vExecutorStorageSnapshotSummary").as(anorm.Macro.namedParser[VExecutorStorageSnapshotSummaryDto].*);
+    dtos
+  }
+  def getVExecutorStorageSnapshotSummarysCount() : Long = {
+    implicit val connection = getConnection();
+    val cnt : Long = SQL("select count(*) as cnt from vExecutorStorageSnapshotSummary").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVExecutorStorageSnapshotSummarysLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vExecutorStorageSnapshotSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVExecutorStorageSnapshotSummarysLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vExecutorStorageSnapshotSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVExecutorStorageSnapshotSummaryFirst() : VExecutorStorageSnapshotSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VExecutorStorageSnapshotSummaryDto= SQL("select * from vExecutorStorageSnapshotSummary order by insertedRowDate asc ").as(anorm.Macro.namedParser[VExecutorStorageSnapshotSummaryDto].*).head;
+    dtos
+  }
+  def getVExecutorStorageSnapshotSummaryLast() : VExecutorStorageSnapshotSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VExecutorStorageSnapshotSummaryDto= SQL("select * from vExecutorStorageSnapshotSummary order by insertedRowDate desc ").as(anorm.Macro.namedParser[VExecutorStorageSnapshotSummaryDto].*).head;
+    dtos
+  }
+  def getVExecutorStorageSnapshotSummaryByGuid(guid : Long) : VExecutorStorageSnapshotSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VExecutorStorageSnapshotSummaryDto= SQL("select * from vExecutorStorageSnapshotSummary where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VExecutorStorageSnapshotSummaryDto].single);
+    dtos
+  }
+  def getDtosByExecutorStorageSnapshotId(colValue : Long) : List[VExecutorStorageSnapshotSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageSnapshotSummaryDto] = SQL("select * from vExecutorStorageSnapshotSummary where executorStorageSnapshotId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSnapshotSummaryDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VExecutorStorageSnapshotSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageSnapshotSummaryDto] = SQL("select * from vExecutorStorageSnapshotSummary where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSnapshotSummaryDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VExecutorStorageSnapshotSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageSnapshotSummaryDto] = SQL("select * from vExecutorStorageSnapshotSummary where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSnapshotSummaryDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VExecutorStorageSnapshotSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageSnapshotSummaryDto] = SQL("select * from vExecutorStorageSnapshotSummary where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSnapshotSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorInstanceId(colValue : Long) : List[VExecutorStorageSnapshotSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageSnapshotSummaryDto] = SQL("select * from vExecutorStorageSnapshotSummary where executorInstanceId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSnapshotSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorageView_count(colValue : Int) : List[VExecutorStorageSnapshotSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageSnapshotSummaryDto] = SQL("select * from vExecutorStorageSnapshotSummary where executorStorageView_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSnapshotSummaryDto].*);
+    dtos
+  }
+
+}
+
+
+class VExecutorStorageSummaryDao extends DaoBase {
+
+  def getVExecutorStorageSummarysList() : List[VExecutorStorageSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageSummaryDto]= SQL("select * from vExecutorStorageSummary").as(anorm.Macro.namedParser[VExecutorStorageSummaryDto].*);
+    dtos
+  }
+  def getVExecutorStorageSummarysCount() : Long = {
+    implicit val connection = getConnection();
+    val cnt : Long = SQL("select count(*) as cnt from vExecutorStorageSummary").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVExecutorStorageSummarysLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vExecutorStorageSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVExecutorStorageSummarysLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vExecutorStorageSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVExecutorStorageSummaryFirst() : VExecutorStorageSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VExecutorStorageSummaryDto= SQL("select * from vExecutorStorageSummary order by insertedRowDate asc ").as(anorm.Macro.namedParser[VExecutorStorageSummaryDto].*).head;
+    dtos
+  }
+  def getVExecutorStorageSummaryLast() : VExecutorStorageSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VExecutorStorageSummaryDto= SQL("select * from vExecutorStorageSummary order by insertedRowDate desc ").as(anorm.Macro.namedParser[VExecutorStorageSummaryDto].*).head;
+    dtos
+  }
+  def getVExecutorStorageSummaryByGuid(guid : Long) : VExecutorStorageSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VExecutorStorageSummaryDto= SQL("select * from vExecutorStorageSummary where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VExecutorStorageSummaryDto].single);
+    dtos
+  }
+  def getDtosByExecutorStorageId(colValue : Long) : List[VExecutorStorageSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageSummaryDto] = SQL("select * from vExecutorStorageSummary where executorStorageId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSummaryDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VExecutorStorageSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageSummaryDto] = SQL("select * from vExecutorStorageSummary where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSummaryDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VExecutorStorageSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageSummaryDto] = SQL("select * from vExecutorStorageSummary where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSummaryDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VExecutorStorageSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageSummaryDto] = SQL("select * from vExecutorStorageSummary where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorHostId(colValue : Long) : List[VExecutorStorageSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageSummaryDto] = SQL("select * from vExecutorStorageSummary where executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorageTypeId(colValue : Long) : List[VExecutorStorageSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageSummaryDto] = SQL("select * from vExecutorStorageSummary where executorStorageTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSummaryDto].*);
+    dtos
+  }
+  def getDtosByStorageDefinition(colValue : String) : List[VExecutorStorageSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageSummaryDto] = SQL("select * from vExecutorStorageSummary where storageDefinition = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSummaryDto].*);
+    dtos
+  }
+  def getDtosByStorageBasePath(colValue : String) : List[VExecutorStorageSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageSummaryDto] = SQL("select * from vExecutorStorageSummary where storageBasePath = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSummaryDto].*);
+    dtos
+  }
+  def getDtosByStorageFulllPath(colValue : String) : List[VExecutorStorageSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageSummaryDto] = SQL("select * from vExecutorStorageSummary where storageFulllPath = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSummaryDto].*);
+    dtos
+  }
+  def getDtosByIsRunning(colValue : Int) : List[VExecutorStorageSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageSummaryDto] = SQL("select * from vExecutorStorageSummary where isRunning = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSummaryDto].*);
+    dtos
+  }
+  def getDtosByPortNumber(colValue : Int) : List[VExecutorStorageSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageSummaryDto] = SQL("select * from vExecutorStorageSummary where portNumber = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmRun_count(colValue : Int) : List[VExecutorStorageSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageSummaryDto] = SQL("select * from vExecutorStorageSummary where algorithmRun_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSummaryDto].*);
+    dtos
+  }
+  def getDtosBySourceSchedule_count(colValue : Int) : List[VExecutorStorageSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageSummaryDto] = SQL("select * from vExecutorStorageSummary where sourceSchedule_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorageView_count(colValue : Int) : List[VExecutorStorageSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageSummaryDto] = SQL("select * from vExecutorStorageSummary where executorStorageView_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSummaryDto].*);
+    dtos
+  }
+
+}
+
+
+class VExecutorStorageTypeSummaryDao extends DaoBase {
+
+  def getVExecutorStorageTypeSummarysList() : List[VExecutorStorageTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageTypeSummaryDto]= SQL("select * from vExecutorStorageTypeSummary").as(anorm.Macro.namedParser[VExecutorStorageTypeSummaryDto].*);
+    dtos
+  }
+  def getVExecutorStorageTypeSummarysCount() : Long = {
+    implicit val connection = getConnection();
+    val cnt : Long = SQL("select count(*) as cnt from vExecutorStorageTypeSummary").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVExecutorStorageTypeSummarysLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vExecutorStorageTypeSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVExecutorStorageTypeSummarysLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vExecutorStorageTypeSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVExecutorStorageTypeSummaryFirst() : VExecutorStorageTypeSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VExecutorStorageTypeSummaryDto= SQL("select * from vExecutorStorageTypeSummary order by insertedRowDate asc ").as(anorm.Macro.namedParser[VExecutorStorageTypeSummaryDto].*).head;
+    dtos
+  }
+  def getVExecutorStorageTypeSummaryLast() : VExecutorStorageTypeSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VExecutorStorageTypeSummaryDto= SQL("select * from vExecutorStorageTypeSummary order by insertedRowDate desc ").as(anorm.Macro.namedParser[VExecutorStorageTypeSummaryDto].*).head;
+    dtos
+  }
+  def getVExecutorStorageTypeSummaryByGuid(guid : Long) : VExecutorStorageTypeSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VExecutorStorageTypeSummaryDto= SQL("select * from vExecutorStorageTypeSummary where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VExecutorStorageTypeSummaryDto].single);
+    dtos
+  }
+  def getDtosByExecutorStorageTypeId(colValue : Long) : List[VExecutorStorageTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageTypeSummaryDto] = SQL("select * from vExecutorStorageTypeSummary where executorStorageTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VExecutorStorageTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageTypeSummaryDto] = SQL("select * from vExecutorStorageTypeSummary where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VExecutorStorageTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageTypeSummaryDto] = SQL("select * from vExecutorStorageTypeSummary where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VExecutorStorageTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageTypeSummaryDto] = SQL("select * from vExecutorStorageTypeSummary where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorageTypeName(colValue : String) : List[VExecutorStorageTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageTypeSummaryDto] = SQL("select * from vExecutorStorageTypeSummary where executorStorageTypeName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorageTypeClass(colValue : String) : List[VExecutorStorageTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageTypeSummaryDto] = SQL("select * from vExecutorStorageTypeSummary where executorStorageTypeClass = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorage_count(colValue : Int) : List[VExecutorStorageTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageTypeSummaryDto] = SQL("select * from vExecutorStorageTypeSummary where executorStorage_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmStorageSupport_count(colValue : Int) : List[VExecutorStorageTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageTypeSummaryDto] = SQL("select * from vExecutorStorageTypeSummary where algorithmStorageSupport_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageTypeSummaryDto].*);
     dtos
   }
 
@@ -6434,6 +9658,11 @@ class VExecutorStorageViewDao extends DaoBase {
     val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where sourceDownloadId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
     dtos
   }
+  def getDtosBySourceViewId(colValue : Long) : List[VExecutorStorageViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where sourceViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
+    dtos
+  }
   def getDtosByStoragePath(colValue : String) : List[VExecutorStorageViewDto] = {
     implicit val connection = getConnection();
     val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where storagePath = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
@@ -6449,6 +9678,11 @@ class VExecutorStorageViewDao extends DaoBase {
     val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where viewRowsCount = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
     dtos
   }
+  def getDtosByIsValid(colValue : Int) : List[VExecutorStorageViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where isValid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
+    dtos
+  }
   def getDtosByExecutorStorage_executorStorageId(colValue : Long) : List[VExecutorStorageViewDto] = {
     implicit val connection = getConnection();
     val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where executorStorage_executorStorageId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
@@ -6457,6 +9691,16 @@ class VExecutorStorageViewDao extends DaoBase {
   def getDtosByExecutorStorage_guid(colValue : Long) : List[VExecutorStorageViewDto] = {
     implicit val connection = getConnection();
     val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where executorStorage_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorage_insertedRowDate(colValue : java.util.Date) : List[VExecutorStorageViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where executorStorage_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorage_lastUpdatedDate(colValue : java.util.Date) : List[VExecutorStorageViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where executorStorage_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
     dtos
   }
   def getDtosByExecutorStorage_executorHostId(colValue : Long) : List[VExecutorStorageViewDto] = {
@@ -6494,14 +9738,331 @@ class VExecutorStorageViewDao extends DaoBase {
     val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where executorStorage_portNumber = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
     dtos
   }
-  def getDtosByExecutorStorage_insertedRowDate(colValue : java.util.Date) : List[VExecutorStorageViewDto] = {
+  def getDtosByExecutorStorageSnapshot_executorStorageSnapshotId(colValue : Long) : List[VExecutorStorageViewDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where executorStorage_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
+    val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where executorStorageSnapshot_executorStorageSnapshotId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
     dtos
   }
-  def getDtosByExecutorStorage_lastUpdatedDate(colValue : java.util.Date) : List[VExecutorStorageViewDto] = {
+  def getDtosByExecutorStorageSnapshot_guid(colValue : Long) : List[VExecutorStorageViewDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where executorStorage_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
+    val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where executorStorageSnapshot_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorageSnapshot_insertedRowDate(colValue : java.util.Date) : List[VExecutorStorageViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where executorStorageSnapshot_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorageSnapshot_lastUpdatedDate(colValue : java.util.Date) : List[VExecutorStorageViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where executorStorageSnapshot_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorageSnapshot_executorInstanceId(colValue : Long) : List[VExecutorStorageViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where executorStorageSnapshot_executorInstanceId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
+    dtos
+  }
+  def getDtosBySourceDownload_sourceDownloadId(colValue : Long) : List[VExecutorStorageViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where sourceDownload_sourceDownloadId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
+    dtos
+  }
+  def getDtosBySourceDownload_guid(colValue : Long) : List[VExecutorStorageViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where sourceDownload_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
+    dtos
+  }
+  def getDtosBySourceDownload_insertedRowDate(colValue : java.util.Date) : List[VExecutorStorageViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where sourceDownload_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
+    dtos
+  }
+  def getDtosBySourceDownload_lastUpdatedDate(colValue : java.util.Date) : List[VExecutorStorageViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where sourceDownload_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
+    dtos
+  }
+  def getDtosBySourceDownload_sourceScheduleId(colValue : Long) : List[VExecutorStorageViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where sourceDownload_sourceScheduleId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
+    dtos
+  }
+  def getDtosBySourceDownload_executorHostId(colValue : Long) : List[VExecutorStorageViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where sourceDownload_executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
+    dtos
+  }
+  def getDtosBySourceDownload_executorContextId(colValue : Long) : List[VExecutorStorageViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where sourceDownload_executorContextId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
+    dtos
+  }
+  def getDtosBySourceDownload_sourceViewId(colValue : Long) : List[VExecutorStorageViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where sourceDownload_sourceViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
+    dtos
+  }
+  def getDtosBySourceDownload_retryNumber(colValue : Int) : List[VExecutorStorageViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where sourceDownload_retryNumber = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
+    dtos
+  }
+  def getDtosBySourceDownload_isRunning(colValue : Int) : List[VExecutorStorageViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where sourceDownload_isRunning = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
+    dtos
+  }
+  def getDtosBySourceDownload_isFinished(colValue : Int) : List[VExecutorStorageViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where sourceDownload_isFinished = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
+    dtos
+  }
+  def getDtosBySourceDownload_isExcecption(colValue : Int) : List[VExecutorStorageViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where sourceDownload_isExcecption = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
+    dtos
+  }
+  def getDtosBySourceDownload_excecptionDescription(colValue : String) : List[VExecutorStorageViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where sourceDownload_excecptionDescription = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
+    dtos
+  }
+  def getDtosBySourceView_sourceViewId(colValue : Long) : List[VExecutorStorageViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where sourceView_sourceViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
+    dtos
+  }
+  def getDtosBySourceView_guid(colValue : Long) : List[VExecutorStorageViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where sourceView_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
+    dtos
+  }
+  def getDtosBySourceView_insertedRowDate(colValue : java.util.Date) : List[VExecutorStorageViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where sourceView_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
+    dtos
+  }
+  def getDtosBySourceView_lastUpdatedDate(colValue : java.util.Date) : List[VExecutorStorageViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where sourceView_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
+    dtos
+  }
+  def getDtosBySourceView_sourceInstanceId(colValue : Long) : List[VExecutorStorageViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where sourceView_sourceInstanceId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
+    dtos
+  }
+  def getDtosBySourceView_sourceViewTypeId(colValue : Long) : List[VExecutorStorageViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where sourceView_sourceViewTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
+    dtos
+  }
+  def getDtosBySourceView_sourceViewName(colValue : String) : List[VExecutorStorageViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where sourceView_sourceViewName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
+    dtos
+  }
+  def getDtosBySourceView_sourceViewDefinition(colValue : String) : List[VExecutorStorageViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where sourceView_sourceViewDefinition = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
+    dtos
+  }
+  def getDtosBySourceView_isExisting(colValue : Int) : List[VExecutorStorageViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where sourceView_isExisting = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);
+    dtos
+  }
+
+}
+
+
+class VExecutorStorageViewSummaryDao extends DaoBase {
+
+  def getVExecutorStorageViewSummarysList() : List[VExecutorStorageViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewSummaryDto]= SQL("select * from vExecutorStorageViewSummary").as(anorm.Macro.namedParser[VExecutorStorageViewSummaryDto].*);
+    dtos
+  }
+  def getVExecutorStorageViewSummarysCount() : Long = {
+    implicit val connection = getConnection();
+    val cnt : Long = SQL("select count(*) as cnt from vExecutorStorageViewSummary").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVExecutorStorageViewSummarysLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vExecutorStorageViewSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVExecutorStorageViewSummarysLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vExecutorStorageViewSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVExecutorStorageViewSummaryFirst() : VExecutorStorageViewSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VExecutorStorageViewSummaryDto= SQL("select * from vExecutorStorageViewSummary order by insertedRowDate asc ").as(anorm.Macro.namedParser[VExecutorStorageViewSummaryDto].*).head;
+    dtos
+  }
+  def getVExecutorStorageViewSummaryLast() : VExecutorStorageViewSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VExecutorStorageViewSummaryDto= SQL("select * from vExecutorStorageViewSummary order by insertedRowDate desc ").as(anorm.Macro.namedParser[VExecutorStorageViewSummaryDto].*).head;
+    dtos
+  }
+  def getVExecutorStorageViewSummaryByGuid(guid : Long) : VExecutorStorageViewSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VExecutorStorageViewSummaryDto= SQL("select * from vExecutorStorageViewSummary where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VExecutorStorageViewSummaryDto].single);
+    dtos
+  }
+  def getDtosByExecutorStorageViewId(colValue : Long) : List[VExecutorStorageViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewSummaryDto] = SQL("select * from vExecutorStorageViewSummary where executorStorageViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewSummaryDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VExecutorStorageViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewSummaryDto] = SQL("select * from vExecutorStorageViewSummary where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewSummaryDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VExecutorStorageViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewSummaryDto] = SQL("select * from vExecutorStorageViewSummary where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewSummaryDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VExecutorStorageViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewSummaryDto] = SQL("select * from vExecutorStorageViewSummary where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorageSnapshotId(colValue : Long) : List[VExecutorStorageViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewSummaryDto] = SQL("select * from vExecutorStorageViewSummary where executorStorageSnapshotId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorageId(colValue : Long) : List[VExecutorStorageViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewSummaryDto] = SQL("select * from vExecutorStorageViewSummary where executorStorageId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewSummaryDto].*);
+    dtos
+  }
+  def getDtosBySourceDownloadId(colValue : Long) : List[VExecutorStorageViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewSummaryDto] = SQL("select * from vExecutorStorageViewSummary where sourceDownloadId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewSummaryDto].*);
+    dtos
+  }
+  def getDtosBySourceViewId(colValue : Long) : List[VExecutorStorageViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewSummaryDto] = SQL("select * from vExecutorStorageViewSummary where sourceViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewSummaryDto].*);
+    dtos
+  }
+  def getDtosByStoragePath(colValue : String) : List[VExecutorStorageViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewSummaryDto] = SQL("select * from vExecutorStorageViewSummary where storagePath = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewSummaryDto].*);
+    dtos
+  }
+  def getDtosByViewSize(colValue : Long) : List[VExecutorStorageViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewSummaryDto] = SQL("select * from vExecutorStorageViewSummary where viewSize = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewSummaryDto].*);
+    dtos
+  }
+  def getDtosByViewRowsCount(colValue : Long) : List[VExecutorStorageViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewSummaryDto] = SQL("select * from vExecutorStorageViewSummary where viewRowsCount = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewSummaryDto].*);
+    dtos
+  }
+  def getDtosByIsValid(colValue : Int) : List[VExecutorStorageViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewSummaryDto] = SQL("select * from vExecutorStorageViewSummary where isValid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmRunView_count(colValue : Int) : List[VExecutorStorageViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewSummaryDto] = SQL("select * from vExecutorStorageViewSummary where algorithmRunView_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmOutput_count(colValue : Int) : List[VExecutorStorageViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorStorageViewSummaryDto] = SQL("select * from vExecutorStorageViewSummary where algorithmOutput_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewSummaryDto].*);
+    dtos
+  }
+
+}
+
+
+class VExecutorTypeSummaryDao extends DaoBase {
+
+  def getVExecutorTypeSummarysList() : List[VExecutorTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorTypeSummaryDto]= SQL("select * from vExecutorTypeSummary").as(anorm.Macro.namedParser[VExecutorTypeSummaryDto].*);
+    dtos
+  }
+  def getVExecutorTypeSummarysCount() : Long = {
+    implicit val connection = getConnection();
+    val cnt : Long = SQL("select count(*) as cnt from vExecutorTypeSummary").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVExecutorTypeSummarysLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vExecutorTypeSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVExecutorTypeSummarysLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vExecutorTypeSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVExecutorTypeSummaryFirst() : VExecutorTypeSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VExecutorTypeSummaryDto= SQL("select * from vExecutorTypeSummary order by insertedRowDate asc ").as(anorm.Macro.namedParser[VExecutorTypeSummaryDto].*).head;
+    dtos
+  }
+  def getVExecutorTypeSummaryLast() : VExecutorTypeSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VExecutorTypeSummaryDto= SQL("select * from vExecutorTypeSummary order by insertedRowDate desc ").as(anorm.Macro.namedParser[VExecutorTypeSummaryDto].*).head;
+    dtos
+  }
+  def getVExecutorTypeSummaryByGuid(guid : Long) : VExecutorTypeSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VExecutorTypeSummaryDto= SQL("select * from vExecutorTypeSummary where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VExecutorTypeSummaryDto].single);
+    dtos
+  }
+  def getDtosByExecutorTypeId(colValue : Long) : List[VExecutorTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorTypeSummaryDto] = SQL("select * from vExecutorTypeSummary where executorTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VExecutorTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorTypeSummaryDto] = SQL("select * from vExecutorTypeSummary where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VExecutorTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorTypeSummaryDto] = SQL("select * from vExecutorTypeSummary where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VExecutorTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorTypeSummaryDto] = SQL("select * from vExecutorTypeSummary where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorTypeName(colValue : String) : List[VExecutorTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorTypeSummaryDto] = SQL("select * from vExecutorTypeSummary where executorTypeName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorTypeClass(colValue : String) : List[VExecutorTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorTypeSummaryDto] = SQL("select * from vExecutorTypeSummary where executorTypeClass = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorInstance_count(colValue : Int) : List[VExecutorTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorTypeSummaryDto] = SQL("select * from vExecutorTypeSummary where executorInstance_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmImplementation_count(colValue : Int) : List[VExecutorTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VExecutorTypeSummaryDto] = SQL("select * from vExecutorTypeSummary where algorithmImplementation_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorTypeSummaryDto].*);
     dtos
   }
 
@@ -6555,6 +10116,16 @@ class VResourceManagerDao extends DaoBase {
     val dtos : List[VResourceManagerDto] = SQL("select * from vResourceManager where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerDto].*);
     dtos
   }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VResourceManagerDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerDto] = SQL("select * from vResourceManager where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VResourceManagerDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerDto] = SQL("select * from vResourceManager where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerDto].*);
+    dtos
+  }
   def getDtosByResourceManagerTypeId(colValue : Long) : List[VResourceManagerDto] = {
     implicit val connection = getConnection();
     val dtos : List[VResourceManagerDto] = SQL("select * from vResourceManager where resourceManagerTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerDto].*);
@@ -6568,16 +10139,6 @@ class VResourceManagerDao extends DaoBase {
   def getDtosByResourceManagerStatus(colValue : String) : List[VResourceManagerDto] = {
     implicit val connection = getConnection();
     val dtos : List[VResourceManagerDto] = SQL("select * from vResourceManager where resourceManagerStatus = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerDto].*);
-    dtos
-  }
-  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VResourceManagerDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VResourceManagerDto] = SQL("select * from vResourceManager where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerDto].*);
-    dtos
-  }
-  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VResourceManagerDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VResourceManagerDto] = SQL("select * from vResourceManager where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerDto].*);
     dtos
   }
   def getDtosByExecutorHost_executorHostId(colValue : Long) : List[VResourceManagerDto] = {
@@ -6640,6 +10201,16 @@ class VResourceManagerDao extends DaoBase {
     val dtos : List[VResourceManagerDto] = SQL("select * from vResourceManager where resourceManagerType_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerDto].*);
     dtos
   }
+  def getDtosByResourceManagerType_insertedRowDate(colValue : java.util.Date) : List[VResourceManagerDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerDto] = SQL("select * from vResourceManager where resourceManagerType_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerDto].*);
+    dtos
+  }
+  def getDtosByResourceManagerType_lastUpdatedDate(colValue : java.util.Date) : List[VResourceManagerDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerDto] = SQL("select * from vResourceManager where resourceManagerType_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerDto].*);
+    dtos
+  }
   def getDtosByResourceManagerType_resourceManagerTypeName(colValue : String) : List[VResourceManagerDto] = {
     implicit val connection = getConnection();
     val dtos : List[VResourceManagerDto] = SQL("select * from vResourceManager where resourceManagerType_resourceManagerTypeName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerDto].*);
@@ -6650,14 +10221,466 @@ class VResourceManagerDao extends DaoBase {
     val dtos : List[VResourceManagerDto] = SQL("select * from vResourceManager where resourceManagerType_resourceManagerTypeClass = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerDto].*);
     dtos
   }
-  def getDtosByResourceManagerType_insertedRowDate(colValue : java.util.Date) : List[VResourceManagerDto] = {
+
+}
+
+
+class VResourceManagerAllocationDao extends DaoBase {
+
+  def getVResourceManagerAllocationsList() : List[VResourceManagerAllocationDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VResourceManagerDto] = SQL("select * from vResourceManager where resourceManagerType_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerDto].*);
+    val dtos : List[VResourceManagerAllocationDto]= SQL("select * from vResourceManagerAllocation").as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
     dtos
   }
-  def getDtosByResourceManagerType_lastUpdatedDate(colValue : java.util.Date) : List[VResourceManagerDto] = {
+  def getVResourceManagerAllocationsCount() : Long = {
     implicit val connection = getConnection();
-    val dtos : List[VResourceManagerDto] = SQL("select * from vResourceManager where resourceManagerType_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerDto].*);
+    val cnt : Long = SQL("select count(*) as cnt from vResourceManagerAllocation").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVResourceManagerAllocationsLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vResourceManagerAllocation").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVResourceManagerAllocationsLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vResourceManagerAllocation").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVResourceManagerAllocationFirst() : VResourceManagerAllocationDto = {
+    implicit val connection = getConnection();
+    val dtos : VResourceManagerAllocationDto= SQL("select * from vResourceManagerAllocation order by insertedRowDate asc ").as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*).head;
+    dtos
+  }
+  def getVResourceManagerAllocationLast() : VResourceManagerAllocationDto = {
+    implicit val connection = getConnection();
+    val dtos : VResourceManagerAllocationDto= SQL("select * from vResourceManagerAllocation order by insertedRowDate desc ").as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*).head;
+    dtos
+  }
+  def getVResourceManagerAllocationByGuid(guid : Long) : VResourceManagerAllocationDto = {
+    implicit val connection = getConnection();
+    val dtos : VResourceManagerAllocationDto= SQL("select * from vResourceManagerAllocation where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].single);
+    dtos
+  }
+  def getDtosByResourceManagerAllocationId(colValue : Long) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where resourceManagerAllocationId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByResourceManagerTypeId(colValue : Long) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where resourceManagerTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByResourceManagerId(colValue : Long) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where resourceManagerId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByExecutorHostId(colValue : Long) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByExecutorInstanceId(colValue : Long) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where executorInstanceId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByResourceMeasureId(colValue : Long) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where resourceMeasureId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByAllocationValue(colValue : Double) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where allocationValue = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByAllocationValueMin(colValue : Double) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where allocationValueMin = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByAllocationValueMax(colValue : Double) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where allocationValueMax = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_executorHostId(colValue : Long) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where executorHost_executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_guid(colValue : Long) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where executorHost_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_insertedRowDate(colValue : java.util.Date) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where executorHost_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_lastUpdatedDate(colValue : java.util.Date) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where executorHost_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_hostName(colValue : String) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where executorHost_hostName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_hostIp(colValue : String) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where executorHost_hostIp = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_hostDomain(colValue : String) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where executorHost_hostDomain = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_hostOsType(colValue : String) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where executorHost_hostOsType = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_hostOsVersion(colValue : String) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where executorHost_hostOsVersion = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_isWorking(colValue : Int) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where executorHost_isWorking = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByExecutorInstance_executorInstanceId(colValue : Long) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where executorInstance_executorInstanceId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByExecutorInstance_guid(colValue : Long) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where executorInstance_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByExecutorInstance_insertedRowDate(colValue : java.util.Date) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where executorInstance_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByExecutorInstance_lastUpdatedDate(colValue : java.util.Date) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where executorInstance_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByExecutorInstance_executorTypeId(colValue : Long) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where executorInstance_executorTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByExecutorInstance_executorHostId(colValue : Long) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where executorInstance_executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByExecutorInstance_executorContextId(colValue : Long) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where executorInstance_executorContextId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByExecutorInstance_executorInstanceName(colValue : String) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where executorInstance_executorInstanceName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByExecutorInstance_isRunning(colValue : Int) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where executorInstance_isRunning = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByExecutorInstance_isFinished(colValue : Int) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where executorInstance_isFinished = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByExecutorInstance_portNumber(colValue : Int) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where executorInstance_portNumber = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByExecutorInstance_endDate(colValue : java.util.Date) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where executorInstance_endDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByResourceManager_resourceManagerId(colValue : Long) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where resourceManager_resourceManagerId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByResourceManager_guid(colValue : Long) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where resourceManager_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByResourceManager_insertedRowDate(colValue : java.util.Date) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where resourceManager_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByResourceManager_lastUpdatedDate(colValue : java.util.Date) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where resourceManager_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByResourceManager_resourceManagerTypeId(colValue : Long) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where resourceManager_resourceManagerTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByResourceManager_executorHostId(colValue : Long) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where resourceManager_executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByResourceManager_resourceManagerStatus(colValue : String) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where resourceManager_resourceManagerStatus = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByResourceManagerType_resourceManagerTypeId(colValue : Long) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where resourceManagerType_resourceManagerTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByResourceManagerType_guid(colValue : Long) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where resourceManagerType_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByResourceManagerType_insertedRowDate(colValue : java.util.Date) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where resourceManagerType_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByResourceManagerType_lastUpdatedDate(colValue : java.util.Date) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where resourceManagerType_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByResourceManagerType_resourceManagerTypeName(colValue : String) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where resourceManagerType_resourceManagerTypeName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByResourceManagerType_resourceManagerTypeClass(colValue : String) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where resourceManagerType_resourceManagerTypeClass = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByResourceMeasure_resourceMeasureId(colValue : Long) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where resourceMeasure_resourceMeasureId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByResourceMeasure_guid(colValue : Long) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where resourceMeasure_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByResourceMeasure_insertedRowDate(colValue : java.util.Date) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where resourceMeasure_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByResourceMeasure_lastUpdatedDate(colValue : java.util.Date) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where resourceMeasure_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+  def getDtosByResourceMeasure_resourceMeasureName(colValue : String) : List[VResourceManagerAllocationDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where resourceMeasure_resourceMeasureName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);
+    dtos
+  }
+
+}
+
+
+class VResourceManagerCheckDao extends DaoBase {
+
+  def getVResourceManagerChecksList() : List[VResourceManagerCheckDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerCheckDto]= SQL("select * from vResourceManagerCheck").as(anorm.Macro.namedParser[VResourceManagerCheckDto].*);
+    dtos
+  }
+  def getVResourceManagerChecksCount() : Long = {
+    implicit val connection = getConnection();
+    val cnt : Long = SQL("select count(*) as cnt from vResourceManagerCheck").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVResourceManagerChecksLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vResourceManagerCheck").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVResourceManagerChecksLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vResourceManagerCheck").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVResourceManagerCheckFirst() : VResourceManagerCheckDto = {
+    implicit val connection = getConnection();
+    val dtos : VResourceManagerCheckDto= SQL("select * from vResourceManagerCheck order by insertedRowDate asc ").as(anorm.Macro.namedParser[VResourceManagerCheckDto].*).head;
+    dtos
+  }
+  def getVResourceManagerCheckLast() : VResourceManagerCheckDto = {
+    implicit val connection = getConnection();
+    val dtos : VResourceManagerCheckDto= SQL("select * from vResourceManagerCheck order by insertedRowDate desc ").as(anorm.Macro.namedParser[VResourceManagerCheckDto].*).head;
+    dtos
+  }
+  def getVResourceManagerCheckByGuid(guid : Long) : VResourceManagerCheckDto = {
+    implicit val connection = getConnection();
+    val dtos : VResourceManagerCheckDto= SQL("select * from vResourceManagerCheck where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VResourceManagerCheckDto].single);
+    dtos
+  }
+  def getDtosByResourceManagerCheckId(colValue : Long) : List[VResourceManagerCheckDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerCheckDto] = SQL("select * from vResourceManagerCheck where resourceManagerCheckId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerCheckDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VResourceManagerCheckDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerCheckDto] = SQL("select * from vResourceManagerCheck where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerCheckDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VResourceManagerCheckDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerCheckDto] = SQL("select * from vResourceManagerCheck where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerCheckDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VResourceManagerCheckDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerCheckDto] = SQL("select * from vResourceManagerCheck where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerCheckDto].*);
+    dtos
+  }
+  def getDtosByResourceManagerId(colValue : Long) : List[VResourceManagerCheckDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerCheckDto] = SQL("select * from vResourceManagerCheck where resourceManagerId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerCheckDto].*);
+    dtos
+  }
+  def getDtosByExecutorHostId(colValue : Long) : List[VResourceManagerCheckDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerCheckDto] = SQL("select * from vResourceManagerCheck where executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerCheckDto].*);
+    dtos
+  }
+  def getDtosByResourceManagerStatus(colValue : String) : List[VResourceManagerCheckDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerCheckDto] = SQL("select * from vResourceManagerCheck where resourceManagerStatus = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerCheckDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_executorHostId(colValue : Long) : List[VResourceManagerCheckDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerCheckDto] = SQL("select * from vResourceManagerCheck where executorHost_executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerCheckDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_guid(colValue : Long) : List[VResourceManagerCheckDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerCheckDto] = SQL("select * from vResourceManagerCheck where executorHost_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerCheckDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_insertedRowDate(colValue : java.util.Date) : List[VResourceManagerCheckDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerCheckDto] = SQL("select * from vResourceManagerCheck where executorHost_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerCheckDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_lastUpdatedDate(colValue : java.util.Date) : List[VResourceManagerCheckDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerCheckDto] = SQL("select * from vResourceManagerCheck where executorHost_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerCheckDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_hostName(colValue : String) : List[VResourceManagerCheckDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerCheckDto] = SQL("select * from vResourceManagerCheck where executorHost_hostName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerCheckDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_hostIp(colValue : String) : List[VResourceManagerCheckDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerCheckDto] = SQL("select * from vResourceManagerCheck where executorHost_hostIp = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerCheckDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_hostDomain(colValue : String) : List[VResourceManagerCheckDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerCheckDto] = SQL("select * from vResourceManagerCheck where executorHost_hostDomain = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerCheckDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_hostOsType(colValue : String) : List[VResourceManagerCheckDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerCheckDto] = SQL("select * from vResourceManagerCheck where executorHost_hostOsType = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerCheckDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_hostOsVersion(colValue : String) : List[VResourceManagerCheckDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerCheckDto] = SQL("select * from vResourceManagerCheck where executorHost_hostOsVersion = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerCheckDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_isWorking(colValue : Int) : List[VResourceManagerCheckDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerCheckDto] = SQL("select * from vResourceManagerCheck where executorHost_isWorking = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerCheckDto].*);
+    dtos
+  }
+  def getDtosByResourceManager_resourceManagerId(colValue : Long) : List[VResourceManagerCheckDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerCheckDto] = SQL("select * from vResourceManagerCheck where resourceManager_resourceManagerId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerCheckDto].*);
+    dtos
+  }
+  def getDtosByResourceManager_guid(colValue : Long) : List[VResourceManagerCheckDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerCheckDto] = SQL("select * from vResourceManagerCheck where resourceManager_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerCheckDto].*);
+    dtos
+  }
+  def getDtosByResourceManager_insertedRowDate(colValue : java.util.Date) : List[VResourceManagerCheckDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerCheckDto] = SQL("select * from vResourceManagerCheck where resourceManager_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerCheckDto].*);
+    dtos
+  }
+  def getDtosByResourceManager_lastUpdatedDate(colValue : java.util.Date) : List[VResourceManagerCheckDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerCheckDto] = SQL("select * from vResourceManagerCheck where resourceManager_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerCheckDto].*);
+    dtos
+  }
+  def getDtosByResourceManager_resourceManagerTypeId(colValue : Long) : List[VResourceManagerCheckDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerCheckDto] = SQL("select * from vResourceManagerCheck where resourceManager_resourceManagerTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerCheckDto].*);
+    dtos
+  }
+  def getDtosByResourceManager_executorHostId(colValue : Long) : List[VResourceManagerCheckDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerCheckDto] = SQL("select * from vResourceManagerCheck where resourceManager_executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerCheckDto].*);
+    dtos
+  }
+  def getDtosByResourceManager_resourceManagerStatus(colValue : String) : List[VResourceManagerCheckDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerCheckDto] = SQL("select * from vResourceManagerCheck where resourceManager_resourceManagerStatus = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerCheckDto].*);
     dtos
   }
 
@@ -6711,6 +10734,16 @@ class VResourceManagerMeasureDao extends DaoBase {
     val dtos : List[VResourceManagerMeasureDto] = SQL("select * from vResourceManagerMeasure where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerMeasureDto].*);
     dtos
   }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VResourceManagerMeasureDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerMeasureDto] = SQL("select * from vResourceManagerMeasure where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerMeasureDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VResourceManagerMeasureDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerMeasureDto] = SQL("select * from vResourceManagerMeasure where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerMeasureDto].*);
+    dtos
+  }
   def getDtosByResourceManagerId(colValue : Long) : List[VResourceManagerMeasureDto] = {
     implicit val connection = getConnection();
     val dtos : List[VResourceManagerMeasureDto] = SQL("select * from vResourceManagerMeasure where resourceManagerId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerMeasureDto].*);
@@ -6731,16 +10764,6 @@ class VResourceManagerMeasureDao extends DaoBase {
     val dtos : List[VResourceManagerMeasureDto] = SQL("select * from vResourceManagerMeasure where measureValue = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerMeasureDto].*);
     dtos
   }
-  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VResourceManagerMeasureDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VResourceManagerMeasureDto] = SQL("select * from vResourceManagerMeasure where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerMeasureDto].*);
-    dtos
-  }
-  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VResourceManagerMeasureDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VResourceManagerMeasureDto] = SQL("select * from vResourceManagerMeasure where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerMeasureDto].*);
-    dtos
-  }
   def getDtosByResourceManager_resourceManagerId(colValue : Long) : List[VResourceManagerMeasureDto] = {
     implicit val connection = getConnection();
     val dtos : List[VResourceManagerMeasureDto] = SQL("select * from vResourceManagerMeasure where resourceManager_resourceManagerId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerMeasureDto].*);
@@ -6749,6 +10772,16 @@ class VResourceManagerMeasureDao extends DaoBase {
   def getDtosByResourceManager_guid(colValue : Long) : List[VResourceManagerMeasureDto] = {
     implicit val connection = getConnection();
     val dtos : List[VResourceManagerMeasureDto] = SQL("select * from vResourceManagerMeasure where resourceManager_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerMeasureDto].*);
+    dtos
+  }
+  def getDtosByResourceManager_insertedRowDate(colValue : java.util.Date) : List[VResourceManagerMeasureDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerMeasureDto] = SQL("select * from vResourceManagerMeasure where resourceManager_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerMeasureDto].*);
+    dtos
+  }
+  def getDtosByResourceManager_lastUpdatedDate(colValue : java.util.Date) : List[VResourceManagerMeasureDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerMeasureDto] = SQL("select * from vResourceManagerMeasure where resourceManager_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerMeasureDto].*);
     dtos
   }
   def getDtosByResourceManager_resourceManagerTypeId(colValue : Long) : List[VResourceManagerMeasureDto] = {
@@ -6766,16 +10799,6 @@ class VResourceManagerMeasureDao extends DaoBase {
     val dtos : List[VResourceManagerMeasureDto] = SQL("select * from vResourceManagerMeasure where resourceManager_resourceManagerStatus = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerMeasureDto].*);
     dtos
   }
-  def getDtosByResourceManager_insertedRowDate(colValue : java.util.Date) : List[VResourceManagerMeasureDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VResourceManagerMeasureDto] = SQL("select * from vResourceManagerMeasure where resourceManager_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerMeasureDto].*);
-    dtos
-  }
-  def getDtosByResourceManager_lastUpdatedDate(colValue : java.util.Date) : List[VResourceManagerMeasureDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VResourceManagerMeasureDto] = SQL("select * from vResourceManagerMeasure where resourceManager_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerMeasureDto].*);
-    dtos
-  }
   def getDtosByResourceMeasure_resourceMeasureId(colValue : Long) : List[VResourceManagerMeasureDto] = {
     implicit val connection = getConnection();
     val dtos : List[VResourceManagerMeasureDto] = SQL("select * from vResourceManagerMeasure where resourceMeasure_resourceMeasureId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerMeasureDto].*);
@@ -6786,11 +10809,6 @@ class VResourceManagerMeasureDao extends DaoBase {
     val dtos : List[VResourceManagerMeasureDto] = SQL("select * from vResourceManagerMeasure where resourceMeasure_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerMeasureDto].*);
     dtos
   }
-  def getDtosByResourceMeasure_resourceMeasureName(colValue : String) : List[VResourceManagerMeasureDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VResourceManagerMeasureDto] = SQL("select * from vResourceManagerMeasure where resourceMeasure_resourceMeasureName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerMeasureDto].*);
-    dtos
-  }
   def getDtosByResourceMeasure_insertedRowDate(colValue : java.util.Date) : List[VResourceManagerMeasureDto] = {
     implicit val connection = getConnection();
     val dtos : List[VResourceManagerMeasureDto] = SQL("select * from vResourceManagerMeasure where resourceMeasure_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerMeasureDto].*);
@@ -6799,6 +10817,259 @@ class VResourceManagerMeasureDao extends DaoBase {
   def getDtosByResourceMeasure_lastUpdatedDate(colValue : java.util.Date) : List[VResourceManagerMeasureDto] = {
     implicit val connection = getConnection();
     val dtos : List[VResourceManagerMeasureDto] = SQL("select * from vResourceManagerMeasure where resourceMeasure_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerMeasureDto].*);
+    dtos
+  }
+  def getDtosByResourceMeasure_resourceMeasureName(colValue : String) : List[VResourceManagerMeasureDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerMeasureDto] = SQL("select * from vResourceManagerMeasure where resourceMeasure_resourceMeasureName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerMeasureDto].*);
+    dtos
+  }
+
+}
+
+
+class VResourceManagerSummaryDao extends DaoBase {
+
+  def getVResourceManagerSummarysList() : List[VResourceManagerSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerSummaryDto]= SQL("select * from vResourceManagerSummary").as(anorm.Macro.namedParser[VResourceManagerSummaryDto].*);
+    dtos
+  }
+  def getVResourceManagerSummarysCount() : Long = {
+    implicit val connection = getConnection();
+    val cnt : Long = SQL("select count(*) as cnt from vResourceManagerSummary").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVResourceManagerSummarysLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vResourceManagerSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVResourceManagerSummarysLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vResourceManagerSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVResourceManagerSummaryFirst() : VResourceManagerSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VResourceManagerSummaryDto= SQL("select * from vResourceManagerSummary order by insertedRowDate asc ").as(anorm.Macro.namedParser[VResourceManagerSummaryDto].*).head;
+    dtos
+  }
+  def getVResourceManagerSummaryLast() : VResourceManagerSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VResourceManagerSummaryDto= SQL("select * from vResourceManagerSummary order by insertedRowDate desc ").as(anorm.Macro.namedParser[VResourceManagerSummaryDto].*).head;
+    dtos
+  }
+  def getVResourceManagerSummaryByGuid(guid : Long) : VResourceManagerSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VResourceManagerSummaryDto= SQL("select * from vResourceManagerSummary where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VResourceManagerSummaryDto].single);
+    dtos
+  }
+  def getDtosByResourceManagerId(colValue : Long) : List[VResourceManagerSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerSummaryDto] = SQL("select * from vResourceManagerSummary where resourceManagerId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerSummaryDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VResourceManagerSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerSummaryDto] = SQL("select * from vResourceManagerSummary where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerSummaryDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VResourceManagerSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerSummaryDto] = SQL("select * from vResourceManagerSummary where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerSummaryDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VResourceManagerSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerSummaryDto] = SQL("select * from vResourceManagerSummary where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerSummaryDto].*);
+    dtos
+  }
+  def getDtosByResourceManagerTypeId(colValue : Long) : List[VResourceManagerSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerSummaryDto] = SQL("select * from vResourceManagerSummary where resourceManagerTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorHostId(colValue : Long) : List[VResourceManagerSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerSummaryDto] = SQL("select * from vResourceManagerSummary where executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerSummaryDto].*);
+    dtos
+  }
+  def getDtosByResourceManagerStatus(colValue : String) : List[VResourceManagerSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerSummaryDto] = SQL("select * from vResourceManagerSummary where resourceManagerStatus = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerSummaryDto].*);
+    dtos
+  }
+  def getDtosByResourceManagerMeasure_count(colValue : Int) : List[VResourceManagerSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerSummaryDto] = SQL("select * from vResourceManagerSummary where resourceManagerMeasure_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerSummaryDto].*);
+    dtos
+  }
+  def getDtosByResourceManagerCheck_count(colValue : Int) : List[VResourceManagerSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerSummaryDto] = SQL("select * from vResourceManagerSummary where resourceManagerCheck_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerSummaryDto].*);
+    dtos
+  }
+  def getDtosByResourceManagerAllocation_count(colValue : Int) : List[VResourceManagerSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerSummaryDto] = SQL("select * from vResourceManagerSummary where resourceManagerAllocation_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerSummaryDto].*);
+    dtos
+  }
+
+}
+
+
+class VResourceManagerTypeSummaryDao extends DaoBase {
+
+  def getVResourceManagerTypeSummarysList() : List[VResourceManagerTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerTypeSummaryDto]= SQL("select * from vResourceManagerTypeSummary").as(anorm.Macro.namedParser[VResourceManagerTypeSummaryDto].*);
+    dtos
+  }
+  def getVResourceManagerTypeSummarysCount() : Long = {
+    implicit val connection = getConnection();
+    val cnt : Long = SQL("select count(*) as cnt from vResourceManagerTypeSummary").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVResourceManagerTypeSummarysLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vResourceManagerTypeSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVResourceManagerTypeSummarysLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vResourceManagerTypeSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVResourceManagerTypeSummaryFirst() : VResourceManagerTypeSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VResourceManagerTypeSummaryDto= SQL("select * from vResourceManagerTypeSummary order by insertedRowDate asc ").as(anorm.Macro.namedParser[VResourceManagerTypeSummaryDto].*).head;
+    dtos
+  }
+  def getVResourceManagerTypeSummaryLast() : VResourceManagerTypeSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VResourceManagerTypeSummaryDto= SQL("select * from vResourceManagerTypeSummary order by insertedRowDate desc ").as(anorm.Macro.namedParser[VResourceManagerTypeSummaryDto].*).head;
+    dtos
+  }
+  def getVResourceManagerTypeSummaryByGuid(guid : Long) : VResourceManagerTypeSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VResourceManagerTypeSummaryDto= SQL("select * from vResourceManagerTypeSummary where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VResourceManagerTypeSummaryDto].single);
+    dtos
+  }
+  def getDtosByResourceManagerTypeId(colValue : Long) : List[VResourceManagerTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerTypeSummaryDto] = SQL("select * from vResourceManagerTypeSummary where resourceManagerTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VResourceManagerTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerTypeSummaryDto] = SQL("select * from vResourceManagerTypeSummary where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VResourceManagerTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerTypeSummaryDto] = SQL("select * from vResourceManagerTypeSummary where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VResourceManagerTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerTypeSummaryDto] = SQL("select * from vResourceManagerTypeSummary where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByResourceManagerTypeName(colValue : String) : List[VResourceManagerTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerTypeSummaryDto] = SQL("select * from vResourceManagerTypeSummary where resourceManagerTypeName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByResourceManagerTypeClass(colValue : String) : List[VResourceManagerTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerTypeSummaryDto] = SQL("select * from vResourceManagerTypeSummary where resourceManagerTypeClass = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByResourceManager_count(colValue : Int) : List[VResourceManagerTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerTypeSummaryDto] = SQL("select * from vResourceManagerTypeSummary where resourceManager_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByResourceManagerAllocation_count(colValue : Int) : List[VResourceManagerTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceManagerTypeSummaryDto] = SQL("select * from vResourceManagerTypeSummary where resourceManagerAllocation_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerTypeSummaryDto].*);
+    dtos
+  }
+
+}
+
+
+class VResourceMeasureSummaryDao extends DaoBase {
+
+  def getVResourceMeasureSummarysList() : List[VResourceMeasureSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceMeasureSummaryDto]= SQL("select * from vResourceMeasureSummary").as(anorm.Macro.namedParser[VResourceMeasureSummaryDto].*);
+    dtos
+  }
+  def getVResourceMeasureSummarysCount() : Long = {
+    implicit val connection = getConnection();
+    val cnt : Long = SQL("select count(*) as cnt from vResourceMeasureSummary").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVResourceMeasureSummarysLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vResourceMeasureSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVResourceMeasureSummarysLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vResourceMeasureSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVResourceMeasureSummaryFirst() : VResourceMeasureSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VResourceMeasureSummaryDto= SQL("select * from vResourceMeasureSummary order by insertedRowDate asc ").as(anorm.Macro.namedParser[VResourceMeasureSummaryDto].*).head;
+    dtos
+  }
+  def getVResourceMeasureSummaryLast() : VResourceMeasureSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VResourceMeasureSummaryDto= SQL("select * from vResourceMeasureSummary order by insertedRowDate desc ").as(anorm.Macro.namedParser[VResourceMeasureSummaryDto].*).head;
+    dtos
+  }
+  def getVResourceMeasureSummaryByGuid(guid : Long) : VResourceMeasureSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VResourceMeasureSummaryDto= SQL("select * from vResourceMeasureSummary where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VResourceMeasureSummaryDto].single);
+    dtos
+  }
+  def getDtosByResourceMeasureId(colValue : Long) : List[VResourceMeasureSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceMeasureSummaryDto] = SQL("select * from vResourceMeasureSummary where resourceMeasureId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceMeasureSummaryDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VResourceMeasureSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceMeasureSummaryDto] = SQL("select * from vResourceMeasureSummary where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceMeasureSummaryDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VResourceMeasureSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceMeasureSummaryDto] = SQL("select * from vResourceMeasureSummary where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceMeasureSummaryDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VResourceMeasureSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceMeasureSummaryDto] = SQL("select * from vResourceMeasureSummary where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceMeasureSummaryDto].*);
+    dtos
+  }
+  def getDtosByResourceMeasureName(colValue : String) : List[VResourceMeasureSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceMeasureSummaryDto] = SQL("select * from vResourceMeasureSummary where resourceMeasureName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceMeasureSummaryDto].*);
+    dtos
+  }
+  def getDtosByResourceManagerMeasure_count(colValue : Int) : List[VResourceMeasureSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceMeasureSummaryDto] = SQL("select * from vResourceMeasureSummary where resourceManagerMeasure_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceMeasureSummaryDto].*);
+    dtos
+  }
+  def getDtosByResourceManagerAllocation_count(colValue : Int) : List[VResourceMeasureSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VResourceMeasureSummaryDto] = SQL("select * from vResourceMeasureSummary where resourceManagerAllocation_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceMeasureSummaryDto].*);
     dtos
   }
 
@@ -6847,9 +11118,9 @@ class VSourceDownloadDao extends DaoBase {
     val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where sourceDownloadId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
     dtos
   }
-  def getDtosBySourceScheduleId(colValue : Long) : List[VSourceDownloadDto] = {
+  def getDtosByGuid(colValue : Long) : List[VSourceDownloadDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where sourceScheduleId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
+    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
     dtos
   }
   def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VSourceDownloadDto] = {
@@ -6862,9 +11133,24 @@ class VSourceDownloadDao extends DaoBase {
     val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
     dtos
   }
-  def getDtosByGuid(colValue : Long) : List[VSourceDownloadDto] = {
+  def getDtosBySourceScheduleId(colValue : Long) : List[VSourceDownloadDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
+    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where sourceScheduleId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
+    dtos
+  }
+  def getDtosByExecutorHostId(colValue : Long) : List[VSourceDownloadDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
+    dtos
+  }
+  def getDtosByExecutorContextId(colValue : Long) : List[VSourceDownloadDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where executorContextId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
+    dtos
+  }
+  def getDtosBySourceViewId(colValue : Long) : List[VSourceDownloadDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where sourceViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
     dtos
   }
   def getDtosByRetryNumber(colValue : Int) : List[VSourceDownloadDto] = {
@@ -6892,19 +11178,99 @@ class VSourceDownloadDao extends DaoBase {
     val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where excecptionDescription = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
     dtos
   }
+  def getDtosByExecutorHost_executorHostId(colValue : Long) : List[VSourceDownloadDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where executorHost_executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_guid(colValue : Long) : List[VSourceDownloadDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where executorHost_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_insertedRowDate(colValue : java.util.Date) : List[VSourceDownloadDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where executorHost_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_lastUpdatedDate(colValue : java.util.Date) : List[VSourceDownloadDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where executorHost_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_hostName(colValue : String) : List[VSourceDownloadDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where executorHost_hostName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_hostIp(colValue : String) : List[VSourceDownloadDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where executorHost_hostIp = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_hostDomain(colValue : String) : List[VSourceDownloadDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where executorHost_hostDomain = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_hostOsType(colValue : String) : List[VSourceDownloadDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where executorHost_hostOsType = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_hostOsVersion(colValue : String) : List[VSourceDownloadDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where executorHost_hostOsVersion = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
+    dtos
+  }
+  def getDtosByExecutorHost_isWorking(colValue : Int) : List[VSourceDownloadDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where executorHost_isWorking = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
+    dtos
+  }
+  def getDtosByExecutorContext_executorContextId(colValue : Long) : List[VSourceDownloadDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where executorContext_executorContextId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
+    dtos
+  }
+  def getDtosByExecutorContext_guid(colValue : Long) : List[VSourceDownloadDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where executorContext_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
+    dtos
+  }
+  def getDtosByExecutorContext_insertedRowDate(colValue : java.util.Date) : List[VSourceDownloadDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where executorContext_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
+    dtos
+  }
+  def getDtosByExecutorContext_lastUpdatedDate(colValue : java.util.Date) : List[VSourceDownloadDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where executorContext_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
+    dtos
+  }
+  def getDtosByExecutorContext_executorHostId(colValue : Long) : List[VSourceDownloadDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where executorContext_executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
+    dtos
+  }
+  def getDtosByExecutorContext_isWorking(colValue : Int) : List[VSourceDownloadDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where executorContext_isWorking = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
+    dtos
+  }
+  def getDtosByExecutorContext_properties(colValue : String) : List[VSourceDownloadDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where executorContext_properties = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
+    dtos
+  }
   def getDtosBySourceSchedule_sourceScheduleId(colValue : Long) : List[VSourceDownloadDto] = {
     implicit val connection = getConnection();
     val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where sourceSchedule_sourceScheduleId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
     dtos
   }
-  def getDtosBySourceSchedule_sourceViewId(colValue : Long) : List[VSourceDownloadDto] = {
+  def getDtosBySourceSchedule_guid(colValue : Long) : List[VSourceDownloadDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where sourceSchedule_sourceViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
-    dtos
-  }
-  def getDtosBySourceSchedule_executorStorageId(colValue : Long) : List[VSourceDownloadDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where sourceSchedule_executorStorageId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
+    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where sourceSchedule_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
     dtos
   }
   def getDtosBySourceSchedule_insertedRowDate(colValue : java.util.Date) : List[VSourceDownloadDto] = {
@@ -6917,9 +11283,14 @@ class VSourceDownloadDao extends DaoBase {
     val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where sourceSchedule_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
     dtos
   }
-  def getDtosBySourceSchedule_guid(colValue : Long) : List[VSourceDownloadDto] = {
+  def getDtosBySourceSchedule_sourceViewId(colValue : Long) : List[VSourceDownloadDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where sourceSchedule_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
+    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where sourceSchedule_sourceViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
+    dtos
+  }
+  def getDtosBySourceSchedule_executorStorageId(colValue : Long) : List[VSourceDownloadDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where sourceSchedule_executorStorageId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
     dtos
   }
   def getDtosBySourceSchedule_onDemand(colValue : Int) : List[VSourceDownloadDto] = {
@@ -6935,6 +11306,61 @@ class VSourceDownloadDao extends DaoBase {
   def getDtosBySourceSchedule_intervalValue(colValue : Long) : List[VSourceDownloadDto] = {
     implicit val connection = getConnection();
     val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where sourceSchedule_intervalValue = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
+    dtos
+  }
+  def getDtosBySourceSchedule_isScheduled(colValue : Int) : List[VSourceDownloadDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where sourceSchedule_isScheduled = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
+    dtos
+  }
+  def getDtosBySourceSchedule_deleteOldCopies(colValue : Int) : List[VSourceDownloadDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where sourceSchedule_deleteOldCopies = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
+    dtos
+  }
+  def getDtosBySourceView_sourceViewId(colValue : Long) : List[VSourceDownloadDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where sourceView_sourceViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
+    dtos
+  }
+  def getDtosBySourceView_guid(colValue : Long) : List[VSourceDownloadDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where sourceView_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
+    dtos
+  }
+  def getDtosBySourceView_insertedRowDate(colValue : java.util.Date) : List[VSourceDownloadDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where sourceView_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
+    dtos
+  }
+  def getDtosBySourceView_lastUpdatedDate(colValue : java.util.Date) : List[VSourceDownloadDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where sourceView_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
+    dtos
+  }
+  def getDtosBySourceView_sourceInstanceId(colValue : Long) : List[VSourceDownloadDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where sourceView_sourceInstanceId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
+    dtos
+  }
+  def getDtosBySourceView_sourceViewTypeId(colValue : Long) : List[VSourceDownloadDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where sourceView_sourceViewTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
+    dtos
+  }
+  def getDtosBySourceView_sourceViewName(colValue : String) : List[VSourceDownloadDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where sourceView_sourceViewName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
+    dtos
+  }
+  def getDtosBySourceView_sourceViewDefinition(colValue : String) : List[VSourceDownloadDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where sourceView_sourceViewDefinition = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
+    dtos
+  }
+  def getDtosBySourceView_isExisting(colValue : Int) : List[VSourceDownloadDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where sourceView_isExisting = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);
     dtos
   }
 
@@ -7028,9 +11454,9 @@ class VSourceDownloadStatDao extends DaoBase {
     val dtos : List[VSourceDownloadStatDto] = SQL("select * from vSourceDownloadStat where sourceDownload_sourceDownloadId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadStatDto].*);
     dtos
   }
-  def getDtosBySourceDownload_sourceScheduleId(colValue : Long) : List[VSourceDownloadStatDto] = {
+  def getDtosBySourceDownload_guid(colValue : Long) : List[VSourceDownloadStatDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VSourceDownloadStatDto] = SQL("select * from vSourceDownloadStat where sourceDownload_sourceScheduleId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadStatDto].*);
+    val dtos : List[VSourceDownloadStatDto] = SQL("select * from vSourceDownloadStat where sourceDownload_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadStatDto].*);
     dtos
   }
   def getDtosBySourceDownload_insertedRowDate(colValue : java.util.Date) : List[VSourceDownloadStatDto] = {
@@ -7043,9 +11469,24 @@ class VSourceDownloadStatDao extends DaoBase {
     val dtos : List[VSourceDownloadStatDto] = SQL("select * from vSourceDownloadStat where sourceDownload_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadStatDto].*);
     dtos
   }
-  def getDtosBySourceDownload_guid(colValue : Long) : List[VSourceDownloadStatDto] = {
+  def getDtosBySourceDownload_sourceScheduleId(colValue : Long) : List[VSourceDownloadStatDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VSourceDownloadStatDto] = SQL("select * from vSourceDownloadStat where sourceDownload_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadStatDto].*);
+    val dtos : List[VSourceDownloadStatDto] = SQL("select * from vSourceDownloadStat where sourceDownload_sourceScheduleId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadStatDto].*);
+    dtos
+  }
+  def getDtosBySourceDownload_executorHostId(colValue : Long) : List[VSourceDownloadStatDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadStatDto] = SQL("select * from vSourceDownloadStat where sourceDownload_executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadStatDto].*);
+    dtos
+  }
+  def getDtosBySourceDownload_executorContextId(colValue : Long) : List[VSourceDownloadStatDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadStatDto] = SQL("select * from vSourceDownloadStat where sourceDownload_executorContextId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadStatDto].*);
+    dtos
+  }
+  def getDtosBySourceDownload_sourceViewId(colValue : Long) : List[VSourceDownloadStatDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadStatDto] = SQL("select * from vSourceDownloadStat where sourceDownload_sourceViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadStatDto].*);
     dtos
   }
   def getDtosBySourceDownload_retryNumber(colValue : Int) : List[VSourceDownloadStatDto] = {
@@ -7124,16 +11565,6 @@ class VSourceDownloadStatColumnDao extends DaoBase {
     val dtos : List[VSourceDownloadStatColumnDto] = SQL("select * from vSourceDownloadStatColumn where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadStatColumnDto].*);
     dtos
   }
-  def getDtosBySourceDownloadId(colValue : Long) : List[VSourceDownloadStatColumnDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VSourceDownloadStatColumnDto] = SQL("select * from vSourceDownloadStatColumn where sourceDownloadId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadStatColumnDto].*);
-    dtos
-  }
-  def getDtosBySourceViewColumnId(colValue : Long) : List[VSourceDownloadStatColumnDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VSourceDownloadStatColumnDto] = SQL("select * from vSourceDownloadStatColumn where sourceViewColumnId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadStatColumnDto].*);
-    dtos
-  }
   def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VSourceDownloadStatColumnDto] = {
     implicit val connection = getConnection();
     val dtos : List[VSourceDownloadStatColumnDto] = SQL("select * from vSourceDownloadStatColumn where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadStatColumnDto].*);
@@ -7142,6 +11573,16 @@ class VSourceDownloadStatColumnDao extends DaoBase {
   def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VSourceDownloadStatColumnDto] = {
     implicit val connection = getConnection();
     val dtos : List[VSourceDownloadStatColumnDto] = SQL("select * from vSourceDownloadStatColumn where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadStatColumnDto].*);
+    dtos
+  }
+  def getDtosBySourceDownloadId(colValue : Long) : List[VSourceDownloadStatColumnDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadStatColumnDto] = SQL("select * from vSourceDownloadStatColumn where sourceDownloadId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadStatColumnDto].*);
+    dtos
+  }
+  def getDtosBySourceViewColumnId(colValue : Long) : List[VSourceDownloadStatColumnDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadStatColumnDto] = SQL("select * from vSourceDownloadStatColumn where sourceViewColumnId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadStatColumnDto].*);
     dtos
   }
   def getDtosByColumnMinNumber(colValue : Double) : List[VSourceDownloadStatColumnDto] = {
@@ -7174,9 +11615,9 @@ class VSourceDownloadStatColumnDao extends DaoBase {
     val dtos : List[VSourceDownloadStatColumnDto] = SQL("select * from vSourceDownloadStatColumn where sourceDownload_sourceDownloadId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadStatColumnDto].*);
     dtos
   }
-  def getDtosBySourceDownload_sourceScheduleId(colValue : Long) : List[VSourceDownloadStatColumnDto] = {
+  def getDtosBySourceDownload_guid(colValue : Long) : List[VSourceDownloadStatColumnDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VSourceDownloadStatColumnDto] = SQL("select * from vSourceDownloadStatColumn where sourceDownload_sourceScheduleId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadStatColumnDto].*);
+    val dtos : List[VSourceDownloadStatColumnDto] = SQL("select * from vSourceDownloadStatColumn where sourceDownload_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadStatColumnDto].*);
     dtos
   }
   def getDtosBySourceDownload_insertedRowDate(colValue : java.util.Date) : List[VSourceDownloadStatColumnDto] = {
@@ -7189,9 +11630,24 @@ class VSourceDownloadStatColumnDao extends DaoBase {
     val dtos : List[VSourceDownloadStatColumnDto] = SQL("select * from vSourceDownloadStatColumn where sourceDownload_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadStatColumnDto].*);
     dtos
   }
-  def getDtosBySourceDownload_guid(colValue : Long) : List[VSourceDownloadStatColumnDto] = {
+  def getDtosBySourceDownload_sourceScheduleId(colValue : Long) : List[VSourceDownloadStatColumnDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VSourceDownloadStatColumnDto] = SQL("select * from vSourceDownloadStatColumn where sourceDownload_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadStatColumnDto].*);
+    val dtos : List[VSourceDownloadStatColumnDto] = SQL("select * from vSourceDownloadStatColumn where sourceDownload_sourceScheduleId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadStatColumnDto].*);
+    dtos
+  }
+  def getDtosBySourceDownload_executorHostId(colValue : Long) : List[VSourceDownloadStatColumnDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadStatColumnDto] = SQL("select * from vSourceDownloadStatColumn where sourceDownload_executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadStatColumnDto].*);
+    dtos
+  }
+  def getDtosBySourceDownload_executorContextId(colValue : Long) : List[VSourceDownloadStatColumnDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadStatColumnDto] = SQL("select * from vSourceDownloadStatColumn where sourceDownload_executorContextId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadStatColumnDto].*);
+    dtos
+  }
+  def getDtosBySourceDownload_sourceViewId(colValue : Long) : List[VSourceDownloadStatColumnDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadStatColumnDto] = SQL("select * from vSourceDownloadStatColumn where sourceDownload_sourceViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadStatColumnDto].*);
     dtos
   }
   def getDtosBySourceDownload_retryNumber(colValue : Int) : List[VSourceDownloadStatColumnDto] = {
@@ -7224,9 +11680,9 @@ class VSourceDownloadStatColumnDao extends DaoBase {
     val dtos : List[VSourceDownloadStatColumnDto] = SQL("select * from vSourceDownloadStatColumn where sourceViewColumn_sourceViewColumnId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadStatColumnDto].*);
     dtos
   }
-  def getDtosBySourceViewColumn_sourceViewId(colValue : Long) : List[VSourceDownloadStatColumnDto] = {
+  def getDtosBySourceViewColumn_guid(colValue : Long) : List[VSourceDownloadStatColumnDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VSourceDownloadStatColumnDto] = SQL("select * from vSourceDownloadStatColumn where sourceViewColumn_sourceViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadStatColumnDto].*);
+    val dtos : List[VSourceDownloadStatColumnDto] = SQL("select * from vSourceDownloadStatColumn where sourceViewColumn_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadStatColumnDto].*);
     dtos
   }
   def getDtosBySourceViewColumn_insertedRowDate(colValue : java.util.Date) : List[VSourceDownloadStatColumnDto] = {
@@ -7239,9 +11695,9 @@ class VSourceDownloadStatColumnDao extends DaoBase {
     val dtos : List[VSourceDownloadStatColumnDto] = SQL("select * from vSourceDownloadStatColumn where sourceViewColumn_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadStatColumnDto].*);
     dtos
   }
-  def getDtosBySourceViewColumn_guid(colValue : Long) : List[VSourceDownloadStatColumnDto] = {
+  def getDtosBySourceViewColumn_sourceViewId(colValue : Long) : List[VSourceDownloadStatColumnDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VSourceDownloadStatColumnDto] = SQL("select * from vSourceDownloadStatColumn where sourceViewColumn_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadStatColumnDto].*);
+    val dtos : List[VSourceDownloadStatColumnDto] = SQL("select * from vSourceDownloadStatColumn where sourceViewColumn_sourceViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadStatColumnDto].*);
     dtos
   }
   def getDtosBySourceViewColumn_columnName(colValue : String) : List[VSourceDownloadStatColumnDto] = {
@@ -7252,6 +11708,127 @@ class VSourceDownloadStatColumnDao extends DaoBase {
   def getDtosBySourceViewColumn_columnType(colValue : String) : List[VSourceDownloadStatColumnDto] = {
     implicit val connection = getConnection();
     val dtos : List[VSourceDownloadStatColumnDto] = SQL("select * from vSourceDownloadStatColumn where sourceViewColumn_columnType = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadStatColumnDto].*);
+    dtos
+  }
+
+}
+
+
+class VSourceDownloadSummaryDao extends DaoBase {
+
+  def getVSourceDownloadSummarysList() : List[VSourceDownloadSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadSummaryDto]= SQL("select * from vSourceDownloadSummary").as(anorm.Macro.namedParser[VSourceDownloadSummaryDto].*);
+    dtos
+  }
+  def getVSourceDownloadSummarysCount() : Long = {
+    implicit val connection = getConnection();
+    val cnt : Long = SQL("select count(*) as cnt from vSourceDownloadSummary").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVSourceDownloadSummarysLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vSourceDownloadSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVSourceDownloadSummarysLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vSourceDownloadSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVSourceDownloadSummaryFirst() : VSourceDownloadSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VSourceDownloadSummaryDto= SQL("select * from vSourceDownloadSummary order by insertedRowDate asc ").as(anorm.Macro.namedParser[VSourceDownloadSummaryDto].*).head;
+    dtos
+  }
+  def getVSourceDownloadSummaryLast() : VSourceDownloadSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VSourceDownloadSummaryDto= SQL("select * from vSourceDownloadSummary order by insertedRowDate desc ").as(anorm.Macro.namedParser[VSourceDownloadSummaryDto].*).head;
+    dtos
+  }
+  def getVSourceDownloadSummaryByGuid(guid : Long) : VSourceDownloadSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VSourceDownloadSummaryDto= SQL("select * from vSourceDownloadSummary where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VSourceDownloadSummaryDto].single);
+    dtos
+  }
+  def getDtosBySourceDownloadId(colValue : Long) : List[VSourceDownloadSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadSummaryDto] = SQL("select * from vSourceDownloadSummary where sourceDownloadId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadSummaryDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VSourceDownloadSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadSummaryDto] = SQL("select * from vSourceDownloadSummary where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadSummaryDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VSourceDownloadSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadSummaryDto] = SQL("select * from vSourceDownloadSummary where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadSummaryDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VSourceDownloadSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadSummaryDto] = SQL("select * from vSourceDownloadSummary where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadSummaryDto].*);
+    dtos
+  }
+  def getDtosBySourceScheduleId(colValue : Long) : List[VSourceDownloadSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadSummaryDto] = SQL("select * from vSourceDownloadSummary where sourceScheduleId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorHostId(colValue : Long) : List[VSourceDownloadSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadSummaryDto] = SQL("select * from vSourceDownloadSummary where executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorContextId(colValue : Long) : List[VSourceDownloadSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadSummaryDto] = SQL("select * from vSourceDownloadSummary where executorContextId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadSummaryDto].*);
+    dtos
+  }
+  def getDtosBySourceViewId(colValue : Long) : List[VSourceDownloadSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadSummaryDto] = SQL("select * from vSourceDownloadSummary where sourceViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadSummaryDto].*);
+    dtos
+  }
+  def getDtosByRetryNumber(colValue : Int) : List[VSourceDownloadSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadSummaryDto] = SQL("select * from vSourceDownloadSummary where retryNumber = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadSummaryDto].*);
+    dtos
+  }
+  def getDtosByIsRunning(colValue : Int) : List[VSourceDownloadSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadSummaryDto] = SQL("select * from vSourceDownloadSummary where isRunning = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadSummaryDto].*);
+    dtos
+  }
+  def getDtosByIsFinished(colValue : Int) : List[VSourceDownloadSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadSummaryDto] = SQL("select * from vSourceDownloadSummary where isFinished = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadSummaryDto].*);
+    dtos
+  }
+  def getDtosByIsExcecption(colValue : Int) : List[VSourceDownloadSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadSummaryDto] = SQL("select * from vSourceDownloadSummary where isExcecption = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadSummaryDto].*);
+    dtos
+  }
+  def getDtosByExcecptionDescription(colValue : String) : List[VSourceDownloadSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadSummaryDto] = SQL("select * from vSourceDownloadSummary where excecptionDescription = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadSummaryDto].*);
+    dtos
+  }
+  def getDtosBySourceDownloadStat_count(colValue : Int) : List[VSourceDownloadSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadSummaryDto] = SQL("select * from vSourceDownloadSummary where sourceDownloadStat_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadSummaryDto].*);
+    dtos
+  }
+  def getDtosBySourceDownloadStatColumn_count(colValue : Int) : List[VSourceDownloadSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadSummaryDto] = SQL("select * from vSourceDownloadSummary where sourceDownloadStatColumn_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorageView_count(colValue : Int) : List[VSourceDownloadSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceDownloadSummaryDto] = SQL("select * from vSourceDownloadSummary where executorStorageView_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadSummaryDto].*);
     dtos
   }
 
@@ -7305,6 +11882,16 @@ class VSourceInstanceDao extends DaoBase {
     val dtos : List[VSourceInstanceDto] = SQL("select * from vSourceInstance where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceInstanceDto].*);
     dtos
   }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VSourceInstanceDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceInstanceDto] = SQL("select * from vSourceInstance where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceInstanceDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VSourceInstanceDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceInstanceDto] = SQL("select * from vSourceInstance where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceInstanceDto].*);
+    dtos
+  }
   def getDtosBySourceTypeId(colValue : Long) : List[VSourceInstanceDto] = {
     implicit val connection = getConnection();
     val dtos : List[VSourceInstanceDto] = SQL("select * from vSourceInstance where sourceTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceInstanceDto].*);
@@ -7335,16 +11922,6 @@ class VSourceInstanceDao extends DaoBase {
     val dtos : List[VSourceInstanceDto] = SQL("select * from vSourceInstance where lastConnectionDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceInstanceDto].*);
     dtos
   }
-  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VSourceInstanceDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VSourceInstanceDto] = SQL("select * from vSourceInstance where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceInstanceDto].*);
-    dtos
-  }
-  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VSourceInstanceDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VSourceInstanceDto] = SQL("select * from vSourceInstance where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceInstanceDto].*);
-    dtos
-  }
   def getDtosBySourceType_sourceTypeId(colValue : Long) : List[VSourceInstanceDto] = {
     implicit val connection = getConnection();
     val dtos : List[VSourceInstanceDto] = SQL("select * from vSourceInstance where sourceType_sourceTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceInstanceDto].*);
@@ -7353,6 +11930,16 @@ class VSourceInstanceDao extends DaoBase {
   def getDtosBySourceType_guid(colValue : Long) : List[VSourceInstanceDto] = {
     implicit val connection = getConnection();
     val dtos : List[VSourceInstanceDto] = SQL("select * from vSourceInstance where sourceType_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceInstanceDto].*);
+    dtos
+  }
+  def getDtosBySourceType_insertedRowDate(colValue : java.util.Date) : List[VSourceInstanceDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceInstanceDto] = SQL("select * from vSourceInstance where sourceType_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceInstanceDto].*);
+    dtos
+  }
+  def getDtosBySourceType_lastUpdatedDate(colValue : java.util.Date) : List[VSourceInstanceDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceInstanceDto] = SQL("select * from vSourceInstance where sourceType_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceInstanceDto].*);
     dtos
   }
   def getDtosBySourceType_sourceTypeName(colValue : String) : List[VSourceInstanceDto] = {
@@ -7365,14 +11952,191 @@ class VSourceInstanceDao extends DaoBase {
     val dtos : List[VSourceInstanceDto] = SQL("select * from vSourceInstance where sourceType_sourceTypeClass = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceInstanceDto].*);
     dtos
   }
-  def getDtosBySourceType_insertedRowDate(colValue : java.util.Date) : List[VSourceInstanceDto] = {
+
+}
+
+
+class VSourceInstanceSummaryDao extends DaoBase {
+
+  def getVSourceInstanceSummarysList() : List[VSourceInstanceSummaryDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VSourceInstanceDto] = SQL("select * from vSourceInstance where sourceType_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceInstanceDto].*);
+    val dtos : List[VSourceInstanceSummaryDto]= SQL("select * from vSourceInstanceSummary").as(anorm.Macro.namedParser[VSourceInstanceSummaryDto].*);
     dtos
   }
-  def getDtosBySourceType_lastUpdatedDate(colValue : java.util.Date) : List[VSourceInstanceDto] = {
+  def getVSourceInstanceSummarysCount() : Long = {
     implicit val connection = getConnection();
-    val dtos : List[VSourceInstanceDto] = SQL("select * from vSourceInstance where sourceType_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceInstanceDto].*);
+    val cnt : Long = SQL("select count(*) as cnt from vSourceInstanceSummary").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVSourceInstanceSummarysLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vSourceInstanceSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVSourceInstanceSummarysLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vSourceInstanceSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVSourceInstanceSummaryFirst() : VSourceInstanceSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VSourceInstanceSummaryDto= SQL("select * from vSourceInstanceSummary order by insertedRowDate asc ").as(anorm.Macro.namedParser[VSourceInstanceSummaryDto].*).head;
+    dtos
+  }
+  def getVSourceInstanceSummaryLast() : VSourceInstanceSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VSourceInstanceSummaryDto= SQL("select * from vSourceInstanceSummary order by insertedRowDate desc ").as(anorm.Macro.namedParser[VSourceInstanceSummaryDto].*).head;
+    dtos
+  }
+  def getVSourceInstanceSummaryByGuid(guid : Long) : VSourceInstanceSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VSourceInstanceSummaryDto= SQL("select * from vSourceInstanceSummary where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VSourceInstanceSummaryDto].single);
+    dtos
+  }
+  def getDtosBySourceInstanceId(colValue : Long) : List[VSourceInstanceSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceInstanceSummaryDto] = SQL("select * from vSourceInstanceSummary where sourceInstanceId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceInstanceSummaryDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VSourceInstanceSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceInstanceSummaryDto] = SQL("select * from vSourceInstanceSummary where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceInstanceSummaryDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VSourceInstanceSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceInstanceSummaryDto] = SQL("select * from vSourceInstanceSummary where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceInstanceSummaryDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VSourceInstanceSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceInstanceSummaryDto] = SQL("select * from vSourceInstanceSummary where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceInstanceSummaryDto].*);
+    dtos
+  }
+  def getDtosBySourceTypeId(colValue : Long) : List[VSourceInstanceSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceInstanceSummaryDto] = SQL("select * from vSourceInstanceSummary where sourceTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceInstanceSummaryDto].*);
+    dtos
+  }
+  def getDtosBySourceInstanceName(colValue : String) : List[VSourceInstanceSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceInstanceSummaryDto] = SQL("select * from vSourceInstanceSummary where sourceInstanceName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceInstanceSummaryDto].*);
+    dtos
+  }
+  def getDtosByErrorCount(colValue : Long) : List[VSourceInstanceSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceInstanceSummaryDto] = SQL("select * from vSourceInstanceSummary where errorCount = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceInstanceSummaryDto].*);
+    dtos
+  }
+  def getDtosByCorrectCount(colValue : Long) : List[VSourceInstanceSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceInstanceSummaryDto] = SQL("select * from vSourceInstanceSummary where correctCount = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceInstanceSummaryDto].*);
+    dtos
+  }
+  def getDtosByLastStatus(colValue : String) : List[VSourceInstanceSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceInstanceSummaryDto] = SQL("select * from vSourceInstanceSummary where lastStatus = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceInstanceSummaryDto].*);
+    dtos
+  }
+  def getDtosByLastConnectionDate(colValue : java.util.Date) : List[VSourceInstanceSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceInstanceSummaryDto] = SQL("select * from vSourceInstanceSummary where lastConnectionDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceInstanceSummaryDto].*);
+    dtos
+  }
+  def getDtosBySourceParamValue_count(colValue : Int) : List[VSourceInstanceSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceInstanceSummaryDto] = SQL("select * from vSourceInstanceSummary where sourceParamValue_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceInstanceSummaryDto].*);
+    dtos
+  }
+  def getDtosBySourceView_count(colValue : Int) : List[VSourceInstanceSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceInstanceSummaryDto] = SQL("select * from vSourceInstanceSummary where sourceView_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceInstanceSummaryDto].*);
+    dtos
+  }
+
+}
+
+
+class VSourceParamSummaryDao extends DaoBase {
+
+  def getVSourceParamSummarysList() : List[VSourceParamSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceParamSummaryDto]= SQL("select * from vSourceParamSummary").as(anorm.Macro.namedParser[VSourceParamSummaryDto].*);
+    dtos
+  }
+  def getVSourceParamSummarysCount() : Long = {
+    implicit val connection = getConnection();
+    val cnt : Long = SQL("select count(*) as cnt from vSourceParamSummary").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVSourceParamSummarysLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vSourceParamSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVSourceParamSummarysLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vSourceParamSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVSourceParamSummaryFirst() : VSourceParamSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VSourceParamSummaryDto= SQL("select * from vSourceParamSummary order by insertedRowDate asc ").as(anorm.Macro.namedParser[VSourceParamSummaryDto].*).head;
+    dtos
+  }
+  def getVSourceParamSummaryLast() : VSourceParamSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VSourceParamSummaryDto= SQL("select * from vSourceParamSummary order by insertedRowDate desc ").as(anorm.Macro.namedParser[VSourceParamSummaryDto].*).head;
+    dtos
+  }
+  def getVSourceParamSummaryByGuid(guid : Long) : VSourceParamSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VSourceParamSummaryDto= SQL("select * from vSourceParamSummary where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VSourceParamSummaryDto].single);
+    dtos
+  }
+  def getDtosBySourceParamId(colValue : Long) : List[VSourceParamSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceParamSummaryDto] = SQL("select * from vSourceParamSummary where sourceParamId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceParamSummaryDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VSourceParamSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceParamSummaryDto] = SQL("select * from vSourceParamSummary where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceParamSummaryDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VSourceParamSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceParamSummaryDto] = SQL("select * from vSourceParamSummary where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceParamSummaryDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VSourceParamSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceParamSummaryDto] = SQL("select * from vSourceParamSummary where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceParamSummaryDto].*);
+    dtos
+  }
+  def getDtosBySourceParamName(colValue : String) : List[VSourceParamSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceParamSummaryDto] = SQL("select * from vSourceParamSummary where sourceParamName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceParamSummaryDto].*);
+    dtos
+  }
+  def getDtosBySourceParamType(colValue : String) : List[VSourceParamSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceParamSummaryDto] = SQL("select * from vSourceParamSummary where sourceParamType = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceParamSummaryDto].*);
+    dtos
+  }
+  def getDtosByPossibleValues(colValue : String) : List[VSourceParamSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceParamSummaryDto] = SQL("select * from vSourceParamSummary where possibleValues = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceParamSummaryDto].*);
+    dtos
+  }
+  def getDtosBySourceTypeParam_count(colValue : Int) : List[VSourceParamSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceParamSummaryDto] = SQL("select * from vSourceParamSummary where sourceTypeParam_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceParamSummaryDto].*);
+    dtos
+  }
+  def getDtosBySourceParamValue_count(colValue : Int) : List[VSourceParamSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceParamSummaryDto] = SQL("select * from vSourceParamSummary where sourceParamValue_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceParamSummaryDto].*);
     dtos
   }
 
@@ -7421,21 +12185,6 @@ class VSourceParamValueDao extends DaoBase {
     val dtos : List[VSourceParamValueDto] = SQL("select * from vSourceParamValue where sourceParamValueId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceParamValueDto].*);
     dtos
   }
-  def getDtosBySourceInstanceId(colValue : Long) : List[VSourceParamValueDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VSourceParamValueDto] = SQL("select * from vSourceParamValue where sourceInstanceId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceParamValueDto].*);
-    dtos
-  }
-  def getDtosBySourceParamId(colValue : Long) : List[VSourceParamValueDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VSourceParamValueDto] = SQL("select * from vSourceParamValue where sourceParamId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceParamValueDto].*);
-    dtos
-  }
-  def getDtosBySourceParamValueVersion(colValue : String) : List[VSourceParamValueDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VSourceParamValueDto] = SQL("select * from vSourceParamValue where sourceParamValueVersion = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceParamValueDto].*);
-    dtos
-  }
   def getDtosByGuid(colValue : Long) : List[VSourceParamValueDto] = {
     implicit val connection = getConnection();
     val dtos : List[VSourceParamValueDto] = SQL("select * from vSourceParamValue where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceParamValueDto].*);
@@ -7451,6 +12200,21 @@ class VSourceParamValueDao extends DaoBase {
     val dtos : List[VSourceParamValueDto] = SQL("select * from vSourceParamValue where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceParamValueDto].*);
     dtos
   }
+  def getDtosBySourceInstanceId(colValue : Long) : List[VSourceParamValueDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceParamValueDto] = SQL("select * from vSourceParamValue where sourceInstanceId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceParamValueDto].*);
+    dtos
+  }
+  def getDtosBySourceParamId(colValue : Long) : List[VSourceParamValueDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceParamValueDto] = SQL("select * from vSourceParamValue where sourceParamId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceParamValueDto].*);
+    dtos
+  }
+  def getDtosBySourceParamValueVersion(colValue : String) : List[VSourceParamValueDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceParamValueDto] = SQL("select * from vSourceParamValue where sourceParamValueVersion = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceParamValueDto].*);
+    dtos
+  }
   def getDtosByParamValue(colValue : String) : List[VSourceParamValueDto] = {
     implicit val connection = getConnection();
     val dtos : List[VSourceParamValueDto] = SQL("select * from vSourceParamValue where paramValue = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceParamValueDto].*);
@@ -7464,6 +12228,16 @@ class VSourceParamValueDao extends DaoBase {
   def getDtosBySourceInstance_guid(colValue : Long) : List[VSourceParamValueDto] = {
     implicit val connection = getConnection();
     val dtos : List[VSourceParamValueDto] = SQL("select * from vSourceParamValue where sourceInstance_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceParamValueDto].*);
+    dtos
+  }
+  def getDtosBySourceInstance_insertedRowDate(colValue : java.util.Date) : List[VSourceParamValueDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceParamValueDto] = SQL("select * from vSourceParamValue where sourceInstance_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceParamValueDto].*);
+    dtos
+  }
+  def getDtosBySourceInstance_lastUpdatedDate(colValue : java.util.Date) : List[VSourceParamValueDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceParamValueDto] = SQL("select * from vSourceParamValue where sourceInstance_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceParamValueDto].*);
     dtos
   }
   def getDtosBySourceInstance_sourceTypeId(colValue : Long) : List[VSourceParamValueDto] = {
@@ -7496,16 +12270,6 @@ class VSourceParamValueDao extends DaoBase {
     val dtos : List[VSourceParamValueDto] = SQL("select * from vSourceParamValue where sourceInstance_lastConnectionDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceParamValueDto].*);
     dtos
   }
-  def getDtosBySourceInstance_insertedRowDate(colValue : java.util.Date) : List[VSourceParamValueDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VSourceParamValueDto] = SQL("select * from vSourceParamValue where sourceInstance_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceParamValueDto].*);
-    dtos
-  }
-  def getDtosBySourceInstance_lastUpdatedDate(colValue : java.util.Date) : List[VSourceParamValueDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VSourceParamValueDto] = SQL("select * from vSourceParamValue where sourceInstance_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceParamValueDto].*);
-    dtos
-  }
   def getDtosBySourceParam_sourceParamId(colValue : Long) : List[VSourceParamValueDto] = {
     implicit val connection = getConnection();
     val dtos : List[VSourceParamValueDto] = SQL("select * from vSourceParamValue where sourceParam_sourceParamId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceParamValueDto].*);
@@ -7514,6 +12278,16 @@ class VSourceParamValueDao extends DaoBase {
   def getDtosBySourceParam_guid(colValue : Long) : List[VSourceParamValueDto] = {
     implicit val connection = getConnection();
     val dtos : List[VSourceParamValueDto] = SQL("select * from vSourceParamValue where sourceParam_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceParamValueDto].*);
+    dtos
+  }
+  def getDtosBySourceParam_insertedRowDate(colValue : java.util.Date) : List[VSourceParamValueDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceParamValueDto] = SQL("select * from vSourceParamValue where sourceParam_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceParamValueDto].*);
+    dtos
+  }
+  def getDtosBySourceParam_lastUpdatedDate(colValue : java.util.Date) : List[VSourceParamValueDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceParamValueDto] = SQL("select * from vSourceParamValue where sourceParam_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceParamValueDto].*);
     dtos
   }
   def getDtosBySourceParam_sourceParamName(colValue : String) : List[VSourceParamValueDto] = {
@@ -7529,16 +12303,6 @@ class VSourceParamValueDao extends DaoBase {
   def getDtosBySourceParam_possibleValues(colValue : String) : List[VSourceParamValueDto] = {
     implicit val connection = getConnection();
     val dtos : List[VSourceParamValueDto] = SQL("select * from vSourceParamValue where sourceParam_possibleValues = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceParamValueDto].*);
-    dtos
-  }
-  def getDtosBySourceParam_insertedRowDate(colValue : java.util.Date) : List[VSourceParamValueDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VSourceParamValueDto] = SQL("select * from vSourceParamValue where sourceParam_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceParamValueDto].*);
-    dtos
-  }
-  def getDtosBySourceParam_lastUpdatedDate(colValue : java.util.Date) : List[VSourceParamValueDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VSourceParamValueDto] = SQL("select * from vSourceParamValue where sourceParam_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceParamValueDto].*);
     dtos
   }
 
@@ -7587,14 +12351,9 @@ class VSourceScheduleDao extends DaoBase {
     val dtos : List[VSourceScheduleDto] = SQL("select * from vSourceSchedule where sourceScheduleId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceScheduleDto].*);
     dtos
   }
-  def getDtosBySourceViewId(colValue : Long) : List[VSourceScheduleDto] = {
+  def getDtosByGuid(colValue : Long) : List[VSourceScheduleDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VSourceScheduleDto] = SQL("select * from vSourceSchedule where sourceViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceScheduleDto].*);
-    dtos
-  }
-  def getDtosByExecutorStorageId(colValue : Long) : List[VSourceScheduleDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VSourceScheduleDto] = SQL("select * from vSourceSchedule where executorStorageId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceScheduleDto].*);
+    val dtos : List[VSourceScheduleDto] = SQL("select * from vSourceSchedule where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceScheduleDto].*);
     dtos
   }
   def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VSourceScheduleDto] = {
@@ -7607,9 +12366,14 @@ class VSourceScheduleDao extends DaoBase {
     val dtos : List[VSourceScheduleDto] = SQL("select * from vSourceSchedule where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceScheduleDto].*);
     dtos
   }
-  def getDtosByGuid(colValue : Long) : List[VSourceScheduleDto] = {
+  def getDtosBySourceViewId(colValue : Long) : List[VSourceScheduleDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VSourceScheduleDto] = SQL("select * from vSourceSchedule where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceScheduleDto].*);
+    val dtos : List[VSourceScheduleDto] = SQL("select * from vSourceSchedule where sourceViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceScheduleDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorageId(colValue : Long) : List[VSourceScheduleDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceScheduleDto] = SQL("select * from vSourceSchedule where executorStorageId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceScheduleDto].*);
     dtos
   }
   def getDtosByOnDemand(colValue : Int) : List[VSourceScheduleDto] = {
@@ -7627,6 +12391,16 @@ class VSourceScheduleDao extends DaoBase {
     val dtos : List[VSourceScheduleDto] = SQL("select * from vSourceSchedule where intervalValue = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceScheduleDto].*);
     dtos
   }
+  def getDtosByIsScheduled(colValue : Int) : List[VSourceScheduleDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceScheduleDto] = SQL("select * from vSourceSchedule where isScheduled = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceScheduleDto].*);
+    dtos
+  }
+  def getDtosByDeleteOldCopies(colValue : Int) : List[VSourceScheduleDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceScheduleDto] = SQL("select * from vSourceSchedule where deleteOldCopies = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceScheduleDto].*);
+    dtos
+  }
   def getDtosByExecutorStorage_executorStorageId(colValue : Long) : List[VSourceScheduleDto] = {
     implicit val connection = getConnection();
     val dtos : List[VSourceScheduleDto] = SQL("select * from vSourceSchedule where executorStorage_executorStorageId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceScheduleDto].*);
@@ -7635,6 +12409,16 @@ class VSourceScheduleDao extends DaoBase {
   def getDtosByExecutorStorage_guid(colValue : Long) : List[VSourceScheduleDto] = {
     implicit val connection = getConnection();
     val dtos : List[VSourceScheduleDto] = SQL("select * from vSourceSchedule where executorStorage_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceScheduleDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorage_insertedRowDate(colValue : java.util.Date) : List[VSourceScheduleDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceScheduleDto] = SQL("select * from vSourceSchedule where executorStorage_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceScheduleDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorage_lastUpdatedDate(colValue : java.util.Date) : List[VSourceScheduleDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceScheduleDto] = SQL("select * from vSourceSchedule where executorStorage_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceScheduleDto].*);
     dtos
   }
   def getDtosByExecutorStorage_executorHostId(colValue : Long) : List[VSourceScheduleDto] = {
@@ -7672,16 +12456,6 @@ class VSourceScheduleDao extends DaoBase {
     val dtos : List[VSourceScheduleDto] = SQL("select * from vSourceSchedule where executorStorage_portNumber = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceScheduleDto].*);
     dtos
   }
-  def getDtosByExecutorStorage_insertedRowDate(colValue : java.util.Date) : List[VSourceScheduleDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VSourceScheduleDto] = SQL("select * from vSourceSchedule where executorStorage_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceScheduleDto].*);
-    dtos
-  }
-  def getDtosByExecutorStorage_lastUpdatedDate(colValue : java.util.Date) : List[VSourceScheduleDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VSourceScheduleDto] = SQL("select * from vSourceSchedule where executorStorage_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceScheduleDto].*);
-    dtos
-  }
   def getDtosBySourceView_sourceViewId(colValue : Long) : List[VSourceScheduleDto] = {
     implicit val connection = getConnection();
     val dtos : List[VSourceScheduleDto] = SQL("select * from vSourceSchedule where sourceView_sourceViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceScheduleDto].*);
@@ -7690,6 +12464,16 @@ class VSourceScheduleDao extends DaoBase {
   def getDtosBySourceView_guid(colValue : Long) : List[VSourceScheduleDto] = {
     implicit val connection = getConnection();
     val dtos : List[VSourceScheduleDto] = SQL("select * from vSourceSchedule where sourceView_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceScheduleDto].*);
+    dtos
+  }
+  def getDtosBySourceView_insertedRowDate(colValue : java.util.Date) : List[VSourceScheduleDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceScheduleDto] = SQL("select * from vSourceSchedule where sourceView_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceScheduleDto].*);
+    dtos
+  }
+  def getDtosBySourceView_lastUpdatedDate(colValue : java.util.Date) : List[VSourceScheduleDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceScheduleDto] = SQL("select * from vSourceSchedule where sourceView_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceScheduleDto].*);
     dtos
   }
   def getDtosBySourceView_sourceInstanceId(colValue : Long) : List[VSourceScheduleDto] = {
@@ -7712,14 +12496,110 @@ class VSourceScheduleDao extends DaoBase {
     val dtos : List[VSourceScheduleDto] = SQL("select * from vSourceSchedule where sourceView_sourceViewDefinition = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceScheduleDto].*);
     dtos
   }
-  def getDtosBySourceView_insertedRowDate(colValue : java.util.Date) : List[VSourceScheduleDto] = {
+  def getDtosBySourceView_isExisting(colValue : Int) : List[VSourceScheduleDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VSourceScheduleDto] = SQL("select * from vSourceSchedule where sourceView_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceScheduleDto].*);
+    val dtos : List[VSourceScheduleDto] = SQL("select * from vSourceSchedule where sourceView_isExisting = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceScheduleDto].*);
     dtos
   }
-  def getDtosBySourceView_lastUpdatedDate(colValue : java.util.Date) : List[VSourceScheduleDto] = {
+
+}
+
+
+class VSourceScheduleSummaryDao extends DaoBase {
+
+  def getVSourceScheduleSummarysList() : List[VSourceScheduleSummaryDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VSourceScheduleDto] = SQL("select * from vSourceSchedule where sourceView_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceScheduleDto].*);
+    val dtos : List[VSourceScheduleSummaryDto]= SQL("select * from vSourceScheduleSummary").as(anorm.Macro.namedParser[VSourceScheduleSummaryDto].*);
+    dtos
+  }
+  def getVSourceScheduleSummarysCount() : Long = {
+    implicit val connection = getConnection();
+    val cnt : Long = SQL("select count(*) as cnt from vSourceScheduleSummary").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVSourceScheduleSummarysLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vSourceScheduleSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVSourceScheduleSummarysLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vSourceScheduleSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVSourceScheduleSummaryFirst() : VSourceScheduleSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VSourceScheduleSummaryDto= SQL("select * from vSourceScheduleSummary order by insertedRowDate asc ").as(anorm.Macro.namedParser[VSourceScheduleSummaryDto].*).head;
+    dtos
+  }
+  def getVSourceScheduleSummaryLast() : VSourceScheduleSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VSourceScheduleSummaryDto= SQL("select * from vSourceScheduleSummary order by insertedRowDate desc ").as(anorm.Macro.namedParser[VSourceScheduleSummaryDto].*).head;
+    dtos
+  }
+  def getVSourceScheduleSummaryByGuid(guid : Long) : VSourceScheduleSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VSourceScheduleSummaryDto= SQL("select * from vSourceScheduleSummary where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VSourceScheduleSummaryDto].single);
+    dtos
+  }
+  def getDtosBySourceScheduleId(colValue : Long) : List[VSourceScheduleSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceScheduleSummaryDto] = SQL("select * from vSourceScheduleSummary where sourceScheduleId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceScheduleSummaryDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VSourceScheduleSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceScheduleSummaryDto] = SQL("select * from vSourceScheduleSummary where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceScheduleSummaryDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VSourceScheduleSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceScheduleSummaryDto] = SQL("select * from vSourceScheduleSummary where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceScheduleSummaryDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VSourceScheduleSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceScheduleSummaryDto] = SQL("select * from vSourceScheduleSummary where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceScheduleSummaryDto].*);
+    dtos
+  }
+  def getDtosBySourceViewId(colValue : Long) : List[VSourceScheduleSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceScheduleSummaryDto] = SQL("select * from vSourceScheduleSummary where sourceViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceScheduleSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorageId(colValue : Long) : List[VSourceScheduleSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceScheduleSummaryDto] = SQL("select * from vSourceScheduleSummary where executorStorageId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceScheduleSummaryDto].*);
+    dtos
+  }
+  def getDtosByOnDemand(colValue : Int) : List[VSourceScheduleSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceScheduleSummaryDto] = SQL("select * from vSourceScheduleSummary where onDemand = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceScheduleSummaryDto].*);
+    dtos
+  }
+  def getDtosByStartTime(colValue : java.util.Date) : List[VSourceScheduleSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceScheduleSummaryDto] = SQL("select * from vSourceScheduleSummary where startTime = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceScheduleSummaryDto].*);
+    dtos
+  }
+  def getDtosByIntervalValue(colValue : Long) : List[VSourceScheduleSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceScheduleSummaryDto] = SQL("select * from vSourceScheduleSummary where intervalValue = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceScheduleSummaryDto].*);
+    dtos
+  }
+  def getDtosByIsScheduled(colValue : Int) : List[VSourceScheduleSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceScheduleSummaryDto] = SQL("select * from vSourceScheduleSummary where isScheduled = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceScheduleSummaryDto].*);
+    dtos
+  }
+  def getDtosByDeleteOldCopies(colValue : Int) : List[VSourceScheduleSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceScheduleSummaryDto] = SQL("select * from vSourceScheduleSummary where deleteOldCopies = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceScheduleSummaryDto].*);
+    dtos
+  }
+  def getDtosBySourceDownload_count(colValue : Int) : List[VSourceScheduleSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceScheduleSummaryDto] = SQL("select * from vSourceScheduleSummary where sourceDownload_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceScheduleSummaryDto].*);
     dtos
   }
 
@@ -7768,6 +12648,21 @@ class VSourceTypeParamDao extends DaoBase {
     val dtos : List[VSourceTypeParamDto] = SQL("select * from vSourceTypeParam where sourceTypeParamId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceTypeParamDto].*);
     dtos
   }
+  def getDtosByGuid(colValue : Long) : List[VSourceTypeParamDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceTypeParamDto] = SQL("select * from vSourceTypeParam where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceTypeParamDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VSourceTypeParamDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceTypeParamDto] = SQL("select * from vSourceTypeParam where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceTypeParamDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VSourceTypeParamDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceTypeParamDto] = SQL("select * from vSourceTypeParam where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceTypeParamDto].*);
+    dtos
+  }
   def getDtosBySourceTypeId(colValue : Long) : List[VSourceTypeParamDto] = {
     implicit val connection = getConnection();
     val dtos : List[VSourceTypeParamDto] = SQL("select * from vSourceTypeParam where sourceTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceTypeParamDto].*);
@@ -7793,21 +12688,6 @@ class VSourceTypeParamDao extends DaoBase {
     val dtos : List[VSourceTypeParamDto] = SQL("select * from vSourceTypeParam where isRequired = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceTypeParamDto].*);
     dtos
   }
-  def getDtosByGuid(colValue : Long) : List[VSourceTypeParamDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VSourceTypeParamDto] = SQL("select * from vSourceTypeParam where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceTypeParamDto].*);
-    dtos
-  }
-  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VSourceTypeParamDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VSourceTypeParamDto] = SQL("select * from vSourceTypeParam where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceTypeParamDto].*);
-    dtos
-  }
-  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VSourceTypeParamDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VSourceTypeParamDto] = SQL("select * from vSourceTypeParam where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceTypeParamDto].*);
-    dtos
-  }
   def getDtosBySourceParam_sourceParamId(colValue : Long) : List[VSourceTypeParamDto] = {
     implicit val connection = getConnection();
     val dtos : List[VSourceTypeParamDto] = SQL("select * from vSourceTypeParam where sourceParam_sourceParamId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceTypeParamDto].*);
@@ -7816,6 +12696,16 @@ class VSourceTypeParamDao extends DaoBase {
   def getDtosBySourceParam_guid(colValue : Long) : List[VSourceTypeParamDto] = {
     implicit val connection = getConnection();
     val dtos : List[VSourceTypeParamDto] = SQL("select * from vSourceTypeParam where sourceParam_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceTypeParamDto].*);
+    dtos
+  }
+  def getDtosBySourceParam_insertedRowDate(colValue : java.util.Date) : List[VSourceTypeParamDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceTypeParamDto] = SQL("select * from vSourceTypeParam where sourceParam_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceTypeParamDto].*);
+    dtos
+  }
+  def getDtosBySourceParam_lastUpdatedDate(colValue : java.util.Date) : List[VSourceTypeParamDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceTypeParamDto] = SQL("select * from vSourceTypeParam where sourceParam_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceTypeParamDto].*);
     dtos
   }
   def getDtosBySourceParam_sourceParamName(colValue : String) : List[VSourceTypeParamDto] = {
@@ -7833,16 +12723,6 @@ class VSourceTypeParamDao extends DaoBase {
     val dtos : List[VSourceTypeParamDto] = SQL("select * from vSourceTypeParam where sourceParam_possibleValues = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceTypeParamDto].*);
     dtos
   }
-  def getDtosBySourceParam_insertedRowDate(colValue : java.util.Date) : List[VSourceTypeParamDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VSourceTypeParamDto] = SQL("select * from vSourceTypeParam where sourceParam_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceTypeParamDto].*);
-    dtos
-  }
-  def getDtosBySourceParam_lastUpdatedDate(colValue : java.util.Date) : List[VSourceTypeParamDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VSourceTypeParamDto] = SQL("select * from vSourceTypeParam where sourceParam_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceTypeParamDto].*);
-    dtos
-  }
   def getDtosBySourceType_sourceTypeId(colValue : Long) : List[VSourceTypeParamDto] = {
     implicit val connection = getConnection();
     val dtos : List[VSourceTypeParamDto] = SQL("select * from vSourceTypeParam where sourceType_sourceTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceTypeParamDto].*);
@@ -7851,6 +12731,16 @@ class VSourceTypeParamDao extends DaoBase {
   def getDtosBySourceType_guid(colValue : Long) : List[VSourceTypeParamDto] = {
     implicit val connection = getConnection();
     val dtos : List[VSourceTypeParamDto] = SQL("select * from vSourceTypeParam where sourceType_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceTypeParamDto].*);
+    dtos
+  }
+  def getDtosBySourceType_insertedRowDate(colValue : java.util.Date) : List[VSourceTypeParamDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceTypeParamDto] = SQL("select * from vSourceTypeParam where sourceType_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceTypeParamDto].*);
+    dtos
+  }
+  def getDtosBySourceType_lastUpdatedDate(colValue : java.util.Date) : List[VSourceTypeParamDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceTypeParamDto] = SQL("select * from vSourceTypeParam where sourceType_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceTypeParamDto].*);
     dtos
   }
   def getDtosBySourceType_sourceTypeName(colValue : String) : List[VSourceTypeParamDto] = {
@@ -7863,14 +12753,85 @@ class VSourceTypeParamDao extends DaoBase {
     val dtos : List[VSourceTypeParamDto] = SQL("select * from vSourceTypeParam where sourceType_sourceTypeClass = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceTypeParamDto].*);
     dtos
   }
-  def getDtosBySourceType_insertedRowDate(colValue : java.util.Date) : List[VSourceTypeParamDto] = {
+
+}
+
+
+class VSourceTypeSummaryDao extends DaoBase {
+
+  def getVSourceTypeSummarysList() : List[VSourceTypeSummaryDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VSourceTypeParamDto] = SQL("select * from vSourceTypeParam where sourceType_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceTypeParamDto].*);
+    val dtos : List[VSourceTypeSummaryDto]= SQL("select * from vSourceTypeSummary").as(anorm.Macro.namedParser[VSourceTypeSummaryDto].*);
     dtos
   }
-  def getDtosBySourceType_lastUpdatedDate(colValue : java.util.Date) : List[VSourceTypeParamDto] = {
+  def getVSourceTypeSummarysCount() : Long = {
     implicit val connection = getConnection();
-    val dtos : List[VSourceTypeParamDto] = SQL("select * from vSourceTypeParam where sourceType_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceTypeParamDto].*);
+    val cnt : Long = SQL("select count(*) as cnt from vSourceTypeSummary").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVSourceTypeSummarysLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vSourceTypeSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVSourceTypeSummarysLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vSourceTypeSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVSourceTypeSummaryFirst() : VSourceTypeSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VSourceTypeSummaryDto= SQL("select * from vSourceTypeSummary order by insertedRowDate asc ").as(anorm.Macro.namedParser[VSourceTypeSummaryDto].*).head;
+    dtos
+  }
+  def getVSourceTypeSummaryLast() : VSourceTypeSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VSourceTypeSummaryDto= SQL("select * from vSourceTypeSummary order by insertedRowDate desc ").as(anorm.Macro.namedParser[VSourceTypeSummaryDto].*).head;
+    dtos
+  }
+  def getVSourceTypeSummaryByGuid(guid : Long) : VSourceTypeSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VSourceTypeSummaryDto= SQL("select * from vSourceTypeSummary where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VSourceTypeSummaryDto].single);
+    dtos
+  }
+  def getDtosBySourceTypeId(colValue : Long) : List[VSourceTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceTypeSummaryDto] = SQL("select * from vSourceTypeSummary where sourceTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VSourceTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceTypeSummaryDto] = SQL("select * from vSourceTypeSummary where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VSourceTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceTypeSummaryDto] = SQL("select * from vSourceTypeSummary where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VSourceTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceTypeSummaryDto] = SQL("select * from vSourceTypeSummary where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosBySourceTypeName(colValue : String) : List[VSourceTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceTypeSummaryDto] = SQL("select * from vSourceTypeSummary where sourceTypeName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosBySourceTypeClass(colValue : String) : List[VSourceTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceTypeSummaryDto] = SQL("select * from vSourceTypeSummary where sourceTypeClass = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosBySourceInstance_count(colValue : Int) : List[VSourceTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceTypeSummaryDto] = SQL("select * from vSourceTypeSummary where sourceInstance_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosBySourceTypeParam_count(colValue : Int) : List[VSourceTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceTypeSummaryDto] = SQL("select * from vSourceTypeSummary where sourceTypeParam_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceTypeSummaryDto].*);
     dtos
   }
 
@@ -7924,6 +12885,16 @@ class VSourceViewDao extends DaoBase {
     val dtos : List[VSourceViewDto] = SQL("select * from vSourceView where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewDto].*);
     dtos
   }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VSourceViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewDto] = SQL("select * from vSourceView where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VSourceViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewDto] = SQL("select * from vSourceView where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewDto].*);
+    dtos
+  }
   def getDtosBySourceInstanceId(colValue : Long) : List[VSourceViewDto] = {
     implicit val connection = getConnection();
     val dtos : List[VSourceViewDto] = SQL("select * from vSourceView where sourceInstanceId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewDto].*);
@@ -7944,14 +12915,9 @@ class VSourceViewDao extends DaoBase {
     val dtos : List[VSourceViewDto] = SQL("select * from vSourceView where sourceViewDefinition = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewDto].*);
     dtos
   }
-  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VSourceViewDto] = {
+  def getDtosByIsExisting(colValue : Int) : List[VSourceViewDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VSourceViewDto] = SQL("select * from vSourceView where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewDto].*);
-    dtos
-  }
-  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VSourceViewDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VSourceViewDto] = SQL("select * from vSourceView where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewDto].*);
+    val dtos : List[VSourceViewDto] = SQL("select * from vSourceView where isExisting = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewDto].*);
     dtos
   }
   def getDtosBySourceInstance_sourceInstanceId(colValue : Long) : List[VSourceViewDto] = {
@@ -7962,6 +12928,16 @@ class VSourceViewDao extends DaoBase {
   def getDtosBySourceInstance_guid(colValue : Long) : List[VSourceViewDto] = {
     implicit val connection = getConnection();
     val dtos : List[VSourceViewDto] = SQL("select * from vSourceView where sourceInstance_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewDto].*);
+    dtos
+  }
+  def getDtosBySourceInstance_insertedRowDate(colValue : java.util.Date) : List[VSourceViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewDto] = SQL("select * from vSourceView where sourceInstance_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewDto].*);
+    dtos
+  }
+  def getDtosBySourceInstance_lastUpdatedDate(colValue : java.util.Date) : List[VSourceViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewDto] = SQL("select * from vSourceView where sourceInstance_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewDto].*);
     dtos
   }
   def getDtosBySourceInstance_sourceTypeId(colValue : Long) : List[VSourceViewDto] = {
@@ -7994,16 +12970,6 @@ class VSourceViewDao extends DaoBase {
     val dtos : List[VSourceViewDto] = SQL("select * from vSourceView where sourceInstance_lastConnectionDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewDto].*);
     dtos
   }
-  def getDtosBySourceInstance_insertedRowDate(colValue : java.util.Date) : List[VSourceViewDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VSourceViewDto] = SQL("select * from vSourceView where sourceInstance_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewDto].*);
-    dtos
-  }
-  def getDtosBySourceInstance_lastUpdatedDate(colValue : java.util.Date) : List[VSourceViewDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VSourceViewDto] = SQL("select * from vSourceView where sourceInstance_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewDto].*);
-    dtos
-  }
   def getDtosBySourceViewType_sourceViewTypeId(colValue : Long) : List[VSourceViewDto] = {
     implicit val connection = getConnection();
     val dtos : List[VSourceViewDto] = SQL("select * from vSourceView where sourceViewType_sourceViewTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewDto].*);
@@ -8014,16 +12980,6 @@ class VSourceViewDao extends DaoBase {
     val dtos : List[VSourceViewDto] = SQL("select * from vSourceView where sourceViewType_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewDto].*);
     dtos
   }
-  def getDtosBySourceViewType_sourceViewTypeName(colValue : String) : List[VSourceViewDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VSourceViewDto] = SQL("select * from vSourceView where sourceViewType_sourceViewTypeName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewDto].*);
-    dtos
-  }
-  def getDtosBySourceViewType_sourceViewTypeClass(colValue : String) : List[VSourceViewDto] = {
-    implicit val connection = getConnection();
-    val dtos : List[VSourceViewDto] = SQL("select * from vSourceView where sourceViewType_sourceViewTypeClass = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewDto].*);
-    dtos
-  }
   def getDtosBySourceViewType_insertedRowDate(colValue : java.util.Date) : List[VSourceViewDto] = {
     implicit val connection = getConnection();
     val dtos : List[VSourceViewDto] = SQL("select * from vSourceView where sourceViewType_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewDto].*);
@@ -8032,6 +12988,16 @@ class VSourceViewDao extends DaoBase {
   def getDtosBySourceViewType_lastUpdatedDate(colValue : java.util.Date) : List[VSourceViewDto] = {
     implicit val connection = getConnection();
     val dtos : List[VSourceViewDto] = SQL("select * from vSourceView where sourceViewType_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewDto].*);
+    dtos
+  }
+  def getDtosBySourceViewType_sourceViewTypeName(colValue : String) : List[VSourceViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewDto] = SQL("select * from vSourceView where sourceViewType_sourceViewTypeName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewDto].*);
+    dtos
+  }
+  def getDtosBySourceViewType_sourceViewTypeClass(colValue : String) : List[VSourceViewDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewDto] = SQL("select * from vSourceView where sourceViewType_sourceViewTypeClass = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewDto].*);
     dtos
   }
 
@@ -8080,9 +13046,9 @@ class VSourceViewColumnDao extends DaoBase {
     val dtos : List[VSourceViewColumnDto] = SQL("select * from vSourceViewColumn where sourceViewColumnId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewColumnDto].*);
     dtos
   }
-  def getDtosBySourceViewId(colValue : Long) : List[VSourceViewColumnDto] = {
+  def getDtosByGuid(colValue : Long) : List[VSourceViewColumnDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VSourceViewColumnDto] = SQL("select * from vSourceViewColumn where sourceViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewColumnDto].*);
+    val dtos : List[VSourceViewColumnDto] = SQL("select * from vSourceViewColumn where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewColumnDto].*);
     dtos
   }
   def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VSourceViewColumnDto] = {
@@ -8095,9 +13061,9 @@ class VSourceViewColumnDao extends DaoBase {
     val dtos : List[VSourceViewColumnDto] = SQL("select * from vSourceViewColumn where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewColumnDto].*);
     dtos
   }
-  def getDtosByGuid(colValue : Long) : List[VSourceViewColumnDto] = {
+  def getDtosBySourceViewId(colValue : Long) : List[VSourceViewColumnDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VSourceViewColumnDto] = SQL("select * from vSourceViewColumn where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewColumnDto].*);
+    val dtos : List[VSourceViewColumnDto] = SQL("select * from vSourceViewColumn where sourceViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewColumnDto].*);
     dtos
   }
   def getDtosByColumnName(colValue : String) : List[VSourceViewColumnDto] = {
@@ -8120,6 +13086,16 @@ class VSourceViewColumnDao extends DaoBase {
     val dtos : List[VSourceViewColumnDto] = SQL("select * from vSourceViewColumn where sourceView_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewColumnDto].*);
     dtos
   }
+  def getDtosBySourceView_insertedRowDate(colValue : java.util.Date) : List[VSourceViewColumnDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewColumnDto] = SQL("select * from vSourceViewColumn where sourceView_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewColumnDto].*);
+    dtos
+  }
+  def getDtosBySourceView_lastUpdatedDate(colValue : java.util.Date) : List[VSourceViewColumnDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewColumnDto] = SQL("select * from vSourceViewColumn where sourceView_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewColumnDto].*);
+    dtos
+  }
   def getDtosBySourceView_sourceInstanceId(colValue : Long) : List[VSourceViewColumnDto] = {
     implicit val connection = getConnection();
     val dtos : List[VSourceViewColumnDto] = SQL("select * from vSourceViewColumn where sourceView_sourceInstanceId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewColumnDto].*);
@@ -8140,14 +13116,287 @@ class VSourceViewColumnDao extends DaoBase {
     val dtos : List[VSourceViewColumnDto] = SQL("select * from vSourceViewColumn where sourceView_sourceViewDefinition = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewColumnDto].*);
     dtos
   }
-  def getDtosBySourceView_insertedRowDate(colValue : java.util.Date) : List[VSourceViewColumnDto] = {
+  def getDtosBySourceView_isExisting(colValue : Int) : List[VSourceViewColumnDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VSourceViewColumnDto] = SQL("select * from vSourceViewColumn where sourceView_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewColumnDto].*);
+    val dtos : List[VSourceViewColumnDto] = SQL("select * from vSourceViewColumn where sourceView_isExisting = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewColumnDto].*);
     dtos
   }
-  def getDtosBySourceView_lastUpdatedDate(colValue : java.util.Date) : List[VSourceViewColumnDto] = {
+
+}
+
+
+class VSourceViewColumnSummaryDao extends DaoBase {
+
+  def getVSourceViewColumnSummarysList() : List[VSourceViewColumnSummaryDto] = {
     implicit val connection = getConnection();
-    val dtos : List[VSourceViewColumnDto] = SQL("select * from vSourceViewColumn where sourceView_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewColumnDto].*);
+    val dtos : List[VSourceViewColumnSummaryDto]= SQL("select * from vSourceViewColumnSummary").as(anorm.Macro.namedParser[VSourceViewColumnSummaryDto].*);
+    dtos
+  }
+  def getVSourceViewColumnSummarysCount() : Long = {
+    implicit val connection = getConnection();
+    val cnt : Long = SQL("select count(*) as cnt from vSourceViewColumnSummary").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVSourceViewColumnSummarysLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vSourceViewColumnSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVSourceViewColumnSummarysLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vSourceViewColumnSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVSourceViewColumnSummaryFirst() : VSourceViewColumnSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VSourceViewColumnSummaryDto= SQL("select * from vSourceViewColumnSummary order by insertedRowDate asc ").as(anorm.Macro.namedParser[VSourceViewColumnSummaryDto].*).head;
+    dtos
+  }
+  def getVSourceViewColumnSummaryLast() : VSourceViewColumnSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VSourceViewColumnSummaryDto= SQL("select * from vSourceViewColumnSummary order by insertedRowDate desc ").as(anorm.Macro.namedParser[VSourceViewColumnSummaryDto].*).head;
+    dtos
+  }
+  def getVSourceViewColumnSummaryByGuid(guid : Long) : VSourceViewColumnSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VSourceViewColumnSummaryDto= SQL("select * from vSourceViewColumnSummary where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VSourceViewColumnSummaryDto].single);
+    dtos
+  }
+  def getDtosBySourceViewColumnId(colValue : Long) : List[VSourceViewColumnSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewColumnSummaryDto] = SQL("select * from vSourceViewColumnSummary where sourceViewColumnId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewColumnSummaryDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VSourceViewColumnSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewColumnSummaryDto] = SQL("select * from vSourceViewColumnSummary where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewColumnSummaryDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VSourceViewColumnSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewColumnSummaryDto] = SQL("select * from vSourceViewColumnSummary where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewColumnSummaryDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VSourceViewColumnSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewColumnSummaryDto] = SQL("select * from vSourceViewColumnSummary where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewColumnSummaryDto].*);
+    dtos
+  }
+  def getDtosBySourceViewId(colValue : Long) : List[VSourceViewColumnSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewColumnSummaryDto] = SQL("select * from vSourceViewColumnSummary where sourceViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewColumnSummaryDto].*);
+    dtos
+  }
+  def getDtosByColumnName(colValue : String) : List[VSourceViewColumnSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewColumnSummaryDto] = SQL("select * from vSourceViewColumnSummary where columnName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewColumnSummaryDto].*);
+    dtos
+  }
+  def getDtosByColumnType(colValue : String) : List[VSourceViewColumnSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewColumnSummaryDto] = SQL("select * from vSourceViewColumnSummary where columnType = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewColumnSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmScheduleColumn_count(colValue : Int) : List[VSourceViewColumnSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewColumnSummaryDto] = SQL("select * from vSourceViewColumnSummary where algorithmScheduleColumn_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewColumnSummaryDto].*);
+    dtos
+  }
+  def getDtosBySourceDownloadStatColumn_count(colValue : Int) : List[VSourceViewColumnSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewColumnSummaryDto] = SQL("select * from vSourceViewColumnSummary where sourceDownloadStatColumn_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewColumnSummaryDto].*);
+    dtos
+  }
+
+}
+
+
+class VSourceViewSummaryDao extends DaoBase {
+
+  def getVSourceViewSummarysList() : List[VSourceViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewSummaryDto]= SQL("select * from vSourceViewSummary").as(anorm.Macro.namedParser[VSourceViewSummaryDto].*);
+    dtos
+  }
+  def getVSourceViewSummarysCount() : Long = {
+    implicit val connection = getConnection();
+    val cnt : Long = SQL("select count(*) as cnt from vSourceViewSummary").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVSourceViewSummarysLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vSourceViewSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVSourceViewSummarysLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vSourceViewSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVSourceViewSummaryFirst() : VSourceViewSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VSourceViewSummaryDto= SQL("select * from vSourceViewSummary order by insertedRowDate asc ").as(anorm.Macro.namedParser[VSourceViewSummaryDto].*).head;
+    dtos
+  }
+  def getVSourceViewSummaryLast() : VSourceViewSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VSourceViewSummaryDto= SQL("select * from vSourceViewSummary order by insertedRowDate desc ").as(anorm.Macro.namedParser[VSourceViewSummaryDto].*).head;
+    dtos
+  }
+  def getVSourceViewSummaryByGuid(guid : Long) : VSourceViewSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VSourceViewSummaryDto= SQL("select * from vSourceViewSummary where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VSourceViewSummaryDto].single);
+    dtos
+  }
+  def getDtosBySourceViewId(colValue : Long) : List[VSourceViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewSummaryDto] = SQL("select * from vSourceViewSummary where sourceViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewSummaryDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VSourceViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewSummaryDto] = SQL("select * from vSourceViewSummary where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewSummaryDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VSourceViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewSummaryDto] = SQL("select * from vSourceViewSummary where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewSummaryDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VSourceViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewSummaryDto] = SQL("select * from vSourceViewSummary where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewSummaryDto].*);
+    dtos
+  }
+  def getDtosBySourceInstanceId(colValue : Long) : List[VSourceViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewSummaryDto] = SQL("select * from vSourceViewSummary where sourceInstanceId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewSummaryDto].*);
+    dtos
+  }
+  def getDtosBySourceViewTypeId(colValue : Long) : List[VSourceViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewSummaryDto] = SQL("select * from vSourceViewSummary where sourceViewTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewSummaryDto].*);
+    dtos
+  }
+  def getDtosBySourceViewName(colValue : String) : List[VSourceViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewSummaryDto] = SQL("select * from vSourceViewSummary where sourceViewName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewSummaryDto].*);
+    dtos
+  }
+  def getDtosBySourceViewDefinition(colValue : String) : List[VSourceViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewSummaryDto] = SQL("select * from vSourceViewSummary where sourceViewDefinition = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewSummaryDto].*);
+    dtos
+  }
+  def getDtosByIsExisting(colValue : Int) : List[VSourceViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewSummaryDto] = SQL("select * from vSourceViewSummary where isExisting = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmScheduleView_count(colValue : Int) : List[VSourceViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewSummaryDto] = SQL("select * from vSourceViewSummary where algorithmScheduleView_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewSummaryDto].*);
+    dtos
+  }
+  def getDtosByAlgorithmScheduleColumn_count(colValue : Int) : List[VSourceViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewSummaryDto] = SQL("select * from vSourceViewSummary where algorithmScheduleColumn_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewSummaryDto].*);
+    dtos
+  }
+  def getDtosBySourceViewColumn_count(colValue : Int) : List[VSourceViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewSummaryDto] = SQL("select * from vSourceViewSummary where sourceViewColumn_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewSummaryDto].*);
+    dtos
+  }
+  def getDtosBySourceSchedule_count(colValue : Int) : List[VSourceViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewSummaryDto] = SQL("select * from vSourceViewSummary where sourceSchedule_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewSummaryDto].*);
+    dtos
+  }
+  def getDtosBySourceDownload_count(colValue : Int) : List[VSourceViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewSummaryDto] = SQL("select * from vSourceViewSummary where sourceDownload_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewSummaryDto].*);
+    dtos
+  }
+  def getDtosByExecutorStorageView_count(colValue : Int) : List[VSourceViewSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewSummaryDto] = SQL("select * from vSourceViewSummary where executorStorageView_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewSummaryDto].*);
+    dtos
+  }
+
+}
+
+
+class VSourceViewTypeSummaryDao extends DaoBase {
+
+  def getVSourceViewTypeSummarysList() : List[VSourceViewTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewTypeSummaryDto]= SQL("select * from vSourceViewTypeSummary").as(anorm.Macro.namedParser[VSourceViewTypeSummaryDto].*);
+    dtos
+  }
+  def getVSourceViewTypeSummarysCount() : Long = {
+    implicit val connection = getConnection();
+    val cnt : Long = SQL("select count(*) as cnt from vSourceViewTypeSummary").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+    cnt
+  }
+  def getVSourceViewTypeSummarysLastInsertDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vSourceViewTypeSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+    ld
+  }
+  def getVSourceViewTypeSummarysLastUpdatedDate() : java.util.Date = {
+    implicit val connection = getConnection();
+    val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vSourceViewTypeSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+    ld
+  }
+  def getVSourceViewTypeSummaryFirst() : VSourceViewTypeSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VSourceViewTypeSummaryDto= SQL("select * from vSourceViewTypeSummary order by insertedRowDate asc ").as(anorm.Macro.namedParser[VSourceViewTypeSummaryDto].*).head;
+    dtos
+  }
+  def getVSourceViewTypeSummaryLast() : VSourceViewTypeSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VSourceViewTypeSummaryDto= SQL("select * from vSourceViewTypeSummary order by insertedRowDate desc ").as(anorm.Macro.namedParser[VSourceViewTypeSummaryDto].*).head;
+    dtos
+  }
+  def getVSourceViewTypeSummaryByGuid(guid : Long) : VSourceViewTypeSummaryDto = {
+    implicit val connection = getConnection();
+    val dtos : VSourceViewTypeSummaryDto= SQL("select * from vSourceViewTypeSummary where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VSourceViewTypeSummaryDto].single);
+    dtos
+  }
+  def getDtosBySourceViewTypeId(colValue : Long) : List[VSourceViewTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewTypeSummaryDto] = SQL("select * from vSourceViewTypeSummary where sourceViewTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByGuid(colValue : Long) : List[VSourceViewTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewTypeSummaryDto] = SQL("select * from vSourceViewTypeSummary where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VSourceViewTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewTypeSummaryDto] = SQL("select * from vSourceViewTypeSummary where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VSourceViewTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewTypeSummaryDto] = SQL("select * from vSourceViewTypeSummary where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosBySourceViewTypeName(colValue : String) : List[VSourceViewTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewTypeSummaryDto] = SQL("select * from vSourceViewTypeSummary where sourceViewTypeName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosBySourceViewTypeClass(colValue : String) : List[VSourceViewTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewTypeSummaryDto] = SQL("select * from vSourceViewTypeSummary where sourceViewTypeClass = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewTypeSummaryDto].*);
+    dtos
+  }
+  def getDtosBySourceView_count(colValue : Int) : List[VSourceViewTypeSummaryDto] = {
+    implicit val connection = getConnection();
+    val dtos : List[VSourceViewTypeSummaryDto] = SQL("select * from vSourceViewTypeSummary where sourceView_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewTypeSummaryDto].*);
     dtos
   }
 

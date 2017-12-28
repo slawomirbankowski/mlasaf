@@ -7,6 +7,7 @@ package com.mlasaf.domain
 import com.mlasaf.dto._
 import com.mlasaf.base._
 
+/** basic class for source to download views from for algorithms */
 trait Source extends ThreadBase {
 
   var vSourceDto : VSourceInstanceDto = null;
@@ -24,6 +25,7 @@ trait Source extends ThreadBase {
     println("Initializing SourceInstance " + vSourceDto.sourceInstanceName + ", parameters: " + params.map(p => p.sourceParam_sourceParamName + "=" + p.paramValue).mkString(", "))
     onInitialize();
   }
+  def getName() : String = "SOURCE";
   def onRunBegin() = {
     println("Start THREAD for Source: " + vSourceDto.sourceInstanceId);
     getSourceViews();

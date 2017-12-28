@@ -10,9 +10,13 @@ import com.mlasaf.dto.ColumnDetailDto
 object GenerateDaoClassesEntry {
 
   def main(args : Array[String]) = {
-    Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-    implicit val connmssql = java.sql.DriverManager.getConnection("jdbc:sqlserver://localhost\\SQLEXPRESS2014;DatabaseName=mlasaf16", "sa", "sapass");
-    val cols : List[ColumnDetailDto]=  SQL("select TABLE_NAME, COLUMN_NAME, ORDINAL_POSITION, case DATA_TYPE when 'bigint' then 'Long' when 'int' then 'Int' when 'nvarchar' then 'String' when 'datetime' then 'java.util.Date' when 'float' then 'Double'  else '' end as SCALA_TYPE from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME not like 'DATABASE%'")
+    val jdbcString = "jdbc:sqlserver://localhost\\SQLEXPRESS2014;DatabaseName=mlasaf24";
+    val jdbcUser = System.getenv("MLASAF_DDL_USER");
+    val jdbcPass = System.getenv("MLASAF_DDL_PASS");
+    val jdbcDriver = System.getenv("MLASAF_DDL_DRIVER");
+    Class.forName(jdbcDriver);
+    implicit val connmssql = java.sql.DriverManager.getConnection(jdbcString, jdbcUser, jdbcPass);
+    val cols : List[ColumnDetailDto]=  SQL("select TABLE_NAME, COLUMN_NAME, ORDINAL_POSITION, case DATA_TYPE when 'bigint' then 'Long' when 'int' then 'Int' when 'nvarchar' then 'String' when 'varchar' then 'String' when 'datetime' then 'java.util.Date' when 'float' then 'Double'  else '' end as SCALA_TYPE from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME not like 'DATABASE%'")
       .as(anorm.Macro.namedParser[ColumnDetailDto].*);
     val pkCols : List[ColumnDetailDto] =  SQL(" select TABLE_NAME, COLUMN_NAME, ORDINAL_POSITION, '' as SCALA_TYPE from INFORMATION_SCHEMA.KEY_COLUMN_USAGE where CONSTRAINT_NAME like 'PK%' and TABLE_NAME not like 'DATABASE%'")
       .as(anorm.Macro.namedParser[ColumnDetailDto].*);
@@ -79,7 +83,6 @@ object GenerateDaoClassesEntry {
         val pkColName= pkCols.filter(c => c.TABLE_NAME.equals(tableName)).head.COLUMN_NAME;
         val pkColNameUppper = pkColName.charAt(0).toUpper + pkColName.substring(1);
 
-
         daoMethods.append(" def get" + objName + "ByPk(pkColValue : Long) : " + dtoName + " = { \n")
         daoMethods.append("   implicit val connection = getConnection();  \n");
         daoMethods.append("   val dto : " + dtoName + " = SQL(\"select * from " + tableName + " where " + pkColName + " = {pkColValue} \").on(\"pkColValue\" -> pkColValue).as(anorm.Macro.namedParser[" + dtoName + "].single);  \n");
@@ -101,7 +104,6 @@ object GenerateDaoClassesEntry {
           daoMethods.append(" }  \n");
         });
       }
-
       fkCols.filter(c => c.TABLE_NAME.equals(tableName)).map(col => col.COLUMN_NAME).foreach(fkColName => {
         val fkColNameUppper = fkColName.charAt(0).toUpper + fkColName.substring(1);
         daoMethods.append(" def get" + objName + "ByFk" + fkColNameUppper + "(fkColValue : Long) : List[" + dtoName + "] = { \n")

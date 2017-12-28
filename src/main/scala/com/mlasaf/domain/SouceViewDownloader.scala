@@ -4,6 +4,7 @@
 */
 package com.mlasaf.domain
 
+/** base class for downloader to download view to storage */
 trait SouceViewDownloader {
 
   def initialize();

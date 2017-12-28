@@ -29,12 +29,6 @@ class DaoCustom {
       .on("executorHostId" -> dto.executorHostId, "hostName" -> dto.hostName, "hostIp" -> dto.hostIp, "hostDomain" -> dto.hostDomain, "hostOsType" -> dto.hostOsType, "hostOsVersion" -> dto.hostOsVersion)
       .executeInsert()(connection)
   }
-  /** */
-  def registerNewHost() : ExecutorHostDto = {
-    //val hostDto = new ExecutorHostDto("", "", "")
-    //daoFactory.daos.executorHostDao.insertDto()
-    null
-  }
   /**  */
   def registerHost() : ExecutorHostDto = {
     val hostName = MlUtils.getHostName
@@ -42,6 +36,8 @@ class DaoCustom {
     val hostAddress = java.net.InetAddress.getLocalHost.getHostAddress
     val hostIp = java.net.InetAddress.getLocalHost.getAddress.map(b => b.toInt).map(b => if (b<0) b+256 else b).mkString(".")
     val canonicalHost = java.net.InetAddress.getLocalHost.getCanonicalHostName
+    val osName = System.getProperty("os.name")
+    val osVersion = System.getProperty("os.version")
     val connection = daoFactory.daoConn.getConnection();
     val queryRes = SQL("select count(*) as cnt from executorHost where hostName = {hostName} and hostIp = {hostIp}")
       .on("hostName" -> hostName, "hostIp" -> hostIp)
@@ -50,7 +46,7 @@ class DaoCustom {
     val cnt = queryRes.as[Int](SqlParser.int("cnt").single)(connection);
     println("Hosts count for CURRENT name: " + cnt);
     if (cnt == 0) {
-      val currentHost : ExecutorHostDto = daoFactory.daos.executorHostDao.createAndInsertExecutorHostDto(hostName, hostIp, "", "", "", 1);
+      val currentHost : ExecutorHostDto = daoFactory.daos.executorHostDao.createAndInsertExecutorHostDto(hostName, hostIp, "", osName, osVersion, 1);
       logger.info("Registering Executor Host for host: " +  hostName + ", hostAddress: " + hostAddress + ", IP: " + hostIp + ", canonicalHost: " + canonicalHost)
       currentHost
     } else {
@@ -63,11 +59,11 @@ class DaoCustom {
     }
   }
 
-  def registerExecutorInstance(executorTypeId : Long) : ExecutorInstanceDto = {
+  def registerExecutorInstance(executorTypeId : Long, executorContextId : Long) : ExecutorInstanceDto = {
     implicit val conn = daoFactory.daoConn.getConnection();
     val hostDto : ExecutorHostDto = registerHost();
     println("Registering new Executor for host: " + hostDto);
-    val execInst = daoFactory.daos.executorInstanceDao.createAndInsertExecutorInstanceDto(executorTypeId, hostDto.executorHostId, "executor_name", 1, 0, 8888, new java.util.Date());
+    val execInst = daoFactory.daos.executorInstanceDao.createAndInsertExecutorInstanceDto(executorTypeId, hostDto.executorHostId, executorContextId, "executor_name", 1, 0, 8888, new java.util.Date());
     execInst;
   }
 

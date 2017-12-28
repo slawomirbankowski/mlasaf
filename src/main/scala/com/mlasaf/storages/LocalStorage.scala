@@ -33,10 +33,15 @@ class LocalStorage extends Storage {
     bos.close();
     println("File downloaded from view to path: " + storageViewFilePath + ", rows: " + viewRowsCount + ", size: " + viewSize);
     val storageSnapshotDto = parentContext.daoFactory.daos.executorStorageSnapshotDao.createAndInsertExecutorStorageSnapshotDto(1);
-    val storageViewDto = parentContext.daoFactory.daos.executorStorageViewDao.createAndInsertExecutorStorageViewDto(storageSnapshotDto.executorStorageSnapshotId, this.storageDto.executorStorageId, sourceDownloadDto.sourceDownloadId, storageViewFilePath, viewSize, viewRowsCount)
+    val storageViewDto = parentContext.daoFactory.daos.executorStorageViewDao.createAndInsertExecutorStorageViewDto(storageSnapshotDto.executorStorageSnapshotId, this.storageDto.executorStorageId, sourceDownloadDto.sourceDownloadId, sourceView.sourceViewId, storageViewFilePath, viewSize, viewRowsCount, 1);
     storageViewDto
   }
   def onRun() = {
 
   };
+}
+
+object LocalStorage {
+  val NAME: String = "LOCAL_DISK";
+  val DEFAULT_PATH = "../data/";
 }

@@ -12,22 +12,15 @@ object DaoTests {
 
   /** main entry point to run all services for MLASAF, initialization from command line arguments or from xml file */
   def main(args : Array[String]) = {
-    val newargs = Array("--executors", "com.mlasaf.executors.RExecutor,com.mlasaf.executors.LocalExecutor"
-      , "--jdbcString", "jdbc:mysql://localhost:3307/mlasaf22"
-      ,"--jdbcUser" , "root"
-      ,"--jdbcPass" , "rootpass"
-      ,"--restPort" , "8300"
-      ,"--restAlternativePort" , "8301"
-    );
-    val jdbcString = "jdbc:mysql://localhost:3307/mlasaf22"
-    val jdbcUser = "root"
-    val jdbcPass = "rootpass"
-    val jdbcDriver = "com.mysql.jdbc.Driver";
-    val executorClasses = "com.mlasaf.executors.RExecutor,com.mlasaf.executors.LocalExecutor"
-    val restPort = 8300;
-    val restAlternativePort = 8301;
-    val executorDefinition = " [ {executor='RExecutor', port='8806'}, {executor='LocalExecutor', port='8808'} ] "
-    val storageDefinitions = " [ {storage='./', type='local'}, {storage='./', type='local'} ] "
+    val jdbcString = System.getenv("MLASAF_JDBC");
+    val jdbcUser =  System.getenv("MLASAF_USER");
+    val jdbcPass = System.getenv("MLASAF_PASS");
+    val jdbcDriver = System.getenv("MLASAF_DRIVER");
+    //val executorClasses = "com.mlasaf.executors.RExecutor,com.mlasaf.executors.LocalExecutor"
+    //val restPort = 8300;
+    //val restAlternativePort = 8301;
+    //val executorDefinition = " [ {executor='RExecutor', port='8806'}, {executor='LocalExecutor', port='8808'} ] "
+    //val storageDefinitions = " [ {storage='./', type='local'}, {storage='./', type='local'} ] "
     val daoFactory = new DaoFactory();
     //context.daoFactory.registerExecutorInstance();
     daoFactory.initialize(jdbcString, jdbcUser, jdbcPass, jdbcDriver);
@@ -66,8 +59,6 @@ object DaoTests {
     //daoFactory.daos.executorHostDao.up
     val freshAnotherHostDto = daoFactory.daos.executorHostDao.getExecutorHostByPk(anotherHostDto.getPk());
     println("Fresh another host: " + freshAnotherHostDto)
-    //daoFactory.daos.vSourceInstanceDao.getVSourceInstancesList().head.toStringArray();
-    //daoFactory.daos.sourceDownloadDao.getSourceDownloadsList().head.toStringArray();
 
   }
 

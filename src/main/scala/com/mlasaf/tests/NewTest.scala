@@ -10,9 +10,10 @@ object NewTest {
 
   def main(args : Array[String]) = {
     logger.info("START NEW DB Test");
-    val jdbcString = "jdbc:db2://localhost:50000/mlasaf01";
-    val jdbcUser = "db2admin";
-    val jdbcPass = "db2adminpass";
+    val jdbcString = System.getenv("MLASAF_JDBC")
+    val jdbcUser = System.getenv("MLASAF_USER")
+    val jdbcPass = System.getenv("MLASAF_PASS")
+    val jdbcDriver = System.getenv("MLASAF_DRIVER")
     val dbId = "" + com.mlasaf.common.CustomUtils.randomLong();
     val dbFullName = "mlasaf-" + dbId;
     val dbType = "DB2";
@@ -22,7 +23,7 @@ object NewTest {
     val conn = java.sql.DriverManager.getConnection(jdbcString, jdbcUser, jdbcPass);
     // create new database
     conn.createStatement().execute("create database " + dbFullName);
-    conn.createStatement().execute("create user xxx identified by yyy ");
+    //conn.createStatement().execute("create user xxx identified by yyy ");
 
     // create user and grant access
     // only for Oracle this is needed to have: create user mlasafxxx identified by mlasafxxxpass; grant DBA to mlasafxxx;

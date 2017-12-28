@@ -8,17 +8,17 @@ package com.mlasaf.dto
 
 case class AlgorithmColumnTypeDto (
                                     val algorithmColumnTypeId : Long
-                                    , val algorithmColumnTypeName : String
-                                    , val algorithmColumnTypeDescription : String
+                                    , val guid : Long
                                     , val insertedRowDate : java.util.Date
                                     , val lastUpdatedDate : java.util.Date
-                                    , val guid : Long
+                                    , val algorithmColumnTypeName : String
+                                    , val algorithmColumnTypeDescription : String
                                   ) extends BaseDto {
   def tableName : String = {
     "algorithmColumnType";
   }
   def fields : String = {
-    "algorithmColumnTypeId,algorithmColumnTypeName,algorithmColumnTypeDescription,insertedRowDate,lastUpdatedDate,guid";
+    "algorithmColumnTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmColumnTypeName,algorithmColumnTypeDescription";
   }
   def pkFields : String = {
     "algorithmColumnTypeId";
@@ -42,19 +42,19 @@ case class AlgorithmColumnTypeDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(algorithmColumnTypeId,algorithmColumnTypeName,algorithmColumnTypeDescription,insertedRowDate,lastUpdatedDate,guid)
+    Array(algorithmColumnTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmColumnTypeName,algorithmColumnTypeDescription)
   }
   def toStringArray() : Array[String] = {
-    Array(""+algorithmColumnTypeId,""+algorithmColumnTypeName,""+algorithmColumnTypeDescription,""+insertedRowDate,""+lastUpdatedDate,""+guid)
+    Array(""+algorithmColumnTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmColumnTypeName,""+algorithmColumnTypeDescription)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "algorithmColumnTypeId" => algorithmColumnTypeId
-      case "algorithmColumnTypeName" => algorithmColumnTypeName
-      case "algorithmColumnTypeDescription" => algorithmColumnTypeDescription
+      case "guid" => guid
       case "insertedRowDate" => insertedRowDate
       case "lastUpdatedDate" => lastUpdatedDate
-      case "guid" => guid
+      case "algorithmColumnTypeName" => algorithmColumnTypeName
+      case "algorithmColumnTypeDescription" => algorithmColumnTypeDescription
       case _ => null
     }
     ret
@@ -62,38 +62,38 @@ case class AlgorithmColumnTypeDto (
   def getFieldTypeName(name : String) : String = {
     val ret = name match {
       case "algorithmColumnTypeId" => "Long"
-      case "algorithmColumnTypeName" => "String"
-      case "algorithmColumnTypeDescription" => "String"
+      case "guid" => "Long"
       case "insertedRowDate" => "java.util.Date"
       case "lastUpdatedDate" => "java.util.Date"
-      case "guid" => "Long"
+      case "algorithmColumnTypeName" => "String"
+      case "algorithmColumnTypeDescription" => "String"
       case _ => "Object"
     }
     ret
   }
   def prepareInsert(connection : java.sql.Connection) : java.sql.PreparedStatement = {
-    val stat = connection.prepareStatement("insert into algorithmColumnType(algorithmColumnTypeName,algorithmColumnTypeDescription,guid) values (?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
-    stat.setObject(1, algorithmColumnTypeName);
-    stat.setObject(2, algorithmColumnTypeDescription);
-    stat.setObject(3, guid);
+    val stat = connection.prepareStatement("insert into algorithmColumnType(guid,algorithmColumnTypeName,algorithmColumnTypeDescription) values (?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
+    stat.setObject(1, guid);
+    stat.setObject(2, algorithmColumnTypeName);
+    stat.setObject(3, algorithmColumnTypeDescription);
     return stat;
   }
   def modify(algorithmColumnTypeName : String, algorithmColumnTypeDescription : String) : AlgorithmColumnTypeDto = {
-    val dtoModified = new AlgorithmColumnTypeDto(this.algorithmColumnTypeId,algorithmColumnTypeName,algorithmColumnTypeDescription,this.insertedRowDate,new java.util.Date(),this.guid);
+    val dtoModified = new AlgorithmColumnTypeDto(this.algorithmColumnTypeId,this.guid,this.insertedRowDate,new java.util.Date(),algorithmColumnTypeName,algorithmColumnTypeDescription);
     dtoModified
   }
 }
 object AlgorithmColumnTypeDto {
   val TABLE_NAME = "algorithmColumnType";
   val FIELD_algorithmColumnTypeId = "algorithmColumnTypeId";
-  val FIELD_algorithmColumnTypeName = "algorithmColumnTypeName";
-  val FIELD_algorithmColumnTypeDescription = "algorithmColumnTypeDescription";
+  val FIELD_guid = "guid";
   val FIELD_insertedRowDate = "insertedRowDate";
   val FIELD_lastUpdatedDate = "lastUpdatedDate";
-  val FIELD_guid = "guid";
+  val FIELD_algorithmColumnTypeName = "algorithmColumnTypeName";
+  val FIELD_algorithmColumnTypeDescription = "algorithmColumnTypeDescription";
 
   def createNewAlgorithmColumnTypeDto(algorithmColumnTypeName : String, algorithmColumnTypeDescription : String) : AlgorithmColumnTypeDto = {
-    val dto = new AlgorithmColumnTypeDto(0,algorithmColumnTypeName,algorithmColumnTypeDescription,new java.util.Date(),new java.util.Date(),0)
+    val dto = new AlgorithmColumnTypeDto(0,0,new java.util.Date(),new java.util.Date(),algorithmColumnTypeName,algorithmColumnTypeDescription)
     dto
   }
 
@@ -224,7 +224,7 @@ case class AlgorithmOutputDto (
     "algorithmOutputId";
   }
   def fkFields : String = {
-    "";
+    "algorithmOutputTypeId,executorStorageViewId";
   }
   def nameField : String = {
     "";
@@ -311,15 +311,15 @@ object AlgorithmOutputDto {
 case class AlgorithmOutputTypeDto (
                                     val algorithmOutputTypeId : Long
                                     , val guid : Long
-                                    , val algorithmOutputTypeName : String
                                     , val insertedRowDate : java.util.Date
                                     , val lastUpdatedDate : java.util.Date
+                                    , val algorithmOutputTypeName : String
                                   ) extends BaseDto {
   def tableName : String = {
     "algorithmOutputType";
   }
   def fields : String = {
-    "algorithmOutputTypeId,guid,algorithmOutputTypeName,insertedRowDate,lastUpdatedDate";
+    "algorithmOutputTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmOutputTypeName";
   }
   def pkFields : String = {
     "algorithmOutputTypeId";
@@ -343,18 +343,18 @@ case class AlgorithmOutputTypeDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(algorithmOutputTypeId,guid,algorithmOutputTypeName,insertedRowDate,lastUpdatedDate)
+    Array(algorithmOutputTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmOutputTypeName)
   }
   def toStringArray() : Array[String] = {
-    Array(""+algorithmOutputTypeId,""+guid,""+algorithmOutputTypeName,""+insertedRowDate,""+lastUpdatedDate)
+    Array(""+algorithmOutputTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmOutputTypeName)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "algorithmOutputTypeId" => algorithmOutputTypeId
       case "guid" => guid
-      case "algorithmOutputTypeName" => algorithmOutputTypeName
       case "insertedRowDate" => insertedRowDate
       case "lastUpdatedDate" => lastUpdatedDate
+      case "algorithmOutputTypeName" => algorithmOutputTypeName
       case _ => null
     }
     ret
@@ -363,9 +363,9 @@ case class AlgorithmOutputTypeDto (
     val ret = name match {
       case "algorithmOutputTypeId" => "Long"
       case "guid" => "Long"
-      case "algorithmOutputTypeName" => "String"
       case "insertedRowDate" => "java.util.Date"
       case "lastUpdatedDate" => "java.util.Date"
+      case "algorithmOutputTypeName" => "String"
       case _ => "Object"
     }
     ret
@@ -377,7 +377,7 @@ case class AlgorithmOutputTypeDto (
     return stat;
   }
   def modify(algorithmOutputTypeName : String) : AlgorithmOutputTypeDto = {
-    val dtoModified = new AlgorithmOutputTypeDto(this.algorithmOutputTypeId,this.guid,algorithmOutputTypeName,this.insertedRowDate,new java.util.Date());
+    val dtoModified = new AlgorithmOutputTypeDto(this.algorithmOutputTypeId,this.guid,this.insertedRowDate,new java.util.Date(),algorithmOutputTypeName);
     dtoModified
   }
 }
@@ -385,12 +385,12 @@ object AlgorithmOutputTypeDto {
   val TABLE_NAME = "algorithmOutputType";
   val FIELD_algorithmOutputTypeId = "algorithmOutputTypeId";
   val FIELD_guid = "guid";
-  val FIELD_algorithmOutputTypeName = "algorithmOutputTypeName";
   val FIELD_insertedRowDate = "insertedRowDate";
   val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_algorithmOutputTypeName = "algorithmOutputTypeName";
 
   def createNewAlgorithmOutputTypeDto(algorithmOutputTypeName : String) : AlgorithmOutputTypeDto = {
-    val dto = new AlgorithmOutputTypeDto(0,0,algorithmOutputTypeName,new java.util.Date(),new java.util.Date())
+    val dto = new AlgorithmOutputTypeDto(0,0,new java.util.Date(),new java.util.Date(),algorithmOutputTypeName)
     dto
   }
 
@@ -498,18 +498,18 @@ object AlgorithmParamDto {
 
 case class AlgorithmParamTypeDto (
                                    val algorithmParamTypeId : Long
+                                   , val guid : Long
+                                   , val insertedRowDate : java.util.Date
+                                   , val lastUpdatedDate : java.util.Date
                                    , val algorithmParamId : Long
                                    , val algorithmTypeId : Long
                                    , val algorithmTypeVersionId : Long
-                                   , val insertedRowDate : java.util.Date
-                                   , val lastUpdatedDate : java.util.Date
-                                   , val guid : Long
                                  ) extends BaseDto {
   def tableName : String = {
     "algorithmParamType";
   }
   def fields : String = {
-    "algorithmParamTypeId,algorithmParamId,algorithmTypeId,algorithmTypeVersionId,insertedRowDate,lastUpdatedDate,guid";
+    "algorithmParamTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmParamId,algorithmTypeId,algorithmTypeVersionId";
   }
   def pkFields : String = {
     "algorithmParamTypeId";
@@ -533,20 +533,20 @@ case class AlgorithmParamTypeDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(algorithmParamTypeId,algorithmParamId,algorithmTypeId,algorithmTypeVersionId,insertedRowDate,lastUpdatedDate,guid)
+    Array(algorithmParamTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmParamId,algorithmTypeId,algorithmTypeVersionId)
   }
   def toStringArray() : Array[String] = {
-    Array(""+algorithmParamTypeId,""+algorithmParamId,""+algorithmTypeId,""+algorithmTypeVersionId,""+insertedRowDate,""+lastUpdatedDate,""+guid)
+    Array(""+algorithmParamTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmParamId,""+algorithmTypeId,""+algorithmTypeVersionId)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "algorithmParamTypeId" => algorithmParamTypeId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
       case "algorithmParamId" => algorithmParamId
       case "algorithmTypeId" => algorithmTypeId
       case "algorithmTypeVersionId" => algorithmTypeVersionId
-      case "insertedRowDate" => insertedRowDate
-      case "lastUpdatedDate" => lastUpdatedDate
-      case "guid" => guid
       case _ => null
     }
     ret
@@ -554,41 +554,41 @@ case class AlgorithmParamTypeDto (
   def getFieldTypeName(name : String) : String = {
     val ret = name match {
       case "algorithmParamTypeId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
       case "algorithmParamId" => "Long"
       case "algorithmTypeId" => "Long"
       case "algorithmTypeVersionId" => "Long"
-      case "insertedRowDate" => "java.util.Date"
-      case "lastUpdatedDate" => "java.util.Date"
-      case "guid" => "Long"
       case _ => "Object"
     }
     ret
   }
   def prepareInsert(connection : java.sql.Connection) : java.sql.PreparedStatement = {
-    val stat = connection.prepareStatement("insert into algorithmParamType(algorithmParamId,algorithmTypeId,algorithmTypeVersionId,guid) values (?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
-    stat.setObject(1, algorithmParamId);
-    stat.setObject(2, algorithmTypeId);
-    stat.setObject(3, algorithmTypeVersionId);
-    stat.setObject(4, guid);
+    val stat = connection.prepareStatement("insert into algorithmParamType(guid,algorithmParamId,algorithmTypeId,algorithmTypeVersionId) values (?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
+    stat.setObject(1, guid);
+    stat.setObject(2, algorithmParamId);
+    stat.setObject(3, algorithmTypeId);
+    stat.setObject(4, algorithmTypeVersionId);
     return stat;
   }
   def modify(algorithmParamId : Long, algorithmTypeId : Long, algorithmTypeVersionId : Long) : AlgorithmParamTypeDto = {
-    val dtoModified = new AlgorithmParamTypeDto(this.algorithmParamTypeId,algorithmParamId,algorithmTypeId,algorithmTypeVersionId,this.insertedRowDate,new java.util.Date(),this.guid);
+    val dtoModified = new AlgorithmParamTypeDto(this.algorithmParamTypeId,this.guid,this.insertedRowDate,new java.util.Date(),algorithmParamId,algorithmTypeId,algorithmTypeVersionId);
     dtoModified
   }
 }
 object AlgorithmParamTypeDto {
   val TABLE_NAME = "algorithmParamType";
   val FIELD_algorithmParamTypeId = "algorithmParamTypeId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_algorithmParamId = "algorithmParamId";
   val FIELD_algorithmTypeId = "algorithmTypeId";
   val FIELD_algorithmTypeVersionId = "algorithmTypeVersionId";
-  val FIELD_insertedRowDate = "insertedRowDate";
-  val FIELD_lastUpdatedDate = "lastUpdatedDate";
-  val FIELD_guid = "guid";
 
   def createNewAlgorithmParamTypeDto(algorithmParamId : Long, algorithmTypeId : Long, algorithmTypeVersionId : Long) : AlgorithmParamTypeDto = {
-    val dto = new AlgorithmParamTypeDto(0,algorithmParamId,algorithmTypeId,algorithmTypeVersionId,new java.util.Date(),new java.util.Date(),0)
+    val dto = new AlgorithmParamTypeDto(0,0,new java.util.Date(),new java.util.Date(),algorithmParamId,algorithmTypeId,algorithmTypeVersionId)
     dto
   }
 
@@ -598,13 +598,17 @@ object AlgorithmParamTypeDto {
 case class AlgorithmRunDto (
                              val algorithmRunId : Long
                              , val guid : Long
+                             , val insertedRowDate : java.util.Date
+                             , val lastUpdatedDate : java.util.Date
                              , val algorithmScheduleId : Long
                              , val executorInstanceId : Long
                              , val executorStorageId : Long
+                             , val algorithmRunTypeId : Long
                              , val algorithmRunName : String
-                             , val insertedRowDate : java.util.Date
-                             , val lastUpdatedDate : java.util.Date
                              , val runDate : java.util.Date
+                             , val runStatus : String
+                             , val isError : Int
+                             , val errorDescription : String
                              , val isRunning : Int
                              , val isFinished : Int
                            ) extends BaseDto {
@@ -612,13 +616,13 @@ case class AlgorithmRunDto (
     "algorithmRun";
   }
   def fields : String = {
-    "algorithmRunId,guid,algorithmScheduleId,executorInstanceId,executorStorageId,algorithmRunName,insertedRowDate,lastUpdatedDate,runDate,isRunning,isFinished";
+    "algorithmRunId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleId,executorInstanceId,executorStorageId,algorithmRunTypeId,algorithmRunName,runDate,runStatus,isError,errorDescription,isRunning,isFinished";
   }
   def pkFields : String = {
     "algorithmRunId";
   }
   def fkFields : String = {
-    "algorithmScheduleId,executorInstanceId,executorStorageId";
+    "algorithmRunTypeId,algorithmScheduleId,executorInstanceId,executorStorageId";
   }
   def nameField : String = {
     "algorithmRunName";
@@ -636,22 +640,26 @@ case class AlgorithmRunDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(algorithmRunId,guid,algorithmScheduleId,executorInstanceId,executorStorageId,algorithmRunName,insertedRowDate,lastUpdatedDate,runDate,isRunning,isFinished)
+    Array(algorithmRunId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleId,executorInstanceId,executorStorageId,algorithmRunTypeId,algorithmRunName,runDate,runStatus,isError,errorDescription,isRunning,isFinished)
   }
   def toStringArray() : Array[String] = {
-    Array(""+algorithmRunId,""+guid,""+algorithmScheduleId,""+executorInstanceId,""+executorStorageId,""+algorithmRunName,""+insertedRowDate,""+lastUpdatedDate,""+runDate,""+isRunning,""+isFinished)
+    Array(""+algorithmRunId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmScheduleId,""+executorInstanceId,""+executorStorageId,""+algorithmRunTypeId,""+algorithmRunName,""+runDate,""+runStatus,""+isError,""+errorDescription,""+isRunning,""+isFinished)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "algorithmRunId" => algorithmRunId
       case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
       case "algorithmScheduleId" => algorithmScheduleId
       case "executorInstanceId" => executorInstanceId
       case "executorStorageId" => executorStorageId
+      case "algorithmRunTypeId" => algorithmRunTypeId
       case "algorithmRunName" => algorithmRunName
-      case "insertedRowDate" => insertedRowDate
-      case "lastUpdatedDate" => lastUpdatedDate
       case "runDate" => runDate
+      case "runStatus" => runStatus
+      case "isError" => isError
+      case "errorDescription" => errorDescription
       case "isRunning" => isRunning
       case "isFinished" => isFinished
       case _ => null
@@ -662,13 +670,17 @@ case class AlgorithmRunDto (
     val ret = name match {
       case "algorithmRunId" => "Long"
       case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
       case "algorithmScheduleId" => "Long"
       case "executorInstanceId" => "Long"
       case "executorStorageId" => "Long"
+      case "algorithmRunTypeId" => "Long"
       case "algorithmRunName" => "String"
-      case "insertedRowDate" => "java.util.Date"
-      case "lastUpdatedDate" => "java.util.Date"
       case "runDate" => "java.util.Date"
+      case "runStatus" => "String"
+      case "isError" => "Int"
+      case "errorDescription" => "String"
       case "isRunning" => "Int"
       case "isFinished" => "Int"
       case _ => "Object"
@@ -676,19 +688,23 @@ case class AlgorithmRunDto (
     ret
   }
   def prepareInsert(connection : java.sql.Connection) : java.sql.PreparedStatement = {
-    val stat = connection.prepareStatement("insert into algorithmRun(guid,algorithmScheduleId,executorInstanceId,executorStorageId,algorithmRunName,runDate,isRunning,isFinished) values (?,?,?,?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
+    val stat = connection.prepareStatement("insert into algorithmRun(guid,algorithmScheduleId,executorInstanceId,executorStorageId,algorithmRunTypeId,algorithmRunName,runDate,runStatus,isError,errorDescription,isRunning,isFinished) values (?,?,?,?,?,?,?,?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
     stat.setObject(1, guid);
     stat.setObject(2, algorithmScheduleId);
     stat.setObject(3, executorInstanceId);
     stat.setObject(4, executorStorageId);
-    stat.setObject(5, algorithmRunName);
-    stat.setObject(6, runDate);
-    stat.setObject(7, isRunning);
-    stat.setObject(8, isFinished);
+    stat.setObject(5, algorithmRunTypeId);
+    stat.setObject(6, algorithmRunName);
+    stat.setObject(7, runDate);
+    stat.setObject(8, runStatus);
+    stat.setObject(9, isError);
+    stat.setObject(10, errorDescription);
+    stat.setObject(11, isRunning);
+    stat.setObject(12, isFinished);
     return stat;
   }
-  def modify(algorithmScheduleId : Long, executorInstanceId : Long, executorStorageId : Long, algorithmRunName : String, runDate : java.util.Date, isRunning : Int, isFinished : Int) : AlgorithmRunDto = {
-    val dtoModified = new AlgorithmRunDto(this.algorithmRunId,this.guid,algorithmScheduleId,executorInstanceId,executorStorageId,algorithmRunName,this.insertedRowDate,new java.util.Date(),runDate,isRunning,isFinished);
+  def modify(algorithmScheduleId : Long, executorInstanceId : Long, executorStorageId : Long, algorithmRunTypeId : Long, algorithmRunName : String, runDate : java.util.Date, runStatus : String, isError : Int, errorDescription : String, isRunning : Int, isFinished : Int) : AlgorithmRunDto = {
+    val dtoModified = new AlgorithmRunDto(this.algorithmRunId,this.guid,this.insertedRowDate,new java.util.Date(),algorithmScheduleId,executorInstanceId,executorStorageId,algorithmRunTypeId,algorithmRunName,runDate,runStatus,isError,errorDescription,isRunning,isFinished);
     dtoModified
   }
 }
@@ -696,18 +712,22 @@ object AlgorithmRunDto {
   val TABLE_NAME = "algorithmRun";
   val FIELD_algorithmRunId = "algorithmRunId";
   val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_algorithmScheduleId = "algorithmScheduleId";
   val FIELD_executorInstanceId = "executorInstanceId";
   val FIELD_executorStorageId = "executorStorageId";
+  val FIELD_algorithmRunTypeId = "algorithmRunTypeId";
   val FIELD_algorithmRunName = "algorithmRunName";
-  val FIELD_insertedRowDate = "insertedRowDate";
-  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_runDate = "runDate";
+  val FIELD_runStatus = "runStatus";
+  val FIELD_isError = "isError";
+  val FIELD_errorDescription = "errorDescription";
   val FIELD_isRunning = "isRunning";
   val FIELD_isFinished = "isFinished";
 
-  def createNewAlgorithmRunDto(algorithmScheduleId : Long, executorInstanceId : Long, executorStorageId : Long, algorithmRunName : String, runDate : java.util.Date, isRunning : Int, isFinished : Int) : AlgorithmRunDto = {
-    val dto = new AlgorithmRunDto(0,0,algorithmScheduleId,executorInstanceId,executorStorageId,algorithmRunName,new java.util.Date(),new java.util.Date(),runDate,isRunning,isFinished)
+  def createNewAlgorithmRunDto(algorithmScheduleId : Long, executorInstanceId : Long, executorStorageId : Long, algorithmRunTypeId : Long, algorithmRunName : String, runDate : java.util.Date, runStatus : String, isError : Int, errorDescription : String, isRunning : Int, isFinished : Int) : AlgorithmRunDto = {
+    val dto = new AlgorithmRunDto(0,0,new java.util.Date(),new java.util.Date(),algorithmScheduleId,executorInstanceId,executorStorageId,algorithmRunTypeId,algorithmRunName,runDate,runStatus,isError,errorDescription,isRunning,isFinished)
     dto
   }
 
@@ -717,15 +737,15 @@ object AlgorithmRunDto {
 case class AlgorithmRunTypeDto (
                                  val algorithmRunTypeId : Long
                                  , val guid : Long
-                                 , val algorithmRunTypeName : String
                                  , val insertedRowDate : java.util.Date
                                  , val lastUpdatedDate : java.util.Date
+                                 , val algorithmRunTypeName : String
                                ) extends BaseDto {
   def tableName : String = {
     "algorithmRunType";
   }
   def fields : String = {
-    "algorithmRunTypeId,guid,algorithmRunTypeName,insertedRowDate,lastUpdatedDate";
+    "algorithmRunTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmRunTypeName";
   }
   def pkFields : String = {
     "algorithmRunTypeId";
@@ -749,18 +769,18 @@ case class AlgorithmRunTypeDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(algorithmRunTypeId,guid,algorithmRunTypeName,insertedRowDate,lastUpdatedDate)
+    Array(algorithmRunTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmRunTypeName)
   }
   def toStringArray() : Array[String] = {
-    Array(""+algorithmRunTypeId,""+guid,""+algorithmRunTypeName,""+insertedRowDate,""+lastUpdatedDate)
+    Array(""+algorithmRunTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmRunTypeName)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "algorithmRunTypeId" => algorithmRunTypeId
       case "guid" => guid
-      case "algorithmRunTypeName" => algorithmRunTypeName
       case "insertedRowDate" => insertedRowDate
       case "lastUpdatedDate" => lastUpdatedDate
+      case "algorithmRunTypeName" => algorithmRunTypeName
       case _ => null
     }
     ret
@@ -769,9 +789,9 @@ case class AlgorithmRunTypeDto (
     val ret = name match {
       case "algorithmRunTypeId" => "Long"
       case "guid" => "Long"
-      case "algorithmRunTypeName" => "String"
       case "insertedRowDate" => "java.util.Date"
       case "lastUpdatedDate" => "java.util.Date"
+      case "algorithmRunTypeName" => "String"
       case _ => "Object"
     }
     ret
@@ -783,7 +803,7 @@ case class AlgorithmRunTypeDto (
     return stat;
   }
   def modify(algorithmRunTypeName : String) : AlgorithmRunTypeDto = {
-    val dtoModified = new AlgorithmRunTypeDto(this.algorithmRunTypeId,this.guid,algorithmRunTypeName,this.insertedRowDate,new java.util.Date());
+    val dtoModified = new AlgorithmRunTypeDto(this.algorithmRunTypeId,this.guid,this.insertedRowDate,new java.util.Date(),algorithmRunTypeName);
     dtoModified
   }
 }
@@ -791,12 +811,12 @@ object AlgorithmRunTypeDto {
   val TABLE_NAME = "algorithmRunType";
   val FIELD_algorithmRunTypeId = "algorithmRunTypeId";
   val FIELD_guid = "guid";
-  val FIELD_algorithmRunTypeName = "algorithmRunTypeName";
   val FIELD_insertedRowDate = "insertedRowDate";
   val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_algorithmRunTypeName = "algorithmRunTypeName";
 
   def createNewAlgorithmRunTypeDto(algorithmRunTypeName : String) : AlgorithmRunTypeDto = {
-    val dto = new AlgorithmRunTypeDto(0,0,algorithmRunTypeName,new java.util.Date(),new java.util.Date())
+    val dto = new AlgorithmRunTypeDto(0,0,new java.util.Date(),new java.util.Date(),algorithmRunTypeName)
     dto
   }
 
@@ -806,17 +826,17 @@ object AlgorithmRunTypeDto {
 case class AlgorithmRunViewDto (
                                  val algorithmRunViewId : Long
                                  , val guid : Long
-                                 , val algorithmRunId : Long
-                                 , val executorStorageViewId : Long
                                  , val insertedRowDate : java.util.Date
                                  , val lastUpdatedDate : java.util.Date
+                                 , val algorithmRunId : Long
+                                 , val executorStorageViewId : Long
                                  , val isDownloaded : Int
                                ) extends BaseDto {
   def tableName : String = {
     "algorithmRunView";
   }
   def fields : String = {
-    "algorithmRunViewId,guid,algorithmRunId,executorStorageViewId,insertedRowDate,lastUpdatedDate,isDownloaded";
+    "algorithmRunViewId,guid,insertedRowDate,lastUpdatedDate,algorithmRunId,executorStorageViewId,isDownloaded";
   }
   def pkFields : String = {
     "algorithmRunViewId";
@@ -840,19 +860,19 @@ case class AlgorithmRunViewDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(algorithmRunViewId,guid,algorithmRunId,executorStorageViewId,insertedRowDate,lastUpdatedDate,isDownloaded)
+    Array(algorithmRunViewId,guid,insertedRowDate,lastUpdatedDate,algorithmRunId,executorStorageViewId,isDownloaded)
   }
   def toStringArray() : Array[String] = {
-    Array(""+algorithmRunViewId,""+guid,""+algorithmRunId,""+executorStorageViewId,""+insertedRowDate,""+lastUpdatedDate,""+isDownloaded)
+    Array(""+algorithmRunViewId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmRunId,""+executorStorageViewId,""+isDownloaded)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "algorithmRunViewId" => algorithmRunViewId
       case "guid" => guid
-      case "algorithmRunId" => algorithmRunId
-      case "executorStorageViewId" => executorStorageViewId
       case "insertedRowDate" => insertedRowDate
       case "lastUpdatedDate" => lastUpdatedDate
+      case "algorithmRunId" => algorithmRunId
+      case "executorStorageViewId" => executorStorageViewId
       case "isDownloaded" => isDownloaded
       case _ => null
     }
@@ -862,10 +882,10 @@ case class AlgorithmRunViewDto (
     val ret = name match {
       case "algorithmRunViewId" => "Long"
       case "guid" => "Long"
-      case "algorithmRunId" => "Long"
-      case "executorStorageViewId" => "Long"
       case "insertedRowDate" => "java.util.Date"
       case "lastUpdatedDate" => "java.util.Date"
+      case "algorithmRunId" => "Long"
+      case "executorStorageViewId" => "Long"
       case "isDownloaded" => "Int"
       case _ => "Object"
     }
@@ -880,7 +900,7 @@ case class AlgorithmRunViewDto (
     return stat;
   }
   def modify(algorithmRunId : Long, executorStorageViewId : Long, isDownloaded : Int) : AlgorithmRunViewDto = {
-    val dtoModified = new AlgorithmRunViewDto(this.algorithmRunViewId,this.guid,algorithmRunId,executorStorageViewId,this.insertedRowDate,new java.util.Date(),isDownloaded);
+    val dtoModified = new AlgorithmRunViewDto(this.algorithmRunViewId,this.guid,this.insertedRowDate,new java.util.Date(),algorithmRunId,executorStorageViewId,isDownloaded);
     dtoModified
   }
 }
@@ -888,14 +908,14 @@ object AlgorithmRunViewDto {
   val TABLE_NAME = "algorithmRunView";
   val FIELD_algorithmRunViewId = "algorithmRunViewId";
   val FIELD_guid = "guid";
-  val FIELD_algorithmRunId = "algorithmRunId";
-  val FIELD_executorStorageViewId = "executorStorageViewId";
   val FIELD_insertedRowDate = "insertedRowDate";
   val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_algorithmRunId = "algorithmRunId";
+  val FIELD_executorStorageViewId = "executorStorageViewId";
   val FIELD_isDownloaded = "isDownloaded";
 
   def createNewAlgorithmRunViewDto(algorithmRunId : Long, executorStorageViewId : Long, isDownloaded : Int) : AlgorithmRunViewDto = {
-    val dto = new AlgorithmRunViewDto(0,0,algorithmRunId,executorStorageViewId,new java.util.Date(),new java.util.Date(),isDownloaded)
+    val dto = new AlgorithmRunViewDto(0,0,new java.util.Date(),new java.util.Date(),algorithmRunId,executorStorageViewId,isDownloaded)
     dto
   }
 
@@ -905,18 +925,20 @@ object AlgorithmRunViewDto {
 case class AlgorithmScheduleDto (
                                   val algorithmScheduleId : Long
                                   , val guid : Long
+                                  , val insertedRowDate : java.util.Date
+                                  , val lastUpdatedDate : java.util.Date
                                   , val algorithmImplementationId : Long
                                   , val algorithmScheduleTypeId : Long
                                   , val algorithmScheduleName : String
                                   , val isScheduled : Int
-                                  , val insertedRowDate : java.util.Date
-                                  , val lastUpdatedDate : java.util.Date
+                                  , val intervalValue : Long
+                                  , val isRunning : Int
                                 ) extends BaseDto {
   def tableName : String = {
     "algorithmSchedule";
   }
   def fields : String = {
-    "algorithmScheduleId,guid,algorithmImplementationId,algorithmScheduleTypeId,algorithmScheduleName,isScheduled,insertedRowDate,lastUpdatedDate";
+    "algorithmScheduleId,guid,insertedRowDate,lastUpdatedDate,algorithmImplementationId,algorithmScheduleTypeId,algorithmScheduleName,isScheduled,intervalValue,isRunning";
   }
   def pkFields : String = {
     "algorithmScheduleId";
@@ -940,21 +962,23 @@ case class AlgorithmScheduleDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(algorithmScheduleId,guid,algorithmImplementationId,algorithmScheduleTypeId,algorithmScheduleName,isScheduled,insertedRowDate,lastUpdatedDate)
+    Array(algorithmScheduleId,guid,insertedRowDate,lastUpdatedDate,algorithmImplementationId,algorithmScheduleTypeId,algorithmScheduleName,isScheduled,intervalValue,isRunning)
   }
   def toStringArray() : Array[String] = {
-    Array(""+algorithmScheduleId,""+guid,""+algorithmImplementationId,""+algorithmScheduleTypeId,""+algorithmScheduleName,""+isScheduled,""+insertedRowDate,""+lastUpdatedDate)
+    Array(""+algorithmScheduleId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmImplementationId,""+algorithmScheduleTypeId,""+algorithmScheduleName,""+isScheduled,""+intervalValue,""+isRunning)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "algorithmScheduleId" => algorithmScheduleId
       case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
       case "algorithmImplementationId" => algorithmImplementationId
       case "algorithmScheduleTypeId" => algorithmScheduleTypeId
       case "algorithmScheduleName" => algorithmScheduleName
       case "isScheduled" => isScheduled
-      case "insertedRowDate" => insertedRowDate
-      case "lastUpdatedDate" => lastUpdatedDate
+      case "intervalValue" => intervalValue
+      case "isRunning" => isRunning
       case _ => null
     }
     ret
@@ -963,27 +987,31 @@ case class AlgorithmScheduleDto (
     val ret = name match {
       case "algorithmScheduleId" => "Long"
       case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
       case "algorithmImplementationId" => "Long"
       case "algorithmScheduleTypeId" => "Long"
       case "algorithmScheduleName" => "String"
       case "isScheduled" => "Int"
-      case "insertedRowDate" => "java.util.Date"
-      case "lastUpdatedDate" => "java.util.Date"
+      case "intervalValue" => "Long"
+      case "isRunning" => "Int"
       case _ => "Object"
     }
     ret
   }
   def prepareInsert(connection : java.sql.Connection) : java.sql.PreparedStatement = {
-    val stat = connection.prepareStatement("insert into algorithmSchedule(guid,algorithmImplementationId,algorithmScheduleTypeId,algorithmScheduleName,isScheduled) values (?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
+    val stat = connection.prepareStatement("insert into algorithmSchedule(guid,algorithmImplementationId,algorithmScheduleTypeId,algorithmScheduleName,isScheduled,intervalValue,isRunning) values (?,?,?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
     stat.setObject(1, guid);
     stat.setObject(2, algorithmImplementationId);
     stat.setObject(3, algorithmScheduleTypeId);
     stat.setObject(4, algorithmScheduleName);
     stat.setObject(5, isScheduled);
+    stat.setObject(6, intervalValue);
+    stat.setObject(7, isRunning);
     return stat;
   }
-  def modify(algorithmImplementationId : Long, algorithmScheduleTypeId : Long, algorithmScheduleName : String, isScheduled : Int) : AlgorithmScheduleDto = {
-    val dtoModified = new AlgorithmScheduleDto(this.algorithmScheduleId,this.guid,algorithmImplementationId,algorithmScheduleTypeId,algorithmScheduleName,isScheduled,this.insertedRowDate,new java.util.Date());
+  def modify(algorithmImplementationId : Long, algorithmScheduleTypeId : Long, algorithmScheduleName : String, isScheduled : Int, intervalValue : Long, isRunning : Int) : AlgorithmScheduleDto = {
+    val dtoModified = new AlgorithmScheduleDto(this.algorithmScheduleId,this.guid,this.insertedRowDate,new java.util.Date(),algorithmImplementationId,algorithmScheduleTypeId,algorithmScheduleName,isScheduled,intervalValue,isRunning);
     dtoModified
   }
 }
@@ -991,15 +1019,17 @@ object AlgorithmScheduleDto {
   val TABLE_NAME = "algorithmSchedule";
   val FIELD_algorithmScheduleId = "algorithmScheduleId";
   val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_algorithmImplementationId = "algorithmImplementationId";
   val FIELD_algorithmScheduleTypeId = "algorithmScheduleTypeId";
   val FIELD_algorithmScheduleName = "algorithmScheduleName";
   val FIELD_isScheduled = "isScheduled";
-  val FIELD_insertedRowDate = "insertedRowDate";
-  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_intervalValue = "intervalValue";
+  val FIELD_isRunning = "isRunning";
 
-  def createNewAlgorithmScheduleDto(algorithmImplementationId : Long, algorithmScheduleTypeId : Long, algorithmScheduleName : String, isScheduled : Int) : AlgorithmScheduleDto = {
-    val dto = new AlgorithmScheduleDto(0,0,algorithmImplementationId,algorithmScheduleTypeId,algorithmScheduleName,isScheduled,new java.util.Date(),new java.util.Date())
+  def createNewAlgorithmScheduleDto(algorithmImplementationId : Long, algorithmScheduleTypeId : Long, algorithmScheduleName : String, isScheduled : Int, intervalValue : Long, isRunning : Int) : AlgorithmScheduleDto = {
+    val dto = new AlgorithmScheduleDto(0,0,new java.util.Date(),new java.util.Date(),algorithmImplementationId,algorithmScheduleTypeId,algorithmScheduleName,isScheduled,intervalValue,isRunning)
     dto
   }
 
@@ -1009,20 +1039,20 @@ object AlgorithmScheduleDto {
 case class AlgorithmScheduleColumnDto (
                                         val algorithmScheduleColumnId : Long
                                         , val guid : Long
+                                        , val insertedRowDate : java.util.Date
+                                        , val lastUpdatedDate : java.util.Date
                                         , val algorithmScheduleId : Long
                                         , val algorithmColumnTypeId : Long
                                         , val algorithmScheduleViewId : Long
                                         , val sourceViewId : Long
                                         , val sourceViewColumnId : Long
                                         , val extendedProperties : String
-                                        , val insertedRowDate : java.util.Date
-                                        , val lastUpdatedDate : java.util.Date
                                       ) extends BaseDto {
   def tableName : String = {
     "algorithmScheduleColumn";
   }
   def fields : String = {
-    "algorithmScheduleColumnId,guid,algorithmScheduleId,algorithmColumnTypeId,algorithmScheduleViewId,sourceViewId,sourceViewColumnId,extendedProperties,insertedRowDate,lastUpdatedDate";
+    "algorithmScheduleColumnId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleId,algorithmColumnTypeId,algorithmScheduleViewId,sourceViewId,sourceViewColumnId,extendedProperties";
   }
   def pkFields : String = {
     "algorithmScheduleColumnId";
@@ -1046,23 +1076,23 @@ case class AlgorithmScheduleColumnDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(algorithmScheduleColumnId,guid,algorithmScheduleId,algorithmColumnTypeId,algorithmScheduleViewId,sourceViewId,sourceViewColumnId,extendedProperties,insertedRowDate,lastUpdatedDate)
+    Array(algorithmScheduleColumnId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleId,algorithmColumnTypeId,algorithmScheduleViewId,sourceViewId,sourceViewColumnId,extendedProperties)
   }
   def toStringArray() : Array[String] = {
-    Array(""+algorithmScheduleColumnId,""+guid,""+algorithmScheduleId,""+algorithmColumnTypeId,""+algorithmScheduleViewId,""+sourceViewId,""+sourceViewColumnId,""+extendedProperties,""+insertedRowDate,""+lastUpdatedDate)
+    Array(""+algorithmScheduleColumnId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmScheduleId,""+algorithmColumnTypeId,""+algorithmScheduleViewId,""+sourceViewId,""+sourceViewColumnId,""+extendedProperties)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "algorithmScheduleColumnId" => algorithmScheduleColumnId
       case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
       case "algorithmScheduleId" => algorithmScheduleId
       case "algorithmColumnTypeId" => algorithmColumnTypeId
       case "algorithmScheduleViewId" => algorithmScheduleViewId
       case "sourceViewId" => sourceViewId
       case "sourceViewColumnId" => sourceViewColumnId
       case "extendedProperties" => extendedProperties
-      case "insertedRowDate" => insertedRowDate
-      case "lastUpdatedDate" => lastUpdatedDate
       case _ => null
     }
     ret
@@ -1071,14 +1101,14 @@ case class AlgorithmScheduleColumnDto (
     val ret = name match {
       case "algorithmScheduleColumnId" => "Long"
       case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
       case "algorithmScheduleId" => "Long"
       case "algorithmColumnTypeId" => "Long"
       case "algorithmScheduleViewId" => "Long"
       case "sourceViewId" => "Long"
       case "sourceViewColumnId" => "Long"
       case "extendedProperties" => "String"
-      case "insertedRowDate" => "java.util.Date"
-      case "lastUpdatedDate" => "java.util.Date"
       case _ => "Object"
     }
     ret
@@ -1095,7 +1125,7 @@ case class AlgorithmScheduleColumnDto (
     return stat;
   }
   def modify(algorithmScheduleId : Long, algorithmColumnTypeId : Long, algorithmScheduleViewId : Long, sourceViewId : Long, sourceViewColumnId : Long, extendedProperties : String) : AlgorithmScheduleColumnDto = {
-    val dtoModified = new AlgorithmScheduleColumnDto(this.algorithmScheduleColumnId,this.guid,algorithmScheduleId,algorithmColumnTypeId,algorithmScheduleViewId,sourceViewId,sourceViewColumnId,extendedProperties,this.insertedRowDate,new java.util.Date());
+    val dtoModified = new AlgorithmScheduleColumnDto(this.algorithmScheduleColumnId,this.guid,this.insertedRowDate,new java.util.Date(),algorithmScheduleId,algorithmColumnTypeId,algorithmScheduleViewId,sourceViewId,sourceViewColumnId,extendedProperties);
     dtoModified
   }
 }
@@ -1103,17 +1133,17 @@ object AlgorithmScheduleColumnDto {
   val TABLE_NAME = "algorithmScheduleColumn";
   val FIELD_algorithmScheduleColumnId = "algorithmScheduleColumnId";
   val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_algorithmScheduleId = "algorithmScheduleId";
   val FIELD_algorithmColumnTypeId = "algorithmColumnTypeId";
   val FIELD_algorithmScheduleViewId = "algorithmScheduleViewId";
   val FIELD_sourceViewId = "sourceViewId";
   val FIELD_sourceViewColumnId = "sourceViewColumnId";
   val FIELD_extendedProperties = "extendedProperties";
-  val FIELD_insertedRowDate = "insertedRowDate";
-  val FIELD_lastUpdatedDate = "lastUpdatedDate";
 
   def createNewAlgorithmScheduleColumnDto(algorithmScheduleId : Long, algorithmColumnTypeId : Long, algorithmScheduleViewId : Long, sourceViewId : Long, sourceViewColumnId : Long, extendedProperties : String) : AlgorithmScheduleColumnDto = {
-    val dto = new AlgorithmScheduleColumnDto(0,0,algorithmScheduleId,algorithmColumnTypeId,algorithmScheduleViewId,sourceViewId,sourceViewColumnId,extendedProperties,new java.util.Date(),new java.util.Date())
+    val dto = new AlgorithmScheduleColumnDto(0,0,new java.util.Date(),new java.util.Date(),algorithmScheduleId,algorithmColumnTypeId,algorithmScheduleViewId,sourceViewId,sourceViewColumnId,extendedProperties)
     dto
   }
 
@@ -1123,17 +1153,17 @@ object AlgorithmScheduleColumnDto {
 case class AlgorithmScheduleParamDto (
                                        val algorithmScheduleParamId : Long
                                        , val guid : Long
+                                       , val insertedRowDate : java.util.Date
+                                       , val lastUpdatedDate : java.util.Date
                                        , val algorithmScheduleId : Long
                                        , val algorithmParamId : Long
                                        , val algorithmParamValue : String
-                                       , val insertedRowDate : java.util.Date
-                                       , val lastUpdatedDate : java.util.Date
                                      ) extends BaseDto {
   def tableName : String = {
     "algorithmScheduleParam";
   }
   def fields : String = {
-    "algorithmScheduleParamId,guid,algorithmScheduleId,algorithmParamId,algorithmParamValue,insertedRowDate,lastUpdatedDate";
+    "algorithmScheduleParamId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleId,algorithmParamId,algorithmParamValue";
   }
   def pkFields : String = {
     "algorithmScheduleParamId";
@@ -1157,20 +1187,20 @@ case class AlgorithmScheduleParamDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(algorithmScheduleParamId,guid,algorithmScheduleId,algorithmParamId,algorithmParamValue,insertedRowDate,lastUpdatedDate)
+    Array(algorithmScheduleParamId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleId,algorithmParamId,algorithmParamValue)
   }
   def toStringArray() : Array[String] = {
-    Array(""+algorithmScheduleParamId,""+guid,""+algorithmScheduleId,""+algorithmParamId,""+algorithmParamValue,""+insertedRowDate,""+lastUpdatedDate)
+    Array(""+algorithmScheduleParamId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmScheduleId,""+algorithmParamId,""+algorithmParamValue)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "algorithmScheduleParamId" => algorithmScheduleParamId
       case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
       case "algorithmScheduleId" => algorithmScheduleId
       case "algorithmParamId" => algorithmParamId
       case "algorithmParamValue" => algorithmParamValue
-      case "insertedRowDate" => insertedRowDate
-      case "lastUpdatedDate" => lastUpdatedDate
       case _ => null
     }
     ret
@@ -1179,11 +1209,11 @@ case class AlgorithmScheduleParamDto (
     val ret = name match {
       case "algorithmScheduleParamId" => "Long"
       case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
       case "algorithmScheduleId" => "Long"
       case "algorithmParamId" => "Long"
       case "algorithmParamValue" => "String"
-      case "insertedRowDate" => "java.util.Date"
-      case "lastUpdatedDate" => "java.util.Date"
       case _ => "Object"
     }
     ret
@@ -1197,7 +1227,7 @@ case class AlgorithmScheduleParamDto (
     return stat;
   }
   def modify(algorithmScheduleId : Long, algorithmParamId : Long, algorithmParamValue : String) : AlgorithmScheduleParamDto = {
-    val dtoModified = new AlgorithmScheduleParamDto(this.algorithmScheduleParamId,this.guid,algorithmScheduleId,algorithmParamId,algorithmParamValue,this.insertedRowDate,new java.util.Date());
+    val dtoModified = new AlgorithmScheduleParamDto(this.algorithmScheduleParamId,this.guid,this.insertedRowDate,new java.util.Date(),algorithmScheduleId,algorithmParamId,algorithmParamValue);
     dtoModified
   }
 }
@@ -1205,14 +1235,14 @@ object AlgorithmScheduleParamDto {
   val TABLE_NAME = "algorithmScheduleParam";
   val FIELD_algorithmScheduleParamId = "algorithmScheduleParamId";
   val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_algorithmScheduleId = "algorithmScheduleId";
   val FIELD_algorithmParamId = "algorithmParamId";
   val FIELD_algorithmParamValue = "algorithmParamValue";
-  val FIELD_insertedRowDate = "insertedRowDate";
-  val FIELD_lastUpdatedDate = "lastUpdatedDate";
 
   def createNewAlgorithmScheduleParamDto(algorithmScheduleId : Long, algorithmParamId : Long, algorithmParamValue : String) : AlgorithmScheduleParamDto = {
-    val dto = new AlgorithmScheduleParamDto(0,0,algorithmScheduleId,algorithmParamId,algorithmParamValue,new java.util.Date(),new java.util.Date())
+    val dto = new AlgorithmScheduleParamDto(0,0,new java.util.Date(),new java.util.Date(),algorithmScheduleId,algorithmParamId,algorithmParamValue)
     dto
   }
 
@@ -1222,15 +1252,15 @@ object AlgorithmScheduleParamDto {
 case class AlgorithmScheduleTypeDto (
                                       val algorithmScheduleTypeId : Long
                                       , val guid : Long
-                                      , val algorithmScheduleTypeName : String
                                       , val insertedRowDate : java.util.Date
                                       , val lastUpdatedDate : java.util.Date
+                                      , val algorithmScheduleTypeName : String
                                     ) extends BaseDto {
   def tableName : String = {
     "algorithmScheduleType";
   }
   def fields : String = {
-    "algorithmScheduleTypeId,guid,algorithmScheduleTypeName,insertedRowDate,lastUpdatedDate";
+    "algorithmScheduleTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleTypeName";
   }
   def pkFields : String = {
     "algorithmScheduleTypeId";
@@ -1254,18 +1284,18 @@ case class AlgorithmScheduleTypeDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(algorithmScheduleTypeId,guid,algorithmScheduleTypeName,insertedRowDate,lastUpdatedDate)
+    Array(algorithmScheduleTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleTypeName)
   }
   def toStringArray() : Array[String] = {
-    Array(""+algorithmScheduleTypeId,""+guid,""+algorithmScheduleTypeName,""+insertedRowDate,""+lastUpdatedDate)
+    Array(""+algorithmScheduleTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmScheduleTypeName)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "algorithmScheduleTypeId" => algorithmScheduleTypeId
       case "guid" => guid
-      case "algorithmScheduleTypeName" => algorithmScheduleTypeName
       case "insertedRowDate" => insertedRowDate
       case "lastUpdatedDate" => lastUpdatedDate
+      case "algorithmScheduleTypeName" => algorithmScheduleTypeName
       case _ => null
     }
     ret
@@ -1274,9 +1304,9 @@ case class AlgorithmScheduleTypeDto (
     val ret = name match {
       case "algorithmScheduleTypeId" => "Long"
       case "guid" => "Long"
-      case "algorithmScheduleTypeName" => "String"
       case "insertedRowDate" => "java.util.Date"
       case "lastUpdatedDate" => "java.util.Date"
+      case "algorithmScheduleTypeName" => "String"
       case _ => "Object"
     }
     ret
@@ -1288,7 +1318,7 @@ case class AlgorithmScheduleTypeDto (
     return stat;
   }
   def modify(algorithmScheduleTypeName : String) : AlgorithmScheduleTypeDto = {
-    val dtoModified = new AlgorithmScheduleTypeDto(this.algorithmScheduleTypeId,this.guid,algorithmScheduleTypeName,this.insertedRowDate,new java.util.Date());
+    val dtoModified = new AlgorithmScheduleTypeDto(this.algorithmScheduleTypeId,this.guid,this.insertedRowDate,new java.util.Date(),algorithmScheduleTypeName);
     dtoModified
   }
 }
@@ -1296,12 +1326,12 @@ object AlgorithmScheduleTypeDto {
   val TABLE_NAME = "algorithmScheduleType";
   val FIELD_algorithmScheduleTypeId = "algorithmScheduleTypeId";
   val FIELD_guid = "guid";
-  val FIELD_algorithmScheduleTypeName = "algorithmScheduleTypeName";
   val FIELD_insertedRowDate = "insertedRowDate";
   val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_algorithmScheduleTypeName = "algorithmScheduleTypeName";
 
   def createNewAlgorithmScheduleTypeDto(algorithmScheduleTypeName : String) : AlgorithmScheduleTypeDto = {
-    val dto = new AlgorithmScheduleTypeDto(0,0,algorithmScheduleTypeName,new java.util.Date(),new java.util.Date())
+    val dto = new AlgorithmScheduleTypeDto(0,0,new java.util.Date(),new java.util.Date(),algorithmScheduleTypeName)
     dto
   }
 
@@ -1311,18 +1341,18 @@ object AlgorithmScheduleTypeDto {
 case class AlgorithmScheduleViewDto (
                                       val algorithmScheduleViewId : Long
                                       , val guid : Long
+                                      , val insertedRowDate : java.util.Date
+                                      , val lastUpdatedDate : java.util.Date
                                       , val algorithmScheduleViewTypeId : Long
                                       , val algorithmScheduleId : Long
                                       , val sourceViewId : Long
-                                      , val insertedRowDate : java.util.Date
-                                      , val lastUpdatedDate : java.util.Date
                                       , val joinOnDefinition : String
                                     ) extends BaseDto {
   def tableName : String = {
     "algorithmScheduleView";
   }
   def fields : String = {
-    "algorithmScheduleViewId,guid,algorithmScheduleViewTypeId,algorithmScheduleId,sourceViewId,insertedRowDate,lastUpdatedDate,joinOnDefinition";
+    "algorithmScheduleViewId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleViewTypeId,algorithmScheduleId,sourceViewId,joinOnDefinition";
   }
   def pkFields : String = {
     "algorithmScheduleViewId";
@@ -1346,20 +1376,20 @@ case class AlgorithmScheduleViewDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(algorithmScheduleViewId,guid,algorithmScheduleViewTypeId,algorithmScheduleId,sourceViewId,insertedRowDate,lastUpdatedDate,joinOnDefinition)
+    Array(algorithmScheduleViewId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleViewTypeId,algorithmScheduleId,sourceViewId,joinOnDefinition)
   }
   def toStringArray() : Array[String] = {
-    Array(""+algorithmScheduleViewId,""+guid,""+algorithmScheduleViewTypeId,""+algorithmScheduleId,""+sourceViewId,""+insertedRowDate,""+lastUpdatedDate,""+joinOnDefinition)
+    Array(""+algorithmScheduleViewId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmScheduleViewTypeId,""+algorithmScheduleId,""+sourceViewId,""+joinOnDefinition)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "algorithmScheduleViewId" => algorithmScheduleViewId
       case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
       case "algorithmScheduleViewTypeId" => algorithmScheduleViewTypeId
       case "algorithmScheduleId" => algorithmScheduleId
       case "sourceViewId" => sourceViewId
-      case "insertedRowDate" => insertedRowDate
-      case "lastUpdatedDate" => lastUpdatedDate
       case "joinOnDefinition" => joinOnDefinition
       case _ => null
     }
@@ -1369,11 +1399,11 @@ case class AlgorithmScheduleViewDto (
     val ret = name match {
       case "algorithmScheduleViewId" => "Long"
       case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
       case "algorithmScheduleViewTypeId" => "Long"
       case "algorithmScheduleId" => "Long"
       case "sourceViewId" => "Long"
-      case "insertedRowDate" => "java.util.Date"
-      case "lastUpdatedDate" => "java.util.Date"
       case "joinOnDefinition" => "String"
       case _ => "Object"
     }
@@ -1389,7 +1419,7 @@ case class AlgorithmScheduleViewDto (
     return stat;
   }
   def modify(algorithmScheduleViewTypeId : Long, algorithmScheduleId : Long, sourceViewId : Long, joinOnDefinition : String) : AlgorithmScheduleViewDto = {
-    val dtoModified = new AlgorithmScheduleViewDto(this.algorithmScheduleViewId,this.guid,algorithmScheduleViewTypeId,algorithmScheduleId,sourceViewId,this.insertedRowDate,new java.util.Date(),joinOnDefinition);
+    val dtoModified = new AlgorithmScheduleViewDto(this.algorithmScheduleViewId,this.guid,this.insertedRowDate,new java.util.Date(),algorithmScheduleViewTypeId,algorithmScheduleId,sourceViewId,joinOnDefinition);
     dtoModified
   }
 }
@@ -1397,15 +1427,15 @@ object AlgorithmScheduleViewDto {
   val TABLE_NAME = "algorithmScheduleView";
   val FIELD_algorithmScheduleViewId = "algorithmScheduleViewId";
   val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_algorithmScheduleViewTypeId = "algorithmScheduleViewTypeId";
   val FIELD_algorithmScheduleId = "algorithmScheduleId";
   val FIELD_sourceViewId = "sourceViewId";
-  val FIELD_insertedRowDate = "insertedRowDate";
-  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_joinOnDefinition = "joinOnDefinition";
 
   def createNewAlgorithmScheduleViewDto(algorithmScheduleViewTypeId : Long, algorithmScheduleId : Long, sourceViewId : Long, joinOnDefinition : String) : AlgorithmScheduleViewDto = {
-    val dto = new AlgorithmScheduleViewDto(0,0,algorithmScheduleViewTypeId,algorithmScheduleId,sourceViewId,new java.util.Date(),new java.util.Date(),joinOnDefinition)
+    val dto = new AlgorithmScheduleViewDto(0,0,new java.util.Date(),new java.util.Date(),algorithmScheduleViewTypeId,algorithmScheduleId,sourceViewId,joinOnDefinition)
     dto
   }
 
@@ -1415,15 +1445,15 @@ object AlgorithmScheduleViewDto {
 case class AlgorithmScheduleViewTypeDto (
                                           val algorithmScheduleViewTypeId : Long
                                           , val guid : Long
-                                          , val algorithmScheduleViewTypeName : String
                                           , val insertedRowDate : java.util.Date
                                           , val lastUpdatedDate : java.util.Date
+                                          , val algorithmScheduleViewTypeName : String
                                         ) extends BaseDto {
   def tableName : String = {
     "algorithmScheduleViewType";
   }
   def fields : String = {
-    "algorithmScheduleViewTypeId,guid,algorithmScheduleViewTypeName,insertedRowDate,lastUpdatedDate";
+    "algorithmScheduleViewTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleViewTypeName";
   }
   def pkFields : String = {
     "algorithmScheduleViewTypeId";
@@ -1447,18 +1477,18 @@ case class AlgorithmScheduleViewTypeDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(algorithmScheduleViewTypeId,guid,algorithmScheduleViewTypeName,insertedRowDate,lastUpdatedDate)
+    Array(algorithmScheduleViewTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleViewTypeName)
   }
   def toStringArray() : Array[String] = {
-    Array(""+algorithmScheduleViewTypeId,""+guid,""+algorithmScheduleViewTypeName,""+insertedRowDate,""+lastUpdatedDate)
+    Array(""+algorithmScheduleViewTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmScheduleViewTypeName)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "algorithmScheduleViewTypeId" => algorithmScheduleViewTypeId
       case "guid" => guid
-      case "algorithmScheduleViewTypeName" => algorithmScheduleViewTypeName
       case "insertedRowDate" => insertedRowDate
       case "lastUpdatedDate" => lastUpdatedDate
+      case "algorithmScheduleViewTypeName" => algorithmScheduleViewTypeName
       case _ => null
     }
     ret
@@ -1467,9 +1497,9 @@ case class AlgorithmScheduleViewTypeDto (
     val ret = name match {
       case "algorithmScheduleViewTypeId" => "Long"
       case "guid" => "Long"
-      case "algorithmScheduleViewTypeName" => "String"
       case "insertedRowDate" => "java.util.Date"
       case "lastUpdatedDate" => "java.util.Date"
+      case "algorithmScheduleViewTypeName" => "String"
       case _ => "Object"
     }
     ret
@@ -1481,7 +1511,7 @@ case class AlgorithmScheduleViewTypeDto (
     return stat;
   }
   def modify(algorithmScheduleViewTypeName : String) : AlgorithmScheduleViewTypeDto = {
-    val dtoModified = new AlgorithmScheduleViewTypeDto(this.algorithmScheduleViewTypeId,this.guid,algorithmScheduleViewTypeName,this.insertedRowDate,new java.util.Date());
+    val dtoModified = new AlgorithmScheduleViewTypeDto(this.algorithmScheduleViewTypeId,this.guid,this.insertedRowDate,new java.util.Date(),algorithmScheduleViewTypeName);
     dtoModified
   }
 }
@@ -1489,12 +1519,111 @@ object AlgorithmScheduleViewTypeDto {
   val TABLE_NAME = "algorithmScheduleViewType";
   val FIELD_algorithmScheduleViewTypeId = "algorithmScheduleViewTypeId";
   val FIELD_guid = "guid";
-  val FIELD_algorithmScheduleViewTypeName = "algorithmScheduleViewTypeName";
   val FIELD_insertedRowDate = "insertedRowDate";
   val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_algorithmScheduleViewTypeName = "algorithmScheduleViewTypeName";
 
   def createNewAlgorithmScheduleViewTypeDto(algorithmScheduleViewTypeName : String) : AlgorithmScheduleViewTypeDto = {
-    val dto = new AlgorithmScheduleViewTypeDto(0,0,algorithmScheduleViewTypeName,new java.util.Date(),new java.util.Date())
+    val dto = new AlgorithmScheduleViewTypeDto(0,0,new java.util.Date(),new java.util.Date(),algorithmScheduleViewTypeName)
+    dto
+  }
+
+}
+
+
+case class AlgorithmStorageSupportDto (
+                                        val algorithmStorageSupportId : Long
+                                        , val guid : Long
+                                        , val insertedRowDate : java.util.Date
+                                        , val lastUpdatedDate : java.util.Date
+                                        , val algorithmImplementationId : Long
+                                        , val executorStorageTypeId : Long
+                                        , val supportPriority : Int
+                                      ) extends BaseDto {
+  def tableName : String = {
+    "algorithmStorageSupport";
+  }
+  def fields : String = {
+    "algorithmStorageSupportId,guid,insertedRowDate,lastUpdatedDate,algorithmImplementationId,executorStorageTypeId,supportPriority";
+  }
+  def pkFields : String = {
+    "algorithmStorageSupportId";
+  }
+  def fkFields : String = {
+    "algorithmImplementationId,executorStorageTypeId";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    algorithmStorageSupportId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(algorithmStorageSupportId,guid,insertedRowDate,lastUpdatedDate,algorithmImplementationId,executorStorageTypeId,supportPriority)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+algorithmStorageSupportId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmImplementationId,""+executorStorageTypeId,""+supportPriority)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "algorithmStorageSupportId" => algorithmStorageSupportId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "algorithmImplementationId" => algorithmImplementationId
+      case "executorStorageTypeId" => executorStorageTypeId
+      case "supportPriority" => supportPriority
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "algorithmStorageSupportId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "algorithmImplementationId" => "Long"
+      case "executorStorageTypeId" => "Long"
+      case "supportPriority" => "Int"
+      case _ => "Object"
+    }
+    ret
+  }
+  def prepareInsert(connection : java.sql.Connection) : java.sql.PreparedStatement = {
+    val stat = connection.prepareStatement("insert into algorithmStorageSupport(guid,algorithmImplementationId,executorStorageTypeId,supportPriority) values (?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
+    stat.setObject(1, guid);
+    stat.setObject(2, algorithmImplementationId);
+    stat.setObject(3, executorStorageTypeId);
+    stat.setObject(4, supportPriority);
+    return stat;
+  }
+  def modify(algorithmImplementationId : Long, executorStorageTypeId : Long, supportPriority : Int) : AlgorithmStorageSupportDto = {
+    val dtoModified = new AlgorithmStorageSupportDto(this.algorithmStorageSupportId,this.guid,this.insertedRowDate,new java.util.Date(),algorithmImplementationId,executorStorageTypeId,supportPriority);
+    dtoModified
+  }
+}
+object AlgorithmStorageSupportDto {
+  val TABLE_NAME = "algorithmStorageSupport";
+  val FIELD_algorithmStorageSupportId = "algorithmStorageSupportId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_algorithmImplementationId = "algorithmImplementationId";
+  val FIELD_executorStorageTypeId = "executorStorageTypeId";
+  val FIELD_supportPriority = "supportPriority";
+
+  def createNewAlgorithmStorageSupportDto(algorithmImplementationId : Long, executorStorageTypeId : Long, supportPriority : Int) : AlgorithmStorageSupportDto = {
+    val dto = new AlgorithmStorageSupportDto(0,0,new java.util.Date(),new java.util.Date(),algorithmImplementationId,executorStorageTypeId,supportPriority)
     dto
   }
 
@@ -1504,16 +1633,16 @@ object AlgorithmScheduleViewTypeDto {
 case class AlgorithmTypeDto (
                               val algorithmTypeId : Long
                               , val guid : Long
-                              , val algorithmTypeName : String
-                              , val algorithmTypeDescription : String
                               , val insertedRowDate : java.util.Date
                               , val lastUpdatedDate : java.util.Date
+                              , val algorithmTypeName : String
+                              , val algorithmTypeDescription : String
                             ) extends BaseDto {
   def tableName : String = {
     "algorithmType";
   }
   def fields : String = {
-    "algorithmTypeId,guid,algorithmTypeName,algorithmTypeDescription,insertedRowDate,lastUpdatedDate";
+    "algorithmTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeName,algorithmTypeDescription";
   }
   def pkFields : String = {
     "algorithmTypeId";
@@ -1537,19 +1666,19 @@ case class AlgorithmTypeDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(algorithmTypeId,guid,algorithmTypeName,algorithmTypeDescription,insertedRowDate,lastUpdatedDate)
+    Array(algorithmTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeName,algorithmTypeDescription)
   }
   def toStringArray() : Array[String] = {
-    Array(""+algorithmTypeId,""+guid,""+algorithmTypeName,""+algorithmTypeDescription,""+insertedRowDate,""+lastUpdatedDate)
+    Array(""+algorithmTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmTypeName,""+algorithmTypeDescription)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "algorithmTypeId" => algorithmTypeId
       case "guid" => guid
-      case "algorithmTypeName" => algorithmTypeName
-      case "algorithmTypeDescription" => algorithmTypeDescription
       case "insertedRowDate" => insertedRowDate
       case "lastUpdatedDate" => lastUpdatedDate
+      case "algorithmTypeName" => algorithmTypeName
+      case "algorithmTypeDescription" => algorithmTypeDescription
       case _ => null
     }
     ret
@@ -1558,10 +1687,10 @@ case class AlgorithmTypeDto (
     val ret = name match {
       case "algorithmTypeId" => "Long"
       case "guid" => "Long"
-      case "algorithmTypeName" => "String"
-      case "algorithmTypeDescription" => "String"
       case "insertedRowDate" => "java.util.Date"
       case "lastUpdatedDate" => "java.util.Date"
+      case "algorithmTypeName" => "String"
+      case "algorithmTypeDescription" => "String"
       case _ => "Object"
     }
     ret
@@ -1574,7 +1703,7 @@ case class AlgorithmTypeDto (
     return stat;
   }
   def modify(algorithmTypeName : String, algorithmTypeDescription : String) : AlgorithmTypeDto = {
-    val dtoModified = new AlgorithmTypeDto(this.algorithmTypeId,this.guid,algorithmTypeName,algorithmTypeDescription,this.insertedRowDate,new java.util.Date());
+    val dtoModified = new AlgorithmTypeDto(this.algorithmTypeId,this.guid,this.insertedRowDate,new java.util.Date(),algorithmTypeName,algorithmTypeDescription);
     dtoModified
   }
 }
@@ -1582,13 +1711,13 @@ object AlgorithmTypeDto {
   val TABLE_NAME = "algorithmType";
   val FIELD_algorithmTypeId = "algorithmTypeId";
   val FIELD_guid = "guid";
-  val FIELD_algorithmTypeName = "algorithmTypeName";
-  val FIELD_algorithmTypeDescription = "algorithmTypeDescription";
   val FIELD_insertedRowDate = "insertedRowDate";
   val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_algorithmTypeName = "algorithmTypeName";
+  val FIELD_algorithmTypeDescription = "algorithmTypeDescription";
 
   def createNewAlgorithmTypeDto(algorithmTypeName : String, algorithmTypeDescription : String) : AlgorithmTypeDto = {
-    val dto = new AlgorithmTypeDto(0,0,algorithmTypeName,algorithmTypeDescription,new java.util.Date(),new java.util.Date())
+    val dto = new AlgorithmTypeDto(0,0,new java.util.Date(),new java.util.Date(),algorithmTypeName,algorithmTypeDescription)
     dto
   }
 
@@ -1597,19 +1726,19 @@ object AlgorithmTypeDto {
 
 case class AlgorithmTypeColumnTypeDto (
                                         val algorithmTypeColumnTypeId : Long
+                                        , val guid : Long
+                                        , val insertedRowDate : java.util.Date
+                                        , val lastUpdatedDate : java.util.Date
                                         , val algorithmTypeVersionId : Long
                                         , val algorithmColumnTypeId : Long
                                         , val allowMultiple : Int
                                         , val allowEmpty : Int
-                                        , val insertedRowDate : java.util.Date
-                                        , val lastUpdatedDate : java.util.Date
-                                        , val guid : Long
                                       ) extends BaseDto {
   def tableName : String = {
     "algorithmTypeColumnType";
   }
   def fields : String = {
-    "algorithmTypeColumnTypeId,algorithmTypeVersionId,algorithmColumnTypeId,allowMultiple,allowEmpty,insertedRowDate,lastUpdatedDate,guid";
+    "algorithmTypeColumnTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,algorithmColumnTypeId,allowMultiple,allowEmpty";
   }
   def pkFields : String = {
     "algorithmTypeColumnTypeId";
@@ -1633,21 +1762,21 @@ case class AlgorithmTypeColumnTypeDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(algorithmTypeColumnTypeId,algorithmTypeVersionId,algorithmColumnTypeId,allowMultiple,allowEmpty,insertedRowDate,lastUpdatedDate,guid)
+    Array(algorithmTypeColumnTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,algorithmColumnTypeId,allowMultiple,allowEmpty)
   }
   def toStringArray() : Array[String] = {
-    Array(""+algorithmTypeColumnTypeId,""+algorithmTypeVersionId,""+algorithmColumnTypeId,""+allowMultiple,""+allowEmpty,""+insertedRowDate,""+lastUpdatedDate,""+guid)
+    Array(""+algorithmTypeColumnTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmTypeVersionId,""+algorithmColumnTypeId,""+allowMultiple,""+allowEmpty)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "algorithmTypeColumnTypeId" => algorithmTypeColumnTypeId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
       case "algorithmTypeVersionId" => algorithmTypeVersionId
       case "algorithmColumnTypeId" => algorithmColumnTypeId
       case "allowMultiple" => allowMultiple
       case "allowEmpty" => allowEmpty
-      case "insertedRowDate" => insertedRowDate
-      case "lastUpdatedDate" => lastUpdatedDate
-      case "guid" => guid
       case _ => null
     }
     ret
@@ -1655,44 +1784,44 @@ case class AlgorithmTypeColumnTypeDto (
   def getFieldTypeName(name : String) : String = {
     val ret = name match {
       case "algorithmTypeColumnTypeId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
       case "algorithmTypeVersionId" => "Long"
       case "algorithmColumnTypeId" => "Long"
       case "allowMultiple" => "Int"
       case "allowEmpty" => "Int"
-      case "insertedRowDate" => "java.util.Date"
-      case "lastUpdatedDate" => "java.util.Date"
-      case "guid" => "Long"
       case _ => "Object"
     }
     ret
   }
   def prepareInsert(connection : java.sql.Connection) : java.sql.PreparedStatement = {
-    val stat = connection.prepareStatement("insert into algorithmTypeColumnType(algorithmTypeVersionId,algorithmColumnTypeId,allowMultiple,allowEmpty,guid) values (?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
-    stat.setObject(1, algorithmTypeVersionId);
-    stat.setObject(2, algorithmColumnTypeId);
-    stat.setObject(3, allowMultiple);
-    stat.setObject(4, allowEmpty);
-    stat.setObject(5, guid);
+    val stat = connection.prepareStatement("insert into algorithmTypeColumnType(guid,algorithmTypeVersionId,algorithmColumnTypeId,allowMultiple,allowEmpty) values (?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
+    stat.setObject(1, guid);
+    stat.setObject(2, algorithmTypeVersionId);
+    stat.setObject(3, algorithmColumnTypeId);
+    stat.setObject(4, allowMultiple);
+    stat.setObject(5, allowEmpty);
     return stat;
   }
   def modify(algorithmTypeVersionId : Long, algorithmColumnTypeId : Long, allowMultiple : Int, allowEmpty : Int) : AlgorithmTypeColumnTypeDto = {
-    val dtoModified = new AlgorithmTypeColumnTypeDto(this.algorithmTypeColumnTypeId,algorithmTypeVersionId,algorithmColumnTypeId,allowMultiple,allowEmpty,this.insertedRowDate,new java.util.Date(),this.guid);
+    val dtoModified = new AlgorithmTypeColumnTypeDto(this.algorithmTypeColumnTypeId,this.guid,this.insertedRowDate,new java.util.Date(),algorithmTypeVersionId,algorithmColumnTypeId,allowMultiple,allowEmpty);
     dtoModified
   }
 }
 object AlgorithmTypeColumnTypeDto {
   val TABLE_NAME = "algorithmTypeColumnType";
   val FIELD_algorithmTypeColumnTypeId = "algorithmTypeColumnTypeId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_algorithmTypeVersionId = "algorithmTypeVersionId";
   val FIELD_algorithmColumnTypeId = "algorithmColumnTypeId";
   val FIELD_allowMultiple = "allowMultiple";
   val FIELD_allowEmpty = "allowEmpty";
-  val FIELD_insertedRowDate = "insertedRowDate";
-  val FIELD_lastUpdatedDate = "lastUpdatedDate";
-  val FIELD_guid = "guid";
 
   def createNewAlgorithmTypeColumnTypeDto(algorithmTypeVersionId : Long, algorithmColumnTypeId : Long, allowMultiple : Int, allowEmpty : Int) : AlgorithmTypeColumnTypeDto = {
-    val dto = new AlgorithmTypeColumnTypeDto(0,algorithmTypeVersionId,algorithmColumnTypeId,allowMultiple,allowEmpty,new java.util.Date(),new java.util.Date(),0)
+    val dto = new AlgorithmTypeColumnTypeDto(0,0,new java.util.Date(),new java.util.Date(),algorithmTypeVersionId,algorithmColumnTypeId,allowMultiple,allowEmpty)
     dto
   }
 
@@ -1702,23 +1831,23 @@ object AlgorithmTypeColumnTypeDto {
 case class AlgorithmTypeOutputTypeDto (
                                         val algorithmTypeOutputTypeId : Long
                                         , val guid : Long
+                                        , val insertedRowDate : java.util.Date
+                                        , val lastUpdatedDate : java.util.Date
                                         , val algorithmTypeVersionId : Long
                                         , val algorithmOutputTypeId : Long
                                         , val isMandatory : Int
-                                        , val insertedRowDate : java.util.Date
-                                        , val lastUpdatedDate : java.util.Date
                                       ) extends BaseDto {
   def tableName : String = {
     "algorithmTypeOutputType";
   }
   def fields : String = {
-    "algorithmTypeOutputTypeId,guid,algorithmTypeVersionId,algorithmOutputTypeId,isMandatory,insertedRowDate,lastUpdatedDate";
+    "algorithmTypeOutputTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,algorithmOutputTypeId,isMandatory";
   }
   def pkFields : String = {
     "algorithmTypeOutputTypeId";
   }
   def fkFields : String = {
-    "";
+    "algorithmOutputTypeId,algorithmTypeVersionId";
   }
   def nameField : String = {
     "";
@@ -1736,20 +1865,20 @@ case class AlgorithmTypeOutputTypeDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(algorithmTypeOutputTypeId,guid,algorithmTypeVersionId,algorithmOutputTypeId,isMandatory,insertedRowDate,lastUpdatedDate)
+    Array(algorithmTypeOutputTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,algorithmOutputTypeId,isMandatory)
   }
   def toStringArray() : Array[String] = {
-    Array(""+algorithmTypeOutputTypeId,""+guid,""+algorithmTypeVersionId,""+algorithmOutputTypeId,""+isMandatory,""+insertedRowDate,""+lastUpdatedDate)
+    Array(""+algorithmTypeOutputTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmTypeVersionId,""+algorithmOutputTypeId,""+isMandatory)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "algorithmTypeOutputTypeId" => algorithmTypeOutputTypeId
       case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
       case "algorithmTypeVersionId" => algorithmTypeVersionId
       case "algorithmOutputTypeId" => algorithmOutputTypeId
       case "isMandatory" => isMandatory
-      case "insertedRowDate" => insertedRowDate
-      case "lastUpdatedDate" => lastUpdatedDate
       case _ => null
     }
     ret
@@ -1758,11 +1887,11 @@ case class AlgorithmTypeOutputTypeDto (
     val ret = name match {
       case "algorithmTypeOutputTypeId" => "Long"
       case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
       case "algorithmTypeVersionId" => "Long"
       case "algorithmOutputTypeId" => "Long"
       case "isMandatory" => "Int"
-      case "insertedRowDate" => "java.util.Date"
-      case "lastUpdatedDate" => "java.util.Date"
       case _ => "Object"
     }
     ret
@@ -1776,7 +1905,7 @@ case class AlgorithmTypeOutputTypeDto (
     return stat;
   }
   def modify(algorithmTypeVersionId : Long, algorithmOutputTypeId : Long, isMandatory : Int) : AlgorithmTypeOutputTypeDto = {
-    val dtoModified = new AlgorithmTypeOutputTypeDto(this.algorithmTypeOutputTypeId,this.guid,algorithmTypeVersionId,algorithmOutputTypeId,isMandatory,this.insertedRowDate,new java.util.Date());
+    val dtoModified = new AlgorithmTypeOutputTypeDto(this.algorithmTypeOutputTypeId,this.guid,this.insertedRowDate,new java.util.Date(),algorithmTypeVersionId,algorithmOutputTypeId,isMandatory);
     dtoModified
   }
 }
@@ -1784,14 +1913,14 @@ object AlgorithmTypeOutputTypeDto {
   val TABLE_NAME = "algorithmTypeOutputType";
   val FIELD_algorithmTypeOutputTypeId = "algorithmTypeOutputTypeId";
   val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_algorithmTypeVersionId = "algorithmTypeVersionId";
   val FIELD_algorithmOutputTypeId = "algorithmOutputTypeId";
   val FIELD_isMandatory = "isMandatory";
-  val FIELD_insertedRowDate = "insertedRowDate";
-  val FIELD_lastUpdatedDate = "lastUpdatedDate";
 
   def createNewAlgorithmTypeOutputTypeDto(algorithmTypeVersionId : Long, algorithmOutputTypeId : Long, isMandatory : Int) : AlgorithmTypeOutputTypeDto = {
-    val dto = new AlgorithmTypeOutputTypeDto(0,0,algorithmTypeVersionId,algorithmOutputTypeId,isMandatory,new java.util.Date(),new java.util.Date())
+    val dto = new AlgorithmTypeOutputTypeDto(0,0,new java.util.Date(),new java.util.Date(),algorithmTypeVersionId,algorithmOutputTypeId,isMandatory)
     dto
   }
 
@@ -1800,17 +1929,17 @@ object AlgorithmTypeOutputTypeDto {
 
 case class AlgorithmTypeVersionDto (
                                      val algorithmTypeVersionId : Long
+                                     , val insertedRowDate : java.util.Date
+                                     , val lastUpdatedDate : java.util.Date
                                      , val guid : Long
                                      , val algorithmTypeId : Long
                                      , val algorithmTypeVersionName : String
-                                     , val insertedRowDate : java.util.Date
-                                     , val lastUpdatedDate : java.util.Date
                                    ) extends BaseDto {
   def tableName : String = {
     "algorithmTypeVersion";
   }
   def fields : String = {
-    "algorithmTypeVersionId,guid,algorithmTypeId,algorithmTypeVersionName,insertedRowDate,lastUpdatedDate";
+    "algorithmTypeVersionId,insertedRowDate,lastUpdatedDate,guid,algorithmTypeId,algorithmTypeVersionName";
   }
   def pkFields : String = {
     "algorithmTypeVersionId";
@@ -1834,19 +1963,19 @@ case class AlgorithmTypeVersionDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(algorithmTypeVersionId,guid,algorithmTypeId,algorithmTypeVersionName,insertedRowDate,lastUpdatedDate)
+    Array(algorithmTypeVersionId,insertedRowDate,lastUpdatedDate,guid,algorithmTypeId,algorithmTypeVersionName)
   }
   def toStringArray() : Array[String] = {
-    Array(""+algorithmTypeVersionId,""+guid,""+algorithmTypeId,""+algorithmTypeVersionName,""+insertedRowDate,""+lastUpdatedDate)
+    Array(""+algorithmTypeVersionId,""+insertedRowDate,""+lastUpdatedDate,""+guid,""+algorithmTypeId,""+algorithmTypeVersionName)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "algorithmTypeVersionId" => algorithmTypeVersionId
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
       case "guid" => guid
       case "algorithmTypeId" => algorithmTypeId
       case "algorithmTypeVersionName" => algorithmTypeVersionName
-      case "insertedRowDate" => insertedRowDate
-      case "lastUpdatedDate" => lastUpdatedDate
       case _ => null
     }
     ret
@@ -1854,11 +1983,11 @@ case class AlgorithmTypeVersionDto (
   def getFieldTypeName(name : String) : String = {
     val ret = name match {
       case "algorithmTypeVersionId" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
       case "guid" => "Long"
       case "algorithmTypeId" => "Long"
       case "algorithmTypeVersionName" => "String"
-      case "insertedRowDate" => "java.util.Date"
-      case "lastUpdatedDate" => "java.util.Date"
       case _ => "Object"
     }
     ret
@@ -1871,21 +2000,234 @@ case class AlgorithmTypeVersionDto (
     return stat;
   }
   def modify(algorithmTypeId : Long, algorithmTypeVersionName : String) : AlgorithmTypeVersionDto = {
-    val dtoModified = new AlgorithmTypeVersionDto(this.algorithmTypeVersionId,this.guid,algorithmTypeId,algorithmTypeVersionName,this.insertedRowDate,new java.util.Date());
+    val dtoModified = new AlgorithmTypeVersionDto(this.algorithmTypeVersionId,this.insertedRowDate,new java.util.Date(),this.guid,algorithmTypeId,algorithmTypeVersionName);
     dtoModified
   }
 }
 object AlgorithmTypeVersionDto {
   val TABLE_NAME = "algorithmTypeVersion";
   val FIELD_algorithmTypeVersionId = "algorithmTypeVersionId";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_guid = "guid";
   val FIELD_algorithmTypeId = "algorithmTypeId";
   val FIELD_algorithmTypeVersionName = "algorithmTypeVersionName";
-  val FIELD_insertedRowDate = "insertedRowDate";
-  val FIELD_lastUpdatedDate = "lastUpdatedDate";
 
   def createNewAlgorithmTypeVersionDto(algorithmTypeId : Long, algorithmTypeVersionName : String) : AlgorithmTypeVersionDto = {
-    val dto = new AlgorithmTypeVersionDto(0,0,algorithmTypeId,algorithmTypeVersionName,new java.util.Date(),new java.util.Date())
+    val dto = new AlgorithmTypeVersionDto(0,new java.util.Date(),new java.util.Date(),0,algorithmTypeId,algorithmTypeVersionName)
+    dto
+  }
+
+}
+
+
+case class ExecutorContextDto (
+                                val executorContextId : Long
+                                , val guid : Long
+                                , val insertedRowDate : java.util.Date
+                                , val lastUpdatedDate : java.util.Date
+                                , val executorHostId : Long
+                                , val isWorking : Int
+                                , val properties : String
+                              ) extends BaseDto {
+  def tableName : String = {
+    "executorContext";
+  }
+  def fields : String = {
+    "executorContextId,guid,insertedRowDate,lastUpdatedDate,executorHostId,isWorking,properties";
+  }
+  def pkFields : String = {
+    "executorContextId";
+  }
+  def fkFields : String = {
+    "executorHostId";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    executorContextId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(executorContextId,guid,insertedRowDate,lastUpdatedDate,executorHostId,isWorking,properties)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+executorContextId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+isWorking,""+properties)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "executorContextId" => executorContextId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "executorHostId" => executorHostId
+      case "isWorking" => isWorking
+      case "properties" => properties
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "executorContextId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "executorHostId" => "Long"
+      case "isWorking" => "Int"
+      case "properties" => "String"
+      case _ => "Object"
+    }
+    ret
+  }
+  def prepareInsert(connection : java.sql.Connection) : java.sql.PreparedStatement = {
+    val stat = connection.prepareStatement("insert into executorContext(guid,executorHostId,isWorking,properties) values (?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
+    stat.setObject(1, guid);
+    stat.setObject(2, executorHostId);
+    stat.setObject(3, isWorking);
+    stat.setObject(4, properties);
+    return stat;
+  }
+  def modify(executorHostId : Long, isWorking : Int, properties : String) : ExecutorContextDto = {
+    val dtoModified = new ExecutorContextDto(this.executorContextId,this.guid,this.insertedRowDate,new java.util.Date(),executorHostId,isWorking,properties);
+    dtoModified
+  }
+}
+object ExecutorContextDto {
+  val TABLE_NAME = "executorContext";
+  val FIELD_executorContextId = "executorContextId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_executorHostId = "executorHostId";
+  val FIELD_isWorking = "isWorking";
+  val FIELD_properties = "properties";
+
+  def createNewExecutorContextDto(executorHostId : Long, isWorking : Int, properties : String) : ExecutorContextDto = {
+    val dto = new ExecutorContextDto(0,0,new java.util.Date(),new java.util.Date(),executorHostId,isWorking,properties)
+    dto
+  }
+
+}
+
+
+case class ExecutorContextRuntimeDto (
+                                       val executorContextRuntimeId : Long
+                                       , val guid : Long
+                                       , val insertedRowDate : java.util.Date
+                                       , val lastUpdatedDate : java.util.Date
+                                       , val executorHostId : Long
+                                       , val executorContextId : Long
+                                       , val availableProcessors : Double
+                                       , val freeMemory : Double
+                                       , val maxMemory : Double
+                                       , val totalMemory : Double
+                                     ) extends BaseDto {
+  def tableName : String = {
+    "executorContextRuntime";
+  }
+  def fields : String = {
+    "executorContextRuntimeId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorContextId,availableProcessors,freeMemory,maxMemory,totalMemory";
+  }
+  def pkFields : String = {
+    "executorContextRuntimeId";
+  }
+  def fkFields : String = {
+    "executorContextId,executorHostId";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    executorContextRuntimeId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(executorContextRuntimeId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorContextId,availableProcessors,freeMemory,maxMemory,totalMemory)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+executorContextRuntimeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+executorContextId,""+availableProcessors,""+freeMemory,""+maxMemory,""+totalMemory)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "executorContextRuntimeId" => executorContextRuntimeId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "executorHostId" => executorHostId
+      case "executorContextId" => executorContextId
+      case "availableProcessors" => availableProcessors
+      case "freeMemory" => freeMemory
+      case "maxMemory" => maxMemory
+      case "totalMemory" => totalMemory
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "executorContextRuntimeId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "executorHostId" => "Long"
+      case "executorContextId" => "Long"
+      case "availableProcessors" => "Double"
+      case "freeMemory" => "Double"
+      case "maxMemory" => "Double"
+      case "totalMemory" => "Double"
+      case _ => "Object"
+    }
+    ret
+  }
+  def prepareInsert(connection : java.sql.Connection) : java.sql.PreparedStatement = {
+    val stat = connection.prepareStatement("insert into executorContextRuntime(guid,executorHostId,executorContextId,availableProcessors,freeMemory,maxMemory,totalMemory) values (?,?,?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
+    stat.setObject(1, guid);
+    stat.setObject(2, executorHostId);
+    stat.setObject(3, executorContextId);
+    stat.setObject(4, availableProcessors);
+    stat.setObject(5, freeMemory);
+    stat.setObject(6, maxMemory);
+    stat.setObject(7, totalMemory);
+    return stat;
+  }
+  def modify(executorHostId : Long, executorContextId : Long, availableProcessors : Double, freeMemory : Double, maxMemory : Double, totalMemory : Double) : ExecutorContextRuntimeDto = {
+    val dtoModified = new ExecutorContextRuntimeDto(this.executorContextRuntimeId,this.guid,this.insertedRowDate,new java.util.Date(),executorHostId,executorContextId,availableProcessors,freeMemory,maxMemory,totalMemory);
+    dtoModified
+  }
+}
+object ExecutorContextRuntimeDto {
+  val TABLE_NAME = "executorContextRuntime";
+  val FIELD_executorContextRuntimeId = "executorContextRuntimeId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_executorHostId = "executorHostId";
+  val FIELD_executorContextId = "executorContextId";
+  val FIELD_availableProcessors = "availableProcessors";
+  val FIELD_freeMemory = "freeMemory";
+  val FIELD_maxMemory = "maxMemory";
+  val FIELD_totalMemory = "totalMemory";
+
+  def createNewExecutorContextRuntimeDto(executorHostId : Long, executorContextId : Long, availableProcessors : Double, freeMemory : Double, maxMemory : Double, totalMemory : Double) : ExecutorContextRuntimeDto = {
+    val dto = new ExecutorContextRuntimeDto(0,0,new java.util.Date(),new java.util.Date(),executorHostId,executorContextId,availableProcessors,freeMemory,maxMemory,totalMemory)
     dto
   }
 
@@ -2009,27 +2351,28 @@ object ExecutorHostDto {
 case class ExecutorInstanceDto (
                                  val executorInstanceId : Long
                                  , val guid : Long
+                                 , val insertedRowDate : java.util.Date
+                                 , val lastUpdatedDate : java.util.Date
                                  , val executorTypeId : Long
                                  , val executorHostId : Long
+                                 , val executorContextId : Long
                                  , val executorInstanceName : String
                                  , val isRunning : Int
                                  , val isFinished : Int
                                  , val portNumber : Int
-                                 , val insertedRowDate : java.util.Date
-                                 , val lastUpdatedDate : java.util.Date
                                  , val endDate : java.util.Date
                                ) extends BaseDto {
   def tableName : String = {
     "executorInstance";
   }
   def fields : String = {
-    "executorInstanceId,guid,executorTypeId,executorHostId,executorInstanceName,isRunning,isFinished,portNumber,insertedRowDate,lastUpdatedDate,endDate";
+    "executorInstanceId,guid,insertedRowDate,lastUpdatedDate,executorTypeId,executorHostId,executorContextId,executorInstanceName,isRunning,isFinished,portNumber,endDate";
   }
   def pkFields : String = {
     "executorInstanceId";
   }
   def fkFields : String = {
-    "executorHostId,executorTypeId";
+    "executorContextId,executorHostId,executorTypeId";
   }
   def nameField : String = {
     "executorInstanceName";
@@ -2047,23 +2390,24 @@ case class ExecutorInstanceDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(executorInstanceId,guid,executorTypeId,executorHostId,executorInstanceName,isRunning,isFinished,portNumber,insertedRowDate,lastUpdatedDate,endDate)
+    Array(executorInstanceId,guid,insertedRowDate,lastUpdatedDate,executorTypeId,executorHostId,executorContextId,executorInstanceName,isRunning,isFinished,portNumber,endDate)
   }
   def toStringArray() : Array[String] = {
-    Array(""+executorInstanceId,""+guid,""+executorTypeId,""+executorHostId,""+executorInstanceName,""+isRunning,""+isFinished,""+portNumber,""+insertedRowDate,""+lastUpdatedDate,""+endDate)
+    Array(""+executorInstanceId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorTypeId,""+executorHostId,""+executorContextId,""+executorInstanceName,""+isRunning,""+isFinished,""+portNumber,""+endDate)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "executorInstanceId" => executorInstanceId
       case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
       case "executorTypeId" => executorTypeId
       case "executorHostId" => executorHostId
+      case "executorContextId" => executorContextId
       case "executorInstanceName" => executorInstanceName
       case "isRunning" => isRunning
       case "isFinished" => isFinished
       case "portNumber" => portNumber
-      case "insertedRowDate" => insertedRowDate
-      case "lastUpdatedDate" => lastUpdatedDate
       case "endDate" => endDate
       case _ => null
     }
@@ -2073,33 +2417,35 @@ case class ExecutorInstanceDto (
     val ret = name match {
       case "executorInstanceId" => "Long"
       case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
       case "executorTypeId" => "Long"
       case "executorHostId" => "Long"
+      case "executorContextId" => "Long"
       case "executorInstanceName" => "String"
       case "isRunning" => "Int"
       case "isFinished" => "Int"
       case "portNumber" => "Int"
-      case "insertedRowDate" => "java.util.Date"
-      case "lastUpdatedDate" => "java.util.Date"
       case "endDate" => "java.util.Date"
       case _ => "Object"
     }
     ret
   }
   def prepareInsert(connection : java.sql.Connection) : java.sql.PreparedStatement = {
-    val stat = connection.prepareStatement("insert into executorInstance(guid,executorTypeId,executorHostId,executorInstanceName,isRunning,isFinished,portNumber,endDate) values (?,?,?,?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
+    val stat = connection.prepareStatement("insert into executorInstance(guid,executorTypeId,executorHostId,executorContextId,executorInstanceName,isRunning,isFinished,portNumber,endDate) values (?,?,?,?,?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
     stat.setObject(1, guid);
     stat.setObject(2, executorTypeId);
     stat.setObject(3, executorHostId);
-    stat.setObject(4, executorInstanceName);
-    stat.setObject(5, isRunning);
-    stat.setObject(6, isFinished);
-    stat.setObject(7, portNumber);
-    stat.setObject(8, endDate);
+    stat.setObject(4, executorContextId);
+    stat.setObject(5, executorInstanceName);
+    stat.setObject(6, isRunning);
+    stat.setObject(7, isFinished);
+    stat.setObject(8, portNumber);
+    stat.setObject(9, endDate);
     return stat;
   }
-  def modify(executorTypeId : Long, executorHostId : Long, executorInstanceName : String, isRunning : Int, isFinished : Int, portNumber : Int, endDate : java.util.Date) : ExecutorInstanceDto = {
-    val dtoModified = new ExecutorInstanceDto(this.executorInstanceId,this.guid,executorTypeId,executorHostId,executorInstanceName,isRunning,isFinished,portNumber,this.insertedRowDate,new java.util.Date(),endDate);
+  def modify(executorTypeId : Long, executorHostId : Long, executorContextId : Long, executorInstanceName : String, isRunning : Int, isFinished : Int, portNumber : Int, endDate : java.util.Date) : ExecutorInstanceDto = {
+    val dtoModified = new ExecutorInstanceDto(this.executorInstanceId,this.guid,this.insertedRowDate,new java.util.Date(),executorTypeId,executorHostId,executorContextId,executorInstanceName,isRunning,isFinished,portNumber,endDate);
     dtoModified
   }
 }
@@ -2107,18 +2453,113 @@ object ExecutorInstanceDto {
   val TABLE_NAME = "executorInstance";
   val FIELD_executorInstanceId = "executorInstanceId";
   val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_executorTypeId = "executorTypeId";
   val FIELD_executorHostId = "executorHostId";
+  val FIELD_executorContextId = "executorContextId";
   val FIELD_executorInstanceName = "executorInstanceName";
   val FIELD_isRunning = "isRunning";
   val FIELD_isFinished = "isFinished";
   val FIELD_portNumber = "portNumber";
-  val FIELD_insertedRowDate = "insertedRowDate";
-  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_endDate = "endDate";
 
-  def createNewExecutorInstanceDto(executorTypeId : Long, executorHostId : Long, executorInstanceName : String, isRunning : Int, isFinished : Int, portNumber : Int, endDate : java.util.Date) : ExecutorInstanceDto = {
-    val dto = new ExecutorInstanceDto(0,0,executorTypeId,executorHostId,executorInstanceName,isRunning,isFinished,portNumber,new java.util.Date(),new java.util.Date(),endDate)
+  def createNewExecutorInstanceDto(executorTypeId : Long, executorHostId : Long, executorContextId : Long, executorInstanceName : String, isRunning : Int, isFinished : Int, portNumber : Int, endDate : java.util.Date) : ExecutorInstanceDto = {
+    val dto = new ExecutorInstanceDto(0,0,new java.util.Date(),new java.util.Date(),executorTypeId,executorHostId,executorContextId,executorInstanceName,isRunning,isFinished,portNumber,endDate)
+    dto
+  }
+
+}
+
+
+case class ExecutorInstanceStateDto (
+                                      val executorInstanceStateId : Long
+                                      , val guid : Long
+                                      , val insertedRowDate : java.util.Date
+                                      , val lastUpdatedDate : java.util.Date
+                                      , val executorInstanceId : Long
+                                      , val stateName : String
+                                    ) extends BaseDto {
+  def tableName : String = {
+    "executorInstanceState";
+  }
+  def fields : String = {
+    "executorInstanceStateId,guid,insertedRowDate,lastUpdatedDate,executorInstanceId,stateName";
+  }
+  def pkFields : String = {
+    "executorInstanceStateId";
+  }
+  def fkFields : String = {
+    "executorInstanceId";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    executorInstanceStateId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(executorInstanceStateId,guid,insertedRowDate,lastUpdatedDate,executorInstanceId,stateName)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+executorInstanceStateId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorInstanceId,""+stateName)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "executorInstanceStateId" => executorInstanceStateId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "executorInstanceId" => executorInstanceId
+      case "stateName" => stateName
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "executorInstanceStateId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "executorInstanceId" => "Long"
+      case "stateName" => "String"
+      case _ => "Object"
+    }
+    ret
+  }
+  def prepareInsert(connection : java.sql.Connection) : java.sql.PreparedStatement = {
+    val stat = connection.prepareStatement("insert into executorInstanceState(guid,executorInstanceId,stateName) values (?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
+    stat.setObject(1, guid);
+    stat.setObject(2, executorInstanceId);
+    stat.setObject(3, stateName);
+    return stat;
+  }
+  def modify(executorInstanceId : Long, stateName : String) : ExecutorInstanceStateDto = {
+    val dtoModified = new ExecutorInstanceStateDto(this.executorInstanceStateId,this.guid,this.insertedRowDate,new java.util.Date(),executorInstanceId,stateName);
+    dtoModified
+  }
+}
+object ExecutorInstanceStateDto {
+  val TABLE_NAME = "executorInstanceState";
+  val FIELD_executorInstanceStateId = "executorInstanceStateId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_executorInstanceId = "executorInstanceId";
+  val FIELD_stateName = "stateName";
+
+  def createNewExecutorInstanceStateDto(executorInstanceId : Long, stateName : String) : ExecutorInstanceStateDto = {
+    val dto = new ExecutorInstanceStateDto(0,0,new java.util.Date(),new java.util.Date(),executorInstanceId,stateName)
     dto
   }
 
@@ -2128,9 +2569,9 @@ object ExecutorInstanceDto {
 case class ExecutorRestDto (
                              val executorRestId : Long
                              , val guid : Long
-                             , val executorHostId : Long
                              , val insertedRowDate : java.util.Date
                              , val lastUpdatedDate : java.util.Date
+                             , val executorHostId : Long
                              , val restPort : Int
                              , val restVersion : String
                              , val restStatus : String
@@ -2139,7 +2580,7 @@ case class ExecutorRestDto (
     "executorRest";
   }
   def fields : String = {
-    "executorRestId,guid,executorHostId,insertedRowDate,lastUpdatedDate,restPort,restVersion,restStatus";
+    "executorRestId,guid,insertedRowDate,lastUpdatedDate,executorHostId,restPort,restVersion,restStatus";
   }
   def pkFields : String = {
     "executorRestId";
@@ -2163,18 +2604,18 @@ case class ExecutorRestDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(executorRestId,guid,executorHostId,insertedRowDate,lastUpdatedDate,restPort,restVersion,restStatus)
+    Array(executorRestId,guid,insertedRowDate,lastUpdatedDate,executorHostId,restPort,restVersion,restStatus)
   }
   def toStringArray() : Array[String] = {
-    Array(""+executorRestId,""+guid,""+executorHostId,""+insertedRowDate,""+lastUpdatedDate,""+restPort,""+restVersion,""+restStatus)
+    Array(""+executorRestId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+restPort,""+restVersion,""+restStatus)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "executorRestId" => executorRestId
       case "guid" => guid
-      case "executorHostId" => executorHostId
       case "insertedRowDate" => insertedRowDate
       case "lastUpdatedDate" => lastUpdatedDate
+      case "executorHostId" => executorHostId
       case "restPort" => restPort
       case "restVersion" => restVersion
       case "restStatus" => restStatus
@@ -2186,9 +2627,9 @@ case class ExecutorRestDto (
     val ret = name match {
       case "executorRestId" => "Long"
       case "guid" => "Long"
-      case "executorHostId" => "Long"
       case "insertedRowDate" => "java.util.Date"
       case "lastUpdatedDate" => "java.util.Date"
+      case "executorHostId" => "Long"
       case "restPort" => "Int"
       case "restVersion" => "String"
       case "restStatus" => "String"
@@ -2206,7 +2647,7 @@ case class ExecutorRestDto (
     return stat;
   }
   def modify(executorHostId : Long, restPort : Int, restVersion : String, restStatus : String) : ExecutorRestDto = {
-    val dtoModified = new ExecutorRestDto(this.executorRestId,this.guid,executorHostId,this.insertedRowDate,new java.util.Date(),restPort,restVersion,restStatus);
+    val dtoModified = new ExecutorRestDto(this.executorRestId,this.guid,this.insertedRowDate,new java.util.Date(),executorHostId,restPort,restVersion,restStatus);
     dtoModified
   }
 }
@@ -2214,15 +2655,15 @@ object ExecutorRestDto {
   val TABLE_NAME = "executorRest";
   val FIELD_executorRestId = "executorRestId";
   val FIELD_guid = "guid";
-  val FIELD_executorHostId = "executorHostId";
   val FIELD_insertedRowDate = "insertedRowDate";
   val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_executorHostId = "executorHostId";
   val FIELD_restPort = "restPort";
   val FIELD_restVersion = "restVersion";
   val FIELD_restStatus = "restStatus";
 
   def createNewExecutorRestDto(executorHostId : Long, restPort : Int, restVersion : String, restStatus : String) : ExecutorRestDto = {
-    val dto = new ExecutorRestDto(0,0,executorHostId,new java.util.Date(),new java.util.Date(),restPort,restVersion,restStatus)
+    val dto = new ExecutorRestDto(0,0,new java.util.Date(),new java.util.Date(),executorHostId,restPort,restVersion,restStatus)
     dto
   }
 
@@ -2346,6 +2787,8 @@ object ExecutorRestCallDto {
 case class ExecutorStorageDto (
                                 val executorStorageId : Long
                                 , val guid : Long
+                                , val insertedRowDate : java.util.Date
+                                , val lastUpdatedDate : java.util.Date
                                 , val executorHostId : Long
                                 , val executorStorageTypeId : Long
                                 , val storageDefinition : String
@@ -2353,14 +2796,12 @@ case class ExecutorStorageDto (
                                 , val storageFulllPath : String
                                 , val isRunning : Int
                                 , val portNumber : Int
-                                , val insertedRowDate : java.util.Date
-                                , val lastUpdatedDate : java.util.Date
                               ) extends BaseDto {
   def tableName : String = {
     "executorStorage";
   }
   def fields : String = {
-    "executorStorageId,guid,executorHostId,executorStorageTypeId,storageDefinition,storageBasePath,storageFulllPath,isRunning,portNumber,insertedRowDate,lastUpdatedDate";
+    "executorStorageId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorStorageTypeId,storageDefinition,storageBasePath,storageFulllPath,isRunning,portNumber";
   }
   def pkFields : String = {
     "executorStorageId";
@@ -2384,15 +2825,17 @@ case class ExecutorStorageDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(executorStorageId,guid,executorHostId,executorStorageTypeId,storageDefinition,storageBasePath,storageFulllPath,isRunning,portNumber,insertedRowDate,lastUpdatedDate)
+    Array(executorStorageId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorStorageTypeId,storageDefinition,storageBasePath,storageFulllPath,isRunning,portNumber)
   }
   def toStringArray() : Array[String] = {
-    Array(""+executorStorageId,""+guid,""+executorHostId,""+executorStorageTypeId,""+storageDefinition,""+storageBasePath,""+storageFulllPath,""+isRunning,""+portNumber,""+insertedRowDate,""+lastUpdatedDate)
+    Array(""+executorStorageId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+executorStorageTypeId,""+storageDefinition,""+storageBasePath,""+storageFulllPath,""+isRunning,""+portNumber)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "executorStorageId" => executorStorageId
       case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
       case "executorHostId" => executorHostId
       case "executorStorageTypeId" => executorStorageTypeId
       case "storageDefinition" => storageDefinition
@@ -2400,8 +2843,6 @@ case class ExecutorStorageDto (
       case "storageFulllPath" => storageFulllPath
       case "isRunning" => isRunning
       case "portNumber" => portNumber
-      case "insertedRowDate" => insertedRowDate
-      case "lastUpdatedDate" => lastUpdatedDate
       case _ => null
     }
     ret
@@ -2410,6 +2851,8 @@ case class ExecutorStorageDto (
     val ret = name match {
       case "executorStorageId" => "Long"
       case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
       case "executorHostId" => "Long"
       case "executorStorageTypeId" => "Long"
       case "storageDefinition" => "String"
@@ -2417,8 +2860,6 @@ case class ExecutorStorageDto (
       case "storageFulllPath" => "String"
       case "isRunning" => "Int"
       case "portNumber" => "Int"
-      case "insertedRowDate" => "java.util.Date"
-      case "lastUpdatedDate" => "java.util.Date"
       case _ => "Object"
     }
     ret
@@ -2436,7 +2877,7 @@ case class ExecutorStorageDto (
     return stat;
   }
   def modify(executorHostId : Long, executorStorageTypeId : Long, storageDefinition : String, storageBasePath : String, storageFulllPath : String, isRunning : Int, portNumber : Int) : ExecutorStorageDto = {
-    val dtoModified = new ExecutorStorageDto(this.executorStorageId,this.guid,executorHostId,executorStorageTypeId,storageDefinition,storageBasePath,storageFulllPath,isRunning,portNumber,this.insertedRowDate,new java.util.Date());
+    val dtoModified = new ExecutorStorageDto(this.executorStorageId,this.guid,this.insertedRowDate,new java.util.Date(),executorHostId,executorStorageTypeId,storageDefinition,storageBasePath,storageFulllPath,isRunning,portNumber);
     dtoModified
   }
 }
@@ -2444,6 +2885,8 @@ object ExecutorStorageDto {
   val TABLE_NAME = "executorStorage";
   val FIELD_executorStorageId = "executorStorageId";
   val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_executorHostId = "executorHostId";
   val FIELD_executorStorageTypeId = "executorStorageTypeId";
   val FIELD_storageDefinition = "storageDefinition";
@@ -2451,11 +2894,9 @@ object ExecutorStorageDto {
   val FIELD_storageFulllPath = "storageFulllPath";
   val FIELD_isRunning = "isRunning";
   val FIELD_portNumber = "portNumber";
-  val FIELD_insertedRowDate = "insertedRowDate";
-  val FIELD_lastUpdatedDate = "lastUpdatedDate";
 
   def createNewExecutorStorageDto(executorHostId : Long, executorStorageTypeId : Long, storageDefinition : String, storageBasePath : String, storageFulllPath : String, isRunning : Int, portNumber : Int) : ExecutorStorageDto = {
-    val dto = new ExecutorStorageDto(0,0,executorHostId,executorStorageTypeId,storageDefinition,storageBasePath,storageFulllPath,isRunning,portNumber,new java.util.Date(),new java.util.Date())
+    val dto = new ExecutorStorageDto(0,0,new java.util.Date(),new java.util.Date(),executorHostId,executorStorageTypeId,storageDefinition,storageBasePath,storageFulllPath,isRunning,portNumber)
     dto
   }
 
@@ -2464,16 +2905,16 @@ object ExecutorStorageDto {
 
 case class ExecutorStorageSnapshotDto (
                                         val executorStorageSnapshotId : Long
-                                        , val executorInstanceId : Long
                                         , val guid : Long
                                         , val insertedRowDate : java.util.Date
                                         , val lastUpdatedDate : java.util.Date
+                                        , val executorInstanceId : Long
                                       ) extends BaseDto {
   def tableName : String = {
     "executorStorageSnapshot";
   }
   def fields : String = {
-    "executorStorageSnapshotId,executorInstanceId,guid,insertedRowDate,lastUpdatedDate";
+    "executorStorageSnapshotId,guid,insertedRowDate,lastUpdatedDate,executorInstanceId";
   }
   def pkFields : String = {
     "executorStorageSnapshotId";
@@ -2497,18 +2938,18 @@ case class ExecutorStorageSnapshotDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(executorStorageSnapshotId,executorInstanceId,guid,insertedRowDate,lastUpdatedDate)
+    Array(executorStorageSnapshotId,guid,insertedRowDate,lastUpdatedDate,executorInstanceId)
   }
   def toStringArray() : Array[String] = {
-    Array(""+executorStorageSnapshotId,""+executorInstanceId,""+guid,""+insertedRowDate,""+lastUpdatedDate)
+    Array(""+executorStorageSnapshotId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorInstanceId)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "executorStorageSnapshotId" => executorStorageSnapshotId
-      case "executorInstanceId" => executorInstanceId
       case "guid" => guid
       case "insertedRowDate" => insertedRowDate
       case "lastUpdatedDate" => lastUpdatedDate
+      case "executorInstanceId" => executorInstanceId
       case _ => null
     }
     ret
@@ -2516,35 +2957,35 @@ case class ExecutorStorageSnapshotDto (
   def getFieldTypeName(name : String) : String = {
     val ret = name match {
       case "executorStorageSnapshotId" => "Long"
-      case "executorInstanceId" => "Long"
       case "guid" => "Long"
       case "insertedRowDate" => "java.util.Date"
       case "lastUpdatedDate" => "java.util.Date"
+      case "executorInstanceId" => "Long"
       case _ => "Object"
     }
     ret
   }
   def prepareInsert(connection : java.sql.Connection) : java.sql.PreparedStatement = {
-    val stat = connection.prepareStatement("insert into executorStorageSnapshot(executorInstanceId,guid) values (?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
-    stat.setObject(1, executorInstanceId);
-    stat.setObject(2, guid);
+    val stat = connection.prepareStatement("insert into executorStorageSnapshot(guid,executorInstanceId) values (?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
+    stat.setObject(1, guid);
+    stat.setObject(2, executorInstanceId);
     return stat;
   }
   def modify(executorInstanceId : Long) : ExecutorStorageSnapshotDto = {
-    val dtoModified = new ExecutorStorageSnapshotDto(this.executorStorageSnapshotId,executorInstanceId,this.guid,this.insertedRowDate,new java.util.Date());
+    val dtoModified = new ExecutorStorageSnapshotDto(this.executorStorageSnapshotId,this.guid,this.insertedRowDate,new java.util.Date(),executorInstanceId);
     dtoModified
   }
 }
 object ExecutorStorageSnapshotDto {
   val TABLE_NAME = "executorStorageSnapshot";
   val FIELD_executorStorageSnapshotId = "executorStorageSnapshotId";
-  val FIELD_executorInstanceId = "executorInstanceId";
   val FIELD_guid = "guid";
   val FIELD_insertedRowDate = "insertedRowDate";
   val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_executorInstanceId = "executorInstanceId";
 
   def createNewExecutorStorageSnapshotDto(executorInstanceId : Long) : ExecutorStorageSnapshotDto = {
-    val dto = new ExecutorStorageSnapshotDto(0,executorInstanceId,0,new java.util.Date(),new java.util.Date())
+    val dto = new ExecutorStorageSnapshotDto(0,0,new java.util.Date(),new java.util.Date(),executorInstanceId)
     dto
   }
 
@@ -2653,21 +3094,23 @@ case class ExecutorStorageViewDto (
                                     , val executorStorageSnapshotId : Long
                                     , val executorStorageId : Long
                                     , val sourceDownloadId : Long
+                                    , val sourceViewId : Long
                                     , val storagePath : String
                                     , val viewSize : Long
                                     , val viewRowsCount : Long
+                                    , val isValid : Int
                                   ) extends BaseDto {
   def tableName : String = {
     "executorStorageView";
   }
   def fields : String = {
-    "executorStorageViewId,guid,insertedRowDate,lastUpdatedDate,executorStorageSnapshotId,executorStorageId,sourceDownloadId,storagePath,viewSize,viewRowsCount";
+    "executorStorageViewId,guid,insertedRowDate,lastUpdatedDate,executorStorageSnapshotId,executorStorageId,sourceDownloadId,sourceViewId,storagePath,viewSize,viewRowsCount,isValid";
   }
   def pkFields : String = {
     "executorStorageViewId";
   }
   def fkFields : String = {
-    "executorStorageId";
+    "executorStorageId,executorStorageSnapshotId,sourceDownloadId,sourceViewId";
   }
   def nameField : String = {
     "";
@@ -2685,10 +3128,10 @@ case class ExecutorStorageViewDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(executorStorageViewId,guid,insertedRowDate,lastUpdatedDate,executorStorageSnapshotId,executorStorageId,sourceDownloadId,storagePath,viewSize,viewRowsCount)
+    Array(executorStorageViewId,guid,insertedRowDate,lastUpdatedDate,executorStorageSnapshotId,executorStorageId,sourceDownloadId,sourceViewId,storagePath,viewSize,viewRowsCount,isValid)
   }
   def toStringArray() : Array[String] = {
-    Array(""+executorStorageViewId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorStorageSnapshotId,""+executorStorageId,""+sourceDownloadId,""+storagePath,""+viewSize,""+viewRowsCount)
+    Array(""+executorStorageViewId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorStorageSnapshotId,""+executorStorageId,""+sourceDownloadId,""+sourceViewId,""+storagePath,""+viewSize,""+viewRowsCount,""+isValid)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
@@ -2699,9 +3142,11 @@ case class ExecutorStorageViewDto (
       case "executorStorageSnapshotId" => executorStorageSnapshotId
       case "executorStorageId" => executorStorageId
       case "sourceDownloadId" => sourceDownloadId
+      case "sourceViewId" => sourceViewId
       case "storagePath" => storagePath
       case "viewSize" => viewSize
       case "viewRowsCount" => viewRowsCount
+      case "isValid" => isValid
       case _ => null
     }
     ret
@@ -2715,26 +3160,30 @@ case class ExecutorStorageViewDto (
       case "executorStorageSnapshotId" => "Long"
       case "executorStorageId" => "Long"
       case "sourceDownloadId" => "Long"
+      case "sourceViewId" => "Long"
       case "storagePath" => "String"
       case "viewSize" => "Long"
       case "viewRowsCount" => "Long"
+      case "isValid" => "Int"
       case _ => "Object"
     }
     ret
   }
   def prepareInsert(connection : java.sql.Connection) : java.sql.PreparedStatement = {
-    val stat = connection.prepareStatement("insert into executorStorageView(guid,executorStorageSnapshotId,executorStorageId,sourceDownloadId,storagePath,viewSize,viewRowsCount) values (?,?,?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
+    val stat = connection.prepareStatement("insert into executorStorageView(guid,executorStorageSnapshotId,executorStorageId,sourceDownloadId,sourceViewId,storagePath,viewSize,viewRowsCount,isValid) values (?,?,?,?,?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
     stat.setObject(1, guid);
     stat.setObject(2, executorStorageSnapshotId);
     stat.setObject(3, executorStorageId);
     stat.setObject(4, sourceDownloadId);
-    stat.setObject(5, storagePath);
-    stat.setObject(6, viewSize);
-    stat.setObject(7, viewRowsCount);
+    stat.setObject(5, sourceViewId);
+    stat.setObject(6, storagePath);
+    stat.setObject(7, viewSize);
+    stat.setObject(8, viewRowsCount);
+    stat.setObject(9, isValid);
     return stat;
   }
-  def modify(executorStorageSnapshotId : Long, executorStorageId : Long, sourceDownloadId : Long, storagePath : String, viewSize : Long, viewRowsCount : Long) : ExecutorStorageViewDto = {
-    val dtoModified = new ExecutorStorageViewDto(this.executorStorageViewId,this.guid,this.insertedRowDate,new java.util.Date(),executorStorageSnapshotId,executorStorageId,sourceDownloadId,storagePath,viewSize,viewRowsCount);
+  def modify(executorStorageSnapshotId : Long, executorStorageId : Long, sourceDownloadId : Long, sourceViewId : Long, storagePath : String, viewSize : Long, viewRowsCount : Long, isValid : Int) : ExecutorStorageViewDto = {
+    val dtoModified = new ExecutorStorageViewDto(this.executorStorageViewId,this.guid,this.insertedRowDate,new java.util.Date(),executorStorageSnapshotId,executorStorageId,sourceDownloadId,sourceViewId,storagePath,viewSize,viewRowsCount,isValid);
     dtoModified
   }
 }
@@ -2747,12 +3196,14 @@ object ExecutorStorageViewDto {
   val FIELD_executorStorageSnapshotId = "executorStorageSnapshotId";
   val FIELD_executorStorageId = "executorStorageId";
   val FIELD_sourceDownloadId = "sourceDownloadId";
+  val FIELD_sourceViewId = "sourceViewId";
   val FIELD_storagePath = "storagePath";
   val FIELD_viewSize = "viewSize";
   val FIELD_viewRowsCount = "viewRowsCount";
+  val FIELD_isValid = "isValid";
 
-  def createNewExecutorStorageViewDto(executorStorageSnapshotId : Long, executorStorageId : Long, sourceDownloadId : Long, storagePath : String, viewSize : Long, viewRowsCount : Long) : ExecutorStorageViewDto = {
-    val dto = new ExecutorStorageViewDto(0,0,new java.util.Date(),new java.util.Date(),executorStorageSnapshotId,executorStorageId,sourceDownloadId,storagePath,viewSize,viewRowsCount)
+  def createNewExecutorStorageViewDto(executorStorageSnapshotId : Long, executorStorageId : Long, sourceDownloadId : Long, sourceViewId : Long, storagePath : String, viewSize : Long, viewRowsCount : Long, isValid : Int) : ExecutorStorageViewDto = {
+    val dto = new ExecutorStorageViewDto(0,0,new java.util.Date(),new java.util.Date(),executorStorageSnapshotId,executorStorageId,sourceDownloadId,sourceViewId,storagePath,viewSize,viewRowsCount,isValid)
     dto
   }
 
@@ -2856,17 +3307,17 @@ object ExecutorTypeDto {
 case class ResourceManagerDto (
                                 val resourceManagerId : Long
                                 , val guid : Long
+                                , val insertedRowDate : java.util.Date
+                                , val lastUpdatedDate : java.util.Date
                                 , val resourceManagerTypeId : Long
                                 , val executorHostId : Long
                                 , val resourceManagerStatus : String
-                                , val insertedRowDate : java.util.Date
-                                , val lastUpdatedDate : java.util.Date
                               ) extends BaseDto {
   def tableName : String = {
     "resourceManager";
   }
   def fields : String = {
-    "resourceManagerId,guid,resourceManagerTypeId,executorHostId,resourceManagerStatus,insertedRowDate,lastUpdatedDate";
+    "resourceManagerId,guid,insertedRowDate,lastUpdatedDate,resourceManagerTypeId,executorHostId,resourceManagerStatus";
   }
   def pkFields : String = {
     "resourceManagerId";
@@ -2890,20 +3341,20 @@ case class ResourceManagerDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(resourceManagerId,guid,resourceManagerTypeId,executorHostId,resourceManagerStatus,insertedRowDate,lastUpdatedDate)
+    Array(resourceManagerId,guid,insertedRowDate,lastUpdatedDate,resourceManagerTypeId,executorHostId,resourceManagerStatus)
   }
   def toStringArray() : Array[String] = {
-    Array(""+resourceManagerId,""+guid,""+resourceManagerTypeId,""+executorHostId,""+resourceManagerStatus,""+insertedRowDate,""+lastUpdatedDate)
+    Array(""+resourceManagerId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+resourceManagerTypeId,""+executorHostId,""+resourceManagerStatus)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "resourceManagerId" => resourceManagerId
       case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
       case "resourceManagerTypeId" => resourceManagerTypeId
       case "executorHostId" => executorHostId
       case "resourceManagerStatus" => resourceManagerStatus
-      case "insertedRowDate" => insertedRowDate
-      case "lastUpdatedDate" => lastUpdatedDate
       case _ => null
     }
     ret
@@ -2912,11 +3363,11 @@ case class ResourceManagerDto (
     val ret = name match {
       case "resourceManagerId" => "Long"
       case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
       case "resourceManagerTypeId" => "Long"
       case "executorHostId" => "Long"
       case "resourceManagerStatus" => "String"
-      case "insertedRowDate" => "java.util.Date"
-      case "lastUpdatedDate" => "java.util.Date"
       case _ => "Object"
     }
     ret
@@ -2930,7 +3381,7 @@ case class ResourceManagerDto (
     return stat;
   }
   def modify(resourceManagerTypeId : Long, executorHostId : Long, resourceManagerStatus : String) : ResourceManagerDto = {
-    val dtoModified = new ResourceManagerDto(this.resourceManagerId,this.guid,resourceManagerTypeId,executorHostId,resourceManagerStatus,this.insertedRowDate,new java.util.Date());
+    val dtoModified = new ResourceManagerDto(this.resourceManagerId,this.guid,this.insertedRowDate,new java.util.Date(),resourceManagerTypeId,executorHostId,resourceManagerStatus);
     dtoModified
   }
 }
@@ -2938,14 +3389,14 @@ object ResourceManagerDto {
   val TABLE_NAME = "resourceManager";
   val FIELD_resourceManagerId = "resourceManagerId";
   val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_resourceManagerTypeId = "resourceManagerTypeId";
   val FIELD_executorHostId = "executorHostId";
   val FIELD_resourceManagerStatus = "resourceManagerStatus";
-  val FIELD_insertedRowDate = "insertedRowDate";
-  val FIELD_lastUpdatedDate = "lastUpdatedDate";
 
   def createNewResourceManagerDto(resourceManagerTypeId : Long, executorHostId : Long, resourceManagerStatus : String) : ResourceManagerDto = {
-    val dto = new ResourceManagerDto(0,0,resourceManagerTypeId,executorHostId,resourceManagerStatus,new java.util.Date(),new java.util.Date())
+    val dto = new ResourceManagerDto(0,0,new java.util.Date(),new java.util.Date(),resourceManagerTypeId,executorHostId,resourceManagerStatus)
     dto
   }
 
@@ -2976,7 +3427,7 @@ case class ResourceManagerAllocationDto (
     "resourceManagerAllocationId";
   }
   def fkFields : String = {
-    "";
+    "executorHostId,executorInstanceId,resourceManagerId,resourceManagerTypeId,resourceMeasureId";
   }
   def nameField : String = {
     "";
@@ -3079,23 +3530,23 @@ object ResourceManagerAllocationDto {
 case class ResourceManagerCheckDto (
                                      val resourceManagerCheckId : Long
                                      , val guid : Long
+                                     , val insertedRowDate : java.util.Date
+                                     , val lastUpdatedDate : java.util.Date
                                      , val resourceManagerId : Long
                                      , val executorHostId : Long
                                      , val resourceManagerStatus : String
-                                     , val insertedRowDate : java.util.Date
-                                     , val lastUpdatedDate : java.util.Date
                                    ) extends BaseDto {
   def tableName : String = {
     "resourceManagerCheck";
   }
   def fields : String = {
-    "resourceManagerCheckId,guid,resourceManagerId,executorHostId,resourceManagerStatus,insertedRowDate,lastUpdatedDate";
+    "resourceManagerCheckId,guid,insertedRowDate,lastUpdatedDate,resourceManagerId,executorHostId,resourceManagerStatus";
   }
   def pkFields : String = {
     "resourceManagerCheckId";
   }
   def fkFields : String = {
-    "";
+    "executorHostId,resourceManagerId";
   }
   def nameField : String = {
     "";
@@ -3113,20 +3564,20 @@ case class ResourceManagerCheckDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(resourceManagerCheckId,guid,resourceManagerId,executorHostId,resourceManagerStatus,insertedRowDate,lastUpdatedDate)
+    Array(resourceManagerCheckId,guid,insertedRowDate,lastUpdatedDate,resourceManagerId,executorHostId,resourceManagerStatus)
   }
   def toStringArray() : Array[String] = {
-    Array(""+resourceManagerCheckId,""+guid,""+resourceManagerId,""+executorHostId,""+resourceManagerStatus,""+insertedRowDate,""+lastUpdatedDate)
+    Array(""+resourceManagerCheckId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+resourceManagerId,""+executorHostId,""+resourceManagerStatus)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "resourceManagerCheckId" => resourceManagerCheckId
       case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
       case "resourceManagerId" => resourceManagerId
       case "executorHostId" => executorHostId
       case "resourceManagerStatus" => resourceManagerStatus
-      case "insertedRowDate" => insertedRowDate
-      case "lastUpdatedDate" => lastUpdatedDate
       case _ => null
     }
     ret
@@ -3135,11 +3586,11 @@ case class ResourceManagerCheckDto (
     val ret = name match {
       case "resourceManagerCheckId" => "Long"
       case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
       case "resourceManagerId" => "Long"
       case "executorHostId" => "Long"
       case "resourceManagerStatus" => "String"
-      case "insertedRowDate" => "java.util.Date"
-      case "lastUpdatedDate" => "java.util.Date"
       case _ => "Object"
     }
     ret
@@ -3153,7 +3604,7 @@ case class ResourceManagerCheckDto (
     return stat;
   }
   def modify(resourceManagerId : Long, executorHostId : Long, resourceManagerStatus : String) : ResourceManagerCheckDto = {
-    val dtoModified = new ResourceManagerCheckDto(this.resourceManagerCheckId,this.guid,resourceManagerId,executorHostId,resourceManagerStatus,this.insertedRowDate,new java.util.Date());
+    val dtoModified = new ResourceManagerCheckDto(this.resourceManagerCheckId,this.guid,this.insertedRowDate,new java.util.Date(),resourceManagerId,executorHostId,resourceManagerStatus);
     dtoModified
   }
 }
@@ -3161,14 +3612,14 @@ object ResourceManagerCheckDto {
   val TABLE_NAME = "resourceManagerCheck";
   val FIELD_resourceManagerCheckId = "resourceManagerCheckId";
   val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_resourceManagerId = "resourceManagerId";
   val FIELD_executorHostId = "executorHostId";
   val FIELD_resourceManagerStatus = "resourceManagerStatus";
-  val FIELD_insertedRowDate = "insertedRowDate";
-  val FIELD_lastUpdatedDate = "lastUpdatedDate";
 
   def createNewResourceManagerCheckDto(resourceManagerId : Long, executorHostId : Long, resourceManagerStatus : String) : ResourceManagerCheckDto = {
-    val dto = new ResourceManagerCheckDto(0,0,resourceManagerId,executorHostId,resourceManagerStatus,new java.util.Date(),new java.util.Date())
+    val dto = new ResourceManagerCheckDto(0,0,new java.util.Date(),new java.util.Date(),resourceManagerId,executorHostId,resourceManagerStatus)
     dto
   }
 
@@ -3178,18 +3629,18 @@ object ResourceManagerCheckDto {
 case class ResourceManagerMeasureDto (
                                        val resourceManagerMeasureId : Long
                                        , val guid : Long
+                                       , val insertedRowDate : java.util.Date
+                                       , val lastUpdatedDate : java.util.Date
                                        , val resourceManagerId : Long
                                        , val resourceMeasureId : Long
                                        , val measureString : String
                                        , val measureValue : Double
-                                       , val insertedRowDate : java.util.Date
-                                       , val lastUpdatedDate : java.util.Date
                                      ) extends BaseDto {
   def tableName : String = {
     "resourceManagerMeasure";
   }
   def fields : String = {
-    "resourceManagerMeasureId,guid,resourceManagerId,resourceMeasureId,measureString,measureValue,insertedRowDate,lastUpdatedDate";
+    "resourceManagerMeasureId,guid,insertedRowDate,lastUpdatedDate,resourceManagerId,resourceMeasureId,measureString,measureValue";
   }
   def pkFields : String = {
     "resourceManagerMeasureId";
@@ -3213,21 +3664,21 @@ case class ResourceManagerMeasureDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(resourceManagerMeasureId,guid,resourceManagerId,resourceMeasureId,measureString,measureValue,insertedRowDate,lastUpdatedDate)
+    Array(resourceManagerMeasureId,guid,insertedRowDate,lastUpdatedDate,resourceManagerId,resourceMeasureId,measureString,measureValue)
   }
   def toStringArray() : Array[String] = {
-    Array(""+resourceManagerMeasureId,""+guid,""+resourceManagerId,""+resourceMeasureId,""+measureString,""+measureValue,""+insertedRowDate,""+lastUpdatedDate)
+    Array(""+resourceManagerMeasureId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+resourceManagerId,""+resourceMeasureId,""+measureString,""+measureValue)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "resourceManagerMeasureId" => resourceManagerMeasureId
       case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
       case "resourceManagerId" => resourceManagerId
       case "resourceMeasureId" => resourceMeasureId
       case "measureString" => measureString
       case "measureValue" => measureValue
-      case "insertedRowDate" => insertedRowDate
-      case "lastUpdatedDate" => lastUpdatedDate
       case _ => null
     }
     ret
@@ -3236,12 +3687,12 @@ case class ResourceManagerMeasureDto (
     val ret = name match {
       case "resourceManagerMeasureId" => "Long"
       case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
       case "resourceManagerId" => "Long"
       case "resourceMeasureId" => "Long"
       case "measureString" => "String"
       case "measureValue" => "Double"
-      case "insertedRowDate" => "java.util.Date"
-      case "lastUpdatedDate" => "java.util.Date"
       case _ => "Object"
     }
     ret
@@ -3256,7 +3707,7 @@ case class ResourceManagerMeasureDto (
     return stat;
   }
   def modify(resourceManagerId : Long, resourceMeasureId : Long, measureString : String, measureValue : Double) : ResourceManagerMeasureDto = {
-    val dtoModified = new ResourceManagerMeasureDto(this.resourceManagerMeasureId,this.guid,resourceManagerId,resourceMeasureId,measureString,measureValue,this.insertedRowDate,new java.util.Date());
+    val dtoModified = new ResourceManagerMeasureDto(this.resourceManagerMeasureId,this.guid,this.insertedRowDate,new java.util.Date(),resourceManagerId,resourceMeasureId,measureString,measureValue);
     dtoModified
   }
 }
@@ -3264,15 +3715,15 @@ object ResourceManagerMeasureDto {
   val TABLE_NAME = "resourceManagerMeasure";
   val FIELD_resourceManagerMeasureId = "resourceManagerMeasureId";
   val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_resourceManagerId = "resourceManagerId";
   val FIELD_resourceMeasureId = "resourceMeasureId";
   val FIELD_measureString = "measureString";
   val FIELD_measureValue = "measureValue";
-  val FIELD_insertedRowDate = "insertedRowDate";
-  val FIELD_lastUpdatedDate = "lastUpdatedDate";
 
   def createNewResourceManagerMeasureDto(resourceManagerId : Long, resourceMeasureId : Long, measureString : String, measureValue : Double) : ResourceManagerMeasureDto = {
-    val dto = new ResourceManagerMeasureDto(0,0,resourceManagerId,resourceMeasureId,measureString,measureValue,new java.util.Date(),new java.util.Date())
+    val dto = new ResourceManagerMeasureDto(0,0,new java.util.Date(),new java.util.Date(),resourceManagerId,resourceMeasureId,measureString,measureValue)
     dto
   }
 
@@ -3282,16 +3733,16 @@ object ResourceManagerMeasureDto {
 case class ResourceManagerTypeDto (
                                     val resourceManagerTypeId : Long
                                     , val guid : Long
-                                    , val resourceManagerTypeName : String
-                                    , val resourceManagerTypeClass : String
                                     , val insertedRowDate : java.util.Date
                                     , val lastUpdatedDate : java.util.Date
+                                    , val resourceManagerTypeName : String
+                                    , val resourceManagerTypeClass : String
                                   ) extends BaseDto {
   def tableName : String = {
     "resourceManagerType";
   }
   def fields : String = {
-    "resourceManagerTypeId,guid,resourceManagerTypeName,resourceManagerTypeClass,insertedRowDate,lastUpdatedDate";
+    "resourceManagerTypeId,guid,insertedRowDate,lastUpdatedDate,resourceManagerTypeName,resourceManagerTypeClass";
   }
   def pkFields : String = {
     "resourceManagerTypeId";
@@ -3315,19 +3766,19 @@ case class ResourceManagerTypeDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(resourceManagerTypeId,guid,resourceManagerTypeName,resourceManagerTypeClass,insertedRowDate,lastUpdatedDate)
+    Array(resourceManagerTypeId,guid,insertedRowDate,lastUpdatedDate,resourceManagerTypeName,resourceManagerTypeClass)
   }
   def toStringArray() : Array[String] = {
-    Array(""+resourceManagerTypeId,""+guid,""+resourceManagerTypeName,""+resourceManagerTypeClass,""+insertedRowDate,""+lastUpdatedDate)
+    Array(""+resourceManagerTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+resourceManagerTypeName,""+resourceManagerTypeClass)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "resourceManagerTypeId" => resourceManagerTypeId
       case "guid" => guid
-      case "resourceManagerTypeName" => resourceManagerTypeName
-      case "resourceManagerTypeClass" => resourceManagerTypeClass
       case "insertedRowDate" => insertedRowDate
       case "lastUpdatedDate" => lastUpdatedDate
+      case "resourceManagerTypeName" => resourceManagerTypeName
+      case "resourceManagerTypeClass" => resourceManagerTypeClass
       case _ => null
     }
     ret
@@ -3336,10 +3787,10 @@ case class ResourceManagerTypeDto (
     val ret = name match {
       case "resourceManagerTypeId" => "Long"
       case "guid" => "Long"
-      case "resourceManagerTypeName" => "String"
-      case "resourceManagerTypeClass" => "String"
       case "insertedRowDate" => "java.util.Date"
       case "lastUpdatedDate" => "java.util.Date"
+      case "resourceManagerTypeName" => "String"
+      case "resourceManagerTypeClass" => "String"
       case _ => "Object"
     }
     ret
@@ -3352,7 +3803,7 @@ case class ResourceManagerTypeDto (
     return stat;
   }
   def modify(resourceManagerTypeName : String, resourceManagerTypeClass : String) : ResourceManagerTypeDto = {
-    val dtoModified = new ResourceManagerTypeDto(this.resourceManagerTypeId,this.guid,resourceManagerTypeName,resourceManagerTypeClass,this.insertedRowDate,new java.util.Date());
+    val dtoModified = new ResourceManagerTypeDto(this.resourceManagerTypeId,this.guid,this.insertedRowDate,new java.util.Date(),resourceManagerTypeName,resourceManagerTypeClass);
     dtoModified
   }
 }
@@ -3360,13 +3811,13 @@ object ResourceManagerTypeDto {
   val TABLE_NAME = "resourceManagerType";
   val FIELD_resourceManagerTypeId = "resourceManagerTypeId";
   val FIELD_guid = "guid";
-  val FIELD_resourceManagerTypeName = "resourceManagerTypeName";
-  val FIELD_resourceManagerTypeClass = "resourceManagerTypeClass";
   val FIELD_insertedRowDate = "insertedRowDate";
   val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_resourceManagerTypeName = "resourceManagerTypeName";
+  val FIELD_resourceManagerTypeClass = "resourceManagerTypeClass";
 
   def createNewResourceManagerTypeDto(resourceManagerTypeName : String, resourceManagerTypeClass : String) : ResourceManagerTypeDto = {
-    val dto = new ResourceManagerTypeDto(0,0,resourceManagerTypeName,resourceManagerTypeClass,new java.util.Date(),new java.util.Date())
+    val dto = new ResourceManagerTypeDto(0,0,new java.util.Date(),new java.util.Date(),resourceManagerTypeName,resourceManagerTypeClass)
     dto
   }
 
@@ -3376,15 +3827,15 @@ object ResourceManagerTypeDto {
 case class ResourceMeasureDto (
                                 val resourceMeasureId : Long
                                 , val guid : Long
-                                , val resourceMeasureName : String
                                 , val insertedRowDate : java.util.Date
                                 , val lastUpdatedDate : java.util.Date
+                                , val resourceMeasureName : String
                               ) extends BaseDto {
   def tableName : String = {
     "resourceMeasure";
   }
   def fields : String = {
-    "resourceMeasureId,guid,resourceMeasureName,insertedRowDate,lastUpdatedDate";
+    "resourceMeasureId,guid,insertedRowDate,lastUpdatedDate,resourceMeasureName";
   }
   def pkFields : String = {
     "resourceMeasureId";
@@ -3408,18 +3859,18 @@ case class ResourceMeasureDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(resourceMeasureId,guid,resourceMeasureName,insertedRowDate,lastUpdatedDate)
+    Array(resourceMeasureId,guid,insertedRowDate,lastUpdatedDate,resourceMeasureName)
   }
   def toStringArray() : Array[String] = {
-    Array(""+resourceMeasureId,""+guid,""+resourceMeasureName,""+insertedRowDate,""+lastUpdatedDate)
+    Array(""+resourceMeasureId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+resourceMeasureName)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "resourceMeasureId" => resourceMeasureId
       case "guid" => guid
-      case "resourceMeasureName" => resourceMeasureName
       case "insertedRowDate" => insertedRowDate
       case "lastUpdatedDate" => lastUpdatedDate
+      case "resourceMeasureName" => resourceMeasureName
       case _ => null
     }
     ret
@@ -3428,9 +3879,9 @@ case class ResourceMeasureDto (
     val ret = name match {
       case "resourceMeasureId" => "Long"
       case "guid" => "Long"
-      case "resourceMeasureName" => "String"
       case "insertedRowDate" => "java.util.Date"
       case "lastUpdatedDate" => "java.util.Date"
+      case "resourceMeasureName" => "String"
       case _ => "Object"
     }
     ret
@@ -3442,7 +3893,7 @@ case class ResourceMeasureDto (
     return stat;
   }
   def modify(resourceMeasureName : String) : ResourceMeasureDto = {
-    val dtoModified = new ResourceMeasureDto(this.resourceMeasureId,this.guid,resourceMeasureName,this.insertedRowDate,new java.util.Date());
+    val dtoModified = new ResourceMeasureDto(this.resourceMeasureId,this.guid,this.insertedRowDate,new java.util.Date(),resourceMeasureName);
     dtoModified
   }
 }
@@ -3450,12 +3901,12 @@ object ResourceMeasureDto {
   val TABLE_NAME = "resourceMeasure";
   val FIELD_resourceMeasureId = "resourceMeasureId";
   val FIELD_guid = "guid";
-  val FIELD_resourceMeasureName = "resourceMeasureName";
   val FIELD_insertedRowDate = "insertedRowDate";
   val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_resourceMeasureName = "resourceMeasureName";
 
   def createNewResourceMeasureDto(resourceMeasureName : String) : ResourceMeasureDto = {
-    val dto = new ResourceMeasureDto(0,0,resourceMeasureName,new java.util.Date(),new java.util.Date())
+    val dto = new ResourceMeasureDto(0,0,new java.util.Date(),new java.util.Date(),resourceMeasureName)
     dto
   }
 
@@ -3464,10 +3915,13 @@ object ResourceMeasureDto {
 
 case class SourceDownloadDto (
                                val sourceDownloadId : Long
-                               , val sourceScheduleId : Long
+                               , val guid : Long
                                , val insertedRowDate : java.util.Date
                                , val lastUpdatedDate : java.util.Date
-                               , val guid : Long
+                               , val sourceScheduleId : Long
+                               , val executorHostId : Long
+                               , val executorContextId : Long
+                               , val sourceViewId : Long
                                , val retryNumber : Int
                                , val isRunning : Int
                                , val isFinished : Int
@@ -3478,13 +3932,13 @@ case class SourceDownloadDto (
     "sourceDownload";
   }
   def fields : String = {
-    "sourceDownloadId,sourceScheduleId,insertedRowDate,lastUpdatedDate,guid,retryNumber,isRunning,isFinished,isExcecption,excecptionDescription";
+    "sourceDownloadId,guid,insertedRowDate,lastUpdatedDate,sourceScheduleId,executorHostId,executorContextId,sourceViewId,retryNumber,isRunning,isFinished,isExcecption,excecptionDescription";
   }
   def pkFields : String = {
     "sourceDownloadId";
   }
   def fkFields : String = {
-    "sourceScheduleId";
+    "executorHostId,executorContextId,sourceScheduleId,sourceViewId";
   }
   def nameField : String = {
     "";
@@ -3502,18 +3956,21 @@ case class SourceDownloadDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(sourceDownloadId,sourceScheduleId,insertedRowDate,lastUpdatedDate,guid,retryNumber,isRunning,isFinished,isExcecption,excecptionDescription)
+    Array(sourceDownloadId,guid,insertedRowDate,lastUpdatedDate,sourceScheduleId,executorHostId,executorContextId,sourceViewId,retryNumber,isRunning,isFinished,isExcecption,excecptionDescription)
   }
   def toStringArray() : Array[String] = {
-    Array(""+sourceDownloadId,""+sourceScheduleId,""+insertedRowDate,""+lastUpdatedDate,""+guid,""+retryNumber,""+isRunning,""+isFinished,""+isExcecption,""+excecptionDescription)
+    Array(""+sourceDownloadId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceScheduleId,""+executorHostId,""+executorContextId,""+sourceViewId,""+retryNumber,""+isRunning,""+isFinished,""+isExcecption,""+excecptionDescription)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "sourceDownloadId" => sourceDownloadId
-      case "sourceScheduleId" => sourceScheduleId
+      case "guid" => guid
       case "insertedRowDate" => insertedRowDate
       case "lastUpdatedDate" => lastUpdatedDate
-      case "guid" => guid
+      case "sourceScheduleId" => sourceScheduleId
+      case "executorHostId" => executorHostId
+      case "executorContextId" => executorContextId
+      case "sourceViewId" => sourceViewId
       case "retryNumber" => retryNumber
       case "isRunning" => isRunning
       case "isFinished" => isFinished
@@ -3526,10 +3983,13 @@ case class SourceDownloadDto (
   def getFieldTypeName(name : String) : String = {
     val ret = name match {
       case "sourceDownloadId" => "Long"
-      case "sourceScheduleId" => "Long"
+      case "guid" => "Long"
       case "insertedRowDate" => "java.util.Date"
       case "lastUpdatedDate" => "java.util.Date"
-      case "guid" => "Long"
+      case "sourceScheduleId" => "Long"
+      case "executorHostId" => "Long"
+      case "executorContextId" => "Long"
+      case "sourceViewId" => "Long"
       case "retryNumber" => "Int"
       case "isRunning" => "Int"
       case "isFinished" => "Int"
@@ -3540,36 +4000,42 @@ case class SourceDownloadDto (
     ret
   }
   def prepareInsert(connection : java.sql.Connection) : java.sql.PreparedStatement = {
-    val stat = connection.prepareStatement("insert into sourceDownload(sourceScheduleId,guid,retryNumber,isRunning,isFinished,isExcecption,excecptionDescription) values (?,?,?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
-    stat.setObject(1, sourceScheduleId);
-    stat.setObject(2, guid);
-    stat.setObject(3, retryNumber);
-    stat.setObject(4, isRunning);
-    stat.setObject(5, isFinished);
-    stat.setObject(6, isExcecption);
-    stat.setObject(7, excecptionDescription);
+    val stat = connection.prepareStatement("insert into sourceDownload(guid,sourceScheduleId,executorHostId,executorContextId,sourceViewId,retryNumber,isRunning,isFinished,isExcecption,excecptionDescription) values (?,?,?,?,?,?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
+    stat.setObject(1, guid);
+    stat.setObject(2, sourceScheduleId);
+    stat.setObject(3, executorHostId);
+    stat.setObject(4, executorContextId);
+    stat.setObject(5, sourceViewId);
+    stat.setObject(6, retryNumber);
+    stat.setObject(7, isRunning);
+    stat.setObject(8, isFinished);
+    stat.setObject(9, isExcecption);
+    stat.setObject(10, excecptionDescription);
     return stat;
   }
-  def modify(sourceScheduleId : Long, retryNumber : Int, isRunning : Int, isFinished : Int, isExcecption : Int, excecptionDescription : String) : SourceDownloadDto = {
-    val dtoModified = new SourceDownloadDto(this.sourceDownloadId,sourceScheduleId,this.insertedRowDate,new java.util.Date(),this.guid,retryNumber,isRunning,isFinished,isExcecption,excecptionDescription);
+  def modify(sourceScheduleId : Long, executorHostId : Long, executorContextId : Long, sourceViewId : Long, retryNumber : Int, isRunning : Int, isFinished : Int, isExcecption : Int, excecptionDescription : String) : SourceDownloadDto = {
+    val dtoModified = new SourceDownloadDto(this.sourceDownloadId,this.guid,this.insertedRowDate,new java.util.Date(),sourceScheduleId,executorHostId,executorContextId,sourceViewId,retryNumber,isRunning,isFinished,isExcecption,excecptionDescription);
     dtoModified
   }
 }
 object SourceDownloadDto {
   val TABLE_NAME = "sourceDownload";
   val FIELD_sourceDownloadId = "sourceDownloadId";
-  val FIELD_sourceScheduleId = "sourceScheduleId";
+  val FIELD_guid = "guid";
   val FIELD_insertedRowDate = "insertedRowDate";
   val FIELD_lastUpdatedDate = "lastUpdatedDate";
-  val FIELD_guid = "guid";
+  val FIELD_sourceScheduleId = "sourceScheduleId";
+  val FIELD_executorHostId = "executorHostId";
+  val FIELD_executorContextId = "executorContextId";
+  val FIELD_sourceViewId = "sourceViewId";
   val FIELD_retryNumber = "retryNumber";
   val FIELD_isRunning = "isRunning";
   val FIELD_isFinished = "isFinished";
   val FIELD_isExcecption = "isExcecption";
   val FIELD_excecptionDescription = "excecptionDescription";
 
-  def createNewSourceDownloadDto(sourceScheduleId : Long, retryNumber : Int, isRunning : Int, isFinished : Int, isExcecption : Int, excecptionDescription : String) : SourceDownloadDto = {
-    val dto = new SourceDownloadDto(0,sourceScheduleId,new java.util.Date(),new java.util.Date(),0,retryNumber,isRunning,isFinished,isExcecption,excecptionDescription)
+  def createNewSourceDownloadDto(sourceScheduleId : Long, executorHostId : Long, executorContextId : Long, sourceViewId : Long, retryNumber : Int, isRunning : Int, isFinished : Int, isExcecption : Int, excecptionDescription : String) : SourceDownloadDto = {
+    val dto = new SourceDownloadDto(0,0,new java.util.Date(),new java.util.Date(),sourceScheduleId,executorHostId,executorContextId,sourceViewId,retryNumber,isRunning,isFinished,isExcecption,excecptionDescription)
     dto
   }
 
@@ -3688,10 +4154,10 @@ object SourceDownloadStatDto {
 case class SourceDownloadStatColumnDto (
                                          val sourceDownloadStatColumnId : Long
                                          , val guid : Long
-                                         , val sourceDownloadId : Long
-                                         , val sourceViewColumnId : Long
                                          , val insertedRowDate : java.util.Date
                                          , val lastUpdatedDate : java.util.Date
+                                         , val sourceDownloadId : Long
+                                         , val sourceViewColumnId : Long
                                          , val columnMinNumber : Double
                                          , val columnMaxNumber : Double
                                          , val columnMinStr : String
@@ -3702,7 +4168,7 @@ case class SourceDownloadStatColumnDto (
     "sourceDownloadStatColumn";
   }
   def fields : String = {
-    "sourceDownloadStatColumnId,guid,sourceDownloadId,sourceViewColumnId,insertedRowDate,lastUpdatedDate,columnMinNumber,columnMaxNumber,columnMinStr,columnMaxStr,columnNonemptyCount";
+    "sourceDownloadStatColumnId,guid,insertedRowDate,lastUpdatedDate,sourceDownloadId,sourceViewColumnId,columnMinNumber,columnMaxNumber,columnMinStr,columnMaxStr,columnNonemptyCount";
   }
   def pkFields : String = {
     "sourceDownloadStatColumnId";
@@ -3726,19 +4192,19 @@ case class SourceDownloadStatColumnDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(sourceDownloadStatColumnId,guid,sourceDownloadId,sourceViewColumnId,insertedRowDate,lastUpdatedDate,columnMinNumber,columnMaxNumber,columnMinStr,columnMaxStr,columnNonemptyCount)
+    Array(sourceDownloadStatColumnId,guid,insertedRowDate,lastUpdatedDate,sourceDownloadId,sourceViewColumnId,columnMinNumber,columnMaxNumber,columnMinStr,columnMaxStr,columnNonemptyCount)
   }
   def toStringArray() : Array[String] = {
-    Array(""+sourceDownloadStatColumnId,""+guid,""+sourceDownloadId,""+sourceViewColumnId,""+insertedRowDate,""+lastUpdatedDate,""+columnMinNumber,""+columnMaxNumber,""+columnMinStr,""+columnMaxStr,""+columnNonemptyCount)
+    Array(""+sourceDownloadStatColumnId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceDownloadId,""+sourceViewColumnId,""+columnMinNumber,""+columnMaxNumber,""+columnMinStr,""+columnMaxStr,""+columnNonemptyCount)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "sourceDownloadStatColumnId" => sourceDownloadStatColumnId
       case "guid" => guid
-      case "sourceDownloadId" => sourceDownloadId
-      case "sourceViewColumnId" => sourceViewColumnId
       case "insertedRowDate" => insertedRowDate
       case "lastUpdatedDate" => lastUpdatedDate
+      case "sourceDownloadId" => sourceDownloadId
+      case "sourceViewColumnId" => sourceViewColumnId
       case "columnMinNumber" => columnMinNumber
       case "columnMaxNumber" => columnMaxNumber
       case "columnMinStr" => columnMinStr
@@ -3752,10 +4218,10 @@ case class SourceDownloadStatColumnDto (
     val ret = name match {
       case "sourceDownloadStatColumnId" => "Long"
       case "guid" => "Long"
-      case "sourceDownloadId" => "Long"
-      case "sourceViewColumnId" => "Long"
       case "insertedRowDate" => "java.util.Date"
       case "lastUpdatedDate" => "java.util.Date"
+      case "sourceDownloadId" => "Long"
+      case "sourceViewColumnId" => "Long"
       case "columnMinNumber" => "Double"
       case "columnMaxNumber" => "Double"
       case "columnMinStr" => "String"
@@ -3778,7 +4244,7 @@ case class SourceDownloadStatColumnDto (
     return stat;
   }
   def modify(sourceDownloadId : Long, sourceViewColumnId : Long, columnMinNumber : Double, columnMaxNumber : Double, columnMinStr : String, columnMaxStr : String, columnNonemptyCount : Long) : SourceDownloadStatColumnDto = {
-    val dtoModified = new SourceDownloadStatColumnDto(this.sourceDownloadStatColumnId,this.guid,sourceDownloadId,sourceViewColumnId,this.insertedRowDate,new java.util.Date(),columnMinNumber,columnMaxNumber,columnMinStr,columnMaxStr,columnNonemptyCount);
+    val dtoModified = new SourceDownloadStatColumnDto(this.sourceDownloadStatColumnId,this.guid,this.insertedRowDate,new java.util.Date(),sourceDownloadId,sourceViewColumnId,columnMinNumber,columnMaxNumber,columnMinStr,columnMaxStr,columnNonemptyCount);
     dtoModified
   }
 }
@@ -3786,10 +4252,10 @@ object SourceDownloadStatColumnDto {
   val TABLE_NAME = "sourceDownloadStatColumn";
   val FIELD_sourceDownloadStatColumnId = "sourceDownloadStatColumnId";
   val FIELD_guid = "guid";
-  val FIELD_sourceDownloadId = "sourceDownloadId";
-  val FIELD_sourceViewColumnId = "sourceViewColumnId";
   val FIELD_insertedRowDate = "insertedRowDate";
   val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_sourceDownloadId = "sourceDownloadId";
+  val FIELD_sourceViewColumnId = "sourceViewColumnId";
   val FIELD_columnMinNumber = "columnMinNumber";
   val FIELD_columnMaxNumber = "columnMaxNumber";
   val FIELD_columnMinStr = "columnMinStr";
@@ -3797,7 +4263,7 @@ object SourceDownloadStatColumnDto {
   val FIELD_columnNonemptyCount = "columnNonemptyCount";
 
   def createNewSourceDownloadStatColumnDto(sourceDownloadId : Long, sourceViewColumnId : Long, columnMinNumber : Double, columnMaxNumber : Double, columnMinStr : String, columnMaxStr : String, columnNonemptyCount : Long) : SourceDownloadStatColumnDto = {
-    val dto = new SourceDownloadStatColumnDto(0,0,sourceDownloadId,sourceViewColumnId,new java.util.Date(),new java.util.Date(),columnMinNumber,columnMaxNumber,columnMinStr,columnMaxStr,columnNonemptyCount)
+    val dto = new SourceDownloadStatColumnDto(0,0,new java.util.Date(),new java.util.Date(),sourceDownloadId,sourceViewColumnId,columnMinNumber,columnMaxNumber,columnMinStr,columnMaxStr,columnNonemptyCount)
     dto
   }
 
@@ -3807,20 +4273,20 @@ object SourceDownloadStatColumnDto {
 case class SourceInstanceDto (
                                val sourceInstanceId : Long
                                , val guid : Long
+                               , val insertedRowDate : java.util.Date
+                               , val lastUpdatedDate : java.util.Date
                                , val sourceTypeId : Long
                                , val sourceInstanceName : String
                                , val errorCount : Long
                                , val correctCount : Long
                                , val lastStatus : String
                                , val lastConnectionDate : java.util.Date
-                               , val insertedRowDate : java.util.Date
-                               , val lastUpdatedDate : java.util.Date
                              ) extends BaseDto {
   def tableName : String = {
     "sourceInstance";
   }
   def fields : String = {
-    "sourceInstanceId,guid,sourceTypeId,sourceInstanceName,errorCount,correctCount,lastStatus,lastConnectionDate,insertedRowDate,lastUpdatedDate";
+    "sourceInstanceId,guid,insertedRowDate,lastUpdatedDate,sourceTypeId,sourceInstanceName,errorCount,correctCount,lastStatus,lastConnectionDate";
   }
   def pkFields : String = {
     "sourceInstanceId";
@@ -3844,23 +4310,23 @@ case class SourceInstanceDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(sourceInstanceId,guid,sourceTypeId,sourceInstanceName,errorCount,correctCount,lastStatus,lastConnectionDate,insertedRowDate,lastUpdatedDate)
+    Array(sourceInstanceId,guid,insertedRowDate,lastUpdatedDate,sourceTypeId,sourceInstanceName,errorCount,correctCount,lastStatus,lastConnectionDate)
   }
   def toStringArray() : Array[String] = {
-    Array(""+sourceInstanceId,""+guid,""+sourceTypeId,""+sourceInstanceName,""+errorCount,""+correctCount,""+lastStatus,""+lastConnectionDate,""+insertedRowDate,""+lastUpdatedDate)
+    Array(""+sourceInstanceId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceTypeId,""+sourceInstanceName,""+errorCount,""+correctCount,""+lastStatus,""+lastConnectionDate)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "sourceInstanceId" => sourceInstanceId
       case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
       case "sourceTypeId" => sourceTypeId
       case "sourceInstanceName" => sourceInstanceName
       case "errorCount" => errorCount
       case "correctCount" => correctCount
       case "lastStatus" => lastStatus
       case "lastConnectionDate" => lastConnectionDate
-      case "insertedRowDate" => insertedRowDate
-      case "lastUpdatedDate" => lastUpdatedDate
       case _ => null
     }
     ret
@@ -3869,14 +4335,14 @@ case class SourceInstanceDto (
     val ret = name match {
       case "sourceInstanceId" => "Long"
       case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
       case "sourceTypeId" => "Long"
       case "sourceInstanceName" => "String"
       case "errorCount" => "Long"
       case "correctCount" => "Long"
       case "lastStatus" => "String"
       case "lastConnectionDate" => "java.util.Date"
-      case "insertedRowDate" => "java.util.Date"
-      case "lastUpdatedDate" => "java.util.Date"
       case _ => "Object"
     }
     ret
@@ -3893,7 +4359,7 @@ case class SourceInstanceDto (
     return stat;
   }
   def modify(sourceTypeId : Long, sourceInstanceName : String, errorCount : Long, correctCount : Long, lastStatus : String, lastConnectionDate : java.util.Date) : SourceInstanceDto = {
-    val dtoModified = new SourceInstanceDto(this.sourceInstanceId,this.guid,sourceTypeId,sourceInstanceName,errorCount,correctCount,lastStatus,lastConnectionDate,this.insertedRowDate,new java.util.Date());
+    val dtoModified = new SourceInstanceDto(this.sourceInstanceId,this.guid,this.insertedRowDate,new java.util.Date(),sourceTypeId,sourceInstanceName,errorCount,correctCount,lastStatus,lastConnectionDate);
     dtoModified
   }
 }
@@ -3901,17 +4367,17 @@ object SourceInstanceDto {
   val TABLE_NAME = "sourceInstance";
   val FIELD_sourceInstanceId = "sourceInstanceId";
   val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_sourceTypeId = "sourceTypeId";
   val FIELD_sourceInstanceName = "sourceInstanceName";
   val FIELD_errorCount = "errorCount";
   val FIELD_correctCount = "correctCount";
   val FIELD_lastStatus = "lastStatus";
   val FIELD_lastConnectionDate = "lastConnectionDate";
-  val FIELD_insertedRowDate = "insertedRowDate";
-  val FIELD_lastUpdatedDate = "lastUpdatedDate";
 
   def createNewSourceInstanceDto(sourceTypeId : Long, sourceInstanceName : String, errorCount : Long, correctCount : Long, lastStatus : String, lastConnectionDate : java.util.Date) : SourceInstanceDto = {
-    val dto = new SourceInstanceDto(0,0,sourceTypeId,sourceInstanceName,errorCount,correctCount,lastStatus,lastConnectionDate,new java.util.Date(),new java.util.Date())
+    val dto = new SourceInstanceDto(0,0,new java.util.Date(),new java.util.Date(),sourceTypeId,sourceInstanceName,errorCount,correctCount,lastStatus,lastConnectionDate)
     dto
   }
 
@@ -3921,17 +4387,17 @@ object SourceInstanceDto {
 case class SourceParamDto (
                             val sourceParamId : Long
                             , val guid : Long
+                            , val insertedRowDate : java.util.Date
+                            , val lastUpdatedDate : java.util.Date
                             , val sourceParamName : String
                             , val sourceParamType : String
                             , val possibleValues : String
-                            , val insertedRowDate : java.util.Date
-                            , val lastUpdatedDate : java.util.Date
                           ) extends BaseDto {
   def tableName : String = {
     "sourceParam";
   }
   def fields : String = {
-    "sourceParamId,guid,sourceParamName,sourceParamType,possibleValues,insertedRowDate,lastUpdatedDate";
+    "sourceParamId,guid,insertedRowDate,lastUpdatedDate,sourceParamName,sourceParamType,possibleValues";
   }
   def pkFields : String = {
     "sourceParamId";
@@ -3955,20 +4421,20 @@ case class SourceParamDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(sourceParamId,guid,sourceParamName,sourceParamType,possibleValues,insertedRowDate,lastUpdatedDate)
+    Array(sourceParamId,guid,insertedRowDate,lastUpdatedDate,sourceParamName,sourceParamType,possibleValues)
   }
   def toStringArray() : Array[String] = {
-    Array(""+sourceParamId,""+guid,""+sourceParamName,""+sourceParamType,""+possibleValues,""+insertedRowDate,""+lastUpdatedDate)
+    Array(""+sourceParamId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceParamName,""+sourceParamType,""+possibleValues)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "sourceParamId" => sourceParamId
       case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
       case "sourceParamName" => sourceParamName
       case "sourceParamType" => sourceParamType
       case "possibleValues" => possibleValues
-      case "insertedRowDate" => insertedRowDate
-      case "lastUpdatedDate" => lastUpdatedDate
       case _ => null
     }
     ret
@@ -3977,11 +4443,11 @@ case class SourceParamDto (
     val ret = name match {
       case "sourceParamId" => "Long"
       case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
       case "sourceParamName" => "String"
       case "sourceParamType" => "String"
       case "possibleValues" => "String"
-      case "insertedRowDate" => "java.util.Date"
-      case "lastUpdatedDate" => "java.util.Date"
       case _ => "Object"
     }
     ret
@@ -3995,7 +4461,7 @@ case class SourceParamDto (
     return stat;
   }
   def modify(sourceParamName : String, sourceParamType : String, possibleValues : String) : SourceParamDto = {
-    val dtoModified = new SourceParamDto(this.sourceParamId,this.guid,sourceParamName,sourceParamType,possibleValues,this.insertedRowDate,new java.util.Date());
+    val dtoModified = new SourceParamDto(this.sourceParamId,this.guid,this.insertedRowDate,new java.util.Date(),sourceParamName,sourceParamType,possibleValues);
     dtoModified
   }
 }
@@ -4003,14 +4469,14 @@ object SourceParamDto {
   val TABLE_NAME = "sourceParam";
   val FIELD_sourceParamId = "sourceParamId";
   val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_sourceParamName = "sourceParamName";
   val FIELD_sourceParamType = "sourceParamType";
   val FIELD_possibleValues = "possibleValues";
-  val FIELD_insertedRowDate = "insertedRowDate";
-  val FIELD_lastUpdatedDate = "lastUpdatedDate";
 
   def createNewSourceParamDto(sourceParamName : String, sourceParamType : String, possibleValues : String) : SourceParamDto = {
-    val dto = new SourceParamDto(0,0,sourceParamName,sourceParamType,possibleValues,new java.util.Date(),new java.util.Date())
+    val dto = new SourceParamDto(0,0,new java.util.Date(),new java.util.Date(),sourceParamName,sourceParamType,possibleValues)
     dto
   }
 
@@ -4019,19 +4485,19 @@ object SourceParamDto {
 
 case class SourceParamValueDto (
                                  val sourceParamValueId : Long
-                                 , val sourceInstanceId : Long
-                                 , val sourceParamId : Long
-                                 , val sourceParamValueVersion : String
                                  , val guid : Long
                                  , val insertedRowDate : java.util.Date
                                  , val lastUpdatedDate : java.util.Date
+                                 , val sourceInstanceId : Long
+                                 , val sourceParamId : Long
+                                 , val sourceParamValueVersion : String
                                  , val paramValue : String
                                ) extends BaseDto {
   def tableName : String = {
     "sourceParamValue";
   }
   def fields : String = {
-    "sourceParamValueId,sourceInstanceId,sourceParamId,sourceParamValueVersion,guid,insertedRowDate,lastUpdatedDate,paramValue";
+    "sourceParamValueId,guid,insertedRowDate,lastUpdatedDate,sourceInstanceId,sourceParamId,sourceParamValueVersion,paramValue";
   }
   def pkFields : String = {
     "sourceParamValueId";
@@ -4055,20 +4521,20 @@ case class SourceParamValueDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(sourceParamValueId,sourceInstanceId,sourceParamId,sourceParamValueVersion,guid,insertedRowDate,lastUpdatedDate,paramValue)
+    Array(sourceParamValueId,guid,insertedRowDate,lastUpdatedDate,sourceInstanceId,sourceParamId,sourceParamValueVersion,paramValue)
   }
   def toStringArray() : Array[String] = {
-    Array(""+sourceParamValueId,""+sourceInstanceId,""+sourceParamId,""+sourceParamValueVersion,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+paramValue)
+    Array(""+sourceParamValueId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceInstanceId,""+sourceParamId,""+sourceParamValueVersion,""+paramValue)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "sourceParamValueId" => sourceParamValueId
-      case "sourceInstanceId" => sourceInstanceId
-      case "sourceParamId" => sourceParamId
-      case "sourceParamValueVersion" => sourceParamValueVersion
       case "guid" => guid
       case "insertedRowDate" => insertedRowDate
       case "lastUpdatedDate" => lastUpdatedDate
+      case "sourceInstanceId" => sourceInstanceId
+      case "sourceParamId" => sourceParamId
+      case "sourceParamValueVersion" => sourceParamValueVersion
       case "paramValue" => paramValue
       case _ => null
     }
@@ -4077,44 +4543,44 @@ case class SourceParamValueDto (
   def getFieldTypeName(name : String) : String = {
     val ret = name match {
       case "sourceParamValueId" => "Long"
-      case "sourceInstanceId" => "Long"
-      case "sourceParamId" => "Long"
-      case "sourceParamValueVersion" => "String"
       case "guid" => "Long"
       case "insertedRowDate" => "java.util.Date"
       case "lastUpdatedDate" => "java.util.Date"
+      case "sourceInstanceId" => "Long"
+      case "sourceParamId" => "Long"
+      case "sourceParamValueVersion" => "String"
       case "paramValue" => "String"
       case _ => "Object"
     }
     ret
   }
   def prepareInsert(connection : java.sql.Connection) : java.sql.PreparedStatement = {
-    val stat = connection.prepareStatement("insert into sourceParamValue(sourceInstanceId,sourceParamId,sourceParamValueVersion,guid,paramValue) values (?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
-    stat.setObject(1, sourceInstanceId);
-    stat.setObject(2, sourceParamId);
-    stat.setObject(3, sourceParamValueVersion);
-    stat.setObject(4, guid);
+    val stat = connection.prepareStatement("insert into sourceParamValue(guid,sourceInstanceId,sourceParamId,sourceParamValueVersion,paramValue) values (?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
+    stat.setObject(1, guid);
+    stat.setObject(2, sourceInstanceId);
+    stat.setObject(3, sourceParamId);
+    stat.setObject(4, sourceParamValueVersion);
     stat.setObject(5, paramValue);
     return stat;
   }
   def modify(sourceInstanceId : Long, sourceParamId : Long, sourceParamValueVersion : String, paramValue : String) : SourceParamValueDto = {
-    val dtoModified = new SourceParamValueDto(this.sourceParamValueId,sourceInstanceId,sourceParamId,sourceParamValueVersion,this.guid,this.insertedRowDate,new java.util.Date(),paramValue);
+    val dtoModified = new SourceParamValueDto(this.sourceParamValueId,this.guid,this.insertedRowDate,new java.util.Date(),sourceInstanceId,sourceParamId,sourceParamValueVersion,paramValue);
     dtoModified
   }
 }
 object SourceParamValueDto {
   val TABLE_NAME = "sourceParamValue";
   val FIELD_sourceParamValueId = "sourceParamValueId";
-  val FIELD_sourceInstanceId = "sourceInstanceId";
-  val FIELD_sourceParamId = "sourceParamId";
-  val FIELD_sourceParamValueVersion = "sourceParamValueVersion";
   val FIELD_guid = "guid";
   val FIELD_insertedRowDate = "insertedRowDate";
   val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_sourceInstanceId = "sourceInstanceId";
+  val FIELD_sourceParamId = "sourceParamId";
+  val FIELD_sourceParamValueVersion = "sourceParamValueVersion";
   val FIELD_paramValue = "paramValue";
 
   def createNewSourceParamValueDto(sourceInstanceId : Long, sourceParamId : Long, sourceParamValueVersion : String, paramValue : String) : SourceParamValueDto = {
-    val dto = new SourceParamValueDto(0,sourceInstanceId,sourceParamId,sourceParamValueVersion,0,new java.util.Date(),new java.util.Date(),paramValue)
+    val dto = new SourceParamValueDto(0,0,new java.util.Date(),new java.util.Date(),sourceInstanceId,sourceParamId,sourceParamValueVersion,paramValue)
     dto
   }
 
@@ -4123,20 +4589,22 @@ object SourceParamValueDto {
 
 case class SourceScheduleDto (
                                val sourceScheduleId : Long
-                               , val sourceViewId : Long
-                               , val executorStorageId : Long
+                               , val guid : Long
                                , val insertedRowDate : java.util.Date
                                , val lastUpdatedDate : java.util.Date
-                               , val guid : Long
+                               , val sourceViewId : Long
+                               , val executorStorageId : Long
                                , val onDemand : Int
                                , val startTime : java.util.Date
                                , val intervalValue : Long
+                               , val isScheduled : Int
+                               , val deleteOldCopies : Int
                              ) extends BaseDto {
   def tableName : String = {
     "sourceSchedule";
   }
   def fields : String = {
-    "sourceScheduleId,sourceViewId,executorStorageId,insertedRowDate,lastUpdatedDate,guid,onDemand,startTime,intervalValue";
+    "sourceScheduleId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,executorStorageId,onDemand,startTime,intervalValue,isScheduled,deleteOldCopies";
   }
   def pkFields : String = {
     "sourceScheduleId";
@@ -4160,22 +4628,24 @@ case class SourceScheduleDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(sourceScheduleId,sourceViewId,executorStorageId,insertedRowDate,lastUpdatedDate,guid,onDemand,startTime,intervalValue)
+    Array(sourceScheduleId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,executorStorageId,onDemand,startTime,intervalValue,isScheduled,deleteOldCopies)
   }
   def toStringArray() : Array[String] = {
-    Array(""+sourceScheduleId,""+sourceViewId,""+executorStorageId,""+insertedRowDate,""+lastUpdatedDate,""+guid,""+onDemand,""+startTime,""+intervalValue)
+    Array(""+sourceScheduleId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceViewId,""+executorStorageId,""+onDemand,""+startTime,""+intervalValue,""+isScheduled,""+deleteOldCopies)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "sourceScheduleId" => sourceScheduleId
-      case "sourceViewId" => sourceViewId
-      case "executorStorageId" => executorStorageId
+      case "guid" => guid
       case "insertedRowDate" => insertedRowDate
       case "lastUpdatedDate" => lastUpdatedDate
-      case "guid" => guid
+      case "sourceViewId" => sourceViewId
+      case "executorStorageId" => executorStorageId
       case "onDemand" => onDemand
       case "startTime" => startTime
       case "intervalValue" => intervalValue
+      case "isScheduled" => isScheduled
+      case "deleteOldCopies" => deleteOldCopies
       case _ => null
     }
     ret
@@ -4183,47 +4653,53 @@ case class SourceScheduleDto (
   def getFieldTypeName(name : String) : String = {
     val ret = name match {
       case "sourceScheduleId" => "Long"
-      case "sourceViewId" => "Long"
-      case "executorStorageId" => "Long"
+      case "guid" => "Long"
       case "insertedRowDate" => "java.util.Date"
       case "lastUpdatedDate" => "java.util.Date"
-      case "guid" => "Long"
+      case "sourceViewId" => "Long"
+      case "executorStorageId" => "Long"
       case "onDemand" => "Int"
       case "startTime" => "java.util.Date"
       case "intervalValue" => "Long"
+      case "isScheduled" => "Int"
+      case "deleteOldCopies" => "Int"
       case _ => "Object"
     }
     ret
   }
   def prepareInsert(connection : java.sql.Connection) : java.sql.PreparedStatement = {
-    val stat = connection.prepareStatement("insert into sourceSchedule(sourceViewId,executorStorageId,guid,onDemand,startTime,intervalValue) values (?,?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
-    stat.setObject(1, sourceViewId);
-    stat.setObject(2, executorStorageId);
-    stat.setObject(3, guid);
+    val stat = connection.prepareStatement("insert into sourceSchedule(guid,sourceViewId,executorStorageId,onDemand,startTime,intervalValue,isScheduled,deleteOldCopies) values (?,?,?,?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
+    stat.setObject(1, guid);
+    stat.setObject(2, sourceViewId);
+    stat.setObject(3, executorStorageId);
     stat.setObject(4, onDemand);
     stat.setObject(5, startTime);
     stat.setObject(6, intervalValue);
+    stat.setObject(7, isScheduled);
+    stat.setObject(8, deleteOldCopies);
     return stat;
   }
-  def modify(sourceViewId : Long, executorStorageId : Long, onDemand : Int, startTime : java.util.Date, intervalValue : Long) : SourceScheduleDto = {
-    val dtoModified = new SourceScheduleDto(this.sourceScheduleId,sourceViewId,executorStorageId,this.insertedRowDate,new java.util.Date(),this.guid,onDemand,startTime,intervalValue);
+  def modify(sourceViewId : Long, executorStorageId : Long, onDemand : Int, startTime : java.util.Date, intervalValue : Long, isScheduled : Int, deleteOldCopies : Int) : SourceScheduleDto = {
+    val dtoModified = new SourceScheduleDto(this.sourceScheduleId,this.guid,this.insertedRowDate,new java.util.Date(),sourceViewId,executorStorageId,onDemand,startTime,intervalValue,isScheduled,deleteOldCopies);
     dtoModified
   }
 }
 object SourceScheduleDto {
   val TABLE_NAME = "sourceSchedule";
   val FIELD_sourceScheduleId = "sourceScheduleId";
-  val FIELD_sourceViewId = "sourceViewId";
-  val FIELD_executorStorageId = "executorStorageId";
+  val FIELD_guid = "guid";
   val FIELD_insertedRowDate = "insertedRowDate";
   val FIELD_lastUpdatedDate = "lastUpdatedDate";
-  val FIELD_guid = "guid";
+  val FIELD_sourceViewId = "sourceViewId";
+  val FIELD_executorStorageId = "executorStorageId";
   val FIELD_onDemand = "onDemand";
   val FIELD_startTime = "startTime";
   val FIELD_intervalValue = "intervalValue";
+  val FIELD_isScheduled = "isScheduled";
+  val FIELD_deleteOldCopies = "deleteOldCopies";
 
-  def createNewSourceScheduleDto(sourceViewId : Long, executorStorageId : Long, onDemand : Int, startTime : java.util.Date, intervalValue : Long) : SourceScheduleDto = {
-    val dto = new SourceScheduleDto(0,sourceViewId,executorStorageId,new java.util.Date(),new java.util.Date(),0,onDemand,startTime,intervalValue)
+  def createNewSourceScheduleDto(sourceViewId : Long, executorStorageId : Long, onDemand : Int, startTime : java.util.Date, intervalValue : Long, isScheduled : Int, deleteOldCopies : Int) : SourceScheduleDto = {
+    val dto = new SourceScheduleDto(0,0,new java.util.Date(),new java.util.Date(),sourceViewId,executorStorageId,onDemand,startTime,intervalValue,isScheduled,deleteOldCopies)
     dto
   }
 
@@ -4233,16 +4709,16 @@ object SourceScheduleDto {
 case class SourceTypeDto (
                            val sourceTypeId : Long
                            , val guid : Long
-                           , val sourceTypeName : String
-                           , val sourceTypeClass : String
                            , val insertedRowDate : java.util.Date
                            , val lastUpdatedDate : java.util.Date
+                           , val sourceTypeName : String
+                           , val sourceTypeClass : String
                          ) extends BaseDto {
   def tableName : String = {
     "sourceType";
   }
   def fields : String = {
-    "sourceTypeId,guid,sourceTypeName,sourceTypeClass,insertedRowDate,lastUpdatedDate";
+    "sourceTypeId,guid,insertedRowDate,lastUpdatedDate,sourceTypeName,sourceTypeClass";
   }
   def pkFields : String = {
     "sourceTypeId";
@@ -4266,19 +4742,19 @@ case class SourceTypeDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(sourceTypeId,guid,sourceTypeName,sourceTypeClass,insertedRowDate,lastUpdatedDate)
+    Array(sourceTypeId,guid,insertedRowDate,lastUpdatedDate,sourceTypeName,sourceTypeClass)
   }
   def toStringArray() : Array[String] = {
-    Array(""+sourceTypeId,""+guid,""+sourceTypeName,""+sourceTypeClass,""+insertedRowDate,""+lastUpdatedDate)
+    Array(""+sourceTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceTypeName,""+sourceTypeClass)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "sourceTypeId" => sourceTypeId
       case "guid" => guid
-      case "sourceTypeName" => sourceTypeName
-      case "sourceTypeClass" => sourceTypeClass
       case "insertedRowDate" => insertedRowDate
       case "lastUpdatedDate" => lastUpdatedDate
+      case "sourceTypeName" => sourceTypeName
+      case "sourceTypeClass" => sourceTypeClass
       case _ => null
     }
     ret
@@ -4287,10 +4763,10 @@ case class SourceTypeDto (
     val ret = name match {
       case "sourceTypeId" => "Long"
       case "guid" => "Long"
-      case "sourceTypeName" => "String"
-      case "sourceTypeClass" => "String"
       case "insertedRowDate" => "java.util.Date"
       case "lastUpdatedDate" => "java.util.Date"
+      case "sourceTypeName" => "String"
+      case "sourceTypeClass" => "String"
       case _ => "Object"
     }
     ret
@@ -4303,7 +4779,7 @@ case class SourceTypeDto (
     return stat;
   }
   def modify(sourceTypeName : String, sourceTypeClass : String) : SourceTypeDto = {
-    val dtoModified = new SourceTypeDto(this.sourceTypeId,this.guid,sourceTypeName,sourceTypeClass,this.insertedRowDate,new java.util.Date());
+    val dtoModified = new SourceTypeDto(this.sourceTypeId,this.guid,this.insertedRowDate,new java.util.Date(),sourceTypeName,sourceTypeClass);
     dtoModified
   }
 }
@@ -4311,13 +4787,13 @@ object SourceTypeDto {
   val TABLE_NAME = "sourceType";
   val FIELD_sourceTypeId = "sourceTypeId";
   val FIELD_guid = "guid";
-  val FIELD_sourceTypeName = "sourceTypeName";
-  val FIELD_sourceTypeClass = "sourceTypeClass";
   val FIELD_insertedRowDate = "insertedRowDate";
   val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_sourceTypeName = "sourceTypeName";
+  val FIELD_sourceTypeClass = "sourceTypeClass";
 
   def createNewSourceTypeDto(sourceTypeName : String, sourceTypeClass : String) : SourceTypeDto = {
-    val dto = new SourceTypeDto(0,0,sourceTypeName,sourceTypeClass,new java.util.Date(),new java.util.Date())
+    val dto = new SourceTypeDto(0,0,new java.util.Date(),new java.util.Date(),sourceTypeName,sourceTypeClass)
     dto
   }
 
@@ -4326,20 +4802,20 @@ object SourceTypeDto {
 
 case class SourceTypeParamDto (
                                 val sourceTypeParamId : Long
+                                , val guid : Long
+                                , val insertedRowDate : java.util.Date
+                                , val lastUpdatedDate : java.util.Date
                                 , val sourceTypeId : Long
                                 , val sourceParamId : Long
                                 , val sourceTypeName : String
                                 , val sourceParamName : String
                                 , val isRequired : Int
-                                , val guid : Long
-                                , val insertedRowDate : java.util.Date
-                                , val lastUpdatedDate : java.util.Date
                               ) extends BaseDto {
   def tableName : String = {
     "sourceTypeParam";
   }
   def fields : String = {
-    "sourceTypeParamId,sourceTypeId,sourceParamId,sourceTypeName,sourceParamName,isRequired,guid,insertedRowDate,lastUpdatedDate";
+    "sourceTypeParamId,guid,insertedRowDate,lastUpdatedDate,sourceTypeId,sourceParamId,sourceTypeName,sourceParamName,isRequired";
   }
   def pkFields : String = {
     "sourceTypeParamId";
@@ -4363,22 +4839,22 @@ case class SourceTypeParamDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(sourceTypeParamId,sourceTypeId,sourceParamId,sourceTypeName,sourceParamName,isRequired,guid,insertedRowDate,lastUpdatedDate)
+    Array(sourceTypeParamId,guid,insertedRowDate,lastUpdatedDate,sourceTypeId,sourceParamId,sourceTypeName,sourceParamName,isRequired)
   }
   def toStringArray() : Array[String] = {
-    Array(""+sourceTypeParamId,""+sourceTypeId,""+sourceParamId,""+sourceTypeName,""+sourceParamName,""+isRequired,""+guid,""+insertedRowDate,""+lastUpdatedDate)
+    Array(""+sourceTypeParamId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceTypeId,""+sourceParamId,""+sourceTypeName,""+sourceParamName,""+isRequired)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "sourceTypeParamId" => sourceTypeParamId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
       case "sourceTypeId" => sourceTypeId
       case "sourceParamId" => sourceParamId
       case "sourceTypeName" => sourceTypeName
       case "sourceParamName" => sourceParamName
       case "isRequired" => isRequired
-      case "guid" => guid
-      case "insertedRowDate" => insertedRowDate
-      case "lastUpdatedDate" => lastUpdatedDate
       case _ => null
     }
     ret
@@ -4386,47 +4862,47 @@ case class SourceTypeParamDto (
   def getFieldTypeName(name : String) : String = {
     val ret = name match {
       case "sourceTypeParamId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
       case "sourceTypeId" => "Long"
       case "sourceParamId" => "Long"
       case "sourceTypeName" => "String"
       case "sourceParamName" => "String"
       case "isRequired" => "Int"
-      case "guid" => "Long"
-      case "insertedRowDate" => "java.util.Date"
-      case "lastUpdatedDate" => "java.util.Date"
       case _ => "Object"
     }
     ret
   }
   def prepareInsert(connection : java.sql.Connection) : java.sql.PreparedStatement = {
-    val stat = connection.prepareStatement("insert into sourceTypeParam(sourceTypeId,sourceParamId,sourceTypeName,sourceParamName,isRequired,guid) values (?,?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
-    stat.setObject(1, sourceTypeId);
-    stat.setObject(2, sourceParamId);
-    stat.setObject(3, sourceTypeName);
-    stat.setObject(4, sourceParamName);
-    stat.setObject(5, isRequired);
-    stat.setObject(6, guid);
+    val stat = connection.prepareStatement("insert into sourceTypeParam(guid,sourceTypeId,sourceParamId,sourceTypeName,sourceParamName,isRequired) values (?,?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
+    stat.setObject(1, guid);
+    stat.setObject(2, sourceTypeId);
+    stat.setObject(3, sourceParamId);
+    stat.setObject(4, sourceTypeName);
+    stat.setObject(5, sourceParamName);
+    stat.setObject(6, isRequired);
     return stat;
   }
   def modify(sourceTypeId : Long, sourceParamId : Long, sourceTypeName : String, sourceParamName : String, isRequired : Int) : SourceTypeParamDto = {
-    val dtoModified = new SourceTypeParamDto(this.sourceTypeParamId,sourceTypeId,sourceParamId,sourceTypeName,sourceParamName,isRequired,this.guid,this.insertedRowDate,new java.util.Date());
+    val dtoModified = new SourceTypeParamDto(this.sourceTypeParamId,this.guid,this.insertedRowDate,new java.util.Date(),sourceTypeId,sourceParamId,sourceTypeName,sourceParamName,isRequired);
     dtoModified
   }
 }
 object SourceTypeParamDto {
   val TABLE_NAME = "sourceTypeParam";
   val FIELD_sourceTypeParamId = "sourceTypeParamId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_sourceTypeId = "sourceTypeId";
   val FIELD_sourceParamId = "sourceParamId";
   val FIELD_sourceTypeName = "sourceTypeName";
   val FIELD_sourceParamName = "sourceParamName";
   val FIELD_isRequired = "isRequired";
-  val FIELD_guid = "guid";
-  val FIELD_insertedRowDate = "insertedRowDate";
-  val FIELD_lastUpdatedDate = "lastUpdatedDate";
 
   def createNewSourceTypeParamDto(sourceTypeId : Long, sourceParamId : Long, sourceTypeName : String, sourceParamName : String, isRequired : Int) : SourceTypeParamDto = {
-    val dto = new SourceTypeParamDto(0,sourceTypeId,sourceParamId,sourceTypeName,sourceParamName,isRequired,0,new java.util.Date(),new java.util.Date())
+    val dto = new SourceTypeParamDto(0,0,new java.util.Date(),new java.util.Date(),sourceTypeId,sourceParamId,sourceTypeName,sourceParamName,isRequired)
     dto
   }
 
@@ -4436,18 +4912,19 @@ object SourceTypeParamDto {
 case class SourceViewDto (
                            val sourceViewId : Long
                            , val guid : Long
+                           , val insertedRowDate : java.util.Date
+                           , val lastUpdatedDate : java.util.Date
                            , val sourceInstanceId : Long
                            , val sourceViewTypeId : Long
                            , val sourceViewName : String
                            , val sourceViewDefinition : String
-                           , val insertedRowDate : java.util.Date
-                           , val lastUpdatedDate : java.util.Date
+                           , val isExisting : Int
                          ) extends BaseDto {
   def tableName : String = {
     "sourceView";
   }
   def fields : String = {
-    "sourceViewId,guid,sourceInstanceId,sourceViewTypeId,sourceViewName,sourceViewDefinition,insertedRowDate,lastUpdatedDate";
+    "sourceViewId,guid,insertedRowDate,lastUpdatedDate,sourceInstanceId,sourceViewTypeId,sourceViewName,sourceViewDefinition,isExisting";
   }
   def pkFields : String = {
     "sourceViewId";
@@ -4471,21 +4948,22 @@ case class SourceViewDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(sourceViewId,guid,sourceInstanceId,sourceViewTypeId,sourceViewName,sourceViewDefinition,insertedRowDate,lastUpdatedDate)
+    Array(sourceViewId,guid,insertedRowDate,lastUpdatedDate,sourceInstanceId,sourceViewTypeId,sourceViewName,sourceViewDefinition,isExisting)
   }
   def toStringArray() : Array[String] = {
-    Array(""+sourceViewId,""+guid,""+sourceInstanceId,""+sourceViewTypeId,""+sourceViewName,""+sourceViewDefinition,""+insertedRowDate,""+lastUpdatedDate)
+    Array(""+sourceViewId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceInstanceId,""+sourceViewTypeId,""+sourceViewName,""+sourceViewDefinition,""+isExisting)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "sourceViewId" => sourceViewId
       case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
       case "sourceInstanceId" => sourceInstanceId
       case "sourceViewTypeId" => sourceViewTypeId
       case "sourceViewName" => sourceViewName
       case "sourceViewDefinition" => sourceViewDefinition
-      case "insertedRowDate" => insertedRowDate
-      case "lastUpdatedDate" => lastUpdatedDate
+      case "isExisting" => isExisting
       case _ => null
     }
     ret
@@ -4494,27 +4972,29 @@ case class SourceViewDto (
     val ret = name match {
       case "sourceViewId" => "Long"
       case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
       case "sourceInstanceId" => "Long"
       case "sourceViewTypeId" => "Long"
       case "sourceViewName" => "String"
       case "sourceViewDefinition" => "String"
-      case "insertedRowDate" => "java.util.Date"
-      case "lastUpdatedDate" => "java.util.Date"
+      case "isExisting" => "Int"
       case _ => "Object"
     }
     ret
   }
   def prepareInsert(connection : java.sql.Connection) : java.sql.PreparedStatement = {
-    val stat = connection.prepareStatement("insert into sourceView(guid,sourceInstanceId,sourceViewTypeId,sourceViewName,sourceViewDefinition) values (?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
+    val stat = connection.prepareStatement("insert into sourceView(guid,sourceInstanceId,sourceViewTypeId,sourceViewName,sourceViewDefinition,isExisting) values (?,?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
     stat.setObject(1, guid);
     stat.setObject(2, sourceInstanceId);
     stat.setObject(3, sourceViewTypeId);
     stat.setObject(4, sourceViewName);
     stat.setObject(5, sourceViewDefinition);
+    stat.setObject(6, isExisting);
     return stat;
   }
-  def modify(sourceInstanceId : Long, sourceViewTypeId : Long, sourceViewName : String, sourceViewDefinition : String) : SourceViewDto = {
-    val dtoModified = new SourceViewDto(this.sourceViewId,this.guid,sourceInstanceId,sourceViewTypeId,sourceViewName,sourceViewDefinition,this.insertedRowDate,new java.util.Date());
+  def modify(sourceInstanceId : Long, sourceViewTypeId : Long, sourceViewName : String, sourceViewDefinition : String, isExisting : Int) : SourceViewDto = {
+    val dtoModified = new SourceViewDto(this.sourceViewId,this.guid,this.insertedRowDate,new java.util.Date(),sourceInstanceId,sourceViewTypeId,sourceViewName,sourceViewDefinition,isExisting);
     dtoModified
   }
 }
@@ -4522,15 +5002,16 @@ object SourceViewDto {
   val TABLE_NAME = "sourceView";
   val FIELD_sourceViewId = "sourceViewId";
   val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_sourceInstanceId = "sourceInstanceId";
   val FIELD_sourceViewTypeId = "sourceViewTypeId";
   val FIELD_sourceViewName = "sourceViewName";
   val FIELD_sourceViewDefinition = "sourceViewDefinition";
-  val FIELD_insertedRowDate = "insertedRowDate";
-  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_isExisting = "isExisting";
 
-  def createNewSourceViewDto(sourceInstanceId : Long, sourceViewTypeId : Long, sourceViewName : String, sourceViewDefinition : String) : SourceViewDto = {
-    val dto = new SourceViewDto(0,0,sourceInstanceId,sourceViewTypeId,sourceViewName,sourceViewDefinition,new java.util.Date(),new java.util.Date())
+  def createNewSourceViewDto(sourceInstanceId : Long, sourceViewTypeId : Long, sourceViewName : String, sourceViewDefinition : String, isExisting : Int) : SourceViewDto = {
+    val dto = new SourceViewDto(0,0,new java.util.Date(),new java.util.Date(),sourceInstanceId,sourceViewTypeId,sourceViewName,sourceViewDefinition,isExisting)
     dto
   }
 
@@ -4539,10 +5020,10 @@ object SourceViewDto {
 
 case class SourceViewColumnDto (
                                  val sourceViewColumnId : Long
-                                 , val sourceViewId : Long
+                                 , val guid : Long
                                  , val insertedRowDate : java.util.Date
                                  , val lastUpdatedDate : java.util.Date
-                                 , val guid : Long
+                                 , val sourceViewId : Long
                                  , val columnName : String
                                  , val columnType : String
                                ) extends BaseDto {
@@ -4550,7 +5031,7 @@ case class SourceViewColumnDto (
     "sourceViewColumn";
   }
   def fields : String = {
-    "sourceViewColumnId,sourceViewId,insertedRowDate,lastUpdatedDate,guid,columnName,columnType";
+    "sourceViewColumnId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,columnName,columnType";
   }
   def pkFields : String = {
     "sourceViewColumnId";
@@ -4574,18 +5055,18 @@ case class SourceViewColumnDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(sourceViewColumnId,sourceViewId,insertedRowDate,lastUpdatedDate,guid,columnName,columnType)
+    Array(sourceViewColumnId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,columnName,columnType)
   }
   def toStringArray() : Array[String] = {
-    Array(""+sourceViewColumnId,""+sourceViewId,""+insertedRowDate,""+lastUpdatedDate,""+guid,""+columnName,""+columnType)
+    Array(""+sourceViewColumnId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceViewId,""+columnName,""+columnType)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "sourceViewColumnId" => sourceViewColumnId
-      case "sourceViewId" => sourceViewId
+      case "guid" => guid
       case "insertedRowDate" => insertedRowDate
       case "lastUpdatedDate" => lastUpdatedDate
-      case "guid" => guid
+      case "sourceViewId" => sourceViewId
       case "columnName" => columnName
       case "columnType" => columnType
       case _ => null
@@ -4595,10 +5076,10 @@ case class SourceViewColumnDto (
   def getFieldTypeName(name : String) : String = {
     val ret = name match {
       case "sourceViewColumnId" => "Long"
-      case "sourceViewId" => "Long"
+      case "guid" => "Long"
       case "insertedRowDate" => "java.util.Date"
       case "lastUpdatedDate" => "java.util.Date"
-      case "guid" => "Long"
+      case "sourceViewId" => "Long"
       case "columnName" => "String"
       case "columnType" => "String"
       case _ => "Object"
@@ -4606,30 +5087,30 @@ case class SourceViewColumnDto (
     ret
   }
   def prepareInsert(connection : java.sql.Connection) : java.sql.PreparedStatement = {
-    val stat = connection.prepareStatement("insert into sourceViewColumn(sourceViewId,guid,columnName,columnType) values (?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
-    stat.setObject(1, sourceViewId);
-    stat.setObject(2, guid);
+    val stat = connection.prepareStatement("insert into sourceViewColumn(guid,sourceViewId,columnName,columnType) values (?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
+    stat.setObject(1, guid);
+    stat.setObject(2, sourceViewId);
     stat.setObject(3, columnName);
     stat.setObject(4, columnType);
     return stat;
   }
   def modify(sourceViewId : Long, columnName : String, columnType : String) : SourceViewColumnDto = {
-    val dtoModified = new SourceViewColumnDto(this.sourceViewColumnId,sourceViewId,this.insertedRowDate,new java.util.Date(),this.guid,columnName,columnType);
+    val dtoModified = new SourceViewColumnDto(this.sourceViewColumnId,this.guid,this.insertedRowDate,new java.util.Date(),sourceViewId,columnName,columnType);
     dtoModified
   }
 }
 object SourceViewColumnDto {
   val TABLE_NAME = "sourceViewColumn";
   val FIELD_sourceViewColumnId = "sourceViewColumnId";
-  val FIELD_sourceViewId = "sourceViewId";
+  val FIELD_guid = "guid";
   val FIELD_insertedRowDate = "insertedRowDate";
   val FIELD_lastUpdatedDate = "lastUpdatedDate";
-  val FIELD_guid = "guid";
+  val FIELD_sourceViewId = "sourceViewId";
   val FIELD_columnName = "columnName";
   val FIELD_columnType = "columnType";
 
   def createNewSourceViewColumnDto(sourceViewId : Long, columnName : String, columnType : String) : SourceViewColumnDto = {
-    val dto = new SourceViewColumnDto(0,sourceViewId,new java.util.Date(),new java.util.Date(),0,columnName,columnType)
+    val dto = new SourceViewColumnDto(0,0,new java.util.Date(),new java.util.Date(),sourceViewId,columnName,columnType)
     dto
   }
 
@@ -4639,16 +5120,16 @@ object SourceViewColumnDto {
 case class SourceViewTypeDto (
                                val sourceViewTypeId : Long
                                , val guid : Long
-                               , val sourceViewTypeName : String
-                               , val sourceViewTypeClass : String
                                , val insertedRowDate : java.util.Date
                                , val lastUpdatedDate : java.util.Date
+                               , val sourceViewTypeName : String
+                               , val sourceViewTypeClass : String
                              ) extends BaseDto {
   def tableName : String = {
     "sourceViewType";
   }
   def fields : String = {
-    "sourceViewTypeId,guid,sourceViewTypeName,sourceViewTypeClass,insertedRowDate,lastUpdatedDate";
+    "sourceViewTypeId,guid,insertedRowDate,lastUpdatedDate,sourceViewTypeName,sourceViewTypeClass";
   }
   def pkFields : String = {
     "sourceViewTypeId";
@@ -4672,19 +5153,19 @@ case class SourceViewTypeDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(sourceViewTypeId,guid,sourceViewTypeName,sourceViewTypeClass,insertedRowDate,lastUpdatedDate)
+    Array(sourceViewTypeId,guid,insertedRowDate,lastUpdatedDate,sourceViewTypeName,sourceViewTypeClass)
   }
   def toStringArray() : Array[String] = {
-    Array(""+sourceViewTypeId,""+guid,""+sourceViewTypeName,""+sourceViewTypeClass,""+insertedRowDate,""+lastUpdatedDate)
+    Array(""+sourceViewTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceViewTypeName,""+sourceViewTypeClass)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "sourceViewTypeId" => sourceViewTypeId
       case "guid" => guid
-      case "sourceViewTypeName" => sourceViewTypeName
-      case "sourceViewTypeClass" => sourceViewTypeClass
       case "insertedRowDate" => insertedRowDate
       case "lastUpdatedDate" => lastUpdatedDate
+      case "sourceViewTypeName" => sourceViewTypeName
+      case "sourceViewTypeClass" => sourceViewTypeClass
       case _ => null
     }
     ret
@@ -4693,10 +5174,10 @@ case class SourceViewTypeDto (
     val ret = name match {
       case "sourceViewTypeId" => "Long"
       case "guid" => "Long"
-      case "sourceViewTypeName" => "String"
-      case "sourceViewTypeClass" => "String"
       case "insertedRowDate" => "java.util.Date"
       case "lastUpdatedDate" => "java.util.Date"
+      case "sourceViewTypeName" => "String"
+      case "sourceViewTypeClass" => "String"
       case _ => "Object"
     }
     ret
@@ -4709,7 +5190,7 @@ case class SourceViewTypeDto (
     return stat;
   }
   def modify(sourceViewTypeName : String, sourceViewTypeClass : String) : SourceViewTypeDto = {
-    val dtoModified = new SourceViewTypeDto(this.sourceViewTypeId,this.guid,sourceViewTypeName,sourceViewTypeClass,this.insertedRowDate,new java.util.Date());
+    val dtoModified = new SourceViewTypeDto(this.sourceViewTypeId,this.guid,this.insertedRowDate,new java.util.Date(),sourceViewTypeName,sourceViewTypeClass);
     dtoModified
   }
 }
@@ -4717,15 +5198,101 @@ object SourceViewTypeDto {
   val TABLE_NAME = "sourceViewType";
   val FIELD_sourceViewTypeId = "sourceViewTypeId";
   val FIELD_guid = "guid";
-  val FIELD_sourceViewTypeName = "sourceViewTypeName";
-  val FIELD_sourceViewTypeClass = "sourceViewTypeClass";
   val FIELD_insertedRowDate = "insertedRowDate";
   val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_sourceViewTypeName = "sourceViewTypeName";
+  val FIELD_sourceViewTypeClass = "sourceViewTypeClass";
 
   def createNewSourceViewTypeDto(sourceViewTypeName : String, sourceViewTypeClass : String) : SourceViewTypeDto = {
-    val dto = new SourceViewTypeDto(0,0,sourceViewTypeName,sourceViewTypeClass,new java.util.Date(),new java.util.Date())
+    val dto = new SourceViewTypeDto(0,0,new java.util.Date(),new java.util.Date(),sourceViewTypeName,sourceViewTypeClass)
     dto
   }
+
+}
+
+
+case class VAlgorithmColumnTypeSummaryDto (
+                                            val algorithmColumnTypeId : Long
+                                            , val guid : Long
+                                            , val insertedRowDate : java.util.Date
+                                            , val lastUpdatedDate : java.util.Date
+                                            , val algorithmColumnTypeName : String
+                                            , val algorithmColumnTypeDescription : String
+                                            , val algorithmTypeColumnType_count : Int
+                                            , val algorithmScheduleColumn_count : Int
+                                          ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vAlgorithmColumnTypeSummary";
+  }
+  def fields : String = {
+    "algorithmColumnTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmColumnTypeName,algorithmColumnTypeDescription,algorithmTypeColumnType_count,algorithmScheduleColumn_count";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    algorithmColumnTypeSummaryId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(algorithmColumnTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmColumnTypeName,algorithmColumnTypeDescription,algorithmTypeColumnType_count,algorithmScheduleColumn_count)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+algorithmColumnTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmColumnTypeName,""+algorithmColumnTypeDescription,""+algorithmTypeColumnType_count,""+algorithmScheduleColumn_count)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "algorithmColumnTypeId" => algorithmColumnTypeId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "algorithmColumnTypeName" => algorithmColumnTypeName
+      case "algorithmColumnTypeDescription" => algorithmColumnTypeDescription
+      case "algorithmTypeColumnType_count" => algorithmTypeColumnType_count
+      case "algorithmScheduleColumn_count" => algorithmScheduleColumn_count
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "algorithmColumnTypeId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "algorithmColumnTypeName" => "String"
+      case "algorithmColumnTypeDescription" => "String"
+      case "algorithmTypeColumnType_count" => "Int"
+      case "algorithmScheduleColumn_count" => "Int"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VAlgorithmColumnTypeSummaryDto {
+  val TABLE_NAME = "vAlgorithmColumnTypeSummary";
+  val FIELD_algorithmColumnTypeId = "algorithmColumnTypeId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_algorithmColumnTypeName = "algorithmColumnTypeName";
+  val FIELD_algorithmColumnTypeDescription = "algorithmColumnTypeDescription";
+  val FIELD_algorithmTypeColumnType_count = "algorithmTypeColumnType_count";
+  val FIELD_algorithmScheduleColumn_count = "algorithmScheduleColumn_count";
 
 }
 
@@ -4740,11 +5307,11 @@ case class VAlgorithmImplementationDto (
                                          , val algorithmImplementationName : String
                                          , val algorithmImplementationClass : String
                                          , val algorithmTypeVersion_algorithmTypeVersionId : Long
+                                         , val algorithmTypeVersion_insertedRowDate : java.util.Date
+                                         , val algorithmTypeVersion_lastUpdatedDate : java.util.Date
                                          , val algorithmTypeVersion_guid : Long
                                          , val algorithmTypeVersion_algorithmTypeId : Long
                                          , val algorithmTypeVersion_algorithmTypeVersionName : String
-                                         , val algorithmTypeVersion_insertedRowDate : java.util.Date
-                                         , val algorithmTypeVersion_lastUpdatedDate : java.util.Date
                                          , val executorType_executorTypeId : Long
                                          , val executorType_guid : Long
                                          , val executorType_insertedRowDate : java.util.Date
@@ -4756,7 +5323,7 @@ case class VAlgorithmImplementationDto (
     "vAlgorithmImplementation";
   }
   def fields : String = {
-    "algorithmImplementationId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,executorTypeId,algorithmImplementationName,algorithmImplementationClass,algorithmTypeVersion_algorithmTypeVersionId,algorithmTypeVersion_guid,algorithmTypeVersion_algorithmTypeId,algorithmTypeVersion_algorithmTypeVersionName,algorithmTypeVersion_insertedRowDate,algorithmTypeVersion_lastUpdatedDate,executorType_executorTypeId,executorType_guid,executorType_insertedRowDate,executorType_lastUpdatedDate,executorType_executorTypeName,executorType_executorTypeClass";
+    "algorithmImplementationId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,executorTypeId,algorithmImplementationName,algorithmImplementationClass,algorithmTypeVersion_algorithmTypeVersionId,algorithmTypeVersion_insertedRowDate,algorithmTypeVersion_lastUpdatedDate,algorithmTypeVersion_guid,algorithmTypeVersion_algorithmTypeId,algorithmTypeVersion_algorithmTypeVersionName,executorType_executorTypeId,executorType_guid,executorType_insertedRowDate,executorType_lastUpdatedDate,executorType_executorTypeName,executorType_executorTypeClass";
   }
   def pkFields : String = {
     "";
@@ -4780,10 +5347,10 @@ case class VAlgorithmImplementationDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(algorithmImplementationId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,executorTypeId,algorithmImplementationName,algorithmImplementationClass,algorithmTypeVersion_algorithmTypeVersionId,algorithmTypeVersion_guid,algorithmTypeVersion_algorithmTypeId,algorithmTypeVersion_algorithmTypeVersionName,algorithmTypeVersion_insertedRowDate,algorithmTypeVersion_lastUpdatedDate,executorType_executorTypeId,executorType_guid,executorType_insertedRowDate,executorType_lastUpdatedDate,executorType_executorTypeName,executorType_executorTypeClass)
+    Array(algorithmImplementationId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,executorTypeId,algorithmImplementationName,algorithmImplementationClass,algorithmTypeVersion_algorithmTypeVersionId,algorithmTypeVersion_insertedRowDate,algorithmTypeVersion_lastUpdatedDate,algorithmTypeVersion_guid,algorithmTypeVersion_algorithmTypeId,algorithmTypeVersion_algorithmTypeVersionName,executorType_executorTypeId,executorType_guid,executorType_insertedRowDate,executorType_lastUpdatedDate,executorType_executorTypeName,executorType_executorTypeClass)
   }
   def toStringArray() : Array[String] = {
-    Array(""+algorithmImplementationId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmTypeVersionId,""+executorTypeId,""+algorithmImplementationName,""+algorithmImplementationClass,""+algorithmTypeVersion_algorithmTypeVersionId,""+algorithmTypeVersion_guid,""+algorithmTypeVersion_algorithmTypeId,""+algorithmTypeVersion_algorithmTypeVersionName,""+algorithmTypeVersion_insertedRowDate,""+algorithmTypeVersion_lastUpdatedDate,""+executorType_executorTypeId,""+executorType_guid,""+executorType_insertedRowDate,""+executorType_lastUpdatedDate,""+executorType_executorTypeName,""+executorType_executorTypeClass)
+    Array(""+algorithmImplementationId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmTypeVersionId,""+executorTypeId,""+algorithmImplementationName,""+algorithmImplementationClass,""+algorithmTypeVersion_algorithmTypeVersionId,""+algorithmTypeVersion_insertedRowDate,""+algorithmTypeVersion_lastUpdatedDate,""+algorithmTypeVersion_guid,""+algorithmTypeVersion_algorithmTypeId,""+algorithmTypeVersion_algorithmTypeVersionName,""+executorType_executorTypeId,""+executorType_guid,""+executorType_insertedRowDate,""+executorType_lastUpdatedDate,""+executorType_executorTypeName,""+executorType_executorTypeClass)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
@@ -4796,11 +5363,11 @@ case class VAlgorithmImplementationDto (
       case "algorithmImplementationName" => algorithmImplementationName
       case "algorithmImplementationClass" => algorithmImplementationClass
       case "algorithmTypeVersion_algorithmTypeVersionId" => algorithmTypeVersion_algorithmTypeVersionId
+      case "algorithmTypeVersion_insertedRowDate" => algorithmTypeVersion_insertedRowDate
+      case "algorithmTypeVersion_lastUpdatedDate" => algorithmTypeVersion_lastUpdatedDate
       case "algorithmTypeVersion_guid" => algorithmTypeVersion_guid
       case "algorithmTypeVersion_algorithmTypeId" => algorithmTypeVersion_algorithmTypeId
       case "algorithmTypeVersion_algorithmTypeVersionName" => algorithmTypeVersion_algorithmTypeVersionName
-      case "algorithmTypeVersion_insertedRowDate" => algorithmTypeVersion_insertedRowDate
-      case "algorithmTypeVersion_lastUpdatedDate" => algorithmTypeVersion_lastUpdatedDate
       case "executorType_executorTypeId" => executorType_executorTypeId
       case "executorType_guid" => executorType_guid
       case "executorType_insertedRowDate" => executorType_insertedRowDate
@@ -4822,11 +5389,11 @@ case class VAlgorithmImplementationDto (
       case "algorithmImplementationName" => "String"
       case "algorithmImplementationClass" => "String"
       case "algorithmTypeVersion_algorithmTypeVersionId" => "Long"
+      case "algorithmTypeVersion_insertedRowDate" => "java.util.Date"
+      case "algorithmTypeVersion_lastUpdatedDate" => "java.util.Date"
       case "algorithmTypeVersion_guid" => "Long"
       case "algorithmTypeVersion_algorithmTypeId" => "Long"
       case "algorithmTypeVersion_algorithmTypeVersionName" => "String"
-      case "algorithmTypeVersion_insertedRowDate" => "java.util.Date"
-      case "algorithmTypeVersion_lastUpdatedDate" => "java.util.Date"
       case "executorType_executorTypeId" => "Long"
       case "executorType_guid" => "Long"
       case "executorType_insertedRowDate" => "java.util.Date"
@@ -4849,11 +5416,11 @@ object VAlgorithmImplementationDto {
   val FIELD_algorithmImplementationName = "algorithmImplementationName";
   val FIELD_algorithmImplementationClass = "algorithmImplementationClass";
   val FIELD_algorithmTypeVersion_algorithmTypeVersionId = "algorithmTypeVersion_algorithmTypeVersionId";
+  val FIELD_algorithmTypeVersion_insertedRowDate = "algorithmTypeVersion_insertedRowDate";
+  val FIELD_algorithmTypeVersion_lastUpdatedDate = "algorithmTypeVersion_lastUpdatedDate";
   val FIELD_algorithmTypeVersion_guid = "algorithmTypeVersion_guid";
   val FIELD_algorithmTypeVersion_algorithmTypeId = "algorithmTypeVersion_algorithmTypeId";
   val FIELD_algorithmTypeVersion_algorithmTypeVersionName = "algorithmTypeVersion_algorithmTypeVersionName";
-  val FIELD_algorithmTypeVersion_insertedRowDate = "algorithmTypeVersion_insertedRowDate";
-  val FIELD_algorithmTypeVersion_lastUpdatedDate = "algorithmTypeVersion_lastUpdatedDate";
   val FIELD_executorType_executorTypeId = "executorType_executorTypeId";
   val FIELD_executorType_guid = "executorType_guid";
   val FIELD_executorType_insertedRowDate = "executorType_insertedRowDate";
@@ -4864,14 +5431,434 @@ object VAlgorithmImplementationDto {
 }
 
 
+case class VAlgorithmImplementationSummaryDto (
+                                                val algorithmImplementationId : Long
+                                                , val guid : Long
+                                                , val insertedRowDate : java.util.Date
+                                                , val lastUpdatedDate : java.util.Date
+                                                , val algorithmTypeVersionId : Long
+                                                , val executorTypeId : Long
+                                                , val algorithmImplementationName : String
+                                                , val algorithmImplementationClass : String
+                                                , val algorithmSchedule_count : Int
+                                                , val algorithmStorageSupport_count : Int
+                                              ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vAlgorithmImplementationSummary";
+  }
+  def fields : String = {
+    "algorithmImplementationId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,executorTypeId,algorithmImplementationName,algorithmImplementationClass,algorithmSchedule_count,algorithmStorageSupport_count";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    algorithmImplementationSummaryId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(algorithmImplementationId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,executorTypeId,algorithmImplementationName,algorithmImplementationClass,algorithmSchedule_count,algorithmStorageSupport_count)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+algorithmImplementationId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmTypeVersionId,""+executorTypeId,""+algorithmImplementationName,""+algorithmImplementationClass,""+algorithmSchedule_count,""+algorithmStorageSupport_count)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "algorithmImplementationId" => algorithmImplementationId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "algorithmTypeVersionId" => algorithmTypeVersionId
+      case "executorTypeId" => executorTypeId
+      case "algorithmImplementationName" => algorithmImplementationName
+      case "algorithmImplementationClass" => algorithmImplementationClass
+      case "algorithmSchedule_count" => algorithmSchedule_count
+      case "algorithmStorageSupport_count" => algorithmStorageSupport_count
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "algorithmImplementationId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "algorithmTypeVersionId" => "Long"
+      case "executorTypeId" => "Long"
+      case "algorithmImplementationName" => "String"
+      case "algorithmImplementationClass" => "String"
+      case "algorithmSchedule_count" => "Int"
+      case "algorithmStorageSupport_count" => "Int"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VAlgorithmImplementationSummaryDto {
+  val TABLE_NAME = "vAlgorithmImplementationSummary";
+  val FIELD_algorithmImplementationId = "algorithmImplementationId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_algorithmTypeVersionId = "algorithmTypeVersionId";
+  val FIELD_executorTypeId = "executorTypeId";
+  val FIELD_algorithmImplementationName = "algorithmImplementationName";
+  val FIELD_algorithmImplementationClass = "algorithmImplementationClass";
+  val FIELD_algorithmSchedule_count = "algorithmSchedule_count";
+  val FIELD_algorithmStorageSupport_count = "algorithmStorageSupport_count";
+
+}
+
+
+case class VAlgorithmOutputDto (
+                                 val algorithmOutputId : Long
+                                 , val guid : Long
+                                 , val insertedRowDate : java.util.Date
+                                 , val lastUpdatedDate : java.util.Date
+                                 , val algorithmRunId : Long
+                                 , val algorithmOutputTypeId : Long
+                                 , val executorStorageViewId : Long
+                                 , val outputPath : String
+                                 , val algorithmOutputType_algorithmOutputTypeId : Long
+                                 , val algorithmOutputType_guid : Long
+                                 , val algorithmOutputType_insertedRowDate : java.util.Date
+                                 , val algorithmOutputType_lastUpdatedDate : java.util.Date
+                                 , val algorithmOutputType_algorithmOutputTypeName : String
+                                 , val executorStorageView_executorStorageViewId : Long
+                                 , val executorStorageView_guid : Long
+                                 , val executorStorageView_insertedRowDate : java.util.Date
+                                 , val executorStorageView_lastUpdatedDate : java.util.Date
+                                 , val executorStorageView_executorStorageSnapshotId : Long
+                                 , val executorStorageView_executorStorageId : Long
+                                 , val executorStorageView_sourceDownloadId : Long
+                                 , val executorStorageView_sourceViewId : Long
+                                 , val executorStorageView_storagePath : String
+                                 , val executorStorageView_viewSize : Long
+                                 , val executorStorageView_viewRowsCount : Long
+                                 , val executorStorageView_isValid : Int
+                               ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vAlgorithmOutput";
+  }
+  def fields : String = {
+    "algorithmOutputId,guid,insertedRowDate,lastUpdatedDate,algorithmRunId,algorithmOutputTypeId,executorStorageViewId,outputPath,algorithmOutputType_algorithmOutputTypeId,algorithmOutputType_guid,algorithmOutputType_insertedRowDate,algorithmOutputType_lastUpdatedDate,algorithmOutputType_algorithmOutputTypeName,executorStorageView_executorStorageViewId,executorStorageView_guid,executorStorageView_insertedRowDate,executorStorageView_lastUpdatedDate,executorStorageView_executorStorageSnapshotId,executorStorageView_executorStorageId,executorStorageView_sourceDownloadId,executorStorageView_sourceViewId,executorStorageView_storagePath,executorStorageView_viewSize,executorStorageView_viewRowsCount,executorStorageView_isValid";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    algorithmOutputId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(algorithmOutputId,guid,insertedRowDate,lastUpdatedDate,algorithmRunId,algorithmOutputTypeId,executorStorageViewId,outputPath,algorithmOutputType_algorithmOutputTypeId,algorithmOutputType_guid,algorithmOutputType_insertedRowDate,algorithmOutputType_lastUpdatedDate,algorithmOutputType_algorithmOutputTypeName,executorStorageView_executorStorageViewId,executorStorageView_guid,executorStorageView_insertedRowDate,executorStorageView_lastUpdatedDate,executorStorageView_executorStorageSnapshotId,executorStorageView_executorStorageId,executorStorageView_sourceDownloadId,executorStorageView_sourceViewId,executorStorageView_storagePath,executorStorageView_viewSize,executorStorageView_viewRowsCount,executorStorageView_isValid)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+algorithmOutputId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmRunId,""+algorithmOutputTypeId,""+executorStorageViewId,""+outputPath,""+algorithmOutputType_algorithmOutputTypeId,""+algorithmOutputType_guid,""+algorithmOutputType_insertedRowDate,""+algorithmOutputType_lastUpdatedDate,""+algorithmOutputType_algorithmOutputTypeName,""+executorStorageView_executorStorageViewId,""+executorStorageView_guid,""+executorStorageView_insertedRowDate,""+executorStorageView_lastUpdatedDate,""+executorStorageView_executorStorageSnapshotId,""+executorStorageView_executorStorageId,""+executorStorageView_sourceDownloadId,""+executorStorageView_sourceViewId,""+executorStorageView_storagePath,""+executorStorageView_viewSize,""+executorStorageView_viewRowsCount,""+executorStorageView_isValid)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "algorithmOutputId" => algorithmOutputId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "algorithmRunId" => algorithmRunId
+      case "algorithmOutputTypeId" => algorithmOutputTypeId
+      case "executorStorageViewId" => executorStorageViewId
+      case "outputPath" => outputPath
+      case "algorithmOutputType_algorithmOutputTypeId" => algorithmOutputType_algorithmOutputTypeId
+      case "algorithmOutputType_guid" => algorithmOutputType_guid
+      case "algorithmOutputType_insertedRowDate" => algorithmOutputType_insertedRowDate
+      case "algorithmOutputType_lastUpdatedDate" => algorithmOutputType_lastUpdatedDate
+      case "algorithmOutputType_algorithmOutputTypeName" => algorithmOutputType_algorithmOutputTypeName
+      case "executorStorageView_executorStorageViewId" => executorStorageView_executorStorageViewId
+      case "executorStorageView_guid" => executorStorageView_guid
+      case "executorStorageView_insertedRowDate" => executorStorageView_insertedRowDate
+      case "executorStorageView_lastUpdatedDate" => executorStorageView_lastUpdatedDate
+      case "executorStorageView_executorStorageSnapshotId" => executorStorageView_executorStorageSnapshotId
+      case "executorStorageView_executorStorageId" => executorStorageView_executorStorageId
+      case "executorStorageView_sourceDownloadId" => executorStorageView_sourceDownloadId
+      case "executorStorageView_sourceViewId" => executorStorageView_sourceViewId
+      case "executorStorageView_storagePath" => executorStorageView_storagePath
+      case "executorStorageView_viewSize" => executorStorageView_viewSize
+      case "executorStorageView_viewRowsCount" => executorStorageView_viewRowsCount
+      case "executorStorageView_isValid" => executorStorageView_isValid
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "algorithmOutputId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "algorithmRunId" => "Long"
+      case "algorithmOutputTypeId" => "Long"
+      case "executorStorageViewId" => "Long"
+      case "outputPath" => "String"
+      case "algorithmOutputType_algorithmOutputTypeId" => "Long"
+      case "algorithmOutputType_guid" => "Long"
+      case "algorithmOutputType_insertedRowDate" => "java.util.Date"
+      case "algorithmOutputType_lastUpdatedDate" => "java.util.Date"
+      case "algorithmOutputType_algorithmOutputTypeName" => "String"
+      case "executorStorageView_executorStorageViewId" => "Long"
+      case "executorStorageView_guid" => "Long"
+      case "executorStorageView_insertedRowDate" => "java.util.Date"
+      case "executorStorageView_lastUpdatedDate" => "java.util.Date"
+      case "executorStorageView_executorStorageSnapshotId" => "Long"
+      case "executorStorageView_executorStorageId" => "Long"
+      case "executorStorageView_sourceDownloadId" => "Long"
+      case "executorStorageView_sourceViewId" => "Long"
+      case "executorStorageView_storagePath" => "String"
+      case "executorStorageView_viewSize" => "Long"
+      case "executorStorageView_viewRowsCount" => "Long"
+      case "executorStorageView_isValid" => "Int"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VAlgorithmOutputDto {
+  val TABLE_NAME = "vAlgorithmOutput";
+  val FIELD_algorithmOutputId = "algorithmOutputId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_algorithmRunId = "algorithmRunId";
+  val FIELD_algorithmOutputTypeId = "algorithmOutputTypeId";
+  val FIELD_executorStorageViewId = "executorStorageViewId";
+  val FIELD_outputPath = "outputPath";
+  val FIELD_algorithmOutputType_algorithmOutputTypeId = "algorithmOutputType_algorithmOutputTypeId";
+  val FIELD_algorithmOutputType_guid = "algorithmOutputType_guid";
+  val FIELD_algorithmOutputType_insertedRowDate = "algorithmOutputType_insertedRowDate";
+  val FIELD_algorithmOutputType_lastUpdatedDate = "algorithmOutputType_lastUpdatedDate";
+  val FIELD_algorithmOutputType_algorithmOutputTypeName = "algorithmOutputType_algorithmOutputTypeName";
+  val FIELD_executorStorageView_executorStorageViewId = "executorStorageView_executorStorageViewId";
+  val FIELD_executorStorageView_guid = "executorStorageView_guid";
+  val FIELD_executorStorageView_insertedRowDate = "executorStorageView_insertedRowDate";
+  val FIELD_executorStorageView_lastUpdatedDate = "executorStorageView_lastUpdatedDate";
+  val FIELD_executorStorageView_executorStorageSnapshotId = "executorStorageView_executorStorageSnapshotId";
+  val FIELD_executorStorageView_executorStorageId = "executorStorageView_executorStorageId";
+  val FIELD_executorStorageView_sourceDownloadId = "executorStorageView_sourceDownloadId";
+  val FIELD_executorStorageView_sourceViewId = "executorStorageView_sourceViewId";
+  val FIELD_executorStorageView_storagePath = "executorStorageView_storagePath";
+  val FIELD_executorStorageView_viewSize = "executorStorageView_viewSize";
+  val FIELD_executorStorageView_viewRowsCount = "executorStorageView_viewRowsCount";
+  val FIELD_executorStorageView_isValid = "executorStorageView_isValid";
+
+}
+
+
+case class VAlgorithmOutputTypeSummaryDto (
+                                            val algorithmOutputTypeId : Long
+                                            , val guid : Long
+                                            , val insertedRowDate : java.util.Date
+                                            , val lastUpdatedDate : java.util.Date
+                                            , val algorithmOutputTypeName : String
+                                            , val algorithmTypeOutputType_count : Int
+                                            , val algorithmOutput_count : Int
+                                          ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vAlgorithmOutputTypeSummary";
+  }
+  def fields : String = {
+    "algorithmOutputTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmOutputTypeName,algorithmTypeOutputType_count,algorithmOutput_count";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    algorithmOutputTypeSummaryId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(algorithmOutputTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmOutputTypeName,algorithmTypeOutputType_count,algorithmOutput_count)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+algorithmOutputTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmOutputTypeName,""+algorithmTypeOutputType_count,""+algorithmOutput_count)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "algorithmOutputTypeId" => algorithmOutputTypeId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "algorithmOutputTypeName" => algorithmOutputTypeName
+      case "algorithmTypeOutputType_count" => algorithmTypeOutputType_count
+      case "algorithmOutput_count" => algorithmOutput_count
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "algorithmOutputTypeId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "algorithmOutputTypeName" => "String"
+      case "algorithmTypeOutputType_count" => "Int"
+      case "algorithmOutput_count" => "Int"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VAlgorithmOutputTypeSummaryDto {
+  val TABLE_NAME = "vAlgorithmOutputTypeSummary";
+  val FIELD_algorithmOutputTypeId = "algorithmOutputTypeId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_algorithmOutputTypeName = "algorithmOutputTypeName";
+  val FIELD_algorithmTypeOutputType_count = "algorithmTypeOutputType_count";
+  val FIELD_algorithmOutput_count = "algorithmOutput_count";
+
+}
+
+
+case class VAlgorithmParamSummaryDto (
+                                       val algorithmParamId : Long
+                                       , val guid : Long
+                                       , val insertedRowDate : java.util.Date
+                                       , val lastUpdatedDate : java.util.Date
+                                       , val algorithmParamName : String
+                                       , val algorithmParamDescription : String
+                                       , val algorithmParamType : String
+                                       , val algorithmScheduleParam_count : Int
+                                       , val algorithmParamType_count : Int
+                                     ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vAlgorithmParamSummary";
+  }
+  def fields : String = {
+    "algorithmParamId,guid,insertedRowDate,lastUpdatedDate,algorithmParamName,algorithmParamDescription,algorithmParamType,algorithmScheduleParam_count,algorithmParamType_count";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    algorithmParamSummaryId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(algorithmParamId,guid,insertedRowDate,lastUpdatedDate,algorithmParamName,algorithmParamDescription,algorithmParamType,algorithmScheduleParam_count,algorithmParamType_count)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+algorithmParamId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmParamName,""+algorithmParamDescription,""+algorithmParamType,""+algorithmScheduleParam_count,""+algorithmParamType_count)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "algorithmParamId" => algorithmParamId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "algorithmParamName" => algorithmParamName
+      case "algorithmParamDescription" => algorithmParamDescription
+      case "algorithmParamType" => algorithmParamType
+      case "algorithmScheduleParam_count" => algorithmScheduleParam_count
+      case "algorithmParamType_count" => algorithmParamType_count
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "algorithmParamId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "algorithmParamName" => "String"
+      case "algorithmParamDescription" => "String"
+      case "algorithmParamType" => "String"
+      case "algorithmScheduleParam_count" => "Int"
+      case "algorithmParamType_count" => "Int"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VAlgorithmParamSummaryDto {
+  val TABLE_NAME = "vAlgorithmParamSummary";
+  val FIELD_algorithmParamId = "algorithmParamId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_algorithmParamName = "algorithmParamName";
+  val FIELD_algorithmParamDescription = "algorithmParamDescription";
+  val FIELD_algorithmParamType = "algorithmParamType";
+  val FIELD_algorithmScheduleParam_count = "algorithmScheduleParam_count";
+  val FIELD_algorithmParamType_count = "algorithmParamType_count";
+
+}
+
+
 case class VAlgorithmParamTypeDto (
                                     val algorithmParamTypeId : Long
+                                    , val guid : Long
+                                    , val insertedRowDate : java.util.Date
+                                    , val lastUpdatedDate : java.util.Date
                                     , val algorithmParamId : Long
                                     , val algorithmTypeId : Long
                                     , val algorithmTypeVersionId : Long
-                                    , val insertedRowDate : java.util.Date
-                                    , val lastUpdatedDate : java.util.Date
-                                    , val guid : Long
                                     , val algorithmParam_algorithmParamId : Long
                                     , val algorithmParam_guid : Long
                                     , val algorithmParam_insertedRowDate : java.util.Date
@@ -4881,22 +5868,22 @@ case class VAlgorithmParamTypeDto (
                                     , val algorithmParam_algorithmParamType : String
                                     , val algorithmType_algorithmTypeId : Long
                                     , val algorithmType_guid : Long
-                                    , val algorithmType_algorithmTypeName : String
-                                    , val algorithmType_algorithmTypeDescription : String
                                     , val algorithmType_insertedRowDate : java.util.Date
                                     , val algorithmType_lastUpdatedDate : java.util.Date
+                                    , val algorithmType_algorithmTypeName : String
+                                    , val algorithmType_algorithmTypeDescription : String
                                     , val algorithmTypeVersion_algorithmTypeVersionId : Long
+                                    , val algorithmTypeVersion_insertedRowDate : java.util.Date
+                                    , val algorithmTypeVersion_lastUpdatedDate : java.util.Date
                                     , val algorithmTypeVersion_guid : Long
                                     , val algorithmTypeVersion_algorithmTypeId : Long
                                     , val algorithmTypeVersion_algorithmTypeVersionName : String
-                                    , val algorithmTypeVersion_insertedRowDate : java.util.Date
-                                    , val algorithmTypeVersion_lastUpdatedDate : java.util.Date
                                   ) extends BaseReadOnlyDto {
   def tableName : String = {
     "vAlgorithmParamType";
   }
   def fields : String = {
-    "algorithmParamTypeId,algorithmParamId,algorithmTypeId,algorithmTypeVersionId,insertedRowDate,lastUpdatedDate,guid,algorithmParam_algorithmParamId,algorithmParam_guid,algorithmParam_insertedRowDate,algorithmParam_lastUpdatedDate,algorithmParam_algorithmParamName,algorithmParam_algorithmParamDescription,algorithmParam_algorithmParamType,algorithmType_algorithmTypeId,algorithmType_guid,algorithmType_algorithmTypeName,algorithmType_algorithmTypeDescription,algorithmType_insertedRowDate,algorithmType_lastUpdatedDate,algorithmTypeVersion_algorithmTypeVersionId,algorithmTypeVersion_guid,algorithmTypeVersion_algorithmTypeId,algorithmTypeVersion_algorithmTypeVersionName,algorithmTypeVersion_insertedRowDate,algorithmTypeVersion_lastUpdatedDate";
+    "algorithmParamTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmParamId,algorithmTypeId,algorithmTypeVersionId,algorithmParam_algorithmParamId,algorithmParam_guid,algorithmParam_insertedRowDate,algorithmParam_lastUpdatedDate,algorithmParam_algorithmParamName,algorithmParam_algorithmParamDescription,algorithmParam_algorithmParamType,algorithmType_algorithmTypeId,algorithmType_guid,algorithmType_insertedRowDate,algorithmType_lastUpdatedDate,algorithmType_algorithmTypeName,algorithmType_algorithmTypeDescription,algorithmTypeVersion_algorithmTypeVersionId,algorithmTypeVersion_insertedRowDate,algorithmTypeVersion_lastUpdatedDate,algorithmTypeVersion_guid,algorithmTypeVersion_algorithmTypeId,algorithmTypeVersion_algorithmTypeVersionName";
   }
   def pkFields : String = {
     "";
@@ -4920,20 +5907,20 @@ case class VAlgorithmParamTypeDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(algorithmParamTypeId,algorithmParamId,algorithmTypeId,algorithmTypeVersionId,insertedRowDate,lastUpdatedDate,guid,algorithmParam_algorithmParamId,algorithmParam_guid,algorithmParam_insertedRowDate,algorithmParam_lastUpdatedDate,algorithmParam_algorithmParamName,algorithmParam_algorithmParamDescription,algorithmParam_algorithmParamType,algorithmType_algorithmTypeId,algorithmType_guid,algorithmType_algorithmTypeName,algorithmType_algorithmTypeDescription,algorithmType_insertedRowDate,algorithmType_lastUpdatedDate,algorithmTypeVersion_algorithmTypeVersionId,algorithmTypeVersion_guid,algorithmTypeVersion_algorithmTypeId,algorithmTypeVersion_algorithmTypeVersionName,algorithmTypeVersion_insertedRowDate,algorithmTypeVersion_lastUpdatedDate)
+    Array(algorithmParamTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmParamId,algorithmTypeId,algorithmTypeVersionId,algorithmParam_algorithmParamId,algorithmParam_guid,algorithmParam_insertedRowDate,algorithmParam_lastUpdatedDate,algorithmParam_algorithmParamName,algorithmParam_algorithmParamDescription,algorithmParam_algorithmParamType,algorithmType_algorithmTypeId,algorithmType_guid,algorithmType_insertedRowDate,algorithmType_lastUpdatedDate,algorithmType_algorithmTypeName,algorithmType_algorithmTypeDescription,algorithmTypeVersion_algorithmTypeVersionId,algorithmTypeVersion_insertedRowDate,algorithmTypeVersion_lastUpdatedDate,algorithmTypeVersion_guid,algorithmTypeVersion_algorithmTypeId,algorithmTypeVersion_algorithmTypeVersionName)
   }
   def toStringArray() : Array[String] = {
-    Array(""+algorithmParamTypeId,""+algorithmParamId,""+algorithmTypeId,""+algorithmTypeVersionId,""+insertedRowDate,""+lastUpdatedDate,""+guid,""+algorithmParam_algorithmParamId,""+algorithmParam_guid,""+algorithmParam_insertedRowDate,""+algorithmParam_lastUpdatedDate,""+algorithmParam_algorithmParamName,""+algorithmParam_algorithmParamDescription,""+algorithmParam_algorithmParamType,""+algorithmType_algorithmTypeId,""+algorithmType_guid,""+algorithmType_algorithmTypeName,""+algorithmType_algorithmTypeDescription,""+algorithmType_insertedRowDate,""+algorithmType_lastUpdatedDate,""+algorithmTypeVersion_algorithmTypeVersionId,""+algorithmTypeVersion_guid,""+algorithmTypeVersion_algorithmTypeId,""+algorithmTypeVersion_algorithmTypeVersionName,""+algorithmTypeVersion_insertedRowDate,""+algorithmTypeVersion_lastUpdatedDate)
+    Array(""+algorithmParamTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmParamId,""+algorithmTypeId,""+algorithmTypeVersionId,""+algorithmParam_algorithmParamId,""+algorithmParam_guid,""+algorithmParam_insertedRowDate,""+algorithmParam_lastUpdatedDate,""+algorithmParam_algorithmParamName,""+algorithmParam_algorithmParamDescription,""+algorithmParam_algorithmParamType,""+algorithmType_algorithmTypeId,""+algorithmType_guid,""+algorithmType_insertedRowDate,""+algorithmType_lastUpdatedDate,""+algorithmType_algorithmTypeName,""+algorithmType_algorithmTypeDescription,""+algorithmTypeVersion_algorithmTypeVersionId,""+algorithmTypeVersion_insertedRowDate,""+algorithmTypeVersion_lastUpdatedDate,""+algorithmTypeVersion_guid,""+algorithmTypeVersion_algorithmTypeId,""+algorithmTypeVersion_algorithmTypeVersionName)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "algorithmParamTypeId" => algorithmParamTypeId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
       case "algorithmParamId" => algorithmParamId
       case "algorithmTypeId" => algorithmTypeId
       case "algorithmTypeVersionId" => algorithmTypeVersionId
-      case "insertedRowDate" => insertedRowDate
-      case "lastUpdatedDate" => lastUpdatedDate
-      case "guid" => guid
       case "algorithmParam_algorithmParamId" => algorithmParam_algorithmParamId
       case "algorithmParam_guid" => algorithmParam_guid
       case "algorithmParam_insertedRowDate" => algorithmParam_insertedRowDate
@@ -4943,16 +5930,16 @@ case class VAlgorithmParamTypeDto (
       case "algorithmParam_algorithmParamType" => algorithmParam_algorithmParamType
       case "algorithmType_algorithmTypeId" => algorithmType_algorithmTypeId
       case "algorithmType_guid" => algorithmType_guid
-      case "algorithmType_algorithmTypeName" => algorithmType_algorithmTypeName
-      case "algorithmType_algorithmTypeDescription" => algorithmType_algorithmTypeDescription
       case "algorithmType_insertedRowDate" => algorithmType_insertedRowDate
       case "algorithmType_lastUpdatedDate" => algorithmType_lastUpdatedDate
+      case "algorithmType_algorithmTypeName" => algorithmType_algorithmTypeName
+      case "algorithmType_algorithmTypeDescription" => algorithmType_algorithmTypeDescription
       case "algorithmTypeVersion_algorithmTypeVersionId" => algorithmTypeVersion_algorithmTypeVersionId
+      case "algorithmTypeVersion_insertedRowDate" => algorithmTypeVersion_insertedRowDate
+      case "algorithmTypeVersion_lastUpdatedDate" => algorithmTypeVersion_lastUpdatedDate
       case "algorithmTypeVersion_guid" => algorithmTypeVersion_guid
       case "algorithmTypeVersion_algorithmTypeId" => algorithmTypeVersion_algorithmTypeId
       case "algorithmTypeVersion_algorithmTypeVersionName" => algorithmTypeVersion_algorithmTypeVersionName
-      case "algorithmTypeVersion_insertedRowDate" => algorithmTypeVersion_insertedRowDate
-      case "algorithmTypeVersion_lastUpdatedDate" => algorithmTypeVersion_lastUpdatedDate
       case _ => null
     }
     ret
@@ -4960,12 +5947,12 @@ case class VAlgorithmParamTypeDto (
   def getFieldTypeName(name : String) : String = {
     val ret = name match {
       case "algorithmParamTypeId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
       case "algorithmParamId" => "Long"
       case "algorithmTypeId" => "Long"
       case "algorithmTypeVersionId" => "Long"
-      case "insertedRowDate" => "java.util.Date"
-      case "lastUpdatedDate" => "java.util.Date"
-      case "guid" => "Long"
       case "algorithmParam_algorithmParamId" => "Long"
       case "algorithmParam_guid" => "Long"
       case "algorithmParam_insertedRowDate" => "java.util.Date"
@@ -4975,16 +5962,16 @@ case class VAlgorithmParamTypeDto (
       case "algorithmParam_algorithmParamType" => "String"
       case "algorithmType_algorithmTypeId" => "Long"
       case "algorithmType_guid" => "Long"
-      case "algorithmType_algorithmTypeName" => "String"
-      case "algorithmType_algorithmTypeDescription" => "String"
       case "algorithmType_insertedRowDate" => "java.util.Date"
       case "algorithmType_lastUpdatedDate" => "java.util.Date"
+      case "algorithmType_algorithmTypeName" => "String"
+      case "algorithmType_algorithmTypeDescription" => "String"
       case "algorithmTypeVersion_algorithmTypeVersionId" => "Long"
+      case "algorithmTypeVersion_insertedRowDate" => "java.util.Date"
+      case "algorithmTypeVersion_lastUpdatedDate" => "java.util.Date"
       case "algorithmTypeVersion_guid" => "Long"
       case "algorithmTypeVersion_algorithmTypeId" => "Long"
       case "algorithmTypeVersion_algorithmTypeVersionName" => "String"
-      case "algorithmTypeVersion_insertedRowDate" => "java.util.Date"
-      case "algorithmTypeVersion_lastUpdatedDate" => "java.util.Date"
       case _ => "Object"
     }
     ret
@@ -4993,12 +5980,12 @@ case class VAlgorithmParamTypeDto (
 object VAlgorithmParamTypeDto {
   val TABLE_NAME = "vAlgorithmParamType";
   val FIELD_algorithmParamTypeId = "algorithmParamTypeId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_algorithmParamId = "algorithmParamId";
   val FIELD_algorithmTypeId = "algorithmTypeId";
   val FIELD_algorithmTypeVersionId = "algorithmTypeVersionId";
-  val FIELD_insertedRowDate = "insertedRowDate";
-  val FIELD_lastUpdatedDate = "lastUpdatedDate";
-  val FIELD_guid = "guid";
   val FIELD_algorithmParam_algorithmParamId = "algorithmParam_algorithmParamId";
   val FIELD_algorithmParam_guid = "algorithmParam_guid";
   val FIELD_algorithmParam_insertedRowDate = "algorithmParam_insertedRowDate";
@@ -5008,16 +5995,16 @@ object VAlgorithmParamTypeDto {
   val FIELD_algorithmParam_algorithmParamType = "algorithmParam_algorithmParamType";
   val FIELD_algorithmType_algorithmTypeId = "algorithmType_algorithmTypeId";
   val FIELD_algorithmType_guid = "algorithmType_guid";
-  val FIELD_algorithmType_algorithmTypeName = "algorithmType_algorithmTypeName";
-  val FIELD_algorithmType_algorithmTypeDescription = "algorithmType_algorithmTypeDescription";
   val FIELD_algorithmType_insertedRowDate = "algorithmType_insertedRowDate";
   val FIELD_algorithmType_lastUpdatedDate = "algorithmType_lastUpdatedDate";
+  val FIELD_algorithmType_algorithmTypeName = "algorithmType_algorithmTypeName";
+  val FIELD_algorithmType_algorithmTypeDescription = "algorithmType_algorithmTypeDescription";
   val FIELD_algorithmTypeVersion_algorithmTypeVersionId = "algorithmTypeVersion_algorithmTypeVersionId";
+  val FIELD_algorithmTypeVersion_insertedRowDate = "algorithmTypeVersion_insertedRowDate";
+  val FIELD_algorithmTypeVersion_lastUpdatedDate = "algorithmTypeVersion_lastUpdatedDate";
   val FIELD_algorithmTypeVersion_guid = "algorithmTypeVersion_guid";
   val FIELD_algorithmTypeVersion_algorithmTypeId = "algorithmTypeVersion_algorithmTypeId";
   val FIELD_algorithmTypeVersion_algorithmTypeVersionName = "algorithmTypeVersion_algorithmTypeVersionName";
-  val FIELD_algorithmTypeVersion_insertedRowDate = "algorithmTypeVersion_insertedRowDate";
-  val FIELD_algorithmTypeVersion_lastUpdatedDate = "algorithmTypeVersion_lastUpdatedDate";
 
 }
 
@@ -5025,36 +6012,50 @@ object VAlgorithmParamTypeDto {
 case class VAlgorithmRunDto (
                               val algorithmRunId : Long
                               , val guid : Long
+                              , val insertedRowDate : java.util.Date
+                              , val lastUpdatedDate : java.util.Date
                               , val algorithmScheduleId : Long
                               , val executorInstanceId : Long
                               , val executorStorageId : Long
+                              , val algorithmRunTypeId : Long
                               , val algorithmRunName : String
-                              , val insertedRowDate : java.util.Date
-                              , val lastUpdatedDate : java.util.Date
                               , val runDate : java.util.Date
+                              , val runStatus : String
+                              , val isError : Int
+                              , val errorDescription : String
                               , val isRunning : Int
                               , val isFinished : Int
+                              , val algorithmRunType_algorithmRunTypeId : Long
+                              , val algorithmRunType_guid : Long
+                              , val algorithmRunType_insertedRowDate : java.util.Date
+                              , val algorithmRunType_lastUpdatedDate : java.util.Date
+                              , val algorithmRunType_algorithmRunTypeName : String
                               , val algorithmSchedule_algorithmScheduleId : Long
                               , val algorithmSchedule_guid : Long
+                              , val algorithmSchedule_insertedRowDate : java.util.Date
+                              , val algorithmSchedule_lastUpdatedDate : java.util.Date
                               , val algorithmSchedule_algorithmImplementationId : Long
                               , val algorithmSchedule_algorithmScheduleTypeId : Long
                               , val algorithmSchedule_algorithmScheduleName : String
                               , val algorithmSchedule_isScheduled : Int
-                              , val algorithmSchedule_insertedRowDate : java.util.Date
-                              , val algorithmSchedule_lastUpdatedDate : java.util.Date
+                              , val algorithmSchedule_intervalValue : Long
+                              , val algorithmSchedule_isRunning : Int
                               , val executorInstance_executorInstanceId : Long
                               , val executorInstance_guid : Long
+                              , val executorInstance_insertedRowDate : java.util.Date
+                              , val executorInstance_lastUpdatedDate : java.util.Date
                               , val executorInstance_executorTypeId : Long
                               , val executorInstance_executorHostId : Long
+                              , val executorInstance_executorContextId : Long
                               , val executorInstance_executorInstanceName : String
                               , val executorInstance_isRunning : Int
                               , val executorInstance_isFinished : Int
                               , val executorInstance_portNumber : Int
-                              , val executorInstance_insertedRowDate : java.util.Date
-                              , val executorInstance_lastUpdatedDate : java.util.Date
                               , val executorInstance_endDate : java.util.Date
                               , val executorStorage_executorStorageId : Long
                               , val executorStorage_guid : Long
+                              , val executorStorage_insertedRowDate : java.util.Date
+                              , val executorStorage_lastUpdatedDate : java.util.Date
                               , val executorStorage_executorHostId : Long
                               , val executorStorage_executorStorageTypeId : Long
                               , val executorStorage_storageDefinition : String
@@ -5062,14 +6063,12 @@ case class VAlgorithmRunDto (
                               , val executorStorage_storageFulllPath : String
                               , val executorStorage_isRunning : Int
                               , val executorStorage_portNumber : Int
-                              , val executorStorage_insertedRowDate : java.util.Date
-                              , val executorStorage_lastUpdatedDate : java.util.Date
                             ) extends BaseReadOnlyDto {
   def tableName : String = {
     "vAlgorithmRun";
   }
   def fields : String = {
-    "algorithmRunId,guid,algorithmScheduleId,executorInstanceId,executorStorageId,algorithmRunName,insertedRowDate,lastUpdatedDate,runDate,isRunning,isFinished,algorithmSchedule_algorithmScheduleId,algorithmSchedule_guid,algorithmSchedule_algorithmImplementationId,algorithmSchedule_algorithmScheduleTypeId,algorithmSchedule_algorithmScheduleName,algorithmSchedule_isScheduled,algorithmSchedule_insertedRowDate,algorithmSchedule_lastUpdatedDate,executorInstance_executorInstanceId,executorInstance_guid,executorInstance_executorTypeId,executorInstance_executorHostId,executorInstance_executorInstanceName,executorInstance_isRunning,executorInstance_isFinished,executorInstance_portNumber,executorInstance_insertedRowDate,executorInstance_lastUpdatedDate,executorInstance_endDate,executorStorage_executorStorageId,executorStorage_guid,executorStorage_executorHostId,executorStorage_executorStorageTypeId,executorStorage_storageDefinition,executorStorage_storageBasePath,executorStorage_storageFulllPath,executorStorage_isRunning,executorStorage_portNumber,executorStorage_insertedRowDate,executorStorage_lastUpdatedDate";
+    "algorithmRunId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleId,executorInstanceId,executorStorageId,algorithmRunTypeId,algorithmRunName,runDate,runStatus,isError,errorDescription,isRunning,isFinished,algorithmRunType_algorithmRunTypeId,algorithmRunType_guid,algorithmRunType_insertedRowDate,algorithmRunType_lastUpdatedDate,algorithmRunType_algorithmRunTypeName,algorithmSchedule_algorithmScheduleId,algorithmSchedule_guid,algorithmSchedule_insertedRowDate,algorithmSchedule_lastUpdatedDate,algorithmSchedule_algorithmImplementationId,algorithmSchedule_algorithmScheduleTypeId,algorithmSchedule_algorithmScheduleName,algorithmSchedule_isScheduled,algorithmSchedule_intervalValue,algorithmSchedule_isRunning,executorInstance_executorInstanceId,executorInstance_guid,executorInstance_insertedRowDate,executorInstance_lastUpdatedDate,executorInstance_executorTypeId,executorInstance_executorHostId,executorInstance_executorContextId,executorInstance_executorInstanceName,executorInstance_isRunning,executorInstance_isFinished,executorInstance_portNumber,executorInstance_endDate,executorStorage_executorStorageId,executorStorage_guid,executorStorage_insertedRowDate,executorStorage_lastUpdatedDate,executorStorage_executorHostId,executorStorage_executorStorageTypeId,executorStorage_storageDefinition,executorStorage_storageBasePath,executorStorage_storageFulllPath,executorStorage_isRunning,executorStorage_portNumber";
   }
   def pkFields : String = {
     "";
@@ -5093,45 +6092,59 @@ case class VAlgorithmRunDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(algorithmRunId,guid,algorithmScheduleId,executorInstanceId,executorStorageId,algorithmRunName,insertedRowDate,lastUpdatedDate,runDate,isRunning,isFinished,algorithmSchedule_algorithmScheduleId,algorithmSchedule_guid,algorithmSchedule_algorithmImplementationId,algorithmSchedule_algorithmScheduleTypeId,algorithmSchedule_algorithmScheduleName,algorithmSchedule_isScheduled,algorithmSchedule_insertedRowDate,algorithmSchedule_lastUpdatedDate,executorInstance_executorInstanceId,executorInstance_guid,executorInstance_executorTypeId,executorInstance_executorHostId,executorInstance_executorInstanceName,executorInstance_isRunning,executorInstance_isFinished,executorInstance_portNumber,executorInstance_insertedRowDate,executorInstance_lastUpdatedDate,executorInstance_endDate,executorStorage_executorStorageId,executorStorage_guid,executorStorage_executorHostId,executorStorage_executorStorageTypeId,executorStorage_storageDefinition,executorStorage_storageBasePath,executorStorage_storageFulllPath,executorStorage_isRunning,executorStorage_portNumber,executorStorage_insertedRowDate,executorStorage_lastUpdatedDate)
+    Array(algorithmRunId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleId,executorInstanceId,executorStorageId,algorithmRunTypeId,algorithmRunName,runDate,runStatus,isError,errorDescription,isRunning,isFinished,algorithmRunType_algorithmRunTypeId,algorithmRunType_guid,algorithmRunType_insertedRowDate,algorithmRunType_lastUpdatedDate,algorithmRunType_algorithmRunTypeName,algorithmSchedule_algorithmScheduleId,algorithmSchedule_guid,algorithmSchedule_insertedRowDate,algorithmSchedule_lastUpdatedDate,algorithmSchedule_algorithmImplementationId,algorithmSchedule_algorithmScheduleTypeId,algorithmSchedule_algorithmScheduleName,algorithmSchedule_isScheduled,algorithmSchedule_intervalValue,algorithmSchedule_isRunning,executorInstance_executorInstanceId,executorInstance_guid,executorInstance_insertedRowDate,executorInstance_lastUpdatedDate,executorInstance_executorTypeId,executorInstance_executorHostId,executorInstance_executorContextId,executorInstance_executorInstanceName,executorInstance_isRunning,executorInstance_isFinished,executorInstance_portNumber,executorInstance_endDate,executorStorage_executorStorageId,executorStorage_guid,executorStorage_insertedRowDate,executorStorage_lastUpdatedDate,executorStorage_executorHostId,executorStorage_executorStorageTypeId,executorStorage_storageDefinition,executorStorage_storageBasePath,executorStorage_storageFulllPath,executorStorage_isRunning,executorStorage_portNumber)
   }
   def toStringArray() : Array[String] = {
-    Array(""+algorithmRunId,""+guid,""+algorithmScheduleId,""+executorInstanceId,""+executorStorageId,""+algorithmRunName,""+insertedRowDate,""+lastUpdatedDate,""+runDate,""+isRunning,""+isFinished,""+algorithmSchedule_algorithmScheduleId,""+algorithmSchedule_guid,""+algorithmSchedule_algorithmImplementationId,""+algorithmSchedule_algorithmScheduleTypeId,""+algorithmSchedule_algorithmScheduleName,""+algorithmSchedule_isScheduled,""+algorithmSchedule_insertedRowDate,""+algorithmSchedule_lastUpdatedDate,""+executorInstance_executorInstanceId,""+executorInstance_guid,""+executorInstance_executorTypeId,""+executorInstance_executorHostId,""+executorInstance_executorInstanceName,""+executorInstance_isRunning,""+executorInstance_isFinished,""+executorInstance_portNumber,""+executorInstance_insertedRowDate,""+executorInstance_lastUpdatedDate,""+executorInstance_endDate,""+executorStorage_executorStorageId,""+executorStorage_guid,""+executorStorage_executorHostId,""+executorStorage_executorStorageTypeId,""+executorStorage_storageDefinition,""+executorStorage_storageBasePath,""+executorStorage_storageFulllPath,""+executorStorage_isRunning,""+executorStorage_portNumber,""+executorStorage_insertedRowDate,""+executorStorage_lastUpdatedDate)
+    Array(""+algorithmRunId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmScheduleId,""+executorInstanceId,""+executorStorageId,""+algorithmRunTypeId,""+algorithmRunName,""+runDate,""+runStatus,""+isError,""+errorDescription,""+isRunning,""+isFinished,""+algorithmRunType_algorithmRunTypeId,""+algorithmRunType_guid,""+algorithmRunType_insertedRowDate,""+algorithmRunType_lastUpdatedDate,""+algorithmRunType_algorithmRunTypeName,""+algorithmSchedule_algorithmScheduleId,""+algorithmSchedule_guid,""+algorithmSchedule_insertedRowDate,""+algorithmSchedule_lastUpdatedDate,""+algorithmSchedule_algorithmImplementationId,""+algorithmSchedule_algorithmScheduleTypeId,""+algorithmSchedule_algorithmScheduleName,""+algorithmSchedule_isScheduled,""+algorithmSchedule_intervalValue,""+algorithmSchedule_isRunning,""+executorInstance_executorInstanceId,""+executorInstance_guid,""+executorInstance_insertedRowDate,""+executorInstance_lastUpdatedDate,""+executorInstance_executorTypeId,""+executorInstance_executorHostId,""+executorInstance_executorContextId,""+executorInstance_executorInstanceName,""+executorInstance_isRunning,""+executorInstance_isFinished,""+executorInstance_portNumber,""+executorInstance_endDate,""+executorStorage_executorStorageId,""+executorStorage_guid,""+executorStorage_insertedRowDate,""+executorStorage_lastUpdatedDate,""+executorStorage_executorHostId,""+executorStorage_executorStorageTypeId,""+executorStorage_storageDefinition,""+executorStorage_storageBasePath,""+executorStorage_storageFulllPath,""+executorStorage_isRunning,""+executorStorage_portNumber)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "algorithmRunId" => algorithmRunId
       case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
       case "algorithmScheduleId" => algorithmScheduleId
       case "executorInstanceId" => executorInstanceId
       case "executorStorageId" => executorStorageId
+      case "algorithmRunTypeId" => algorithmRunTypeId
       case "algorithmRunName" => algorithmRunName
-      case "insertedRowDate" => insertedRowDate
-      case "lastUpdatedDate" => lastUpdatedDate
       case "runDate" => runDate
+      case "runStatus" => runStatus
+      case "isError" => isError
+      case "errorDescription" => errorDescription
       case "isRunning" => isRunning
       case "isFinished" => isFinished
+      case "algorithmRunType_algorithmRunTypeId" => algorithmRunType_algorithmRunTypeId
+      case "algorithmRunType_guid" => algorithmRunType_guid
+      case "algorithmRunType_insertedRowDate" => algorithmRunType_insertedRowDate
+      case "algorithmRunType_lastUpdatedDate" => algorithmRunType_lastUpdatedDate
+      case "algorithmRunType_algorithmRunTypeName" => algorithmRunType_algorithmRunTypeName
       case "algorithmSchedule_algorithmScheduleId" => algorithmSchedule_algorithmScheduleId
       case "algorithmSchedule_guid" => algorithmSchedule_guid
+      case "algorithmSchedule_insertedRowDate" => algorithmSchedule_insertedRowDate
+      case "algorithmSchedule_lastUpdatedDate" => algorithmSchedule_lastUpdatedDate
       case "algorithmSchedule_algorithmImplementationId" => algorithmSchedule_algorithmImplementationId
       case "algorithmSchedule_algorithmScheduleTypeId" => algorithmSchedule_algorithmScheduleTypeId
       case "algorithmSchedule_algorithmScheduleName" => algorithmSchedule_algorithmScheduleName
       case "algorithmSchedule_isScheduled" => algorithmSchedule_isScheduled
-      case "algorithmSchedule_insertedRowDate" => algorithmSchedule_insertedRowDate
-      case "algorithmSchedule_lastUpdatedDate" => algorithmSchedule_lastUpdatedDate
+      case "algorithmSchedule_intervalValue" => algorithmSchedule_intervalValue
+      case "algorithmSchedule_isRunning" => algorithmSchedule_isRunning
       case "executorInstance_executorInstanceId" => executorInstance_executorInstanceId
       case "executorInstance_guid" => executorInstance_guid
+      case "executorInstance_insertedRowDate" => executorInstance_insertedRowDate
+      case "executorInstance_lastUpdatedDate" => executorInstance_lastUpdatedDate
       case "executorInstance_executorTypeId" => executorInstance_executorTypeId
       case "executorInstance_executorHostId" => executorInstance_executorHostId
+      case "executorInstance_executorContextId" => executorInstance_executorContextId
       case "executorInstance_executorInstanceName" => executorInstance_executorInstanceName
       case "executorInstance_isRunning" => executorInstance_isRunning
       case "executorInstance_isFinished" => executorInstance_isFinished
       case "executorInstance_portNumber" => executorInstance_portNumber
-      case "executorInstance_insertedRowDate" => executorInstance_insertedRowDate
-      case "executorInstance_lastUpdatedDate" => executorInstance_lastUpdatedDate
       case "executorInstance_endDate" => executorInstance_endDate
       case "executorStorage_executorStorageId" => executorStorage_executorStorageId
       case "executorStorage_guid" => executorStorage_guid
+      case "executorStorage_insertedRowDate" => executorStorage_insertedRowDate
+      case "executorStorage_lastUpdatedDate" => executorStorage_lastUpdatedDate
       case "executorStorage_executorHostId" => executorStorage_executorHostId
       case "executorStorage_executorStorageTypeId" => executorStorage_executorStorageTypeId
       case "executorStorage_storageDefinition" => executorStorage_storageDefinition
@@ -5139,8 +6152,6 @@ case class VAlgorithmRunDto (
       case "executorStorage_storageFulllPath" => executorStorage_storageFulllPath
       case "executorStorage_isRunning" => executorStorage_isRunning
       case "executorStorage_portNumber" => executorStorage_portNumber
-      case "executorStorage_insertedRowDate" => executorStorage_insertedRowDate
-      case "executorStorage_lastUpdatedDate" => executorStorage_lastUpdatedDate
       case _ => null
     }
     ret
@@ -5149,36 +6160,50 @@ case class VAlgorithmRunDto (
     val ret = name match {
       case "algorithmRunId" => "Long"
       case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
       case "algorithmScheduleId" => "Long"
       case "executorInstanceId" => "Long"
       case "executorStorageId" => "Long"
+      case "algorithmRunTypeId" => "Long"
       case "algorithmRunName" => "String"
-      case "insertedRowDate" => "java.util.Date"
-      case "lastUpdatedDate" => "java.util.Date"
       case "runDate" => "java.util.Date"
+      case "runStatus" => "String"
+      case "isError" => "Int"
+      case "errorDescription" => "String"
       case "isRunning" => "Int"
       case "isFinished" => "Int"
+      case "algorithmRunType_algorithmRunTypeId" => "Long"
+      case "algorithmRunType_guid" => "Long"
+      case "algorithmRunType_insertedRowDate" => "java.util.Date"
+      case "algorithmRunType_lastUpdatedDate" => "java.util.Date"
+      case "algorithmRunType_algorithmRunTypeName" => "String"
       case "algorithmSchedule_algorithmScheduleId" => "Long"
       case "algorithmSchedule_guid" => "Long"
+      case "algorithmSchedule_insertedRowDate" => "java.util.Date"
+      case "algorithmSchedule_lastUpdatedDate" => "java.util.Date"
       case "algorithmSchedule_algorithmImplementationId" => "Long"
       case "algorithmSchedule_algorithmScheduleTypeId" => "Long"
       case "algorithmSchedule_algorithmScheduleName" => "String"
       case "algorithmSchedule_isScheduled" => "Int"
-      case "algorithmSchedule_insertedRowDate" => "java.util.Date"
-      case "algorithmSchedule_lastUpdatedDate" => "java.util.Date"
+      case "algorithmSchedule_intervalValue" => "Long"
+      case "algorithmSchedule_isRunning" => "Int"
       case "executorInstance_executorInstanceId" => "Long"
       case "executorInstance_guid" => "Long"
+      case "executorInstance_insertedRowDate" => "java.util.Date"
+      case "executorInstance_lastUpdatedDate" => "java.util.Date"
       case "executorInstance_executorTypeId" => "Long"
       case "executorInstance_executorHostId" => "Long"
+      case "executorInstance_executorContextId" => "Long"
       case "executorInstance_executorInstanceName" => "String"
       case "executorInstance_isRunning" => "Int"
       case "executorInstance_isFinished" => "Int"
       case "executorInstance_portNumber" => "Int"
-      case "executorInstance_insertedRowDate" => "java.util.Date"
-      case "executorInstance_lastUpdatedDate" => "java.util.Date"
       case "executorInstance_endDate" => "java.util.Date"
       case "executorStorage_executorStorageId" => "Long"
       case "executorStorage_guid" => "Long"
+      case "executorStorage_insertedRowDate" => "java.util.Date"
+      case "executorStorage_lastUpdatedDate" => "java.util.Date"
       case "executorStorage_executorHostId" => "Long"
       case "executorStorage_executorStorageTypeId" => "Long"
       case "executorStorage_storageDefinition" => "String"
@@ -5186,8 +6211,6 @@ case class VAlgorithmRunDto (
       case "executorStorage_storageFulllPath" => "String"
       case "executorStorage_isRunning" => "Int"
       case "executorStorage_portNumber" => "Int"
-      case "executorStorage_insertedRowDate" => "java.util.Date"
-      case "executorStorage_lastUpdatedDate" => "java.util.Date"
       case _ => "Object"
     }
     ret
@@ -5197,36 +6220,50 @@ object VAlgorithmRunDto {
   val TABLE_NAME = "vAlgorithmRun";
   val FIELD_algorithmRunId = "algorithmRunId";
   val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_algorithmScheduleId = "algorithmScheduleId";
   val FIELD_executorInstanceId = "executorInstanceId";
   val FIELD_executorStorageId = "executorStorageId";
+  val FIELD_algorithmRunTypeId = "algorithmRunTypeId";
   val FIELD_algorithmRunName = "algorithmRunName";
-  val FIELD_insertedRowDate = "insertedRowDate";
-  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_runDate = "runDate";
+  val FIELD_runStatus = "runStatus";
+  val FIELD_isError = "isError";
+  val FIELD_errorDescription = "errorDescription";
   val FIELD_isRunning = "isRunning";
   val FIELD_isFinished = "isFinished";
+  val FIELD_algorithmRunType_algorithmRunTypeId = "algorithmRunType_algorithmRunTypeId";
+  val FIELD_algorithmRunType_guid = "algorithmRunType_guid";
+  val FIELD_algorithmRunType_insertedRowDate = "algorithmRunType_insertedRowDate";
+  val FIELD_algorithmRunType_lastUpdatedDate = "algorithmRunType_lastUpdatedDate";
+  val FIELD_algorithmRunType_algorithmRunTypeName = "algorithmRunType_algorithmRunTypeName";
   val FIELD_algorithmSchedule_algorithmScheduleId = "algorithmSchedule_algorithmScheduleId";
   val FIELD_algorithmSchedule_guid = "algorithmSchedule_guid";
+  val FIELD_algorithmSchedule_insertedRowDate = "algorithmSchedule_insertedRowDate";
+  val FIELD_algorithmSchedule_lastUpdatedDate = "algorithmSchedule_lastUpdatedDate";
   val FIELD_algorithmSchedule_algorithmImplementationId = "algorithmSchedule_algorithmImplementationId";
   val FIELD_algorithmSchedule_algorithmScheduleTypeId = "algorithmSchedule_algorithmScheduleTypeId";
   val FIELD_algorithmSchedule_algorithmScheduleName = "algorithmSchedule_algorithmScheduleName";
   val FIELD_algorithmSchedule_isScheduled = "algorithmSchedule_isScheduled";
-  val FIELD_algorithmSchedule_insertedRowDate = "algorithmSchedule_insertedRowDate";
-  val FIELD_algorithmSchedule_lastUpdatedDate = "algorithmSchedule_lastUpdatedDate";
+  val FIELD_algorithmSchedule_intervalValue = "algorithmSchedule_intervalValue";
+  val FIELD_algorithmSchedule_isRunning = "algorithmSchedule_isRunning";
   val FIELD_executorInstance_executorInstanceId = "executorInstance_executorInstanceId";
   val FIELD_executorInstance_guid = "executorInstance_guid";
+  val FIELD_executorInstance_insertedRowDate = "executorInstance_insertedRowDate";
+  val FIELD_executorInstance_lastUpdatedDate = "executorInstance_lastUpdatedDate";
   val FIELD_executorInstance_executorTypeId = "executorInstance_executorTypeId";
   val FIELD_executorInstance_executorHostId = "executorInstance_executorHostId";
+  val FIELD_executorInstance_executorContextId = "executorInstance_executorContextId";
   val FIELD_executorInstance_executorInstanceName = "executorInstance_executorInstanceName";
   val FIELD_executorInstance_isRunning = "executorInstance_isRunning";
   val FIELD_executorInstance_isFinished = "executorInstance_isFinished";
   val FIELD_executorInstance_portNumber = "executorInstance_portNumber";
-  val FIELD_executorInstance_insertedRowDate = "executorInstance_insertedRowDate";
-  val FIELD_executorInstance_lastUpdatedDate = "executorInstance_lastUpdatedDate";
   val FIELD_executorInstance_endDate = "executorInstance_endDate";
   val FIELD_executorStorage_executorStorageId = "executorStorage_executorStorageId";
   val FIELD_executorStorage_guid = "executorStorage_guid";
+  val FIELD_executorStorage_insertedRowDate = "executorStorage_insertedRowDate";
+  val FIELD_executorStorage_lastUpdatedDate = "executorStorage_lastUpdatedDate";
   val FIELD_executorStorage_executorHostId = "executorStorage_executorHostId";
   val FIELD_executorStorage_executorStorageTypeId = "executorStorage_executorStorageTypeId";
   val FIELD_executorStorage_storageDefinition = "executorStorage_storageDefinition";
@@ -5234,8 +6271,206 @@ object VAlgorithmRunDto {
   val FIELD_executorStorage_storageFulllPath = "executorStorage_storageFulllPath";
   val FIELD_executorStorage_isRunning = "executorStorage_isRunning";
   val FIELD_executorStorage_portNumber = "executorStorage_portNumber";
-  val FIELD_executorStorage_insertedRowDate = "executorStorage_insertedRowDate";
-  val FIELD_executorStorage_lastUpdatedDate = "executorStorage_lastUpdatedDate";
+
+}
+
+
+case class VAlgorithmRunSummaryDto (
+                                     val algorithmRunId : Long
+                                     , val guid : Long
+                                     , val insertedRowDate : java.util.Date
+                                     , val lastUpdatedDate : java.util.Date
+                                     , val algorithmScheduleId : Long
+                                     , val executorInstanceId : Long
+                                     , val executorStorageId : Long
+                                     , val algorithmRunTypeId : Long
+                                     , val algorithmRunName : String
+                                     , val runDate : java.util.Date
+                                     , val runStatus : String
+                                     , val isError : Int
+                                     , val errorDescription : String
+                                     , val isRunning : Int
+                                     , val isFinished : Int
+                                     , val algorithmRunView_count : Int
+                                     , val algorithmOutput_count : Int
+                                   ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vAlgorithmRunSummary";
+  }
+  def fields : String = {
+    "algorithmRunId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleId,executorInstanceId,executorStorageId,algorithmRunTypeId,algorithmRunName,runDate,runStatus,isError,errorDescription,isRunning,isFinished,algorithmRunView_count,algorithmOutput_count";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    algorithmRunSummaryId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(algorithmRunId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleId,executorInstanceId,executorStorageId,algorithmRunTypeId,algorithmRunName,runDate,runStatus,isError,errorDescription,isRunning,isFinished,algorithmRunView_count,algorithmOutput_count)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+algorithmRunId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmScheduleId,""+executorInstanceId,""+executorStorageId,""+algorithmRunTypeId,""+algorithmRunName,""+runDate,""+runStatus,""+isError,""+errorDescription,""+isRunning,""+isFinished,""+algorithmRunView_count,""+algorithmOutput_count)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "algorithmRunId" => algorithmRunId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "algorithmScheduleId" => algorithmScheduleId
+      case "executorInstanceId" => executorInstanceId
+      case "executorStorageId" => executorStorageId
+      case "algorithmRunTypeId" => algorithmRunTypeId
+      case "algorithmRunName" => algorithmRunName
+      case "runDate" => runDate
+      case "runStatus" => runStatus
+      case "isError" => isError
+      case "errorDescription" => errorDescription
+      case "isRunning" => isRunning
+      case "isFinished" => isFinished
+      case "algorithmRunView_count" => algorithmRunView_count
+      case "algorithmOutput_count" => algorithmOutput_count
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "algorithmRunId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "algorithmScheduleId" => "Long"
+      case "executorInstanceId" => "Long"
+      case "executorStorageId" => "Long"
+      case "algorithmRunTypeId" => "Long"
+      case "algorithmRunName" => "String"
+      case "runDate" => "java.util.Date"
+      case "runStatus" => "String"
+      case "isError" => "Int"
+      case "errorDescription" => "String"
+      case "isRunning" => "Int"
+      case "isFinished" => "Int"
+      case "algorithmRunView_count" => "Int"
+      case "algorithmOutput_count" => "Int"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VAlgorithmRunSummaryDto {
+  val TABLE_NAME = "vAlgorithmRunSummary";
+  val FIELD_algorithmRunId = "algorithmRunId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_algorithmScheduleId = "algorithmScheduleId";
+  val FIELD_executorInstanceId = "executorInstanceId";
+  val FIELD_executorStorageId = "executorStorageId";
+  val FIELD_algorithmRunTypeId = "algorithmRunTypeId";
+  val FIELD_algorithmRunName = "algorithmRunName";
+  val FIELD_runDate = "runDate";
+  val FIELD_runStatus = "runStatus";
+  val FIELD_isError = "isError";
+  val FIELD_errorDescription = "errorDescription";
+  val FIELD_isRunning = "isRunning";
+  val FIELD_isFinished = "isFinished";
+  val FIELD_algorithmRunView_count = "algorithmRunView_count";
+  val FIELD_algorithmOutput_count = "algorithmOutput_count";
+
+}
+
+
+case class VAlgorithmRunTypeSummaryDto (
+                                         val algorithmRunTypeId : Long
+                                         , val guid : Long
+                                         , val insertedRowDate : java.util.Date
+                                         , val lastUpdatedDate : java.util.Date
+                                         , val algorithmRunTypeName : String
+                                         , val algorithmRun_count : Int
+                                       ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vAlgorithmRunTypeSummary";
+  }
+  def fields : String = {
+    "algorithmRunTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmRunTypeName,algorithmRun_count";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    algorithmRunTypeSummaryId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(algorithmRunTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmRunTypeName,algorithmRun_count)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+algorithmRunTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmRunTypeName,""+algorithmRun_count)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "algorithmRunTypeId" => algorithmRunTypeId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "algorithmRunTypeName" => algorithmRunTypeName
+      case "algorithmRun_count" => algorithmRun_count
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "algorithmRunTypeId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "algorithmRunTypeName" => "String"
+      case "algorithmRun_count" => "Int"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VAlgorithmRunTypeSummaryDto {
+  val TABLE_NAME = "vAlgorithmRunTypeSummary";
+  val FIELD_algorithmRunTypeId = "algorithmRunTypeId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_algorithmRunTypeName = "algorithmRunTypeName";
+  val FIELD_algorithmRun_count = "algorithmRun_count";
 
 }
 
@@ -5243,20 +6478,24 @@ object VAlgorithmRunDto {
 case class VAlgorithmRunViewDto (
                                   val algorithmRunViewId : Long
                                   , val guid : Long
-                                  , val algorithmRunId : Long
-                                  , val executorStorageViewId : Long
                                   , val insertedRowDate : java.util.Date
                                   , val lastUpdatedDate : java.util.Date
+                                  , val algorithmRunId : Long
+                                  , val executorStorageViewId : Long
                                   , val isDownloaded : Int
                                   , val algorithmRun_algorithmRunId : Long
                                   , val algorithmRun_guid : Long
+                                  , val algorithmRun_insertedRowDate : java.util.Date
+                                  , val algorithmRun_lastUpdatedDate : java.util.Date
                                   , val algorithmRun_algorithmScheduleId : Long
                                   , val algorithmRun_executorInstanceId : Long
                                   , val algorithmRun_executorStorageId : Long
+                                  , val algorithmRun_algorithmRunTypeId : Long
                                   , val algorithmRun_algorithmRunName : String
-                                  , val algorithmRun_insertedRowDate : java.util.Date
-                                  , val algorithmRun_lastUpdatedDate : java.util.Date
                                   , val algorithmRun_runDate : java.util.Date
+                                  , val algorithmRun_runStatus : String
+                                  , val algorithmRun_isError : Int
+                                  , val algorithmRun_errorDescription : String
                                   , val algorithmRun_isRunning : Int
                                   , val algorithmRun_isFinished : Int
                                   , val executorStorageView_executorStorageViewId : Long
@@ -5266,15 +6505,17 @@ case class VAlgorithmRunViewDto (
                                   , val executorStorageView_executorStorageSnapshotId : Long
                                   , val executorStorageView_executorStorageId : Long
                                   , val executorStorageView_sourceDownloadId : Long
+                                  , val executorStorageView_sourceViewId : Long
                                   , val executorStorageView_storagePath : String
                                   , val executorStorageView_viewSize : Long
                                   , val executorStorageView_viewRowsCount : Long
+                                  , val executorStorageView_isValid : Int
                                 ) extends BaseReadOnlyDto {
   def tableName : String = {
     "vAlgorithmRunView";
   }
   def fields : String = {
-    "algorithmRunViewId,guid,algorithmRunId,executorStorageViewId,insertedRowDate,lastUpdatedDate,isDownloaded,algorithmRun_algorithmRunId,algorithmRun_guid,algorithmRun_algorithmScheduleId,algorithmRun_executorInstanceId,algorithmRun_executorStorageId,algorithmRun_algorithmRunName,algorithmRun_insertedRowDate,algorithmRun_lastUpdatedDate,algorithmRun_runDate,algorithmRun_isRunning,algorithmRun_isFinished,executorStorageView_executorStorageViewId,executorStorageView_guid,executorStorageView_insertedRowDate,executorStorageView_lastUpdatedDate,executorStorageView_executorStorageSnapshotId,executorStorageView_executorStorageId,executorStorageView_sourceDownloadId,executorStorageView_storagePath,executorStorageView_viewSize,executorStorageView_viewRowsCount";
+    "algorithmRunViewId,guid,insertedRowDate,lastUpdatedDate,algorithmRunId,executorStorageViewId,isDownloaded,algorithmRun_algorithmRunId,algorithmRun_guid,algorithmRun_insertedRowDate,algorithmRun_lastUpdatedDate,algorithmRun_algorithmScheduleId,algorithmRun_executorInstanceId,algorithmRun_executorStorageId,algorithmRun_algorithmRunTypeId,algorithmRun_algorithmRunName,algorithmRun_runDate,algorithmRun_runStatus,algorithmRun_isError,algorithmRun_errorDescription,algorithmRun_isRunning,algorithmRun_isFinished,executorStorageView_executorStorageViewId,executorStorageView_guid,executorStorageView_insertedRowDate,executorStorageView_lastUpdatedDate,executorStorageView_executorStorageSnapshotId,executorStorageView_executorStorageId,executorStorageView_sourceDownloadId,executorStorageView_sourceViewId,executorStorageView_storagePath,executorStorageView_viewSize,executorStorageView_viewRowsCount,executorStorageView_isValid";
   }
   def pkFields : String = {
     "";
@@ -5298,29 +6539,33 @@ case class VAlgorithmRunViewDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(algorithmRunViewId,guid,algorithmRunId,executorStorageViewId,insertedRowDate,lastUpdatedDate,isDownloaded,algorithmRun_algorithmRunId,algorithmRun_guid,algorithmRun_algorithmScheduleId,algorithmRun_executorInstanceId,algorithmRun_executorStorageId,algorithmRun_algorithmRunName,algorithmRun_insertedRowDate,algorithmRun_lastUpdatedDate,algorithmRun_runDate,algorithmRun_isRunning,algorithmRun_isFinished,executorStorageView_executorStorageViewId,executorStorageView_guid,executorStorageView_insertedRowDate,executorStorageView_lastUpdatedDate,executorStorageView_executorStorageSnapshotId,executorStorageView_executorStorageId,executorStorageView_sourceDownloadId,executorStorageView_storagePath,executorStorageView_viewSize,executorStorageView_viewRowsCount)
+    Array(algorithmRunViewId,guid,insertedRowDate,lastUpdatedDate,algorithmRunId,executorStorageViewId,isDownloaded,algorithmRun_algorithmRunId,algorithmRun_guid,algorithmRun_insertedRowDate,algorithmRun_lastUpdatedDate,algorithmRun_algorithmScheduleId,algorithmRun_executorInstanceId,algorithmRun_executorStorageId,algorithmRun_algorithmRunTypeId,algorithmRun_algorithmRunName,algorithmRun_runDate,algorithmRun_runStatus,algorithmRun_isError,algorithmRun_errorDescription,algorithmRun_isRunning,algorithmRun_isFinished,executorStorageView_executorStorageViewId,executorStorageView_guid,executorStorageView_insertedRowDate,executorStorageView_lastUpdatedDate,executorStorageView_executorStorageSnapshotId,executorStorageView_executorStorageId,executorStorageView_sourceDownloadId,executorStorageView_sourceViewId,executorStorageView_storagePath,executorStorageView_viewSize,executorStorageView_viewRowsCount,executorStorageView_isValid)
   }
   def toStringArray() : Array[String] = {
-    Array(""+algorithmRunViewId,""+guid,""+algorithmRunId,""+executorStorageViewId,""+insertedRowDate,""+lastUpdatedDate,""+isDownloaded,""+algorithmRun_algorithmRunId,""+algorithmRun_guid,""+algorithmRun_algorithmScheduleId,""+algorithmRun_executorInstanceId,""+algorithmRun_executorStorageId,""+algorithmRun_algorithmRunName,""+algorithmRun_insertedRowDate,""+algorithmRun_lastUpdatedDate,""+algorithmRun_runDate,""+algorithmRun_isRunning,""+algorithmRun_isFinished,""+executorStorageView_executorStorageViewId,""+executorStorageView_guid,""+executorStorageView_insertedRowDate,""+executorStorageView_lastUpdatedDate,""+executorStorageView_executorStorageSnapshotId,""+executorStorageView_executorStorageId,""+executorStorageView_sourceDownloadId,""+executorStorageView_storagePath,""+executorStorageView_viewSize,""+executorStorageView_viewRowsCount)
+    Array(""+algorithmRunViewId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmRunId,""+executorStorageViewId,""+isDownloaded,""+algorithmRun_algorithmRunId,""+algorithmRun_guid,""+algorithmRun_insertedRowDate,""+algorithmRun_lastUpdatedDate,""+algorithmRun_algorithmScheduleId,""+algorithmRun_executorInstanceId,""+algorithmRun_executorStorageId,""+algorithmRun_algorithmRunTypeId,""+algorithmRun_algorithmRunName,""+algorithmRun_runDate,""+algorithmRun_runStatus,""+algorithmRun_isError,""+algorithmRun_errorDescription,""+algorithmRun_isRunning,""+algorithmRun_isFinished,""+executorStorageView_executorStorageViewId,""+executorStorageView_guid,""+executorStorageView_insertedRowDate,""+executorStorageView_lastUpdatedDate,""+executorStorageView_executorStorageSnapshotId,""+executorStorageView_executorStorageId,""+executorStorageView_sourceDownloadId,""+executorStorageView_sourceViewId,""+executorStorageView_storagePath,""+executorStorageView_viewSize,""+executorStorageView_viewRowsCount,""+executorStorageView_isValid)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "algorithmRunViewId" => algorithmRunViewId
       case "guid" => guid
-      case "algorithmRunId" => algorithmRunId
-      case "executorStorageViewId" => executorStorageViewId
       case "insertedRowDate" => insertedRowDate
       case "lastUpdatedDate" => lastUpdatedDate
+      case "algorithmRunId" => algorithmRunId
+      case "executorStorageViewId" => executorStorageViewId
       case "isDownloaded" => isDownloaded
       case "algorithmRun_algorithmRunId" => algorithmRun_algorithmRunId
       case "algorithmRun_guid" => algorithmRun_guid
+      case "algorithmRun_insertedRowDate" => algorithmRun_insertedRowDate
+      case "algorithmRun_lastUpdatedDate" => algorithmRun_lastUpdatedDate
       case "algorithmRun_algorithmScheduleId" => algorithmRun_algorithmScheduleId
       case "algorithmRun_executorInstanceId" => algorithmRun_executorInstanceId
       case "algorithmRun_executorStorageId" => algorithmRun_executorStorageId
+      case "algorithmRun_algorithmRunTypeId" => algorithmRun_algorithmRunTypeId
       case "algorithmRun_algorithmRunName" => algorithmRun_algorithmRunName
-      case "algorithmRun_insertedRowDate" => algorithmRun_insertedRowDate
-      case "algorithmRun_lastUpdatedDate" => algorithmRun_lastUpdatedDate
       case "algorithmRun_runDate" => algorithmRun_runDate
+      case "algorithmRun_runStatus" => algorithmRun_runStatus
+      case "algorithmRun_isError" => algorithmRun_isError
+      case "algorithmRun_errorDescription" => algorithmRun_errorDescription
       case "algorithmRun_isRunning" => algorithmRun_isRunning
       case "algorithmRun_isFinished" => algorithmRun_isFinished
       case "executorStorageView_executorStorageViewId" => executorStorageView_executorStorageViewId
@@ -5330,9 +6575,11 @@ case class VAlgorithmRunViewDto (
       case "executorStorageView_executorStorageSnapshotId" => executorStorageView_executorStorageSnapshotId
       case "executorStorageView_executorStorageId" => executorStorageView_executorStorageId
       case "executorStorageView_sourceDownloadId" => executorStorageView_sourceDownloadId
+      case "executorStorageView_sourceViewId" => executorStorageView_sourceViewId
       case "executorStorageView_storagePath" => executorStorageView_storagePath
       case "executorStorageView_viewSize" => executorStorageView_viewSize
       case "executorStorageView_viewRowsCount" => executorStorageView_viewRowsCount
+      case "executorStorageView_isValid" => executorStorageView_isValid
       case _ => null
     }
     ret
@@ -5341,20 +6588,24 @@ case class VAlgorithmRunViewDto (
     val ret = name match {
       case "algorithmRunViewId" => "Long"
       case "guid" => "Long"
-      case "algorithmRunId" => "Long"
-      case "executorStorageViewId" => "Long"
       case "insertedRowDate" => "java.util.Date"
       case "lastUpdatedDate" => "java.util.Date"
+      case "algorithmRunId" => "Long"
+      case "executorStorageViewId" => "Long"
       case "isDownloaded" => "Int"
       case "algorithmRun_algorithmRunId" => "Long"
       case "algorithmRun_guid" => "Long"
+      case "algorithmRun_insertedRowDate" => "java.util.Date"
+      case "algorithmRun_lastUpdatedDate" => "java.util.Date"
       case "algorithmRun_algorithmScheduleId" => "Long"
       case "algorithmRun_executorInstanceId" => "Long"
       case "algorithmRun_executorStorageId" => "Long"
+      case "algorithmRun_algorithmRunTypeId" => "Long"
       case "algorithmRun_algorithmRunName" => "String"
-      case "algorithmRun_insertedRowDate" => "java.util.Date"
-      case "algorithmRun_lastUpdatedDate" => "java.util.Date"
       case "algorithmRun_runDate" => "java.util.Date"
+      case "algorithmRun_runStatus" => "String"
+      case "algorithmRun_isError" => "Int"
+      case "algorithmRun_errorDescription" => "String"
       case "algorithmRun_isRunning" => "Int"
       case "algorithmRun_isFinished" => "Int"
       case "executorStorageView_executorStorageViewId" => "Long"
@@ -5364,9 +6615,11 @@ case class VAlgorithmRunViewDto (
       case "executorStorageView_executorStorageSnapshotId" => "Long"
       case "executorStorageView_executorStorageId" => "Long"
       case "executorStorageView_sourceDownloadId" => "Long"
+      case "executorStorageView_sourceViewId" => "Long"
       case "executorStorageView_storagePath" => "String"
       case "executorStorageView_viewSize" => "Long"
       case "executorStorageView_viewRowsCount" => "Long"
+      case "executorStorageView_isValid" => "Int"
       case _ => "Object"
     }
     ret
@@ -5376,20 +6629,24 @@ object VAlgorithmRunViewDto {
   val TABLE_NAME = "vAlgorithmRunView";
   val FIELD_algorithmRunViewId = "algorithmRunViewId";
   val FIELD_guid = "guid";
-  val FIELD_algorithmRunId = "algorithmRunId";
-  val FIELD_executorStorageViewId = "executorStorageViewId";
   val FIELD_insertedRowDate = "insertedRowDate";
   val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_algorithmRunId = "algorithmRunId";
+  val FIELD_executorStorageViewId = "executorStorageViewId";
   val FIELD_isDownloaded = "isDownloaded";
   val FIELD_algorithmRun_algorithmRunId = "algorithmRun_algorithmRunId";
   val FIELD_algorithmRun_guid = "algorithmRun_guid";
+  val FIELD_algorithmRun_insertedRowDate = "algorithmRun_insertedRowDate";
+  val FIELD_algorithmRun_lastUpdatedDate = "algorithmRun_lastUpdatedDate";
   val FIELD_algorithmRun_algorithmScheduleId = "algorithmRun_algorithmScheduleId";
   val FIELD_algorithmRun_executorInstanceId = "algorithmRun_executorInstanceId";
   val FIELD_algorithmRun_executorStorageId = "algorithmRun_executorStorageId";
+  val FIELD_algorithmRun_algorithmRunTypeId = "algorithmRun_algorithmRunTypeId";
   val FIELD_algorithmRun_algorithmRunName = "algorithmRun_algorithmRunName";
-  val FIELD_algorithmRun_insertedRowDate = "algorithmRun_insertedRowDate";
-  val FIELD_algorithmRun_lastUpdatedDate = "algorithmRun_lastUpdatedDate";
   val FIELD_algorithmRun_runDate = "algorithmRun_runDate";
+  val FIELD_algorithmRun_runStatus = "algorithmRun_runStatus";
+  val FIELD_algorithmRun_isError = "algorithmRun_isError";
+  val FIELD_algorithmRun_errorDescription = "algorithmRun_errorDescription";
   val FIELD_algorithmRun_isRunning = "algorithmRun_isRunning";
   val FIELD_algorithmRun_isFinished = "algorithmRun_isFinished";
   val FIELD_executorStorageView_executorStorageViewId = "executorStorageView_executorStorageViewId";
@@ -5399,9 +6656,11 @@ object VAlgorithmRunViewDto {
   val FIELD_executorStorageView_executorStorageSnapshotId = "executorStorageView_executorStorageSnapshotId";
   val FIELD_executorStorageView_executorStorageId = "executorStorageView_executorStorageId";
   val FIELD_executorStorageView_sourceDownloadId = "executorStorageView_sourceDownloadId";
+  val FIELD_executorStorageView_sourceViewId = "executorStorageView_sourceViewId";
   val FIELD_executorStorageView_storagePath = "executorStorageView_storagePath";
   val FIELD_executorStorageView_viewSize = "executorStorageView_viewSize";
   val FIELD_executorStorageView_viewRowsCount = "executorStorageView_viewRowsCount";
+  val FIELD_executorStorageView_isValid = "executorStorageView_isValid";
 
 }
 
@@ -5409,12 +6668,14 @@ object VAlgorithmRunViewDto {
 case class VAlgorithmScheduleDto (
                                    val algorithmScheduleId : Long
                                    , val guid : Long
+                                   , val insertedRowDate : java.util.Date
+                                   , val lastUpdatedDate : java.util.Date
                                    , val algorithmImplementationId : Long
                                    , val algorithmScheduleTypeId : Long
                                    , val algorithmScheduleName : String
                                    , val isScheduled : Int
-                                   , val insertedRowDate : java.util.Date
-                                   , val lastUpdatedDate : java.util.Date
+                                   , val intervalValue : Long
+                                   , val isRunning : Int
                                    , val algorithmImplementation_algorithmImplementationId : Long
                                    , val algorithmImplementation_guid : Long
                                    , val algorithmImplementation_insertedRowDate : java.util.Date
@@ -5425,15 +6686,15 @@ case class VAlgorithmScheduleDto (
                                    , val algorithmImplementation_algorithmImplementationClass : String
                                    , val algorithmScheduleType_algorithmScheduleTypeId : Long
                                    , val algorithmScheduleType_guid : Long
-                                   , val algorithmScheduleType_algorithmScheduleTypeName : String
                                    , val algorithmScheduleType_insertedRowDate : java.util.Date
                                    , val algorithmScheduleType_lastUpdatedDate : java.util.Date
+                                   , val algorithmScheduleType_algorithmScheduleTypeName : String
                                  ) extends BaseReadOnlyDto {
   def tableName : String = {
     "vAlgorithmSchedule";
   }
   def fields : String = {
-    "algorithmScheduleId,guid,algorithmImplementationId,algorithmScheduleTypeId,algorithmScheduleName,isScheduled,insertedRowDate,lastUpdatedDate,algorithmImplementation_algorithmImplementationId,algorithmImplementation_guid,algorithmImplementation_insertedRowDate,algorithmImplementation_lastUpdatedDate,algorithmImplementation_algorithmTypeVersionId,algorithmImplementation_executorTypeId,algorithmImplementation_algorithmImplementationName,algorithmImplementation_algorithmImplementationClass,algorithmScheduleType_algorithmScheduleTypeId,algorithmScheduleType_guid,algorithmScheduleType_algorithmScheduleTypeName,algorithmScheduleType_insertedRowDate,algorithmScheduleType_lastUpdatedDate";
+    "algorithmScheduleId,guid,insertedRowDate,lastUpdatedDate,algorithmImplementationId,algorithmScheduleTypeId,algorithmScheduleName,isScheduled,intervalValue,isRunning,algorithmImplementation_algorithmImplementationId,algorithmImplementation_guid,algorithmImplementation_insertedRowDate,algorithmImplementation_lastUpdatedDate,algorithmImplementation_algorithmTypeVersionId,algorithmImplementation_executorTypeId,algorithmImplementation_algorithmImplementationName,algorithmImplementation_algorithmImplementationClass,algorithmScheduleType_algorithmScheduleTypeId,algorithmScheduleType_guid,algorithmScheduleType_insertedRowDate,algorithmScheduleType_lastUpdatedDate,algorithmScheduleType_algorithmScheduleTypeName";
   }
   def pkFields : String = {
     "";
@@ -5457,21 +6718,23 @@ case class VAlgorithmScheduleDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(algorithmScheduleId,guid,algorithmImplementationId,algorithmScheduleTypeId,algorithmScheduleName,isScheduled,insertedRowDate,lastUpdatedDate,algorithmImplementation_algorithmImplementationId,algorithmImplementation_guid,algorithmImplementation_insertedRowDate,algorithmImplementation_lastUpdatedDate,algorithmImplementation_algorithmTypeVersionId,algorithmImplementation_executorTypeId,algorithmImplementation_algorithmImplementationName,algorithmImplementation_algorithmImplementationClass,algorithmScheduleType_algorithmScheduleTypeId,algorithmScheduleType_guid,algorithmScheduleType_algorithmScheduleTypeName,algorithmScheduleType_insertedRowDate,algorithmScheduleType_lastUpdatedDate)
+    Array(algorithmScheduleId,guid,insertedRowDate,lastUpdatedDate,algorithmImplementationId,algorithmScheduleTypeId,algorithmScheduleName,isScheduled,intervalValue,isRunning,algorithmImplementation_algorithmImplementationId,algorithmImplementation_guid,algorithmImplementation_insertedRowDate,algorithmImplementation_lastUpdatedDate,algorithmImplementation_algorithmTypeVersionId,algorithmImplementation_executorTypeId,algorithmImplementation_algorithmImplementationName,algorithmImplementation_algorithmImplementationClass,algorithmScheduleType_algorithmScheduleTypeId,algorithmScheduleType_guid,algorithmScheduleType_insertedRowDate,algorithmScheduleType_lastUpdatedDate,algorithmScheduleType_algorithmScheduleTypeName)
   }
   def toStringArray() : Array[String] = {
-    Array(""+algorithmScheduleId,""+guid,""+algorithmImplementationId,""+algorithmScheduleTypeId,""+algorithmScheduleName,""+isScheduled,""+insertedRowDate,""+lastUpdatedDate,""+algorithmImplementation_algorithmImplementationId,""+algorithmImplementation_guid,""+algorithmImplementation_insertedRowDate,""+algorithmImplementation_lastUpdatedDate,""+algorithmImplementation_algorithmTypeVersionId,""+algorithmImplementation_executorTypeId,""+algorithmImplementation_algorithmImplementationName,""+algorithmImplementation_algorithmImplementationClass,""+algorithmScheduleType_algorithmScheduleTypeId,""+algorithmScheduleType_guid,""+algorithmScheduleType_algorithmScheduleTypeName,""+algorithmScheduleType_insertedRowDate,""+algorithmScheduleType_lastUpdatedDate)
+    Array(""+algorithmScheduleId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmImplementationId,""+algorithmScheduleTypeId,""+algorithmScheduleName,""+isScheduled,""+intervalValue,""+isRunning,""+algorithmImplementation_algorithmImplementationId,""+algorithmImplementation_guid,""+algorithmImplementation_insertedRowDate,""+algorithmImplementation_lastUpdatedDate,""+algorithmImplementation_algorithmTypeVersionId,""+algorithmImplementation_executorTypeId,""+algorithmImplementation_algorithmImplementationName,""+algorithmImplementation_algorithmImplementationClass,""+algorithmScheduleType_algorithmScheduleTypeId,""+algorithmScheduleType_guid,""+algorithmScheduleType_insertedRowDate,""+algorithmScheduleType_lastUpdatedDate,""+algorithmScheduleType_algorithmScheduleTypeName)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "algorithmScheduleId" => algorithmScheduleId
       case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
       case "algorithmImplementationId" => algorithmImplementationId
       case "algorithmScheduleTypeId" => algorithmScheduleTypeId
       case "algorithmScheduleName" => algorithmScheduleName
       case "isScheduled" => isScheduled
-      case "insertedRowDate" => insertedRowDate
-      case "lastUpdatedDate" => lastUpdatedDate
+      case "intervalValue" => intervalValue
+      case "isRunning" => isRunning
       case "algorithmImplementation_algorithmImplementationId" => algorithmImplementation_algorithmImplementationId
       case "algorithmImplementation_guid" => algorithmImplementation_guid
       case "algorithmImplementation_insertedRowDate" => algorithmImplementation_insertedRowDate
@@ -5482,9 +6745,9 @@ case class VAlgorithmScheduleDto (
       case "algorithmImplementation_algorithmImplementationClass" => algorithmImplementation_algorithmImplementationClass
       case "algorithmScheduleType_algorithmScheduleTypeId" => algorithmScheduleType_algorithmScheduleTypeId
       case "algorithmScheduleType_guid" => algorithmScheduleType_guid
-      case "algorithmScheduleType_algorithmScheduleTypeName" => algorithmScheduleType_algorithmScheduleTypeName
       case "algorithmScheduleType_insertedRowDate" => algorithmScheduleType_insertedRowDate
       case "algorithmScheduleType_lastUpdatedDate" => algorithmScheduleType_lastUpdatedDate
+      case "algorithmScheduleType_algorithmScheduleTypeName" => algorithmScheduleType_algorithmScheduleTypeName
       case _ => null
     }
     ret
@@ -5493,12 +6756,14 @@ case class VAlgorithmScheduleDto (
     val ret = name match {
       case "algorithmScheduleId" => "Long"
       case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
       case "algorithmImplementationId" => "Long"
       case "algorithmScheduleTypeId" => "Long"
       case "algorithmScheduleName" => "String"
       case "isScheduled" => "Int"
-      case "insertedRowDate" => "java.util.Date"
-      case "lastUpdatedDate" => "java.util.Date"
+      case "intervalValue" => "Long"
+      case "isRunning" => "Int"
       case "algorithmImplementation_algorithmImplementationId" => "Long"
       case "algorithmImplementation_guid" => "Long"
       case "algorithmImplementation_insertedRowDate" => "java.util.Date"
@@ -5509,9 +6774,9 @@ case class VAlgorithmScheduleDto (
       case "algorithmImplementation_algorithmImplementationClass" => "String"
       case "algorithmScheduleType_algorithmScheduleTypeId" => "Long"
       case "algorithmScheduleType_guid" => "Long"
-      case "algorithmScheduleType_algorithmScheduleTypeName" => "String"
       case "algorithmScheduleType_insertedRowDate" => "java.util.Date"
       case "algorithmScheduleType_lastUpdatedDate" => "java.util.Date"
+      case "algorithmScheduleType_algorithmScheduleTypeName" => "String"
       case _ => "Object"
     }
     ret
@@ -5521,12 +6786,14 @@ object VAlgorithmScheduleDto {
   val TABLE_NAME = "vAlgorithmSchedule";
   val FIELD_algorithmScheduleId = "algorithmScheduleId";
   val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_algorithmImplementationId = "algorithmImplementationId";
   val FIELD_algorithmScheduleTypeId = "algorithmScheduleTypeId";
   val FIELD_algorithmScheduleName = "algorithmScheduleName";
   val FIELD_isScheduled = "isScheduled";
-  val FIELD_insertedRowDate = "insertedRowDate";
-  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_intervalValue = "intervalValue";
+  val FIELD_isRunning = "isRunning";
   val FIELD_algorithmImplementation_algorithmImplementationId = "algorithmImplementation_algorithmImplementationId";
   val FIELD_algorithmImplementation_guid = "algorithmImplementation_guid";
   val FIELD_algorithmImplementation_insertedRowDate = "algorithmImplementation_insertedRowDate";
@@ -5537,9 +6804,9 @@ object VAlgorithmScheduleDto {
   val FIELD_algorithmImplementation_algorithmImplementationClass = "algorithmImplementation_algorithmImplementationClass";
   val FIELD_algorithmScheduleType_algorithmScheduleTypeId = "algorithmScheduleType_algorithmScheduleTypeId";
   val FIELD_algorithmScheduleType_guid = "algorithmScheduleType_guid";
-  val FIELD_algorithmScheduleType_algorithmScheduleTypeName = "algorithmScheduleType_algorithmScheduleTypeName";
   val FIELD_algorithmScheduleType_insertedRowDate = "algorithmScheduleType_insertedRowDate";
   val FIELD_algorithmScheduleType_lastUpdatedDate = "algorithmScheduleType_lastUpdatedDate";
+  val FIELD_algorithmScheduleType_algorithmScheduleTypeName = "algorithmScheduleType_algorithmScheduleTypeName";
 
 }
 
@@ -5547,49 +6814,52 @@ object VAlgorithmScheduleDto {
 case class VAlgorithmScheduleColumnDto (
                                          val algorithmScheduleColumnId : Long
                                          , val guid : Long
+                                         , val insertedRowDate : java.util.Date
+                                         , val lastUpdatedDate : java.util.Date
                                          , val algorithmScheduleId : Long
                                          , val algorithmColumnTypeId : Long
                                          , val algorithmScheduleViewId : Long
                                          , val sourceViewId : Long
                                          , val sourceViewColumnId : Long
                                          , val extendedProperties : String
-                                         , val insertedRowDate : java.util.Date
-                                         , val lastUpdatedDate : java.util.Date
                                          , val algorithmColumnType_algorithmColumnTypeId : Long
-                                         , val algorithmColumnType_algorithmColumnTypeName : String
-                                         , val algorithmColumnType_algorithmColumnTypeDescription : String
+                                         , val algorithmColumnType_guid : Long
                                          , val algorithmColumnType_insertedRowDate : java.util.Date
                                          , val algorithmColumnType_lastUpdatedDate : java.util.Date
-                                         , val algorithmColumnType_guid : Long
+                                         , val algorithmColumnType_algorithmColumnTypeName : String
+                                         , val algorithmColumnType_algorithmColumnTypeDescription : String
                                          , val algorithmSchedule_algorithmScheduleId : Long
                                          , val algorithmSchedule_guid : Long
+                                         , val algorithmSchedule_insertedRowDate : java.util.Date
+                                         , val algorithmSchedule_lastUpdatedDate : java.util.Date
                                          , val algorithmSchedule_algorithmImplementationId : Long
                                          , val algorithmSchedule_algorithmScheduleTypeId : Long
                                          , val algorithmSchedule_algorithmScheduleName : String
                                          , val algorithmSchedule_isScheduled : Int
-                                         , val algorithmSchedule_insertedRowDate : java.util.Date
-                                         , val algorithmSchedule_lastUpdatedDate : java.util.Date
+                                         , val algorithmSchedule_intervalValue : Long
+                                         , val algorithmSchedule_isRunning : Int
                                          , val algorithmScheduleView_algorithmScheduleViewId : Long
                                          , val algorithmScheduleView_guid : Long
+                                         , val algorithmScheduleView_insertedRowDate : java.util.Date
+                                         , val algorithmScheduleView_lastUpdatedDate : java.util.Date
                                          , val algorithmScheduleView_algorithmScheduleViewTypeId : Long
                                          , val algorithmScheduleView_algorithmScheduleId : Long
                                          , val algorithmScheduleView_sourceViewId : Long
-                                         , val algorithmScheduleView_insertedRowDate : java.util.Date
-                                         , val algorithmScheduleView_lastUpdatedDate : java.util.Date
                                          , val algorithmScheduleView_joinOnDefinition : String
                                          , val sourceView_sourceViewId : Long
                                          , val sourceView_guid : Long
+                                         , val sourceView_insertedRowDate : java.util.Date
+                                         , val sourceView_lastUpdatedDate : java.util.Date
                                          , val sourceView_sourceInstanceId : Long
                                          , val sourceView_sourceViewTypeId : Long
                                          , val sourceView_sourceViewName : String
                                          , val sourceView_sourceViewDefinition : String
-                                         , val sourceView_insertedRowDate : java.util.Date
-                                         , val sourceView_lastUpdatedDate : java.util.Date
+                                         , val sourceView_isExisting : Int
                                          , val sourceViewColumn_sourceViewColumnId : Long
-                                         , val sourceViewColumn_sourceViewId : Long
+                                         , val sourceViewColumn_guid : Long
                                          , val sourceViewColumn_insertedRowDate : java.util.Date
                                          , val sourceViewColumn_lastUpdatedDate : java.util.Date
-                                         , val sourceViewColumn_guid : Long
+                                         , val sourceViewColumn_sourceViewId : Long
                                          , val sourceViewColumn_columnName : String
                                          , val sourceViewColumn_columnType : String
                                        ) extends BaseReadOnlyDto {
@@ -5597,7 +6867,7 @@ case class VAlgorithmScheduleColumnDto (
     "vAlgorithmScheduleColumn";
   }
   def fields : String = {
-    "algorithmScheduleColumnId,guid,algorithmScheduleId,algorithmColumnTypeId,algorithmScheduleViewId,sourceViewId,sourceViewColumnId,extendedProperties,insertedRowDate,lastUpdatedDate,algorithmColumnType_algorithmColumnTypeId,algorithmColumnType_algorithmColumnTypeName,algorithmColumnType_algorithmColumnTypeDescription,algorithmColumnType_insertedRowDate,algorithmColumnType_lastUpdatedDate,algorithmColumnType_guid,algorithmSchedule_algorithmScheduleId,algorithmSchedule_guid,algorithmSchedule_algorithmImplementationId,algorithmSchedule_algorithmScheduleTypeId,algorithmSchedule_algorithmScheduleName,algorithmSchedule_isScheduled,algorithmSchedule_insertedRowDate,algorithmSchedule_lastUpdatedDate,algorithmScheduleView_algorithmScheduleViewId,algorithmScheduleView_guid,algorithmScheduleView_algorithmScheduleViewTypeId,algorithmScheduleView_algorithmScheduleId,algorithmScheduleView_sourceViewId,algorithmScheduleView_insertedRowDate,algorithmScheduleView_lastUpdatedDate,algorithmScheduleView_joinOnDefinition,sourceView_sourceViewId,sourceView_guid,sourceView_sourceInstanceId,sourceView_sourceViewTypeId,sourceView_sourceViewName,sourceView_sourceViewDefinition,sourceView_insertedRowDate,sourceView_lastUpdatedDate,sourceViewColumn_sourceViewColumnId,sourceViewColumn_sourceViewId,sourceViewColumn_insertedRowDate,sourceViewColumn_lastUpdatedDate,sourceViewColumn_guid,sourceViewColumn_columnName,sourceViewColumn_columnType";
+    "algorithmScheduleColumnId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleId,algorithmColumnTypeId,algorithmScheduleViewId,sourceViewId,sourceViewColumnId,extendedProperties,algorithmColumnType_algorithmColumnTypeId,algorithmColumnType_guid,algorithmColumnType_insertedRowDate,algorithmColumnType_lastUpdatedDate,algorithmColumnType_algorithmColumnTypeName,algorithmColumnType_algorithmColumnTypeDescription,algorithmSchedule_algorithmScheduleId,algorithmSchedule_guid,algorithmSchedule_insertedRowDate,algorithmSchedule_lastUpdatedDate,algorithmSchedule_algorithmImplementationId,algorithmSchedule_algorithmScheduleTypeId,algorithmSchedule_algorithmScheduleName,algorithmSchedule_isScheduled,algorithmSchedule_intervalValue,algorithmSchedule_isRunning,algorithmScheduleView_algorithmScheduleViewId,algorithmScheduleView_guid,algorithmScheduleView_insertedRowDate,algorithmScheduleView_lastUpdatedDate,algorithmScheduleView_algorithmScheduleViewTypeId,algorithmScheduleView_algorithmScheduleId,algorithmScheduleView_sourceViewId,algorithmScheduleView_joinOnDefinition,sourceView_sourceViewId,sourceView_guid,sourceView_insertedRowDate,sourceView_lastUpdatedDate,sourceView_sourceInstanceId,sourceView_sourceViewTypeId,sourceView_sourceViewName,sourceView_sourceViewDefinition,sourceView_isExisting,sourceViewColumn_sourceViewColumnId,sourceViewColumn_guid,sourceViewColumn_insertedRowDate,sourceViewColumn_lastUpdatedDate,sourceViewColumn_sourceViewId,sourceViewColumn_columnName,sourceViewColumn_columnType";
   }
   def pkFields : String = {
     "";
@@ -5621,58 +6891,61 @@ case class VAlgorithmScheduleColumnDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(algorithmScheduleColumnId,guid,algorithmScheduleId,algorithmColumnTypeId,algorithmScheduleViewId,sourceViewId,sourceViewColumnId,extendedProperties,insertedRowDate,lastUpdatedDate,algorithmColumnType_algorithmColumnTypeId,algorithmColumnType_algorithmColumnTypeName,algorithmColumnType_algorithmColumnTypeDescription,algorithmColumnType_insertedRowDate,algorithmColumnType_lastUpdatedDate,algorithmColumnType_guid,algorithmSchedule_algorithmScheduleId,algorithmSchedule_guid,algorithmSchedule_algorithmImplementationId,algorithmSchedule_algorithmScheduleTypeId,algorithmSchedule_algorithmScheduleName,algorithmSchedule_isScheduled,algorithmSchedule_insertedRowDate,algorithmSchedule_lastUpdatedDate,algorithmScheduleView_algorithmScheduleViewId,algorithmScheduleView_guid,algorithmScheduleView_algorithmScheduleViewTypeId,algorithmScheduleView_algorithmScheduleId,algorithmScheduleView_sourceViewId,algorithmScheduleView_insertedRowDate,algorithmScheduleView_lastUpdatedDate,algorithmScheduleView_joinOnDefinition,sourceView_sourceViewId,sourceView_guid,sourceView_sourceInstanceId,sourceView_sourceViewTypeId,sourceView_sourceViewName,sourceView_sourceViewDefinition,sourceView_insertedRowDate,sourceView_lastUpdatedDate,sourceViewColumn_sourceViewColumnId,sourceViewColumn_sourceViewId,sourceViewColumn_insertedRowDate,sourceViewColumn_lastUpdatedDate,sourceViewColumn_guid,sourceViewColumn_columnName,sourceViewColumn_columnType)
+    Array(algorithmScheduleColumnId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleId,algorithmColumnTypeId,algorithmScheduleViewId,sourceViewId,sourceViewColumnId,extendedProperties,algorithmColumnType_algorithmColumnTypeId,algorithmColumnType_guid,algorithmColumnType_insertedRowDate,algorithmColumnType_lastUpdatedDate,algorithmColumnType_algorithmColumnTypeName,algorithmColumnType_algorithmColumnTypeDescription,algorithmSchedule_algorithmScheduleId,algorithmSchedule_guid,algorithmSchedule_insertedRowDate,algorithmSchedule_lastUpdatedDate,algorithmSchedule_algorithmImplementationId,algorithmSchedule_algorithmScheduleTypeId,algorithmSchedule_algorithmScheduleName,algorithmSchedule_isScheduled,algorithmSchedule_intervalValue,algorithmSchedule_isRunning,algorithmScheduleView_algorithmScheduleViewId,algorithmScheduleView_guid,algorithmScheduleView_insertedRowDate,algorithmScheduleView_lastUpdatedDate,algorithmScheduleView_algorithmScheduleViewTypeId,algorithmScheduleView_algorithmScheduleId,algorithmScheduleView_sourceViewId,algorithmScheduleView_joinOnDefinition,sourceView_sourceViewId,sourceView_guid,sourceView_insertedRowDate,sourceView_lastUpdatedDate,sourceView_sourceInstanceId,sourceView_sourceViewTypeId,sourceView_sourceViewName,sourceView_sourceViewDefinition,sourceView_isExisting,sourceViewColumn_sourceViewColumnId,sourceViewColumn_guid,sourceViewColumn_insertedRowDate,sourceViewColumn_lastUpdatedDate,sourceViewColumn_sourceViewId,sourceViewColumn_columnName,sourceViewColumn_columnType)
   }
   def toStringArray() : Array[String] = {
-    Array(""+algorithmScheduleColumnId,""+guid,""+algorithmScheduleId,""+algorithmColumnTypeId,""+algorithmScheduleViewId,""+sourceViewId,""+sourceViewColumnId,""+extendedProperties,""+insertedRowDate,""+lastUpdatedDate,""+algorithmColumnType_algorithmColumnTypeId,""+algorithmColumnType_algorithmColumnTypeName,""+algorithmColumnType_algorithmColumnTypeDescription,""+algorithmColumnType_insertedRowDate,""+algorithmColumnType_lastUpdatedDate,""+algorithmColumnType_guid,""+algorithmSchedule_algorithmScheduleId,""+algorithmSchedule_guid,""+algorithmSchedule_algorithmImplementationId,""+algorithmSchedule_algorithmScheduleTypeId,""+algorithmSchedule_algorithmScheduleName,""+algorithmSchedule_isScheduled,""+algorithmSchedule_insertedRowDate,""+algorithmSchedule_lastUpdatedDate,""+algorithmScheduleView_algorithmScheduleViewId,""+algorithmScheduleView_guid,""+algorithmScheduleView_algorithmScheduleViewTypeId,""+algorithmScheduleView_algorithmScheduleId,""+algorithmScheduleView_sourceViewId,""+algorithmScheduleView_insertedRowDate,""+algorithmScheduleView_lastUpdatedDate,""+algorithmScheduleView_joinOnDefinition,""+sourceView_sourceViewId,""+sourceView_guid,""+sourceView_sourceInstanceId,""+sourceView_sourceViewTypeId,""+sourceView_sourceViewName,""+sourceView_sourceViewDefinition,""+sourceView_insertedRowDate,""+sourceView_lastUpdatedDate,""+sourceViewColumn_sourceViewColumnId,""+sourceViewColumn_sourceViewId,""+sourceViewColumn_insertedRowDate,""+sourceViewColumn_lastUpdatedDate,""+sourceViewColumn_guid,""+sourceViewColumn_columnName,""+sourceViewColumn_columnType)
+    Array(""+algorithmScheduleColumnId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmScheduleId,""+algorithmColumnTypeId,""+algorithmScheduleViewId,""+sourceViewId,""+sourceViewColumnId,""+extendedProperties,""+algorithmColumnType_algorithmColumnTypeId,""+algorithmColumnType_guid,""+algorithmColumnType_insertedRowDate,""+algorithmColumnType_lastUpdatedDate,""+algorithmColumnType_algorithmColumnTypeName,""+algorithmColumnType_algorithmColumnTypeDescription,""+algorithmSchedule_algorithmScheduleId,""+algorithmSchedule_guid,""+algorithmSchedule_insertedRowDate,""+algorithmSchedule_lastUpdatedDate,""+algorithmSchedule_algorithmImplementationId,""+algorithmSchedule_algorithmScheduleTypeId,""+algorithmSchedule_algorithmScheduleName,""+algorithmSchedule_isScheduled,""+algorithmSchedule_intervalValue,""+algorithmSchedule_isRunning,""+algorithmScheduleView_algorithmScheduleViewId,""+algorithmScheduleView_guid,""+algorithmScheduleView_insertedRowDate,""+algorithmScheduleView_lastUpdatedDate,""+algorithmScheduleView_algorithmScheduleViewTypeId,""+algorithmScheduleView_algorithmScheduleId,""+algorithmScheduleView_sourceViewId,""+algorithmScheduleView_joinOnDefinition,""+sourceView_sourceViewId,""+sourceView_guid,""+sourceView_insertedRowDate,""+sourceView_lastUpdatedDate,""+sourceView_sourceInstanceId,""+sourceView_sourceViewTypeId,""+sourceView_sourceViewName,""+sourceView_sourceViewDefinition,""+sourceView_isExisting,""+sourceViewColumn_sourceViewColumnId,""+sourceViewColumn_guid,""+sourceViewColumn_insertedRowDate,""+sourceViewColumn_lastUpdatedDate,""+sourceViewColumn_sourceViewId,""+sourceViewColumn_columnName,""+sourceViewColumn_columnType)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "algorithmScheduleColumnId" => algorithmScheduleColumnId
       case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
       case "algorithmScheduleId" => algorithmScheduleId
       case "algorithmColumnTypeId" => algorithmColumnTypeId
       case "algorithmScheduleViewId" => algorithmScheduleViewId
       case "sourceViewId" => sourceViewId
       case "sourceViewColumnId" => sourceViewColumnId
       case "extendedProperties" => extendedProperties
-      case "insertedRowDate" => insertedRowDate
-      case "lastUpdatedDate" => lastUpdatedDate
       case "algorithmColumnType_algorithmColumnTypeId" => algorithmColumnType_algorithmColumnTypeId
-      case "algorithmColumnType_algorithmColumnTypeName" => algorithmColumnType_algorithmColumnTypeName
-      case "algorithmColumnType_algorithmColumnTypeDescription" => algorithmColumnType_algorithmColumnTypeDescription
+      case "algorithmColumnType_guid" => algorithmColumnType_guid
       case "algorithmColumnType_insertedRowDate" => algorithmColumnType_insertedRowDate
       case "algorithmColumnType_lastUpdatedDate" => algorithmColumnType_lastUpdatedDate
-      case "algorithmColumnType_guid" => algorithmColumnType_guid
+      case "algorithmColumnType_algorithmColumnTypeName" => algorithmColumnType_algorithmColumnTypeName
+      case "algorithmColumnType_algorithmColumnTypeDescription" => algorithmColumnType_algorithmColumnTypeDescription
       case "algorithmSchedule_algorithmScheduleId" => algorithmSchedule_algorithmScheduleId
       case "algorithmSchedule_guid" => algorithmSchedule_guid
+      case "algorithmSchedule_insertedRowDate" => algorithmSchedule_insertedRowDate
+      case "algorithmSchedule_lastUpdatedDate" => algorithmSchedule_lastUpdatedDate
       case "algorithmSchedule_algorithmImplementationId" => algorithmSchedule_algorithmImplementationId
       case "algorithmSchedule_algorithmScheduleTypeId" => algorithmSchedule_algorithmScheduleTypeId
       case "algorithmSchedule_algorithmScheduleName" => algorithmSchedule_algorithmScheduleName
       case "algorithmSchedule_isScheduled" => algorithmSchedule_isScheduled
-      case "algorithmSchedule_insertedRowDate" => algorithmSchedule_insertedRowDate
-      case "algorithmSchedule_lastUpdatedDate" => algorithmSchedule_lastUpdatedDate
+      case "algorithmSchedule_intervalValue" => algorithmSchedule_intervalValue
+      case "algorithmSchedule_isRunning" => algorithmSchedule_isRunning
       case "algorithmScheduleView_algorithmScheduleViewId" => algorithmScheduleView_algorithmScheduleViewId
       case "algorithmScheduleView_guid" => algorithmScheduleView_guid
+      case "algorithmScheduleView_insertedRowDate" => algorithmScheduleView_insertedRowDate
+      case "algorithmScheduleView_lastUpdatedDate" => algorithmScheduleView_lastUpdatedDate
       case "algorithmScheduleView_algorithmScheduleViewTypeId" => algorithmScheduleView_algorithmScheduleViewTypeId
       case "algorithmScheduleView_algorithmScheduleId" => algorithmScheduleView_algorithmScheduleId
       case "algorithmScheduleView_sourceViewId" => algorithmScheduleView_sourceViewId
-      case "algorithmScheduleView_insertedRowDate" => algorithmScheduleView_insertedRowDate
-      case "algorithmScheduleView_lastUpdatedDate" => algorithmScheduleView_lastUpdatedDate
       case "algorithmScheduleView_joinOnDefinition" => algorithmScheduleView_joinOnDefinition
       case "sourceView_sourceViewId" => sourceView_sourceViewId
       case "sourceView_guid" => sourceView_guid
+      case "sourceView_insertedRowDate" => sourceView_insertedRowDate
+      case "sourceView_lastUpdatedDate" => sourceView_lastUpdatedDate
       case "sourceView_sourceInstanceId" => sourceView_sourceInstanceId
       case "sourceView_sourceViewTypeId" => sourceView_sourceViewTypeId
       case "sourceView_sourceViewName" => sourceView_sourceViewName
       case "sourceView_sourceViewDefinition" => sourceView_sourceViewDefinition
-      case "sourceView_insertedRowDate" => sourceView_insertedRowDate
-      case "sourceView_lastUpdatedDate" => sourceView_lastUpdatedDate
+      case "sourceView_isExisting" => sourceView_isExisting
       case "sourceViewColumn_sourceViewColumnId" => sourceViewColumn_sourceViewColumnId
-      case "sourceViewColumn_sourceViewId" => sourceViewColumn_sourceViewId
+      case "sourceViewColumn_guid" => sourceViewColumn_guid
       case "sourceViewColumn_insertedRowDate" => sourceViewColumn_insertedRowDate
       case "sourceViewColumn_lastUpdatedDate" => sourceViewColumn_lastUpdatedDate
-      case "sourceViewColumn_guid" => sourceViewColumn_guid
+      case "sourceViewColumn_sourceViewId" => sourceViewColumn_sourceViewId
       case "sourceViewColumn_columnName" => sourceViewColumn_columnName
       case "sourceViewColumn_columnType" => sourceViewColumn_columnType
       case _ => null
@@ -5683,49 +6956,52 @@ case class VAlgorithmScheduleColumnDto (
     val ret = name match {
       case "algorithmScheduleColumnId" => "Long"
       case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
       case "algorithmScheduleId" => "Long"
       case "algorithmColumnTypeId" => "Long"
       case "algorithmScheduleViewId" => "Long"
       case "sourceViewId" => "Long"
       case "sourceViewColumnId" => "Long"
       case "extendedProperties" => "String"
-      case "insertedRowDate" => "java.util.Date"
-      case "lastUpdatedDate" => "java.util.Date"
       case "algorithmColumnType_algorithmColumnTypeId" => "Long"
-      case "algorithmColumnType_algorithmColumnTypeName" => "String"
-      case "algorithmColumnType_algorithmColumnTypeDescription" => "String"
+      case "algorithmColumnType_guid" => "Long"
       case "algorithmColumnType_insertedRowDate" => "java.util.Date"
       case "algorithmColumnType_lastUpdatedDate" => "java.util.Date"
-      case "algorithmColumnType_guid" => "Long"
+      case "algorithmColumnType_algorithmColumnTypeName" => "String"
+      case "algorithmColumnType_algorithmColumnTypeDescription" => "String"
       case "algorithmSchedule_algorithmScheduleId" => "Long"
       case "algorithmSchedule_guid" => "Long"
+      case "algorithmSchedule_insertedRowDate" => "java.util.Date"
+      case "algorithmSchedule_lastUpdatedDate" => "java.util.Date"
       case "algorithmSchedule_algorithmImplementationId" => "Long"
       case "algorithmSchedule_algorithmScheduleTypeId" => "Long"
       case "algorithmSchedule_algorithmScheduleName" => "String"
       case "algorithmSchedule_isScheduled" => "Int"
-      case "algorithmSchedule_insertedRowDate" => "java.util.Date"
-      case "algorithmSchedule_lastUpdatedDate" => "java.util.Date"
+      case "algorithmSchedule_intervalValue" => "Long"
+      case "algorithmSchedule_isRunning" => "Int"
       case "algorithmScheduleView_algorithmScheduleViewId" => "Long"
       case "algorithmScheduleView_guid" => "Long"
+      case "algorithmScheduleView_insertedRowDate" => "java.util.Date"
+      case "algorithmScheduleView_lastUpdatedDate" => "java.util.Date"
       case "algorithmScheduleView_algorithmScheduleViewTypeId" => "Long"
       case "algorithmScheduleView_algorithmScheduleId" => "Long"
       case "algorithmScheduleView_sourceViewId" => "Long"
-      case "algorithmScheduleView_insertedRowDate" => "java.util.Date"
-      case "algorithmScheduleView_lastUpdatedDate" => "java.util.Date"
       case "algorithmScheduleView_joinOnDefinition" => "String"
       case "sourceView_sourceViewId" => "Long"
       case "sourceView_guid" => "Long"
+      case "sourceView_insertedRowDate" => "java.util.Date"
+      case "sourceView_lastUpdatedDate" => "java.util.Date"
       case "sourceView_sourceInstanceId" => "Long"
       case "sourceView_sourceViewTypeId" => "Long"
       case "sourceView_sourceViewName" => "String"
       case "sourceView_sourceViewDefinition" => "String"
-      case "sourceView_insertedRowDate" => "java.util.Date"
-      case "sourceView_lastUpdatedDate" => "java.util.Date"
+      case "sourceView_isExisting" => "Int"
       case "sourceViewColumn_sourceViewColumnId" => "Long"
-      case "sourceViewColumn_sourceViewId" => "Long"
+      case "sourceViewColumn_guid" => "Long"
       case "sourceViewColumn_insertedRowDate" => "java.util.Date"
       case "sourceViewColumn_lastUpdatedDate" => "java.util.Date"
-      case "sourceViewColumn_guid" => "Long"
+      case "sourceViewColumn_sourceViewId" => "Long"
       case "sourceViewColumn_columnName" => "String"
       case "sourceViewColumn_columnType" => "String"
       case _ => "Object"
@@ -5737,49 +7013,52 @@ object VAlgorithmScheduleColumnDto {
   val TABLE_NAME = "vAlgorithmScheduleColumn";
   val FIELD_algorithmScheduleColumnId = "algorithmScheduleColumnId";
   val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_algorithmScheduleId = "algorithmScheduleId";
   val FIELD_algorithmColumnTypeId = "algorithmColumnTypeId";
   val FIELD_algorithmScheduleViewId = "algorithmScheduleViewId";
   val FIELD_sourceViewId = "sourceViewId";
   val FIELD_sourceViewColumnId = "sourceViewColumnId";
   val FIELD_extendedProperties = "extendedProperties";
-  val FIELD_insertedRowDate = "insertedRowDate";
-  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_algorithmColumnType_algorithmColumnTypeId = "algorithmColumnType_algorithmColumnTypeId";
-  val FIELD_algorithmColumnType_algorithmColumnTypeName = "algorithmColumnType_algorithmColumnTypeName";
-  val FIELD_algorithmColumnType_algorithmColumnTypeDescription = "algorithmColumnType_algorithmColumnTypeDescription";
+  val FIELD_algorithmColumnType_guid = "algorithmColumnType_guid";
   val FIELD_algorithmColumnType_insertedRowDate = "algorithmColumnType_insertedRowDate";
   val FIELD_algorithmColumnType_lastUpdatedDate = "algorithmColumnType_lastUpdatedDate";
-  val FIELD_algorithmColumnType_guid = "algorithmColumnType_guid";
+  val FIELD_algorithmColumnType_algorithmColumnTypeName = "algorithmColumnType_algorithmColumnTypeName";
+  val FIELD_algorithmColumnType_algorithmColumnTypeDescription = "algorithmColumnType_algorithmColumnTypeDescription";
   val FIELD_algorithmSchedule_algorithmScheduleId = "algorithmSchedule_algorithmScheduleId";
   val FIELD_algorithmSchedule_guid = "algorithmSchedule_guid";
+  val FIELD_algorithmSchedule_insertedRowDate = "algorithmSchedule_insertedRowDate";
+  val FIELD_algorithmSchedule_lastUpdatedDate = "algorithmSchedule_lastUpdatedDate";
   val FIELD_algorithmSchedule_algorithmImplementationId = "algorithmSchedule_algorithmImplementationId";
   val FIELD_algorithmSchedule_algorithmScheduleTypeId = "algorithmSchedule_algorithmScheduleTypeId";
   val FIELD_algorithmSchedule_algorithmScheduleName = "algorithmSchedule_algorithmScheduleName";
   val FIELD_algorithmSchedule_isScheduled = "algorithmSchedule_isScheduled";
-  val FIELD_algorithmSchedule_insertedRowDate = "algorithmSchedule_insertedRowDate";
-  val FIELD_algorithmSchedule_lastUpdatedDate = "algorithmSchedule_lastUpdatedDate";
+  val FIELD_algorithmSchedule_intervalValue = "algorithmSchedule_intervalValue";
+  val FIELD_algorithmSchedule_isRunning = "algorithmSchedule_isRunning";
   val FIELD_algorithmScheduleView_algorithmScheduleViewId = "algorithmScheduleView_algorithmScheduleViewId";
   val FIELD_algorithmScheduleView_guid = "algorithmScheduleView_guid";
+  val FIELD_algorithmScheduleView_insertedRowDate = "algorithmScheduleView_insertedRowDate";
+  val FIELD_algorithmScheduleView_lastUpdatedDate = "algorithmScheduleView_lastUpdatedDate";
   val FIELD_algorithmScheduleView_algorithmScheduleViewTypeId = "algorithmScheduleView_algorithmScheduleViewTypeId";
   val FIELD_algorithmScheduleView_algorithmScheduleId = "algorithmScheduleView_algorithmScheduleId";
   val FIELD_algorithmScheduleView_sourceViewId = "algorithmScheduleView_sourceViewId";
-  val FIELD_algorithmScheduleView_insertedRowDate = "algorithmScheduleView_insertedRowDate";
-  val FIELD_algorithmScheduleView_lastUpdatedDate = "algorithmScheduleView_lastUpdatedDate";
   val FIELD_algorithmScheduleView_joinOnDefinition = "algorithmScheduleView_joinOnDefinition";
   val FIELD_sourceView_sourceViewId = "sourceView_sourceViewId";
   val FIELD_sourceView_guid = "sourceView_guid";
+  val FIELD_sourceView_insertedRowDate = "sourceView_insertedRowDate";
+  val FIELD_sourceView_lastUpdatedDate = "sourceView_lastUpdatedDate";
   val FIELD_sourceView_sourceInstanceId = "sourceView_sourceInstanceId";
   val FIELD_sourceView_sourceViewTypeId = "sourceView_sourceViewTypeId";
   val FIELD_sourceView_sourceViewName = "sourceView_sourceViewName";
   val FIELD_sourceView_sourceViewDefinition = "sourceView_sourceViewDefinition";
-  val FIELD_sourceView_insertedRowDate = "sourceView_insertedRowDate";
-  val FIELD_sourceView_lastUpdatedDate = "sourceView_lastUpdatedDate";
+  val FIELD_sourceView_isExisting = "sourceView_isExisting";
   val FIELD_sourceViewColumn_sourceViewColumnId = "sourceViewColumn_sourceViewColumnId";
-  val FIELD_sourceViewColumn_sourceViewId = "sourceViewColumn_sourceViewId";
+  val FIELD_sourceViewColumn_guid = "sourceViewColumn_guid";
   val FIELD_sourceViewColumn_insertedRowDate = "sourceViewColumn_insertedRowDate";
   val FIELD_sourceViewColumn_lastUpdatedDate = "sourceViewColumn_lastUpdatedDate";
-  val FIELD_sourceViewColumn_guid = "sourceViewColumn_guid";
+  val FIELD_sourceViewColumn_sourceViewId = "sourceViewColumn_sourceViewId";
   val FIELD_sourceViewColumn_columnName = "sourceViewColumn_columnName";
   val FIELD_sourceViewColumn_columnType = "sourceViewColumn_columnType";
 
@@ -5789,11 +7068,11 @@ object VAlgorithmScheduleColumnDto {
 case class VAlgorithmScheduleParamDto (
                                         val algorithmScheduleParamId : Long
                                         , val guid : Long
+                                        , val insertedRowDate : java.util.Date
+                                        , val lastUpdatedDate : java.util.Date
                                         , val algorithmScheduleId : Long
                                         , val algorithmParamId : Long
                                         , val algorithmParamValue : String
-                                        , val insertedRowDate : java.util.Date
-                                        , val lastUpdatedDate : java.util.Date
                                         , val algorithmParam_algorithmParamId : Long
                                         , val algorithmParam_guid : Long
                                         , val algorithmParam_insertedRowDate : java.util.Date
@@ -5803,18 +7082,20 @@ case class VAlgorithmScheduleParamDto (
                                         , val algorithmParam_algorithmParamType : String
                                         , val algorithmSchedule_algorithmScheduleId : Long
                                         , val algorithmSchedule_guid : Long
+                                        , val algorithmSchedule_insertedRowDate : java.util.Date
+                                        , val algorithmSchedule_lastUpdatedDate : java.util.Date
                                         , val algorithmSchedule_algorithmImplementationId : Long
                                         , val algorithmSchedule_algorithmScheduleTypeId : Long
                                         , val algorithmSchedule_algorithmScheduleName : String
                                         , val algorithmSchedule_isScheduled : Int
-                                        , val algorithmSchedule_insertedRowDate : java.util.Date
-                                        , val algorithmSchedule_lastUpdatedDate : java.util.Date
+                                        , val algorithmSchedule_intervalValue : Long
+                                        , val algorithmSchedule_isRunning : Int
                                       ) extends BaseReadOnlyDto {
   def tableName : String = {
     "vAlgorithmScheduleParam";
   }
   def fields : String = {
-    "algorithmScheduleParamId,guid,algorithmScheduleId,algorithmParamId,algorithmParamValue,insertedRowDate,lastUpdatedDate,algorithmParam_algorithmParamId,algorithmParam_guid,algorithmParam_insertedRowDate,algorithmParam_lastUpdatedDate,algorithmParam_algorithmParamName,algorithmParam_algorithmParamDescription,algorithmParam_algorithmParamType,algorithmSchedule_algorithmScheduleId,algorithmSchedule_guid,algorithmSchedule_algorithmImplementationId,algorithmSchedule_algorithmScheduleTypeId,algorithmSchedule_algorithmScheduleName,algorithmSchedule_isScheduled,algorithmSchedule_insertedRowDate,algorithmSchedule_lastUpdatedDate";
+    "algorithmScheduleParamId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleId,algorithmParamId,algorithmParamValue,algorithmParam_algorithmParamId,algorithmParam_guid,algorithmParam_insertedRowDate,algorithmParam_lastUpdatedDate,algorithmParam_algorithmParamName,algorithmParam_algorithmParamDescription,algorithmParam_algorithmParamType,algorithmSchedule_algorithmScheduleId,algorithmSchedule_guid,algorithmSchedule_insertedRowDate,algorithmSchedule_lastUpdatedDate,algorithmSchedule_algorithmImplementationId,algorithmSchedule_algorithmScheduleTypeId,algorithmSchedule_algorithmScheduleName,algorithmSchedule_isScheduled,algorithmSchedule_intervalValue,algorithmSchedule_isRunning";
   }
   def pkFields : String = {
     "";
@@ -5838,20 +7119,20 @@ case class VAlgorithmScheduleParamDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(algorithmScheduleParamId,guid,algorithmScheduleId,algorithmParamId,algorithmParamValue,insertedRowDate,lastUpdatedDate,algorithmParam_algorithmParamId,algorithmParam_guid,algorithmParam_insertedRowDate,algorithmParam_lastUpdatedDate,algorithmParam_algorithmParamName,algorithmParam_algorithmParamDescription,algorithmParam_algorithmParamType,algorithmSchedule_algorithmScheduleId,algorithmSchedule_guid,algorithmSchedule_algorithmImplementationId,algorithmSchedule_algorithmScheduleTypeId,algorithmSchedule_algorithmScheduleName,algorithmSchedule_isScheduled,algorithmSchedule_insertedRowDate,algorithmSchedule_lastUpdatedDate)
+    Array(algorithmScheduleParamId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleId,algorithmParamId,algorithmParamValue,algorithmParam_algorithmParamId,algorithmParam_guid,algorithmParam_insertedRowDate,algorithmParam_lastUpdatedDate,algorithmParam_algorithmParamName,algorithmParam_algorithmParamDescription,algorithmParam_algorithmParamType,algorithmSchedule_algorithmScheduleId,algorithmSchedule_guid,algorithmSchedule_insertedRowDate,algorithmSchedule_lastUpdatedDate,algorithmSchedule_algorithmImplementationId,algorithmSchedule_algorithmScheduleTypeId,algorithmSchedule_algorithmScheduleName,algorithmSchedule_isScheduled,algorithmSchedule_intervalValue,algorithmSchedule_isRunning)
   }
   def toStringArray() : Array[String] = {
-    Array(""+algorithmScheduleParamId,""+guid,""+algorithmScheduleId,""+algorithmParamId,""+algorithmParamValue,""+insertedRowDate,""+lastUpdatedDate,""+algorithmParam_algorithmParamId,""+algorithmParam_guid,""+algorithmParam_insertedRowDate,""+algorithmParam_lastUpdatedDate,""+algorithmParam_algorithmParamName,""+algorithmParam_algorithmParamDescription,""+algorithmParam_algorithmParamType,""+algorithmSchedule_algorithmScheduleId,""+algorithmSchedule_guid,""+algorithmSchedule_algorithmImplementationId,""+algorithmSchedule_algorithmScheduleTypeId,""+algorithmSchedule_algorithmScheduleName,""+algorithmSchedule_isScheduled,""+algorithmSchedule_insertedRowDate,""+algorithmSchedule_lastUpdatedDate)
+    Array(""+algorithmScheduleParamId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmScheduleId,""+algorithmParamId,""+algorithmParamValue,""+algorithmParam_algorithmParamId,""+algorithmParam_guid,""+algorithmParam_insertedRowDate,""+algorithmParam_lastUpdatedDate,""+algorithmParam_algorithmParamName,""+algorithmParam_algorithmParamDescription,""+algorithmParam_algorithmParamType,""+algorithmSchedule_algorithmScheduleId,""+algorithmSchedule_guid,""+algorithmSchedule_insertedRowDate,""+algorithmSchedule_lastUpdatedDate,""+algorithmSchedule_algorithmImplementationId,""+algorithmSchedule_algorithmScheduleTypeId,""+algorithmSchedule_algorithmScheduleName,""+algorithmSchedule_isScheduled,""+algorithmSchedule_intervalValue,""+algorithmSchedule_isRunning)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "algorithmScheduleParamId" => algorithmScheduleParamId
       case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
       case "algorithmScheduleId" => algorithmScheduleId
       case "algorithmParamId" => algorithmParamId
       case "algorithmParamValue" => algorithmParamValue
-      case "insertedRowDate" => insertedRowDate
-      case "lastUpdatedDate" => lastUpdatedDate
       case "algorithmParam_algorithmParamId" => algorithmParam_algorithmParamId
       case "algorithmParam_guid" => algorithmParam_guid
       case "algorithmParam_insertedRowDate" => algorithmParam_insertedRowDate
@@ -5861,12 +7142,14 @@ case class VAlgorithmScheduleParamDto (
       case "algorithmParam_algorithmParamType" => algorithmParam_algorithmParamType
       case "algorithmSchedule_algorithmScheduleId" => algorithmSchedule_algorithmScheduleId
       case "algorithmSchedule_guid" => algorithmSchedule_guid
+      case "algorithmSchedule_insertedRowDate" => algorithmSchedule_insertedRowDate
+      case "algorithmSchedule_lastUpdatedDate" => algorithmSchedule_lastUpdatedDate
       case "algorithmSchedule_algorithmImplementationId" => algorithmSchedule_algorithmImplementationId
       case "algorithmSchedule_algorithmScheduleTypeId" => algorithmSchedule_algorithmScheduleTypeId
       case "algorithmSchedule_algorithmScheduleName" => algorithmSchedule_algorithmScheduleName
       case "algorithmSchedule_isScheduled" => algorithmSchedule_isScheduled
-      case "algorithmSchedule_insertedRowDate" => algorithmSchedule_insertedRowDate
-      case "algorithmSchedule_lastUpdatedDate" => algorithmSchedule_lastUpdatedDate
+      case "algorithmSchedule_intervalValue" => algorithmSchedule_intervalValue
+      case "algorithmSchedule_isRunning" => algorithmSchedule_isRunning
       case _ => null
     }
     ret
@@ -5875,11 +7158,11 @@ case class VAlgorithmScheduleParamDto (
     val ret = name match {
       case "algorithmScheduleParamId" => "Long"
       case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
       case "algorithmScheduleId" => "Long"
       case "algorithmParamId" => "Long"
       case "algorithmParamValue" => "String"
-      case "insertedRowDate" => "java.util.Date"
-      case "lastUpdatedDate" => "java.util.Date"
       case "algorithmParam_algorithmParamId" => "Long"
       case "algorithmParam_guid" => "Long"
       case "algorithmParam_insertedRowDate" => "java.util.Date"
@@ -5889,12 +7172,14 @@ case class VAlgorithmScheduleParamDto (
       case "algorithmParam_algorithmParamType" => "String"
       case "algorithmSchedule_algorithmScheduleId" => "Long"
       case "algorithmSchedule_guid" => "Long"
+      case "algorithmSchedule_insertedRowDate" => "java.util.Date"
+      case "algorithmSchedule_lastUpdatedDate" => "java.util.Date"
       case "algorithmSchedule_algorithmImplementationId" => "Long"
       case "algorithmSchedule_algorithmScheduleTypeId" => "Long"
       case "algorithmSchedule_algorithmScheduleName" => "String"
       case "algorithmSchedule_isScheduled" => "Int"
-      case "algorithmSchedule_insertedRowDate" => "java.util.Date"
-      case "algorithmSchedule_lastUpdatedDate" => "java.util.Date"
+      case "algorithmSchedule_intervalValue" => "Long"
+      case "algorithmSchedule_isRunning" => "Int"
       case _ => "Object"
     }
     ret
@@ -5904,11 +7189,11 @@ object VAlgorithmScheduleParamDto {
   val TABLE_NAME = "vAlgorithmScheduleParam";
   val FIELD_algorithmScheduleParamId = "algorithmScheduleParamId";
   val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_algorithmScheduleId = "algorithmScheduleId";
   val FIELD_algorithmParamId = "algorithmParamId";
   val FIELD_algorithmParamValue = "algorithmParamValue";
-  val FIELD_insertedRowDate = "insertedRowDate";
-  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_algorithmParam_algorithmParamId = "algorithmParam_algorithmParamId";
   val FIELD_algorithmParam_guid = "algorithmParam_guid";
   val FIELD_algorithmParam_insertedRowDate = "algorithmParam_insertedRowDate";
@@ -5918,12 +7203,202 @@ object VAlgorithmScheduleParamDto {
   val FIELD_algorithmParam_algorithmParamType = "algorithmParam_algorithmParamType";
   val FIELD_algorithmSchedule_algorithmScheduleId = "algorithmSchedule_algorithmScheduleId";
   val FIELD_algorithmSchedule_guid = "algorithmSchedule_guid";
+  val FIELD_algorithmSchedule_insertedRowDate = "algorithmSchedule_insertedRowDate";
+  val FIELD_algorithmSchedule_lastUpdatedDate = "algorithmSchedule_lastUpdatedDate";
   val FIELD_algorithmSchedule_algorithmImplementationId = "algorithmSchedule_algorithmImplementationId";
   val FIELD_algorithmSchedule_algorithmScheduleTypeId = "algorithmSchedule_algorithmScheduleTypeId";
   val FIELD_algorithmSchedule_algorithmScheduleName = "algorithmSchedule_algorithmScheduleName";
   val FIELD_algorithmSchedule_isScheduled = "algorithmSchedule_isScheduled";
-  val FIELD_algorithmSchedule_insertedRowDate = "algorithmSchedule_insertedRowDate";
-  val FIELD_algorithmSchedule_lastUpdatedDate = "algorithmSchedule_lastUpdatedDate";
+  val FIELD_algorithmSchedule_intervalValue = "algorithmSchedule_intervalValue";
+  val FIELD_algorithmSchedule_isRunning = "algorithmSchedule_isRunning";
+
+}
+
+
+case class VAlgorithmScheduleSummaryDto (
+                                          val algorithmScheduleId : Long
+                                          , val guid : Long
+                                          , val insertedRowDate : java.util.Date
+                                          , val lastUpdatedDate : java.util.Date
+                                          , val algorithmImplementationId : Long
+                                          , val algorithmScheduleTypeId : Long
+                                          , val algorithmScheduleName : String
+                                          , val isScheduled : Int
+                                          , val intervalValue : Long
+                                          , val isRunning : Int
+                                          , val algorithmScheduleView_count : Int
+                                          , val algorithmScheduleParam_count : Int
+                                          , val algorithmScheduleColumn_count : Int
+                                          , val algorithmRun_count : Int
+                                        ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vAlgorithmScheduleSummary";
+  }
+  def fields : String = {
+    "algorithmScheduleId,guid,insertedRowDate,lastUpdatedDate,algorithmImplementationId,algorithmScheduleTypeId,algorithmScheduleName,isScheduled,intervalValue,isRunning,algorithmScheduleView_count,algorithmScheduleParam_count,algorithmScheduleColumn_count,algorithmRun_count";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    algorithmScheduleSummaryId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(algorithmScheduleId,guid,insertedRowDate,lastUpdatedDate,algorithmImplementationId,algorithmScheduleTypeId,algorithmScheduleName,isScheduled,intervalValue,isRunning,algorithmScheduleView_count,algorithmScheduleParam_count,algorithmScheduleColumn_count,algorithmRun_count)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+algorithmScheduleId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmImplementationId,""+algorithmScheduleTypeId,""+algorithmScheduleName,""+isScheduled,""+intervalValue,""+isRunning,""+algorithmScheduleView_count,""+algorithmScheduleParam_count,""+algorithmScheduleColumn_count,""+algorithmRun_count)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "algorithmScheduleId" => algorithmScheduleId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "algorithmImplementationId" => algorithmImplementationId
+      case "algorithmScheduleTypeId" => algorithmScheduleTypeId
+      case "algorithmScheduleName" => algorithmScheduleName
+      case "isScheduled" => isScheduled
+      case "intervalValue" => intervalValue
+      case "isRunning" => isRunning
+      case "algorithmScheduleView_count" => algorithmScheduleView_count
+      case "algorithmScheduleParam_count" => algorithmScheduleParam_count
+      case "algorithmScheduleColumn_count" => algorithmScheduleColumn_count
+      case "algorithmRun_count" => algorithmRun_count
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "algorithmScheduleId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "algorithmImplementationId" => "Long"
+      case "algorithmScheduleTypeId" => "Long"
+      case "algorithmScheduleName" => "String"
+      case "isScheduled" => "Int"
+      case "intervalValue" => "Long"
+      case "isRunning" => "Int"
+      case "algorithmScheduleView_count" => "Int"
+      case "algorithmScheduleParam_count" => "Int"
+      case "algorithmScheduleColumn_count" => "Int"
+      case "algorithmRun_count" => "Int"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VAlgorithmScheduleSummaryDto {
+  val TABLE_NAME = "vAlgorithmScheduleSummary";
+  val FIELD_algorithmScheduleId = "algorithmScheduleId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_algorithmImplementationId = "algorithmImplementationId";
+  val FIELD_algorithmScheduleTypeId = "algorithmScheduleTypeId";
+  val FIELD_algorithmScheduleName = "algorithmScheduleName";
+  val FIELD_isScheduled = "isScheduled";
+  val FIELD_intervalValue = "intervalValue";
+  val FIELD_isRunning = "isRunning";
+  val FIELD_algorithmScheduleView_count = "algorithmScheduleView_count";
+  val FIELD_algorithmScheduleParam_count = "algorithmScheduleParam_count";
+  val FIELD_algorithmScheduleColumn_count = "algorithmScheduleColumn_count";
+  val FIELD_algorithmRun_count = "algorithmRun_count";
+
+}
+
+
+case class VAlgorithmScheduleTypeSummaryDto (
+                                              val algorithmScheduleTypeId : Long
+                                              , val guid : Long
+                                              , val insertedRowDate : java.util.Date
+                                              , val lastUpdatedDate : java.util.Date
+                                              , val algorithmScheduleTypeName : String
+                                              , val algorithmSchedule_count : Int
+                                            ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vAlgorithmScheduleTypeSummary";
+  }
+  def fields : String = {
+    "algorithmScheduleTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleTypeName,algorithmSchedule_count";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    algorithmScheduleTypeSummaryId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(algorithmScheduleTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleTypeName,algorithmSchedule_count)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+algorithmScheduleTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmScheduleTypeName,""+algorithmSchedule_count)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "algorithmScheduleTypeId" => algorithmScheduleTypeId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "algorithmScheduleTypeName" => algorithmScheduleTypeName
+      case "algorithmSchedule_count" => algorithmSchedule_count
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "algorithmScheduleTypeId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "algorithmScheduleTypeName" => "String"
+      case "algorithmSchedule_count" => "Int"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VAlgorithmScheduleTypeSummaryDto {
+  val TABLE_NAME = "vAlgorithmScheduleTypeSummary";
+  val FIELD_algorithmScheduleTypeId = "algorithmScheduleTypeId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_algorithmScheduleTypeName = "algorithmScheduleTypeName";
+  val FIELD_algorithmSchedule_count = "algorithmSchedule_count";
 
 }
 
@@ -5931,39 +7406,42 @@ object VAlgorithmScheduleParamDto {
 case class VAlgorithmScheduleViewDto (
                                        val algorithmScheduleViewId : Long
                                        , val guid : Long
+                                       , val insertedRowDate : java.util.Date
+                                       , val lastUpdatedDate : java.util.Date
                                        , val algorithmScheduleViewTypeId : Long
                                        , val algorithmScheduleId : Long
                                        , val sourceViewId : Long
-                                       , val insertedRowDate : java.util.Date
-                                       , val lastUpdatedDate : java.util.Date
                                        , val joinOnDefinition : String
                                        , val algorithmSchedule_algorithmScheduleId : Long
                                        , val algorithmSchedule_guid : Long
+                                       , val algorithmSchedule_insertedRowDate : java.util.Date
+                                       , val algorithmSchedule_lastUpdatedDate : java.util.Date
                                        , val algorithmSchedule_algorithmImplementationId : Long
                                        , val algorithmSchedule_algorithmScheduleTypeId : Long
                                        , val algorithmSchedule_algorithmScheduleName : String
                                        , val algorithmSchedule_isScheduled : Int
-                                       , val algorithmSchedule_insertedRowDate : java.util.Date
-                                       , val algorithmSchedule_lastUpdatedDate : java.util.Date
+                                       , val algorithmSchedule_intervalValue : Long
+                                       , val algorithmSchedule_isRunning : Int
                                        , val algorithmScheduleViewType_algorithmScheduleViewTypeId : Long
                                        , val algorithmScheduleViewType_guid : Long
-                                       , val algorithmScheduleViewType_algorithmScheduleViewTypeName : String
                                        , val algorithmScheduleViewType_insertedRowDate : java.util.Date
                                        , val algorithmScheduleViewType_lastUpdatedDate : java.util.Date
+                                       , val algorithmScheduleViewType_algorithmScheduleViewTypeName : String
                                        , val sourceView_sourceViewId : Long
                                        , val sourceView_guid : Long
+                                       , val sourceView_insertedRowDate : java.util.Date
+                                       , val sourceView_lastUpdatedDate : java.util.Date
                                        , val sourceView_sourceInstanceId : Long
                                        , val sourceView_sourceViewTypeId : Long
                                        , val sourceView_sourceViewName : String
                                        , val sourceView_sourceViewDefinition : String
-                                       , val sourceView_insertedRowDate : java.util.Date
-                                       , val sourceView_lastUpdatedDate : java.util.Date
+                                       , val sourceView_isExisting : Int
                                      ) extends BaseReadOnlyDto {
   def tableName : String = {
     "vAlgorithmScheduleView";
   }
   def fields : String = {
-    "algorithmScheduleViewId,guid,algorithmScheduleViewTypeId,algorithmScheduleId,sourceViewId,insertedRowDate,lastUpdatedDate,joinOnDefinition,algorithmSchedule_algorithmScheduleId,algorithmSchedule_guid,algorithmSchedule_algorithmImplementationId,algorithmSchedule_algorithmScheduleTypeId,algorithmSchedule_algorithmScheduleName,algorithmSchedule_isScheduled,algorithmSchedule_insertedRowDate,algorithmSchedule_lastUpdatedDate,algorithmScheduleViewType_algorithmScheduleViewTypeId,algorithmScheduleViewType_guid,algorithmScheduleViewType_algorithmScheduleViewTypeName,algorithmScheduleViewType_insertedRowDate,algorithmScheduleViewType_lastUpdatedDate,sourceView_sourceViewId,sourceView_guid,sourceView_sourceInstanceId,sourceView_sourceViewTypeId,sourceView_sourceViewName,sourceView_sourceViewDefinition,sourceView_insertedRowDate,sourceView_lastUpdatedDate";
+    "algorithmScheduleViewId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleViewTypeId,algorithmScheduleId,sourceViewId,joinOnDefinition,algorithmSchedule_algorithmScheduleId,algorithmSchedule_guid,algorithmSchedule_insertedRowDate,algorithmSchedule_lastUpdatedDate,algorithmSchedule_algorithmImplementationId,algorithmSchedule_algorithmScheduleTypeId,algorithmSchedule_algorithmScheduleName,algorithmSchedule_isScheduled,algorithmSchedule_intervalValue,algorithmSchedule_isRunning,algorithmScheduleViewType_algorithmScheduleViewTypeId,algorithmScheduleViewType_guid,algorithmScheduleViewType_insertedRowDate,algorithmScheduleViewType_lastUpdatedDate,algorithmScheduleViewType_algorithmScheduleViewTypeName,sourceView_sourceViewId,sourceView_guid,sourceView_insertedRowDate,sourceView_lastUpdatedDate,sourceView_sourceInstanceId,sourceView_sourceViewTypeId,sourceView_sourceViewName,sourceView_sourceViewDefinition,sourceView_isExisting";
   }
   def pkFields : String = {
     "";
@@ -5987,42 +7465,45 @@ case class VAlgorithmScheduleViewDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(algorithmScheduleViewId,guid,algorithmScheduleViewTypeId,algorithmScheduleId,sourceViewId,insertedRowDate,lastUpdatedDate,joinOnDefinition,algorithmSchedule_algorithmScheduleId,algorithmSchedule_guid,algorithmSchedule_algorithmImplementationId,algorithmSchedule_algorithmScheduleTypeId,algorithmSchedule_algorithmScheduleName,algorithmSchedule_isScheduled,algorithmSchedule_insertedRowDate,algorithmSchedule_lastUpdatedDate,algorithmScheduleViewType_algorithmScheduleViewTypeId,algorithmScheduleViewType_guid,algorithmScheduleViewType_algorithmScheduleViewTypeName,algorithmScheduleViewType_insertedRowDate,algorithmScheduleViewType_lastUpdatedDate,sourceView_sourceViewId,sourceView_guid,sourceView_sourceInstanceId,sourceView_sourceViewTypeId,sourceView_sourceViewName,sourceView_sourceViewDefinition,sourceView_insertedRowDate,sourceView_lastUpdatedDate)
+    Array(algorithmScheduleViewId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleViewTypeId,algorithmScheduleId,sourceViewId,joinOnDefinition,algorithmSchedule_algorithmScheduleId,algorithmSchedule_guid,algorithmSchedule_insertedRowDate,algorithmSchedule_lastUpdatedDate,algorithmSchedule_algorithmImplementationId,algorithmSchedule_algorithmScheduleTypeId,algorithmSchedule_algorithmScheduleName,algorithmSchedule_isScheduled,algorithmSchedule_intervalValue,algorithmSchedule_isRunning,algorithmScheduleViewType_algorithmScheduleViewTypeId,algorithmScheduleViewType_guid,algorithmScheduleViewType_insertedRowDate,algorithmScheduleViewType_lastUpdatedDate,algorithmScheduleViewType_algorithmScheduleViewTypeName,sourceView_sourceViewId,sourceView_guid,sourceView_insertedRowDate,sourceView_lastUpdatedDate,sourceView_sourceInstanceId,sourceView_sourceViewTypeId,sourceView_sourceViewName,sourceView_sourceViewDefinition,sourceView_isExisting)
   }
   def toStringArray() : Array[String] = {
-    Array(""+algorithmScheduleViewId,""+guid,""+algorithmScheduleViewTypeId,""+algorithmScheduleId,""+sourceViewId,""+insertedRowDate,""+lastUpdatedDate,""+joinOnDefinition,""+algorithmSchedule_algorithmScheduleId,""+algorithmSchedule_guid,""+algorithmSchedule_algorithmImplementationId,""+algorithmSchedule_algorithmScheduleTypeId,""+algorithmSchedule_algorithmScheduleName,""+algorithmSchedule_isScheduled,""+algorithmSchedule_insertedRowDate,""+algorithmSchedule_lastUpdatedDate,""+algorithmScheduleViewType_algorithmScheduleViewTypeId,""+algorithmScheduleViewType_guid,""+algorithmScheduleViewType_algorithmScheduleViewTypeName,""+algorithmScheduleViewType_insertedRowDate,""+algorithmScheduleViewType_lastUpdatedDate,""+sourceView_sourceViewId,""+sourceView_guid,""+sourceView_sourceInstanceId,""+sourceView_sourceViewTypeId,""+sourceView_sourceViewName,""+sourceView_sourceViewDefinition,""+sourceView_insertedRowDate,""+sourceView_lastUpdatedDate)
+    Array(""+algorithmScheduleViewId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmScheduleViewTypeId,""+algorithmScheduleId,""+sourceViewId,""+joinOnDefinition,""+algorithmSchedule_algorithmScheduleId,""+algorithmSchedule_guid,""+algorithmSchedule_insertedRowDate,""+algorithmSchedule_lastUpdatedDate,""+algorithmSchedule_algorithmImplementationId,""+algorithmSchedule_algorithmScheduleTypeId,""+algorithmSchedule_algorithmScheduleName,""+algorithmSchedule_isScheduled,""+algorithmSchedule_intervalValue,""+algorithmSchedule_isRunning,""+algorithmScheduleViewType_algorithmScheduleViewTypeId,""+algorithmScheduleViewType_guid,""+algorithmScheduleViewType_insertedRowDate,""+algorithmScheduleViewType_lastUpdatedDate,""+algorithmScheduleViewType_algorithmScheduleViewTypeName,""+sourceView_sourceViewId,""+sourceView_guid,""+sourceView_insertedRowDate,""+sourceView_lastUpdatedDate,""+sourceView_sourceInstanceId,""+sourceView_sourceViewTypeId,""+sourceView_sourceViewName,""+sourceView_sourceViewDefinition,""+sourceView_isExisting)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "algorithmScheduleViewId" => algorithmScheduleViewId
       case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
       case "algorithmScheduleViewTypeId" => algorithmScheduleViewTypeId
       case "algorithmScheduleId" => algorithmScheduleId
       case "sourceViewId" => sourceViewId
-      case "insertedRowDate" => insertedRowDate
-      case "lastUpdatedDate" => lastUpdatedDate
       case "joinOnDefinition" => joinOnDefinition
       case "algorithmSchedule_algorithmScheduleId" => algorithmSchedule_algorithmScheduleId
       case "algorithmSchedule_guid" => algorithmSchedule_guid
+      case "algorithmSchedule_insertedRowDate" => algorithmSchedule_insertedRowDate
+      case "algorithmSchedule_lastUpdatedDate" => algorithmSchedule_lastUpdatedDate
       case "algorithmSchedule_algorithmImplementationId" => algorithmSchedule_algorithmImplementationId
       case "algorithmSchedule_algorithmScheduleTypeId" => algorithmSchedule_algorithmScheduleTypeId
       case "algorithmSchedule_algorithmScheduleName" => algorithmSchedule_algorithmScheduleName
       case "algorithmSchedule_isScheduled" => algorithmSchedule_isScheduled
-      case "algorithmSchedule_insertedRowDate" => algorithmSchedule_insertedRowDate
-      case "algorithmSchedule_lastUpdatedDate" => algorithmSchedule_lastUpdatedDate
+      case "algorithmSchedule_intervalValue" => algorithmSchedule_intervalValue
+      case "algorithmSchedule_isRunning" => algorithmSchedule_isRunning
       case "algorithmScheduleViewType_algorithmScheduleViewTypeId" => algorithmScheduleViewType_algorithmScheduleViewTypeId
       case "algorithmScheduleViewType_guid" => algorithmScheduleViewType_guid
-      case "algorithmScheduleViewType_algorithmScheduleViewTypeName" => algorithmScheduleViewType_algorithmScheduleViewTypeName
       case "algorithmScheduleViewType_insertedRowDate" => algorithmScheduleViewType_insertedRowDate
       case "algorithmScheduleViewType_lastUpdatedDate" => algorithmScheduleViewType_lastUpdatedDate
+      case "algorithmScheduleViewType_algorithmScheduleViewTypeName" => algorithmScheduleViewType_algorithmScheduleViewTypeName
       case "sourceView_sourceViewId" => sourceView_sourceViewId
       case "sourceView_guid" => sourceView_guid
+      case "sourceView_insertedRowDate" => sourceView_insertedRowDate
+      case "sourceView_lastUpdatedDate" => sourceView_lastUpdatedDate
       case "sourceView_sourceInstanceId" => sourceView_sourceInstanceId
       case "sourceView_sourceViewTypeId" => sourceView_sourceViewTypeId
       case "sourceView_sourceViewName" => sourceView_sourceViewName
       case "sourceView_sourceViewDefinition" => sourceView_sourceViewDefinition
-      case "sourceView_insertedRowDate" => sourceView_insertedRowDate
-      case "sourceView_lastUpdatedDate" => sourceView_lastUpdatedDate
+      case "sourceView_isExisting" => sourceView_isExisting
       case _ => null
     }
     ret
@@ -6031,33 +7512,36 @@ case class VAlgorithmScheduleViewDto (
     val ret = name match {
       case "algorithmScheduleViewId" => "Long"
       case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
       case "algorithmScheduleViewTypeId" => "Long"
       case "algorithmScheduleId" => "Long"
       case "sourceViewId" => "Long"
-      case "insertedRowDate" => "java.util.Date"
-      case "lastUpdatedDate" => "java.util.Date"
       case "joinOnDefinition" => "String"
       case "algorithmSchedule_algorithmScheduleId" => "Long"
       case "algorithmSchedule_guid" => "Long"
+      case "algorithmSchedule_insertedRowDate" => "java.util.Date"
+      case "algorithmSchedule_lastUpdatedDate" => "java.util.Date"
       case "algorithmSchedule_algorithmImplementationId" => "Long"
       case "algorithmSchedule_algorithmScheduleTypeId" => "Long"
       case "algorithmSchedule_algorithmScheduleName" => "String"
       case "algorithmSchedule_isScheduled" => "Int"
-      case "algorithmSchedule_insertedRowDate" => "java.util.Date"
-      case "algorithmSchedule_lastUpdatedDate" => "java.util.Date"
+      case "algorithmSchedule_intervalValue" => "Long"
+      case "algorithmSchedule_isRunning" => "Int"
       case "algorithmScheduleViewType_algorithmScheduleViewTypeId" => "Long"
       case "algorithmScheduleViewType_guid" => "Long"
-      case "algorithmScheduleViewType_algorithmScheduleViewTypeName" => "String"
       case "algorithmScheduleViewType_insertedRowDate" => "java.util.Date"
       case "algorithmScheduleViewType_lastUpdatedDate" => "java.util.Date"
+      case "algorithmScheduleViewType_algorithmScheduleViewTypeName" => "String"
       case "sourceView_sourceViewId" => "Long"
       case "sourceView_guid" => "Long"
+      case "sourceView_insertedRowDate" => "java.util.Date"
+      case "sourceView_lastUpdatedDate" => "java.util.Date"
       case "sourceView_sourceInstanceId" => "Long"
       case "sourceView_sourceViewTypeId" => "Long"
       case "sourceView_sourceViewName" => "String"
       case "sourceView_sourceViewDefinition" => "String"
-      case "sourceView_insertedRowDate" => "java.util.Date"
-      case "sourceView_lastUpdatedDate" => "java.util.Date"
+      case "sourceView_isExisting" => "Int"
       case _ => "Object"
     }
     ret
@@ -6067,64 +7551,373 @@ object VAlgorithmScheduleViewDto {
   val TABLE_NAME = "vAlgorithmScheduleView";
   val FIELD_algorithmScheduleViewId = "algorithmScheduleViewId";
   val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_algorithmScheduleViewTypeId = "algorithmScheduleViewTypeId";
   val FIELD_algorithmScheduleId = "algorithmScheduleId";
   val FIELD_sourceViewId = "sourceViewId";
-  val FIELD_insertedRowDate = "insertedRowDate";
-  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_joinOnDefinition = "joinOnDefinition";
   val FIELD_algorithmSchedule_algorithmScheduleId = "algorithmSchedule_algorithmScheduleId";
   val FIELD_algorithmSchedule_guid = "algorithmSchedule_guid";
+  val FIELD_algorithmSchedule_insertedRowDate = "algorithmSchedule_insertedRowDate";
+  val FIELD_algorithmSchedule_lastUpdatedDate = "algorithmSchedule_lastUpdatedDate";
   val FIELD_algorithmSchedule_algorithmImplementationId = "algorithmSchedule_algorithmImplementationId";
   val FIELD_algorithmSchedule_algorithmScheduleTypeId = "algorithmSchedule_algorithmScheduleTypeId";
   val FIELD_algorithmSchedule_algorithmScheduleName = "algorithmSchedule_algorithmScheduleName";
   val FIELD_algorithmSchedule_isScheduled = "algorithmSchedule_isScheduled";
-  val FIELD_algorithmSchedule_insertedRowDate = "algorithmSchedule_insertedRowDate";
-  val FIELD_algorithmSchedule_lastUpdatedDate = "algorithmSchedule_lastUpdatedDate";
+  val FIELD_algorithmSchedule_intervalValue = "algorithmSchedule_intervalValue";
+  val FIELD_algorithmSchedule_isRunning = "algorithmSchedule_isRunning";
   val FIELD_algorithmScheduleViewType_algorithmScheduleViewTypeId = "algorithmScheduleViewType_algorithmScheduleViewTypeId";
   val FIELD_algorithmScheduleViewType_guid = "algorithmScheduleViewType_guid";
-  val FIELD_algorithmScheduleViewType_algorithmScheduleViewTypeName = "algorithmScheduleViewType_algorithmScheduleViewTypeName";
   val FIELD_algorithmScheduleViewType_insertedRowDate = "algorithmScheduleViewType_insertedRowDate";
   val FIELD_algorithmScheduleViewType_lastUpdatedDate = "algorithmScheduleViewType_lastUpdatedDate";
+  val FIELD_algorithmScheduleViewType_algorithmScheduleViewTypeName = "algorithmScheduleViewType_algorithmScheduleViewTypeName";
   val FIELD_sourceView_sourceViewId = "sourceView_sourceViewId";
   val FIELD_sourceView_guid = "sourceView_guid";
+  val FIELD_sourceView_insertedRowDate = "sourceView_insertedRowDate";
+  val FIELD_sourceView_lastUpdatedDate = "sourceView_lastUpdatedDate";
   val FIELD_sourceView_sourceInstanceId = "sourceView_sourceInstanceId";
   val FIELD_sourceView_sourceViewTypeId = "sourceView_sourceViewTypeId";
   val FIELD_sourceView_sourceViewName = "sourceView_sourceViewName";
   val FIELD_sourceView_sourceViewDefinition = "sourceView_sourceViewDefinition";
-  val FIELD_sourceView_insertedRowDate = "sourceView_insertedRowDate";
-  val FIELD_sourceView_lastUpdatedDate = "sourceView_lastUpdatedDate";
+  val FIELD_sourceView_isExisting = "sourceView_isExisting";
+
+}
+
+
+case class VAlgorithmScheduleViewSummaryDto (
+                                              val algorithmScheduleViewId : Long
+                                              , val guid : Long
+                                              , val insertedRowDate : java.util.Date
+                                              , val lastUpdatedDate : java.util.Date
+                                              , val algorithmScheduleViewTypeId : Long
+                                              , val algorithmScheduleId : Long
+                                              , val sourceViewId : Long
+                                              , val joinOnDefinition : String
+                                              , val algorithmScheduleColumn_count : Int
+                                            ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vAlgorithmScheduleViewSummary";
+  }
+  def fields : String = {
+    "algorithmScheduleViewId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleViewTypeId,algorithmScheduleId,sourceViewId,joinOnDefinition,algorithmScheduleColumn_count";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    algorithmScheduleViewSummaryId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(algorithmScheduleViewId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleViewTypeId,algorithmScheduleId,sourceViewId,joinOnDefinition,algorithmScheduleColumn_count)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+algorithmScheduleViewId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmScheduleViewTypeId,""+algorithmScheduleId,""+sourceViewId,""+joinOnDefinition,""+algorithmScheduleColumn_count)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "algorithmScheduleViewId" => algorithmScheduleViewId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "algorithmScheduleViewTypeId" => algorithmScheduleViewTypeId
+      case "algorithmScheduleId" => algorithmScheduleId
+      case "sourceViewId" => sourceViewId
+      case "joinOnDefinition" => joinOnDefinition
+      case "algorithmScheduleColumn_count" => algorithmScheduleColumn_count
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "algorithmScheduleViewId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "algorithmScheduleViewTypeId" => "Long"
+      case "algorithmScheduleId" => "Long"
+      case "sourceViewId" => "Long"
+      case "joinOnDefinition" => "String"
+      case "algorithmScheduleColumn_count" => "Int"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VAlgorithmScheduleViewSummaryDto {
+  val TABLE_NAME = "vAlgorithmScheduleViewSummary";
+  val FIELD_algorithmScheduleViewId = "algorithmScheduleViewId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_algorithmScheduleViewTypeId = "algorithmScheduleViewTypeId";
+  val FIELD_algorithmScheduleId = "algorithmScheduleId";
+  val FIELD_sourceViewId = "sourceViewId";
+  val FIELD_joinOnDefinition = "joinOnDefinition";
+  val FIELD_algorithmScheduleColumn_count = "algorithmScheduleColumn_count";
+
+}
+
+
+case class VAlgorithmScheduleViewTypeSummaryDto (
+                                                  val algorithmScheduleViewTypeId : Long
+                                                  , val guid : Long
+                                                  , val insertedRowDate : java.util.Date
+                                                  , val lastUpdatedDate : java.util.Date
+                                                  , val algorithmScheduleViewTypeName : String
+                                                  , val algorithmScheduleView_count : Int
+                                                ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vAlgorithmScheduleViewTypeSummary";
+  }
+  def fields : String = {
+    "algorithmScheduleViewTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleViewTypeName,algorithmScheduleView_count";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    algorithmScheduleViewTypeSummaryId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(algorithmScheduleViewTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleViewTypeName,algorithmScheduleView_count)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+algorithmScheduleViewTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmScheduleViewTypeName,""+algorithmScheduleView_count)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "algorithmScheduleViewTypeId" => algorithmScheduleViewTypeId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "algorithmScheduleViewTypeName" => algorithmScheduleViewTypeName
+      case "algorithmScheduleView_count" => algorithmScheduleView_count
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "algorithmScheduleViewTypeId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "algorithmScheduleViewTypeName" => "String"
+      case "algorithmScheduleView_count" => "Int"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VAlgorithmScheduleViewTypeSummaryDto {
+  val TABLE_NAME = "vAlgorithmScheduleViewTypeSummary";
+  val FIELD_algorithmScheduleViewTypeId = "algorithmScheduleViewTypeId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_algorithmScheduleViewTypeName = "algorithmScheduleViewTypeName";
+  val FIELD_algorithmScheduleView_count = "algorithmScheduleView_count";
+
+}
+
+
+case class VAlgorithmStorageSupportDto (
+                                         val algorithmStorageSupportId : Long
+                                         , val guid : Long
+                                         , val insertedRowDate : java.util.Date
+                                         , val lastUpdatedDate : java.util.Date
+                                         , val algorithmImplementationId : Long
+                                         , val executorStorageTypeId : Long
+                                         , val supportPriority : Int
+                                         , val algorithmImplementation_algorithmImplementationId : Long
+                                         , val algorithmImplementation_guid : Long
+                                         , val algorithmImplementation_insertedRowDate : java.util.Date
+                                         , val algorithmImplementation_lastUpdatedDate : java.util.Date
+                                         , val algorithmImplementation_algorithmTypeVersionId : Long
+                                         , val algorithmImplementation_executorTypeId : Long
+                                         , val algorithmImplementation_algorithmImplementationName : String
+                                         , val algorithmImplementation_algorithmImplementationClass : String
+                                         , val executorStorageType_executorStorageTypeId : Long
+                                         , val executorStorageType_guid : Long
+                                         , val executorStorageType_insertedRowDate : java.util.Date
+                                         , val executorStorageType_lastUpdatedDate : java.util.Date
+                                         , val executorStorageType_executorStorageTypeName : String
+                                         , val executorStorageType_executorStorageTypeClass : String
+                                       ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vAlgorithmStorageSupport";
+  }
+  def fields : String = {
+    "algorithmStorageSupportId,guid,insertedRowDate,lastUpdatedDate,algorithmImplementationId,executorStorageTypeId,supportPriority,algorithmImplementation_algorithmImplementationId,algorithmImplementation_guid,algorithmImplementation_insertedRowDate,algorithmImplementation_lastUpdatedDate,algorithmImplementation_algorithmTypeVersionId,algorithmImplementation_executorTypeId,algorithmImplementation_algorithmImplementationName,algorithmImplementation_algorithmImplementationClass,executorStorageType_executorStorageTypeId,executorStorageType_guid,executorStorageType_insertedRowDate,executorStorageType_lastUpdatedDate,executorStorageType_executorStorageTypeName,executorStorageType_executorStorageTypeClass";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    algorithmStorageSupportId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(algorithmStorageSupportId,guid,insertedRowDate,lastUpdatedDate,algorithmImplementationId,executorStorageTypeId,supportPriority,algorithmImplementation_algorithmImplementationId,algorithmImplementation_guid,algorithmImplementation_insertedRowDate,algorithmImplementation_lastUpdatedDate,algorithmImplementation_algorithmTypeVersionId,algorithmImplementation_executorTypeId,algorithmImplementation_algorithmImplementationName,algorithmImplementation_algorithmImplementationClass,executorStorageType_executorStorageTypeId,executorStorageType_guid,executorStorageType_insertedRowDate,executorStorageType_lastUpdatedDate,executorStorageType_executorStorageTypeName,executorStorageType_executorStorageTypeClass)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+algorithmStorageSupportId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmImplementationId,""+executorStorageTypeId,""+supportPriority,""+algorithmImplementation_algorithmImplementationId,""+algorithmImplementation_guid,""+algorithmImplementation_insertedRowDate,""+algorithmImplementation_lastUpdatedDate,""+algorithmImplementation_algorithmTypeVersionId,""+algorithmImplementation_executorTypeId,""+algorithmImplementation_algorithmImplementationName,""+algorithmImplementation_algorithmImplementationClass,""+executorStorageType_executorStorageTypeId,""+executorStorageType_guid,""+executorStorageType_insertedRowDate,""+executorStorageType_lastUpdatedDate,""+executorStorageType_executorStorageTypeName,""+executorStorageType_executorStorageTypeClass)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "algorithmStorageSupportId" => algorithmStorageSupportId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "algorithmImplementationId" => algorithmImplementationId
+      case "executorStorageTypeId" => executorStorageTypeId
+      case "supportPriority" => supportPriority
+      case "algorithmImplementation_algorithmImplementationId" => algorithmImplementation_algorithmImplementationId
+      case "algorithmImplementation_guid" => algorithmImplementation_guid
+      case "algorithmImplementation_insertedRowDate" => algorithmImplementation_insertedRowDate
+      case "algorithmImplementation_lastUpdatedDate" => algorithmImplementation_lastUpdatedDate
+      case "algorithmImplementation_algorithmTypeVersionId" => algorithmImplementation_algorithmTypeVersionId
+      case "algorithmImplementation_executorTypeId" => algorithmImplementation_executorTypeId
+      case "algorithmImplementation_algorithmImplementationName" => algorithmImplementation_algorithmImplementationName
+      case "algorithmImplementation_algorithmImplementationClass" => algorithmImplementation_algorithmImplementationClass
+      case "executorStorageType_executorStorageTypeId" => executorStorageType_executorStorageTypeId
+      case "executorStorageType_guid" => executorStorageType_guid
+      case "executorStorageType_insertedRowDate" => executorStorageType_insertedRowDate
+      case "executorStorageType_lastUpdatedDate" => executorStorageType_lastUpdatedDate
+      case "executorStorageType_executorStorageTypeName" => executorStorageType_executorStorageTypeName
+      case "executorStorageType_executorStorageTypeClass" => executorStorageType_executorStorageTypeClass
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "algorithmStorageSupportId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "algorithmImplementationId" => "Long"
+      case "executorStorageTypeId" => "Long"
+      case "supportPriority" => "Int"
+      case "algorithmImplementation_algorithmImplementationId" => "Long"
+      case "algorithmImplementation_guid" => "Long"
+      case "algorithmImplementation_insertedRowDate" => "java.util.Date"
+      case "algorithmImplementation_lastUpdatedDate" => "java.util.Date"
+      case "algorithmImplementation_algorithmTypeVersionId" => "Long"
+      case "algorithmImplementation_executorTypeId" => "Long"
+      case "algorithmImplementation_algorithmImplementationName" => "String"
+      case "algorithmImplementation_algorithmImplementationClass" => "String"
+      case "executorStorageType_executorStorageTypeId" => "Long"
+      case "executorStorageType_guid" => "Long"
+      case "executorStorageType_insertedRowDate" => "java.util.Date"
+      case "executorStorageType_lastUpdatedDate" => "java.util.Date"
+      case "executorStorageType_executorStorageTypeName" => "String"
+      case "executorStorageType_executorStorageTypeClass" => "String"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VAlgorithmStorageSupportDto {
+  val TABLE_NAME = "vAlgorithmStorageSupport";
+  val FIELD_algorithmStorageSupportId = "algorithmStorageSupportId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_algorithmImplementationId = "algorithmImplementationId";
+  val FIELD_executorStorageTypeId = "executorStorageTypeId";
+  val FIELD_supportPriority = "supportPriority";
+  val FIELD_algorithmImplementation_algorithmImplementationId = "algorithmImplementation_algorithmImplementationId";
+  val FIELD_algorithmImplementation_guid = "algorithmImplementation_guid";
+  val FIELD_algorithmImplementation_insertedRowDate = "algorithmImplementation_insertedRowDate";
+  val FIELD_algorithmImplementation_lastUpdatedDate = "algorithmImplementation_lastUpdatedDate";
+  val FIELD_algorithmImplementation_algorithmTypeVersionId = "algorithmImplementation_algorithmTypeVersionId";
+  val FIELD_algorithmImplementation_executorTypeId = "algorithmImplementation_executorTypeId";
+  val FIELD_algorithmImplementation_algorithmImplementationName = "algorithmImplementation_algorithmImplementationName";
+  val FIELD_algorithmImplementation_algorithmImplementationClass = "algorithmImplementation_algorithmImplementationClass";
+  val FIELD_executorStorageType_executorStorageTypeId = "executorStorageType_executorStorageTypeId";
+  val FIELD_executorStorageType_guid = "executorStorageType_guid";
+  val FIELD_executorStorageType_insertedRowDate = "executorStorageType_insertedRowDate";
+  val FIELD_executorStorageType_lastUpdatedDate = "executorStorageType_lastUpdatedDate";
+  val FIELD_executorStorageType_executorStorageTypeName = "executorStorageType_executorStorageTypeName";
+  val FIELD_executorStorageType_executorStorageTypeClass = "executorStorageType_executorStorageTypeClass";
 
 }
 
 
 case class VAlgorithmTypeColumnTypeDto (
                                          val algorithmTypeColumnTypeId : Long
+                                         , val guid : Long
+                                         , val insertedRowDate : java.util.Date
+                                         , val lastUpdatedDate : java.util.Date
                                          , val algorithmTypeVersionId : Long
                                          , val algorithmColumnTypeId : Long
                                          , val allowMultiple : Int
                                          , val allowEmpty : Int
-                                         , val insertedRowDate : java.util.Date
-                                         , val lastUpdatedDate : java.util.Date
-                                         , val guid : Long
                                          , val algorithmColumnType_algorithmColumnTypeId : Long
-                                         , val algorithmColumnType_algorithmColumnTypeName : String
-                                         , val algorithmColumnType_algorithmColumnTypeDescription : String
+                                         , val algorithmColumnType_guid : Long
                                          , val algorithmColumnType_insertedRowDate : java.util.Date
                                          , val algorithmColumnType_lastUpdatedDate : java.util.Date
-                                         , val algorithmColumnType_guid : Long
+                                         , val algorithmColumnType_algorithmColumnTypeName : String
+                                         , val algorithmColumnType_algorithmColumnTypeDescription : String
                                          , val algorithmTypeVersion_algorithmTypeVersionId : Long
+                                         , val algorithmTypeVersion_insertedRowDate : java.util.Date
+                                         , val algorithmTypeVersion_lastUpdatedDate : java.util.Date
                                          , val algorithmTypeVersion_guid : Long
                                          , val algorithmTypeVersion_algorithmTypeId : Long
                                          , val algorithmTypeVersion_algorithmTypeVersionName : String
-                                         , val algorithmTypeVersion_insertedRowDate : java.util.Date
-                                         , val algorithmTypeVersion_lastUpdatedDate : java.util.Date
                                        ) extends BaseReadOnlyDto {
   def tableName : String = {
     "vAlgorithmTypeColumnType";
   }
   def fields : String = {
-    "algorithmTypeColumnTypeId,algorithmTypeVersionId,algorithmColumnTypeId,allowMultiple,allowEmpty,insertedRowDate,lastUpdatedDate,guid,algorithmColumnType_algorithmColumnTypeId,algorithmColumnType_algorithmColumnTypeName,algorithmColumnType_algorithmColumnTypeDescription,algorithmColumnType_insertedRowDate,algorithmColumnType_lastUpdatedDate,algorithmColumnType_guid,algorithmTypeVersion_algorithmTypeVersionId,algorithmTypeVersion_guid,algorithmTypeVersion_algorithmTypeId,algorithmTypeVersion_algorithmTypeVersionName,algorithmTypeVersion_insertedRowDate,algorithmTypeVersion_lastUpdatedDate";
+    "algorithmTypeColumnTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,algorithmColumnTypeId,allowMultiple,allowEmpty,algorithmColumnType_algorithmColumnTypeId,algorithmColumnType_guid,algorithmColumnType_insertedRowDate,algorithmColumnType_lastUpdatedDate,algorithmColumnType_algorithmColumnTypeName,algorithmColumnType_algorithmColumnTypeDescription,algorithmTypeVersion_algorithmTypeVersionId,algorithmTypeVersion_insertedRowDate,algorithmTypeVersion_lastUpdatedDate,algorithmTypeVersion_guid,algorithmTypeVersion_algorithmTypeId,algorithmTypeVersion_algorithmTypeVersionName";
   }
   def pkFields : String = {
     "";
@@ -6148,33 +7941,33 @@ case class VAlgorithmTypeColumnTypeDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(algorithmTypeColumnTypeId,algorithmTypeVersionId,algorithmColumnTypeId,allowMultiple,allowEmpty,insertedRowDate,lastUpdatedDate,guid,algorithmColumnType_algorithmColumnTypeId,algorithmColumnType_algorithmColumnTypeName,algorithmColumnType_algorithmColumnTypeDescription,algorithmColumnType_insertedRowDate,algorithmColumnType_lastUpdatedDate,algorithmColumnType_guid,algorithmTypeVersion_algorithmTypeVersionId,algorithmTypeVersion_guid,algorithmTypeVersion_algorithmTypeId,algorithmTypeVersion_algorithmTypeVersionName,algorithmTypeVersion_insertedRowDate,algorithmTypeVersion_lastUpdatedDate)
+    Array(algorithmTypeColumnTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,algorithmColumnTypeId,allowMultiple,allowEmpty,algorithmColumnType_algorithmColumnTypeId,algorithmColumnType_guid,algorithmColumnType_insertedRowDate,algorithmColumnType_lastUpdatedDate,algorithmColumnType_algorithmColumnTypeName,algorithmColumnType_algorithmColumnTypeDescription,algorithmTypeVersion_algorithmTypeVersionId,algorithmTypeVersion_insertedRowDate,algorithmTypeVersion_lastUpdatedDate,algorithmTypeVersion_guid,algorithmTypeVersion_algorithmTypeId,algorithmTypeVersion_algorithmTypeVersionName)
   }
   def toStringArray() : Array[String] = {
-    Array(""+algorithmTypeColumnTypeId,""+algorithmTypeVersionId,""+algorithmColumnTypeId,""+allowMultiple,""+allowEmpty,""+insertedRowDate,""+lastUpdatedDate,""+guid,""+algorithmColumnType_algorithmColumnTypeId,""+algorithmColumnType_algorithmColumnTypeName,""+algorithmColumnType_algorithmColumnTypeDescription,""+algorithmColumnType_insertedRowDate,""+algorithmColumnType_lastUpdatedDate,""+algorithmColumnType_guid,""+algorithmTypeVersion_algorithmTypeVersionId,""+algorithmTypeVersion_guid,""+algorithmTypeVersion_algorithmTypeId,""+algorithmTypeVersion_algorithmTypeVersionName,""+algorithmTypeVersion_insertedRowDate,""+algorithmTypeVersion_lastUpdatedDate)
+    Array(""+algorithmTypeColumnTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmTypeVersionId,""+algorithmColumnTypeId,""+allowMultiple,""+allowEmpty,""+algorithmColumnType_algorithmColumnTypeId,""+algorithmColumnType_guid,""+algorithmColumnType_insertedRowDate,""+algorithmColumnType_lastUpdatedDate,""+algorithmColumnType_algorithmColumnTypeName,""+algorithmColumnType_algorithmColumnTypeDescription,""+algorithmTypeVersion_algorithmTypeVersionId,""+algorithmTypeVersion_insertedRowDate,""+algorithmTypeVersion_lastUpdatedDate,""+algorithmTypeVersion_guid,""+algorithmTypeVersion_algorithmTypeId,""+algorithmTypeVersion_algorithmTypeVersionName)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "algorithmTypeColumnTypeId" => algorithmTypeColumnTypeId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
       case "algorithmTypeVersionId" => algorithmTypeVersionId
       case "algorithmColumnTypeId" => algorithmColumnTypeId
       case "allowMultiple" => allowMultiple
       case "allowEmpty" => allowEmpty
-      case "insertedRowDate" => insertedRowDate
-      case "lastUpdatedDate" => lastUpdatedDate
-      case "guid" => guid
       case "algorithmColumnType_algorithmColumnTypeId" => algorithmColumnType_algorithmColumnTypeId
-      case "algorithmColumnType_algorithmColumnTypeName" => algorithmColumnType_algorithmColumnTypeName
-      case "algorithmColumnType_algorithmColumnTypeDescription" => algorithmColumnType_algorithmColumnTypeDescription
+      case "algorithmColumnType_guid" => algorithmColumnType_guid
       case "algorithmColumnType_insertedRowDate" => algorithmColumnType_insertedRowDate
       case "algorithmColumnType_lastUpdatedDate" => algorithmColumnType_lastUpdatedDate
-      case "algorithmColumnType_guid" => algorithmColumnType_guid
+      case "algorithmColumnType_algorithmColumnTypeName" => algorithmColumnType_algorithmColumnTypeName
+      case "algorithmColumnType_algorithmColumnTypeDescription" => algorithmColumnType_algorithmColumnTypeDescription
       case "algorithmTypeVersion_algorithmTypeVersionId" => algorithmTypeVersion_algorithmTypeVersionId
+      case "algorithmTypeVersion_insertedRowDate" => algorithmTypeVersion_insertedRowDate
+      case "algorithmTypeVersion_lastUpdatedDate" => algorithmTypeVersion_lastUpdatedDate
       case "algorithmTypeVersion_guid" => algorithmTypeVersion_guid
       case "algorithmTypeVersion_algorithmTypeId" => algorithmTypeVersion_algorithmTypeId
       case "algorithmTypeVersion_algorithmTypeVersionName" => algorithmTypeVersion_algorithmTypeVersionName
-      case "algorithmTypeVersion_insertedRowDate" => algorithmTypeVersion_insertedRowDate
-      case "algorithmTypeVersion_lastUpdatedDate" => algorithmTypeVersion_lastUpdatedDate
       case _ => null
     }
     ret
@@ -6182,25 +7975,25 @@ case class VAlgorithmTypeColumnTypeDto (
   def getFieldTypeName(name : String) : String = {
     val ret = name match {
       case "algorithmTypeColumnTypeId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
       case "algorithmTypeVersionId" => "Long"
       case "algorithmColumnTypeId" => "Long"
       case "allowMultiple" => "Int"
       case "allowEmpty" => "Int"
-      case "insertedRowDate" => "java.util.Date"
-      case "lastUpdatedDate" => "java.util.Date"
-      case "guid" => "Long"
       case "algorithmColumnType_algorithmColumnTypeId" => "Long"
-      case "algorithmColumnType_algorithmColumnTypeName" => "String"
-      case "algorithmColumnType_algorithmColumnTypeDescription" => "String"
+      case "algorithmColumnType_guid" => "Long"
       case "algorithmColumnType_insertedRowDate" => "java.util.Date"
       case "algorithmColumnType_lastUpdatedDate" => "java.util.Date"
-      case "algorithmColumnType_guid" => "Long"
+      case "algorithmColumnType_algorithmColumnTypeName" => "String"
+      case "algorithmColumnType_algorithmColumnTypeDescription" => "String"
       case "algorithmTypeVersion_algorithmTypeVersionId" => "Long"
+      case "algorithmTypeVersion_insertedRowDate" => "java.util.Date"
+      case "algorithmTypeVersion_lastUpdatedDate" => "java.util.Date"
       case "algorithmTypeVersion_guid" => "Long"
       case "algorithmTypeVersion_algorithmTypeId" => "Long"
       case "algorithmTypeVersion_algorithmTypeVersionName" => "String"
-      case "algorithmTypeVersion_insertedRowDate" => "java.util.Date"
-      case "algorithmTypeVersion_lastUpdatedDate" => "java.util.Date"
       case _ => "Object"
     }
     ret
@@ -6209,48 +8002,260 @@ case class VAlgorithmTypeColumnTypeDto (
 object VAlgorithmTypeColumnTypeDto {
   val TABLE_NAME = "vAlgorithmTypeColumnType";
   val FIELD_algorithmTypeColumnTypeId = "algorithmTypeColumnTypeId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_algorithmTypeVersionId = "algorithmTypeVersionId";
   val FIELD_algorithmColumnTypeId = "algorithmColumnTypeId";
   val FIELD_allowMultiple = "allowMultiple";
   val FIELD_allowEmpty = "allowEmpty";
-  val FIELD_insertedRowDate = "insertedRowDate";
-  val FIELD_lastUpdatedDate = "lastUpdatedDate";
-  val FIELD_guid = "guid";
   val FIELD_algorithmColumnType_algorithmColumnTypeId = "algorithmColumnType_algorithmColumnTypeId";
-  val FIELD_algorithmColumnType_algorithmColumnTypeName = "algorithmColumnType_algorithmColumnTypeName";
-  val FIELD_algorithmColumnType_algorithmColumnTypeDescription = "algorithmColumnType_algorithmColumnTypeDescription";
+  val FIELD_algorithmColumnType_guid = "algorithmColumnType_guid";
   val FIELD_algorithmColumnType_insertedRowDate = "algorithmColumnType_insertedRowDate";
   val FIELD_algorithmColumnType_lastUpdatedDate = "algorithmColumnType_lastUpdatedDate";
-  val FIELD_algorithmColumnType_guid = "algorithmColumnType_guid";
+  val FIELD_algorithmColumnType_algorithmColumnTypeName = "algorithmColumnType_algorithmColumnTypeName";
+  val FIELD_algorithmColumnType_algorithmColumnTypeDescription = "algorithmColumnType_algorithmColumnTypeDescription";
   val FIELD_algorithmTypeVersion_algorithmTypeVersionId = "algorithmTypeVersion_algorithmTypeVersionId";
+  val FIELD_algorithmTypeVersion_insertedRowDate = "algorithmTypeVersion_insertedRowDate";
+  val FIELD_algorithmTypeVersion_lastUpdatedDate = "algorithmTypeVersion_lastUpdatedDate";
   val FIELD_algorithmTypeVersion_guid = "algorithmTypeVersion_guid";
   val FIELD_algorithmTypeVersion_algorithmTypeId = "algorithmTypeVersion_algorithmTypeId";
   val FIELD_algorithmTypeVersion_algorithmTypeVersionName = "algorithmTypeVersion_algorithmTypeVersionName";
+
+}
+
+
+case class VAlgorithmTypeOutputTypeDto (
+                                         val algorithmTypeOutputTypeId : Long
+                                         , val guid : Long
+                                         , val insertedRowDate : java.util.Date
+                                         , val lastUpdatedDate : java.util.Date
+                                         , val algorithmTypeVersionId : Long
+                                         , val algorithmOutputTypeId : Long
+                                         , val isMandatory : Int
+                                         , val algorithmOutputType_algorithmOutputTypeId : Long
+                                         , val algorithmOutputType_guid : Long
+                                         , val algorithmOutputType_insertedRowDate : java.util.Date
+                                         , val algorithmOutputType_lastUpdatedDate : java.util.Date
+                                         , val algorithmOutputType_algorithmOutputTypeName : String
+                                         , val algorithmTypeVersion_algorithmTypeVersionId : Long
+                                         , val algorithmTypeVersion_insertedRowDate : java.util.Date
+                                         , val algorithmTypeVersion_lastUpdatedDate : java.util.Date
+                                         , val algorithmTypeVersion_guid : Long
+                                         , val algorithmTypeVersion_algorithmTypeId : Long
+                                         , val algorithmTypeVersion_algorithmTypeVersionName : String
+                                       ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vAlgorithmTypeOutputType";
+  }
+  def fields : String = {
+    "algorithmTypeOutputTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,algorithmOutputTypeId,isMandatory,algorithmOutputType_algorithmOutputTypeId,algorithmOutputType_guid,algorithmOutputType_insertedRowDate,algorithmOutputType_lastUpdatedDate,algorithmOutputType_algorithmOutputTypeName,algorithmTypeVersion_algorithmTypeVersionId,algorithmTypeVersion_insertedRowDate,algorithmTypeVersion_lastUpdatedDate,algorithmTypeVersion_guid,algorithmTypeVersion_algorithmTypeId,algorithmTypeVersion_algorithmTypeVersionName";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    algorithmTypeOutputTypeId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(algorithmTypeOutputTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,algorithmOutputTypeId,isMandatory,algorithmOutputType_algorithmOutputTypeId,algorithmOutputType_guid,algorithmOutputType_insertedRowDate,algorithmOutputType_lastUpdatedDate,algorithmOutputType_algorithmOutputTypeName,algorithmTypeVersion_algorithmTypeVersionId,algorithmTypeVersion_insertedRowDate,algorithmTypeVersion_lastUpdatedDate,algorithmTypeVersion_guid,algorithmTypeVersion_algorithmTypeId,algorithmTypeVersion_algorithmTypeVersionName)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+algorithmTypeOutputTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmTypeVersionId,""+algorithmOutputTypeId,""+isMandatory,""+algorithmOutputType_algorithmOutputTypeId,""+algorithmOutputType_guid,""+algorithmOutputType_insertedRowDate,""+algorithmOutputType_lastUpdatedDate,""+algorithmOutputType_algorithmOutputTypeName,""+algorithmTypeVersion_algorithmTypeVersionId,""+algorithmTypeVersion_insertedRowDate,""+algorithmTypeVersion_lastUpdatedDate,""+algorithmTypeVersion_guid,""+algorithmTypeVersion_algorithmTypeId,""+algorithmTypeVersion_algorithmTypeVersionName)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "algorithmTypeOutputTypeId" => algorithmTypeOutputTypeId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "algorithmTypeVersionId" => algorithmTypeVersionId
+      case "algorithmOutputTypeId" => algorithmOutputTypeId
+      case "isMandatory" => isMandatory
+      case "algorithmOutputType_algorithmOutputTypeId" => algorithmOutputType_algorithmOutputTypeId
+      case "algorithmOutputType_guid" => algorithmOutputType_guid
+      case "algorithmOutputType_insertedRowDate" => algorithmOutputType_insertedRowDate
+      case "algorithmOutputType_lastUpdatedDate" => algorithmOutputType_lastUpdatedDate
+      case "algorithmOutputType_algorithmOutputTypeName" => algorithmOutputType_algorithmOutputTypeName
+      case "algorithmTypeVersion_algorithmTypeVersionId" => algorithmTypeVersion_algorithmTypeVersionId
+      case "algorithmTypeVersion_insertedRowDate" => algorithmTypeVersion_insertedRowDate
+      case "algorithmTypeVersion_lastUpdatedDate" => algorithmTypeVersion_lastUpdatedDate
+      case "algorithmTypeVersion_guid" => algorithmTypeVersion_guid
+      case "algorithmTypeVersion_algorithmTypeId" => algorithmTypeVersion_algorithmTypeId
+      case "algorithmTypeVersion_algorithmTypeVersionName" => algorithmTypeVersion_algorithmTypeVersionName
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "algorithmTypeOutputTypeId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "algorithmTypeVersionId" => "Long"
+      case "algorithmOutputTypeId" => "Long"
+      case "isMandatory" => "Int"
+      case "algorithmOutputType_algorithmOutputTypeId" => "Long"
+      case "algorithmOutputType_guid" => "Long"
+      case "algorithmOutputType_insertedRowDate" => "java.util.Date"
+      case "algorithmOutputType_lastUpdatedDate" => "java.util.Date"
+      case "algorithmOutputType_algorithmOutputTypeName" => "String"
+      case "algorithmTypeVersion_algorithmTypeVersionId" => "Long"
+      case "algorithmTypeVersion_insertedRowDate" => "java.util.Date"
+      case "algorithmTypeVersion_lastUpdatedDate" => "java.util.Date"
+      case "algorithmTypeVersion_guid" => "Long"
+      case "algorithmTypeVersion_algorithmTypeId" => "Long"
+      case "algorithmTypeVersion_algorithmTypeVersionName" => "String"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VAlgorithmTypeOutputTypeDto {
+  val TABLE_NAME = "vAlgorithmTypeOutputType";
+  val FIELD_algorithmTypeOutputTypeId = "algorithmTypeOutputTypeId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_algorithmTypeVersionId = "algorithmTypeVersionId";
+  val FIELD_algorithmOutputTypeId = "algorithmOutputTypeId";
+  val FIELD_isMandatory = "isMandatory";
+  val FIELD_algorithmOutputType_algorithmOutputTypeId = "algorithmOutputType_algorithmOutputTypeId";
+  val FIELD_algorithmOutputType_guid = "algorithmOutputType_guid";
+  val FIELD_algorithmOutputType_insertedRowDate = "algorithmOutputType_insertedRowDate";
+  val FIELD_algorithmOutputType_lastUpdatedDate = "algorithmOutputType_lastUpdatedDate";
+  val FIELD_algorithmOutputType_algorithmOutputTypeName = "algorithmOutputType_algorithmOutputTypeName";
+  val FIELD_algorithmTypeVersion_algorithmTypeVersionId = "algorithmTypeVersion_algorithmTypeVersionId";
   val FIELD_algorithmTypeVersion_insertedRowDate = "algorithmTypeVersion_insertedRowDate";
   val FIELD_algorithmTypeVersion_lastUpdatedDate = "algorithmTypeVersion_lastUpdatedDate";
+  val FIELD_algorithmTypeVersion_guid = "algorithmTypeVersion_guid";
+  val FIELD_algorithmTypeVersion_algorithmTypeId = "algorithmTypeVersion_algorithmTypeId";
+  val FIELD_algorithmTypeVersion_algorithmTypeVersionName = "algorithmTypeVersion_algorithmTypeVersionName";
+
+}
+
+
+case class VAlgorithmTypeSummaryDto (
+                                      val algorithmTypeId : Long
+                                      , val guid : Long
+                                      , val insertedRowDate : java.util.Date
+                                      , val lastUpdatedDate : java.util.Date
+                                      , val algorithmTypeName : String
+                                      , val algorithmTypeDescription : String
+                                      , val algorithmTypeVersion_count : Int
+                                      , val algorithmParamType_count : Int
+                                    ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vAlgorithmTypeSummary";
+  }
+  def fields : String = {
+    "algorithmTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeName,algorithmTypeDescription,algorithmTypeVersion_count,algorithmParamType_count";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    algorithmTypeSummaryId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(algorithmTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeName,algorithmTypeDescription,algorithmTypeVersion_count,algorithmParamType_count)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+algorithmTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmTypeName,""+algorithmTypeDescription,""+algorithmTypeVersion_count,""+algorithmParamType_count)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "algorithmTypeId" => algorithmTypeId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "algorithmTypeName" => algorithmTypeName
+      case "algorithmTypeDescription" => algorithmTypeDescription
+      case "algorithmTypeVersion_count" => algorithmTypeVersion_count
+      case "algorithmParamType_count" => algorithmParamType_count
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "algorithmTypeId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "algorithmTypeName" => "String"
+      case "algorithmTypeDescription" => "String"
+      case "algorithmTypeVersion_count" => "Int"
+      case "algorithmParamType_count" => "Int"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VAlgorithmTypeSummaryDto {
+  val TABLE_NAME = "vAlgorithmTypeSummary";
+  val FIELD_algorithmTypeId = "algorithmTypeId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_algorithmTypeName = "algorithmTypeName";
+  val FIELD_algorithmTypeDescription = "algorithmTypeDescription";
+  val FIELD_algorithmTypeVersion_count = "algorithmTypeVersion_count";
+  val FIELD_algorithmParamType_count = "algorithmParamType_count";
 
 }
 
 
 case class VAlgorithmTypeVersionDto (
                                       val algorithmTypeVersionId : Long
+                                      , val insertedRowDate : java.util.Date
+                                      , val lastUpdatedDate : java.util.Date
                                       , val guid : Long
                                       , val algorithmTypeId : Long
                                       , val algorithmTypeVersionName : String
-                                      , val insertedRowDate : java.util.Date
-                                      , val lastUpdatedDate : java.util.Date
                                       , val algorithmType_algorithmTypeId : Long
                                       , val algorithmType_guid : Long
-                                      , val algorithmType_algorithmTypeName : String
-                                      , val algorithmType_algorithmTypeDescription : String
                                       , val algorithmType_insertedRowDate : java.util.Date
                                       , val algorithmType_lastUpdatedDate : java.util.Date
+                                      , val algorithmType_algorithmTypeName : String
+                                      , val algorithmType_algorithmTypeDescription : String
                                     ) extends BaseReadOnlyDto {
   def tableName : String = {
     "vAlgorithmTypeVersion";
   }
   def fields : String = {
-    "algorithmTypeVersionId,guid,algorithmTypeId,algorithmTypeVersionName,insertedRowDate,lastUpdatedDate,algorithmType_algorithmTypeId,algorithmType_guid,algorithmType_algorithmTypeName,algorithmType_algorithmTypeDescription,algorithmType_insertedRowDate,algorithmType_lastUpdatedDate";
+    "algorithmTypeVersionId,insertedRowDate,lastUpdatedDate,guid,algorithmTypeId,algorithmTypeVersionName,algorithmType_algorithmTypeId,algorithmType_guid,algorithmType_insertedRowDate,algorithmType_lastUpdatedDate,algorithmType_algorithmTypeName,algorithmType_algorithmTypeDescription";
   }
   def pkFields : String = {
     "";
@@ -6274,25 +8279,25 @@ case class VAlgorithmTypeVersionDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(algorithmTypeVersionId,guid,algorithmTypeId,algorithmTypeVersionName,insertedRowDate,lastUpdatedDate,algorithmType_algorithmTypeId,algorithmType_guid,algorithmType_algorithmTypeName,algorithmType_algorithmTypeDescription,algorithmType_insertedRowDate,algorithmType_lastUpdatedDate)
+    Array(algorithmTypeVersionId,insertedRowDate,lastUpdatedDate,guid,algorithmTypeId,algorithmTypeVersionName,algorithmType_algorithmTypeId,algorithmType_guid,algorithmType_insertedRowDate,algorithmType_lastUpdatedDate,algorithmType_algorithmTypeName,algorithmType_algorithmTypeDescription)
   }
   def toStringArray() : Array[String] = {
-    Array(""+algorithmTypeVersionId,""+guid,""+algorithmTypeId,""+algorithmTypeVersionName,""+insertedRowDate,""+lastUpdatedDate,""+algorithmType_algorithmTypeId,""+algorithmType_guid,""+algorithmType_algorithmTypeName,""+algorithmType_algorithmTypeDescription,""+algorithmType_insertedRowDate,""+algorithmType_lastUpdatedDate)
+    Array(""+algorithmTypeVersionId,""+insertedRowDate,""+lastUpdatedDate,""+guid,""+algorithmTypeId,""+algorithmTypeVersionName,""+algorithmType_algorithmTypeId,""+algorithmType_guid,""+algorithmType_insertedRowDate,""+algorithmType_lastUpdatedDate,""+algorithmType_algorithmTypeName,""+algorithmType_algorithmTypeDescription)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "algorithmTypeVersionId" => algorithmTypeVersionId
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
       case "guid" => guid
       case "algorithmTypeId" => algorithmTypeId
       case "algorithmTypeVersionName" => algorithmTypeVersionName
-      case "insertedRowDate" => insertedRowDate
-      case "lastUpdatedDate" => lastUpdatedDate
       case "algorithmType_algorithmTypeId" => algorithmType_algorithmTypeId
       case "algorithmType_guid" => algorithmType_guid
-      case "algorithmType_algorithmTypeName" => algorithmType_algorithmTypeName
-      case "algorithmType_algorithmTypeDescription" => algorithmType_algorithmTypeDescription
       case "algorithmType_insertedRowDate" => algorithmType_insertedRowDate
       case "algorithmType_lastUpdatedDate" => algorithmType_lastUpdatedDate
+      case "algorithmType_algorithmTypeName" => algorithmType_algorithmTypeName
+      case "algorithmType_algorithmTypeDescription" => algorithmType_algorithmTypeDescription
       case _ => null
     }
     ret
@@ -6300,17 +8305,17 @@ case class VAlgorithmTypeVersionDto (
   def getFieldTypeName(name : String) : String = {
     val ret = name match {
       case "algorithmTypeVersionId" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
       case "guid" => "Long"
       case "algorithmTypeId" => "Long"
       case "algorithmTypeVersionName" => "String"
-      case "insertedRowDate" => "java.util.Date"
-      case "lastUpdatedDate" => "java.util.Date"
       case "algorithmType_algorithmTypeId" => "Long"
       case "algorithmType_guid" => "Long"
-      case "algorithmType_algorithmTypeName" => "String"
-      case "algorithmType_algorithmTypeDescription" => "String"
       case "algorithmType_insertedRowDate" => "java.util.Date"
       case "algorithmType_lastUpdatedDate" => "java.util.Date"
+      case "algorithmType_algorithmTypeName" => "String"
+      case "algorithmType_algorithmTypeDescription" => "String"
       case _ => "Object"
     }
     ret
@@ -6319,17 +8324,623 @@ case class VAlgorithmTypeVersionDto (
 object VAlgorithmTypeVersionDto {
   val TABLE_NAME = "vAlgorithmTypeVersion";
   val FIELD_algorithmTypeVersionId = "algorithmTypeVersionId";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_guid = "guid";
   val FIELD_algorithmTypeId = "algorithmTypeId";
   val FIELD_algorithmTypeVersionName = "algorithmTypeVersionName";
-  val FIELD_insertedRowDate = "insertedRowDate";
-  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_algorithmType_algorithmTypeId = "algorithmType_algorithmTypeId";
   val FIELD_algorithmType_guid = "algorithmType_guid";
-  val FIELD_algorithmType_algorithmTypeName = "algorithmType_algorithmTypeName";
-  val FIELD_algorithmType_algorithmTypeDescription = "algorithmType_algorithmTypeDescription";
   val FIELD_algorithmType_insertedRowDate = "algorithmType_insertedRowDate";
   val FIELD_algorithmType_lastUpdatedDate = "algorithmType_lastUpdatedDate";
+  val FIELD_algorithmType_algorithmTypeName = "algorithmType_algorithmTypeName";
+  val FIELD_algorithmType_algorithmTypeDescription = "algorithmType_algorithmTypeDescription";
+
+}
+
+
+case class VAlgorithmTypeVersionSummaryDto (
+                                             val algorithmTypeVersionId : Long
+                                             , val insertedRowDate : java.util.Date
+                                             , val lastUpdatedDate : java.util.Date
+                                             , val guid : Long
+                                             , val algorithmTypeId : Long
+                                             , val algorithmTypeVersionName : String
+                                             , val algorithmTypeColumnType_count : Int
+                                             , val algorithmTypeOutputType_count : Int
+                                             , val algorithmImplementation_count : Int
+                                             , val algorithmParamType_count : Int
+                                           ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vAlgorithmTypeVersionSummary";
+  }
+  def fields : String = {
+    "algorithmTypeVersionId,insertedRowDate,lastUpdatedDate,guid,algorithmTypeId,algorithmTypeVersionName,algorithmTypeColumnType_count,algorithmTypeOutputType_count,algorithmImplementation_count,algorithmParamType_count";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    algorithmTypeVersionSummaryId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(algorithmTypeVersionId,insertedRowDate,lastUpdatedDate,guid,algorithmTypeId,algorithmTypeVersionName,algorithmTypeColumnType_count,algorithmTypeOutputType_count,algorithmImplementation_count,algorithmParamType_count)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+algorithmTypeVersionId,""+insertedRowDate,""+lastUpdatedDate,""+guid,""+algorithmTypeId,""+algorithmTypeVersionName,""+algorithmTypeColumnType_count,""+algorithmTypeOutputType_count,""+algorithmImplementation_count,""+algorithmParamType_count)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "algorithmTypeVersionId" => algorithmTypeVersionId
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "guid" => guid
+      case "algorithmTypeId" => algorithmTypeId
+      case "algorithmTypeVersionName" => algorithmTypeVersionName
+      case "algorithmTypeColumnType_count" => algorithmTypeColumnType_count
+      case "algorithmTypeOutputType_count" => algorithmTypeOutputType_count
+      case "algorithmImplementation_count" => algorithmImplementation_count
+      case "algorithmParamType_count" => algorithmParamType_count
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "algorithmTypeVersionId" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "guid" => "Long"
+      case "algorithmTypeId" => "Long"
+      case "algorithmTypeVersionName" => "String"
+      case "algorithmTypeColumnType_count" => "Int"
+      case "algorithmTypeOutputType_count" => "Int"
+      case "algorithmImplementation_count" => "Int"
+      case "algorithmParamType_count" => "Int"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VAlgorithmTypeVersionSummaryDto {
+  val TABLE_NAME = "vAlgorithmTypeVersionSummary";
+  val FIELD_algorithmTypeVersionId = "algorithmTypeVersionId";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_guid = "guid";
+  val FIELD_algorithmTypeId = "algorithmTypeId";
+  val FIELD_algorithmTypeVersionName = "algorithmTypeVersionName";
+  val FIELD_algorithmTypeColumnType_count = "algorithmTypeColumnType_count";
+  val FIELD_algorithmTypeOutputType_count = "algorithmTypeOutputType_count";
+  val FIELD_algorithmImplementation_count = "algorithmImplementation_count";
+  val FIELD_algorithmParamType_count = "algorithmParamType_count";
+
+}
+
+
+case class VExecutorContextDto (
+                                 val executorContextId : Long
+                                 , val guid : Long
+                                 , val insertedRowDate : java.util.Date
+                                 , val lastUpdatedDate : java.util.Date
+                                 , val executorHostId : Long
+                                 , val isWorking : Int
+                                 , val properties : String
+                                 , val executorHost_executorHostId : Long
+                                 , val executorHost_guid : Long
+                                 , val executorHost_insertedRowDate : java.util.Date
+                                 , val executorHost_lastUpdatedDate : java.util.Date
+                                 , val executorHost_hostName : String
+                                 , val executorHost_hostIp : String
+                                 , val executorHost_hostDomain : String
+                                 , val executorHost_hostOsType : String
+                                 , val executorHost_hostOsVersion : String
+                                 , val executorHost_isWorking : Int
+                               ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vExecutorContext";
+  }
+  def fields : String = {
+    "executorContextId,guid,insertedRowDate,lastUpdatedDate,executorHostId,isWorking,properties,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    executorContextId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(executorContextId,guid,insertedRowDate,lastUpdatedDate,executorHostId,isWorking,properties,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+executorContextId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+isWorking,""+properties,""+executorHost_executorHostId,""+executorHost_guid,""+executorHost_insertedRowDate,""+executorHost_lastUpdatedDate,""+executorHost_hostName,""+executorHost_hostIp,""+executorHost_hostDomain,""+executorHost_hostOsType,""+executorHost_hostOsVersion,""+executorHost_isWorking)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "executorContextId" => executorContextId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "executorHostId" => executorHostId
+      case "isWorking" => isWorking
+      case "properties" => properties
+      case "executorHost_executorHostId" => executorHost_executorHostId
+      case "executorHost_guid" => executorHost_guid
+      case "executorHost_insertedRowDate" => executorHost_insertedRowDate
+      case "executorHost_lastUpdatedDate" => executorHost_lastUpdatedDate
+      case "executorHost_hostName" => executorHost_hostName
+      case "executorHost_hostIp" => executorHost_hostIp
+      case "executorHost_hostDomain" => executorHost_hostDomain
+      case "executorHost_hostOsType" => executorHost_hostOsType
+      case "executorHost_hostOsVersion" => executorHost_hostOsVersion
+      case "executorHost_isWorking" => executorHost_isWorking
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "executorContextId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "executorHostId" => "Long"
+      case "isWorking" => "Int"
+      case "properties" => "String"
+      case "executorHost_executorHostId" => "Long"
+      case "executorHost_guid" => "Long"
+      case "executorHost_insertedRowDate" => "java.util.Date"
+      case "executorHost_lastUpdatedDate" => "java.util.Date"
+      case "executorHost_hostName" => "String"
+      case "executorHost_hostIp" => "String"
+      case "executorHost_hostDomain" => "String"
+      case "executorHost_hostOsType" => "String"
+      case "executorHost_hostOsVersion" => "String"
+      case "executorHost_isWorking" => "Int"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VExecutorContextDto {
+  val TABLE_NAME = "vExecutorContext";
+  val FIELD_executorContextId = "executorContextId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_executorHostId = "executorHostId";
+  val FIELD_isWorking = "isWorking";
+  val FIELD_properties = "properties";
+  val FIELD_executorHost_executorHostId = "executorHost_executorHostId";
+  val FIELD_executorHost_guid = "executorHost_guid";
+  val FIELD_executorHost_insertedRowDate = "executorHost_insertedRowDate";
+  val FIELD_executorHost_lastUpdatedDate = "executorHost_lastUpdatedDate";
+  val FIELD_executorHost_hostName = "executorHost_hostName";
+  val FIELD_executorHost_hostIp = "executorHost_hostIp";
+  val FIELD_executorHost_hostDomain = "executorHost_hostDomain";
+  val FIELD_executorHost_hostOsType = "executorHost_hostOsType";
+  val FIELD_executorHost_hostOsVersion = "executorHost_hostOsVersion";
+  val FIELD_executorHost_isWorking = "executorHost_isWorking";
+
+}
+
+
+case class VExecutorContextRuntimeDto (
+                                        val executorContextRuntimeId : Long
+                                        , val guid : Long
+                                        , val insertedRowDate : java.util.Date
+                                        , val lastUpdatedDate : java.util.Date
+                                        , val executorHostId : Long
+                                        , val executorContextId : Long
+                                        , val availableProcessors : Double
+                                        , val freeMemory : Double
+                                        , val maxMemory : Double
+                                        , val totalMemory : Double
+                                        , val executorContext_executorContextId : Long
+                                        , val executorContext_guid : Long
+                                        , val executorContext_insertedRowDate : java.util.Date
+                                        , val executorContext_lastUpdatedDate : java.util.Date
+                                        , val executorContext_executorHostId : Long
+                                        , val executorContext_isWorking : Int
+                                        , val executorContext_properties : String
+                                        , val executorHost_executorHostId : Long
+                                        , val executorHost_guid : Long
+                                        , val executorHost_insertedRowDate : java.util.Date
+                                        , val executorHost_lastUpdatedDate : java.util.Date
+                                        , val executorHost_hostName : String
+                                        , val executorHost_hostIp : String
+                                        , val executorHost_hostDomain : String
+                                        , val executorHost_hostOsType : String
+                                        , val executorHost_hostOsVersion : String
+                                        , val executorHost_isWorking : Int
+                                      ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vExecutorContextRuntime";
+  }
+  def fields : String = {
+    "executorContextRuntimeId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorContextId,availableProcessors,freeMemory,maxMemory,totalMemory,executorContext_executorContextId,executorContext_guid,executorContext_insertedRowDate,executorContext_lastUpdatedDate,executorContext_executorHostId,executorContext_isWorking,executorContext_properties,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    executorContextRuntimeId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(executorContextRuntimeId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorContextId,availableProcessors,freeMemory,maxMemory,totalMemory,executorContext_executorContextId,executorContext_guid,executorContext_insertedRowDate,executorContext_lastUpdatedDate,executorContext_executorHostId,executorContext_isWorking,executorContext_properties,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+executorContextRuntimeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+executorContextId,""+availableProcessors,""+freeMemory,""+maxMemory,""+totalMemory,""+executorContext_executorContextId,""+executorContext_guid,""+executorContext_insertedRowDate,""+executorContext_lastUpdatedDate,""+executorContext_executorHostId,""+executorContext_isWorking,""+executorContext_properties,""+executorHost_executorHostId,""+executorHost_guid,""+executorHost_insertedRowDate,""+executorHost_lastUpdatedDate,""+executorHost_hostName,""+executorHost_hostIp,""+executorHost_hostDomain,""+executorHost_hostOsType,""+executorHost_hostOsVersion,""+executorHost_isWorking)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "executorContextRuntimeId" => executorContextRuntimeId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "executorHostId" => executorHostId
+      case "executorContextId" => executorContextId
+      case "availableProcessors" => availableProcessors
+      case "freeMemory" => freeMemory
+      case "maxMemory" => maxMemory
+      case "totalMemory" => totalMemory
+      case "executorContext_executorContextId" => executorContext_executorContextId
+      case "executorContext_guid" => executorContext_guid
+      case "executorContext_insertedRowDate" => executorContext_insertedRowDate
+      case "executorContext_lastUpdatedDate" => executorContext_lastUpdatedDate
+      case "executorContext_executorHostId" => executorContext_executorHostId
+      case "executorContext_isWorking" => executorContext_isWorking
+      case "executorContext_properties" => executorContext_properties
+      case "executorHost_executorHostId" => executorHost_executorHostId
+      case "executorHost_guid" => executorHost_guid
+      case "executorHost_insertedRowDate" => executorHost_insertedRowDate
+      case "executorHost_lastUpdatedDate" => executorHost_lastUpdatedDate
+      case "executorHost_hostName" => executorHost_hostName
+      case "executorHost_hostIp" => executorHost_hostIp
+      case "executorHost_hostDomain" => executorHost_hostDomain
+      case "executorHost_hostOsType" => executorHost_hostOsType
+      case "executorHost_hostOsVersion" => executorHost_hostOsVersion
+      case "executorHost_isWorking" => executorHost_isWorking
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "executorContextRuntimeId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "executorHostId" => "Long"
+      case "executorContextId" => "Long"
+      case "availableProcessors" => "Double"
+      case "freeMemory" => "Double"
+      case "maxMemory" => "Double"
+      case "totalMemory" => "Double"
+      case "executorContext_executorContextId" => "Long"
+      case "executorContext_guid" => "Long"
+      case "executorContext_insertedRowDate" => "java.util.Date"
+      case "executorContext_lastUpdatedDate" => "java.util.Date"
+      case "executorContext_executorHostId" => "Long"
+      case "executorContext_isWorking" => "Int"
+      case "executorContext_properties" => "String"
+      case "executorHost_executorHostId" => "Long"
+      case "executorHost_guid" => "Long"
+      case "executorHost_insertedRowDate" => "java.util.Date"
+      case "executorHost_lastUpdatedDate" => "java.util.Date"
+      case "executorHost_hostName" => "String"
+      case "executorHost_hostIp" => "String"
+      case "executorHost_hostDomain" => "String"
+      case "executorHost_hostOsType" => "String"
+      case "executorHost_hostOsVersion" => "String"
+      case "executorHost_isWorking" => "Int"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VExecutorContextRuntimeDto {
+  val TABLE_NAME = "vExecutorContextRuntime";
+  val FIELD_executorContextRuntimeId = "executorContextRuntimeId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_executorHostId = "executorHostId";
+  val FIELD_executorContextId = "executorContextId";
+  val FIELD_availableProcessors = "availableProcessors";
+  val FIELD_freeMemory = "freeMemory";
+  val FIELD_maxMemory = "maxMemory";
+  val FIELD_totalMemory = "totalMemory";
+  val FIELD_executorContext_executorContextId = "executorContext_executorContextId";
+  val FIELD_executorContext_guid = "executorContext_guid";
+  val FIELD_executorContext_insertedRowDate = "executorContext_insertedRowDate";
+  val FIELD_executorContext_lastUpdatedDate = "executorContext_lastUpdatedDate";
+  val FIELD_executorContext_executorHostId = "executorContext_executorHostId";
+  val FIELD_executorContext_isWorking = "executorContext_isWorking";
+  val FIELD_executorContext_properties = "executorContext_properties";
+  val FIELD_executorHost_executorHostId = "executorHost_executorHostId";
+  val FIELD_executorHost_guid = "executorHost_guid";
+  val FIELD_executorHost_insertedRowDate = "executorHost_insertedRowDate";
+  val FIELD_executorHost_lastUpdatedDate = "executorHost_lastUpdatedDate";
+  val FIELD_executorHost_hostName = "executorHost_hostName";
+  val FIELD_executorHost_hostIp = "executorHost_hostIp";
+  val FIELD_executorHost_hostDomain = "executorHost_hostDomain";
+  val FIELD_executorHost_hostOsType = "executorHost_hostOsType";
+  val FIELD_executorHost_hostOsVersion = "executorHost_hostOsVersion";
+  val FIELD_executorHost_isWorking = "executorHost_isWorking";
+
+}
+
+
+case class VExecutorContextSummaryDto (
+                                        val executorContextId : Long
+                                        , val guid : Long
+                                        , val insertedRowDate : java.util.Date
+                                        , val lastUpdatedDate : java.util.Date
+                                        , val executorHostId : Long
+                                        , val isWorking : Int
+                                        , val properties : String
+                                        , val executorContextRuntime_count : Int
+                                        , val executorInstance_count : Int
+                                        , val sourceDownload_count : Int
+                                      ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vExecutorContextSummary";
+  }
+  def fields : String = {
+    "executorContextId,guid,insertedRowDate,lastUpdatedDate,executorHostId,isWorking,properties,executorContextRuntime_count,executorInstance_count,sourceDownload_count";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    executorContextSummaryId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(executorContextId,guid,insertedRowDate,lastUpdatedDate,executorHostId,isWorking,properties,executorContextRuntime_count,executorInstance_count,sourceDownload_count)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+executorContextId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+isWorking,""+properties,""+executorContextRuntime_count,""+executorInstance_count,""+sourceDownload_count)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "executorContextId" => executorContextId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "executorHostId" => executorHostId
+      case "isWorking" => isWorking
+      case "properties" => properties
+      case "executorContextRuntime_count" => executorContextRuntime_count
+      case "executorInstance_count" => executorInstance_count
+      case "sourceDownload_count" => sourceDownload_count
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "executorContextId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "executorHostId" => "Long"
+      case "isWorking" => "Int"
+      case "properties" => "String"
+      case "executorContextRuntime_count" => "Int"
+      case "executorInstance_count" => "Int"
+      case "sourceDownload_count" => "Int"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VExecutorContextSummaryDto {
+  val TABLE_NAME = "vExecutorContextSummary";
+  val FIELD_executorContextId = "executorContextId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_executorHostId = "executorHostId";
+  val FIELD_isWorking = "isWorking";
+  val FIELD_properties = "properties";
+  val FIELD_executorContextRuntime_count = "executorContextRuntime_count";
+  val FIELD_executorInstance_count = "executorInstance_count";
+  val FIELD_sourceDownload_count = "sourceDownload_count";
+
+}
+
+
+case class VExecutorHostSummaryDto (
+                                     val executorHostId : Long
+                                     , val guid : Long
+                                     , val insertedRowDate : java.util.Date
+                                     , val lastUpdatedDate : java.util.Date
+                                     , val hostName : String
+                                     , val hostIp : String
+                                     , val hostDomain : String
+                                     , val hostOsType : String
+                                     , val hostOsVersion : String
+                                     , val isWorking : Int
+                                     , val executorContext_count : Int
+                                     , val executorContextRuntime_count : Int
+                                     , val executorRest_count : Int
+                                     , val executorRestCall_count : Int
+                                     , val executorInstance_count : Int
+                                     , val sourceDownload_count : Int
+                                     , val executorStorage_count : Int
+                                     , val resourceManager_count : Int
+                                     , val resourceManagerCheck_count : Int
+                                     , val resourceManagerAllocation_count : Int
+                                   ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vExecutorHostSummary";
+  }
+  def fields : String = {
+    "executorHostId,guid,insertedRowDate,lastUpdatedDate,hostName,hostIp,hostDomain,hostOsType,hostOsVersion,isWorking,executorContext_count,executorContextRuntime_count,executorRest_count,executorRestCall_count,executorInstance_count,sourceDownload_count,executorStorage_count,resourceManager_count,resourceManagerCheck_count,resourceManagerAllocation_count";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    executorHostSummaryId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(executorHostId,guid,insertedRowDate,lastUpdatedDate,hostName,hostIp,hostDomain,hostOsType,hostOsVersion,isWorking,executorContext_count,executorContextRuntime_count,executorRest_count,executorRestCall_count,executorInstance_count,sourceDownload_count,executorStorage_count,resourceManager_count,resourceManagerCheck_count,resourceManagerAllocation_count)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+executorHostId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+hostName,""+hostIp,""+hostDomain,""+hostOsType,""+hostOsVersion,""+isWorking,""+executorContext_count,""+executorContextRuntime_count,""+executorRest_count,""+executorRestCall_count,""+executorInstance_count,""+sourceDownload_count,""+executorStorage_count,""+resourceManager_count,""+resourceManagerCheck_count,""+resourceManagerAllocation_count)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "executorHostId" => executorHostId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "hostName" => hostName
+      case "hostIp" => hostIp
+      case "hostDomain" => hostDomain
+      case "hostOsType" => hostOsType
+      case "hostOsVersion" => hostOsVersion
+      case "isWorking" => isWorking
+      case "executorContext_count" => executorContext_count
+      case "executorContextRuntime_count" => executorContextRuntime_count
+      case "executorRest_count" => executorRest_count
+      case "executorRestCall_count" => executorRestCall_count
+      case "executorInstance_count" => executorInstance_count
+      case "sourceDownload_count" => sourceDownload_count
+      case "executorStorage_count" => executorStorage_count
+      case "resourceManager_count" => resourceManager_count
+      case "resourceManagerCheck_count" => resourceManagerCheck_count
+      case "resourceManagerAllocation_count" => resourceManagerAllocation_count
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "executorHostId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "hostName" => "String"
+      case "hostIp" => "String"
+      case "hostDomain" => "String"
+      case "hostOsType" => "String"
+      case "hostOsVersion" => "String"
+      case "isWorking" => "Int"
+      case "executorContext_count" => "Int"
+      case "executorContextRuntime_count" => "Int"
+      case "executorRest_count" => "Int"
+      case "executorRestCall_count" => "Int"
+      case "executorInstance_count" => "Int"
+      case "sourceDownload_count" => "Int"
+      case "executorStorage_count" => "Int"
+      case "resourceManager_count" => "Int"
+      case "resourceManagerCheck_count" => "Int"
+      case "resourceManagerAllocation_count" => "Int"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VExecutorHostSummaryDto {
+  val TABLE_NAME = "vExecutorHostSummary";
+  val FIELD_executorHostId = "executorHostId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_hostName = "hostName";
+  val FIELD_hostIp = "hostIp";
+  val FIELD_hostDomain = "hostDomain";
+  val FIELD_hostOsType = "hostOsType";
+  val FIELD_hostOsVersion = "hostOsVersion";
+  val FIELD_isWorking = "isWorking";
+  val FIELD_executorContext_count = "executorContext_count";
+  val FIELD_executorContextRuntime_count = "executorContextRuntime_count";
+  val FIELD_executorRest_count = "executorRest_count";
+  val FIELD_executorRestCall_count = "executorRestCall_count";
+  val FIELD_executorInstance_count = "executorInstance_count";
+  val FIELD_sourceDownload_count = "sourceDownload_count";
+  val FIELD_executorStorage_count = "executorStorage_count";
+  val FIELD_resourceManager_count = "resourceManager_count";
+  val FIELD_resourceManagerCheck_count = "resourceManagerCheck_count";
+  val FIELD_resourceManagerAllocation_count = "resourceManagerAllocation_count";
 
 }
 
@@ -6337,15 +8948,23 @@ object VAlgorithmTypeVersionDto {
 case class VExecutorInstanceDto (
                                   val executorInstanceId : Long
                                   , val guid : Long
+                                  , val insertedRowDate : java.util.Date
+                                  , val lastUpdatedDate : java.util.Date
                                   , val executorTypeId : Long
                                   , val executorHostId : Long
+                                  , val executorContextId : Long
                                   , val executorInstanceName : String
                                   , val isRunning : Int
                                   , val isFinished : Int
                                   , val portNumber : Int
-                                  , val insertedRowDate : java.util.Date
-                                  , val lastUpdatedDate : java.util.Date
                                   , val endDate : java.util.Date
+                                  , val executorContext_executorContextId : Long
+                                  , val executorContext_guid : Long
+                                  , val executorContext_insertedRowDate : java.util.Date
+                                  , val executorContext_lastUpdatedDate : java.util.Date
+                                  , val executorContext_executorHostId : Long
+                                  , val executorContext_isWorking : Int
+                                  , val executorContext_properties : String
                                   , val executorHost_executorHostId : Long
                                   , val executorHost_guid : Long
                                   , val executorHost_insertedRowDate : java.util.Date
@@ -6367,7 +8986,7 @@ case class VExecutorInstanceDto (
     "vExecutorInstance";
   }
   def fields : String = {
-    "executorInstanceId,guid,executorTypeId,executorHostId,executorInstanceName,isRunning,isFinished,portNumber,insertedRowDate,lastUpdatedDate,endDate,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking,executorType_executorTypeId,executorType_guid,executorType_insertedRowDate,executorType_lastUpdatedDate,executorType_executorTypeName,executorType_executorTypeClass";
+    "executorInstanceId,guid,insertedRowDate,lastUpdatedDate,executorTypeId,executorHostId,executorContextId,executorInstanceName,isRunning,isFinished,portNumber,endDate,executorContext_executorContextId,executorContext_guid,executorContext_insertedRowDate,executorContext_lastUpdatedDate,executorContext_executorHostId,executorContext_isWorking,executorContext_properties,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking,executorType_executorTypeId,executorType_guid,executorType_insertedRowDate,executorType_lastUpdatedDate,executorType_executorTypeName,executorType_executorTypeClass";
   }
   def pkFields : String = {
     "";
@@ -6391,24 +9010,32 @@ case class VExecutorInstanceDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(executorInstanceId,guid,executorTypeId,executorHostId,executorInstanceName,isRunning,isFinished,portNumber,insertedRowDate,lastUpdatedDate,endDate,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking,executorType_executorTypeId,executorType_guid,executorType_insertedRowDate,executorType_lastUpdatedDate,executorType_executorTypeName,executorType_executorTypeClass)
+    Array(executorInstanceId,guid,insertedRowDate,lastUpdatedDate,executorTypeId,executorHostId,executorContextId,executorInstanceName,isRunning,isFinished,portNumber,endDate,executorContext_executorContextId,executorContext_guid,executorContext_insertedRowDate,executorContext_lastUpdatedDate,executorContext_executorHostId,executorContext_isWorking,executorContext_properties,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking,executorType_executorTypeId,executorType_guid,executorType_insertedRowDate,executorType_lastUpdatedDate,executorType_executorTypeName,executorType_executorTypeClass)
   }
   def toStringArray() : Array[String] = {
-    Array(""+executorInstanceId,""+guid,""+executorTypeId,""+executorHostId,""+executorInstanceName,""+isRunning,""+isFinished,""+portNumber,""+insertedRowDate,""+lastUpdatedDate,""+endDate,""+executorHost_executorHostId,""+executorHost_guid,""+executorHost_insertedRowDate,""+executorHost_lastUpdatedDate,""+executorHost_hostName,""+executorHost_hostIp,""+executorHost_hostDomain,""+executorHost_hostOsType,""+executorHost_hostOsVersion,""+executorHost_isWorking,""+executorType_executorTypeId,""+executorType_guid,""+executorType_insertedRowDate,""+executorType_lastUpdatedDate,""+executorType_executorTypeName,""+executorType_executorTypeClass)
+    Array(""+executorInstanceId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorTypeId,""+executorHostId,""+executorContextId,""+executorInstanceName,""+isRunning,""+isFinished,""+portNumber,""+endDate,""+executorContext_executorContextId,""+executorContext_guid,""+executorContext_insertedRowDate,""+executorContext_lastUpdatedDate,""+executorContext_executorHostId,""+executorContext_isWorking,""+executorContext_properties,""+executorHost_executorHostId,""+executorHost_guid,""+executorHost_insertedRowDate,""+executorHost_lastUpdatedDate,""+executorHost_hostName,""+executorHost_hostIp,""+executorHost_hostDomain,""+executorHost_hostOsType,""+executorHost_hostOsVersion,""+executorHost_isWorking,""+executorType_executorTypeId,""+executorType_guid,""+executorType_insertedRowDate,""+executorType_lastUpdatedDate,""+executorType_executorTypeName,""+executorType_executorTypeClass)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "executorInstanceId" => executorInstanceId
       case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
       case "executorTypeId" => executorTypeId
       case "executorHostId" => executorHostId
+      case "executorContextId" => executorContextId
       case "executorInstanceName" => executorInstanceName
       case "isRunning" => isRunning
       case "isFinished" => isFinished
       case "portNumber" => portNumber
-      case "insertedRowDate" => insertedRowDate
-      case "lastUpdatedDate" => lastUpdatedDate
       case "endDate" => endDate
+      case "executorContext_executorContextId" => executorContext_executorContextId
+      case "executorContext_guid" => executorContext_guid
+      case "executorContext_insertedRowDate" => executorContext_insertedRowDate
+      case "executorContext_lastUpdatedDate" => executorContext_lastUpdatedDate
+      case "executorContext_executorHostId" => executorContext_executorHostId
+      case "executorContext_isWorking" => executorContext_isWorking
+      case "executorContext_properties" => executorContext_properties
       case "executorHost_executorHostId" => executorHost_executorHostId
       case "executorHost_guid" => executorHost_guid
       case "executorHost_insertedRowDate" => executorHost_insertedRowDate
@@ -6433,15 +9060,23 @@ case class VExecutorInstanceDto (
     val ret = name match {
       case "executorInstanceId" => "Long"
       case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
       case "executorTypeId" => "Long"
       case "executorHostId" => "Long"
+      case "executorContextId" => "Long"
       case "executorInstanceName" => "String"
       case "isRunning" => "Int"
       case "isFinished" => "Int"
       case "portNumber" => "Int"
-      case "insertedRowDate" => "java.util.Date"
-      case "lastUpdatedDate" => "java.util.Date"
       case "endDate" => "java.util.Date"
+      case "executorContext_executorContextId" => "Long"
+      case "executorContext_guid" => "Long"
+      case "executorContext_insertedRowDate" => "java.util.Date"
+      case "executorContext_lastUpdatedDate" => "java.util.Date"
+      case "executorContext_executorHostId" => "Long"
+      case "executorContext_isWorking" => "Int"
+      case "executorContext_properties" => "String"
       case "executorHost_executorHostId" => "Long"
       case "executorHost_guid" => "Long"
       case "executorHost_insertedRowDate" => "java.util.Date"
@@ -6467,15 +9102,23 @@ object VExecutorInstanceDto {
   val TABLE_NAME = "vExecutorInstance";
   val FIELD_executorInstanceId = "executorInstanceId";
   val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_executorTypeId = "executorTypeId";
   val FIELD_executorHostId = "executorHostId";
+  val FIELD_executorContextId = "executorContextId";
   val FIELD_executorInstanceName = "executorInstanceName";
   val FIELD_isRunning = "isRunning";
   val FIELD_isFinished = "isFinished";
   val FIELD_portNumber = "portNumber";
-  val FIELD_insertedRowDate = "insertedRowDate";
-  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_endDate = "endDate";
+  val FIELD_executorContext_executorContextId = "executorContext_executorContextId";
+  val FIELD_executorContext_guid = "executorContext_guid";
+  val FIELD_executorContext_insertedRowDate = "executorContext_insertedRowDate";
+  val FIELD_executorContext_lastUpdatedDate = "executorContext_lastUpdatedDate";
+  val FIELD_executorContext_executorHostId = "executorContext_executorHostId";
+  val FIELD_executorContext_isWorking = "executorContext_isWorking";
+  val FIELD_executorContext_properties = "executorContext_properties";
   val FIELD_executorHost_executorHostId = "executorHost_executorHostId";
   val FIELD_executorHost_guid = "executorHost_guid";
   val FIELD_executorHost_insertedRowDate = "executorHost_insertedRowDate";
@@ -6496,12 +9139,256 @@ object VExecutorInstanceDto {
 }
 
 
+case class VExecutorInstanceStateDto (
+                                       val executorInstanceStateId : Long
+                                       , val guid : Long
+                                       , val insertedRowDate : java.util.Date
+                                       , val lastUpdatedDate : java.util.Date
+                                       , val executorInstanceId : Long
+                                       , val stateName : String
+                                       , val executorInstance_executorInstanceId : Long
+                                       , val executorInstance_guid : Long
+                                       , val executorInstance_insertedRowDate : java.util.Date
+                                       , val executorInstance_lastUpdatedDate : java.util.Date
+                                       , val executorInstance_executorTypeId : Long
+                                       , val executorInstance_executorHostId : Long
+                                       , val executorInstance_executorContextId : Long
+                                       , val executorInstance_executorInstanceName : String
+                                       , val executorInstance_isRunning : Int
+                                       , val executorInstance_isFinished : Int
+                                       , val executorInstance_portNumber : Int
+                                       , val executorInstance_endDate : java.util.Date
+                                     ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vExecutorInstanceState";
+  }
+  def fields : String = {
+    "executorInstanceStateId,guid,insertedRowDate,lastUpdatedDate,executorInstanceId,stateName,executorInstance_executorInstanceId,executorInstance_guid,executorInstance_insertedRowDate,executorInstance_lastUpdatedDate,executorInstance_executorTypeId,executorInstance_executorHostId,executorInstance_executorContextId,executorInstance_executorInstanceName,executorInstance_isRunning,executorInstance_isFinished,executorInstance_portNumber,executorInstance_endDate";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    executorInstanceStateId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(executorInstanceStateId,guid,insertedRowDate,lastUpdatedDate,executorInstanceId,stateName,executorInstance_executorInstanceId,executorInstance_guid,executorInstance_insertedRowDate,executorInstance_lastUpdatedDate,executorInstance_executorTypeId,executorInstance_executorHostId,executorInstance_executorContextId,executorInstance_executorInstanceName,executorInstance_isRunning,executorInstance_isFinished,executorInstance_portNumber,executorInstance_endDate)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+executorInstanceStateId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorInstanceId,""+stateName,""+executorInstance_executorInstanceId,""+executorInstance_guid,""+executorInstance_insertedRowDate,""+executorInstance_lastUpdatedDate,""+executorInstance_executorTypeId,""+executorInstance_executorHostId,""+executorInstance_executorContextId,""+executorInstance_executorInstanceName,""+executorInstance_isRunning,""+executorInstance_isFinished,""+executorInstance_portNumber,""+executorInstance_endDate)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "executorInstanceStateId" => executorInstanceStateId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "executorInstanceId" => executorInstanceId
+      case "stateName" => stateName
+      case "executorInstance_executorInstanceId" => executorInstance_executorInstanceId
+      case "executorInstance_guid" => executorInstance_guid
+      case "executorInstance_insertedRowDate" => executorInstance_insertedRowDate
+      case "executorInstance_lastUpdatedDate" => executorInstance_lastUpdatedDate
+      case "executorInstance_executorTypeId" => executorInstance_executorTypeId
+      case "executorInstance_executorHostId" => executorInstance_executorHostId
+      case "executorInstance_executorContextId" => executorInstance_executorContextId
+      case "executorInstance_executorInstanceName" => executorInstance_executorInstanceName
+      case "executorInstance_isRunning" => executorInstance_isRunning
+      case "executorInstance_isFinished" => executorInstance_isFinished
+      case "executorInstance_portNumber" => executorInstance_portNumber
+      case "executorInstance_endDate" => executorInstance_endDate
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "executorInstanceStateId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "executorInstanceId" => "Long"
+      case "stateName" => "String"
+      case "executorInstance_executorInstanceId" => "Long"
+      case "executorInstance_guid" => "Long"
+      case "executorInstance_insertedRowDate" => "java.util.Date"
+      case "executorInstance_lastUpdatedDate" => "java.util.Date"
+      case "executorInstance_executorTypeId" => "Long"
+      case "executorInstance_executorHostId" => "Long"
+      case "executorInstance_executorContextId" => "Long"
+      case "executorInstance_executorInstanceName" => "String"
+      case "executorInstance_isRunning" => "Int"
+      case "executorInstance_isFinished" => "Int"
+      case "executorInstance_portNumber" => "Int"
+      case "executorInstance_endDate" => "java.util.Date"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VExecutorInstanceStateDto {
+  val TABLE_NAME = "vExecutorInstanceState";
+  val FIELD_executorInstanceStateId = "executorInstanceStateId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_executorInstanceId = "executorInstanceId";
+  val FIELD_stateName = "stateName";
+  val FIELD_executorInstance_executorInstanceId = "executorInstance_executorInstanceId";
+  val FIELD_executorInstance_guid = "executorInstance_guid";
+  val FIELD_executorInstance_insertedRowDate = "executorInstance_insertedRowDate";
+  val FIELD_executorInstance_lastUpdatedDate = "executorInstance_lastUpdatedDate";
+  val FIELD_executorInstance_executorTypeId = "executorInstance_executorTypeId";
+  val FIELD_executorInstance_executorHostId = "executorInstance_executorHostId";
+  val FIELD_executorInstance_executorContextId = "executorInstance_executorContextId";
+  val FIELD_executorInstance_executorInstanceName = "executorInstance_executorInstanceName";
+  val FIELD_executorInstance_isRunning = "executorInstance_isRunning";
+  val FIELD_executorInstance_isFinished = "executorInstance_isFinished";
+  val FIELD_executorInstance_portNumber = "executorInstance_portNumber";
+  val FIELD_executorInstance_endDate = "executorInstance_endDate";
+
+}
+
+
+case class VExecutorInstanceSummaryDto (
+                                         val executorInstanceId : Long
+                                         , val guid : Long
+                                         , val insertedRowDate : java.util.Date
+                                         , val lastUpdatedDate : java.util.Date
+                                         , val executorTypeId : Long
+                                         , val executorHostId : Long
+                                         , val executorContextId : Long
+                                         , val executorInstanceName : String
+                                         , val isRunning : Int
+                                         , val isFinished : Int
+                                         , val portNumber : Int
+                                         , val endDate : java.util.Date
+                                         , val algorithmRun_count : Int
+                                         , val executorInstanceState_count : Int
+                                         , val executorStorageSnapshot_count : Int
+                                         , val resourceManagerAllocation_count : Int
+                                       ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vExecutorInstanceSummary";
+  }
+  def fields : String = {
+    "executorInstanceId,guid,insertedRowDate,lastUpdatedDate,executorTypeId,executorHostId,executorContextId,executorInstanceName,isRunning,isFinished,portNumber,endDate,algorithmRun_count,executorInstanceState_count,executorStorageSnapshot_count,resourceManagerAllocation_count";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    executorInstanceSummaryId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(executorInstanceId,guid,insertedRowDate,lastUpdatedDate,executorTypeId,executorHostId,executorContextId,executorInstanceName,isRunning,isFinished,portNumber,endDate,algorithmRun_count,executorInstanceState_count,executorStorageSnapshot_count,resourceManagerAllocation_count)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+executorInstanceId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorTypeId,""+executorHostId,""+executorContextId,""+executorInstanceName,""+isRunning,""+isFinished,""+portNumber,""+endDate,""+algorithmRun_count,""+executorInstanceState_count,""+executorStorageSnapshot_count,""+resourceManagerAllocation_count)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "executorInstanceId" => executorInstanceId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "executorTypeId" => executorTypeId
+      case "executorHostId" => executorHostId
+      case "executorContextId" => executorContextId
+      case "executorInstanceName" => executorInstanceName
+      case "isRunning" => isRunning
+      case "isFinished" => isFinished
+      case "portNumber" => portNumber
+      case "endDate" => endDate
+      case "algorithmRun_count" => algorithmRun_count
+      case "executorInstanceState_count" => executorInstanceState_count
+      case "executorStorageSnapshot_count" => executorStorageSnapshot_count
+      case "resourceManagerAllocation_count" => resourceManagerAllocation_count
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "executorInstanceId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "executorTypeId" => "Long"
+      case "executorHostId" => "Long"
+      case "executorContextId" => "Long"
+      case "executorInstanceName" => "String"
+      case "isRunning" => "Int"
+      case "isFinished" => "Int"
+      case "portNumber" => "Int"
+      case "endDate" => "java.util.Date"
+      case "algorithmRun_count" => "Int"
+      case "executorInstanceState_count" => "Int"
+      case "executorStorageSnapshot_count" => "Int"
+      case "resourceManagerAllocation_count" => "Int"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VExecutorInstanceSummaryDto {
+  val TABLE_NAME = "vExecutorInstanceSummary";
+  val FIELD_executorInstanceId = "executorInstanceId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_executorTypeId = "executorTypeId";
+  val FIELD_executorHostId = "executorHostId";
+  val FIELD_executorContextId = "executorContextId";
+  val FIELD_executorInstanceName = "executorInstanceName";
+  val FIELD_isRunning = "isRunning";
+  val FIELD_isFinished = "isFinished";
+  val FIELD_portNumber = "portNumber";
+  val FIELD_endDate = "endDate";
+  val FIELD_algorithmRun_count = "algorithmRun_count";
+  val FIELD_executorInstanceState_count = "executorInstanceState_count";
+  val FIELD_executorStorageSnapshot_count = "executorStorageSnapshot_count";
+  val FIELD_resourceManagerAllocation_count = "resourceManagerAllocation_count";
+
+}
+
+
 case class VExecutorRestDto (
                               val executorRestId : Long
                               , val guid : Long
-                              , val executorHostId : Long
                               , val insertedRowDate : java.util.Date
                               , val lastUpdatedDate : java.util.Date
+                              , val executorHostId : Long
                               , val restPort : Int
                               , val restVersion : String
                               , val restStatus : String
@@ -6520,7 +9407,7 @@ case class VExecutorRestDto (
     "vExecutorRest";
   }
   def fields : String = {
-    "executorRestId,guid,executorHostId,insertedRowDate,lastUpdatedDate,restPort,restVersion,restStatus,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking";
+    "executorRestId,guid,insertedRowDate,lastUpdatedDate,executorHostId,restPort,restVersion,restStatus,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking";
   }
   def pkFields : String = {
     "";
@@ -6544,18 +9431,18 @@ case class VExecutorRestDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(executorRestId,guid,executorHostId,insertedRowDate,lastUpdatedDate,restPort,restVersion,restStatus,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking)
+    Array(executorRestId,guid,insertedRowDate,lastUpdatedDate,executorHostId,restPort,restVersion,restStatus,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking)
   }
   def toStringArray() : Array[String] = {
-    Array(""+executorRestId,""+guid,""+executorHostId,""+insertedRowDate,""+lastUpdatedDate,""+restPort,""+restVersion,""+restStatus,""+executorHost_executorHostId,""+executorHost_guid,""+executorHost_insertedRowDate,""+executorHost_lastUpdatedDate,""+executorHost_hostName,""+executorHost_hostIp,""+executorHost_hostDomain,""+executorHost_hostOsType,""+executorHost_hostOsVersion,""+executorHost_isWorking)
+    Array(""+executorRestId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+restPort,""+restVersion,""+restStatus,""+executorHost_executorHostId,""+executorHost_guid,""+executorHost_insertedRowDate,""+executorHost_lastUpdatedDate,""+executorHost_hostName,""+executorHost_hostIp,""+executorHost_hostDomain,""+executorHost_hostOsType,""+executorHost_hostOsVersion,""+executorHost_isWorking)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "executorRestId" => executorRestId
       case "guid" => guid
-      case "executorHostId" => executorHostId
       case "insertedRowDate" => insertedRowDate
       case "lastUpdatedDate" => lastUpdatedDate
+      case "executorHostId" => executorHostId
       case "restPort" => restPort
       case "restVersion" => restVersion
       case "restStatus" => restStatus
@@ -6577,9 +9464,9 @@ case class VExecutorRestDto (
     val ret = name match {
       case "executorRestId" => "Long"
       case "guid" => "Long"
-      case "executorHostId" => "Long"
       case "insertedRowDate" => "java.util.Date"
       case "lastUpdatedDate" => "java.util.Date"
+      case "executorHostId" => "Long"
       case "restPort" => "Int"
       case "restVersion" => "String"
       case "restStatus" => "String"
@@ -6602,9 +9489,9 @@ object VExecutorRestDto {
   val TABLE_NAME = "vExecutorRest";
   val FIELD_executorRestId = "executorRestId";
   val FIELD_guid = "guid";
-  val FIELD_executorHostId = "executorHostId";
   val FIELD_insertedRowDate = "insertedRowDate";
   val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_executorHostId = "executorHostId";
   val FIELD_restPort = "restPort";
   val FIELD_restVersion = "restVersion";
   val FIELD_restStatus = "restStatus";
@@ -6645,9 +9532,9 @@ case class VExecutorRestCallDto (
                                   , val executorHost_isWorking : Int
                                   , val executorRest_executorRestId : Long
                                   , val executorRest_guid : Long
-                                  , val executorRest_executorHostId : Long
                                   , val executorRest_insertedRowDate : java.util.Date
                                   , val executorRest_lastUpdatedDate : java.util.Date
+                                  , val executorRest_executorHostId : Long
                                   , val executorRest_restPort : Int
                                   , val executorRest_restVersion : String
                                   , val executorRest_restStatus : String
@@ -6656,7 +9543,7 @@ case class VExecutorRestCallDto (
     "vExecutorRestCall";
   }
   def fields : String = {
-    "executorRestCallId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorRestId,requestMethod,requestHeader,requestBody,responseBody,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking,executorRest_executorRestId,executorRest_guid,executorRest_executorHostId,executorRest_insertedRowDate,executorRest_lastUpdatedDate,executorRest_restPort,executorRest_restVersion,executorRest_restStatus";
+    "executorRestCallId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorRestId,requestMethod,requestHeader,requestBody,responseBody,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking,executorRest_executorRestId,executorRest_guid,executorRest_insertedRowDate,executorRest_lastUpdatedDate,executorRest_executorHostId,executorRest_restPort,executorRest_restVersion,executorRest_restStatus";
   }
   def pkFields : String = {
     "";
@@ -6680,10 +9567,10 @@ case class VExecutorRestCallDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(executorRestCallId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorRestId,requestMethod,requestHeader,requestBody,responseBody,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking,executorRest_executorRestId,executorRest_guid,executorRest_executorHostId,executorRest_insertedRowDate,executorRest_lastUpdatedDate,executorRest_restPort,executorRest_restVersion,executorRest_restStatus)
+    Array(executorRestCallId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorRestId,requestMethod,requestHeader,requestBody,responseBody,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking,executorRest_executorRestId,executorRest_guid,executorRest_insertedRowDate,executorRest_lastUpdatedDate,executorRest_executorHostId,executorRest_restPort,executorRest_restVersion,executorRest_restStatus)
   }
   def toStringArray() : Array[String] = {
-    Array(""+executorRestCallId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+executorRestId,""+requestMethod,""+requestHeader,""+requestBody,""+responseBody,""+executorHost_executorHostId,""+executorHost_guid,""+executorHost_insertedRowDate,""+executorHost_lastUpdatedDate,""+executorHost_hostName,""+executorHost_hostIp,""+executorHost_hostDomain,""+executorHost_hostOsType,""+executorHost_hostOsVersion,""+executorHost_isWorking,""+executorRest_executorRestId,""+executorRest_guid,""+executorRest_executorHostId,""+executorRest_insertedRowDate,""+executorRest_lastUpdatedDate,""+executorRest_restPort,""+executorRest_restVersion,""+executorRest_restStatus)
+    Array(""+executorRestCallId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+executorRestId,""+requestMethod,""+requestHeader,""+requestBody,""+responseBody,""+executorHost_executorHostId,""+executorHost_guid,""+executorHost_insertedRowDate,""+executorHost_lastUpdatedDate,""+executorHost_hostName,""+executorHost_hostIp,""+executorHost_hostDomain,""+executorHost_hostOsType,""+executorHost_hostOsVersion,""+executorHost_isWorking,""+executorRest_executorRestId,""+executorRest_guid,""+executorRest_insertedRowDate,""+executorRest_lastUpdatedDate,""+executorRest_executorHostId,""+executorRest_restPort,""+executorRest_restVersion,""+executorRest_restStatus)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
@@ -6709,9 +9596,9 @@ case class VExecutorRestCallDto (
       case "executorHost_isWorking" => executorHost_isWorking
       case "executorRest_executorRestId" => executorRest_executorRestId
       case "executorRest_guid" => executorRest_guid
-      case "executorRest_executorHostId" => executorRest_executorHostId
       case "executorRest_insertedRowDate" => executorRest_insertedRowDate
       case "executorRest_lastUpdatedDate" => executorRest_lastUpdatedDate
+      case "executorRest_executorHostId" => executorRest_executorHostId
       case "executorRest_restPort" => executorRest_restPort
       case "executorRest_restVersion" => executorRest_restVersion
       case "executorRest_restStatus" => executorRest_restStatus
@@ -6743,9 +9630,9 @@ case class VExecutorRestCallDto (
       case "executorHost_isWorking" => "Int"
       case "executorRest_executorRestId" => "Long"
       case "executorRest_guid" => "Long"
-      case "executorRest_executorHostId" => "Long"
       case "executorRest_insertedRowDate" => "java.util.Date"
       case "executorRest_lastUpdatedDate" => "java.util.Date"
+      case "executorRest_executorHostId" => "Long"
       case "executorRest_restPort" => "Int"
       case "executorRest_restVersion" => "String"
       case "executorRest_restStatus" => "String"
@@ -6778,9 +9665,9 @@ object VExecutorRestCallDto {
   val FIELD_executorHost_isWorking = "executorHost_isWorking";
   val FIELD_executorRest_executorRestId = "executorRest_executorRestId";
   val FIELD_executorRest_guid = "executorRest_guid";
-  val FIELD_executorRest_executorHostId = "executorRest_executorHostId";
   val FIELD_executorRest_insertedRowDate = "executorRest_insertedRowDate";
   val FIELD_executorRest_lastUpdatedDate = "executorRest_lastUpdatedDate";
+  val FIELD_executorRest_executorHostId = "executorRest_executorHostId";
   val FIELD_executorRest_restPort = "executorRest_restPort";
   val FIELD_executorRest_restVersion = "executorRest_restVersion";
   val FIELD_executorRest_restStatus = "executorRest_restStatus";
@@ -6788,9 +9675,101 @@ object VExecutorRestCallDto {
 }
 
 
+case class VExecutorRestSummaryDto (
+                                     val executorRestId : Long
+                                     , val guid : Long
+                                     , val insertedRowDate : java.util.Date
+                                     , val lastUpdatedDate : java.util.Date
+                                     , val executorHostId : Long
+                                     , val restPort : Int
+                                     , val restVersion : String
+                                     , val restStatus : String
+                                     , val executorRestCall_count : Int
+                                   ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vExecutorRestSummary";
+  }
+  def fields : String = {
+    "executorRestId,guid,insertedRowDate,lastUpdatedDate,executorHostId,restPort,restVersion,restStatus,executorRestCall_count";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    executorRestSummaryId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(executorRestId,guid,insertedRowDate,lastUpdatedDate,executorHostId,restPort,restVersion,restStatus,executorRestCall_count)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+executorRestId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+restPort,""+restVersion,""+restStatus,""+executorRestCall_count)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "executorRestId" => executorRestId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "executorHostId" => executorHostId
+      case "restPort" => restPort
+      case "restVersion" => restVersion
+      case "restStatus" => restStatus
+      case "executorRestCall_count" => executorRestCall_count
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "executorRestId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "executorHostId" => "Long"
+      case "restPort" => "Int"
+      case "restVersion" => "String"
+      case "restStatus" => "String"
+      case "executorRestCall_count" => "Int"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VExecutorRestSummaryDto {
+  val TABLE_NAME = "vExecutorRestSummary";
+  val FIELD_executorRestId = "executorRestId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_executorHostId = "executorHostId";
+  val FIELD_restPort = "restPort";
+  val FIELD_restVersion = "restVersion";
+  val FIELD_restStatus = "restStatus";
+  val FIELD_executorRestCall_count = "executorRestCall_count";
+
+}
+
+
 case class VExecutorStorageDto (
                                  val executorStorageId : Long
                                  , val guid : Long
+                                 , val insertedRowDate : java.util.Date
+                                 , val lastUpdatedDate : java.util.Date
                                  , val executorHostId : Long
                                  , val executorStorageTypeId : Long
                                  , val storageDefinition : String
@@ -6798,8 +9777,6 @@ case class VExecutorStorageDto (
                                  , val storageFulllPath : String
                                  , val isRunning : Int
                                  , val portNumber : Int
-                                 , val insertedRowDate : java.util.Date
-                                 , val lastUpdatedDate : java.util.Date
                                  , val executorStorageType_executorStorageTypeId : Long
                                  , val executorStorageType_guid : Long
                                  , val executorStorageType_insertedRowDate : java.util.Date
@@ -6821,7 +9798,7 @@ case class VExecutorStorageDto (
     "vExecutorStorage";
   }
   def fields : String = {
-    "executorStorageId,guid,executorHostId,executorStorageTypeId,storageDefinition,storageBasePath,storageFulllPath,isRunning,portNumber,insertedRowDate,lastUpdatedDate,executorStorageType_executorStorageTypeId,executorStorageType_guid,executorStorageType_insertedRowDate,executorStorageType_lastUpdatedDate,executorStorageType_executorStorageTypeName,executorStorageType_executorStorageTypeClass,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking";
+    "executorStorageId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorStorageTypeId,storageDefinition,storageBasePath,storageFulllPath,isRunning,portNumber,executorStorageType_executorStorageTypeId,executorStorageType_guid,executorStorageType_insertedRowDate,executorStorageType_lastUpdatedDate,executorStorageType_executorStorageTypeName,executorStorageType_executorStorageTypeClass,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking";
   }
   def pkFields : String = {
     "";
@@ -6845,15 +9822,17 @@ case class VExecutorStorageDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(executorStorageId,guid,executorHostId,executorStorageTypeId,storageDefinition,storageBasePath,storageFulllPath,isRunning,portNumber,insertedRowDate,lastUpdatedDate,executorStorageType_executorStorageTypeId,executorStorageType_guid,executorStorageType_insertedRowDate,executorStorageType_lastUpdatedDate,executorStorageType_executorStorageTypeName,executorStorageType_executorStorageTypeClass,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking)
+    Array(executorStorageId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorStorageTypeId,storageDefinition,storageBasePath,storageFulllPath,isRunning,portNumber,executorStorageType_executorStorageTypeId,executorStorageType_guid,executorStorageType_insertedRowDate,executorStorageType_lastUpdatedDate,executorStorageType_executorStorageTypeName,executorStorageType_executorStorageTypeClass,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking)
   }
   def toStringArray() : Array[String] = {
-    Array(""+executorStorageId,""+guid,""+executorHostId,""+executorStorageTypeId,""+storageDefinition,""+storageBasePath,""+storageFulllPath,""+isRunning,""+portNumber,""+insertedRowDate,""+lastUpdatedDate,""+executorStorageType_executorStorageTypeId,""+executorStorageType_guid,""+executorStorageType_insertedRowDate,""+executorStorageType_lastUpdatedDate,""+executorStorageType_executorStorageTypeName,""+executorStorageType_executorStorageTypeClass,""+executorHost_executorHostId,""+executorHost_guid,""+executorHost_insertedRowDate,""+executorHost_lastUpdatedDate,""+executorHost_hostName,""+executorHost_hostIp,""+executorHost_hostDomain,""+executorHost_hostOsType,""+executorHost_hostOsVersion,""+executorHost_isWorking)
+    Array(""+executorStorageId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+executorStorageTypeId,""+storageDefinition,""+storageBasePath,""+storageFulllPath,""+isRunning,""+portNumber,""+executorStorageType_executorStorageTypeId,""+executorStorageType_guid,""+executorStorageType_insertedRowDate,""+executorStorageType_lastUpdatedDate,""+executorStorageType_executorStorageTypeName,""+executorStorageType_executorStorageTypeClass,""+executorHost_executorHostId,""+executorHost_guid,""+executorHost_insertedRowDate,""+executorHost_lastUpdatedDate,""+executorHost_hostName,""+executorHost_hostIp,""+executorHost_hostDomain,""+executorHost_hostOsType,""+executorHost_hostOsVersion,""+executorHost_isWorking)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "executorStorageId" => executorStorageId
       case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
       case "executorHostId" => executorHostId
       case "executorStorageTypeId" => executorStorageTypeId
       case "storageDefinition" => storageDefinition
@@ -6861,8 +9840,6 @@ case class VExecutorStorageDto (
       case "storageFulllPath" => storageFulllPath
       case "isRunning" => isRunning
       case "portNumber" => portNumber
-      case "insertedRowDate" => insertedRowDate
-      case "lastUpdatedDate" => lastUpdatedDate
       case "executorStorageType_executorStorageTypeId" => executorStorageType_executorStorageTypeId
       case "executorStorageType_guid" => executorStorageType_guid
       case "executorStorageType_insertedRowDate" => executorStorageType_insertedRowDate
@@ -6887,6 +9864,8 @@ case class VExecutorStorageDto (
     val ret = name match {
       case "executorStorageId" => "Long"
       case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
       case "executorHostId" => "Long"
       case "executorStorageTypeId" => "Long"
       case "storageDefinition" => "String"
@@ -6894,8 +9873,6 @@ case class VExecutorStorageDto (
       case "storageFulllPath" => "String"
       case "isRunning" => "Int"
       case "portNumber" => "Int"
-      case "insertedRowDate" => "java.util.Date"
-      case "lastUpdatedDate" => "java.util.Date"
       case "executorStorageType_executorStorageTypeId" => "Long"
       case "executorStorageType_guid" => "Long"
       case "executorStorageType_insertedRowDate" => "java.util.Date"
@@ -6921,6 +9898,8 @@ object VExecutorStorageDto {
   val TABLE_NAME = "vExecutorStorage";
   val FIELD_executorStorageId = "executorStorageId";
   val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_executorHostId = "executorHostId";
   val FIELD_executorStorageTypeId = "executorStorageTypeId";
   val FIELD_storageDefinition = "storageDefinition";
@@ -6928,8 +9907,6 @@ object VExecutorStorageDto {
   val FIELD_storageFulllPath = "storageFulllPath";
   val FIELD_isRunning = "isRunning";
   val FIELD_portNumber = "portNumber";
-  val FIELD_insertedRowDate = "insertedRowDate";
-  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_executorStorageType_executorStorageTypeId = "executorStorageType_executorStorageTypeId";
   val FIELD_executorStorageType_guid = "executorStorageType_guid";
   val FIELD_executorStorageType_insertedRowDate = "executorStorageType_insertedRowDate";
@@ -6952,27 +9929,28 @@ object VExecutorStorageDto {
 
 case class VExecutorStorageSnapshotDto (
                                          val executorStorageSnapshotId : Long
-                                         , val executorInstanceId : Long
                                          , val guid : Long
                                          , val insertedRowDate : java.util.Date
                                          , val lastUpdatedDate : java.util.Date
+                                         , val executorInstanceId : Long
                                          , val executorInstance_executorInstanceId : Long
                                          , val executorInstance_guid : Long
+                                         , val executorInstance_insertedRowDate : java.util.Date
+                                         , val executorInstance_lastUpdatedDate : java.util.Date
                                          , val executorInstance_executorTypeId : Long
                                          , val executorInstance_executorHostId : Long
+                                         , val executorInstance_executorContextId : Long
                                          , val executorInstance_executorInstanceName : String
                                          , val executorInstance_isRunning : Int
                                          , val executorInstance_isFinished : Int
                                          , val executorInstance_portNumber : Int
-                                         , val executorInstance_insertedRowDate : java.util.Date
-                                         , val executorInstance_lastUpdatedDate : java.util.Date
                                          , val executorInstance_endDate : java.util.Date
                                        ) extends BaseReadOnlyDto {
   def tableName : String = {
     "vExecutorStorageSnapshot";
   }
   def fields : String = {
-    "executorStorageSnapshotId,executorInstanceId,guid,insertedRowDate,lastUpdatedDate,executorInstance_executorInstanceId,executorInstance_guid,executorInstance_executorTypeId,executorInstance_executorHostId,executorInstance_executorInstanceName,executorInstance_isRunning,executorInstance_isFinished,executorInstance_portNumber,executorInstance_insertedRowDate,executorInstance_lastUpdatedDate,executorInstance_endDate";
+    "executorStorageSnapshotId,guid,insertedRowDate,lastUpdatedDate,executorInstanceId,executorInstance_executorInstanceId,executorInstance_guid,executorInstance_insertedRowDate,executorInstance_lastUpdatedDate,executorInstance_executorTypeId,executorInstance_executorHostId,executorInstance_executorContextId,executorInstance_executorInstanceName,executorInstance_isRunning,executorInstance_isFinished,executorInstance_portNumber,executorInstance_endDate";
   }
   def pkFields : String = {
     "";
@@ -6996,28 +9974,29 @@ case class VExecutorStorageSnapshotDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(executorStorageSnapshotId,executorInstanceId,guid,insertedRowDate,lastUpdatedDate,executorInstance_executorInstanceId,executorInstance_guid,executorInstance_executorTypeId,executorInstance_executorHostId,executorInstance_executorInstanceName,executorInstance_isRunning,executorInstance_isFinished,executorInstance_portNumber,executorInstance_insertedRowDate,executorInstance_lastUpdatedDate,executorInstance_endDate)
+    Array(executorStorageSnapshotId,guid,insertedRowDate,lastUpdatedDate,executorInstanceId,executorInstance_executorInstanceId,executorInstance_guid,executorInstance_insertedRowDate,executorInstance_lastUpdatedDate,executorInstance_executorTypeId,executorInstance_executorHostId,executorInstance_executorContextId,executorInstance_executorInstanceName,executorInstance_isRunning,executorInstance_isFinished,executorInstance_portNumber,executorInstance_endDate)
   }
   def toStringArray() : Array[String] = {
-    Array(""+executorStorageSnapshotId,""+executorInstanceId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorInstance_executorInstanceId,""+executorInstance_guid,""+executorInstance_executorTypeId,""+executorInstance_executorHostId,""+executorInstance_executorInstanceName,""+executorInstance_isRunning,""+executorInstance_isFinished,""+executorInstance_portNumber,""+executorInstance_insertedRowDate,""+executorInstance_lastUpdatedDate,""+executorInstance_endDate)
+    Array(""+executorStorageSnapshotId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorInstanceId,""+executorInstance_executorInstanceId,""+executorInstance_guid,""+executorInstance_insertedRowDate,""+executorInstance_lastUpdatedDate,""+executorInstance_executorTypeId,""+executorInstance_executorHostId,""+executorInstance_executorContextId,""+executorInstance_executorInstanceName,""+executorInstance_isRunning,""+executorInstance_isFinished,""+executorInstance_portNumber,""+executorInstance_endDate)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "executorStorageSnapshotId" => executorStorageSnapshotId
-      case "executorInstanceId" => executorInstanceId
       case "guid" => guid
       case "insertedRowDate" => insertedRowDate
       case "lastUpdatedDate" => lastUpdatedDate
+      case "executorInstanceId" => executorInstanceId
       case "executorInstance_executorInstanceId" => executorInstance_executorInstanceId
       case "executorInstance_guid" => executorInstance_guid
+      case "executorInstance_insertedRowDate" => executorInstance_insertedRowDate
+      case "executorInstance_lastUpdatedDate" => executorInstance_lastUpdatedDate
       case "executorInstance_executorTypeId" => executorInstance_executorTypeId
       case "executorInstance_executorHostId" => executorInstance_executorHostId
+      case "executorInstance_executorContextId" => executorInstance_executorContextId
       case "executorInstance_executorInstanceName" => executorInstance_executorInstanceName
       case "executorInstance_isRunning" => executorInstance_isRunning
       case "executorInstance_isFinished" => executorInstance_isFinished
       case "executorInstance_portNumber" => executorInstance_portNumber
-      case "executorInstance_insertedRowDate" => executorInstance_insertedRowDate
-      case "executorInstance_lastUpdatedDate" => executorInstance_lastUpdatedDate
       case "executorInstance_endDate" => executorInstance_endDate
       case _ => null
     }
@@ -7026,20 +10005,21 @@ case class VExecutorStorageSnapshotDto (
   def getFieldTypeName(name : String) : String = {
     val ret = name match {
       case "executorStorageSnapshotId" => "Long"
-      case "executorInstanceId" => "Long"
       case "guid" => "Long"
       case "insertedRowDate" => "java.util.Date"
       case "lastUpdatedDate" => "java.util.Date"
+      case "executorInstanceId" => "Long"
       case "executorInstance_executorInstanceId" => "Long"
       case "executorInstance_guid" => "Long"
+      case "executorInstance_insertedRowDate" => "java.util.Date"
+      case "executorInstance_lastUpdatedDate" => "java.util.Date"
       case "executorInstance_executorTypeId" => "Long"
       case "executorInstance_executorHostId" => "Long"
+      case "executorInstance_executorContextId" => "Long"
       case "executorInstance_executorInstanceName" => "String"
       case "executorInstance_isRunning" => "Int"
       case "executorInstance_isFinished" => "Int"
       case "executorInstance_portNumber" => "Int"
-      case "executorInstance_insertedRowDate" => "java.util.Date"
-      case "executorInstance_lastUpdatedDate" => "java.util.Date"
       case "executorInstance_endDate" => "java.util.Date"
       case _ => "Object"
     }
@@ -7049,21 +10029,296 @@ case class VExecutorStorageSnapshotDto (
 object VExecutorStorageSnapshotDto {
   val TABLE_NAME = "vExecutorStorageSnapshot";
   val FIELD_executorStorageSnapshotId = "executorStorageSnapshotId";
-  val FIELD_executorInstanceId = "executorInstanceId";
   val FIELD_guid = "guid";
   val FIELD_insertedRowDate = "insertedRowDate";
   val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_executorInstanceId = "executorInstanceId";
   val FIELD_executorInstance_executorInstanceId = "executorInstance_executorInstanceId";
   val FIELD_executorInstance_guid = "executorInstance_guid";
+  val FIELD_executorInstance_insertedRowDate = "executorInstance_insertedRowDate";
+  val FIELD_executorInstance_lastUpdatedDate = "executorInstance_lastUpdatedDate";
   val FIELD_executorInstance_executorTypeId = "executorInstance_executorTypeId";
   val FIELD_executorInstance_executorHostId = "executorInstance_executorHostId";
+  val FIELD_executorInstance_executorContextId = "executorInstance_executorContextId";
   val FIELD_executorInstance_executorInstanceName = "executorInstance_executorInstanceName";
   val FIELD_executorInstance_isRunning = "executorInstance_isRunning";
   val FIELD_executorInstance_isFinished = "executorInstance_isFinished";
   val FIELD_executorInstance_portNumber = "executorInstance_portNumber";
-  val FIELD_executorInstance_insertedRowDate = "executorInstance_insertedRowDate";
-  val FIELD_executorInstance_lastUpdatedDate = "executorInstance_lastUpdatedDate";
   val FIELD_executorInstance_endDate = "executorInstance_endDate";
+
+}
+
+
+case class VExecutorStorageSnapshotSummaryDto (
+                                                val executorStorageSnapshotId : Long
+                                                , val guid : Long
+                                                , val insertedRowDate : java.util.Date
+                                                , val lastUpdatedDate : java.util.Date
+                                                , val executorInstanceId : Long
+                                                , val executorStorageView_count : Int
+                                              ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vExecutorStorageSnapshotSummary";
+  }
+  def fields : String = {
+    "executorStorageSnapshotId,guid,insertedRowDate,lastUpdatedDate,executorInstanceId,executorStorageView_count";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    executorStorageSnapshotSummaryId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(executorStorageSnapshotId,guid,insertedRowDate,lastUpdatedDate,executorInstanceId,executorStorageView_count)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+executorStorageSnapshotId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorInstanceId,""+executorStorageView_count)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "executorStorageSnapshotId" => executorStorageSnapshotId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "executorInstanceId" => executorInstanceId
+      case "executorStorageView_count" => executorStorageView_count
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "executorStorageSnapshotId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "executorInstanceId" => "Long"
+      case "executorStorageView_count" => "Int"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VExecutorStorageSnapshotSummaryDto {
+  val TABLE_NAME = "vExecutorStorageSnapshotSummary";
+  val FIELD_executorStorageSnapshotId = "executorStorageSnapshotId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_executorInstanceId = "executorInstanceId";
+  val FIELD_executorStorageView_count = "executorStorageView_count";
+
+}
+
+
+case class VExecutorStorageSummaryDto (
+                                        val executorStorageId : Long
+                                        , val guid : Long
+                                        , val insertedRowDate : java.util.Date
+                                        , val lastUpdatedDate : java.util.Date
+                                        , val executorHostId : Long
+                                        , val executorStorageTypeId : Long
+                                        , val storageDefinition : String
+                                        , val storageBasePath : String
+                                        , val storageFulllPath : String
+                                        , val isRunning : Int
+                                        , val portNumber : Int
+                                        , val algorithmRun_count : Int
+                                        , val sourceSchedule_count : Int
+                                        , val executorStorageView_count : Int
+                                      ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vExecutorStorageSummary";
+  }
+  def fields : String = {
+    "executorStorageId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorStorageTypeId,storageDefinition,storageBasePath,storageFulllPath,isRunning,portNumber,algorithmRun_count,sourceSchedule_count,executorStorageView_count";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    executorStorageSummaryId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(executorStorageId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorStorageTypeId,storageDefinition,storageBasePath,storageFulllPath,isRunning,portNumber,algorithmRun_count,sourceSchedule_count,executorStorageView_count)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+executorStorageId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+executorStorageTypeId,""+storageDefinition,""+storageBasePath,""+storageFulllPath,""+isRunning,""+portNumber,""+algorithmRun_count,""+sourceSchedule_count,""+executorStorageView_count)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "executorStorageId" => executorStorageId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "executorHostId" => executorHostId
+      case "executorStorageTypeId" => executorStorageTypeId
+      case "storageDefinition" => storageDefinition
+      case "storageBasePath" => storageBasePath
+      case "storageFulllPath" => storageFulllPath
+      case "isRunning" => isRunning
+      case "portNumber" => portNumber
+      case "algorithmRun_count" => algorithmRun_count
+      case "sourceSchedule_count" => sourceSchedule_count
+      case "executorStorageView_count" => executorStorageView_count
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "executorStorageId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "executorHostId" => "Long"
+      case "executorStorageTypeId" => "Long"
+      case "storageDefinition" => "String"
+      case "storageBasePath" => "String"
+      case "storageFulllPath" => "String"
+      case "isRunning" => "Int"
+      case "portNumber" => "Int"
+      case "algorithmRun_count" => "Int"
+      case "sourceSchedule_count" => "Int"
+      case "executorStorageView_count" => "Int"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VExecutorStorageSummaryDto {
+  val TABLE_NAME = "vExecutorStorageSummary";
+  val FIELD_executorStorageId = "executorStorageId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_executorHostId = "executorHostId";
+  val FIELD_executorStorageTypeId = "executorStorageTypeId";
+  val FIELD_storageDefinition = "storageDefinition";
+  val FIELD_storageBasePath = "storageBasePath";
+  val FIELD_storageFulllPath = "storageFulllPath";
+  val FIELD_isRunning = "isRunning";
+  val FIELD_portNumber = "portNumber";
+  val FIELD_algorithmRun_count = "algorithmRun_count";
+  val FIELD_sourceSchedule_count = "sourceSchedule_count";
+  val FIELD_executorStorageView_count = "executorStorageView_count";
+
+}
+
+
+case class VExecutorStorageTypeSummaryDto (
+                                            val executorStorageTypeId : Long
+                                            , val guid : Long
+                                            , val insertedRowDate : java.util.Date
+                                            , val lastUpdatedDate : java.util.Date
+                                            , val executorStorageTypeName : String
+                                            , val executorStorageTypeClass : String
+                                            , val executorStorage_count : Int
+                                            , val algorithmStorageSupport_count : Int
+                                          ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vExecutorStorageTypeSummary";
+  }
+  def fields : String = {
+    "executorStorageTypeId,guid,insertedRowDate,lastUpdatedDate,executorStorageTypeName,executorStorageTypeClass,executorStorage_count,algorithmStorageSupport_count";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    executorStorageTypeSummaryId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(executorStorageTypeId,guid,insertedRowDate,lastUpdatedDate,executorStorageTypeName,executorStorageTypeClass,executorStorage_count,algorithmStorageSupport_count)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+executorStorageTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorStorageTypeName,""+executorStorageTypeClass,""+executorStorage_count,""+algorithmStorageSupport_count)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "executorStorageTypeId" => executorStorageTypeId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "executorStorageTypeName" => executorStorageTypeName
+      case "executorStorageTypeClass" => executorStorageTypeClass
+      case "executorStorage_count" => executorStorage_count
+      case "algorithmStorageSupport_count" => algorithmStorageSupport_count
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "executorStorageTypeId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "executorStorageTypeName" => "String"
+      case "executorStorageTypeClass" => "String"
+      case "executorStorage_count" => "Int"
+      case "algorithmStorageSupport_count" => "Int"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VExecutorStorageTypeSummaryDto {
+  val TABLE_NAME = "vExecutorStorageTypeSummary";
+  val FIELD_executorStorageTypeId = "executorStorageTypeId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_executorStorageTypeName = "executorStorageTypeName";
+  val FIELD_executorStorageTypeClass = "executorStorageTypeClass";
+  val FIELD_executorStorage_count = "executorStorage_count";
+  val FIELD_algorithmStorageSupport_count = "algorithmStorageSupport_count";
 
 }
 
@@ -7076,11 +10331,15 @@ case class VExecutorStorageViewDto (
                                      , val executorStorageSnapshotId : Long
                                      , val executorStorageId : Long
                                      , val sourceDownloadId : Long
+                                     , val sourceViewId : Long
                                      , val storagePath : String
                                      , val viewSize : Long
                                      , val viewRowsCount : Long
+                                     , val isValid : Int
                                      , val executorStorage_executorStorageId : Long
                                      , val executorStorage_guid : Long
+                                     , val executorStorage_insertedRowDate : java.util.Date
+                                     , val executorStorage_lastUpdatedDate : java.util.Date
                                      , val executorStorage_executorHostId : Long
                                      , val executorStorage_executorStorageTypeId : Long
                                      , val executorStorage_storageDefinition : String
@@ -7088,14 +10347,39 @@ case class VExecutorStorageViewDto (
                                      , val executorStorage_storageFulllPath : String
                                      , val executorStorage_isRunning : Int
                                      , val executorStorage_portNumber : Int
-                                     , val executorStorage_insertedRowDate : java.util.Date
-                                     , val executorStorage_lastUpdatedDate : java.util.Date
+                                     , val executorStorageSnapshot_executorStorageSnapshotId : Long
+                                     , val executorStorageSnapshot_guid : Long
+                                     , val executorStorageSnapshot_insertedRowDate : java.util.Date
+                                     , val executorStorageSnapshot_lastUpdatedDate : java.util.Date
+                                     , val executorStorageSnapshot_executorInstanceId : Long
+                                     , val sourceDownload_sourceDownloadId : Long
+                                     , val sourceDownload_guid : Long
+                                     , val sourceDownload_insertedRowDate : java.util.Date
+                                     , val sourceDownload_lastUpdatedDate : java.util.Date
+                                     , val sourceDownload_sourceScheduleId : Long
+                                     , val sourceDownload_executorHostId : Long
+                                     , val sourceDownload_executorContextId : Long
+                                     , val sourceDownload_sourceViewId : Long
+                                     , val sourceDownload_retryNumber : Int
+                                     , val sourceDownload_isRunning : Int
+                                     , val sourceDownload_isFinished : Int
+                                     , val sourceDownload_isExcecption : Int
+                                     , val sourceDownload_excecptionDescription : String
+                                     , val sourceView_sourceViewId : Long
+                                     , val sourceView_guid : Long
+                                     , val sourceView_insertedRowDate : java.util.Date
+                                     , val sourceView_lastUpdatedDate : java.util.Date
+                                     , val sourceView_sourceInstanceId : Long
+                                     , val sourceView_sourceViewTypeId : Long
+                                     , val sourceView_sourceViewName : String
+                                     , val sourceView_sourceViewDefinition : String
+                                     , val sourceView_isExisting : Int
                                    ) extends BaseReadOnlyDto {
   def tableName : String = {
     "vExecutorStorageView";
   }
   def fields : String = {
-    "executorStorageViewId,guid,insertedRowDate,lastUpdatedDate,executorStorageSnapshotId,executorStorageId,sourceDownloadId,storagePath,viewSize,viewRowsCount,executorStorage_executorStorageId,executorStorage_guid,executorStorage_executorHostId,executorStorage_executorStorageTypeId,executorStorage_storageDefinition,executorStorage_storageBasePath,executorStorage_storageFulllPath,executorStorage_isRunning,executorStorage_portNumber,executorStorage_insertedRowDate,executorStorage_lastUpdatedDate";
+    "executorStorageViewId,guid,insertedRowDate,lastUpdatedDate,executorStorageSnapshotId,executorStorageId,sourceDownloadId,sourceViewId,storagePath,viewSize,viewRowsCount,isValid,executorStorage_executorStorageId,executorStorage_guid,executorStorage_insertedRowDate,executorStorage_lastUpdatedDate,executorStorage_executorHostId,executorStorage_executorStorageTypeId,executorStorage_storageDefinition,executorStorage_storageBasePath,executorStorage_storageFulllPath,executorStorage_isRunning,executorStorage_portNumber,executorStorageSnapshot_executorStorageSnapshotId,executorStorageSnapshot_guid,executorStorageSnapshot_insertedRowDate,executorStorageSnapshot_lastUpdatedDate,executorStorageSnapshot_executorInstanceId,sourceDownload_sourceDownloadId,sourceDownload_guid,sourceDownload_insertedRowDate,sourceDownload_lastUpdatedDate,sourceDownload_sourceScheduleId,sourceDownload_executorHostId,sourceDownload_executorContextId,sourceDownload_sourceViewId,sourceDownload_retryNumber,sourceDownload_isRunning,sourceDownload_isFinished,sourceDownload_isExcecption,sourceDownload_excecptionDescription,sourceView_sourceViewId,sourceView_guid,sourceView_insertedRowDate,sourceView_lastUpdatedDate,sourceView_sourceInstanceId,sourceView_sourceViewTypeId,sourceView_sourceViewName,sourceView_sourceViewDefinition,sourceView_isExisting";
   }
   def pkFields : String = {
     "";
@@ -7119,10 +10403,10 @@ case class VExecutorStorageViewDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(executorStorageViewId,guid,insertedRowDate,lastUpdatedDate,executorStorageSnapshotId,executorStorageId,sourceDownloadId,storagePath,viewSize,viewRowsCount,executorStorage_executorStorageId,executorStorage_guid,executorStorage_executorHostId,executorStorage_executorStorageTypeId,executorStorage_storageDefinition,executorStorage_storageBasePath,executorStorage_storageFulllPath,executorStorage_isRunning,executorStorage_portNumber,executorStorage_insertedRowDate,executorStorage_lastUpdatedDate)
+    Array(executorStorageViewId,guid,insertedRowDate,lastUpdatedDate,executorStorageSnapshotId,executorStorageId,sourceDownloadId,sourceViewId,storagePath,viewSize,viewRowsCount,isValid,executorStorage_executorStorageId,executorStorage_guid,executorStorage_insertedRowDate,executorStorage_lastUpdatedDate,executorStorage_executorHostId,executorStorage_executorStorageTypeId,executorStorage_storageDefinition,executorStorage_storageBasePath,executorStorage_storageFulllPath,executorStorage_isRunning,executorStorage_portNumber,executorStorageSnapshot_executorStorageSnapshotId,executorStorageSnapshot_guid,executorStorageSnapshot_insertedRowDate,executorStorageSnapshot_lastUpdatedDate,executorStorageSnapshot_executorInstanceId,sourceDownload_sourceDownloadId,sourceDownload_guid,sourceDownload_insertedRowDate,sourceDownload_lastUpdatedDate,sourceDownload_sourceScheduleId,sourceDownload_executorHostId,sourceDownload_executorContextId,sourceDownload_sourceViewId,sourceDownload_retryNumber,sourceDownload_isRunning,sourceDownload_isFinished,sourceDownload_isExcecption,sourceDownload_excecptionDescription,sourceView_sourceViewId,sourceView_guid,sourceView_insertedRowDate,sourceView_lastUpdatedDate,sourceView_sourceInstanceId,sourceView_sourceViewTypeId,sourceView_sourceViewName,sourceView_sourceViewDefinition,sourceView_isExisting)
   }
   def toStringArray() : Array[String] = {
-    Array(""+executorStorageViewId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorStorageSnapshotId,""+executorStorageId,""+sourceDownloadId,""+storagePath,""+viewSize,""+viewRowsCount,""+executorStorage_executorStorageId,""+executorStorage_guid,""+executorStorage_executorHostId,""+executorStorage_executorStorageTypeId,""+executorStorage_storageDefinition,""+executorStorage_storageBasePath,""+executorStorage_storageFulllPath,""+executorStorage_isRunning,""+executorStorage_portNumber,""+executorStorage_insertedRowDate,""+executorStorage_lastUpdatedDate)
+    Array(""+executorStorageViewId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorStorageSnapshotId,""+executorStorageId,""+sourceDownloadId,""+sourceViewId,""+storagePath,""+viewSize,""+viewRowsCount,""+isValid,""+executorStorage_executorStorageId,""+executorStorage_guid,""+executorStorage_insertedRowDate,""+executorStorage_lastUpdatedDate,""+executorStorage_executorHostId,""+executorStorage_executorStorageTypeId,""+executorStorage_storageDefinition,""+executorStorage_storageBasePath,""+executorStorage_storageFulllPath,""+executorStorage_isRunning,""+executorStorage_portNumber,""+executorStorageSnapshot_executorStorageSnapshotId,""+executorStorageSnapshot_guid,""+executorStorageSnapshot_insertedRowDate,""+executorStorageSnapshot_lastUpdatedDate,""+executorStorageSnapshot_executorInstanceId,""+sourceDownload_sourceDownloadId,""+sourceDownload_guid,""+sourceDownload_insertedRowDate,""+sourceDownload_lastUpdatedDate,""+sourceDownload_sourceScheduleId,""+sourceDownload_executorHostId,""+sourceDownload_executorContextId,""+sourceDownload_sourceViewId,""+sourceDownload_retryNumber,""+sourceDownload_isRunning,""+sourceDownload_isFinished,""+sourceDownload_isExcecption,""+sourceDownload_excecptionDescription,""+sourceView_sourceViewId,""+sourceView_guid,""+sourceView_insertedRowDate,""+sourceView_lastUpdatedDate,""+sourceView_sourceInstanceId,""+sourceView_sourceViewTypeId,""+sourceView_sourceViewName,""+sourceView_sourceViewDefinition,""+sourceView_isExisting)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
@@ -7133,11 +10417,15 @@ case class VExecutorStorageViewDto (
       case "executorStorageSnapshotId" => executorStorageSnapshotId
       case "executorStorageId" => executorStorageId
       case "sourceDownloadId" => sourceDownloadId
+      case "sourceViewId" => sourceViewId
       case "storagePath" => storagePath
       case "viewSize" => viewSize
       case "viewRowsCount" => viewRowsCount
+      case "isValid" => isValid
       case "executorStorage_executorStorageId" => executorStorage_executorStorageId
       case "executorStorage_guid" => executorStorage_guid
+      case "executorStorage_insertedRowDate" => executorStorage_insertedRowDate
+      case "executorStorage_lastUpdatedDate" => executorStorage_lastUpdatedDate
       case "executorStorage_executorHostId" => executorStorage_executorHostId
       case "executorStorage_executorStorageTypeId" => executorStorage_executorStorageTypeId
       case "executorStorage_storageDefinition" => executorStorage_storageDefinition
@@ -7145,8 +10433,33 @@ case class VExecutorStorageViewDto (
       case "executorStorage_storageFulllPath" => executorStorage_storageFulllPath
       case "executorStorage_isRunning" => executorStorage_isRunning
       case "executorStorage_portNumber" => executorStorage_portNumber
-      case "executorStorage_insertedRowDate" => executorStorage_insertedRowDate
-      case "executorStorage_lastUpdatedDate" => executorStorage_lastUpdatedDate
+      case "executorStorageSnapshot_executorStorageSnapshotId" => executorStorageSnapshot_executorStorageSnapshotId
+      case "executorStorageSnapshot_guid" => executorStorageSnapshot_guid
+      case "executorStorageSnapshot_insertedRowDate" => executorStorageSnapshot_insertedRowDate
+      case "executorStorageSnapshot_lastUpdatedDate" => executorStorageSnapshot_lastUpdatedDate
+      case "executorStorageSnapshot_executorInstanceId" => executorStorageSnapshot_executorInstanceId
+      case "sourceDownload_sourceDownloadId" => sourceDownload_sourceDownloadId
+      case "sourceDownload_guid" => sourceDownload_guid
+      case "sourceDownload_insertedRowDate" => sourceDownload_insertedRowDate
+      case "sourceDownload_lastUpdatedDate" => sourceDownload_lastUpdatedDate
+      case "sourceDownload_sourceScheduleId" => sourceDownload_sourceScheduleId
+      case "sourceDownload_executorHostId" => sourceDownload_executorHostId
+      case "sourceDownload_executorContextId" => sourceDownload_executorContextId
+      case "sourceDownload_sourceViewId" => sourceDownload_sourceViewId
+      case "sourceDownload_retryNumber" => sourceDownload_retryNumber
+      case "sourceDownload_isRunning" => sourceDownload_isRunning
+      case "sourceDownload_isFinished" => sourceDownload_isFinished
+      case "sourceDownload_isExcecption" => sourceDownload_isExcecption
+      case "sourceDownload_excecptionDescription" => sourceDownload_excecptionDescription
+      case "sourceView_sourceViewId" => sourceView_sourceViewId
+      case "sourceView_guid" => sourceView_guid
+      case "sourceView_insertedRowDate" => sourceView_insertedRowDate
+      case "sourceView_lastUpdatedDate" => sourceView_lastUpdatedDate
+      case "sourceView_sourceInstanceId" => sourceView_sourceInstanceId
+      case "sourceView_sourceViewTypeId" => sourceView_sourceViewTypeId
+      case "sourceView_sourceViewName" => sourceView_sourceViewName
+      case "sourceView_sourceViewDefinition" => sourceView_sourceViewDefinition
+      case "sourceView_isExisting" => sourceView_isExisting
       case _ => null
     }
     ret
@@ -7160,11 +10473,15 @@ case class VExecutorStorageViewDto (
       case "executorStorageSnapshotId" => "Long"
       case "executorStorageId" => "Long"
       case "sourceDownloadId" => "Long"
+      case "sourceViewId" => "Long"
       case "storagePath" => "String"
       case "viewSize" => "Long"
       case "viewRowsCount" => "Long"
+      case "isValid" => "Int"
       case "executorStorage_executorStorageId" => "Long"
       case "executorStorage_guid" => "Long"
+      case "executorStorage_insertedRowDate" => "java.util.Date"
+      case "executorStorage_lastUpdatedDate" => "java.util.Date"
       case "executorStorage_executorHostId" => "Long"
       case "executorStorage_executorStorageTypeId" => "Long"
       case "executorStorage_storageDefinition" => "String"
@@ -7172,8 +10489,33 @@ case class VExecutorStorageViewDto (
       case "executorStorage_storageFulllPath" => "String"
       case "executorStorage_isRunning" => "Int"
       case "executorStorage_portNumber" => "Int"
-      case "executorStorage_insertedRowDate" => "java.util.Date"
-      case "executorStorage_lastUpdatedDate" => "java.util.Date"
+      case "executorStorageSnapshot_executorStorageSnapshotId" => "Long"
+      case "executorStorageSnapshot_guid" => "Long"
+      case "executorStorageSnapshot_insertedRowDate" => "java.util.Date"
+      case "executorStorageSnapshot_lastUpdatedDate" => "java.util.Date"
+      case "executorStorageSnapshot_executorInstanceId" => "Long"
+      case "sourceDownload_sourceDownloadId" => "Long"
+      case "sourceDownload_guid" => "Long"
+      case "sourceDownload_insertedRowDate" => "java.util.Date"
+      case "sourceDownload_lastUpdatedDate" => "java.util.Date"
+      case "sourceDownload_sourceScheduleId" => "Long"
+      case "sourceDownload_executorHostId" => "Long"
+      case "sourceDownload_executorContextId" => "Long"
+      case "sourceDownload_sourceViewId" => "Long"
+      case "sourceDownload_retryNumber" => "Int"
+      case "sourceDownload_isRunning" => "Int"
+      case "sourceDownload_isFinished" => "Int"
+      case "sourceDownload_isExcecption" => "Int"
+      case "sourceDownload_excecptionDescription" => "String"
+      case "sourceView_sourceViewId" => "Long"
+      case "sourceView_guid" => "Long"
+      case "sourceView_insertedRowDate" => "java.util.Date"
+      case "sourceView_lastUpdatedDate" => "java.util.Date"
+      case "sourceView_sourceInstanceId" => "Long"
+      case "sourceView_sourceViewTypeId" => "Long"
+      case "sourceView_sourceViewName" => "String"
+      case "sourceView_sourceViewDefinition" => "String"
+      case "sourceView_isExisting" => "Int"
       case _ => "Object"
     }
     ret
@@ -7188,11 +10530,15 @@ object VExecutorStorageViewDto {
   val FIELD_executorStorageSnapshotId = "executorStorageSnapshotId";
   val FIELD_executorStorageId = "executorStorageId";
   val FIELD_sourceDownloadId = "sourceDownloadId";
+  val FIELD_sourceViewId = "sourceViewId";
   val FIELD_storagePath = "storagePath";
   val FIELD_viewSize = "viewSize";
   val FIELD_viewRowsCount = "viewRowsCount";
+  val FIELD_isValid = "isValid";
   val FIELD_executorStorage_executorStorageId = "executorStorage_executorStorageId";
   val FIELD_executorStorage_guid = "executorStorage_guid";
+  val FIELD_executorStorage_insertedRowDate = "executorStorage_insertedRowDate";
+  val FIELD_executorStorage_lastUpdatedDate = "executorStorage_lastUpdatedDate";
   val FIELD_executorStorage_executorHostId = "executorStorage_executorHostId";
   val FIELD_executorStorage_executorStorageTypeId = "executorStorage_executorStorageTypeId";
   val FIELD_executorStorage_storageDefinition = "executorStorage_storageDefinition";
@@ -7200,8 +10546,229 @@ object VExecutorStorageViewDto {
   val FIELD_executorStorage_storageFulllPath = "executorStorage_storageFulllPath";
   val FIELD_executorStorage_isRunning = "executorStorage_isRunning";
   val FIELD_executorStorage_portNumber = "executorStorage_portNumber";
-  val FIELD_executorStorage_insertedRowDate = "executorStorage_insertedRowDate";
-  val FIELD_executorStorage_lastUpdatedDate = "executorStorage_lastUpdatedDate";
+  val FIELD_executorStorageSnapshot_executorStorageSnapshotId = "executorStorageSnapshot_executorStorageSnapshotId";
+  val FIELD_executorStorageSnapshot_guid = "executorStorageSnapshot_guid";
+  val FIELD_executorStorageSnapshot_insertedRowDate = "executorStorageSnapshot_insertedRowDate";
+  val FIELD_executorStorageSnapshot_lastUpdatedDate = "executorStorageSnapshot_lastUpdatedDate";
+  val FIELD_executorStorageSnapshot_executorInstanceId = "executorStorageSnapshot_executorInstanceId";
+  val FIELD_sourceDownload_sourceDownloadId = "sourceDownload_sourceDownloadId";
+  val FIELD_sourceDownload_guid = "sourceDownload_guid";
+  val FIELD_sourceDownload_insertedRowDate = "sourceDownload_insertedRowDate";
+  val FIELD_sourceDownload_lastUpdatedDate = "sourceDownload_lastUpdatedDate";
+  val FIELD_sourceDownload_sourceScheduleId = "sourceDownload_sourceScheduleId";
+  val FIELD_sourceDownload_executorHostId = "sourceDownload_executorHostId";
+  val FIELD_sourceDownload_executorContextId = "sourceDownload_executorContextId";
+  val FIELD_sourceDownload_sourceViewId = "sourceDownload_sourceViewId";
+  val FIELD_sourceDownload_retryNumber = "sourceDownload_retryNumber";
+  val FIELD_sourceDownload_isRunning = "sourceDownload_isRunning";
+  val FIELD_sourceDownload_isFinished = "sourceDownload_isFinished";
+  val FIELD_sourceDownload_isExcecption = "sourceDownload_isExcecption";
+  val FIELD_sourceDownload_excecptionDescription = "sourceDownload_excecptionDescription";
+  val FIELD_sourceView_sourceViewId = "sourceView_sourceViewId";
+  val FIELD_sourceView_guid = "sourceView_guid";
+  val FIELD_sourceView_insertedRowDate = "sourceView_insertedRowDate";
+  val FIELD_sourceView_lastUpdatedDate = "sourceView_lastUpdatedDate";
+  val FIELD_sourceView_sourceInstanceId = "sourceView_sourceInstanceId";
+  val FIELD_sourceView_sourceViewTypeId = "sourceView_sourceViewTypeId";
+  val FIELD_sourceView_sourceViewName = "sourceView_sourceViewName";
+  val FIELD_sourceView_sourceViewDefinition = "sourceView_sourceViewDefinition";
+  val FIELD_sourceView_isExisting = "sourceView_isExisting";
+
+}
+
+
+case class VExecutorStorageViewSummaryDto (
+                                            val executorStorageViewId : Long
+                                            , val guid : Long
+                                            , val insertedRowDate : java.util.Date
+                                            , val lastUpdatedDate : java.util.Date
+                                            , val executorStorageSnapshotId : Long
+                                            , val executorStorageId : Long
+                                            , val sourceDownloadId : Long
+                                            , val sourceViewId : Long
+                                            , val storagePath : String
+                                            , val viewSize : Long
+                                            , val viewRowsCount : Long
+                                            , val isValid : Int
+                                            , val algorithmRunView_count : Int
+                                            , val algorithmOutput_count : Int
+                                          ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vExecutorStorageViewSummary";
+  }
+  def fields : String = {
+    "executorStorageViewId,guid,insertedRowDate,lastUpdatedDate,executorStorageSnapshotId,executorStorageId,sourceDownloadId,sourceViewId,storagePath,viewSize,viewRowsCount,isValid,algorithmRunView_count,algorithmOutput_count";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    executorStorageViewSummaryId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(executorStorageViewId,guid,insertedRowDate,lastUpdatedDate,executorStorageSnapshotId,executorStorageId,sourceDownloadId,sourceViewId,storagePath,viewSize,viewRowsCount,isValid,algorithmRunView_count,algorithmOutput_count)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+executorStorageViewId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorStorageSnapshotId,""+executorStorageId,""+sourceDownloadId,""+sourceViewId,""+storagePath,""+viewSize,""+viewRowsCount,""+isValid,""+algorithmRunView_count,""+algorithmOutput_count)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "executorStorageViewId" => executorStorageViewId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "executorStorageSnapshotId" => executorStorageSnapshotId
+      case "executorStorageId" => executorStorageId
+      case "sourceDownloadId" => sourceDownloadId
+      case "sourceViewId" => sourceViewId
+      case "storagePath" => storagePath
+      case "viewSize" => viewSize
+      case "viewRowsCount" => viewRowsCount
+      case "isValid" => isValid
+      case "algorithmRunView_count" => algorithmRunView_count
+      case "algorithmOutput_count" => algorithmOutput_count
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "executorStorageViewId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "executorStorageSnapshotId" => "Long"
+      case "executorStorageId" => "Long"
+      case "sourceDownloadId" => "Long"
+      case "sourceViewId" => "Long"
+      case "storagePath" => "String"
+      case "viewSize" => "Long"
+      case "viewRowsCount" => "Long"
+      case "isValid" => "Int"
+      case "algorithmRunView_count" => "Int"
+      case "algorithmOutput_count" => "Int"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VExecutorStorageViewSummaryDto {
+  val TABLE_NAME = "vExecutorStorageViewSummary";
+  val FIELD_executorStorageViewId = "executorStorageViewId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_executorStorageSnapshotId = "executorStorageSnapshotId";
+  val FIELD_executorStorageId = "executorStorageId";
+  val FIELD_sourceDownloadId = "sourceDownloadId";
+  val FIELD_sourceViewId = "sourceViewId";
+  val FIELD_storagePath = "storagePath";
+  val FIELD_viewSize = "viewSize";
+  val FIELD_viewRowsCount = "viewRowsCount";
+  val FIELD_isValid = "isValid";
+  val FIELD_algorithmRunView_count = "algorithmRunView_count";
+  val FIELD_algorithmOutput_count = "algorithmOutput_count";
+
+}
+
+
+case class VExecutorTypeSummaryDto (
+                                     val executorTypeId : Long
+                                     , val guid : Long
+                                     , val insertedRowDate : java.util.Date
+                                     , val lastUpdatedDate : java.util.Date
+                                     , val executorTypeName : String
+                                     , val executorTypeClass : String
+                                     , val executorInstance_count : Int
+                                     , val algorithmImplementation_count : Int
+                                   ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vExecutorTypeSummary";
+  }
+  def fields : String = {
+    "executorTypeId,guid,insertedRowDate,lastUpdatedDate,executorTypeName,executorTypeClass,executorInstance_count,algorithmImplementation_count";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    executorTypeSummaryId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(executorTypeId,guid,insertedRowDate,lastUpdatedDate,executorTypeName,executorTypeClass,executorInstance_count,algorithmImplementation_count)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+executorTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorTypeName,""+executorTypeClass,""+executorInstance_count,""+algorithmImplementation_count)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "executorTypeId" => executorTypeId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "executorTypeName" => executorTypeName
+      case "executorTypeClass" => executorTypeClass
+      case "executorInstance_count" => executorInstance_count
+      case "algorithmImplementation_count" => algorithmImplementation_count
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "executorTypeId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "executorTypeName" => "String"
+      case "executorTypeClass" => "String"
+      case "executorInstance_count" => "Int"
+      case "algorithmImplementation_count" => "Int"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VExecutorTypeSummaryDto {
+  val TABLE_NAME = "vExecutorTypeSummary";
+  val FIELD_executorTypeId = "executorTypeId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_executorTypeName = "executorTypeName";
+  val FIELD_executorTypeClass = "executorTypeClass";
+  val FIELD_executorInstance_count = "executorInstance_count";
+  val FIELD_algorithmImplementation_count = "algorithmImplementation_count";
 
 }
 
@@ -7209,11 +10776,11 @@ object VExecutorStorageViewDto {
 case class VResourceManagerDto (
                                  val resourceManagerId : Long
                                  , val guid : Long
+                                 , val insertedRowDate : java.util.Date
+                                 , val lastUpdatedDate : java.util.Date
                                  , val resourceManagerTypeId : Long
                                  , val executorHostId : Long
                                  , val resourceManagerStatus : String
-                                 , val insertedRowDate : java.util.Date
-                                 , val lastUpdatedDate : java.util.Date
                                  , val executorHost_executorHostId : Long
                                  , val executorHost_guid : Long
                                  , val executorHost_insertedRowDate : java.util.Date
@@ -7226,16 +10793,16 @@ case class VResourceManagerDto (
                                  , val executorHost_isWorking : Int
                                  , val resourceManagerType_resourceManagerTypeId : Long
                                  , val resourceManagerType_guid : Long
-                                 , val resourceManagerType_resourceManagerTypeName : String
-                                 , val resourceManagerType_resourceManagerTypeClass : String
                                  , val resourceManagerType_insertedRowDate : java.util.Date
                                  , val resourceManagerType_lastUpdatedDate : java.util.Date
+                                 , val resourceManagerType_resourceManagerTypeName : String
+                                 , val resourceManagerType_resourceManagerTypeClass : String
                                ) extends BaseReadOnlyDto {
   def tableName : String = {
     "vResourceManager";
   }
   def fields : String = {
-    "resourceManagerId,guid,resourceManagerTypeId,executorHostId,resourceManagerStatus,insertedRowDate,lastUpdatedDate,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking,resourceManagerType_resourceManagerTypeId,resourceManagerType_guid,resourceManagerType_resourceManagerTypeName,resourceManagerType_resourceManagerTypeClass,resourceManagerType_insertedRowDate,resourceManagerType_lastUpdatedDate";
+    "resourceManagerId,guid,insertedRowDate,lastUpdatedDate,resourceManagerTypeId,executorHostId,resourceManagerStatus,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking,resourceManagerType_resourceManagerTypeId,resourceManagerType_guid,resourceManagerType_insertedRowDate,resourceManagerType_lastUpdatedDate,resourceManagerType_resourceManagerTypeName,resourceManagerType_resourceManagerTypeClass";
   }
   def pkFields : String = {
     "";
@@ -7259,20 +10826,20 @@ case class VResourceManagerDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(resourceManagerId,guid,resourceManagerTypeId,executorHostId,resourceManagerStatus,insertedRowDate,lastUpdatedDate,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking,resourceManagerType_resourceManagerTypeId,resourceManagerType_guid,resourceManagerType_resourceManagerTypeName,resourceManagerType_resourceManagerTypeClass,resourceManagerType_insertedRowDate,resourceManagerType_lastUpdatedDate)
+    Array(resourceManagerId,guid,insertedRowDate,lastUpdatedDate,resourceManagerTypeId,executorHostId,resourceManagerStatus,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking,resourceManagerType_resourceManagerTypeId,resourceManagerType_guid,resourceManagerType_insertedRowDate,resourceManagerType_lastUpdatedDate,resourceManagerType_resourceManagerTypeName,resourceManagerType_resourceManagerTypeClass)
   }
   def toStringArray() : Array[String] = {
-    Array(""+resourceManagerId,""+guid,""+resourceManagerTypeId,""+executorHostId,""+resourceManagerStatus,""+insertedRowDate,""+lastUpdatedDate,""+executorHost_executorHostId,""+executorHost_guid,""+executorHost_insertedRowDate,""+executorHost_lastUpdatedDate,""+executorHost_hostName,""+executorHost_hostIp,""+executorHost_hostDomain,""+executorHost_hostOsType,""+executorHost_hostOsVersion,""+executorHost_isWorking,""+resourceManagerType_resourceManagerTypeId,""+resourceManagerType_guid,""+resourceManagerType_resourceManagerTypeName,""+resourceManagerType_resourceManagerTypeClass,""+resourceManagerType_insertedRowDate,""+resourceManagerType_lastUpdatedDate)
+    Array(""+resourceManagerId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+resourceManagerTypeId,""+executorHostId,""+resourceManagerStatus,""+executorHost_executorHostId,""+executorHost_guid,""+executorHost_insertedRowDate,""+executorHost_lastUpdatedDate,""+executorHost_hostName,""+executorHost_hostIp,""+executorHost_hostDomain,""+executorHost_hostOsType,""+executorHost_hostOsVersion,""+executorHost_isWorking,""+resourceManagerType_resourceManagerTypeId,""+resourceManagerType_guid,""+resourceManagerType_insertedRowDate,""+resourceManagerType_lastUpdatedDate,""+resourceManagerType_resourceManagerTypeName,""+resourceManagerType_resourceManagerTypeClass)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "resourceManagerId" => resourceManagerId
       case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
       case "resourceManagerTypeId" => resourceManagerTypeId
       case "executorHostId" => executorHostId
       case "resourceManagerStatus" => resourceManagerStatus
-      case "insertedRowDate" => insertedRowDate
-      case "lastUpdatedDate" => lastUpdatedDate
       case "executorHost_executorHostId" => executorHost_executorHostId
       case "executorHost_guid" => executorHost_guid
       case "executorHost_insertedRowDate" => executorHost_insertedRowDate
@@ -7285,10 +10852,10 @@ case class VResourceManagerDto (
       case "executorHost_isWorking" => executorHost_isWorking
       case "resourceManagerType_resourceManagerTypeId" => resourceManagerType_resourceManagerTypeId
       case "resourceManagerType_guid" => resourceManagerType_guid
-      case "resourceManagerType_resourceManagerTypeName" => resourceManagerType_resourceManagerTypeName
-      case "resourceManagerType_resourceManagerTypeClass" => resourceManagerType_resourceManagerTypeClass
       case "resourceManagerType_insertedRowDate" => resourceManagerType_insertedRowDate
       case "resourceManagerType_lastUpdatedDate" => resourceManagerType_lastUpdatedDate
+      case "resourceManagerType_resourceManagerTypeName" => resourceManagerType_resourceManagerTypeName
+      case "resourceManagerType_resourceManagerTypeClass" => resourceManagerType_resourceManagerTypeClass
       case _ => null
     }
     ret
@@ -7297,11 +10864,11 @@ case class VResourceManagerDto (
     val ret = name match {
       case "resourceManagerId" => "Long"
       case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
       case "resourceManagerTypeId" => "Long"
       case "executorHostId" => "Long"
       case "resourceManagerStatus" => "String"
-      case "insertedRowDate" => "java.util.Date"
-      case "lastUpdatedDate" => "java.util.Date"
       case "executorHost_executorHostId" => "Long"
       case "executorHost_guid" => "Long"
       case "executorHost_insertedRowDate" => "java.util.Date"
@@ -7314,10 +10881,10 @@ case class VResourceManagerDto (
       case "executorHost_isWorking" => "Int"
       case "resourceManagerType_resourceManagerTypeId" => "Long"
       case "resourceManagerType_guid" => "Long"
-      case "resourceManagerType_resourceManagerTypeName" => "String"
-      case "resourceManagerType_resourceManagerTypeClass" => "String"
       case "resourceManagerType_insertedRowDate" => "java.util.Date"
       case "resourceManagerType_lastUpdatedDate" => "java.util.Date"
+      case "resourceManagerType_resourceManagerTypeName" => "String"
+      case "resourceManagerType_resourceManagerTypeClass" => "String"
       case _ => "Object"
     }
     ret
@@ -7327,11 +10894,11 @@ object VResourceManagerDto {
   val TABLE_NAME = "vResourceManager";
   val FIELD_resourceManagerId = "resourceManagerId";
   val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_resourceManagerTypeId = "resourceManagerTypeId";
   val FIELD_executorHostId = "executorHostId";
   val FIELD_resourceManagerStatus = "resourceManagerStatus";
-  val FIELD_insertedRowDate = "insertedRowDate";
-  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_executorHost_executorHostId = "executorHost_executorHostId";
   val FIELD_executorHost_guid = "executorHost_guid";
   val FIELD_executorHost_insertedRowDate = "executorHost_insertedRowDate";
@@ -7344,10 +10911,422 @@ object VResourceManagerDto {
   val FIELD_executorHost_isWorking = "executorHost_isWorking";
   val FIELD_resourceManagerType_resourceManagerTypeId = "resourceManagerType_resourceManagerTypeId";
   val FIELD_resourceManagerType_guid = "resourceManagerType_guid";
-  val FIELD_resourceManagerType_resourceManagerTypeName = "resourceManagerType_resourceManagerTypeName";
-  val FIELD_resourceManagerType_resourceManagerTypeClass = "resourceManagerType_resourceManagerTypeClass";
   val FIELD_resourceManagerType_insertedRowDate = "resourceManagerType_insertedRowDate";
   val FIELD_resourceManagerType_lastUpdatedDate = "resourceManagerType_lastUpdatedDate";
+  val FIELD_resourceManagerType_resourceManagerTypeName = "resourceManagerType_resourceManagerTypeName";
+  val FIELD_resourceManagerType_resourceManagerTypeClass = "resourceManagerType_resourceManagerTypeClass";
+
+}
+
+
+case class VResourceManagerAllocationDto (
+                                           val resourceManagerAllocationId : Long
+                                           , val guid : Long
+                                           , val insertedRowDate : java.util.Date
+                                           , val lastUpdatedDate : java.util.Date
+                                           , val resourceManagerTypeId : Long
+                                           , val resourceManagerId : Long
+                                           , val executorHostId : Long
+                                           , val executorInstanceId : Long
+                                           , val resourceMeasureId : Long
+                                           , val allocationValue : Double
+                                           , val allocationValueMin : Double
+                                           , val allocationValueMax : Double
+                                           , val executorHost_executorHostId : Long
+                                           , val executorHost_guid : Long
+                                           , val executorHost_insertedRowDate : java.util.Date
+                                           , val executorHost_lastUpdatedDate : java.util.Date
+                                           , val executorHost_hostName : String
+                                           , val executorHost_hostIp : String
+                                           , val executorHost_hostDomain : String
+                                           , val executorHost_hostOsType : String
+                                           , val executorHost_hostOsVersion : String
+                                           , val executorHost_isWorking : Int
+                                           , val executorInstance_executorInstanceId : Long
+                                           , val executorInstance_guid : Long
+                                           , val executorInstance_insertedRowDate : java.util.Date
+                                           , val executorInstance_lastUpdatedDate : java.util.Date
+                                           , val executorInstance_executorTypeId : Long
+                                           , val executorInstance_executorHostId : Long
+                                           , val executorInstance_executorContextId : Long
+                                           , val executorInstance_executorInstanceName : String
+                                           , val executorInstance_isRunning : Int
+                                           , val executorInstance_isFinished : Int
+                                           , val executorInstance_portNumber : Int
+                                           , val executorInstance_endDate : java.util.Date
+                                           , val resourceManager_resourceManagerId : Long
+                                           , val resourceManager_guid : Long
+                                           , val resourceManager_insertedRowDate : java.util.Date
+                                           , val resourceManager_lastUpdatedDate : java.util.Date
+                                           , val resourceManager_resourceManagerTypeId : Long
+                                           , val resourceManager_executorHostId : Long
+                                           , val resourceManager_resourceManagerStatus : String
+                                           , val resourceManagerType_resourceManagerTypeId : Long
+                                           , val resourceManagerType_guid : Long
+                                           , val resourceManagerType_insertedRowDate : java.util.Date
+                                           , val resourceManagerType_lastUpdatedDate : java.util.Date
+                                           , val resourceManagerType_resourceManagerTypeName : String
+                                           , val resourceManagerType_resourceManagerTypeClass : String
+                                           , val resourceMeasure_resourceMeasureId : Long
+                                           , val resourceMeasure_guid : Long
+                                           , val resourceMeasure_insertedRowDate : java.util.Date
+                                           , val resourceMeasure_lastUpdatedDate : java.util.Date
+                                           , val resourceMeasure_resourceMeasureName : String
+                                         ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vResourceManagerAllocation";
+  }
+  def fields : String = {
+    "resourceManagerAllocationId,guid,insertedRowDate,lastUpdatedDate,resourceManagerTypeId,resourceManagerId,executorHostId,executorInstanceId,resourceMeasureId,allocationValue,allocationValueMin,allocationValueMax,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking,executorInstance_executorInstanceId,executorInstance_guid,executorInstance_insertedRowDate,executorInstance_lastUpdatedDate,executorInstance_executorTypeId,executorInstance_executorHostId,executorInstance_executorContextId,executorInstance_executorInstanceName,executorInstance_isRunning,executorInstance_isFinished,executorInstance_portNumber,executorInstance_endDate,resourceManager_resourceManagerId,resourceManager_guid,resourceManager_insertedRowDate,resourceManager_lastUpdatedDate,resourceManager_resourceManagerTypeId,resourceManager_executorHostId,resourceManager_resourceManagerStatus,resourceManagerType_resourceManagerTypeId,resourceManagerType_guid,resourceManagerType_insertedRowDate,resourceManagerType_lastUpdatedDate,resourceManagerType_resourceManagerTypeName,resourceManagerType_resourceManagerTypeClass,resourceMeasure_resourceMeasureId,resourceMeasure_guid,resourceMeasure_insertedRowDate,resourceMeasure_lastUpdatedDate,resourceMeasure_resourceMeasureName";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    resourceManagerAllocationId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(resourceManagerAllocationId,guid,insertedRowDate,lastUpdatedDate,resourceManagerTypeId,resourceManagerId,executorHostId,executorInstanceId,resourceMeasureId,allocationValue,allocationValueMin,allocationValueMax,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking,executorInstance_executorInstanceId,executorInstance_guid,executorInstance_insertedRowDate,executorInstance_lastUpdatedDate,executorInstance_executorTypeId,executorInstance_executorHostId,executorInstance_executorContextId,executorInstance_executorInstanceName,executorInstance_isRunning,executorInstance_isFinished,executorInstance_portNumber,executorInstance_endDate,resourceManager_resourceManagerId,resourceManager_guid,resourceManager_insertedRowDate,resourceManager_lastUpdatedDate,resourceManager_resourceManagerTypeId,resourceManager_executorHostId,resourceManager_resourceManagerStatus,resourceManagerType_resourceManagerTypeId,resourceManagerType_guid,resourceManagerType_insertedRowDate,resourceManagerType_lastUpdatedDate,resourceManagerType_resourceManagerTypeName,resourceManagerType_resourceManagerTypeClass,resourceMeasure_resourceMeasureId,resourceMeasure_guid,resourceMeasure_insertedRowDate,resourceMeasure_lastUpdatedDate,resourceMeasure_resourceMeasureName)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+resourceManagerAllocationId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+resourceManagerTypeId,""+resourceManagerId,""+executorHostId,""+executorInstanceId,""+resourceMeasureId,""+allocationValue,""+allocationValueMin,""+allocationValueMax,""+executorHost_executorHostId,""+executorHost_guid,""+executorHost_insertedRowDate,""+executorHost_lastUpdatedDate,""+executorHost_hostName,""+executorHost_hostIp,""+executorHost_hostDomain,""+executorHost_hostOsType,""+executorHost_hostOsVersion,""+executorHost_isWorking,""+executorInstance_executorInstanceId,""+executorInstance_guid,""+executorInstance_insertedRowDate,""+executorInstance_lastUpdatedDate,""+executorInstance_executorTypeId,""+executorInstance_executorHostId,""+executorInstance_executorContextId,""+executorInstance_executorInstanceName,""+executorInstance_isRunning,""+executorInstance_isFinished,""+executorInstance_portNumber,""+executorInstance_endDate,""+resourceManager_resourceManagerId,""+resourceManager_guid,""+resourceManager_insertedRowDate,""+resourceManager_lastUpdatedDate,""+resourceManager_resourceManagerTypeId,""+resourceManager_executorHostId,""+resourceManager_resourceManagerStatus,""+resourceManagerType_resourceManagerTypeId,""+resourceManagerType_guid,""+resourceManagerType_insertedRowDate,""+resourceManagerType_lastUpdatedDate,""+resourceManagerType_resourceManagerTypeName,""+resourceManagerType_resourceManagerTypeClass,""+resourceMeasure_resourceMeasureId,""+resourceMeasure_guid,""+resourceMeasure_insertedRowDate,""+resourceMeasure_lastUpdatedDate,""+resourceMeasure_resourceMeasureName)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "resourceManagerAllocationId" => resourceManagerAllocationId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "resourceManagerTypeId" => resourceManagerTypeId
+      case "resourceManagerId" => resourceManagerId
+      case "executorHostId" => executorHostId
+      case "executorInstanceId" => executorInstanceId
+      case "resourceMeasureId" => resourceMeasureId
+      case "allocationValue" => allocationValue
+      case "allocationValueMin" => allocationValueMin
+      case "allocationValueMax" => allocationValueMax
+      case "executorHost_executorHostId" => executorHost_executorHostId
+      case "executorHost_guid" => executorHost_guid
+      case "executorHost_insertedRowDate" => executorHost_insertedRowDate
+      case "executorHost_lastUpdatedDate" => executorHost_lastUpdatedDate
+      case "executorHost_hostName" => executorHost_hostName
+      case "executorHost_hostIp" => executorHost_hostIp
+      case "executorHost_hostDomain" => executorHost_hostDomain
+      case "executorHost_hostOsType" => executorHost_hostOsType
+      case "executorHost_hostOsVersion" => executorHost_hostOsVersion
+      case "executorHost_isWorking" => executorHost_isWorking
+      case "executorInstance_executorInstanceId" => executorInstance_executorInstanceId
+      case "executorInstance_guid" => executorInstance_guid
+      case "executorInstance_insertedRowDate" => executorInstance_insertedRowDate
+      case "executorInstance_lastUpdatedDate" => executorInstance_lastUpdatedDate
+      case "executorInstance_executorTypeId" => executorInstance_executorTypeId
+      case "executorInstance_executorHostId" => executorInstance_executorHostId
+      case "executorInstance_executorContextId" => executorInstance_executorContextId
+      case "executorInstance_executorInstanceName" => executorInstance_executorInstanceName
+      case "executorInstance_isRunning" => executorInstance_isRunning
+      case "executorInstance_isFinished" => executorInstance_isFinished
+      case "executorInstance_portNumber" => executorInstance_portNumber
+      case "executorInstance_endDate" => executorInstance_endDate
+      case "resourceManager_resourceManagerId" => resourceManager_resourceManagerId
+      case "resourceManager_guid" => resourceManager_guid
+      case "resourceManager_insertedRowDate" => resourceManager_insertedRowDate
+      case "resourceManager_lastUpdatedDate" => resourceManager_lastUpdatedDate
+      case "resourceManager_resourceManagerTypeId" => resourceManager_resourceManagerTypeId
+      case "resourceManager_executorHostId" => resourceManager_executorHostId
+      case "resourceManager_resourceManagerStatus" => resourceManager_resourceManagerStatus
+      case "resourceManagerType_resourceManagerTypeId" => resourceManagerType_resourceManagerTypeId
+      case "resourceManagerType_guid" => resourceManagerType_guid
+      case "resourceManagerType_insertedRowDate" => resourceManagerType_insertedRowDate
+      case "resourceManagerType_lastUpdatedDate" => resourceManagerType_lastUpdatedDate
+      case "resourceManagerType_resourceManagerTypeName" => resourceManagerType_resourceManagerTypeName
+      case "resourceManagerType_resourceManagerTypeClass" => resourceManagerType_resourceManagerTypeClass
+      case "resourceMeasure_resourceMeasureId" => resourceMeasure_resourceMeasureId
+      case "resourceMeasure_guid" => resourceMeasure_guid
+      case "resourceMeasure_insertedRowDate" => resourceMeasure_insertedRowDate
+      case "resourceMeasure_lastUpdatedDate" => resourceMeasure_lastUpdatedDate
+      case "resourceMeasure_resourceMeasureName" => resourceMeasure_resourceMeasureName
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "resourceManagerAllocationId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "resourceManagerTypeId" => "Long"
+      case "resourceManagerId" => "Long"
+      case "executorHostId" => "Long"
+      case "executorInstanceId" => "Long"
+      case "resourceMeasureId" => "Long"
+      case "allocationValue" => "Double"
+      case "allocationValueMin" => "Double"
+      case "allocationValueMax" => "Double"
+      case "executorHost_executorHostId" => "Long"
+      case "executorHost_guid" => "Long"
+      case "executorHost_insertedRowDate" => "java.util.Date"
+      case "executorHost_lastUpdatedDate" => "java.util.Date"
+      case "executorHost_hostName" => "String"
+      case "executorHost_hostIp" => "String"
+      case "executorHost_hostDomain" => "String"
+      case "executorHost_hostOsType" => "String"
+      case "executorHost_hostOsVersion" => "String"
+      case "executorHost_isWorking" => "Int"
+      case "executorInstance_executorInstanceId" => "Long"
+      case "executorInstance_guid" => "Long"
+      case "executorInstance_insertedRowDate" => "java.util.Date"
+      case "executorInstance_lastUpdatedDate" => "java.util.Date"
+      case "executorInstance_executorTypeId" => "Long"
+      case "executorInstance_executorHostId" => "Long"
+      case "executorInstance_executorContextId" => "Long"
+      case "executorInstance_executorInstanceName" => "String"
+      case "executorInstance_isRunning" => "Int"
+      case "executorInstance_isFinished" => "Int"
+      case "executorInstance_portNumber" => "Int"
+      case "executorInstance_endDate" => "java.util.Date"
+      case "resourceManager_resourceManagerId" => "Long"
+      case "resourceManager_guid" => "Long"
+      case "resourceManager_insertedRowDate" => "java.util.Date"
+      case "resourceManager_lastUpdatedDate" => "java.util.Date"
+      case "resourceManager_resourceManagerTypeId" => "Long"
+      case "resourceManager_executorHostId" => "Long"
+      case "resourceManager_resourceManagerStatus" => "String"
+      case "resourceManagerType_resourceManagerTypeId" => "Long"
+      case "resourceManagerType_guid" => "Long"
+      case "resourceManagerType_insertedRowDate" => "java.util.Date"
+      case "resourceManagerType_lastUpdatedDate" => "java.util.Date"
+      case "resourceManagerType_resourceManagerTypeName" => "String"
+      case "resourceManagerType_resourceManagerTypeClass" => "String"
+      case "resourceMeasure_resourceMeasureId" => "Long"
+      case "resourceMeasure_guid" => "Long"
+      case "resourceMeasure_insertedRowDate" => "java.util.Date"
+      case "resourceMeasure_lastUpdatedDate" => "java.util.Date"
+      case "resourceMeasure_resourceMeasureName" => "String"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VResourceManagerAllocationDto {
+  val TABLE_NAME = "vResourceManagerAllocation";
+  val FIELD_resourceManagerAllocationId = "resourceManagerAllocationId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_resourceManagerTypeId = "resourceManagerTypeId";
+  val FIELD_resourceManagerId = "resourceManagerId";
+  val FIELD_executorHostId = "executorHostId";
+  val FIELD_executorInstanceId = "executorInstanceId";
+  val FIELD_resourceMeasureId = "resourceMeasureId";
+  val FIELD_allocationValue = "allocationValue";
+  val FIELD_allocationValueMin = "allocationValueMin";
+  val FIELD_allocationValueMax = "allocationValueMax";
+  val FIELD_executorHost_executorHostId = "executorHost_executorHostId";
+  val FIELD_executorHost_guid = "executorHost_guid";
+  val FIELD_executorHost_insertedRowDate = "executorHost_insertedRowDate";
+  val FIELD_executorHost_lastUpdatedDate = "executorHost_lastUpdatedDate";
+  val FIELD_executorHost_hostName = "executorHost_hostName";
+  val FIELD_executorHost_hostIp = "executorHost_hostIp";
+  val FIELD_executorHost_hostDomain = "executorHost_hostDomain";
+  val FIELD_executorHost_hostOsType = "executorHost_hostOsType";
+  val FIELD_executorHost_hostOsVersion = "executorHost_hostOsVersion";
+  val FIELD_executorHost_isWorking = "executorHost_isWorking";
+  val FIELD_executorInstance_executorInstanceId = "executorInstance_executorInstanceId";
+  val FIELD_executorInstance_guid = "executorInstance_guid";
+  val FIELD_executorInstance_insertedRowDate = "executorInstance_insertedRowDate";
+  val FIELD_executorInstance_lastUpdatedDate = "executorInstance_lastUpdatedDate";
+  val FIELD_executorInstance_executorTypeId = "executorInstance_executorTypeId";
+  val FIELD_executorInstance_executorHostId = "executorInstance_executorHostId";
+  val FIELD_executorInstance_executorContextId = "executorInstance_executorContextId";
+  val FIELD_executorInstance_executorInstanceName = "executorInstance_executorInstanceName";
+  val FIELD_executorInstance_isRunning = "executorInstance_isRunning";
+  val FIELD_executorInstance_isFinished = "executorInstance_isFinished";
+  val FIELD_executorInstance_portNumber = "executorInstance_portNumber";
+  val FIELD_executorInstance_endDate = "executorInstance_endDate";
+  val FIELD_resourceManager_resourceManagerId = "resourceManager_resourceManagerId";
+  val FIELD_resourceManager_guid = "resourceManager_guid";
+  val FIELD_resourceManager_insertedRowDate = "resourceManager_insertedRowDate";
+  val FIELD_resourceManager_lastUpdatedDate = "resourceManager_lastUpdatedDate";
+  val FIELD_resourceManager_resourceManagerTypeId = "resourceManager_resourceManagerTypeId";
+  val FIELD_resourceManager_executorHostId = "resourceManager_executorHostId";
+  val FIELD_resourceManager_resourceManagerStatus = "resourceManager_resourceManagerStatus";
+  val FIELD_resourceManagerType_resourceManagerTypeId = "resourceManagerType_resourceManagerTypeId";
+  val FIELD_resourceManagerType_guid = "resourceManagerType_guid";
+  val FIELD_resourceManagerType_insertedRowDate = "resourceManagerType_insertedRowDate";
+  val FIELD_resourceManagerType_lastUpdatedDate = "resourceManagerType_lastUpdatedDate";
+  val FIELD_resourceManagerType_resourceManagerTypeName = "resourceManagerType_resourceManagerTypeName";
+  val FIELD_resourceManagerType_resourceManagerTypeClass = "resourceManagerType_resourceManagerTypeClass";
+  val FIELD_resourceMeasure_resourceMeasureId = "resourceMeasure_resourceMeasureId";
+  val FIELD_resourceMeasure_guid = "resourceMeasure_guid";
+  val FIELD_resourceMeasure_insertedRowDate = "resourceMeasure_insertedRowDate";
+  val FIELD_resourceMeasure_lastUpdatedDate = "resourceMeasure_lastUpdatedDate";
+  val FIELD_resourceMeasure_resourceMeasureName = "resourceMeasure_resourceMeasureName";
+
+}
+
+
+case class VResourceManagerCheckDto (
+                                      val resourceManagerCheckId : Long
+                                      , val guid : Long
+                                      , val insertedRowDate : java.util.Date
+                                      , val lastUpdatedDate : java.util.Date
+                                      , val resourceManagerId : Long
+                                      , val executorHostId : Long
+                                      , val resourceManagerStatus : String
+                                      , val executorHost_executorHostId : Long
+                                      , val executorHost_guid : Long
+                                      , val executorHost_insertedRowDate : java.util.Date
+                                      , val executorHost_lastUpdatedDate : java.util.Date
+                                      , val executorHost_hostName : String
+                                      , val executorHost_hostIp : String
+                                      , val executorHost_hostDomain : String
+                                      , val executorHost_hostOsType : String
+                                      , val executorHost_hostOsVersion : String
+                                      , val executorHost_isWorking : Int
+                                      , val resourceManager_resourceManagerId : Long
+                                      , val resourceManager_guid : Long
+                                      , val resourceManager_insertedRowDate : java.util.Date
+                                      , val resourceManager_lastUpdatedDate : java.util.Date
+                                      , val resourceManager_resourceManagerTypeId : Long
+                                      , val resourceManager_executorHostId : Long
+                                      , val resourceManager_resourceManagerStatus : String
+                                    ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vResourceManagerCheck";
+  }
+  def fields : String = {
+    "resourceManagerCheckId,guid,insertedRowDate,lastUpdatedDate,resourceManagerId,executorHostId,resourceManagerStatus,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking,resourceManager_resourceManagerId,resourceManager_guid,resourceManager_insertedRowDate,resourceManager_lastUpdatedDate,resourceManager_resourceManagerTypeId,resourceManager_executorHostId,resourceManager_resourceManagerStatus";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    resourceManagerCheckId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(resourceManagerCheckId,guid,insertedRowDate,lastUpdatedDate,resourceManagerId,executorHostId,resourceManagerStatus,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking,resourceManager_resourceManagerId,resourceManager_guid,resourceManager_insertedRowDate,resourceManager_lastUpdatedDate,resourceManager_resourceManagerTypeId,resourceManager_executorHostId,resourceManager_resourceManagerStatus)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+resourceManagerCheckId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+resourceManagerId,""+executorHostId,""+resourceManagerStatus,""+executorHost_executorHostId,""+executorHost_guid,""+executorHost_insertedRowDate,""+executorHost_lastUpdatedDate,""+executorHost_hostName,""+executorHost_hostIp,""+executorHost_hostDomain,""+executorHost_hostOsType,""+executorHost_hostOsVersion,""+executorHost_isWorking,""+resourceManager_resourceManagerId,""+resourceManager_guid,""+resourceManager_insertedRowDate,""+resourceManager_lastUpdatedDate,""+resourceManager_resourceManagerTypeId,""+resourceManager_executorHostId,""+resourceManager_resourceManagerStatus)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "resourceManagerCheckId" => resourceManagerCheckId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "resourceManagerId" => resourceManagerId
+      case "executorHostId" => executorHostId
+      case "resourceManagerStatus" => resourceManagerStatus
+      case "executorHost_executorHostId" => executorHost_executorHostId
+      case "executorHost_guid" => executorHost_guid
+      case "executorHost_insertedRowDate" => executorHost_insertedRowDate
+      case "executorHost_lastUpdatedDate" => executorHost_lastUpdatedDate
+      case "executorHost_hostName" => executorHost_hostName
+      case "executorHost_hostIp" => executorHost_hostIp
+      case "executorHost_hostDomain" => executorHost_hostDomain
+      case "executorHost_hostOsType" => executorHost_hostOsType
+      case "executorHost_hostOsVersion" => executorHost_hostOsVersion
+      case "executorHost_isWorking" => executorHost_isWorking
+      case "resourceManager_resourceManagerId" => resourceManager_resourceManagerId
+      case "resourceManager_guid" => resourceManager_guid
+      case "resourceManager_insertedRowDate" => resourceManager_insertedRowDate
+      case "resourceManager_lastUpdatedDate" => resourceManager_lastUpdatedDate
+      case "resourceManager_resourceManagerTypeId" => resourceManager_resourceManagerTypeId
+      case "resourceManager_executorHostId" => resourceManager_executorHostId
+      case "resourceManager_resourceManagerStatus" => resourceManager_resourceManagerStatus
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "resourceManagerCheckId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "resourceManagerId" => "Long"
+      case "executorHostId" => "Long"
+      case "resourceManagerStatus" => "String"
+      case "executorHost_executorHostId" => "Long"
+      case "executorHost_guid" => "Long"
+      case "executorHost_insertedRowDate" => "java.util.Date"
+      case "executorHost_lastUpdatedDate" => "java.util.Date"
+      case "executorHost_hostName" => "String"
+      case "executorHost_hostIp" => "String"
+      case "executorHost_hostDomain" => "String"
+      case "executorHost_hostOsType" => "String"
+      case "executorHost_hostOsVersion" => "String"
+      case "executorHost_isWorking" => "Int"
+      case "resourceManager_resourceManagerId" => "Long"
+      case "resourceManager_guid" => "Long"
+      case "resourceManager_insertedRowDate" => "java.util.Date"
+      case "resourceManager_lastUpdatedDate" => "java.util.Date"
+      case "resourceManager_resourceManagerTypeId" => "Long"
+      case "resourceManager_executorHostId" => "Long"
+      case "resourceManager_resourceManagerStatus" => "String"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VResourceManagerCheckDto {
+  val TABLE_NAME = "vResourceManagerCheck";
+  val FIELD_resourceManagerCheckId = "resourceManagerCheckId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_resourceManagerId = "resourceManagerId";
+  val FIELD_executorHostId = "executorHostId";
+  val FIELD_resourceManagerStatus = "resourceManagerStatus";
+  val FIELD_executorHost_executorHostId = "executorHost_executorHostId";
+  val FIELD_executorHost_guid = "executorHost_guid";
+  val FIELD_executorHost_insertedRowDate = "executorHost_insertedRowDate";
+  val FIELD_executorHost_lastUpdatedDate = "executorHost_lastUpdatedDate";
+  val FIELD_executorHost_hostName = "executorHost_hostName";
+  val FIELD_executorHost_hostIp = "executorHost_hostIp";
+  val FIELD_executorHost_hostDomain = "executorHost_hostDomain";
+  val FIELD_executorHost_hostOsType = "executorHost_hostOsType";
+  val FIELD_executorHost_hostOsVersion = "executorHost_hostOsVersion";
+  val FIELD_executorHost_isWorking = "executorHost_isWorking";
+  val FIELD_resourceManager_resourceManagerId = "resourceManager_resourceManagerId";
+  val FIELD_resourceManager_guid = "resourceManager_guid";
+  val FIELD_resourceManager_insertedRowDate = "resourceManager_insertedRowDate";
+  val FIELD_resourceManager_lastUpdatedDate = "resourceManager_lastUpdatedDate";
+  val FIELD_resourceManager_resourceManagerTypeId = "resourceManager_resourceManagerTypeId";
+  val FIELD_resourceManager_executorHostId = "resourceManager_executorHostId";
+  val FIELD_resourceManager_resourceManagerStatus = "resourceManager_resourceManagerStatus";
 
 }
 
@@ -7355,30 +11334,30 @@ object VResourceManagerDto {
 case class VResourceManagerMeasureDto (
                                         val resourceManagerMeasureId : Long
                                         , val guid : Long
+                                        , val insertedRowDate : java.util.Date
+                                        , val lastUpdatedDate : java.util.Date
                                         , val resourceManagerId : Long
                                         , val resourceMeasureId : Long
                                         , val measureString : String
                                         , val measureValue : Double
-                                        , val insertedRowDate : java.util.Date
-                                        , val lastUpdatedDate : java.util.Date
                                         , val resourceManager_resourceManagerId : Long
                                         , val resourceManager_guid : Long
+                                        , val resourceManager_insertedRowDate : java.util.Date
+                                        , val resourceManager_lastUpdatedDate : java.util.Date
                                         , val resourceManager_resourceManagerTypeId : Long
                                         , val resourceManager_executorHostId : Long
                                         , val resourceManager_resourceManagerStatus : String
-                                        , val resourceManager_insertedRowDate : java.util.Date
-                                        , val resourceManager_lastUpdatedDate : java.util.Date
                                         , val resourceMeasure_resourceMeasureId : Long
                                         , val resourceMeasure_guid : Long
-                                        , val resourceMeasure_resourceMeasureName : String
                                         , val resourceMeasure_insertedRowDate : java.util.Date
                                         , val resourceMeasure_lastUpdatedDate : java.util.Date
+                                        , val resourceMeasure_resourceMeasureName : String
                                       ) extends BaseReadOnlyDto {
   def tableName : String = {
     "vResourceManagerMeasure";
   }
   def fields : String = {
-    "resourceManagerMeasureId,guid,resourceManagerId,resourceMeasureId,measureString,measureValue,insertedRowDate,lastUpdatedDate,resourceManager_resourceManagerId,resourceManager_guid,resourceManager_resourceManagerTypeId,resourceManager_executorHostId,resourceManager_resourceManagerStatus,resourceManager_insertedRowDate,resourceManager_lastUpdatedDate,resourceMeasure_resourceMeasureId,resourceMeasure_guid,resourceMeasure_resourceMeasureName,resourceMeasure_insertedRowDate,resourceMeasure_lastUpdatedDate";
+    "resourceManagerMeasureId,guid,insertedRowDate,lastUpdatedDate,resourceManagerId,resourceMeasureId,measureString,measureValue,resourceManager_resourceManagerId,resourceManager_guid,resourceManager_insertedRowDate,resourceManager_lastUpdatedDate,resourceManager_resourceManagerTypeId,resourceManager_executorHostId,resourceManager_resourceManagerStatus,resourceMeasure_resourceMeasureId,resourceMeasure_guid,resourceMeasure_insertedRowDate,resourceMeasure_lastUpdatedDate,resourceMeasure_resourceMeasureName";
   }
   def pkFields : String = {
     "";
@@ -7402,33 +11381,33 @@ case class VResourceManagerMeasureDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(resourceManagerMeasureId,guid,resourceManagerId,resourceMeasureId,measureString,measureValue,insertedRowDate,lastUpdatedDate,resourceManager_resourceManagerId,resourceManager_guid,resourceManager_resourceManagerTypeId,resourceManager_executorHostId,resourceManager_resourceManagerStatus,resourceManager_insertedRowDate,resourceManager_lastUpdatedDate,resourceMeasure_resourceMeasureId,resourceMeasure_guid,resourceMeasure_resourceMeasureName,resourceMeasure_insertedRowDate,resourceMeasure_lastUpdatedDate)
+    Array(resourceManagerMeasureId,guid,insertedRowDate,lastUpdatedDate,resourceManagerId,resourceMeasureId,measureString,measureValue,resourceManager_resourceManagerId,resourceManager_guid,resourceManager_insertedRowDate,resourceManager_lastUpdatedDate,resourceManager_resourceManagerTypeId,resourceManager_executorHostId,resourceManager_resourceManagerStatus,resourceMeasure_resourceMeasureId,resourceMeasure_guid,resourceMeasure_insertedRowDate,resourceMeasure_lastUpdatedDate,resourceMeasure_resourceMeasureName)
   }
   def toStringArray() : Array[String] = {
-    Array(""+resourceManagerMeasureId,""+guid,""+resourceManagerId,""+resourceMeasureId,""+measureString,""+measureValue,""+insertedRowDate,""+lastUpdatedDate,""+resourceManager_resourceManagerId,""+resourceManager_guid,""+resourceManager_resourceManagerTypeId,""+resourceManager_executorHostId,""+resourceManager_resourceManagerStatus,""+resourceManager_insertedRowDate,""+resourceManager_lastUpdatedDate,""+resourceMeasure_resourceMeasureId,""+resourceMeasure_guid,""+resourceMeasure_resourceMeasureName,""+resourceMeasure_insertedRowDate,""+resourceMeasure_lastUpdatedDate)
+    Array(""+resourceManagerMeasureId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+resourceManagerId,""+resourceMeasureId,""+measureString,""+measureValue,""+resourceManager_resourceManagerId,""+resourceManager_guid,""+resourceManager_insertedRowDate,""+resourceManager_lastUpdatedDate,""+resourceManager_resourceManagerTypeId,""+resourceManager_executorHostId,""+resourceManager_resourceManagerStatus,""+resourceMeasure_resourceMeasureId,""+resourceMeasure_guid,""+resourceMeasure_insertedRowDate,""+resourceMeasure_lastUpdatedDate,""+resourceMeasure_resourceMeasureName)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "resourceManagerMeasureId" => resourceManagerMeasureId
       case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
       case "resourceManagerId" => resourceManagerId
       case "resourceMeasureId" => resourceMeasureId
       case "measureString" => measureString
       case "measureValue" => measureValue
-      case "insertedRowDate" => insertedRowDate
-      case "lastUpdatedDate" => lastUpdatedDate
       case "resourceManager_resourceManagerId" => resourceManager_resourceManagerId
       case "resourceManager_guid" => resourceManager_guid
+      case "resourceManager_insertedRowDate" => resourceManager_insertedRowDate
+      case "resourceManager_lastUpdatedDate" => resourceManager_lastUpdatedDate
       case "resourceManager_resourceManagerTypeId" => resourceManager_resourceManagerTypeId
       case "resourceManager_executorHostId" => resourceManager_executorHostId
       case "resourceManager_resourceManagerStatus" => resourceManager_resourceManagerStatus
-      case "resourceManager_insertedRowDate" => resourceManager_insertedRowDate
-      case "resourceManager_lastUpdatedDate" => resourceManager_lastUpdatedDate
       case "resourceMeasure_resourceMeasureId" => resourceMeasure_resourceMeasureId
       case "resourceMeasure_guid" => resourceMeasure_guid
-      case "resourceMeasure_resourceMeasureName" => resourceMeasure_resourceMeasureName
       case "resourceMeasure_insertedRowDate" => resourceMeasure_insertedRowDate
       case "resourceMeasure_lastUpdatedDate" => resourceMeasure_lastUpdatedDate
+      case "resourceMeasure_resourceMeasureName" => resourceMeasure_resourceMeasureName
       case _ => null
     }
     ret
@@ -7437,24 +11416,24 @@ case class VResourceManagerMeasureDto (
     val ret = name match {
       case "resourceManagerMeasureId" => "Long"
       case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
       case "resourceManagerId" => "Long"
       case "resourceMeasureId" => "Long"
       case "measureString" => "String"
       case "measureValue" => "Double"
-      case "insertedRowDate" => "java.util.Date"
-      case "lastUpdatedDate" => "java.util.Date"
       case "resourceManager_resourceManagerId" => "Long"
       case "resourceManager_guid" => "Long"
+      case "resourceManager_insertedRowDate" => "java.util.Date"
+      case "resourceManager_lastUpdatedDate" => "java.util.Date"
       case "resourceManager_resourceManagerTypeId" => "Long"
       case "resourceManager_executorHostId" => "Long"
       case "resourceManager_resourceManagerStatus" => "String"
-      case "resourceManager_insertedRowDate" => "java.util.Date"
-      case "resourceManager_lastUpdatedDate" => "java.util.Date"
       case "resourceMeasure_resourceMeasureId" => "Long"
       case "resourceMeasure_guid" => "Long"
-      case "resourceMeasure_resourceMeasureName" => "String"
       case "resourceMeasure_insertedRowDate" => "java.util.Date"
       case "resourceMeasure_lastUpdatedDate" => "java.util.Date"
+      case "resourceMeasure_resourceMeasureName" => "String"
       case _ => "Object"
     }
     ret
@@ -7464,54 +11443,347 @@ object VResourceManagerMeasureDto {
   val TABLE_NAME = "vResourceManagerMeasure";
   val FIELD_resourceManagerMeasureId = "resourceManagerMeasureId";
   val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_resourceManagerId = "resourceManagerId";
   val FIELD_resourceMeasureId = "resourceMeasureId";
   val FIELD_measureString = "measureString";
   val FIELD_measureValue = "measureValue";
-  val FIELD_insertedRowDate = "insertedRowDate";
-  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_resourceManager_resourceManagerId = "resourceManager_resourceManagerId";
   val FIELD_resourceManager_guid = "resourceManager_guid";
+  val FIELD_resourceManager_insertedRowDate = "resourceManager_insertedRowDate";
+  val FIELD_resourceManager_lastUpdatedDate = "resourceManager_lastUpdatedDate";
   val FIELD_resourceManager_resourceManagerTypeId = "resourceManager_resourceManagerTypeId";
   val FIELD_resourceManager_executorHostId = "resourceManager_executorHostId";
   val FIELD_resourceManager_resourceManagerStatus = "resourceManager_resourceManagerStatus";
-  val FIELD_resourceManager_insertedRowDate = "resourceManager_insertedRowDate";
-  val FIELD_resourceManager_lastUpdatedDate = "resourceManager_lastUpdatedDate";
   val FIELD_resourceMeasure_resourceMeasureId = "resourceMeasure_resourceMeasureId";
   val FIELD_resourceMeasure_guid = "resourceMeasure_guid";
-  val FIELD_resourceMeasure_resourceMeasureName = "resourceMeasure_resourceMeasureName";
   val FIELD_resourceMeasure_insertedRowDate = "resourceMeasure_insertedRowDate";
   val FIELD_resourceMeasure_lastUpdatedDate = "resourceMeasure_lastUpdatedDate";
+  val FIELD_resourceMeasure_resourceMeasureName = "resourceMeasure_resourceMeasureName";
+
+}
+
+
+case class VResourceManagerSummaryDto (
+                                        val resourceManagerId : Long
+                                        , val guid : Long
+                                        , val insertedRowDate : java.util.Date
+                                        , val lastUpdatedDate : java.util.Date
+                                        , val resourceManagerTypeId : Long
+                                        , val executorHostId : Long
+                                        , val resourceManagerStatus : String
+                                        , val resourceManagerMeasure_count : Int
+                                        , val resourceManagerCheck_count : Int
+                                        , val resourceManagerAllocation_count : Int
+                                      ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vResourceManagerSummary";
+  }
+  def fields : String = {
+    "resourceManagerId,guid,insertedRowDate,lastUpdatedDate,resourceManagerTypeId,executorHostId,resourceManagerStatus,resourceManagerMeasure_count,resourceManagerCheck_count,resourceManagerAllocation_count";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    resourceManagerSummaryId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(resourceManagerId,guid,insertedRowDate,lastUpdatedDate,resourceManagerTypeId,executorHostId,resourceManagerStatus,resourceManagerMeasure_count,resourceManagerCheck_count,resourceManagerAllocation_count)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+resourceManagerId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+resourceManagerTypeId,""+executorHostId,""+resourceManagerStatus,""+resourceManagerMeasure_count,""+resourceManagerCheck_count,""+resourceManagerAllocation_count)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "resourceManagerId" => resourceManagerId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "resourceManagerTypeId" => resourceManagerTypeId
+      case "executorHostId" => executorHostId
+      case "resourceManagerStatus" => resourceManagerStatus
+      case "resourceManagerMeasure_count" => resourceManagerMeasure_count
+      case "resourceManagerCheck_count" => resourceManagerCheck_count
+      case "resourceManagerAllocation_count" => resourceManagerAllocation_count
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "resourceManagerId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "resourceManagerTypeId" => "Long"
+      case "executorHostId" => "Long"
+      case "resourceManagerStatus" => "String"
+      case "resourceManagerMeasure_count" => "Int"
+      case "resourceManagerCheck_count" => "Int"
+      case "resourceManagerAllocation_count" => "Int"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VResourceManagerSummaryDto {
+  val TABLE_NAME = "vResourceManagerSummary";
+  val FIELD_resourceManagerId = "resourceManagerId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_resourceManagerTypeId = "resourceManagerTypeId";
+  val FIELD_executorHostId = "executorHostId";
+  val FIELD_resourceManagerStatus = "resourceManagerStatus";
+  val FIELD_resourceManagerMeasure_count = "resourceManagerMeasure_count";
+  val FIELD_resourceManagerCheck_count = "resourceManagerCheck_count";
+  val FIELD_resourceManagerAllocation_count = "resourceManagerAllocation_count";
+
+}
+
+
+case class VResourceManagerTypeSummaryDto (
+                                            val resourceManagerTypeId : Long
+                                            , val guid : Long
+                                            , val insertedRowDate : java.util.Date
+                                            , val lastUpdatedDate : java.util.Date
+                                            , val resourceManagerTypeName : String
+                                            , val resourceManagerTypeClass : String
+                                            , val resourceManager_count : Int
+                                            , val resourceManagerAllocation_count : Int
+                                          ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vResourceManagerTypeSummary";
+  }
+  def fields : String = {
+    "resourceManagerTypeId,guid,insertedRowDate,lastUpdatedDate,resourceManagerTypeName,resourceManagerTypeClass,resourceManager_count,resourceManagerAllocation_count";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    resourceManagerTypeSummaryId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(resourceManagerTypeId,guid,insertedRowDate,lastUpdatedDate,resourceManagerTypeName,resourceManagerTypeClass,resourceManager_count,resourceManagerAllocation_count)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+resourceManagerTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+resourceManagerTypeName,""+resourceManagerTypeClass,""+resourceManager_count,""+resourceManagerAllocation_count)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "resourceManagerTypeId" => resourceManagerTypeId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "resourceManagerTypeName" => resourceManagerTypeName
+      case "resourceManagerTypeClass" => resourceManagerTypeClass
+      case "resourceManager_count" => resourceManager_count
+      case "resourceManagerAllocation_count" => resourceManagerAllocation_count
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "resourceManagerTypeId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "resourceManagerTypeName" => "String"
+      case "resourceManagerTypeClass" => "String"
+      case "resourceManager_count" => "Int"
+      case "resourceManagerAllocation_count" => "Int"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VResourceManagerTypeSummaryDto {
+  val TABLE_NAME = "vResourceManagerTypeSummary";
+  val FIELD_resourceManagerTypeId = "resourceManagerTypeId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_resourceManagerTypeName = "resourceManagerTypeName";
+  val FIELD_resourceManagerTypeClass = "resourceManagerTypeClass";
+  val FIELD_resourceManager_count = "resourceManager_count";
+  val FIELD_resourceManagerAllocation_count = "resourceManagerAllocation_count";
+
+}
+
+
+case class VResourceMeasureSummaryDto (
+                                        val resourceMeasureId : Long
+                                        , val guid : Long
+                                        , val insertedRowDate : java.util.Date
+                                        , val lastUpdatedDate : java.util.Date
+                                        , val resourceMeasureName : String
+                                        , val resourceManagerMeasure_count : Int
+                                        , val resourceManagerAllocation_count : Int
+                                      ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vResourceMeasureSummary";
+  }
+  def fields : String = {
+    "resourceMeasureId,guid,insertedRowDate,lastUpdatedDate,resourceMeasureName,resourceManagerMeasure_count,resourceManagerAllocation_count";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    resourceMeasureSummaryId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(resourceMeasureId,guid,insertedRowDate,lastUpdatedDate,resourceMeasureName,resourceManagerMeasure_count,resourceManagerAllocation_count)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+resourceMeasureId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+resourceMeasureName,""+resourceManagerMeasure_count,""+resourceManagerAllocation_count)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "resourceMeasureId" => resourceMeasureId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "resourceMeasureName" => resourceMeasureName
+      case "resourceManagerMeasure_count" => resourceManagerMeasure_count
+      case "resourceManagerAllocation_count" => resourceManagerAllocation_count
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "resourceMeasureId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "resourceMeasureName" => "String"
+      case "resourceManagerMeasure_count" => "Int"
+      case "resourceManagerAllocation_count" => "Int"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VResourceMeasureSummaryDto {
+  val TABLE_NAME = "vResourceMeasureSummary";
+  val FIELD_resourceMeasureId = "resourceMeasureId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_resourceMeasureName = "resourceMeasureName";
+  val FIELD_resourceManagerMeasure_count = "resourceManagerMeasure_count";
+  val FIELD_resourceManagerAllocation_count = "resourceManagerAllocation_count";
 
 }
 
 
 case class VSourceDownloadDto (
                                 val sourceDownloadId : Long
-                                , val sourceScheduleId : Long
+                                , val guid : Long
                                 , val insertedRowDate : java.util.Date
                                 , val lastUpdatedDate : java.util.Date
-                                , val guid : Long
+                                , val sourceScheduleId : Long
+                                , val executorHostId : Long
+                                , val executorContextId : Long
+                                , val sourceViewId : Long
                                 , val retryNumber : Int
                                 , val isRunning : Int
                                 , val isFinished : Int
                                 , val isExcecption : Int
                                 , val excecptionDescription : String
+                                , val executorHost_executorHostId : Long
+                                , val executorHost_guid : Long
+                                , val executorHost_insertedRowDate : java.util.Date
+                                , val executorHost_lastUpdatedDate : java.util.Date
+                                , val executorHost_hostName : String
+                                , val executorHost_hostIp : String
+                                , val executorHost_hostDomain : String
+                                , val executorHost_hostOsType : String
+                                , val executorHost_hostOsVersion : String
+                                , val executorHost_isWorking : Int
+                                , val executorContext_executorContextId : Long
+                                , val executorContext_guid : Long
+                                , val executorContext_insertedRowDate : java.util.Date
+                                , val executorContext_lastUpdatedDate : java.util.Date
+                                , val executorContext_executorHostId : Long
+                                , val executorContext_isWorking : Int
+                                , val executorContext_properties : String
                                 , val sourceSchedule_sourceScheduleId : Long
-                                , val sourceSchedule_sourceViewId : Long
-                                , val sourceSchedule_executorStorageId : Long
+                                , val sourceSchedule_guid : Long
                                 , val sourceSchedule_insertedRowDate : java.util.Date
                                 , val sourceSchedule_lastUpdatedDate : java.util.Date
-                                , val sourceSchedule_guid : Long
+                                , val sourceSchedule_sourceViewId : Long
+                                , val sourceSchedule_executorStorageId : Long
                                 , val sourceSchedule_onDemand : Int
                                 , val sourceSchedule_startTime : java.util.Date
                                 , val sourceSchedule_intervalValue : Long
+                                , val sourceSchedule_isScheduled : Int
+                                , val sourceSchedule_deleteOldCopies : Int
+                                , val sourceView_sourceViewId : Long
+                                , val sourceView_guid : Long
+                                , val sourceView_insertedRowDate : java.util.Date
+                                , val sourceView_lastUpdatedDate : java.util.Date
+                                , val sourceView_sourceInstanceId : Long
+                                , val sourceView_sourceViewTypeId : Long
+                                , val sourceView_sourceViewName : String
+                                , val sourceView_sourceViewDefinition : String
+                                , val sourceView_isExisting : Int
                               ) extends BaseReadOnlyDto {
   def tableName : String = {
     "vSourceDownload";
   }
   def fields : String = {
-    "sourceDownloadId,sourceScheduleId,insertedRowDate,lastUpdatedDate,guid,retryNumber,isRunning,isFinished,isExcecption,excecptionDescription,sourceSchedule_sourceScheduleId,sourceSchedule_sourceViewId,sourceSchedule_executorStorageId,sourceSchedule_insertedRowDate,sourceSchedule_lastUpdatedDate,sourceSchedule_guid,sourceSchedule_onDemand,sourceSchedule_startTime,sourceSchedule_intervalValue";
+    "sourceDownloadId,guid,insertedRowDate,lastUpdatedDate,sourceScheduleId,executorHostId,executorContextId,sourceViewId,retryNumber,isRunning,isFinished,isExcecption,excecptionDescription,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking,executorContext_executorContextId,executorContext_guid,executorContext_insertedRowDate,executorContext_lastUpdatedDate,executorContext_executorHostId,executorContext_isWorking,executorContext_properties,sourceSchedule_sourceScheduleId,sourceSchedule_guid,sourceSchedule_insertedRowDate,sourceSchedule_lastUpdatedDate,sourceSchedule_sourceViewId,sourceSchedule_executorStorageId,sourceSchedule_onDemand,sourceSchedule_startTime,sourceSchedule_intervalValue,sourceSchedule_isScheduled,sourceSchedule_deleteOldCopies,sourceView_sourceViewId,sourceView_guid,sourceView_insertedRowDate,sourceView_lastUpdatedDate,sourceView_sourceInstanceId,sourceView_sourceViewTypeId,sourceView_sourceViewName,sourceView_sourceViewDefinition,sourceView_isExisting";
   }
   def pkFields : String = {
     "";
@@ -7535,32 +11807,63 @@ case class VSourceDownloadDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(sourceDownloadId,sourceScheduleId,insertedRowDate,lastUpdatedDate,guid,retryNumber,isRunning,isFinished,isExcecption,excecptionDescription,sourceSchedule_sourceScheduleId,sourceSchedule_sourceViewId,sourceSchedule_executorStorageId,sourceSchedule_insertedRowDate,sourceSchedule_lastUpdatedDate,sourceSchedule_guid,sourceSchedule_onDemand,sourceSchedule_startTime,sourceSchedule_intervalValue)
+    Array(sourceDownloadId,guid,insertedRowDate,lastUpdatedDate,sourceScheduleId,executorHostId,executorContextId,sourceViewId,retryNumber,isRunning,isFinished,isExcecption,excecptionDescription,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking,executorContext_executorContextId,executorContext_guid,executorContext_insertedRowDate,executorContext_lastUpdatedDate,executorContext_executorHostId,executorContext_isWorking,executorContext_properties,sourceSchedule_sourceScheduleId,sourceSchedule_guid,sourceSchedule_insertedRowDate,sourceSchedule_lastUpdatedDate,sourceSchedule_sourceViewId,sourceSchedule_executorStorageId,sourceSchedule_onDemand,sourceSchedule_startTime,sourceSchedule_intervalValue,sourceSchedule_isScheduled,sourceSchedule_deleteOldCopies,sourceView_sourceViewId,sourceView_guid,sourceView_insertedRowDate,sourceView_lastUpdatedDate,sourceView_sourceInstanceId,sourceView_sourceViewTypeId,sourceView_sourceViewName,sourceView_sourceViewDefinition,sourceView_isExisting)
   }
   def toStringArray() : Array[String] = {
-    Array(""+sourceDownloadId,""+sourceScheduleId,""+insertedRowDate,""+lastUpdatedDate,""+guid,""+retryNumber,""+isRunning,""+isFinished,""+isExcecption,""+excecptionDescription,""+sourceSchedule_sourceScheduleId,""+sourceSchedule_sourceViewId,""+sourceSchedule_executorStorageId,""+sourceSchedule_insertedRowDate,""+sourceSchedule_lastUpdatedDate,""+sourceSchedule_guid,""+sourceSchedule_onDemand,""+sourceSchedule_startTime,""+sourceSchedule_intervalValue)
+    Array(""+sourceDownloadId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceScheduleId,""+executorHostId,""+executorContextId,""+sourceViewId,""+retryNumber,""+isRunning,""+isFinished,""+isExcecption,""+excecptionDescription,""+executorHost_executorHostId,""+executorHost_guid,""+executorHost_insertedRowDate,""+executorHost_lastUpdatedDate,""+executorHost_hostName,""+executorHost_hostIp,""+executorHost_hostDomain,""+executorHost_hostOsType,""+executorHost_hostOsVersion,""+executorHost_isWorking,""+executorContext_executorContextId,""+executorContext_guid,""+executorContext_insertedRowDate,""+executorContext_lastUpdatedDate,""+executorContext_executorHostId,""+executorContext_isWorking,""+executorContext_properties,""+sourceSchedule_sourceScheduleId,""+sourceSchedule_guid,""+sourceSchedule_insertedRowDate,""+sourceSchedule_lastUpdatedDate,""+sourceSchedule_sourceViewId,""+sourceSchedule_executorStorageId,""+sourceSchedule_onDemand,""+sourceSchedule_startTime,""+sourceSchedule_intervalValue,""+sourceSchedule_isScheduled,""+sourceSchedule_deleteOldCopies,""+sourceView_sourceViewId,""+sourceView_guid,""+sourceView_insertedRowDate,""+sourceView_lastUpdatedDate,""+sourceView_sourceInstanceId,""+sourceView_sourceViewTypeId,""+sourceView_sourceViewName,""+sourceView_sourceViewDefinition,""+sourceView_isExisting)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "sourceDownloadId" => sourceDownloadId
-      case "sourceScheduleId" => sourceScheduleId
+      case "guid" => guid
       case "insertedRowDate" => insertedRowDate
       case "lastUpdatedDate" => lastUpdatedDate
-      case "guid" => guid
+      case "sourceScheduleId" => sourceScheduleId
+      case "executorHostId" => executorHostId
+      case "executorContextId" => executorContextId
+      case "sourceViewId" => sourceViewId
       case "retryNumber" => retryNumber
       case "isRunning" => isRunning
       case "isFinished" => isFinished
       case "isExcecption" => isExcecption
       case "excecptionDescription" => excecptionDescription
+      case "executorHost_executorHostId" => executorHost_executorHostId
+      case "executorHost_guid" => executorHost_guid
+      case "executorHost_insertedRowDate" => executorHost_insertedRowDate
+      case "executorHost_lastUpdatedDate" => executorHost_lastUpdatedDate
+      case "executorHost_hostName" => executorHost_hostName
+      case "executorHost_hostIp" => executorHost_hostIp
+      case "executorHost_hostDomain" => executorHost_hostDomain
+      case "executorHost_hostOsType" => executorHost_hostOsType
+      case "executorHost_hostOsVersion" => executorHost_hostOsVersion
+      case "executorHost_isWorking" => executorHost_isWorking
+      case "executorContext_executorContextId" => executorContext_executorContextId
+      case "executorContext_guid" => executorContext_guid
+      case "executorContext_insertedRowDate" => executorContext_insertedRowDate
+      case "executorContext_lastUpdatedDate" => executorContext_lastUpdatedDate
+      case "executorContext_executorHostId" => executorContext_executorHostId
+      case "executorContext_isWorking" => executorContext_isWorking
+      case "executorContext_properties" => executorContext_properties
       case "sourceSchedule_sourceScheduleId" => sourceSchedule_sourceScheduleId
-      case "sourceSchedule_sourceViewId" => sourceSchedule_sourceViewId
-      case "sourceSchedule_executorStorageId" => sourceSchedule_executorStorageId
+      case "sourceSchedule_guid" => sourceSchedule_guid
       case "sourceSchedule_insertedRowDate" => sourceSchedule_insertedRowDate
       case "sourceSchedule_lastUpdatedDate" => sourceSchedule_lastUpdatedDate
-      case "sourceSchedule_guid" => sourceSchedule_guid
+      case "sourceSchedule_sourceViewId" => sourceSchedule_sourceViewId
+      case "sourceSchedule_executorStorageId" => sourceSchedule_executorStorageId
       case "sourceSchedule_onDemand" => sourceSchedule_onDemand
       case "sourceSchedule_startTime" => sourceSchedule_startTime
       case "sourceSchedule_intervalValue" => sourceSchedule_intervalValue
+      case "sourceSchedule_isScheduled" => sourceSchedule_isScheduled
+      case "sourceSchedule_deleteOldCopies" => sourceSchedule_deleteOldCopies
+      case "sourceView_sourceViewId" => sourceView_sourceViewId
+      case "sourceView_guid" => sourceView_guid
+      case "sourceView_insertedRowDate" => sourceView_insertedRowDate
+      case "sourceView_lastUpdatedDate" => sourceView_lastUpdatedDate
+      case "sourceView_sourceInstanceId" => sourceView_sourceInstanceId
+      case "sourceView_sourceViewTypeId" => sourceView_sourceViewTypeId
+      case "sourceView_sourceViewName" => sourceView_sourceViewName
+      case "sourceView_sourceViewDefinition" => sourceView_sourceViewDefinition
+      case "sourceView_isExisting" => sourceView_isExisting
       case _ => null
     }
     ret
@@ -7568,24 +11871,55 @@ case class VSourceDownloadDto (
   def getFieldTypeName(name : String) : String = {
     val ret = name match {
       case "sourceDownloadId" => "Long"
-      case "sourceScheduleId" => "Long"
+      case "guid" => "Long"
       case "insertedRowDate" => "java.util.Date"
       case "lastUpdatedDate" => "java.util.Date"
-      case "guid" => "Long"
+      case "sourceScheduleId" => "Long"
+      case "executorHostId" => "Long"
+      case "executorContextId" => "Long"
+      case "sourceViewId" => "Long"
       case "retryNumber" => "Int"
       case "isRunning" => "Int"
       case "isFinished" => "Int"
       case "isExcecption" => "Int"
       case "excecptionDescription" => "String"
+      case "executorHost_executorHostId" => "Long"
+      case "executorHost_guid" => "Long"
+      case "executorHost_insertedRowDate" => "java.util.Date"
+      case "executorHost_lastUpdatedDate" => "java.util.Date"
+      case "executorHost_hostName" => "String"
+      case "executorHost_hostIp" => "String"
+      case "executorHost_hostDomain" => "String"
+      case "executorHost_hostOsType" => "String"
+      case "executorHost_hostOsVersion" => "String"
+      case "executorHost_isWorking" => "Int"
+      case "executorContext_executorContextId" => "Long"
+      case "executorContext_guid" => "Long"
+      case "executorContext_insertedRowDate" => "java.util.Date"
+      case "executorContext_lastUpdatedDate" => "java.util.Date"
+      case "executorContext_executorHostId" => "Long"
+      case "executorContext_isWorking" => "Int"
+      case "executorContext_properties" => "String"
       case "sourceSchedule_sourceScheduleId" => "Long"
-      case "sourceSchedule_sourceViewId" => "Long"
-      case "sourceSchedule_executorStorageId" => "Long"
+      case "sourceSchedule_guid" => "Long"
       case "sourceSchedule_insertedRowDate" => "java.util.Date"
       case "sourceSchedule_lastUpdatedDate" => "java.util.Date"
-      case "sourceSchedule_guid" => "Long"
+      case "sourceSchedule_sourceViewId" => "Long"
+      case "sourceSchedule_executorStorageId" => "Long"
       case "sourceSchedule_onDemand" => "Int"
       case "sourceSchedule_startTime" => "java.util.Date"
       case "sourceSchedule_intervalValue" => "Long"
+      case "sourceSchedule_isScheduled" => "Int"
+      case "sourceSchedule_deleteOldCopies" => "Int"
+      case "sourceView_sourceViewId" => "Long"
+      case "sourceView_guid" => "Long"
+      case "sourceView_insertedRowDate" => "java.util.Date"
+      case "sourceView_lastUpdatedDate" => "java.util.Date"
+      case "sourceView_sourceInstanceId" => "Long"
+      case "sourceView_sourceViewTypeId" => "Long"
+      case "sourceView_sourceViewName" => "String"
+      case "sourceView_sourceViewDefinition" => "String"
+      case "sourceView_isExisting" => "Int"
       case _ => "Object"
     }
     ret
@@ -7594,24 +11928,55 @@ case class VSourceDownloadDto (
 object VSourceDownloadDto {
   val TABLE_NAME = "vSourceDownload";
   val FIELD_sourceDownloadId = "sourceDownloadId";
-  val FIELD_sourceScheduleId = "sourceScheduleId";
+  val FIELD_guid = "guid";
   val FIELD_insertedRowDate = "insertedRowDate";
   val FIELD_lastUpdatedDate = "lastUpdatedDate";
-  val FIELD_guid = "guid";
+  val FIELD_sourceScheduleId = "sourceScheduleId";
+  val FIELD_executorHostId = "executorHostId";
+  val FIELD_executorContextId = "executorContextId";
+  val FIELD_sourceViewId = "sourceViewId";
   val FIELD_retryNumber = "retryNumber";
   val FIELD_isRunning = "isRunning";
   val FIELD_isFinished = "isFinished";
   val FIELD_isExcecption = "isExcecption";
   val FIELD_excecptionDescription = "excecptionDescription";
+  val FIELD_executorHost_executorHostId = "executorHost_executorHostId";
+  val FIELD_executorHost_guid = "executorHost_guid";
+  val FIELD_executorHost_insertedRowDate = "executorHost_insertedRowDate";
+  val FIELD_executorHost_lastUpdatedDate = "executorHost_lastUpdatedDate";
+  val FIELD_executorHost_hostName = "executorHost_hostName";
+  val FIELD_executorHost_hostIp = "executorHost_hostIp";
+  val FIELD_executorHost_hostDomain = "executorHost_hostDomain";
+  val FIELD_executorHost_hostOsType = "executorHost_hostOsType";
+  val FIELD_executorHost_hostOsVersion = "executorHost_hostOsVersion";
+  val FIELD_executorHost_isWorking = "executorHost_isWorking";
+  val FIELD_executorContext_executorContextId = "executorContext_executorContextId";
+  val FIELD_executorContext_guid = "executorContext_guid";
+  val FIELD_executorContext_insertedRowDate = "executorContext_insertedRowDate";
+  val FIELD_executorContext_lastUpdatedDate = "executorContext_lastUpdatedDate";
+  val FIELD_executorContext_executorHostId = "executorContext_executorHostId";
+  val FIELD_executorContext_isWorking = "executorContext_isWorking";
+  val FIELD_executorContext_properties = "executorContext_properties";
   val FIELD_sourceSchedule_sourceScheduleId = "sourceSchedule_sourceScheduleId";
-  val FIELD_sourceSchedule_sourceViewId = "sourceSchedule_sourceViewId";
-  val FIELD_sourceSchedule_executorStorageId = "sourceSchedule_executorStorageId";
+  val FIELD_sourceSchedule_guid = "sourceSchedule_guid";
   val FIELD_sourceSchedule_insertedRowDate = "sourceSchedule_insertedRowDate";
   val FIELD_sourceSchedule_lastUpdatedDate = "sourceSchedule_lastUpdatedDate";
-  val FIELD_sourceSchedule_guid = "sourceSchedule_guid";
+  val FIELD_sourceSchedule_sourceViewId = "sourceSchedule_sourceViewId";
+  val FIELD_sourceSchedule_executorStorageId = "sourceSchedule_executorStorageId";
   val FIELD_sourceSchedule_onDemand = "sourceSchedule_onDemand";
   val FIELD_sourceSchedule_startTime = "sourceSchedule_startTime";
   val FIELD_sourceSchedule_intervalValue = "sourceSchedule_intervalValue";
+  val FIELD_sourceSchedule_isScheduled = "sourceSchedule_isScheduled";
+  val FIELD_sourceSchedule_deleteOldCopies = "sourceSchedule_deleteOldCopies";
+  val FIELD_sourceView_sourceViewId = "sourceView_sourceViewId";
+  val FIELD_sourceView_guid = "sourceView_guid";
+  val FIELD_sourceView_insertedRowDate = "sourceView_insertedRowDate";
+  val FIELD_sourceView_lastUpdatedDate = "sourceView_lastUpdatedDate";
+  val FIELD_sourceView_sourceInstanceId = "sourceView_sourceInstanceId";
+  val FIELD_sourceView_sourceViewTypeId = "sourceView_sourceViewTypeId";
+  val FIELD_sourceView_sourceViewName = "sourceView_sourceViewName";
+  val FIELD_sourceView_sourceViewDefinition = "sourceView_sourceViewDefinition";
+  val FIELD_sourceView_isExisting = "sourceView_isExisting";
 
 }
 
@@ -7627,10 +11992,13 @@ case class VSourceDownloadStatDto (
                                     , val totalBytesCount : Long
                                     , val empryRowsCount : Long
                                     , val sourceDownload_sourceDownloadId : Long
-                                    , val sourceDownload_sourceScheduleId : Long
+                                    , val sourceDownload_guid : Long
                                     , val sourceDownload_insertedRowDate : java.util.Date
                                     , val sourceDownload_lastUpdatedDate : java.util.Date
-                                    , val sourceDownload_guid : Long
+                                    , val sourceDownload_sourceScheduleId : Long
+                                    , val sourceDownload_executorHostId : Long
+                                    , val sourceDownload_executorContextId : Long
+                                    , val sourceDownload_sourceViewId : Long
                                     , val sourceDownload_retryNumber : Int
                                     , val sourceDownload_isRunning : Int
                                     , val sourceDownload_isFinished : Int
@@ -7641,7 +12009,7 @@ case class VSourceDownloadStatDto (
     "vSourceDownloadStat";
   }
   def fields : String = {
-    "sourceDownloadStatId,guid,sourceDownloadId,insertedRowDate,lastUpdatedDate,rowsCount,errorRowsCount,totalBytesCount,empryRowsCount,sourceDownload_sourceDownloadId,sourceDownload_sourceScheduleId,sourceDownload_insertedRowDate,sourceDownload_lastUpdatedDate,sourceDownload_guid,sourceDownload_retryNumber,sourceDownload_isRunning,sourceDownload_isFinished,sourceDownload_isExcecption,sourceDownload_excecptionDescription";
+    "sourceDownloadStatId,guid,sourceDownloadId,insertedRowDate,lastUpdatedDate,rowsCount,errorRowsCount,totalBytesCount,empryRowsCount,sourceDownload_sourceDownloadId,sourceDownload_guid,sourceDownload_insertedRowDate,sourceDownload_lastUpdatedDate,sourceDownload_sourceScheduleId,sourceDownload_executorHostId,sourceDownload_executorContextId,sourceDownload_sourceViewId,sourceDownload_retryNumber,sourceDownload_isRunning,sourceDownload_isFinished,sourceDownload_isExcecption,sourceDownload_excecptionDescription";
   }
   def pkFields : String = {
     "";
@@ -7665,10 +12033,10 @@ case class VSourceDownloadStatDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(sourceDownloadStatId,guid,sourceDownloadId,insertedRowDate,lastUpdatedDate,rowsCount,errorRowsCount,totalBytesCount,empryRowsCount,sourceDownload_sourceDownloadId,sourceDownload_sourceScheduleId,sourceDownload_insertedRowDate,sourceDownload_lastUpdatedDate,sourceDownload_guid,sourceDownload_retryNumber,sourceDownload_isRunning,sourceDownload_isFinished,sourceDownload_isExcecption,sourceDownload_excecptionDescription)
+    Array(sourceDownloadStatId,guid,sourceDownloadId,insertedRowDate,lastUpdatedDate,rowsCount,errorRowsCount,totalBytesCount,empryRowsCount,sourceDownload_sourceDownloadId,sourceDownload_guid,sourceDownload_insertedRowDate,sourceDownload_lastUpdatedDate,sourceDownload_sourceScheduleId,sourceDownload_executorHostId,sourceDownload_executorContextId,sourceDownload_sourceViewId,sourceDownload_retryNumber,sourceDownload_isRunning,sourceDownload_isFinished,sourceDownload_isExcecption,sourceDownload_excecptionDescription)
   }
   def toStringArray() : Array[String] = {
-    Array(""+sourceDownloadStatId,""+guid,""+sourceDownloadId,""+insertedRowDate,""+lastUpdatedDate,""+rowsCount,""+errorRowsCount,""+totalBytesCount,""+empryRowsCount,""+sourceDownload_sourceDownloadId,""+sourceDownload_sourceScheduleId,""+sourceDownload_insertedRowDate,""+sourceDownload_lastUpdatedDate,""+sourceDownload_guid,""+sourceDownload_retryNumber,""+sourceDownload_isRunning,""+sourceDownload_isFinished,""+sourceDownload_isExcecption,""+sourceDownload_excecptionDescription)
+    Array(""+sourceDownloadStatId,""+guid,""+sourceDownloadId,""+insertedRowDate,""+lastUpdatedDate,""+rowsCount,""+errorRowsCount,""+totalBytesCount,""+empryRowsCount,""+sourceDownload_sourceDownloadId,""+sourceDownload_guid,""+sourceDownload_insertedRowDate,""+sourceDownload_lastUpdatedDate,""+sourceDownload_sourceScheduleId,""+sourceDownload_executorHostId,""+sourceDownload_executorContextId,""+sourceDownload_sourceViewId,""+sourceDownload_retryNumber,""+sourceDownload_isRunning,""+sourceDownload_isFinished,""+sourceDownload_isExcecption,""+sourceDownload_excecptionDescription)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
@@ -7682,10 +12050,13 @@ case class VSourceDownloadStatDto (
       case "totalBytesCount" => totalBytesCount
       case "empryRowsCount" => empryRowsCount
       case "sourceDownload_sourceDownloadId" => sourceDownload_sourceDownloadId
-      case "sourceDownload_sourceScheduleId" => sourceDownload_sourceScheduleId
+      case "sourceDownload_guid" => sourceDownload_guid
       case "sourceDownload_insertedRowDate" => sourceDownload_insertedRowDate
       case "sourceDownload_lastUpdatedDate" => sourceDownload_lastUpdatedDate
-      case "sourceDownload_guid" => sourceDownload_guid
+      case "sourceDownload_sourceScheduleId" => sourceDownload_sourceScheduleId
+      case "sourceDownload_executorHostId" => sourceDownload_executorHostId
+      case "sourceDownload_executorContextId" => sourceDownload_executorContextId
+      case "sourceDownload_sourceViewId" => sourceDownload_sourceViewId
       case "sourceDownload_retryNumber" => sourceDownload_retryNumber
       case "sourceDownload_isRunning" => sourceDownload_isRunning
       case "sourceDownload_isFinished" => sourceDownload_isFinished
@@ -7707,10 +12078,13 @@ case class VSourceDownloadStatDto (
       case "totalBytesCount" => "Long"
       case "empryRowsCount" => "Long"
       case "sourceDownload_sourceDownloadId" => "Long"
-      case "sourceDownload_sourceScheduleId" => "Long"
+      case "sourceDownload_guid" => "Long"
       case "sourceDownload_insertedRowDate" => "java.util.Date"
       case "sourceDownload_lastUpdatedDate" => "java.util.Date"
-      case "sourceDownload_guid" => "Long"
+      case "sourceDownload_sourceScheduleId" => "Long"
+      case "sourceDownload_executorHostId" => "Long"
+      case "sourceDownload_executorContextId" => "Long"
+      case "sourceDownload_sourceViewId" => "Long"
       case "sourceDownload_retryNumber" => "Int"
       case "sourceDownload_isRunning" => "Int"
       case "sourceDownload_isFinished" => "Int"
@@ -7733,10 +12107,13 @@ object VSourceDownloadStatDto {
   val FIELD_totalBytesCount = "totalBytesCount";
   val FIELD_empryRowsCount = "empryRowsCount";
   val FIELD_sourceDownload_sourceDownloadId = "sourceDownload_sourceDownloadId";
-  val FIELD_sourceDownload_sourceScheduleId = "sourceDownload_sourceScheduleId";
+  val FIELD_sourceDownload_guid = "sourceDownload_guid";
   val FIELD_sourceDownload_insertedRowDate = "sourceDownload_insertedRowDate";
   val FIELD_sourceDownload_lastUpdatedDate = "sourceDownload_lastUpdatedDate";
-  val FIELD_sourceDownload_guid = "sourceDownload_guid";
+  val FIELD_sourceDownload_sourceScheduleId = "sourceDownload_sourceScheduleId";
+  val FIELD_sourceDownload_executorHostId = "sourceDownload_executorHostId";
+  val FIELD_sourceDownload_executorContextId = "sourceDownload_executorContextId";
+  val FIELD_sourceDownload_sourceViewId = "sourceDownload_sourceViewId";
   val FIELD_sourceDownload_retryNumber = "sourceDownload_retryNumber";
   val FIELD_sourceDownload_isRunning = "sourceDownload_isRunning";
   val FIELD_sourceDownload_isFinished = "sourceDownload_isFinished";
@@ -7749,30 +12126,33 @@ object VSourceDownloadStatDto {
 case class VSourceDownloadStatColumnDto (
                                           val sourceDownloadStatColumnId : Long
                                           , val guid : Long
-                                          , val sourceDownloadId : Long
-                                          , val sourceViewColumnId : Long
                                           , val insertedRowDate : java.util.Date
                                           , val lastUpdatedDate : java.util.Date
+                                          , val sourceDownloadId : Long
+                                          , val sourceViewColumnId : Long
                                           , val columnMinNumber : Double
                                           , val columnMaxNumber : Double
                                           , val columnMinStr : String
                                           , val columnMaxStr : String
                                           , val columnNonemptyCount : Long
                                           , val sourceDownload_sourceDownloadId : Long
-                                          , val sourceDownload_sourceScheduleId : Long
+                                          , val sourceDownload_guid : Long
                                           , val sourceDownload_insertedRowDate : java.util.Date
                                           , val sourceDownload_lastUpdatedDate : java.util.Date
-                                          , val sourceDownload_guid : Long
+                                          , val sourceDownload_sourceScheduleId : Long
+                                          , val sourceDownload_executorHostId : Long
+                                          , val sourceDownload_executorContextId : Long
+                                          , val sourceDownload_sourceViewId : Long
                                           , val sourceDownload_retryNumber : Int
                                           , val sourceDownload_isRunning : Int
                                           , val sourceDownload_isFinished : Int
                                           , val sourceDownload_isExcecption : Int
                                           , val sourceDownload_excecptionDescription : String
                                           , val sourceViewColumn_sourceViewColumnId : Long
-                                          , val sourceViewColumn_sourceViewId : Long
+                                          , val sourceViewColumn_guid : Long
                                           , val sourceViewColumn_insertedRowDate : java.util.Date
                                           , val sourceViewColumn_lastUpdatedDate : java.util.Date
-                                          , val sourceViewColumn_guid : Long
+                                          , val sourceViewColumn_sourceViewId : Long
                                           , val sourceViewColumn_columnName : String
                                           , val sourceViewColumn_columnType : String
                                         ) extends BaseReadOnlyDto {
@@ -7780,7 +12160,7 @@ case class VSourceDownloadStatColumnDto (
     "vSourceDownloadStatColumn";
   }
   def fields : String = {
-    "sourceDownloadStatColumnId,guid,sourceDownloadId,sourceViewColumnId,insertedRowDate,lastUpdatedDate,columnMinNumber,columnMaxNumber,columnMinStr,columnMaxStr,columnNonemptyCount,sourceDownload_sourceDownloadId,sourceDownload_sourceScheduleId,sourceDownload_insertedRowDate,sourceDownload_lastUpdatedDate,sourceDownload_guid,sourceDownload_retryNumber,sourceDownload_isRunning,sourceDownload_isFinished,sourceDownload_isExcecption,sourceDownload_excecptionDescription,sourceViewColumn_sourceViewColumnId,sourceViewColumn_sourceViewId,sourceViewColumn_insertedRowDate,sourceViewColumn_lastUpdatedDate,sourceViewColumn_guid,sourceViewColumn_columnName,sourceViewColumn_columnType";
+    "sourceDownloadStatColumnId,guid,insertedRowDate,lastUpdatedDate,sourceDownloadId,sourceViewColumnId,columnMinNumber,columnMaxNumber,columnMinStr,columnMaxStr,columnNonemptyCount,sourceDownload_sourceDownloadId,sourceDownload_guid,sourceDownload_insertedRowDate,sourceDownload_lastUpdatedDate,sourceDownload_sourceScheduleId,sourceDownload_executorHostId,sourceDownload_executorContextId,sourceDownload_sourceViewId,sourceDownload_retryNumber,sourceDownload_isRunning,sourceDownload_isFinished,sourceDownload_isExcecption,sourceDownload_excecptionDescription,sourceViewColumn_sourceViewColumnId,sourceViewColumn_guid,sourceViewColumn_insertedRowDate,sourceViewColumn_lastUpdatedDate,sourceViewColumn_sourceViewId,sourceViewColumn_columnName,sourceViewColumn_columnType";
   }
   def pkFields : String = {
     "";
@@ -7804,39 +12184,42 @@ case class VSourceDownloadStatColumnDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(sourceDownloadStatColumnId,guid,sourceDownloadId,sourceViewColumnId,insertedRowDate,lastUpdatedDate,columnMinNumber,columnMaxNumber,columnMinStr,columnMaxStr,columnNonemptyCount,sourceDownload_sourceDownloadId,sourceDownload_sourceScheduleId,sourceDownload_insertedRowDate,sourceDownload_lastUpdatedDate,sourceDownload_guid,sourceDownload_retryNumber,sourceDownload_isRunning,sourceDownload_isFinished,sourceDownload_isExcecption,sourceDownload_excecptionDescription,sourceViewColumn_sourceViewColumnId,sourceViewColumn_sourceViewId,sourceViewColumn_insertedRowDate,sourceViewColumn_lastUpdatedDate,sourceViewColumn_guid,sourceViewColumn_columnName,sourceViewColumn_columnType)
+    Array(sourceDownloadStatColumnId,guid,insertedRowDate,lastUpdatedDate,sourceDownloadId,sourceViewColumnId,columnMinNumber,columnMaxNumber,columnMinStr,columnMaxStr,columnNonemptyCount,sourceDownload_sourceDownloadId,sourceDownload_guid,sourceDownload_insertedRowDate,sourceDownload_lastUpdatedDate,sourceDownload_sourceScheduleId,sourceDownload_executorHostId,sourceDownload_executorContextId,sourceDownload_sourceViewId,sourceDownload_retryNumber,sourceDownload_isRunning,sourceDownload_isFinished,sourceDownload_isExcecption,sourceDownload_excecptionDescription,sourceViewColumn_sourceViewColumnId,sourceViewColumn_guid,sourceViewColumn_insertedRowDate,sourceViewColumn_lastUpdatedDate,sourceViewColumn_sourceViewId,sourceViewColumn_columnName,sourceViewColumn_columnType)
   }
   def toStringArray() : Array[String] = {
-    Array(""+sourceDownloadStatColumnId,""+guid,""+sourceDownloadId,""+sourceViewColumnId,""+insertedRowDate,""+lastUpdatedDate,""+columnMinNumber,""+columnMaxNumber,""+columnMinStr,""+columnMaxStr,""+columnNonemptyCount,""+sourceDownload_sourceDownloadId,""+sourceDownload_sourceScheduleId,""+sourceDownload_insertedRowDate,""+sourceDownload_lastUpdatedDate,""+sourceDownload_guid,""+sourceDownload_retryNumber,""+sourceDownload_isRunning,""+sourceDownload_isFinished,""+sourceDownload_isExcecption,""+sourceDownload_excecptionDescription,""+sourceViewColumn_sourceViewColumnId,""+sourceViewColumn_sourceViewId,""+sourceViewColumn_insertedRowDate,""+sourceViewColumn_lastUpdatedDate,""+sourceViewColumn_guid,""+sourceViewColumn_columnName,""+sourceViewColumn_columnType)
+    Array(""+sourceDownloadStatColumnId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceDownloadId,""+sourceViewColumnId,""+columnMinNumber,""+columnMaxNumber,""+columnMinStr,""+columnMaxStr,""+columnNonemptyCount,""+sourceDownload_sourceDownloadId,""+sourceDownload_guid,""+sourceDownload_insertedRowDate,""+sourceDownload_lastUpdatedDate,""+sourceDownload_sourceScheduleId,""+sourceDownload_executorHostId,""+sourceDownload_executorContextId,""+sourceDownload_sourceViewId,""+sourceDownload_retryNumber,""+sourceDownload_isRunning,""+sourceDownload_isFinished,""+sourceDownload_isExcecption,""+sourceDownload_excecptionDescription,""+sourceViewColumn_sourceViewColumnId,""+sourceViewColumn_guid,""+sourceViewColumn_insertedRowDate,""+sourceViewColumn_lastUpdatedDate,""+sourceViewColumn_sourceViewId,""+sourceViewColumn_columnName,""+sourceViewColumn_columnType)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "sourceDownloadStatColumnId" => sourceDownloadStatColumnId
       case "guid" => guid
-      case "sourceDownloadId" => sourceDownloadId
-      case "sourceViewColumnId" => sourceViewColumnId
       case "insertedRowDate" => insertedRowDate
       case "lastUpdatedDate" => lastUpdatedDate
+      case "sourceDownloadId" => sourceDownloadId
+      case "sourceViewColumnId" => sourceViewColumnId
       case "columnMinNumber" => columnMinNumber
       case "columnMaxNumber" => columnMaxNumber
       case "columnMinStr" => columnMinStr
       case "columnMaxStr" => columnMaxStr
       case "columnNonemptyCount" => columnNonemptyCount
       case "sourceDownload_sourceDownloadId" => sourceDownload_sourceDownloadId
-      case "sourceDownload_sourceScheduleId" => sourceDownload_sourceScheduleId
+      case "sourceDownload_guid" => sourceDownload_guid
       case "sourceDownload_insertedRowDate" => sourceDownload_insertedRowDate
       case "sourceDownload_lastUpdatedDate" => sourceDownload_lastUpdatedDate
-      case "sourceDownload_guid" => sourceDownload_guid
+      case "sourceDownload_sourceScheduleId" => sourceDownload_sourceScheduleId
+      case "sourceDownload_executorHostId" => sourceDownload_executorHostId
+      case "sourceDownload_executorContextId" => sourceDownload_executorContextId
+      case "sourceDownload_sourceViewId" => sourceDownload_sourceViewId
       case "sourceDownload_retryNumber" => sourceDownload_retryNumber
       case "sourceDownload_isRunning" => sourceDownload_isRunning
       case "sourceDownload_isFinished" => sourceDownload_isFinished
       case "sourceDownload_isExcecption" => sourceDownload_isExcecption
       case "sourceDownload_excecptionDescription" => sourceDownload_excecptionDescription
       case "sourceViewColumn_sourceViewColumnId" => sourceViewColumn_sourceViewColumnId
-      case "sourceViewColumn_sourceViewId" => sourceViewColumn_sourceViewId
+      case "sourceViewColumn_guid" => sourceViewColumn_guid
       case "sourceViewColumn_insertedRowDate" => sourceViewColumn_insertedRowDate
       case "sourceViewColumn_lastUpdatedDate" => sourceViewColumn_lastUpdatedDate
-      case "sourceViewColumn_guid" => sourceViewColumn_guid
+      case "sourceViewColumn_sourceViewId" => sourceViewColumn_sourceViewId
       case "sourceViewColumn_columnName" => sourceViewColumn_columnName
       case "sourceViewColumn_columnType" => sourceViewColumn_columnType
       case _ => null
@@ -7847,30 +12230,33 @@ case class VSourceDownloadStatColumnDto (
     val ret = name match {
       case "sourceDownloadStatColumnId" => "Long"
       case "guid" => "Long"
-      case "sourceDownloadId" => "Long"
-      case "sourceViewColumnId" => "Long"
       case "insertedRowDate" => "java.util.Date"
       case "lastUpdatedDate" => "java.util.Date"
+      case "sourceDownloadId" => "Long"
+      case "sourceViewColumnId" => "Long"
       case "columnMinNumber" => "Double"
       case "columnMaxNumber" => "Double"
       case "columnMinStr" => "String"
       case "columnMaxStr" => "String"
       case "columnNonemptyCount" => "Long"
       case "sourceDownload_sourceDownloadId" => "Long"
-      case "sourceDownload_sourceScheduleId" => "Long"
+      case "sourceDownload_guid" => "Long"
       case "sourceDownload_insertedRowDate" => "java.util.Date"
       case "sourceDownload_lastUpdatedDate" => "java.util.Date"
-      case "sourceDownload_guid" => "Long"
+      case "sourceDownload_sourceScheduleId" => "Long"
+      case "sourceDownload_executorHostId" => "Long"
+      case "sourceDownload_executorContextId" => "Long"
+      case "sourceDownload_sourceViewId" => "Long"
       case "sourceDownload_retryNumber" => "Int"
       case "sourceDownload_isRunning" => "Int"
       case "sourceDownload_isFinished" => "Int"
       case "sourceDownload_isExcecption" => "Int"
       case "sourceDownload_excecptionDescription" => "String"
       case "sourceViewColumn_sourceViewColumnId" => "Long"
-      case "sourceViewColumn_sourceViewId" => "Long"
+      case "sourceViewColumn_guid" => "Long"
       case "sourceViewColumn_insertedRowDate" => "java.util.Date"
       case "sourceViewColumn_lastUpdatedDate" => "java.util.Date"
-      case "sourceViewColumn_guid" => "Long"
+      case "sourceViewColumn_sourceViewId" => "Long"
       case "sourceViewColumn_columnName" => "String"
       case "sourceViewColumn_columnType" => "String"
       case _ => "Object"
@@ -7882,32 +12268,153 @@ object VSourceDownloadStatColumnDto {
   val TABLE_NAME = "vSourceDownloadStatColumn";
   val FIELD_sourceDownloadStatColumnId = "sourceDownloadStatColumnId";
   val FIELD_guid = "guid";
-  val FIELD_sourceDownloadId = "sourceDownloadId";
-  val FIELD_sourceViewColumnId = "sourceViewColumnId";
   val FIELD_insertedRowDate = "insertedRowDate";
   val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_sourceDownloadId = "sourceDownloadId";
+  val FIELD_sourceViewColumnId = "sourceViewColumnId";
   val FIELD_columnMinNumber = "columnMinNumber";
   val FIELD_columnMaxNumber = "columnMaxNumber";
   val FIELD_columnMinStr = "columnMinStr";
   val FIELD_columnMaxStr = "columnMaxStr";
   val FIELD_columnNonemptyCount = "columnNonemptyCount";
   val FIELD_sourceDownload_sourceDownloadId = "sourceDownload_sourceDownloadId";
-  val FIELD_sourceDownload_sourceScheduleId = "sourceDownload_sourceScheduleId";
+  val FIELD_sourceDownload_guid = "sourceDownload_guid";
   val FIELD_sourceDownload_insertedRowDate = "sourceDownload_insertedRowDate";
   val FIELD_sourceDownload_lastUpdatedDate = "sourceDownload_lastUpdatedDate";
-  val FIELD_sourceDownload_guid = "sourceDownload_guid";
+  val FIELD_sourceDownload_sourceScheduleId = "sourceDownload_sourceScheduleId";
+  val FIELD_sourceDownload_executorHostId = "sourceDownload_executorHostId";
+  val FIELD_sourceDownload_executorContextId = "sourceDownload_executorContextId";
+  val FIELD_sourceDownload_sourceViewId = "sourceDownload_sourceViewId";
   val FIELD_sourceDownload_retryNumber = "sourceDownload_retryNumber";
   val FIELD_sourceDownload_isRunning = "sourceDownload_isRunning";
   val FIELD_sourceDownload_isFinished = "sourceDownload_isFinished";
   val FIELD_sourceDownload_isExcecption = "sourceDownload_isExcecption";
   val FIELD_sourceDownload_excecptionDescription = "sourceDownload_excecptionDescription";
   val FIELD_sourceViewColumn_sourceViewColumnId = "sourceViewColumn_sourceViewColumnId";
-  val FIELD_sourceViewColumn_sourceViewId = "sourceViewColumn_sourceViewId";
+  val FIELD_sourceViewColumn_guid = "sourceViewColumn_guid";
   val FIELD_sourceViewColumn_insertedRowDate = "sourceViewColumn_insertedRowDate";
   val FIELD_sourceViewColumn_lastUpdatedDate = "sourceViewColumn_lastUpdatedDate";
-  val FIELD_sourceViewColumn_guid = "sourceViewColumn_guid";
+  val FIELD_sourceViewColumn_sourceViewId = "sourceViewColumn_sourceViewId";
   val FIELD_sourceViewColumn_columnName = "sourceViewColumn_columnName";
   val FIELD_sourceViewColumn_columnType = "sourceViewColumn_columnType";
+
+}
+
+
+case class VSourceDownloadSummaryDto (
+                                       val sourceDownloadId : Long
+                                       , val guid : Long
+                                       , val insertedRowDate : java.util.Date
+                                       , val lastUpdatedDate : java.util.Date
+                                       , val sourceScheduleId : Long
+                                       , val executorHostId : Long
+                                       , val executorContextId : Long
+                                       , val sourceViewId : Long
+                                       , val retryNumber : Int
+                                       , val isRunning : Int
+                                       , val isFinished : Int
+                                       , val isExcecption : Int
+                                       , val excecptionDescription : String
+                                       , val sourceDownloadStat_count : Int
+                                       , val sourceDownloadStatColumn_count : Int
+                                       , val executorStorageView_count : Int
+                                     ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vSourceDownloadSummary";
+  }
+  def fields : String = {
+    "sourceDownloadId,guid,insertedRowDate,lastUpdatedDate,sourceScheduleId,executorHostId,executorContextId,sourceViewId,retryNumber,isRunning,isFinished,isExcecption,excecptionDescription,sourceDownloadStat_count,sourceDownloadStatColumn_count,executorStorageView_count";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    sourceDownloadSummaryId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(sourceDownloadId,guid,insertedRowDate,lastUpdatedDate,sourceScheduleId,executorHostId,executorContextId,sourceViewId,retryNumber,isRunning,isFinished,isExcecption,excecptionDescription,sourceDownloadStat_count,sourceDownloadStatColumn_count,executorStorageView_count)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+sourceDownloadId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceScheduleId,""+executorHostId,""+executorContextId,""+sourceViewId,""+retryNumber,""+isRunning,""+isFinished,""+isExcecption,""+excecptionDescription,""+sourceDownloadStat_count,""+sourceDownloadStatColumn_count,""+executorStorageView_count)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "sourceDownloadId" => sourceDownloadId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "sourceScheduleId" => sourceScheduleId
+      case "executorHostId" => executorHostId
+      case "executorContextId" => executorContextId
+      case "sourceViewId" => sourceViewId
+      case "retryNumber" => retryNumber
+      case "isRunning" => isRunning
+      case "isFinished" => isFinished
+      case "isExcecption" => isExcecption
+      case "excecptionDescription" => excecptionDescription
+      case "sourceDownloadStat_count" => sourceDownloadStat_count
+      case "sourceDownloadStatColumn_count" => sourceDownloadStatColumn_count
+      case "executorStorageView_count" => executorStorageView_count
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "sourceDownloadId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "sourceScheduleId" => "Long"
+      case "executorHostId" => "Long"
+      case "executorContextId" => "Long"
+      case "sourceViewId" => "Long"
+      case "retryNumber" => "Int"
+      case "isRunning" => "Int"
+      case "isFinished" => "Int"
+      case "isExcecption" => "Int"
+      case "excecptionDescription" => "String"
+      case "sourceDownloadStat_count" => "Int"
+      case "sourceDownloadStatColumn_count" => "Int"
+      case "executorStorageView_count" => "Int"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VSourceDownloadSummaryDto {
+  val TABLE_NAME = "vSourceDownloadSummary";
+  val FIELD_sourceDownloadId = "sourceDownloadId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_sourceScheduleId = "sourceScheduleId";
+  val FIELD_executorHostId = "executorHostId";
+  val FIELD_executorContextId = "executorContextId";
+  val FIELD_sourceViewId = "sourceViewId";
+  val FIELD_retryNumber = "retryNumber";
+  val FIELD_isRunning = "isRunning";
+  val FIELD_isFinished = "isFinished";
+  val FIELD_isExcecption = "isExcecption";
+  val FIELD_excecptionDescription = "excecptionDescription";
+  val FIELD_sourceDownloadStat_count = "sourceDownloadStat_count";
+  val FIELD_sourceDownloadStatColumn_count = "sourceDownloadStatColumn_count";
+  val FIELD_executorStorageView_count = "executorStorageView_count";
 
 }
 
@@ -7915,26 +12422,26 @@ object VSourceDownloadStatColumnDto {
 case class VSourceInstanceDto (
                                 val sourceInstanceId : Long
                                 , val guid : Long
+                                , val insertedRowDate : java.util.Date
+                                , val lastUpdatedDate : java.util.Date
                                 , val sourceTypeId : Long
                                 , val sourceInstanceName : String
                                 , val errorCount : Long
                                 , val correctCount : Long
                                 , val lastStatus : String
                                 , val lastConnectionDate : java.util.Date
-                                , val insertedRowDate : java.util.Date
-                                , val lastUpdatedDate : java.util.Date
                                 , val sourceType_sourceTypeId : Long
                                 , val sourceType_guid : Long
-                                , val sourceType_sourceTypeName : String
-                                , val sourceType_sourceTypeClass : String
                                 , val sourceType_insertedRowDate : java.util.Date
                                 , val sourceType_lastUpdatedDate : java.util.Date
+                                , val sourceType_sourceTypeName : String
+                                , val sourceType_sourceTypeClass : String
                               ) extends BaseReadOnlyDto {
   def tableName : String = {
     "vSourceInstance";
   }
   def fields : String = {
-    "sourceInstanceId,guid,sourceTypeId,sourceInstanceName,errorCount,correctCount,lastStatus,lastConnectionDate,insertedRowDate,lastUpdatedDate,sourceType_sourceTypeId,sourceType_guid,sourceType_sourceTypeName,sourceType_sourceTypeClass,sourceType_insertedRowDate,sourceType_lastUpdatedDate";
+    "sourceInstanceId,guid,insertedRowDate,lastUpdatedDate,sourceTypeId,sourceInstanceName,errorCount,correctCount,lastStatus,lastConnectionDate,sourceType_sourceTypeId,sourceType_guid,sourceType_insertedRowDate,sourceType_lastUpdatedDate,sourceType_sourceTypeName,sourceType_sourceTypeClass";
   }
   def pkFields : String = {
     "";
@@ -7958,29 +12465,29 @@ case class VSourceInstanceDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(sourceInstanceId,guid,sourceTypeId,sourceInstanceName,errorCount,correctCount,lastStatus,lastConnectionDate,insertedRowDate,lastUpdatedDate,sourceType_sourceTypeId,sourceType_guid,sourceType_sourceTypeName,sourceType_sourceTypeClass,sourceType_insertedRowDate,sourceType_lastUpdatedDate)
+    Array(sourceInstanceId,guid,insertedRowDate,lastUpdatedDate,sourceTypeId,sourceInstanceName,errorCount,correctCount,lastStatus,lastConnectionDate,sourceType_sourceTypeId,sourceType_guid,sourceType_insertedRowDate,sourceType_lastUpdatedDate,sourceType_sourceTypeName,sourceType_sourceTypeClass)
   }
   def toStringArray() : Array[String] = {
-    Array(""+sourceInstanceId,""+guid,""+sourceTypeId,""+sourceInstanceName,""+errorCount,""+correctCount,""+lastStatus,""+lastConnectionDate,""+insertedRowDate,""+lastUpdatedDate,""+sourceType_sourceTypeId,""+sourceType_guid,""+sourceType_sourceTypeName,""+sourceType_sourceTypeClass,""+sourceType_insertedRowDate,""+sourceType_lastUpdatedDate)
+    Array(""+sourceInstanceId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceTypeId,""+sourceInstanceName,""+errorCount,""+correctCount,""+lastStatus,""+lastConnectionDate,""+sourceType_sourceTypeId,""+sourceType_guid,""+sourceType_insertedRowDate,""+sourceType_lastUpdatedDate,""+sourceType_sourceTypeName,""+sourceType_sourceTypeClass)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "sourceInstanceId" => sourceInstanceId
       case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
       case "sourceTypeId" => sourceTypeId
       case "sourceInstanceName" => sourceInstanceName
       case "errorCount" => errorCount
       case "correctCount" => correctCount
       case "lastStatus" => lastStatus
       case "lastConnectionDate" => lastConnectionDate
-      case "insertedRowDate" => insertedRowDate
-      case "lastUpdatedDate" => lastUpdatedDate
       case "sourceType_sourceTypeId" => sourceType_sourceTypeId
       case "sourceType_guid" => sourceType_guid
-      case "sourceType_sourceTypeName" => sourceType_sourceTypeName
-      case "sourceType_sourceTypeClass" => sourceType_sourceTypeClass
       case "sourceType_insertedRowDate" => sourceType_insertedRowDate
       case "sourceType_lastUpdatedDate" => sourceType_lastUpdatedDate
+      case "sourceType_sourceTypeName" => sourceType_sourceTypeName
+      case "sourceType_sourceTypeClass" => sourceType_sourceTypeClass
       case _ => null
     }
     ret
@@ -7989,20 +12496,20 @@ case class VSourceInstanceDto (
     val ret = name match {
       case "sourceInstanceId" => "Long"
       case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
       case "sourceTypeId" => "Long"
       case "sourceInstanceName" => "String"
       case "errorCount" => "Long"
       case "correctCount" => "Long"
       case "lastStatus" => "String"
       case "lastConnectionDate" => "java.util.Date"
-      case "insertedRowDate" => "java.util.Date"
-      case "lastUpdatedDate" => "java.util.Date"
       case "sourceType_sourceTypeId" => "Long"
       case "sourceType_guid" => "Long"
-      case "sourceType_sourceTypeName" => "String"
-      case "sourceType_sourceTypeClass" => "String"
       case "sourceType_insertedRowDate" => "java.util.Date"
       case "sourceType_lastUpdatedDate" => "java.util.Date"
+      case "sourceType_sourceTypeName" => "String"
+      case "sourceType_sourceTypeClass" => "String"
       case _ => "Object"
     }
     ret
@@ -8012,56 +12519,248 @@ object VSourceInstanceDto {
   val TABLE_NAME = "vSourceInstance";
   val FIELD_sourceInstanceId = "sourceInstanceId";
   val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_sourceTypeId = "sourceTypeId";
   val FIELD_sourceInstanceName = "sourceInstanceName";
   val FIELD_errorCount = "errorCount";
   val FIELD_correctCount = "correctCount";
   val FIELD_lastStatus = "lastStatus";
   val FIELD_lastConnectionDate = "lastConnectionDate";
-  val FIELD_insertedRowDate = "insertedRowDate";
-  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_sourceType_sourceTypeId = "sourceType_sourceTypeId";
   val FIELD_sourceType_guid = "sourceType_guid";
-  val FIELD_sourceType_sourceTypeName = "sourceType_sourceTypeName";
-  val FIELD_sourceType_sourceTypeClass = "sourceType_sourceTypeClass";
   val FIELD_sourceType_insertedRowDate = "sourceType_insertedRowDate";
   val FIELD_sourceType_lastUpdatedDate = "sourceType_lastUpdatedDate";
+  val FIELD_sourceType_sourceTypeName = "sourceType_sourceTypeName";
+  val FIELD_sourceType_sourceTypeClass = "sourceType_sourceTypeClass";
+
+}
+
+
+case class VSourceInstanceSummaryDto (
+                                       val sourceInstanceId : Long
+                                       , val guid : Long
+                                       , val insertedRowDate : java.util.Date
+                                       , val lastUpdatedDate : java.util.Date
+                                       , val sourceTypeId : Long
+                                       , val sourceInstanceName : String
+                                       , val errorCount : Long
+                                       , val correctCount : Long
+                                       , val lastStatus : String
+                                       , val lastConnectionDate : java.util.Date
+                                       , val sourceParamValue_count : Int
+                                       , val sourceView_count : Int
+                                     ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vSourceInstanceSummary";
+  }
+  def fields : String = {
+    "sourceInstanceId,guid,insertedRowDate,lastUpdatedDate,sourceTypeId,sourceInstanceName,errorCount,correctCount,lastStatus,lastConnectionDate,sourceParamValue_count,sourceView_count";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    sourceInstanceSummaryId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(sourceInstanceId,guid,insertedRowDate,lastUpdatedDate,sourceTypeId,sourceInstanceName,errorCount,correctCount,lastStatus,lastConnectionDate,sourceParamValue_count,sourceView_count)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+sourceInstanceId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceTypeId,""+sourceInstanceName,""+errorCount,""+correctCount,""+lastStatus,""+lastConnectionDate,""+sourceParamValue_count,""+sourceView_count)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "sourceInstanceId" => sourceInstanceId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "sourceTypeId" => sourceTypeId
+      case "sourceInstanceName" => sourceInstanceName
+      case "errorCount" => errorCount
+      case "correctCount" => correctCount
+      case "lastStatus" => lastStatus
+      case "lastConnectionDate" => lastConnectionDate
+      case "sourceParamValue_count" => sourceParamValue_count
+      case "sourceView_count" => sourceView_count
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "sourceInstanceId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "sourceTypeId" => "Long"
+      case "sourceInstanceName" => "String"
+      case "errorCount" => "Long"
+      case "correctCount" => "Long"
+      case "lastStatus" => "String"
+      case "lastConnectionDate" => "java.util.Date"
+      case "sourceParamValue_count" => "Int"
+      case "sourceView_count" => "Int"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VSourceInstanceSummaryDto {
+  val TABLE_NAME = "vSourceInstanceSummary";
+  val FIELD_sourceInstanceId = "sourceInstanceId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_sourceTypeId = "sourceTypeId";
+  val FIELD_sourceInstanceName = "sourceInstanceName";
+  val FIELD_errorCount = "errorCount";
+  val FIELD_correctCount = "correctCount";
+  val FIELD_lastStatus = "lastStatus";
+  val FIELD_lastConnectionDate = "lastConnectionDate";
+  val FIELD_sourceParamValue_count = "sourceParamValue_count";
+  val FIELD_sourceView_count = "sourceView_count";
+
+}
+
+
+case class VSourceParamSummaryDto (
+                                    val sourceParamId : Long
+                                    , val guid : Long
+                                    , val insertedRowDate : java.util.Date
+                                    , val lastUpdatedDate : java.util.Date
+                                    , val sourceParamName : String
+                                    , val sourceParamType : String
+                                    , val possibleValues : String
+                                    , val sourceTypeParam_count : Int
+                                    , val sourceParamValue_count : Int
+                                  ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vSourceParamSummary";
+  }
+  def fields : String = {
+    "sourceParamId,guid,insertedRowDate,lastUpdatedDate,sourceParamName,sourceParamType,possibleValues,sourceTypeParam_count,sourceParamValue_count";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    sourceParamSummaryId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(sourceParamId,guid,insertedRowDate,lastUpdatedDate,sourceParamName,sourceParamType,possibleValues,sourceTypeParam_count,sourceParamValue_count)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+sourceParamId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceParamName,""+sourceParamType,""+possibleValues,""+sourceTypeParam_count,""+sourceParamValue_count)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "sourceParamId" => sourceParamId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "sourceParamName" => sourceParamName
+      case "sourceParamType" => sourceParamType
+      case "possibleValues" => possibleValues
+      case "sourceTypeParam_count" => sourceTypeParam_count
+      case "sourceParamValue_count" => sourceParamValue_count
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "sourceParamId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "sourceParamName" => "String"
+      case "sourceParamType" => "String"
+      case "possibleValues" => "String"
+      case "sourceTypeParam_count" => "Int"
+      case "sourceParamValue_count" => "Int"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VSourceParamSummaryDto {
+  val TABLE_NAME = "vSourceParamSummary";
+  val FIELD_sourceParamId = "sourceParamId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_sourceParamName = "sourceParamName";
+  val FIELD_sourceParamType = "sourceParamType";
+  val FIELD_possibleValues = "possibleValues";
+  val FIELD_sourceTypeParam_count = "sourceTypeParam_count";
+  val FIELD_sourceParamValue_count = "sourceParamValue_count";
 
 }
 
 
 case class VSourceParamValueDto (
                                   val sourceParamValueId : Long
-                                  , val sourceInstanceId : Long
-                                  , val sourceParamId : Long
-                                  , val sourceParamValueVersion : String
                                   , val guid : Long
                                   , val insertedRowDate : java.util.Date
                                   , val lastUpdatedDate : java.util.Date
+                                  , val sourceInstanceId : Long
+                                  , val sourceParamId : Long
+                                  , val sourceParamValueVersion : String
                                   , val paramValue : String
                                   , val sourceInstance_sourceInstanceId : Long
                                   , val sourceInstance_guid : Long
+                                  , val sourceInstance_insertedRowDate : java.util.Date
+                                  , val sourceInstance_lastUpdatedDate : java.util.Date
                                   , val sourceInstance_sourceTypeId : Long
                                   , val sourceInstance_sourceInstanceName : String
                                   , val sourceInstance_errorCount : Long
                                   , val sourceInstance_correctCount : Long
                                   , val sourceInstance_lastStatus : String
                                   , val sourceInstance_lastConnectionDate : java.util.Date
-                                  , val sourceInstance_insertedRowDate : java.util.Date
-                                  , val sourceInstance_lastUpdatedDate : java.util.Date
                                   , val sourceParam_sourceParamId : Long
                                   , val sourceParam_guid : Long
+                                  , val sourceParam_insertedRowDate : java.util.Date
+                                  , val sourceParam_lastUpdatedDate : java.util.Date
                                   , val sourceParam_sourceParamName : String
                                   , val sourceParam_sourceParamType : String
                                   , val sourceParam_possibleValues : String
-                                  , val sourceParam_insertedRowDate : java.util.Date
-                                  , val sourceParam_lastUpdatedDate : java.util.Date
                                 ) extends BaseReadOnlyDto {
   def tableName : String = {
     "vSourceParamValue";
   }
   def fields : String = {
-    "sourceParamValueId,sourceInstanceId,sourceParamId,sourceParamValueVersion,guid,insertedRowDate,lastUpdatedDate,paramValue,sourceInstance_sourceInstanceId,sourceInstance_guid,sourceInstance_sourceTypeId,sourceInstance_sourceInstanceName,sourceInstance_errorCount,sourceInstance_correctCount,sourceInstance_lastStatus,sourceInstance_lastConnectionDate,sourceInstance_insertedRowDate,sourceInstance_lastUpdatedDate,sourceParam_sourceParamId,sourceParam_guid,sourceParam_sourceParamName,sourceParam_sourceParamType,sourceParam_possibleValues,sourceParam_insertedRowDate,sourceParam_lastUpdatedDate";
+    "sourceParamValueId,guid,insertedRowDate,lastUpdatedDate,sourceInstanceId,sourceParamId,sourceParamValueVersion,paramValue,sourceInstance_sourceInstanceId,sourceInstance_guid,sourceInstance_insertedRowDate,sourceInstance_lastUpdatedDate,sourceInstance_sourceTypeId,sourceInstance_sourceInstanceName,sourceInstance_errorCount,sourceInstance_correctCount,sourceInstance_lastStatus,sourceInstance_lastConnectionDate,sourceParam_sourceParamId,sourceParam_guid,sourceParam_insertedRowDate,sourceParam_lastUpdatedDate,sourceParam_sourceParamName,sourceParam_sourceParamType,sourceParam_possibleValues";
   }
   def pkFields : String = {
     "";
@@ -8085,38 +12784,38 @@ case class VSourceParamValueDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(sourceParamValueId,sourceInstanceId,sourceParamId,sourceParamValueVersion,guid,insertedRowDate,lastUpdatedDate,paramValue,sourceInstance_sourceInstanceId,sourceInstance_guid,sourceInstance_sourceTypeId,sourceInstance_sourceInstanceName,sourceInstance_errorCount,sourceInstance_correctCount,sourceInstance_lastStatus,sourceInstance_lastConnectionDate,sourceInstance_insertedRowDate,sourceInstance_lastUpdatedDate,sourceParam_sourceParamId,sourceParam_guid,sourceParam_sourceParamName,sourceParam_sourceParamType,sourceParam_possibleValues,sourceParam_insertedRowDate,sourceParam_lastUpdatedDate)
+    Array(sourceParamValueId,guid,insertedRowDate,lastUpdatedDate,sourceInstanceId,sourceParamId,sourceParamValueVersion,paramValue,sourceInstance_sourceInstanceId,sourceInstance_guid,sourceInstance_insertedRowDate,sourceInstance_lastUpdatedDate,sourceInstance_sourceTypeId,sourceInstance_sourceInstanceName,sourceInstance_errorCount,sourceInstance_correctCount,sourceInstance_lastStatus,sourceInstance_lastConnectionDate,sourceParam_sourceParamId,sourceParam_guid,sourceParam_insertedRowDate,sourceParam_lastUpdatedDate,sourceParam_sourceParamName,sourceParam_sourceParamType,sourceParam_possibleValues)
   }
   def toStringArray() : Array[String] = {
-    Array(""+sourceParamValueId,""+sourceInstanceId,""+sourceParamId,""+sourceParamValueVersion,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+paramValue,""+sourceInstance_sourceInstanceId,""+sourceInstance_guid,""+sourceInstance_sourceTypeId,""+sourceInstance_sourceInstanceName,""+sourceInstance_errorCount,""+sourceInstance_correctCount,""+sourceInstance_lastStatus,""+sourceInstance_lastConnectionDate,""+sourceInstance_insertedRowDate,""+sourceInstance_lastUpdatedDate,""+sourceParam_sourceParamId,""+sourceParam_guid,""+sourceParam_sourceParamName,""+sourceParam_sourceParamType,""+sourceParam_possibleValues,""+sourceParam_insertedRowDate,""+sourceParam_lastUpdatedDate)
+    Array(""+sourceParamValueId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceInstanceId,""+sourceParamId,""+sourceParamValueVersion,""+paramValue,""+sourceInstance_sourceInstanceId,""+sourceInstance_guid,""+sourceInstance_insertedRowDate,""+sourceInstance_lastUpdatedDate,""+sourceInstance_sourceTypeId,""+sourceInstance_sourceInstanceName,""+sourceInstance_errorCount,""+sourceInstance_correctCount,""+sourceInstance_lastStatus,""+sourceInstance_lastConnectionDate,""+sourceParam_sourceParamId,""+sourceParam_guid,""+sourceParam_insertedRowDate,""+sourceParam_lastUpdatedDate,""+sourceParam_sourceParamName,""+sourceParam_sourceParamType,""+sourceParam_possibleValues)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "sourceParamValueId" => sourceParamValueId
-      case "sourceInstanceId" => sourceInstanceId
-      case "sourceParamId" => sourceParamId
-      case "sourceParamValueVersion" => sourceParamValueVersion
       case "guid" => guid
       case "insertedRowDate" => insertedRowDate
       case "lastUpdatedDate" => lastUpdatedDate
+      case "sourceInstanceId" => sourceInstanceId
+      case "sourceParamId" => sourceParamId
+      case "sourceParamValueVersion" => sourceParamValueVersion
       case "paramValue" => paramValue
       case "sourceInstance_sourceInstanceId" => sourceInstance_sourceInstanceId
       case "sourceInstance_guid" => sourceInstance_guid
+      case "sourceInstance_insertedRowDate" => sourceInstance_insertedRowDate
+      case "sourceInstance_lastUpdatedDate" => sourceInstance_lastUpdatedDate
       case "sourceInstance_sourceTypeId" => sourceInstance_sourceTypeId
       case "sourceInstance_sourceInstanceName" => sourceInstance_sourceInstanceName
       case "sourceInstance_errorCount" => sourceInstance_errorCount
       case "sourceInstance_correctCount" => sourceInstance_correctCount
       case "sourceInstance_lastStatus" => sourceInstance_lastStatus
       case "sourceInstance_lastConnectionDate" => sourceInstance_lastConnectionDate
-      case "sourceInstance_insertedRowDate" => sourceInstance_insertedRowDate
-      case "sourceInstance_lastUpdatedDate" => sourceInstance_lastUpdatedDate
       case "sourceParam_sourceParamId" => sourceParam_sourceParamId
       case "sourceParam_guid" => sourceParam_guid
+      case "sourceParam_insertedRowDate" => sourceParam_insertedRowDate
+      case "sourceParam_lastUpdatedDate" => sourceParam_lastUpdatedDate
       case "sourceParam_sourceParamName" => sourceParam_sourceParamName
       case "sourceParam_sourceParamType" => sourceParam_sourceParamType
       case "sourceParam_possibleValues" => sourceParam_possibleValues
-      case "sourceParam_insertedRowDate" => sourceParam_insertedRowDate
-      case "sourceParam_lastUpdatedDate" => sourceParam_lastUpdatedDate
       case _ => null
     }
     ret
@@ -8124,30 +12823,30 @@ case class VSourceParamValueDto (
   def getFieldTypeName(name : String) : String = {
     val ret = name match {
       case "sourceParamValueId" => "Long"
-      case "sourceInstanceId" => "Long"
-      case "sourceParamId" => "Long"
-      case "sourceParamValueVersion" => "String"
       case "guid" => "Long"
       case "insertedRowDate" => "java.util.Date"
       case "lastUpdatedDate" => "java.util.Date"
+      case "sourceInstanceId" => "Long"
+      case "sourceParamId" => "Long"
+      case "sourceParamValueVersion" => "String"
       case "paramValue" => "String"
       case "sourceInstance_sourceInstanceId" => "Long"
       case "sourceInstance_guid" => "Long"
+      case "sourceInstance_insertedRowDate" => "java.util.Date"
+      case "sourceInstance_lastUpdatedDate" => "java.util.Date"
       case "sourceInstance_sourceTypeId" => "Long"
       case "sourceInstance_sourceInstanceName" => "String"
       case "sourceInstance_errorCount" => "Long"
       case "sourceInstance_correctCount" => "Long"
       case "sourceInstance_lastStatus" => "String"
       case "sourceInstance_lastConnectionDate" => "java.util.Date"
-      case "sourceInstance_insertedRowDate" => "java.util.Date"
-      case "sourceInstance_lastUpdatedDate" => "java.util.Date"
       case "sourceParam_sourceParamId" => "Long"
       case "sourceParam_guid" => "Long"
+      case "sourceParam_insertedRowDate" => "java.util.Date"
+      case "sourceParam_lastUpdatedDate" => "java.util.Date"
       case "sourceParam_sourceParamName" => "String"
       case "sourceParam_sourceParamType" => "String"
       case "sourceParam_possibleValues" => "String"
-      case "sourceParam_insertedRowDate" => "java.util.Date"
-      case "sourceParam_lastUpdatedDate" => "java.util.Date"
       case _ => "Object"
     }
     ret
@@ -8156,46 +12855,50 @@ case class VSourceParamValueDto (
 object VSourceParamValueDto {
   val TABLE_NAME = "vSourceParamValue";
   val FIELD_sourceParamValueId = "sourceParamValueId";
-  val FIELD_sourceInstanceId = "sourceInstanceId";
-  val FIELD_sourceParamId = "sourceParamId";
-  val FIELD_sourceParamValueVersion = "sourceParamValueVersion";
   val FIELD_guid = "guid";
   val FIELD_insertedRowDate = "insertedRowDate";
   val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_sourceInstanceId = "sourceInstanceId";
+  val FIELD_sourceParamId = "sourceParamId";
+  val FIELD_sourceParamValueVersion = "sourceParamValueVersion";
   val FIELD_paramValue = "paramValue";
   val FIELD_sourceInstance_sourceInstanceId = "sourceInstance_sourceInstanceId";
   val FIELD_sourceInstance_guid = "sourceInstance_guid";
+  val FIELD_sourceInstance_insertedRowDate = "sourceInstance_insertedRowDate";
+  val FIELD_sourceInstance_lastUpdatedDate = "sourceInstance_lastUpdatedDate";
   val FIELD_sourceInstance_sourceTypeId = "sourceInstance_sourceTypeId";
   val FIELD_sourceInstance_sourceInstanceName = "sourceInstance_sourceInstanceName";
   val FIELD_sourceInstance_errorCount = "sourceInstance_errorCount";
   val FIELD_sourceInstance_correctCount = "sourceInstance_correctCount";
   val FIELD_sourceInstance_lastStatus = "sourceInstance_lastStatus";
   val FIELD_sourceInstance_lastConnectionDate = "sourceInstance_lastConnectionDate";
-  val FIELD_sourceInstance_insertedRowDate = "sourceInstance_insertedRowDate";
-  val FIELD_sourceInstance_lastUpdatedDate = "sourceInstance_lastUpdatedDate";
   val FIELD_sourceParam_sourceParamId = "sourceParam_sourceParamId";
   val FIELD_sourceParam_guid = "sourceParam_guid";
+  val FIELD_sourceParam_insertedRowDate = "sourceParam_insertedRowDate";
+  val FIELD_sourceParam_lastUpdatedDate = "sourceParam_lastUpdatedDate";
   val FIELD_sourceParam_sourceParamName = "sourceParam_sourceParamName";
   val FIELD_sourceParam_sourceParamType = "sourceParam_sourceParamType";
   val FIELD_sourceParam_possibleValues = "sourceParam_possibleValues";
-  val FIELD_sourceParam_insertedRowDate = "sourceParam_insertedRowDate";
-  val FIELD_sourceParam_lastUpdatedDate = "sourceParam_lastUpdatedDate";
 
 }
 
 
 case class VSourceScheduleDto (
                                 val sourceScheduleId : Long
-                                , val sourceViewId : Long
-                                , val executorStorageId : Long
+                                , val guid : Long
                                 , val insertedRowDate : java.util.Date
                                 , val lastUpdatedDate : java.util.Date
-                                , val guid : Long
+                                , val sourceViewId : Long
+                                , val executorStorageId : Long
                                 , val onDemand : Int
                                 , val startTime : java.util.Date
                                 , val intervalValue : Long
+                                , val isScheduled : Int
+                                , val deleteOldCopies : Int
                                 , val executorStorage_executorStorageId : Long
                                 , val executorStorage_guid : Long
+                                , val executorStorage_insertedRowDate : java.util.Date
+                                , val executorStorage_lastUpdatedDate : java.util.Date
                                 , val executorStorage_executorHostId : Long
                                 , val executorStorage_executorStorageTypeId : Long
                                 , val executorStorage_storageDefinition : String
@@ -8203,22 +12906,21 @@ case class VSourceScheduleDto (
                                 , val executorStorage_storageFulllPath : String
                                 , val executorStorage_isRunning : Int
                                 , val executorStorage_portNumber : Int
-                                , val executorStorage_insertedRowDate : java.util.Date
-                                , val executorStorage_lastUpdatedDate : java.util.Date
                                 , val sourceView_sourceViewId : Long
                                 , val sourceView_guid : Long
+                                , val sourceView_insertedRowDate : java.util.Date
+                                , val sourceView_lastUpdatedDate : java.util.Date
                                 , val sourceView_sourceInstanceId : Long
                                 , val sourceView_sourceViewTypeId : Long
                                 , val sourceView_sourceViewName : String
                                 , val sourceView_sourceViewDefinition : String
-                                , val sourceView_insertedRowDate : java.util.Date
-                                , val sourceView_lastUpdatedDate : java.util.Date
+                                , val sourceView_isExisting : Int
                               ) extends BaseReadOnlyDto {
   def tableName : String = {
     "vSourceSchedule";
   }
   def fields : String = {
-    "sourceScheduleId,sourceViewId,executorStorageId,insertedRowDate,lastUpdatedDate,guid,onDemand,startTime,intervalValue,executorStorage_executorStorageId,executorStorage_guid,executorStorage_executorHostId,executorStorage_executorStorageTypeId,executorStorage_storageDefinition,executorStorage_storageBasePath,executorStorage_storageFulllPath,executorStorage_isRunning,executorStorage_portNumber,executorStorage_insertedRowDate,executorStorage_lastUpdatedDate,sourceView_sourceViewId,sourceView_guid,sourceView_sourceInstanceId,sourceView_sourceViewTypeId,sourceView_sourceViewName,sourceView_sourceViewDefinition,sourceView_insertedRowDate,sourceView_lastUpdatedDate";
+    "sourceScheduleId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,executorStorageId,onDemand,startTime,intervalValue,isScheduled,deleteOldCopies,executorStorage_executorStorageId,executorStorage_guid,executorStorage_insertedRowDate,executorStorage_lastUpdatedDate,executorStorage_executorHostId,executorStorage_executorStorageTypeId,executorStorage_storageDefinition,executorStorage_storageBasePath,executorStorage_storageFulllPath,executorStorage_isRunning,executorStorage_portNumber,sourceView_sourceViewId,sourceView_guid,sourceView_insertedRowDate,sourceView_lastUpdatedDate,sourceView_sourceInstanceId,sourceView_sourceViewTypeId,sourceView_sourceViewName,sourceView_sourceViewDefinition,sourceView_isExisting";
   }
   def pkFields : String = {
     "";
@@ -8242,24 +12944,28 @@ case class VSourceScheduleDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(sourceScheduleId,sourceViewId,executorStorageId,insertedRowDate,lastUpdatedDate,guid,onDemand,startTime,intervalValue,executorStorage_executorStorageId,executorStorage_guid,executorStorage_executorHostId,executorStorage_executorStorageTypeId,executorStorage_storageDefinition,executorStorage_storageBasePath,executorStorage_storageFulllPath,executorStorage_isRunning,executorStorage_portNumber,executorStorage_insertedRowDate,executorStorage_lastUpdatedDate,sourceView_sourceViewId,sourceView_guid,sourceView_sourceInstanceId,sourceView_sourceViewTypeId,sourceView_sourceViewName,sourceView_sourceViewDefinition,sourceView_insertedRowDate,sourceView_lastUpdatedDate)
+    Array(sourceScheduleId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,executorStorageId,onDemand,startTime,intervalValue,isScheduled,deleteOldCopies,executorStorage_executorStorageId,executorStorage_guid,executorStorage_insertedRowDate,executorStorage_lastUpdatedDate,executorStorage_executorHostId,executorStorage_executorStorageTypeId,executorStorage_storageDefinition,executorStorage_storageBasePath,executorStorage_storageFulllPath,executorStorage_isRunning,executorStorage_portNumber,sourceView_sourceViewId,sourceView_guid,sourceView_insertedRowDate,sourceView_lastUpdatedDate,sourceView_sourceInstanceId,sourceView_sourceViewTypeId,sourceView_sourceViewName,sourceView_sourceViewDefinition,sourceView_isExisting)
   }
   def toStringArray() : Array[String] = {
-    Array(""+sourceScheduleId,""+sourceViewId,""+executorStorageId,""+insertedRowDate,""+lastUpdatedDate,""+guid,""+onDemand,""+startTime,""+intervalValue,""+executorStorage_executorStorageId,""+executorStorage_guid,""+executorStorage_executorHostId,""+executorStorage_executorStorageTypeId,""+executorStorage_storageDefinition,""+executorStorage_storageBasePath,""+executorStorage_storageFulllPath,""+executorStorage_isRunning,""+executorStorage_portNumber,""+executorStorage_insertedRowDate,""+executorStorage_lastUpdatedDate,""+sourceView_sourceViewId,""+sourceView_guid,""+sourceView_sourceInstanceId,""+sourceView_sourceViewTypeId,""+sourceView_sourceViewName,""+sourceView_sourceViewDefinition,""+sourceView_insertedRowDate,""+sourceView_lastUpdatedDate)
+    Array(""+sourceScheduleId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceViewId,""+executorStorageId,""+onDemand,""+startTime,""+intervalValue,""+isScheduled,""+deleteOldCopies,""+executorStorage_executorStorageId,""+executorStorage_guid,""+executorStorage_insertedRowDate,""+executorStorage_lastUpdatedDate,""+executorStorage_executorHostId,""+executorStorage_executorStorageTypeId,""+executorStorage_storageDefinition,""+executorStorage_storageBasePath,""+executorStorage_storageFulllPath,""+executorStorage_isRunning,""+executorStorage_portNumber,""+sourceView_sourceViewId,""+sourceView_guid,""+sourceView_insertedRowDate,""+sourceView_lastUpdatedDate,""+sourceView_sourceInstanceId,""+sourceView_sourceViewTypeId,""+sourceView_sourceViewName,""+sourceView_sourceViewDefinition,""+sourceView_isExisting)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "sourceScheduleId" => sourceScheduleId
-      case "sourceViewId" => sourceViewId
-      case "executorStorageId" => executorStorageId
+      case "guid" => guid
       case "insertedRowDate" => insertedRowDate
       case "lastUpdatedDate" => lastUpdatedDate
-      case "guid" => guid
+      case "sourceViewId" => sourceViewId
+      case "executorStorageId" => executorStorageId
       case "onDemand" => onDemand
       case "startTime" => startTime
       case "intervalValue" => intervalValue
+      case "isScheduled" => isScheduled
+      case "deleteOldCopies" => deleteOldCopies
       case "executorStorage_executorStorageId" => executorStorage_executorStorageId
       case "executorStorage_guid" => executorStorage_guid
+      case "executorStorage_insertedRowDate" => executorStorage_insertedRowDate
+      case "executorStorage_lastUpdatedDate" => executorStorage_lastUpdatedDate
       case "executorStorage_executorHostId" => executorStorage_executorHostId
       case "executorStorage_executorStorageTypeId" => executorStorage_executorStorageTypeId
       case "executorStorage_storageDefinition" => executorStorage_storageDefinition
@@ -8267,16 +12973,15 @@ case class VSourceScheduleDto (
       case "executorStorage_storageFulllPath" => executorStorage_storageFulllPath
       case "executorStorage_isRunning" => executorStorage_isRunning
       case "executorStorage_portNumber" => executorStorage_portNumber
-      case "executorStorage_insertedRowDate" => executorStorage_insertedRowDate
-      case "executorStorage_lastUpdatedDate" => executorStorage_lastUpdatedDate
       case "sourceView_sourceViewId" => sourceView_sourceViewId
       case "sourceView_guid" => sourceView_guid
+      case "sourceView_insertedRowDate" => sourceView_insertedRowDate
+      case "sourceView_lastUpdatedDate" => sourceView_lastUpdatedDate
       case "sourceView_sourceInstanceId" => sourceView_sourceInstanceId
       case "sourceView_sourceViewTypeId" => sourceView_sourceViewTypeId
       case "sourceView_sourceViewName" => sourceView_sourceViewName
       case "sourceView_sourceViewDefinition" => sourceView_sourceViewDefinition
-      case "sourceView_insertedRowDate" => sourceView_insertedRowDate
-      case "sourceView_lastUpdatedDate" => sourceView_lastUpdatedDate
+      case "sourceView_isExisting" => sourceView_isExisting
       case _ => null
     }
     ret
@@ -8284,16 +12989,20 @@ case class VSourceScheduleDto (
   def getFieldTypeName(name : String) : String = {
     val ret = name match {
       case "sourceScheduleId" => "Long"
-      case "sourceViewId" => "Long"
-      case "executorStorageId" => "Long"
+      case "guid" => "Long"
       case "insertedRowDate" => "java.util.Date"
       case "lastUpdatedDate" => "java.util.Date"
-      case "guid" => "Long"
+      case "sourceViewId" => "Long"
+      case "executorStorageId" => "Long"
       case "onDemand" => "Int"
       case "startTime" => "java.util.Date"
       case "intervalValue" => "Long"
+      case "isScheduled" => "Int"
+      case "deleteOldCopies" => "Int"
       case "executorStorage_executorStorageId" => "Long"
       case "executorStorage_guid" => "Long"
+      case "executorStorage_insertedRowDate" => "java.util.Date"
+      case "executorStorage_lastUpdatedDate" => "java.util.Date"
       case "executorStorage_executorHostId" => "Long"
       case "executorStorage_executorStorageTypeId" => "Long"
       case "executorStorage_storageDefinition" => "String"
@@ -8301,16 +13010,15 @@ case class VSourceScheduleDto (
       case "executorStorage_storageFulllPath" => "String"
       case "executorStorage_isRunning" => "Int"
       case "executorStorage_portNumber" => "Int"
-      case "executorStorage_insertedRowDate" => "java.util.Date"
-      case "executorStorage_lastUpdatedDate" => "java.util.Date"
       case "sourceView_sourceViewId" => "Long"
       case "sourceView_guid" => "Long"
+      case "sourceView_insertedRowDate" => "java.util.Date"
+      case "sourceView_lastUpdatedDate" => "java.util.Date"
       case "sourceView_sourceInstanceId" => "Long"
       case "sourceView_sourceViewTypeId" => "Long"
       case "sourceView_sourceViewName" => "String"
       case "sourceView_sourceViewDefinition" => "String"
-      case "sourceView_insertedRowDate" => "java.util.Date"
-      case "sourceView_lastUpdatedDate" => "java.util.Date"
+      case "sourceView_isExisting" => "Int"
       case _ => "Object"
     }
     ret
@@ -8319,16 +13027,20 @@ case class VSourceScheduleDto (
 object VSourceScheduleDto {
   val TABLE_NAME = "vSourceSchedule";
   val FIELD_sourceScheduleId = "sourceScheduleId";
-  val FIELD_sourceViewId = "sourceViewId";
-  val FIELD_executorStorageId = "executorStorageId";
+  val FIELD_guid = "guid";
   val FIELD_insertedRowDate = "insertedRowDate";
   val FIELD_lastUpdatedDate = "lastUpdatedDate";
-  val FIELD_guid = "guid";
+  val FIELD_sourceViewId = "sourceViewId";
+  val FIELD_executorStorageId = "executorStorageId";
   val FIELD_onDemand = "onDemand";
   val FIELD_startTime = "startTime";
   val FIELD_intervalValue = "intervalValue";
+  val FIELD_isScheduled = "isScheduled";
+  val FIELD_deleteOldCopies = "deleteOldCopies";
   val FIELD_executorStorage_executorStorageId = "executorStorage_executorStorageId";
   val FIELD_executorStorage_guid = "executorStorage_guid";
+  val FIELD_executorStorage_insertedRowDate = "executorStorage_insertedRowDate";
+  val FIELD_executorStorage_lastUpdatedDate = "executorStorage_lastUpdatedDate";
   val FIELD_executorStorage_executorHostId = "executorStorage_executorHostId";
   val FIELD_executorStorage_executorStorageTypeId = "executorStorage_executorStorageTypeId";
   val FIELD_executorStorage_storageDefinition = "executorStorage_storageDefinition";
@@ -8336,49 +13048,150 @@ object VSourceScheduleDto {
   val FIELD_executorStorage_storageFulllPath = "executorStorage_storageFulllPath";
   val FIELD_executorStorage_isRunning = "executorStorage_isRunning";
   val FIELD_executorStorage_portNumber = "executorStorage_portNumber";
-  val FIELD_executorStorage_insertedRowDate = "executorStorage_insertedRowDate";
-  val FIELD_executorStorage_lastUpdatedDate = "executorStorage_lastUpdatedDate";
   val FIELD_sourceView_sourceViewId = "sourceView_sourceViewId";
   val FIELD_sourceView_guid = "sourceView_guid";
+  val FIELD_sourceView_insertedRowDate = "sourceView_insertedRowDate";
+  val FIELD_sourceView_lastUpdatedDate = "sourceView_lastUpdatedDate";
   val FIELD_sourceView_sourceInstanceId = "sourceView_sourceInstanceId";
   val FIELD_sourceView_sourceViewTypeId = "sourceView_sourceViewTypeId";
   val FIELD_sourceView_sourceViewName = "sourceView_sourceViewName";
   val FIELD_sourceView_sourceViewDefinition = "sourceView_sourceViewDefinition";
-  val FIELD_sourceView_insertedRowDate = "sourceView_insertedRowDate";
-  val FIELD_sourceView_lastUpdatedDate = "sourceView_lastUpdatedDate";
+  val FIELD_sourceView_isExisting = "sourceView_isExisting";
+
+}
+
+
+case class VSourceScheduleSummaryDto (
+                                       val sourceScheduleId : Long
+                                       , val guid : Long
+                                       , val insertedRowDate : java.util.Date
+                                       , val lastUpdatedDate : java.util.Date
+                                       , val sourceViewId : Long
+                                       , val executorStorageId : Long
+                                       , val onDemand : Int
+                                       , val startTime : java.util.Date
+                                       , val intervalValue : Long
+                                       , val isScheduled : Int
+                                       , val deleteOldCopies : Int
+                                       , val sourceDownload_count : Int
+                                     ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vSourceScheduleSummary";
+  }
+  def fields : String = {
+    "sourceScheduleId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,executorStorageId,onDemand,startTime,intervalValue,isScheduled,deleteOldCopies,sourceDownload_count";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    sourceScheduleSummaryId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(sourceScheduleId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,executorStorageId,onDemand,startTime,intervalValue,isScheduled,deleteOldCopies,sourceDownload_count)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+sourceScheduleId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceViewId,""+executorStorageId,""+onDemand,""+startTime,""+intervalValue,""+isScheduled,""+deleteOldCopies,""+sourceDownload_count)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "sourceScheduleId" => sourceScheduleId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "sourceViewId" => sourceViewId
+      case "executorStorageId" => executorStorageId
+      case "onDemand" => onDemand
+      case "startTime" => startTime
+      case "intervalValue" => intervalValue
+      case "isScheduled" => isScheduled
+      case "deleteOldCopies" => deleteOldCopies
+      case "sourceDownload_count" => sourceDownload_count
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "sourceScheduleId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "sourceViewId" => "Long"
+      case "executorStorageId" => "Long"
+      case "onDemand" => "Int"
+      case "startTime" => "java.util.Date"
+      case "intervalValue" => "Long"
+      case "isScheduled" => "Int"
+      case "deleteOldCopies" => "Int"
+      case "sourceDownload_count" => "Int"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VSourceScheduleSummaryDto {
+  val TABLE_NAME = "vSourceScheduleSummary";
+  val FIELD_sourceScheduleId = "sourceScheduleId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_sourceViewId = "sourceViewId";
+  val FIELD_executorStorageId = "executorStorageId";
+  val FIELD_onDemand = "onDemand";
+  val FIELD_startTime = "startTime";
+  val FIELD_intervalValue = "intervalValue";
+  val FIELD_isScheduled = "isScheduled";
+  val FIELD_deleteOldCopies = "deleteOldCopies";
+  val FIELD_sourceDownload_count = "sourceDownload_count";
 
 }
 
 
 case class VSourceTypeParamDto (
                                  val sourceTypeParamId : Long
+                                 , val guid : Long
+                                 , val insertedRowDate : java.util.Date
+                                 , val lastUpdatedDate : java.util.Date
                                  , val sourceTypeId : Long
                                  , val sourceParamId : Long
                                  , val sourceTypeName : String
                                  , val sourceParamName : String
                                  , val isRequired : Int
-                                 , val guid : Long
-                                 , val insertedRowDate : java.util.Date
-                                 , val lastUpdatedDate : java.util.Date
                                  , val sourceParam_sourceParamId : Long
                                  , val sourceParam_guid : Long
+                                 , val sourceParam_insertedRowDate : java.util.Date
+                                 , val sourceParam_lastUpdatedDate : java.util.Date
                                  , val sourceParam_sourceParamName : String
                                  , val sourceParam_sourceParamType : String
                                  , val sourceParam_possibleValues : String
-                                 , val sourceParam_insertedRowDate : java.util.Date
-                                 , val sourceParam_lastUpdatedDate : java.util.Date
                                  , val sourceType_sourceTypeId : Long
                                  , val sourceType_guid : Long
-                                 , val sourceType_sourceTypeName : String
-                                 , val sourceType_sourceTypeClass : String
                                  , val sourceType_insertedRowDate : java.util.Date
                                  , val sourceType_lastUpdatedDate : java.util.Date
+                                 , val sourceType_sourceTypeName : String
+                                 , val sourceType_sourceTypeClass : String
                                ) extends BaseReadOnlyDto {
   def tableName : String = {
     "vSourceTypeParam";
   }
   def fields : String = {
-    "sourceTypeParamId,sourceTypeId,sourceParamId,sourceTypeName,sourceParamName,isRequired,guid,insertedRowDate,lastUpdatedDate,sourceParam_sourceParamId,sourceParam_guid,sourceParam_sourceParamName,sourceParam_sourceParamType,sourceParam_possibleValues,sourceParam_insertedRowDate,sourceParam_lastUpdatedDate,sourceType_sourceTypeId,sourceType_guid,sourceType_sourceTypeName,sourceType_sourceTypeClass,sourceType_insertedRowDate,sourceType_lastUpdatedDate";
+    "sourceTypeParamId,guid,insertedRowDate,lastUpdatedDate,sourceTypeId,sourceParamId,sourceTypeName,sourceParamName,isRequired,sourceParam_sourceParamId,sourceParam_guid,sourceParam_insertedRowDate,sourceParam_lastUpdatedDate,sourceParam_sourceParamName,sourceParam_sourceParamType,sourceParam_possibleValues,sourceType_sourceTypeId,sourceType_guid,sourceType_insertedRowDate,sourceType_lastUpdatedDate,sourceType_sourceTypeName,sourceType_sourceTypeClass";
   }
   def pkFields : String = {
     "";
@@ -8402,35 +13215,35 @@ case class VSourceTypeParamDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(sourceTypeParamId,sourceTypeId,sourceParamId,sourceTypeName,sourceParamName,isRequired,guid,insertedRowDate,lastUpdatedDate,sourceParam_sourceParamId,sourceParam_guid,sourceParam_sourceParamName,sourceParam_sourceParamType,sourceParam_possibleValues,sourceParam_insertedRowDate,sourceParam_lastUpdatedDate,sourceType_sourceTypeId,sourceType_guid,sourceType_sourceTypeName,sourceType_sourceTypeClass,sourceType_insertedRowDate,sourceType_lastUpdatedDate)
+    Array(sourceTypeParamId,guid,insertedRowDate,lastUpdatedDate,sourceTypeId,sourceParamId,sourceTypeName,sourceParamName,isRequired,sourceParam_sourceParamId,sourceParam_guid,sourceParam_insertedRowDate,sourceParam_lastUpdatedDate,sourceParam_sourceParamName,sourceParam_sourceParamType,sourceParam_possibleValues,sourceType_sourceTypeId,sourceType_guid,sourceType_insertedRowDate,sourceType_lastUpdatedDate,sourceType_sourceTypeName,sourceType_sourceTypeClass)
   }
   def toStringArray() : Array[String] = {
-    Array(""+sourceTypeParamId,""+sourceTypeId,""+sourceParamId,""+sourceTypeName,""+sourceParamName,""+isRequired,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceParam_sourceParamId,""+sourceParam_guid,""+sourceParam_sourceParamName,""+sourceParam_sourceParamType,""+sourceParam_possibleValues,""+sourceParam_insertedRowDate,""+sourceParam_lastUpdatedDate,""+sourceType_sourceTypeId,""+sourceType_guid,""+sourceType_sourceTypeName,""+sourceType_sourceTypeClass,""+sourceType_insertedRowDate,""+sourceType_lastUpdatedDate)
+    Array(""+sourceTypeParamId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceTypeId,""+sourceParamId,""+sourceTypeName,""+sourceParamName,""+isRequired,""+sourceParam_sourceParamId,""+sourceParam_guid,""+sourceParam_insertedRowDate,""+sourceParam_lastUpdatedDate,""+sourceParam_sourceParamName,""+sourceParam_sourceParamType,""+sourceParam_possibleValues,""+sourceType_sourceTypeId,""+sourceType_guid,""+sourceType_insertedRowDate,""+sourceType_lastUpdatedDate,""+sourceType_sourceTypeName,""+sourceType_sourceTypeClass)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "sourceTypeParamId" => sourceTypeParamId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
       case "sourceTypeId" => sourceTypeId
       case "sourceParamId" => sourceParamId
       case "sourceTypeName" => sourceTypeName
       case "sourceParamName" => sourceParamName
       case "isRequired" => isRequired
-      case "guid" => guid
-      case "insertedRowDate" => insertedRowDate
-      case "lastUpdatedDate" => lastUpdatedDate
       case "sourceParam_sourceParamId" => sourceParam_sourceParamId
       case "sourceParam_guid" => sourceParam_guid
+      case "sourceParam_insertedRowDate" => sourceParam_insertedRowDate
+      case "sourceParam_lastUpdatedDate" => sourceParam_lastUpdatedDate
       case "sourceParam_sourceParamName" => sourceParam_sourceParamName
       case "sourceParam_sourceParamType" => sourceParam_sourceParamType
       case "sourceParam_possibleValues" => sourceParam_possibleValues
-      case "sourceParam_insertedRowDate" => sourceParam_insertedRowDate
-      case "sourceParam_lastUpdatedDate" => sourceParam_lastUpdatedDate
       case "sourceType_sourceTypeId" => sourceType_sourceTypeId
       case "sourceType_guid" => sourceType_guid
-      case "sourceType_sourceTypeName" => sourceType_sourceTypeName
-      case "sourceType_sourceTypeClass" => sourceType_sourceTypeClass
       case "sourceType_insertedRowDate" => sourceType_insertedRowDate
       case "sourceType_lastUpdatedDate" => sourceType_lastUpdatedDate
+      case "sourceType_sourceTypeName" => sourceType_sourceTypeName
+      case "sourceType_sourceTypeClass" => sourceType_sourceTypeClass
       case _ => null
     }
     ret
@@ -8438,27 +13251,27 @@ case class VSourceTypeParamDto (
   def getFieldTypeName(name : String) : String = {
     val ret = name match {
       case "sourceTypeParamId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
       case "sourceTypeId" => "Long"
       case "sourceParamId" => "Long"
       case "sourceTypeName" => "String"
       case "sourceParamName" => "String"
       case "isRequired" => "Int"
-      case "guid" => "Long"
-      case "insertedRowDate" => "java.util.Date"
-      case "lastUpdatedDate" => "java.util.Date"
       case "sourceParam_sourceParamId" => "Long"
       case "sourceParam_guid" => "Long"
+      case "sourceParam_insertedRowDate" => "java.util.Date"
+      case "sourceParam_lastUpdatedDate" => "java.util.Date"
       case "sourceParam_sourceParamName" => "String"
       case "sourceParam_sourceParamType" => "String"
       case "sourceParam_possibleValues" => "String"
-      case "sourceParam_insertedRowDate" => "java.util.Date"
-      case "sourceParam_lastUpdatedDate" => "java.util.Date"
       case "sourceType_sourceTypeId" => "Long"
       case "sourceType_guid" => "Long"
-      case "sourceType_sourceTypeName" => "String"
-      case "sourceType_sourceTypeClass" => "String"
       case "sourceType_insertedRowDate" => "java.util.Date"
       case "sourceType_lastUpdatedDate" => "java.util.Date"
+      case "sourceType_sourceTypeName" => "String"
+      case "sourceType_sourceTypeClass" => "String"
       case _ => "Object"
     }
     ret
@@ -8467,27 +13280,113 @@ case class VSourceTypeParamDto (
 object VSourceTypeParamDto {
   val TABLE_NAME = "vSourceTypeParam";
   val FIELD_sourceTypeParamId = "sourceTypeParamId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_sourceTypeId = "sourceTypeId";
   val FIELD_sourceParamId = "sourceParamId";
   val FIELD_sourceTypeName = "sourceTypeName";
   val FIELD_sourceParamName = "sourceParamName";
   val FIELD_isRequired = "isRequired";
-  val FIELD_guid = "guid";
-  val FIELD_insertedRowDate = "insertedRowDate";
-  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_sourceParam_sourceParamId = "sourceParam_sourceParamId";
   val FIELD_sourceParam_guid = "sourceParam_guid";
+  val FIELD_sourceParam_insertedRowDate = "sourceParam_insertedRowDate";
+  val FIELD_sourceParam_lastUpdatedDate = "sourceParam_lastUpdatedDate";
   val FIELD_sourceParam_sourceParamName = "sourceParam_sourceParamName";
   val FIELD_sourceParam_sourceParamType = "sourceParam_sourceParamType";
   val FIELD_sourceParam_possibleValues = "sourceParam_possibleValues";
-  val FIELD_sourceParam_insertedRowDate = "sourceParam_insertedRowDate";
-  val FIELD_sourceParam_lastUpdatedDate = "sourceParam_lastUpdatedDate";
   val FIELD_sourceType_sourceTypeId = "sourceType_sourceTypeId";
   val FIELD_sourceType_guid = "sourceType_guid";
-  val FIELD_sourceType_sourceTypeName = "sourceType_sourceTypeName";
-  val FIELD_sourceType_sourceTypeClass = "sourceType_sourceTypeClass";
   val FIELD_sourceType_insertedRowDate = "sourceType_insertedRowDate";
   val FIELD_sourceType_lastUpdatedDate = "sourceType_lastUpdatedDate";
+  val FIELD_sourceType_sourceTypeName = "sourceType_sourceTypeName";
+  val FIELD_sourceType_sourceTypeClass = "sourceType_sourceTypeClass";
+
+}
+
+
+case class VSourceTypeSummaryDto (
+                                   val sourceTypeId : Long
+                                   , val guid : Long
+                                   , val insertedRowDate : java.util.Date
+                                   , val lastUpdatedDate : java.util.Date
+                                   , val sourceTypeName : String
+                                   , val sourceTypeClass : String
+                                   , val sourceInstance_count : Int
+                                   , val sourceTypeParam_count : Int
+                                 ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vSourceTypeSummary";
+  }
+  def fields : String = {
+    "sourceTypeId,guid,insertedRowDate,lastUpdatedDate,sourceTypeName,sourceTypeClass,sourceInstance_count,sourceTypeParam_count";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    sourceTypeSummaryId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(sourceTypeId,guid,insertedRowDate,lastUpdatedDate,sourceTypeName,sourceTypeClass,sourceInstance_count,sourceTypeParam_count)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+sourceTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceTypeName,""+sourceTypeClass,""+sourceInstance_count,""+sourceTypeParam_count)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "sourceTypeId" => sourceTypeId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "sourceTypeName" => sourceTypeName
+      case "sourceTypeClass" => sourceTypeClass
+      case "sourceInstance_count" => sourceInstance_count
+      case "sourceTypeParam_count" => sourceTypeParam_count
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "sourceTypeId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "sourceTypeName" => "String"
+      case "sourceTypeClass" => "String"
+      case "sourceInstance_count" => "Int"
+      case "sourceTypeParam_count" => "Int"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VSourceTypeSummaryDto {
+  val TABLE_NAME = "vSourceTypeSummary";
+  val FIELD_sourceTypeId = "sourceTypeId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_sourceTypeName = "sourceTypeName";
+  val FIELD_sourceTypeClass = "sourceTypeClass";
+  val FIELD_sourceInstance_count = "sourceInstance_count";
+  val FIELD_sourceTypeParam_count = "sourceTypeParam_count";
 
 }
 
@@ -8495,34 +13394,35 @@ object VSourceTypeParamDto {
 case class VSourceViewDto (
                             val sourceViewId : Long
                             , val guid : Long
+                            , val insertedRowDate : java.util.Date
+                            , val lastUpdatedDate : java.util.Date
                             , val sourceInstanceId : Long
                             , val sourceViewTypeId : Long
                             , val sourceViewName : String
                             , val sourceViewDefinition : String
-                            , val insertedRowDate : java.util.Date
-                            , val lastUpdatedDate : java.util.Date
+                            , val isExisting : Int
                             , val sourceInstance_sourceInstanceId : Long
                             , val sourceInstance_guid : Long
+                            , val sourceInstance_insertedRowDate : java.util.Date
+                            , val sourceInstance_lastUpdatedDate : java.util.Date
                             , val sourceInstance_sourceTypeId : Long
                             , val sourceInstance_sourceInstanceName : String
                             , val sourceInstance_errorCount : Long
                             , val sourceInstance_correctCount : Long
                             , val sourceInstance_lastStatus : String
                             , val sourceInstance_lastConnectionDate : java.util.Date
-                            , val sourceInstance_insertedRowDate : java.util.Date
-                            , val sourceInstance_lastUpdatedDate : java.util.Date
                             , val sourceViewType_sourceViewTypeId : Long
                             , val sourceViewType_guid : Long
-                            , val sourceViewType_sourceViewTypeName : String
-                            , val sourceViewType_sourceViewTypeClass : String
                             , val sourceViewType_insertedRowDate : java.util.Date
                             , val sourceViewType_lastUpdatedDate : java.util.Date
+                            , val sourceViewType_sourceViewTypeName : String
+                            , val sourceViewType_sourceViewTypeClass : String
                           ) extends BaseReadOnlyDto {
   def tableName : String = {
     "vSourceView";
   }
   def fields : String = {
-    "sourceViewId,guid,sourceInstanceId,sourceViewTypeId,sourceViewName,sourceViewDefinition,insertedRowDate,lastUpdatedDate,sourceInstance_sourceInstanceId,sourceInstance_guid,sourceInstance_sourceTypeId,sourceInstance_sourceInstanceName,sourceInstance_errorCount,sourceInstance_correctCount,sourceInstance_lastStatus,sourceInstance_lastConnectionDate,sourceInstance_insertedRowDate,sourceInstance_lastUpdatedDate,sourceViewType_sourceViewTypeId,sourceViewType_guid,sourceViewType_sourceViewTypeName,sourceViewType_sourceViewTypeClass,sourceViewType_insertedRowDate,sourceViewType_lastUpdatedDate";
+    "sourceViewId,guid,insertedRowDate,lastUpdatedDate,sourceInstanceId,sourceViewTypeId,sourceViewName,sourceViewDefinition,isExisting,sourceInstance_sourceInstanceId,sourceInstance_guid,sourceInstance_insertedRowDate,sourceInstance_lastUpdatedDate,sourceInstance_sourceTypeId,sourceInstance_sourceInstanceName,sourceInstance_errorCount,sourceInstance_correctCount,sourceInstance_lastStatus,sourceInstance_lastConnectionDate,sourceViewType_sourceViewTypeId,sourceViewType_guid,sourceViewType_insertedRowDate,sourceViewType_lastUpdatedDate,sourceViewType_sourceViewTypeName,sourceViewType_sourceViewTypeClass";
   }
   def pkFields : String = {
     "";
@@ -8546,37 +13446,38 @@ case class VSourceViewDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(sourceViewId,guid,sourceInstanceId,sourceViewTypeId,sourceViewName,sourceViewDefinition,insertedRowDate,lastUpdatedDate,sourceInstance_sourceInstanceId,sourceInstance_guid,sourceInstance_sourceTypeId,sourceInstance_sourceInstanceName,sourceInstance_errorCount,sourceInstance_correctCount,sourceInstance_lastStatus,sourceInstance_lastConnectionDate,sourceInstance_insertedRowDate,sourceInstance_lastUpdatedDate,sourceViewType_sourceViewTypeId,sourceViewType_guid,sourceViewType_sourceViewTypeName,sourceViewType_sourceViewTypeClass,sourceViewType_insertedRowDate,sourceViewType_lastUpdatedDate)
+    Array(sourceViewId,guid,insertedRowDate,lastUpdatedDate,sourceInstanceId,sourceViewTypeId,sourceViewName,sourceViewDefinition,isExisting,sourceInstance_sourceInstanceId,sourceInstance_guid,sourceInstance_insertedRowDate,sourceInstance_lastUpdatedDate,sourceInstance_sourceTypeId,sourceInstance_sourceInstanceName,sourceInstance_errorCount,sourceInstance_correctCount,sourceInstance_lastStatus,sourceInstance_lastConnectionDate,sourceViewType_sourceViewTypeId,sourceViewType_guid,sourceViewType_insertedRowDate,sourceViewType_lastUpdatedDate,sourceViewType_sourceViewTypeName,sourceViewType_sourceViewTypeClass)
   }
   def toStringArray() : Array[String] = {
-    Array(""+sourceViewId,""+guid,""+sourceInstanceId,""+sourceViewTypeId,""+sourceViewName,""+sourceViewDefinition,""+insertedRowDate,""+lastUpdatedDate,""+sourceInstance_sourceInstanceId,""+sourceInstance_guid,""+sourceInstance_sourceTypeId,""+sourceInstance_sourceInstanceName,""+sourceInstance_errorCount,""+sourceInstance_correctCount,""+sourceInstance_lastStatus,""+sourceInstance_lastConnectionDate,""+sourceInstance_insertedRowDate,""+sourceInstance_lastUpdatedDate,""+sourceViewType_sourceViewTypeId,""+sourceViewType_guid,""+sourceViewType_sourceViewTypeName,""+sourceViewType_sourceViewTypeClass,""+sourceViewType_insertedRowDate,""+sourceViewType_lastUpdatedDate)
+    Array(""+sourceViewId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceInstanceId,""+sourceViewTypeId,""+sourceViewName,""+sourceViewDefinition,""+isExisting,""+sourceInstance_sourceInstanceId,""+sourceInstance_guid,""+sourceInstance_insertedRowDate,""+sourceInstance_lastUpdatedDate,""+sourceInstance_sourceTypeId,""+sourceInstance_sourceInstanceName,""+sourceInstance_errorCount,""+sourceInstance_correctCount,""+sourceInstance_lastStatus,""+sourceInstance_lastConnectionDate,""+sourceViewType_sourceViewTypeId,""+sourceViewType_guid,""+sourceViewType_insertedRowDate,""+sourceViewType_lastUpdatedDate,""+sourceViewType_sourceViewTypeName,""+sourceViewType_sourceViewTypeClass)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "sourceViewId" => sourceViewId
       case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
       case "sourceInstanceId" => sourceInstanceId
       case "sourceViewTypeId" => sourceViewTypeId
       case "sourceViewName" => sourceViewName
       case "sourceViewDefinition" => sourceViewDefinition
-      case "insertedRowDate" => insertedRowDate
-      case "lastUpdatedDate" => lastUpdatedDate
+      case "isExisting" => isExisting
       case "sourceInstance_sourceInstanceId" => sourceInstance_sourceInstanceId
       case "sourceInstance_guid" => sourceInstance_guid
+      case "sourceInstance_insertedRowDate" => sourceInstance_insertedRowDate
+      case "sourceInstance_lastUpdatedDate" => sourceInstance_lastUpdatedDate
       case "sourceInstance_sourceTypeId" => sourceInstance_sourceTypeId
       case "sourceInstance_sourceInstanceName" => sourceInstance_sourceInstanceName
       case "sourceInstance_errorCount" => sourceInstance_errorCount
       case "sourceInstance_correctCount" => sourceInstance_correctCount
       case "sourceInstance_lastStatus" => sourceInstance_lastStatus
       case "sourceInstance_lastConnectionDate" => sourceInstance_lastConnectionDate
-      case "sourceInstance_insertedRowDate" => sourceInstance_insertedRowDate
-      case "sourceInstance_lastUpdatedDate" => sourceInstance_lastUpdatedDate
       case "sourceViewType_sourceViewTypeId" => sourceViewType_sourceViewTypeId
       case "sourceViewType_guid" => sourceViewType_guid
-      case "sourceViewType_sourceViewTypeName" => sourceViewType_sourceViewTypeName
-      case "sourceViewType_sourceViewTypeClass" => sourceViewType_sourceViewTypeClass
       case "sourceViewType_insertedRowDate" => sourceViewType_insertedRowDate
       case "sourceViewType_lastUpdatedDate" => sourceViewType_lastUpdatedDate
+      case "sourceViewType_sourceViewTypeName" => sourceViewType_sourceViewTypeName
+      case "sourceViewType_sourceViewTypeClass" => sourceViewType_sourceViewTypeClass
       case _ => null
     }
     ret
@@ -8585,28 +13486,29 @@ case class VSourceViewDto (
     val ret = name match {
       case "sourceViewId" => "Long"
       case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
       case "sourceInstanceId" => "Long"
       case "sourceViewTypeId" => "Long"
       case "sourceViewName" => "String"
       case "sourceViewDefinition" => "String"
-      case "insertedRowDate" => "java.util.Date"
-      case "lastUpdatedDate" => "java.util.Date"
+      case "isExisting" => "Int"
       case "sourceInstance_sourceInstanceId" => "Long"
       case "sourceInstance_guid" => "Long"
+      case "sourceInstance_insertedRowDate" => "java.util.Date"
+      case "sourceInstance_lastUpdatedDate" => "java.util.Date"
       case "sourceInstance_sourceTypeId" => "Long"
       case "sourceInstance_sourceInstanceName" => "String"
       case "sourceInstance_errorCount" => "Long"
       case "sourceInstance_correctCount" => "Long"
       case "sourceInstance_lastStatus" => "String"
       case "sourceInstance_lastConnectionDate" => "java.util.Date"
-      case "sourceInstance_insertedRowDate" => "java.util.Date"
-      case "sourceInstance_lastUpdatedDate" => "java.util.Date"
       case "sourceViewType_sourceViewTypeId" => "Long"
       case "sourceViewType_guid" => "Long"
-      case "sourceViewType_sourceViewTypeName" => "String"
-      case "sourceViewType_sourceViewTypeClass" => "String"
       case "sourceViewType_insertedRowDate" => "java.util.Date"
       case "sourceViewType_lastUpdatedDate" => "java.util.Date"
+      case "sourceViewType_sourceViewTypeName" => "String"
+      case "sourceViewType_sourceViewTypeClass" => "String"
       case _ => "Object"
     }
     ret
@@ -8616,54 +13518,56 @@ object VSourceViewDto {
   val TABLE_NAME = "vSourceView";
   val FIELD_sourceViewId = "sourceViewId";
   val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
   val FIELD_sourceInstanceId = "sourceInstanceId";
   val FIELD_sourceViewTypeId = "sourceViewTypeId";
   val FIELD_sourceViewName = "sourceViewName";
   val FIELD_sourceViewDefinition = "sourceViewDefinition";
-  val FIELD_insertedRowDate = "insertedRowDate";
-  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_isExisting = "isExisting";
   val FIELD_sourceInstance_sourceInstanceId = "sourceInstance_sourceInstanceId";
   val FIELD_sourceInstance_guid = "sourceInstance_guid";
+  val FIELD_sourceInstance_insertedRowDate = "sourceInstance_insertedRowDate";
+  val FIELD_sourceInstance_lastUpdatedDate = "sourceInstance_lastUpdatedDate";
   val FIELD_sourceInstance_sourceTypeId = "sourceInstance_sourceTypeId";
   val FIELD_sourceInstance_sourceInstanceName = "sourceInstance_sourceInstanceName";
   val FIELD_sourceInstance_errorCount = "sourceInstance_errorCount";
   val FIELD_sourceInstance_correctCount = "sourceInstance_correctCount";
   val FIELD_sourceInstance_lastStatus = "sourceInstance_lastStatus";
   val FIELD_sourceInstance_lastConnectionDate = "sourceInstance_lastConnectionDate";
-  val FIELD_sourceInstance_insertedRowDate = "sourceInstance_insertedRowDate";
-  val FIELD_sourceInstance_lastUpdatedDate = "sourceInstance_lastUpdatedDate";
   val FIELD_sourceViewType_sourceViewTypeId = "sourceViewType_sourceViewTypeId";
   val FIELD_sourceViewType_guid = "sourceViewType_guid";
-  val FIELD_sourceViewType_sourceViewTypeName = "sourceViewType_sourceViewTypeName";
-  val FIELD_sourceViewType_sourceViewTypeClass = "sourceViewType_sourceViewTypeClass";
   val FIELD_sourceViewType_insertedRowDate = "sourceViewType_insertedRowDate";
   val FIELD_sourceViewType_lastUpdatedDate = "sourceViewType_lastUpdatedDate";
+  val FIELD_sourceViewType_sourceViewTypeName = "sourceViewType_sourceViewTypeName";
+  val FIELD_sourceViewType_sourceViewTypeClass = "sourceViewType_sourceViewTypeClass";
 
 }
 
 
 case class VSourceViewColumnDto (
                                   val sourceViewColumnId : Long
-                                  , val sourceViewId : Long
+                                  , val guid : Long
                                   , val insertedRowDate : java.util.Date
                                   , val lastUpdatedDate : java.util.Date
-                                  , val guid : Long
+                                  , val sourceViewId : Long
                                   , val columnName : String
                                   , val columnType : String
                                   , val sourceView_sourceViewId : Long
                                   , val sourceView_guid : Long
+                                  , val sourceView_insertedRowDate : java.util.Date
+                                  , val sourceView_lastUpdatedDate : java.util.Date
                                   , val sourceView_sourceInstanceId : Long
                                   , val sourceView_sourceViewTypeId : Long
                                   , val sourceView_sourceViewName : String
                                   , val sourceView_sourceViewDefinition : String
-                                  , val sourceView_insertedRowDate : java.util.Date
-                                  , val sourceView_lastUpdatedDate : java.util.Date
+                                  , val sourceView_isExisting : Int
                                 ) extends BaseReadOnlyDto {
   def tableName : String = {
     "vSourceViewColumn";
   }
   def fields : String = {
-    "sourceViewColumnId,sourceViewId,insertedRowDate,lastUpdatedDate,guid,columnName,columnType,sourceView_sourceViewId,sourceView_guid,sourceView_sourceInstanceId,sourceView_sourceViewTypeId,sourceView_sourceViewName,sourceView_sourceViewDefinition,sourceView_insertedRowDate,sourceView_lastUpdatedDate";
+    "sourceViewColumnId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,columnName,columnType,sourceView_sourceViewId,sourceView_guid,sourceView_insertedRowDate,sourceView_lastUpdatedDate,sourceView_sourceInstanceId,sourceView_sourceViewTypeId,sourceView_sourceViewName,sourceView_sourceViewDefinition,sourceView_isExisting";
   }
   def pkFields : String = {
     "";
@@ -8687,28 +13591,29 @@ case class VSourceViewColumnDto (
     guid
   }
   def toAnyArray() : Array[Any] = {
-    Array(sourceViewColumnId,sourceViewId,insertedRowDate,lastUpdatedDate,guid,columnName,columnType,sourceView_sourceViewId,sourceView_guid,sourceView_sourceInstanceId,sourceView_sourceViewTypeId,sourceView_sourceViewName,sourceView_sourceViewDefinition,sourceView_insertedRowDate,sourceView_lastUpdatedDate)
+    Array(sourceViewColumnId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,columnName,columnType,sourceView_sourceViewId,sourceView_guid,sourceView_insertedRowDate,sourceView_lastUpdatedDate,sourceView_sourceInstanceId,sourceView_sourceViewTypeId,sourceView_sourceViewName,sourceView_sourceViewDefinition,sourceView_isExisting)
   }
   def toStringArray() : Array[String] = {
-    Array(""+sourceViewColumnId,""+sourceViewId,""+insertedRowDate,""+lastUpdatedDate,""+guid,""+columnName,""+columnType,""+sourceView_sourceViewId,""+sourceView_guid,""+sourceView_sourceInstanceId,""+sourceView_sourceViewTypeId,""+sourceView_sourceViewName,""+sourceView_sourceViewDefinition,""+sourceView_insertedRowDate,""+sourceView_lastUpdatedDate)
+    Array(""+sourceViewColumnId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceViewId,""+columnName,""+columnType,""+sourceView_sourceViewId,""+sourceView_guid,""+sourceView_insertedRowDate,""+sourceView_lastUpdatedDate,""+sourceView_sourceInstanceId,""+sourceView_sourceViewTypeId,""+sourceView_sourceViewName,""+sourceView_sourceViewDefinition,""+sourceView_isExisting)
   }
   def getFieldValue(name : String) : Any = {
     val ret = name match {
       case "sourceViewColumnId" => sourceViewColumnId
-      case "sourceViewId" => sourceViewId
+      case "guid" => guid
       case "insertedRowDate" => insertedRowDate
       case "lastUpdatedDate" => lastUpdatedDate
-      case "guid" => guid
+      case "sourceViewId" => sourceViewId
       case "columnName" => columnName
       case "columnType" => columnType
       case "sourceView_sourceViewId" => sourceView_sourceViewId
       case "sourceView_guid" => sourceView_guid
+      case "sourceView_insertedRowDate" => sourceView_insertedRowDate
+      case "sourceView_lastUpdatedDate" => sourceView_lastUpdatedDate
       case "sourceView_sourceInstanceId" => sourceView_sourceInstanceId
       case "sourceView_sourceViewTypeId" => sourceView_sourceViewTypeId
       case "sourceView_sourceViewName" => sourceView_sourceViewName
       case "sourceView_sourceViewDefinition" => sourceView_sourceViewDefinition
-      case "sourceView_insertedRowDate" => sourceView_insertedRowDate
-      case "sourceView_lastUpdatedDate" => sourceView_lastUpdatedDate
+      case "sourceView_isExisting" => sourceView_isExisting
       case _ => null
     }
     ret
@@ -8716,20 +13621,21 @@ case class VSourceViewColumnDto (
   def getFieldTypeName(name : String) : String = {
     val ret = name match {
       case "sourceViewColumnId" => "Long"
-      case "sourceViewId" => "Long"
+      case "guid" => "Long"
       case "insertedRowDate" => "java.util.Date"
       case "lastUpdatedDate" => "java.util.Date"
-      case "guid" => "Long"
+      case "sourceViewId" => "Long"
       case "columnName" => "String"
       case "columnType" => "String"
       case "sourceView_sourceViewId" => "Long"
       case "sourceView_guid" => "Long"
+      case "sourceView_insertedRowDate" => "java.util.Date"
+      case "sourceView_lastUpdatedDate" => "java.util.Date"
       case "sourceView_sourceInstanceId" => "Long"
       case "sourceView_sourceViewTypeId" => "Long"
       case "sourceView_sourceViewName" => "String"
       case "sourceView_sourceViewDefinition" => "String"
-      case "sourceView_insertedRowDate" => "java.util.Date"
-      case "sourceView_lastUpdatedDate" => "java.util.Date"
+      case "sourceView_isExisting" => "Int"
       case _ => "Object"
     }
     ret
@@ -8738,19 +13644,309 @@ case class VSourceViewColumnDto (
 object VSourceViewColumnDto {
   val TABLE_NAME = "vSourceViewColumn";
   val FIELD_sourceViewColumnId = "sourceViewColumnId";
-  val FIELD_sourceViewId = "sourceViewId";
+  val FIELD_guid = "guid";
   val FIELD_insertedRowDate = "insertedRowDate";
   val FIELD_lastUpdatedDate = "lastUpdatedDate";
-  val FIELD_guid = "guid";
+  val FIELD_sourceViewId = "sourceViewId";
   val FIELD_columnName = "columnName";
   val FIELD_columnType = "columnType";
   val FIELD_sourceView_sourceViewId = "sourceView_sourceViewId";
   val FIELD_sourceView_guid = "sourceView_guid";
+  val FIELD_sourceView_insertedRowDate = "sourceView_insertedRowDate";
+  val FIELD_sourceView_lastUpdatedDate = "sourceView_lastUpdatedDate";
   val FIELD_sourceView_sourceInstanceId = "sourceView_sourceInstanceId";
   val FIELD_sourceView_sourceViewTypeId = "sourceView_sourceViewTypeId";
   val FIELD_sourceView_sourceViewName = "sourceView_sourceViewName";
   val FIELD_sourceView_sourceViewDefinition = "sourceView_sourceViewDefinition";
-  val FIELD_sourceView_insertedRowDate = "sourceView_insertedRowDate";
-  val FIELD_sourceView_lastUpdatedDate = "sourceView_lastUpdatedDate";
+  val FIELD_sourceView_isExisting = "sourceView_isExisting";
 
 }
+
+
+case class VSourceViewColumnSummaryDto (
+                                         val sourceViewColumnId : Long
+                                         , val guid : Long
+                                         , val insertedRowDate : java.util.Date
+                                         , val lastUpdatedDate : java.util.Date
+                                         , val sourceViewId : Long
+                                         , val columnName : String
+                                         , val columnType : String
+                                         , val algorithmScheduleColumn_count : Int
+                                         , val sourceDownloadStatColumn_count : Int
+                                       ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vSourceViewColumnSummary";
+  }
+  def fields : String = {
+    "sourceViewColumnId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,columnName,columnType,algorithmScheduleColumn_count,sourceDownloadStatColumn_count";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    sourceViewColumnSummaryId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(sourceViewColumnId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,columnName,columnType,algorithmScheduleColumn_count,sourceDownloadStatColumn_count)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+sourceViewColumnId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceViewId,""+columnName,""+columnType,""+algorithmScheduleColumn_count,""+sourceDownloadStatColumn_count)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "sourceViewColumnId" => sourceViewColumnId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "sourceViewId" => sourceViewId
+      case "columnName" => columnName
+      case "columnType" => columnType
+      case "algorithmScheduleColumn_count" => algorithmScheduleColumn_count
+      case "sourceDownloadStatColumn_count" => sourceDownloadStatColumn_count
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "sourceViewColumnId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "sourceViewId" => "Long"
+      case "columnName" => "String"
+      case "columnType" => "String"
+      case "algorithmScheduleColumn_count" => "Int"
+      case "sourceDownloadStatColumn_count" => "Int"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VSourceViewColumnSummaryDto {
+  val TABLE_NAME = "vSourceViewColumnSummary";
+  val FIELD_sourceViewColumnId = "sourceViewColumnId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_sourceViewId = "sourceViewId";
+  val FIELD_columnName = "columnName";
+  val FIELD_columnType = "columnType";
+  val FIELD_algorithmScheduleColumn_count = "algorithmScheduleColumn_count";
+  val FIELD_sourceDownloadStatColumn_count = "sourceDownloadStatColumn_count";
+
+}
+
+
+case class VSourceViewSummaryDto (
+                                   val sourceViewId : Long
+                                   , val guid : Long
+                                   , val insertedRowDate : java.util.Date
+                                   , val lastUpdatedDate : java.util.Date
+                                   , val sourceInstanceId : Long
+                                   , val sourceViewTypeId : Long
+                                   , val sourceViewName : String
+                                   , val sourceViewDefinition : String
+                                   , val isExisting : Int
+                                   , val algorithmScheduleView_count : Int
+                                   , val algorithmScheduleColumn_count : Int
+                                   , val sourceViewColumn_count : Int
+                                   , val sourceSchedule_count : Int
+                                   , val sourceDownload_count : Int
+                                   , val executorStorageView_count : Int
+                                 ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vSourceViewSummary";
+  }
+  def fields : String = {
+    "sourceViewId,guid,insertedRowDate,lastUpdatedDate,sourceInstanceId,sourceViewTypeId,sourceViewName,sourceViewDefinition,isExisting,algorithmScheduleView_count,algorithmScheduleColumn_count,sourceViewColumn_count,sourceSchedule_count,sourceDownload_count,executorStorageView_count";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    sourceViewSummaryId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(sourceViewId,guid,insertedRowDate,lastUpdatedDate,sourceInstanceId,sourceViewTypeId,sourceViewName,sourceViewDefinition,isExisting,algorithmScheduleView_count,algorithmScheduleColumn_count,sourceViewColumn_count,sourceSchedule_count,sourceDownload_count,executorStorageView_count)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+sourceViewId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceInstanceId,""+sourceViewTypeId,""+sourceViewName,""+sourceViewDefinition,""+isExisting,""+algorithmScheduleView_count,""+algorithmScheduleColumn_count,""+sourceViewColumn_count,""+sourceSchedule_count,""+sourceDownload_count,""+executorStorageView_count)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "sourceViewId" => sourceViewId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "sourceInstanceId" => sourceInstanceId
+      case "sourceViewTypeId" => sourceViewTypeId
+      case "sourceViewName" => sourceViewName
+      case "sourceViewDefinition" => sourceViewDefinition
+      case "isExisting" => isExisting
+      case "algorithmScheduleView_count" => algorithmScheduleView_count
+      case "algorithmScheduleColumn_count" => algorithmScheduleColumn_count
+      case "sourceViewColumn_count" => sourceViewColumn_count
+      case "sourceSchedule_count" => sourceSchedule_count
+      case "sourceDownload_count" => sourceDownload_count
+      case "executorStorageView_count" => executorStorageView_count
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "sourceViewId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "sourceInstanceId" => "Long"
+      case "sourceViewTypeId" => "Long"
+      case "sourceViewName" => "String"
+      case "sourceViewDefinition" => "String"
+      case "isExisting" => "Int"
+      case "algorithmScheduleView_count" => "Int"
+      case "algorithmScheduleColumn_count" => "Int"
+      case "sourceViewColumn_count" => "Int"
+      case "sourceSchedule_count" => "Int"
+      case "sourceDownload_count" => "Int"
+      case "executorStorageView_count" => "Int"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VSourceViewSummaryDto {
+  val TABLE_NAME = "vSourceViewSummary";
+  val FIELD_sourceViewId = "sourceViewId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_sourceInstanceId = "sourceInstanceId";
+  val FIELD_sourceViewTypeId = "sourceViewTypeId";
+  val FIELD_sourceViewName = "sourceViewName";
+  val FIELD_sourceViewDefinition = "sourceViewDefinition";
+  val FIELD_isExisting = "isExisting";
+  val FIELD_algorithmScheduleView_count = "algorithmScheduleView_count";
+  val FIELD_algorithmScheduleColumn_count = "algorithmScheduleColumn_count";
+  val FIELD_sourceViewColumn_count = "sourceViewColumn_count";
+  val FIELD_sourceSchedule_count = "sourceSchedule_count";
+  val FIELD_sourceDownload_count = "sourceDownload_count";
+  val FIELD_executorStorageView_count = "executorStorageView_count";
+
+}
+
+
+case class VSourceViewTypeSummaryDto (
+                                       val sourceViewTypeId : Long
+                                       , val guid : Long
+                                       , val insertedRowDate : java.util.Date
+                                       , val lastUpdatedDate : java.util.Date
+                                       , val sourceViewTypeName : String
+                                       , val sourceViewTypeClass : String
+                                       , val sourceView_count : Int
+                                     ) extends BaseReadOnlyDto {
+  def tableName : String = {
+    "vSourceViewTypeSummary";
+  }
+  def fields : String = {
+    "sourceViewTypeId,guid,insertedRowDate,lastUpdatedDate,sourceViewTypeName,sourceViewTypeClass,sourceView_count";
+  }
+  def pkFields : String = {
+    "";
+  }
+  def fkFields : String = {
+    "";
+  }
+  def nameField : String = {
+    "";
+  }
+  def getPk() : Long = {
+    sourceViewTypeSummaryId
+  }
+  def getInsertedRowDate() : java.util.Date = {
+    insertedRowDate
+  }
+  def getLastUpdatedDate() : java.util.Date = {
+    lastUpdatedDate
+  }
+  def getGuid() : Long = {
+    guid
+  }
+  def toAnyArray() : Array[Any] = {
+    Array(sourceViewTypeId,guid,insertedRowDate,lastUpdatedDate,sourceViewTypeName,sourceViewTypeClass,sourceView_count)
+  }
+  def toStringArray() : Array[String] = {
+    Array(""+sourceViewTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceViewTypeName,""+sourceViewTypeClass,""+sourceView_count)
+  }
+  def getFieldValue(name : String) : Any = {
+    val ret = name match {
+      case "sourceViewTypeId" => sourceViewTypeId
+      case "guid" => guid
+      case "insertedRowDate" => insertedRowDate
+      case "lastUpdatedDate" => lastUpdatedDate
+      case "sourceViewTypeName" => sourceViewTypeName
+      case "sourceViewTypeClass" => sourceViewTypeClass
+      case "sourceView_count" => sourceView_count
+      case _ => null
+    }
+    ret
+  }
+  def getFieldTypeName(name : String) : String = {
+    val ret = name match {
+      case "sourceViewTypeId" => "Long"
+      case "guid" => "Long"
+      case "insertedRowDate" => "java.util.Date"
+      case "lastUpdatedDate" => "java.util.Date"
+      case "sourceViewTypeName" => "String"
+      case "sourceViewTypeClass" => "String"
+      case "sourceView_count" => "Int"
+      case _ => "Object"
+    }
+    ret
+  }
+}
+object VSourceViewTypeSummaryDto {
+  val TABLE_NAME = "vSourceViewTypeSummary";
+  val FIELD_sourceViewTypeId = "sourceViewTypeId";
+  val FIELD_guid = "guid";
+  val FIELD_insertedRowDate = "insertedRowDate";
+  val FIELD_lastUpdatedDate = "lastUpdatedDate";
+  val FIELD_sourceViewTypeName = "sourceViewTypeName";
+  val FIELD_sourceViewTypeClass = "sourceViewTypeClass";
+  val FIELD_sourceView_count = "sourceView_count";
+
+}
+
+
+
