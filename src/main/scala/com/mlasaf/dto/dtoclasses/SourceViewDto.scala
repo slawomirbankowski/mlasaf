@@ -17,39 +17,18 @@ case class SourceViewDto (
      , val sourceViewDefinition : String
      , val isExisting : Int 
      ) extends BaseDto {  
-   def tableName : String = { 
-   "sourceView"; 
-   }  
-   def fields : String = { 
-   "sourceViewId,guid,insertedRowDate,lastUpdatedDate,sourceInstanceId,sourceViewTypeId,sourceViewName,sourceViewDefinition,isExisting"; 
-   }  
-   def pkFields : String = { 
-   "sourceViewId"; 
-   }  
-   def fkFields : String = { 
-   "sourceInstanceId,sourceViewTypeId"; 
-   }  
-   def nameField : String = { 
-   "sourceViewName"; 
-   }  
- def getPk() : Long = {
-    sourceViewId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(sourceViewId,guid,insertedRowDate,lastUpdatedDate,sourceInstanceId,sourceViewTypeId,sourceViewName,sourceViewDefinition,isExisting)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+sourceViewId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceInstanceId,""+sourceViewTypeId,""+sourceViewName,""+sourceViewDefinition,""+isExisting) 
-  } 
+   def tableName : String = {    "sourceView";    }  
+   def fields : String = {    "sourceViewId,guid,insertedRowDate,lastUpdatedDate,sourceInstanceId,sourceViewTypeId,sourceViewName,sourceViewDefinition,isExisting";    }  
+   def pkFields : String = {    "sourceViewId";    }  
+   def fkFields : String = {    "sourceInstanceId,sourceViewTypeId";    }  
+   def nameField : String = {    "sourceViewName";    }  
+ def getPk() : Long = {    sourceViewId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(sourceViewId,guid,insertedRowDate,lastUpdatedDate,sourceInstanceId,sourceViewTypeId,sourceViewName,sourceViewDefinition,isExisting)  }  
+ def toStringArray() : Array[String] = {    Array(""+sourceViewId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceInstanceId,""+sourceViewTypeId,""+sourceViewName,""+sourceViewDefinition,""+isExisting)   }  
+ def toFullString() : String = {    "sourceViewId:'"+sourceViewId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"sourceInstanceId:'"+sourceInstanceId+"'"+","+"sourceViewTypeId:'"+sourceViewTypeId+"'"+","+"sourceViewName:'"+sourceViewName+"'"+","+"sourceViewDefinition:'"+sourceViewDefinition+"'"+","+"isExisting:'"+isExisting+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "sourceViewId" => sourceViewId  

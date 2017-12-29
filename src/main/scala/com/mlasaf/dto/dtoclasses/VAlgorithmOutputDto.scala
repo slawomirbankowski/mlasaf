@@ -33,39 +33,18 @@ case class VAlgorithmOutputDto (
      , val executorStorageView_viewRowsCount : Long
      , val executorStorageView_isValid : Int 
      ) extends BaseReadOnlyDto {  
-   def tableName : String = { 
-   "vAlgorithmOutput"; 
-   }  
-   def fields : String = { 
-   "algorithmOutputId,guid,insertedRowDate,lastUpdatedDate,algorithmRunId,algorithmOutputTypeId,executorStorageViewId,outputPath,algorithmOutputType_algorithmOutputTypeId,algorithmOutputType_guid,algorithmOutputType_insertedRowDate,algorithmOutputType_lastUpdatedDate,algorithmOutputType_algorithmOutputTypeName,executorStorageView_executorStorageViewId,executorStorageView_guid,executorStorageView_insertedRowDate,executorStorageView_lastUpdatedDate,executorStorageView_executorStorageSnapshotId,executorStorageView_executorStorageId,executorStorageView_sourceDownloadId,executorStorageView_sourceViewId,executorStorageView_storagePath,executorStorageView_viewSize,executorStorageView_viewRowsCount,executorStorageView_isValid"; 
-   }  
-   def pkFields : String = { 
-   ""; 
-   }  
-   def fkFields : String = { 
-   ""; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    algorithmOutputId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(algorithmOutputId,guid,insertedRowDate,lastUpdatedDate,algorithmRunId,algorithmOutputTypeId,executorStorageViewId,outputPath,algorithmOutputType_algorithmOutputTypeId,algorithmOutputType_guid,algorithmOutputType_insertedRowDate,algorithmOutputType_lastUpdatedDate,algorithmOutputType_algorithmOutputTypeName,executorStorageView_executorStorageViewId,executorStorageView_guid,executorStorageView_insertedRowDate,executorStorageView_lastUpdatedDate,executorStorageView_executorStorageSnapshotId,executorStorageView_executorStorageId,executorStorageView_sourceDownloadId,executorStorageView_sourceViewId,executorStorageView_storagePath,executorStorageView_viewSize,executorStorageView_viewRowsCount,executorStorageView_isValid)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+algorithmOutputId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmRunId,""+algorithmOutputTypeId,""+executorStorageViewId,""+outputPath,""+algorithmOutputType_algorithmOutputTypeId,""+algorithmOutputType_guid,""+algorithmOutputType_insertedRowDate,""+algorithmOutputType_lastUpdatedDate,""+algorithmOutputType_algorithmOutputTypeName,""+executorStorageView_executorStorageViewId,""+executorStorageView_guid,""+executorStorageView_insertedRowDate,""+executorStorageView_lastUpdatedDate,""+executorStorageView_executorStorageSnapshotId,""+executorStorageView_executorStorageId,""+executorStorageView_sourceDownloadId,""+executorStorageView_sourceViewId,""+executorStorageView_storagePath,""+executorStorageView_viewSize,""+executorStorageView_viewRowsCount,""+executorStorageView_isValid) 
-  } 
+   def tableName : String = {    "vAlgorithmOutput";    }  
+   def fields : String = {    "algorithmOutputId,guid,insertedRowDate,lastUpdatedDate,algorithmRunId,algorithmOutputTypeId,executorStorageViewId,outputPath,algorithmOutputType_algorithmOutputTypeId,algorithmOutputType_guid,algorithmOutputType_insertedRowDate,algorithmOutputType_lastUpdatedDate,algorithmOutputType_algorithmOutputTypeName,executorStorageView_executorStorageViewId,executorStorageView_guid,executorStorageView_insertedRowDate,executorStorageView_lastUpdatedDate,executorStorageView_executorStorageSnapshotId,executorStorageView_executorStorageId,executorStorageView_sourceDownloadId,executorStorageView_sourceViewId,executorStorageView_storagePath,executorStorageView_viewSize,executorStorageView_viewRowsCount,executorStorageView_isValid";    }  
+   def pkFields : String = {    "";    }  
+   def fkFields : String = {    "";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    algorithmOutputId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(algorithmOutputId,guid,insertedRowDate,lastUpdatedDate,algorithmRunId,algorithmOutputTypeId,executorStorageViewId,outputPath,algorithmOutputType_algorithmOutputTypeId,algorithmOutputType_guid,algorithmOutputType_insertedRowDate,algorithmOutputType_lastUpdatedDate,algorithmOutputType_algorithmOutputTypeName,executorStorageView_executorStorageViewId,executorStorageView_guid,executorStorageView_insertedRowDate,executorStorageView_lastUpdatedDate,executorStorageView_executorStorageSnapshotId,executorStorageView_executorStorageId,executorStorageView_sourceDownloadId,executorStorageView_sourceViewId,executorStorageView_storagePath,executorStorageView_viewSize,executorStorageView_viewRowsCount,executorStorageView_isValid)  }  
+ def toStringArray() : Array[String] = {    Array(""+algorithmOutputId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmRunId,""+algorithmOutputTypeId,""+executorStorageViewId,""+outputPath,""+algorithmOutputType_algorithmOutputTypeId,""+algorithmOutputType_guid,""+algorithmOutputType_insertedRowDate,""+algorithmOutputType_lastUpdatedDate,""+algorithmOutputType_algorithmOutputTypeName,""+executorStorageView_executorStorageViewId,""+executorStorageView_guid,""+executorStorageView_insertedRowDate,""+executorStorageView_lastUpdatedDate,""+executorStorageView_executorStorageSnapshotId,""+executorStorageView_executorStorageId,""+executorStorageView_sourceDownloadId,""+executorStorageView_sourceViewId,""+executorStorageView_storagePath,""+executorStorageView_viewSize,""+executorStorageView_viewRowsCount,""+executorStorageView_isValid)   }  
+ def toFullString() : String = {    "algorithmOutputId:'"+algorithmOutputId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmRunId:'"+algorithmRunId+"'"+","+"algorithmOutputTypeId:'"+algorithmOutputTypeId+"'"+","+"executorStorageViewId:'"+executorStorageViewId+"'"+","+"outputPath:'"+outputPath+"'"+","+"algorithmOutputType_algorithmOutputTypeId:'"+algorithmOutputType_algorithmOutputTypeId+"'"+","+"algorithmOutputType_guid:'"+algorithmOutputType_guid+"'"+","+"algorithmOutputType_insertedRowDate:'"+algorithmOutputType_insertedRowDate+"'"+","+"algorithmOutputType_lastUpdatedDate:'"+algorithmOutputType_lastUpdatedDate+"'"+","+"algorithmOutputType_algorithmOutputTypeName:'"+algorithmOutputType_algorithmOutputTypeName+"'"+","+"executorStorageView_executorStorageViewId:'"+executorStorageView_executorStorageViewId+"'"+","+"executorStorageView_guid:'"+executorStorageView_guid+"'"+","+"executorStorageView_insertedRowDate:'"+executorStorageView_insertedRowDate+"'"+","+"executorStorageView_lastUpdatedDate:'"+executorStorageView_lastUpdatedDate+"'"+","+"executorStorageView_executorStorageSnapshotId:'"+executorStorageView_executorStorageSnapshotId+"'"+","+"executorStorageView_executorStorageId:'"+executorStorageView_executorStorageId+"'"+","+"executorStorageView_sourceDownloadId:'"+executorStorageView_sourceDownloadId+"'"+","+"executorStorageView_sourceViewId:'"+executorStorageView_sourceViewId+"'"+","+"executorStorageView_storagePath:'"+executorStorageView_storagePath+"'"+","+"executorStorageView_viewSize:'"+executorStorageView_viewSize+"'"+","+"executorStorageView_viewRowsCount:'"+executorStorageView_viewRowsCount+"'"+","+"executorStorageView_isValid:'"+executorStorageView_isValid+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "algorithmOutputId" => algorithmOutputId  

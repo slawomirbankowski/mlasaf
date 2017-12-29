@@ -62,6 +62,11 @@ import java.util.Date
    val dtos : List[AlgorithmOutputDto] = SQL("select * from algorithmOutput where algorithmOutputTypeId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[AlgorithmOutputDto].*);  
    dtos  
  }  
+ def getAlgorithmOutputByFkAlgorithmRunId(fkColValue : Long) : List[AlgorithmOutputDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[AlgorithmOutputDto] = SQL("select * from algorithmOutput where algorithmRunId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[AlgorithmOutputDto].*);  
+   dtos  
+ }  
  def getAlgorithmOutputByFkExecutorStorageViewId(fkColValue : Long) : List[AlgorithmOutputDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[AlgorithmOutputDto] = SQL("select * from algorithmOutput where executorStorageViewId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[AlgorithmOutputDto].*);  

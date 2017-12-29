@@ -20,12 +20,14 @@ trait ThreadBase extends Runnable {
   def setParentContext(pc : Context): Unit = {
     parentContext = pc;
   }
+  /** */
   def start() : Unit = {
     val th : Thread = new Thread(this);
     thread = th;
     th.setDaemon(true);
     th.start();
   }
+  /** */
   def run() : Unit = {
     println("Start running inThread: " + thread.getId);
     onRunBegin();

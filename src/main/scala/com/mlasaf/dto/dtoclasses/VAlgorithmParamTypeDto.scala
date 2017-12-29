@@ -34,39 +34,18 @@ case class VAlgorithmParamTypeDto (
      , val algorithmTypeVersion_algorithmTypeId : Long
      , val algorithmTypeVersion_algorithmTypeVersionName : String 
      ) extends BaseReadOnlyDto {  
-   def tableName : String = { 
-   "vAlgorithmParamType"; 
-   }  
-   def fields : String = { 
-   "algorithmParamTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmParamId,algorithmTypeId,algorithmTypeVersionId,algorithmParam_algorithmParamId,algorithmParam_guid,algorithmParam_insertedRowDate,algorithmParam_lastUpdatedDate,algorithmParam_algorithmParamName,algorithmParam_algorithmParamDescription,algorithmParam_algorithmParamType,algorithmType_algorithmTypeId,algorithmType_guid,algorithmType_insertedRowDate,algorithmType_lastUpdatedDate,algorithmType_algorithmTypeName,algorithmType_algorithmTypeDescription,algorithmTypeVersion_algorithmTypeVersionId,algorithmTypeVersion_insertedRowDate,algorithmTypeVersion_lastUpdatedDate,algorithmTypeVersion_guid,algorithmTypeVersion_algorithmTypeId,algorithmTypeVersion_algorithmTypeVersionName"; 
-   }  
-   def pkFields : String = { 
-   ""; 
-   }  
-   def fkFields : String = { 
-   ""; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    algorithmParamTypeId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(algorithmParamTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmParamId,algorithmTypeId,algorithmTypeVersionId,algorithmParam_algorithmParamId,algorithmParam_guid,algorithmParam_insertedRowDate,algorithmParam_lastUpdatedDate,algorithmParam_algorithmParamName,algorithmParam_algorithmParamDescription,algorithmParam_algorithmParamType,algorithmType_algorithmTypeId,algorithmType_guid,algorithmType_insertedRowDate,algorithmType_lastUpdatedDate,algorithmType_algorithmTypeName,algorithmType_algorithmTypeDescription,algorithmTypeVersion_algorithmTypeVersionId,algorithmTypeVersion_insertedRowDate,algorithmTypeVersion_lastUpdatedDate,algorithmTypeVersion_guid,algorithmTypeVersion_algorithmTypeId,algorithmTypeVersion_algorithmTypeVersionName)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+algorithmParamTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmParamId,""+algorithmTypeId,""+algorithmTypeVersionId,""+algorithmParam_algorithmParamId,""+algorithmParam_guid,""+algorithmParam_insertedRowDate,""+algorithmParam_lastUpdatedDate,""+algorithmParam_algorithmParamName,""+algorithmParam_algorithmParamDescription,""+algorithmParam_algorithmParamType,""+algorithmType_algorithmTypeId,""+algorithmType_guid,""+algorithmType_insertedRowDate,""+algorithmType_lastUpdatedDate,""+algorithmType_algorithmTypeName,""+algorithmType_algorithmTypeDescription,""+algorithmTypeVersion_algorithmTypeVersionId,""+algorithmTypeVersion_insertedRowDate,""+algorithmTypeVersion_lastUpdatedDate,""+algorithmTypeVersion_guid,""+algorithmTypeVersion_algorithmTypeId,""+algorithmTypeVersion_algorithmTypeVersionName) 
-  } 
+   def tableName : String = {    "vAlgorithmParamType";    }  
+   def fields : String = {    "algorithmParamTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmParamId,algorithmTypeId,algorithmTypeVersionId,algorithmParam_algorithmParamId,algorithmParam_guid,algorithmParam_insertedRowDate,algorithmParam_lastUpdatedDate,algorithmParam_algorithmParamName,algorithmParam_algorithmParamDescription,algorithmParam_algorithmParamType,algorithmType_algorithmTypeId,algorithmType_guid,algorithmType_insertedRowDate,algorithmType_lastUpdatedDate,algorithmType_algorithmTypeName,algorithmType_algorithmTypeDescription,algorithmTypeVersion_algorithmTypeVersionId,algorithmTypeVersion_insertedRowDate,algorithmTypeVersion_lastUpdatedDate,algorithmTypeVersion_guid,algorithmTypeVersion_algorithmTypeId,algorithmTypeVersion_algorithmTypeVersionName";    }  
+   def pkFields : String = {    "";    }  
+   def fkFields : String = {    "";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    algorithmParamTypeId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(algorithmParamTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmParamId,algorithmTypeId,algorithmTypeVersionId,algorithmParam_algorithmParamId,algorithmParam_guid,algorithmParam_insertedRowDate,algorithmParam_lastUpdatedDate,algorithmParam_algorithmParamName,algorithmParam_algorithmParamDescription,algorithmParam_algorithmParamType,algorithmType_algorithmTypeId,algorithmType_guid,algorithmType_insertedRowDate,algorithmType_lastUpdatedDate,algorithmType_algorithmTypeName,algorithmType_algorithmTypeDescription,algorithmTypeVersion_algorithmTypeVersionId,algorithmTypeVersion_insertedRowDate,algorithmTypeVersion_lastUpdatedDate,algorithmTypeVersion_guid,algorithmTypeVersion_algorithmTypeId,algorithmTypeVersion_algorithmTypeVersionName)  }  
+ def toStringArray() : Array[String] = {    Array(""+algorithmParamTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmParamId,""+algorithmTypeId,""+algorithmTypeVersionId,""+algorithmParam_algorithmParamId,""+algorithmParam_guid,""+algorithmParam_insertedRowDate,""+algorithmParam_lastUpdatedDate,""+algorithmParam_algorithmParamName,""+algorithmParam_algorithmParamDescription,""+algorithmParam_algorithmParamType,""+algorithmType_algorithmTypeId,""+algorithmType_guid,""+algorithmType_insertedRowDate,""+algorithmType_lastUpdatedDate,""+algorithmType_algorithmTypeName,""+algorithmType_algorithmTypeDescription,""+algorithmTypeVersion_algorithmTypeVersionId,""+algorithmTypeVersion_insertedRowDate,""+algorithmTypeVersion_lastUpdatedDate,""+algorithmTypeVersion_guid,""+algorithmTypeVersion_algorithmTypeId,""+algorithmTypeVersion_algorithmTypeVersionName)   }  
+ def toFullString() : String = {    "algorithmParamTypeId:'"+algorithmParamTypeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmParamId:'"+algorithmParamId+"'"+","+"algorithmTypeId:'"+algorithmTypeId+"'"+","+"algorithmTypeVersionId:'"+algorithmTypeVersionId+"'"+","+"algorithmParam_algorithmParamId:'"+algorithmParam_algorithmParamId+"'"+","+"algorithmParam_guid:'"+algorithmParam_guid+"'"+","+"algorithmParam_insertedRowDate:'"+algorithmParam_insertedRowDate+"'"+","+"algorithmParam_lastUpdatedDate:'"+algorithmParam_lastUpdatedDate+"'"+","+"algorithmParam_algorithmParamName:'"+algorithmParam_algorithmParamName+"'"+","+"algorithmParam_algorithmParamDescription:'"+algorithmParam_algorithmParamDescription+"'"+","+"algorithmParam_algorithmParamType:'"+algorithmParam_algorithmParamType+"'"+","+"algorithmType_algorithmTypeId:'"+algorithmType_algorithmTypeId+"'"+","+"algorithmType_guid:'"+algorithmType_guid+"'"+","+"algorithmType_insertedRowDate:'"+algorithmType_insertedRowDate+"'"+","+"algorithmType_lastUpdatedDate:'"+algorithmType_lastUpdatedDate+"'"+","+"algorithmType_algorithmTypeName:'"+algorithmType_algorithmTypeName+"'"+","+"algorithmType_algorithmTypeDescription:'"+algorithmType_algorithmTypeDescription+"'"+","+"algorithmTypeVersion_algorithmTypeVersionId:'"+algorithmTypeVersion_algorithmTypeVersionId+"'"+","+"algorithmTypeVersion_insertedRowDate:'"+algorithmTypeVersion_insertedRowDate+"'"+","+"algorithmTypeVersion_lastUpdatedDate:'"+algorithmTypeVersion_lastUpdatedDate+"'"+","+"algorithmTypeVersion_guid:'"+algorithmTypeVersion_guid+"'"+","+"algorithmTypeVersion_algorithmTypeId:'"+algorithmTypeVersion_algorithmTypeId+"'"+","+"algorithmTypeVersion_algorithmTypeVersionName:'"+algorithmTypeVersion_algorithmTypeVersionName+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "algorithmParamTypeId" => algorithmParamTypeId  

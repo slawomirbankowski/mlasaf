@@ -33,39 +33,18 @@ case class VSourceParamValueDto (
      , val sourceParam_sourceParamType : String
      , val sourceParam_possibleValues : String 
      ) extends BaseReadOnlyDto {  
-   def tableName : String = { 
-   "vSourceParamValue"; 
-   }  
-   def fields : String = { 
-   "sourceParamValueId,guid,insertedRowDate,lastUpdatedDate,sourceInstanceId,sourceParamId,sourceParamValueVersion,paramValue,sourceInstance_sourceInstanceId,sourceInstance_guid,sourceInstance_insertedRowDate,sourceInstance_lastUpdatedDate,sourceInstance_sourceTypeId,sourceInstance_sourceInstanceName,sourceInstance_errorCount,sourceInstance_correctCount,sourceInstance_lastStatus,sourceInstance_lastConnectionDate,sourceParam_sourceParamId,sourceParam_guid,sourceParam_insertedRowDate,sourceParam_lastUpdatedDate,sourceParam_sourceParamName,sourceParam_sourceParamType,sourceParam_possibleValues"; 
-   }  
-   def pkFields : String = { 
-   ""; 
-   }  
-   def fkFields : String = { 
-   ""; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    sourceParamValueId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(sourceParamValueId,guid,insertedRowDate,lastUpdatedDate,sourceInstanceId,sourceParamId,sourceParamValueVersion,paramValue,sourceInstance_sourceInstanceId,sourceInstance_guid,sourceInstance_insertedRowDate,sourceInstance_lastUpdatedDate,sourceInstance_sourceTypeId,sourceInstance_sourceInstanceName,sourceInstance_errorCount,sourceInstance_correctCount,sourceInstance_lastStatus,sourceInstance_lastConnectionDate,sourceParam_sourceParamId,sourceParam_guid,sourceParam_insertedRowDate,sourceParam_lastUpdatedDate,sourceParam_sourceParamName,sourceParam_sourceParamType,sourceParam_possibleValues)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+sourceParamValueId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceInstanceId,""+sourceParamId,""+sourceParamValueVersion,""+paramValue,""+sourceInstance_sourceInstanceId,""+sourceInstance_guid,""+sourceInstance_insertedRowDate,""+sourceInstance_lastUpdatedDate,""+sourceInstance_sourceTypeId,""+sourceInstance_sourceInstanceName,""+sourceInstance_errorCount,""+sourceInstance_correctCount,""+sourceInstance_lastStatus,""+sourceInstance_lastConnectionDate,""+sourceParam_sourceParamId,""+sourceParam_guid,""+sourceParam_insertedRowDate,""+sourceParam_lastUpdatedDate,""+sourceParam_sourceParamName,""+sourceParam_sourceParamType,""+sourceParam_possibleValues) 
-  } 
+   def tableName : String = {    "vSourceParamValue";    }  
+   def fields : String = {    "sourceParamValueId,guid,insertedRowDate,lastUpdatedDate,sourceInstanceId,sourceParamId,sourceParamValueVersion,paramValue,sourceInstance_sourceInstanceId,sourceInstance_guid,sourceInstance_insertedRowDate,sourceInstance_lastUpdatedDate,sourceInstance_sourceTypeId,sourceInstance_sourceInstanceName,sourceInstance_errorCount,sourceInstance_correctCount,sourceInstance_lastStatus,sourceInstance_lastConnectionDate,sourceParam_sourceParamId,sourceParam_guid,sourceParam_insertedRowDate,sourceParam_lastUpdatedDate,sourceParam_sourceParamName,sourceParam_sourceParamType,sourceParam_possibleValues";    }  
+   def pkFields : String = {    "";    }  
+   def fkFields : String = {    "";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    sourceParamValueId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(sourceParamValueId,guid,insertedRowDate,lastUpdatedDate,sourceInstanceId,sourceParamId,sourceParamValueVersion,paramValue,sourceInstance_sourceInstanceId,sourceInstance_guid,sourceInstance_insertedRowDate,sourceInstance_lastUpdatedDate,sourceInstance_sourceTypeId,sourceInstance_sourceInstanceName,sourceInstance_errorCount,sourceInstance_correctCount,sourceInstance_lastStatus,sourceInstance_lastConnectionDate,sourceParam_sourceParamId,sourceParam_guid,sourceParam_insertedRowDate,sourceParam_lastUpdatedDate,sourceParam_sourceParamName,sourceParam_sourceParamType,sourceParam_possibleValues)  }  
+ def toStringArray() : Array[String] = {    Array(""+sourceParamValueId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceInstanceId,""+sourceParamId,""+sourceParamValueVersion,""+paramValue,""+sourceInstance_sourceInstanceId,""+sourceInstance_guid,""+sourceInstance_insertedRowDate,""+sourceInstance_lastUpdatedDate,""+sourceInstance_sourceTypeId,""+sourceInstance_sourceInstanceName,""+sourceInstance_errorCount,""+sourceInstance_correctCount,""+sourceInstance_lastStatus,""+sourceInstance_lastConnectionDate,""+sourceParam_sourceParamId,""+sourceParam_guid,""+sourceParam_insertedRowDate,""+sourceParam_lastUpdatedDate,""+sourceParam_sourceParamName,""+sourceParam_sourceParamType,""+sourceParam_possibleValues)   }  
+ def toFullString() : String = {    "sourceParamValueId:'"+sourceParamValueId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"sourceInstanceId:'"+sourceInstanceId+"'"+","+"sourceParamId:'"+sourceParamId+"'"+","+"sourceParamValueVersion:'"+sourceParamValueVersion+"'"+","+"paramValue:'"+paramValue+"'"+","+"sourceInstance_sourceInstanceId:'"+sourceInstance_sourceInstanceId+"'"+","+"sourceInstance_guid:'"+sourceInstance_guid+"'"+","+"sourceInstance_insertedRowDate:'"+sourceInstance_insertedRowDate+"'"+","+"sourceInstance_lastUpdatedDate:'"+sourceInstance_lastUpdatedDate+"'"+","+"sourceInstance_sourceTypeId:'"+sourceInstance_sourceTypeId+"'"+","+"sourceInstance_sourceInstanceName:'"+sourceInstance_sourceInstanceName+"'"+","+"sourceInstance_errorCount:'"+sourceInstance_errorCount+"'"+","+"sourceInstance_correctCount:'"+sourceInstance_correctCount+"'"+","+"sourceInstance_lastStatus:'"+sourceInstance_lastStatus+"'"+","+"sourceInstance_lastConnectionDate:'"+sourceInstance_lastConnectionDate+"'"+","+"sourceParam_sourceParamId:'"+sourceParam_sourceParamId+"'"+","+"sourceParam_guid:'"+sourceParam_guid+"'"+","+"sourceParam_insertedRowDate:'"+sourceParam_insertedRowDate+"'"+","+"sourceParam_lastUpdatedDate:'"+sourceParam_lastUpdatedDate+"'"+","+"sourceParam_sourceParamName:'"+sourceParam_sourceParamName+"'"+","+"sourceParam_sourceParamType:'"+sourceParam_sourceParamType+"'"+","+"sourceParam_possibleValues:'"+sourceParam_possibleValues+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "sourceParamValueId" => sourceParamValueId  

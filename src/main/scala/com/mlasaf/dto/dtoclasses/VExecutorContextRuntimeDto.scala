@@ -35,39 +35,18 @@ case class VExecutorContextRuntimeDto (
      , val executorHost_hostOsVersion : String
      , val executorHost_isWorking : Int 
      ) extends BaseReadOnlyDto {  
-   def tableName : String = { 
-   "vExecutorContextRuntime"; 
-   }  
-   def fields : String = { 
-   "executorContextRuntimeId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorContextId,availableProcessors,freeMemory,maxMemory,totalMemory,executorContext_executorContextId,executorContext_guid,executorContext_insertedRowDate,executorContext_lastUpdatedDate,executorContext_executorHostId,executorContext_isWorking,executorContext_properties,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking"; 
-   }  
-   def pkFields : String = { 
-   ""; 
-   }  
-   def fkFields : String = { 
-   ""; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    executorContextRuntimeId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(executorContextRuntimeId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorContextId,availableProcessors,freeMemory,maxMemory,totalMemory,executorContext_executorContextId,executorContext_guid,executorContext_insertedRowDate,executorContext_lastUpdatedDate,executorContext_executorHostId,executorContext_isWorking,executorContext_properties,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+executorContextRuntimeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+executorContextId,""+availableProcessors,""+freeMemory,""+maxMemory,""+totalMemory,""+executorContext_executorContextId,""+executorContext_guid,""+executorContext_insertedRowDate,""+executorContext_lastUpdatedDate,""+executorContext_executorHostId,""+executorContext_isWorking,""+executorContext_properties,""+executorHost_executorHostId,""+executorHost_guid,""+executorHost_insertedRowDate,""+executorHost_lastUpdatedDate,""+executorHost_hostName,""+executorHost_hostIp,""+executorHost_hostDomain,""+executorHost_hostOsType,""+executorHost_hostOsVersion,""+executorHost_isWorking) 
-  } 
+   def tableName : String = {    "vExecutorContextRuntime";    }  
+   def fields : String = {    "executorContextRuntimeId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorContextId,availableProcessors,freeMemory,maxMemory,totalMemory,executorContext_executorContextId,executorContext_guid,executorContext_insertedRowDate,executorContext_lastUpdatedDate,executorContext_executorHostId,executorContext_isWorking,executorContext_properties,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking";    }  
+   def pkFields : String = {    "";    }  
+   def fkFields : String = {    "";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    executorContextRuntimeId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(executorContextRuntimeId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorContextId,availableProcessors,freeMemory,maxMemory,totalMemory,executorContext_executorContextId,executorContext_guid,executorContext_insertedRowDate,executorContext_lastUpdatedDate,executorContext_executorHostId,executorContext_isWorking,executorContext_properties,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking)  }  
+ def toStringArray() : Array[String] = {    Array(""+executorContextRuntimeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+executorContextId,""+availableProcessors,""+freeMemory,""+maxMemory,""+totalMemory,""+executorContext_executorContextId,""+executorContext_guid,""+executorContext_insertedRowDate,""+executorContext_lastUpdatedDate,""+executorContext_executorHostId,""+executorContext_isWorking,""+executorContext_properties,""+executorHost_executorHostId,""+executorHost_guid,""+executorHost_insertedRowDate,""+executorHost_lastUpdatedDate,""+executorHost_hostName,""+executorHost_hostIp,""+executorHost_hostDomain,""+executorHost_hostOsType,""+executorHost_hostOsVersion,""+executorHost_isWorking)   }  
+ def toFullString() : String = {    "executorContextRuntimeId:'"+executorContextRuntimeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorHostId:'"+executorHostId+"'"+","+"executorContextId:'"+executorContextId+"'"+","+"availableProcessors:'"+availableProcessors+"'"+","+"freeMemory:'"+freeMemory+"'"+","+"maxMemory:'"+maxMemory+"'"+","+"totalMemory:'"+totalMemory+"'"+","+"executorContext_executorContextId:'"+executorContext_executorContextId+"'"+","+"executorContext_guid:'"+executorContext_guid+"'"+","+"executorContext_insertedRowDate:'"+executorContext_insertedRowDate+"'"+","+"executorContext_lastUpdatedDate:'"+executorContext_lastUpdatedDate+"'"+","+"executorContext_executorHostId:'"+executorContext_executorHostId+"'"+","+"executorContext_isWorking:'"+executorContext_isWorking+"'"+","+"executorContext_properties:'"+executorContext_properties+"'"+","+"executorHost_executorHostId:'"+executorHost_executorHostId+"'"+","+"executorHost_guid:'"+executorHost_guid+"'"+","+"executorHost_insertedRowDate:'"+executorHost_insertedRowDate+"'"+","+"executorHost_lastUpdatedDate:'"+executorHost_lastUpdatedDate+"'"+","+"executorHost_hostName:'"+executorHost_hostName+"'"+","+"executorHost_hostIp:'"+executorHost_hostIp+"'"+","+"executorHost_hostDomain:'"+executorHost_hostDomain+"'"+","+"executorHost_hostOsType:'"+executorHost_hostOsType+"'"+","+"executorHost_hostOsVersion:'"+executorHost_hostOsVersion+"'"+","+"executorHost_isWorking:'"+executorHost_isWorking+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "executorContextRuntimeId" => executorContextRuntimeId  

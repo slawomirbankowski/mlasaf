@@ -17,39 +17,18 @@ case class VSourceViewColumnSummaryDto (
      , val algorithmScheduleColumn_count : Int
      , val sourceDownloadStatColumn_count : Int 
      ) extends BaseReadOnlyDto {  
-   def tableName : String = { 
-   "vSourceViewColumnSummary"; 
-   }  
-   def fields : String = { 
-   "sourceViewColumnId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,columnName,columnType,algorithmScheduleColumn_count,sourceDownloadStatColumn_count"; 
-   }  
-   def pkFields : String = { 
-   ""; 
-   }  
-   def fkFields : String = { 
-   ""; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    sourceViewColumnId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(sourceViewColumnId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,columnName,columnType,algorithmScheduleColumn_count,sourceDownloadStatColumn_count)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+sourceViewColumnId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceViewId,""+columnName,""+columnType,""+algorithmScheduleColumn_count,""+sourceDownloadStatColumn_count) 
-  } 
+   def tableName : String = {    "vSourceViewColumnSummary";    }  
+   def fields : String = {    "sourceViewColumnId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,columnName,columnType,algorithmScheduleColumn_count,sourceDownloadStatColumn_count";    }  
+   def pkFields : String = {    "";    }  
+   def fkFields : String = {    "";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    sourceViewColumnId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(sourceViewColumnId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,columnName,columnType,algorithmScheduleColumn_count,sourceDownloadStatColumn_count)  }  
+ def toStringArray() : Array[String] = {    Array(""+sourceViewColumnId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceViewId,""+columnName,""+columnType,""+algorithmScheduleColumn_count,""+sourceDownloadStatColumn_count)   }  
+ def toFullString() : String = {    "sourceViewColumnId:'"+sourceViewColumnId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"sourceViewId:'"+sourceViewId+"'"+","+"columnName:'"+columnName+"'"+","+"columnType:'"+columnType+"'"+","+"algorithmScheduleColumn_count:'"+algorithmScheduleColumn_count+"'"+","+"sourceDownloadStatColumn_count:'"+sourceDownloadStatColumn_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "sourceViewColumnId" => sourceViewColumnId  

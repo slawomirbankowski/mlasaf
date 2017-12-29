@@ -18,39 +18,18 @@ case class VExecutorContextSummaryDto (
      , val executorInstance_count : Int
      , val sourceDownload_count : Int 
      ) extends BaseReadOnlyDto {  
-   def tableName : String = { 
-   "vExecutorContextSummary"; 
-   }  
-   def fields : String = { 
-   "executorContextId,guid,insertedRowDate,lastUpdatedDate,executorHostId,isWorking,properties,executorContextRuntime_count,executorInstance_count,sourceDownload_count"; 
-   }  
-   def pkFields : String = { 
-   ""; 
-   }  
-   def fkFields : String = { 
-   ""; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    executorContextId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(executorContextId,guid,insertedRowDate,lastUpdatedDate,executorHostId,isWorking,properties,executorContextRuntime_count,executorInstance_count,sourceDownload_count)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+executorContextId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+isWorking,""+properties,""+executorContextRuntime_count,""+executorInstance_count,""+sourceDownload_count) 
-  } 
+   def tableName : String = {    "vExecutorContextSummary";    }  
+   def fields : String = {    "executorContextId,guid,insertedRowDate,lastUpdatedDate,executorHostId,isWorking,properties,executorContextRuntime_count,executorInstance_count,sourceDownload_count";    }  
+   def pkFields : String = {    "";    }  
+   def fkFields : String = {    "";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    executorContextId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(executorContextId,guid,insertedRowDate,lastUpdatedDate,executorHostId,isWorking,properties,executorContextRuntime_count,executorInstance_count,sourceDownload_count)  }  
+ def toStringArray() : Array[String] = {    Array(""+executorContextId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+isWorking,""+properties,""+executorContextRuntime_count,""+executorInstance_count,""+sourceDownload_count)   }  
+ def toFullString() : String = {    "executorContextId:'"+executorContextId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorHostId:'"+executorHostId+"'"+","+"isWorking:'"+isWorking+"'"+","+"properties:'"+properties+"'"+","+"executorContextRuntime_count:'"+executorContextRuntime_count+"'"+","+"executorInstance_count:'"+executorInstance_count+"'"+","+"sourceDownload_count:'"+sourceDownload_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "executorContextId" => executorContextId  

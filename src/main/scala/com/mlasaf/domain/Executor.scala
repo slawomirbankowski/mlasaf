@@ -57,7 +57,8 @@ trait Executor extends ThreadBase {
         println("Create new Run for schedule: " + sch);
         // select storage for run
         var runTypeId = parentContext.daoFactory.daos.algorithmRunTypeDao.getAlgorithmRunTypeFirstByName("NORMAL").get.algorithmRunTypeId;
-        val storageId = parentContext.storages.head.storageDto.executorStorageId; // TODO: change this to better assignment storage to download views into
+        val storageObj = parentContext.storages.head;
+        val storageId = storageObj.storageDto.executorStorageId; // TODO: change this to better assignment storage to download views into
         val runDto = parentContext.daoFactory.daos.algorithmRunDao.createAndInsertAlgorithmRunDto(sch.algorithmScheduleId, executorInstanceDto.executorInstanceId, storageId, runTypeId, "any custom name for RUN", new java.util.Date(), "CREATED", 0, "", 1, 0);
         println("Created AlgorithmRun object to run algorithm in LOCAL Executor: " + executorInstanceDto);
         // get all views needed for this run
@@ -65,6 +66,7 @@ trait Executor extends ThreadBase {
         var algoRun : AlgorithmRun = new AlgorithmRun();
         algoRunObjs += algoRun;
         algoRun.parentExecutor = this;
+        algoRun.storage = storageObj;
         algoRun.algorithmRunDto = runDto;
         algoRun.algorithmScheduleDto = sch;
         algoRun.algorithmInstance = Class.forName(sch.algorithmImplementation_algorithmImplementationClass).newInstance().asInstanceOf[AlgorithmInstance];

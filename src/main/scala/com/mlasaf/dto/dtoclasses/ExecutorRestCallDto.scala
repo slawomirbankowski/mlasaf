@@ -18,39 +18,18 @@ case class ExecutorRestCallDto (
      , val requestBody : String
      , val responseBody : String 
      ) extends BaseDto {  
-   def tableName : String = { 
-   "executorRestCall"; 
-   }  
-   def fields : String = { 
-   "executorRestCallId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorRestId,requestMethod,requestHeader,requestBody,responseBody"; 
-   }  
-   def pkFields : String = { 
-   "executorRestCallId"; 
-   }  
-   def fkFields : String = { 
-   "executorHostId,executorRestId"; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    executorRestCallId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(executorRestCallId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorRestId,requestMethod,requestHeader,requestBody,responseBody)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+executorRestCallId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+executorRestId,""+requestMethod,""+requestHeader,""+requestBody,""+responseBody) 
-  } 
+   def tableName : String = {    "executorRestCall";    }  
+   def fields : String = {    "executorRestCallId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorRestId,requestMethod,requestHeader,requestBody,responseBody";    }  
+   def pkFields : String = {    "executorRestCallId";    }  
+   def fkFields : String = {    "executorHostId,executorRestId";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    executorRestCallId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(executorRestCallId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorRestId,requestMethod,requestHeader,requestBody,responseBody)  }  
+ def toStringArray() : Array[String] = {    Array(""+executorRestCallId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+executorRestId,""+requestMethod,""+requestHeader,""+requestBody,""+responseBody)   }  
+ def toFullString() : String = {    "executorRestCallId:'"+executorRestCallId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorHostId:'"+executorHostId+"'"+","+"executorRestId:'"+executorRestId+"'"+","+"requestMethod:'"+requestMethod+"'"+","+"requestHeader:'"+requestHeader+"'"+","+"requestBody:'"+requestBody+"'"+","+"responseBody:'"+responseBody+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "executorRestCallId" => executorRestCallId  

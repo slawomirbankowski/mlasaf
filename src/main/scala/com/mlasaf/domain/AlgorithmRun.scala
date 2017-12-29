@@ -9,10 +9,17 @@ import com.mlasaf.dto._
 /** representation of algorithm run to run algorithm */
 class AlgorithmRun {
 
+  /** current status of RUN */
   var status : String = "CREATED";
+  /** parent EXECUTOR */
   var parentExecutor : Executor = null;
+  /** storage for all materialized views */
+  var storage : Storage = null;
+  /** instance of algorithm */
   var algorithmInstance : AlgorithmInstance = null;
+  /** schedule of algorithm to be run - DTO object */
   var algorithmScheduleDto : VAlgorithmScheduleDto = null;
+  /** run of algorithm to be run - DTO object */
   var algorithmRunDto : AlgorithmRunDto = null;
   var algorithmRunViewDtos : scala.collection.mutable.ListBuffer[AlgorithmRunViewDto] = new scala.collection.mutable.ListBuffer();
   var algorithmScheduleViewDtos : scala.collection.mutable.ListBuffer[AlgorithmScheduleViewDto] = new scala.collection.mutable.ListBuffer();
@@ -20,6 +27,7 @@ class AlgorithmRun {
   var sourceScheduleDtos : scala.collection.mutable.ListBuffer[SourceScheduleDto] = new scala.collection.mutable.ListBuffer();
   var executorStorageViewDtos : scala.collection.mutable.ListBuffer[VExecutorStorageViewDto] = new scala.collection.mutable.ListBuffer();
 
+  /** RUN algorithm */
   def runAlgorithm() = {
     println(" +++++++++++++++++++++++ AlgorithmRun status: " + status + ", algorithmRunId: " + algorithmRunDto.algorithmRunId + ", algorithmScheduleViewDtos: " + algorithmScheduleViewDtos.size + ", executorStorageViewDtos: " + executorStorageViewDtos.size)
     // TODO: finish proper flow for AlgorithmRun

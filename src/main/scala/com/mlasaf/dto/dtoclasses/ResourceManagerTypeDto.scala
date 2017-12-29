@@ -14,39 +14,18 @@ case class ResourceManagerTypeDto (
      , val resourceManagerTypeName : String
      , val resourceManagerTypeClass : String 
      ) extends BaseDto {  
-   def tableName : String = { 
-   "resourceManagerType"; 
-   }  
-   def fields : String = { 
-   "resourceManagerTypeId,guid,insertedRowDate,lastUpdatedDate,resourceManagerTypeName,resourceManagerTypeClass"; 
-   }  
-   def pkFields : String = { 
-   "resourceManagerTypeId"; 
-   }  
-   def fkFields : String = { 
-   ""; 
-   }  
-   def nameField : String = { 
-   "resourceManagerTypeName"; 
-   }  
- def getPk() : Long = {
-    resourceManagerTypeId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(resourceManagerTypeId,guid,insertedRowDate,lastUpdatedDate,resourceManagerTypeName,resourceManagerTypeClass)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+resourceManagerTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+resourceManagerTypeName,""+resourceManagerTypeClass) 
-  } 
+   def tableName : String = {    "resourceManagerType";    }  
+   def fields : String = {    "resourceManagerTypeId,guid,insertedRowDate,lastUpdatedDate,resourceManagerTypeName,resourceManagerTypeClass";    }  
+   def pkFields : String = {    "resourceManagerTypeId";    }  
+   def fkFields : String = {    "";    }  
+   def nameField : String = {    "resourceManagerTypeName";    }  
+ def getPk() : Long = {    resourceManagerTypeId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(resourceManagerTypeId,guid,insertedRowDate,lastUpdatedDate,resourceManagerTypeName,resourceManagerTypeClass)  }  
+ def toStringArray() : Array[String] = {    Array(""+resourceManagerTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+resourceManagerTypeName,""+resourceManagerTypeClass)   }  
+ def toFullString() : String = {    "resourceManagerTypeId:'"+resourceManagerTypeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"resourceManagerTypeName:'"+resourceManagerTypeName+"'"+","+"resourceManagerTypeClass:'"+resourceManagerTypeClass+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "resourceManagerTypeId" => resourceManagerTypeId  

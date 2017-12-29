@@ -11,6 +11,7 @@ import com.mlasaf.structures._
 
 object GenerateDaoClassesEntry {
 
+  /** */
   def main(args : Array[String]) = {
     val entryOptions = new GenerateEntryOptions(args);
     val jdbcString = entryOptions.jdbcString.getOrElse("")
@@ -189,8 +190,6 @@ object GenerateDaoClassesEntry {
       outputContent.write("\n");
       outputContent.close();
     });
-
     connmssql.close();
-
   }
 }

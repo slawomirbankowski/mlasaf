@@ -18,39 +18,18 @@ case class AlgorithmScheduleColumnDto (
      , val sourceViewColumnId : Long
      , val extendedProperties : String 
      ) extends BaseDto {  
-   def tableName : String = { 
-   "algorithmScheduleColumn"; 
-   }  
-   def fields : String = { 
-   "algorithmScheduleColumnId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleId,algorithmColumnTypeId,algorithmScheduleViewId,sourceViewId,sourceViewColumnId,extendedProperties"; 
-   }  
-   def pkFields : String = { 
-   "algorithmScheduleColumnId"; 
-   }  
-   def fkFields : String = { 
-   "algorithmColumnTypeId,algorithmScheduleId,algorithmScheduleViewId,sourceViewId,sourceViewColumnId"; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    algorithmScheduleColumnId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(algorithmScheduleColumnId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleId,algorithmColumnTypeId,algorithmScheduleViewId,sourceViewId,sourceViewColumnId,extendedProperties)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+algorithmScheduleColumnId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmScheduleId,""+algorithmColumnTypeId,""+algorithmScheduleViewId,""+sourceViewId,""+sourceViewColumnId,""+extendedProperties) 
-  } 
+   def tableName : String = {    "algorithmScheduleColumn";    }  
+   def fields : String = {    "algorithmScheduleColumnId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleId,algorithmColumnTypeId,algorithmScheduleViewId,sourceViewId,sourceViewColumnId,extendedProperties";    }  
+   def pkFields : String = {    "algorithmScheduleColumnId";    }  
+   def fkFields : String = {    "algorithmColumnTypeId,algorithmScheduleId,algorithmScheduleViewId,sourceViewId,sourceViewColumnId";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    algorithmScheduleColumnId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(algorithmScheduleColumnId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleId,algorithmColumnTypeId,algorithmScheduleViewId,sourceViewId,sourceViewColumnId,extendedProperties)  }  
+ def toStringArray() : Array[String] = {    Array(""+algorithmScheduleColumnId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmScheduleId,""+algorithmColumnTypeId,""+algorithmScheduleViewId,""+sourceViewId,""+sourceViewColumnId,""+extendedProperties)   }  
+ def toFullString() : String = {    "algorithmScheduleColumnId:'"+algorithmScheduleColumnId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmScheduleId:'"+algorithmScheduleId+"'"+","+"algorithmColumnTypeId:'"+algorithmColumnTypeId+"'"+","+"algorithmScheduleViewId:'"+algorithmScheduleViewId+"'"+","+"sourceViewId:'"+sourceViewId+"'"+","+"sourceViewColumnId:'"+sourceViewColumnId+"'"+","+"extendedProperties:'"+extendedProperties+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "algorithmScheduleColumnId" => algorithmScheduleColumnId  

@@ -15,39 +15,18 @@ case class AlgorithmStorageSupportDto (
      , val executorStorageTypeId : Long
      , val supportPriority : Int 
      ) extends BaseDto {  
-   def tableName : String = { 
-   "algorithmStorageSupport"; 
-   }  
-   def fields : String = { 
-   "algorithmStorageSupportId,guid,insertedRowDate,lastUpdatedDate,algorithmImplementationId,executorStorageTypeId,supportPriority"; 
-   }  
-   def pkFields : String = { 
-   "algorithmStorageSupportId"; 
-   }  
-   def fkFields : String = { 
-   "algorithmImplementationId,executorStorageTypeId"; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    algorithmStorageSupportId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(algorithmStorageSupportId,guid,insertedRowDate,lastUpdatedDate,algorithmImplementationId,executorStorageTypeId,supportPriority)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+algorithmStorageSupportId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmImplementationId,""+executorStorageTypeId,""+supportPriority) 
-  } 
+   def tableName : String = {    "algorithmStorageSupport";    }  
+   def fields : String = {    "algorithmStorageSupportId,guid,insertedRowDate,lastUpdatedDate,algorithmImplementationId,executorStorageTypeId,supportPriority";    }  
+   def pkFields : String = {    "algorithmStorageSupportId";    }  
+   def fkFields : String = {    "algorithmImplementationId,executorStorageTypeId";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    algorithmStorageSupportId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(algorithmStorageSupportId,guid,insertedRowDate,lastUpdatedDate,algorithmImplementationId,executorStorageTypeId,supportPriority)  }  
+ def toStringArray() : Array[String] = {    Array(""+algorithmStorageSupportId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmImplementationId,""+executorStorageTypeId,""+supportPriority)   }  
+ def toFullString() : String = {    "algorithmStorageSupportId:'"+algorithmStorageSupportId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmImplementationId:'"+algorithmImplementationId+"'"+","+"executorStorageTypeId:'"+executorStorageTypeId+"'"+","+"supportPriority:'"+supportPriority+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "algorithmStorageSupportId" => algorithmStorageSupportId  

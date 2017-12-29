@@ -28,39 +28,18 @@ case class VExecutorHostSummaryDto (
      , val resourceManagerCheck_count : Int
      , val resourceManagerAllocation_count : Int 
      ) extends BaseReadOnlyDto {  
-   def tableName : String = { 
-   "vExecutorHostSummary"; 
-   }  
-   def fields : String = { 
-   "executorHostId,guid,insertedRowDate,lastUpdatedDate,hostName,hostIp,hostDomain,hostOsType,hostOsVersion,isWorking,executorContext_count,executorContextRuntime_count,executorRest_count,executorRestCall_count,executorInstance_count,sourceDownload_count,executorStorage_count,resourceManager_count,resourceManagerCheck_count,resourceManagerAllocation_count"; 
-   }  
-   def pkFields : String = { 
-   ""; 
-   }  
-   def fkFields : String = { 
-   ""; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    executorHostId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(executorHostId,guid,insertedRowDate,lastUpdatedDate,hostName,hostIp,hostDomain,hostOsType,hostOsVersion,isWorking,executorContext_count,executorContextRuntime_count,executorRest_count,executorRestCall_count,executorInstance_count,sourceDownload_count,executorStorage_count,resourceManager_count,resourceManagerCheck_count,resourceManagerAllocation_count)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+executorHostId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+hostName,""+hostIp,""+hostDomain,""+hostOsType,""+hostOsVersion,""+isWorking,""+executorContext_count,""+executorContextRuntime_count,""+executorRest_count,""+executorRestCall_count,""+executorInstance_count,""+sourceDownload_count,""+executorStorage_count,""+resourceManager_count,""+resourceManagerCheck_count,""+resourceManagerAllocation_count) 
-  } 
+   def tableName : String = {    "vExecutorHostSummary";    }  
+   def fields : String = {    "executorHostId,guid,insertedRowDate,lastUpdatedDate,hostName,hostIp,hostDomain,hostOsType,hostOsVersion,isWorking,executorContext_count,executorContextRuntime_count,executorRest_count,executorRestCall_count,executorInstance_count,sourceDownload_count,executorStorage_count,resourceManager_count,resourceManagerCheck_count,resourceManagerAllocation_count";    }  
+   def pkFields : String = {    "";    }  
+   def fkFields : String = {    "";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    executorHostId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(executorHostId,guid,insertedRowDate,lastUpdatedDate,hostName,hostIp,hostDomain,hostOsType,hostOsVersion,isWorking,executorContext_count,executorContextRuntime_count,executorRest_count,executorRestCall_count,executorInstance_count,sourceDownload_count,executorStorage_count,resourceManager_count,resourceManagerCheck_count,resourceManagerAllocation_count)  }  
+ def toStringArray() : Array[String] = {    Array(""+executorHostId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+hostName,""+hostIp,""+hostDomain,""+hostOsType,""+hostOsVersion,""+isWorking,""+executorContext_count,""+executorContextRuntime_count,""+executorRest_count,""+executorRestCall_count,""+executorInstance_count,""+sourceDownload_count,""+executorStorage_count,""+resourceManager_count,""+resourceManagerCheck_count,""+resourceManagerAllocation_count)   }  
+ def toFullString() : String = {    "executorHostId:'"+executorHostId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"hostName:'"+hostName+"'"+","+"hostIp:'"+hostIp+"'"+","+"hostDomain:'"+hostDomain+"'"+","+"hostOsType:'"+hostOsType+"'"+","+"hostOsVersion:'"+hostOsVersion+"'"+","+"isWorking:'"+isWorking+"'"+","+"executorContext_count:'"+executorContext_count+"'"+","+"executorContextRuntime_count:'"+executorContextRuntime_count+"'"+","+"executorRest_count:'"+executorRest_count+"'"+","+"executorRestCall_count:'"+executorRestCall_count+"'"+","+"executorInstance_count:'"+executorInstance_count+"'"+","+"sourceDownload_count:'"+sourceDownload_count+"'"+","+"executorStorage_count:'"+executorStorage_count+"'"+","+"resourceManager_count:'"+resourceManager_count+"'"+","+"resourceManagerCheck_count:'"+resourceManagerCheck_count+"'"+","+"resourceManagerAllocation_count:'"+resourceManagerAllocation_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "executorHostId" => executorHostId  

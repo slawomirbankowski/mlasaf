@@ -29,39 +29,18 @@ case class VAlgorithmStorageSupportDto (
      , val executorStorageType_executorStorageTypeName : String
      , val executorStorageType_executorStorageTypeClass : String 
      ) extends BaseReadOnlyDto {  
-   def tableName : String = { 
-   "vAlgorithmStorageSupport"; 
-   }  
-   def fields : String = { 
-   "algorithmStorageSupportId,guid,insertedRowDate,lastUpdatedDate,algorithmImplementationId,executorStorageTypeId,supportPriority,algorithmImplementation_algorithmImplementationId,algorithmImplementation_guid,algorithmImplementation_insertedRowDate,algorithmImplementation_lastUpdatedDate,algorithmImplementation_algorithmTypeVersionId,algorithmImplementation_executorTypeId,algorithmImplementation_algorithmImplementationName,algorithmImplementation_algorithmImplementationClass,executorStorageType_executorStorageTypeId,executorStorageType_guid,executorStorageType_insertedRowDate,executorStorageType_lastUpdatedDate,executorStorageType_executorStorageTypeName,executorStorageType_executorStorageTypeClass"; 
-   }  
-   def pkFields : String = { 
-   ""; 
-   }  
-   def fkFields : String = { 
-   ""; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    algorithmStorageSupportId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(algorithmStorageSupportId,guid,insertedRowDate,lastUpdatedDate,algorithmImplementationId,executorStorageTypeId,supportPriority,algorithmImplementation_algorithmImplementationId,algorithmImplementation_guid,algorithmImplementation_insertedRowDate,algorithmImplementation_lastUpdatedDate,algorithmImplementation_algorithmTypeVersionId,algorithmImplementation_executorTypeId,algorithmImplementation_algorithmImplementationName,algorithmImplementation_algorithmImplementationClass,executorStorageType_executorStorageTypeId,executorStorageType_guid,executorStorageType_insertedRowDate,executorStorageType_lastUpdatedDate,executorStorageType_executorStorageTypeName,executorStorageType_executorStorageTypeClass)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+algorithmStorageSupportId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmImplementationId,""+executorStorageTypeId,""+supportPriority,""+algorithmImplementation_algorithmImplementationId,""+algorithmImplementation_guid,""+algorithmImplementation_insertedRowDate,""+algorithmImplementation_lastUpdatedDate,""+algorithmImplementation_algorithmTypeVersionId,""+algorithmImplementation_executorTypeId,""+algorithmImplementation_algorithmImplementationName,""+algorithmImplementation_algorithmImplementationClass,""+executorStorageType_executorStorageTypeId,""+executorStorageType_guid,""+executorStorageType_insertedRowDate,""+executorStorageType_lastUpdatedDate,""+executorStorageType_executorStorageTypeName,""+executorStorageType_executorStorageTypeClass) 
-  } 
+   def tableName : String = {    "vAlgorithmStorageSupport";    }  
+   def fields : String = {    "algorithmStorageSupportId,guid,insertedRowDate,lastUpdatedDate,algorithmImplementationId,executorStorageTypeId,supportPriority,algorithmImplementation_algorithmImplementationId,algorithmImplementation_guid,algorithmImplementation_insertedRowDate,algorithmImplementation_lastUpdatedDate,algorithmImplementation_algorithmTypeVersionId,algorithmImplementation_executorTypeId,algorithmImplementation_algorithmImplementationName,algorithmImplementation_algorithmImplementationClass,executorStorageType_executorStorageTypeId,executorStorageType_guid,executorStorageType_insertedRowDate,executorStorageType_lastUpdatedDate,executorStorageType_executorStorageTypeName,executorStorageType_executorStorageTypeClass";    }  
+   def pkFields : String = {    "";    }  
+   def fkFields : String = {    "";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    algorithmStorageSupportId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(algorithmStorageSupportId,guid,insertedRowDate,lastUpdatedDate,algorithmImplementationId,executorStorageTypeId,supportPriority,algorithmImplementation_algorithmImplementationId,algorithmImplementation_guid,algorithmImplementation_insertedRowDate,algorithmImplementation_lastUpdatedDate,algorithmImplementation_algorithmTypeVersionId,algorithmImplementation_executorTypeId,algorithmImplementation_algorithmImplementationName,algorithmImplementation_algorithmImplementationClass,executorStorageType_executorStorageTypeId,executorStorageType_guid,executorStorageType_insertedRowDate,executorStorageType_lastUpdatedDate,executorStorageType_executorStorageTypeName,executorStorageType_executorStorageTypeClass)  }  
+ def toStringArray() : Array[String] = {    Array(""+algorithmStorageSupportId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmImplementationId,""+executorStorageTypeId,""+supportPriority,""+algorithmImplementation_algorithmImplementationId,""+algorithmImplementation_guid,""+algorithmImplementation_insertedRowDate,""+algorithmImplementation_lastUpdatedDate,""+algorithmImplementation_algorithmTypeVersionId,""+algorithmImplementation_executorTypeId,""+algorithmImplementation_algorithmImplementationName,""+algorithmImplementation_algorithmImplementationClass,""+executorStorageType_executorStorageTypeId,""+executorStorageType_guid,""+executorStorageType_insertedRowDate,""+executorStorageType_lastUpdatedDate,""+executorStorageType_executorStorageTypeName,""+executorStorageType_executorStorageTypeClass)   }  
+ def toFullString() : String = {    "algorithmStorageSupportId:'"+algorithmStorageSupportId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmImplementationId:'"+algorithmImplementationId+"'"+","+"executorStorageTypeId:'"+executorStorageTypeId+"'"+","+"supportPriority:'"+supportPriority+"'"+","+"algorithmImplementation_algorithmImplementationId:'"+algorithmImplementation_algorithmImplementationId+"'"+","+"algorithmImplementation_guid:'"+algorithmImplementation_guid+"'"+","+"algorithmImplementation_insertedRowDate:'"+algorithmImplementation_insertedRowDate+"'"+","+"algorithmImplementation_lastUpdatedDate:'"+algorithmImplementation_lastUpdatedDate+"'"+","+"algorithmImplementation_algorithmTypeVersionId:'"+algorithmImplementation_algorithmTypeVersionId+"'"+","+"algorithmImplementation_executorTypeId:'"+algorithmImplementation_executorTypeId+"'"+","+"algorithmImplementation_algorithmImplementationName:'"+algorithmImplementation_algorithmImplementationName+"'"+","+"algorithmImplementation_algorithmImplementationClass:'"+algorithmImplementation_algorithmImplementationClass+"'"+","+"executorStorageType_executorStorageTypeId:'"+executorStorageType_executorStorageTypeId+"'"+","+"executorStorageType_guid:'"+executorStorageType_guid+"'"+","+"executorStorageType_insertedRowDate:'"+executorStorageType_insertedRowDate+"'"+","+"executorStorageType_lastUpdatedDate:'"+executorStorageType_lastUpdatedDate+"'"+","+"executorStorageType_executorStorageTypeName:'"+executorStorageType_executorStorageTypeName+"'"+","+"executorStorageType_executorStorageTypeClass:'"+executorStorageType_executorStorageTypeClass+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "algorithmStorageSupportId" => algorithmStorageSupportId  

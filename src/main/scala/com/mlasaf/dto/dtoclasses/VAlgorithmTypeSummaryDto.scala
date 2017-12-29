@@ -16,39 +16,18 @@ case class VAlgorithmTypeSummaryDto (
      , val algorithmTypeVersion_count : Int
      , val algorithmParamType_count : Int 
      ) extends BaseReadOnlyDto {  
-   def tableName : String = { 
-   "vAlgorithmTypeSummary"; 
-   }  
-   def fields : String = { 
-   "algorithmTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeName,algorithmTypeDescription,algorithmTypeVersion_count,algorithmParamType_count"; 
-   }  
-   def pkFields : String = { 
-   ""; 
-   }  
-   def fkFields : String = { 
-   ""; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    algorithmTypeId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(algorithmTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeName,algorithmTypeDescription,algorithmTypeVersion_count,algorithmParamType_count)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+algorithmTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmTypeName,""+algorithmTypeDescription,""+algorithmTypeVersion_count,""+algorithmParamType_count) 
-  } 
+   def tableName : String = {    "vAlgorithmTypeSummary";    }  
+   def fields : String = {    "algorithmTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeName,algorithmTypeDescription,algorithmTypeVersion_count,algorithmParamType_count";    }  
+   def pkFields : String = {    "";    }  
+   def fkFields : String = {    "";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    algorithmTypeId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(algorithmTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeName,algorithmTypeDescription,algorithmTypeVersion_count,algorithmParamType_count)  }  
+ def toStringArray() : Array[String] = {    Array(""+algorithmTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmTypeName,""+algorithmTypeDescription,""+algorithmTypeVersion_count,""+algorithmParamType_count)   }  
+ def toFullString() : String = {    "algorithmTypeId:'"+algorithmTypeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmTypeName:'"+algorithmTypeName+"'"+","+"algorithmTypeDescription:'"+algorithmTypeDescription+"'"+","+"algorithmTypeVersion_count:'"+algorithmTypeVersion_count+"'"+","+"algorithmParamType_count:'"+algorithmParamType_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "algorithmTypeId" => algorithmTypeId  

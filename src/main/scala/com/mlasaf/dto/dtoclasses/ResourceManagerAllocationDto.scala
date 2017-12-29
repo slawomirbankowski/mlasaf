@@ -20,39 +20,18 @@ case class ResourceManagerAllocationDto (
      , val allocationValueMin : Double
      , val allocationValueMax : Double 
      ) extends BaseDto {  
-   def tableName : String = { 
-   "resourceManagerAllocation"; 
-   }  
-   def fields : String = { 
-   "resourceManagerAllocationId,guid,insertedRowDate,lastUpdatedDate,resourceManagerTypeId,resourceManagerId,executorHostId,executorInstanceId,resourceMeasureId,allocationValue,allocationValueMin,allocationValueMax"; 
-   }  
-   def pkFields : String = { 
-   "resourceManagerAllocationId"; 
-   }  
-   def fkFields : String = { 
-   "executorHostId,executorInstanceId,resourceManagerId,resourceManagerTypeId,resourceMeasureId"; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    resourceManagerAllocationId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(resourceManagerAllocationId,guid,insertedRowDate,lastUpdatedDate,resourceManagerTypeId,resourceManagerId,executorHostId,executorInstanceId,resourceMeasureId,allocationValue,allocationValueMin,allocationValueMax)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+resourceManagerAllocationId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+resourceManagerTypeId,""+resourceManagerId,""+executorHostId,""+executorInstanceId,""+resourceMeasureId,""+allocationValue,""+allocationValueMin,""+allocationValueMax) 
-  } 
+   def tableName : String = {    "resourceManagerAllocation";    }  
+   def fields : String = {    "resourceManagerAllocationId,guid,insertedRowDate,lastUpdatedDate,resourceManagerTypeId,resourceManagerId,executorHostId,executorInstanceId,resourceMeasureId,allocationValue,allocationValueMin,allocationValueMax";    }  
+   def pkFields : String = {    "resourceManagerAllocationId";    }  
+   def fkFields : String = {    "executorHostId,executorInstanceId,resourceManagerId,resourceManagerTypeId,resourceMeasureId";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    resourceManagerAllocationId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(resourceManagerAllocationId,guid,insertedRowDate,lastUpdatedDate,resourceManagerTypeId,resourceManagerId,executorHostId,executorInstanceId,resourceMeasureId,allocationValue,allocationValueMin,allocationValueMax)  }  
+ def toStringArray() : Array[String] = {    Array(""+resourceManagerAllocationId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+resourceManagerTypeId,""+resourceManagerId,""+executorHostId,""+executorInstanceId,""+resourceMeasureId,""+allocationValue,""+allocationValueMin,""+allocationValueMax)   }  
+ def toFullString() : String = {    "resourceManagerAllocationId:'"+resourceManagerAllocationId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"resourceManagerTypeId:'"+resourceManagerTypeId+"'"+","+"resourceManagerId:'"+resourceManagerId+"'"+","+"executorHostId:'"+executorHostId+"'"+","+"executorInstanceId:'"+executorInstanceId+"'"+","+"resourceMeasureId:'"+resourceMeasureId+"'"+","+"allocationValue:'"+allocationValue+"'"+","+"allocationValueMin:'"+allocationValueMin+"'"+","+"allocationValueMax:'"+allocationValueMax+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "resourceManagerAllocationId" => resourceManagerAllocationId  

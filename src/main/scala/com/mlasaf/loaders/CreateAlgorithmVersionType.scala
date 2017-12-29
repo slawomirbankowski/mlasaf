@@ -19,9 +19,12 @@ object CreateAlgorithmVersionType {
 
     val algorithmType = entryOptions.algorithmType.getOrElse("")
     val algorithmVersion = entryOptions.algorithmVersion.getOrElse("")
-    val columns = entryOptions.columns.getOrElse("")
-    val parameters = entryOptions.parameters.getOrElse("")
-    val outputTypes = entryOptions.outputTypes.getOrElse("")
+    val columns = entryOptions.columns.getOrElse("");
+    println("columns: " + columns);
+    val parameters = entryOptions.parameters.getOrElse("");
+    println("parameters: " + parameters);
+    val outputTypes = entryOptions.outputTypes.getOrElse("");
+    println("outputTypes: " + outputTypes);
 
     val daoFactory = new DaoFactory();
     daoFactory.initialize(jdbcString, jdbcUser, jdbcPass, jdbcDriver);
@@ -45,7 +48,6 @@ object CreateAlgorithmVersionType {
       val algTypeOutType = daoFactory.daos.algorithmTypeOutputTypeDao.createAndInsertAlgorithmTypeOutputTypeDto(algTypeVer.algorithmTypeVersionId, algOutypeId, 1);
       println("algTypeOutType: " + algTypeOutType);
     });
-
   }
 }
 /** entry options */
@@ -57,9 +59,9 @@ class CreateAlgorithmVersionTypeEntryOptions(args : Array[String]) extends Scall
 
   var algorithmType = opt[String](descr="algorithmType", name = "algorithmType", short='t')
   var algorithmVersion = opt[String](descr="algorithmVersion", name = "algorithmVersion", short='v')
-  var columns = opt[String](descr="algorithmType", name = "algorithmType", short='c')
-  var parameters = opt[String](descr="algorithmType", name = "algorithmType", short='a')
-  var outputTypes = opt[String](descr="algorithmType", name = "algorithmType", short='o')
+  var columns = opt[String](descr="columns", name = "columns", short='c')
+  var parameters = opt[String](descr="parameters", name = "parameters", short='a')
+  var outputTypes = opt[String](descr="outputTypes", name = "outputTypes", short='o')
 
   verify()
 

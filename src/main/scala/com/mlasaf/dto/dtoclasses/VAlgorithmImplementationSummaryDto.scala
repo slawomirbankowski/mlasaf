@@ -18,39 +18,18 @@ case class VAlgorithmImplementationSummaryDto (
      , val algorithmSchedule_count : Int
      , val algorithmStorageSupport_count : Int 
      ) extends BaseReadOnlyDto {  
-   def tableName : String = { 
-   "vAlgorithmImplementationSummary"; 
-   }  
-   def fields : String = { 
-   "algorithmImplementationId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,executorTypeId,algorithmImplementationName,algorithmImplementationClass,algorithmSchedule_count,algorithmStorageSupport_count"; 
-   }  
-   def pkFields : String = { 
-   ""; 
-   }  
-   def fkFields : String = { 
-   ""; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    algorithmImplementationId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(algorithmImplementationId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,executorTypeId,algorithmImplementationName,algorithmImplementationClass,algorithmSchedule_count,algorithmStorageSupport_count)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+algorithmImplementationId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmTypeVersionId,""+executorTypeId,""+algorithmImplementationName,""+algorithmImplementationClass,""+algorithmSchedule_count,""+algorithmStorageSupport_count) 
-  } 
+   def tableName : String = {    "vAlgorithmImplementationSummary";    }  
+   def fields : String = {    "algorithmImplementationId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,executorTypeId,algorithmImplementationName,algorithmImplementationClass,algorithmSchedule_count,algorithmStorageSupport_count";    }  
+   def pkFields : String = {    "";    }  
+   def fkFields : String = {    "";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    algorithmImplementationId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(algorithmImplementationId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,executorTypeId,algorithmImplementationName,algorithmImplementationClass,algorithmSchedule_count,algorithmStorageSupport_count)  }  
+ def toStringArray() : Array[String] = {    Array(""+algorithmImplementationId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmTypeVersionId,""+executorTypeId,""+algorithmImplementationName,""+algorithmImplementationClass,""+algorithmSchedule_count,""+algorithmStorageSupport_count)   }  
+ def toFullString() : String = {    "algorithmImplementationId:'"+algorithmImplementationId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmTypeVersionId:'"+algorithmTypeVersionId+"'"+","+"executorTypeId:'"+executorTypeId+"'"+","+"algorithmImplementationName:'"+algorithmImplementationName+"'"+","+"algorithmImplementationClass:'"+algorithmImplementationClass+"'"+","+"algorithmSchedule_count:'"+algorithmSchedule_count+"'"+","+"algorithmStorageSupport_count:'"+algorithmStorageSupport_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "algorithmImplementationId" => algorithmImplementationId  

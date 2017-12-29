@@ -21,9 +21,14 @@ object CreateAlgorithmType {
     val daoFactory = new DaoFactory();
     daoFactory.initialize(jdbcString, jdbcUser, jdbcPass, jdbcDriver);
 
-    val algType = daoFactory.daos.algorithmTypeDao.createAndInsertAlgorithmTypeDto(algorithmType, "");
-    println("algType: " + algType);
+    val currentAlgoTypes = daoFactory.daos.algorithmTypeDao.getAlgorithmTypeByName(algorithmType);
 
+    if (currentAlgoTypes.size == 0 ) {
+      val algType = daoFactory.daos.algorithmTypeDao.createAndInsertAlgorithmTypeDto(algorithmType, "");
+      println("NEW algType: " + algType);
+    } else {
+      println("EXISTING algType: " );
+    }
   }
 }
 /** entry options */

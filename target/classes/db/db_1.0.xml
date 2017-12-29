@@ -54,10 +54,10 @@
             <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" remarks="date and time of change this row" />
             <column name="executorHostId" type="bigint" remarks="FK to executorHost table" />
             <column name="isWorking" type="int" defaultValueNumeric="1"/>
-            <column name="properties" type="varchar(8000)" defaultValue=""/>
-            <column name="properties2" type="varchar(8000)" defaultValue=""/>
-            <column name="properties3" type="varchar(8000)" defaultValue=""/>
-            <column name="entryParams" type="varchar(8000)" defaultValue=""/>
+            <column name="properties" type="varchar(4000)" defaultValue=""/>
+            <column name="properties2" type="varchar(4000)" defaultValue=""/>
+            <column name="properties3" type="varchar(4000)" defaultValue=""/>
+            <column name="entryParams" type="varchar(4000)" defaultValue=""/>
         </createTable>
         <createIndex indexName="idx_ec_executorHostId" tableName="executorContext" unique="false">
             <column name="executorHostId" />

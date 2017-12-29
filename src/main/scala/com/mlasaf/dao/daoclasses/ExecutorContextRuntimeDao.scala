@@ -79,14 +79,14 @@ import java.util.Date
       null; 
     } 
  } 
-  def createAndInsertExecutorContextRuntimeDto(executorHostId : Long, executorContextId : Long, availableProcessors : Double, freeMemory : Double, maxMemory : Double, totalMemory : Double) : ExecutorContextRuntimeDto = {
-    val dto = new ExecutorContextRuntimeDto(0,0,new Date(),new Date(),executorHostId,executorContextId,availableProcessors,freeMemory,maxMemory,totalMemory)
+  def createAndInsertExecutorContextRuntimeDto(executorHostId : Long, executorContextId : Long, availableProcessors : Double, freeMemory : Double, maxMemory : Double, totalMemory : Double, diskInfo : String, currentDiskFreeSpace : Double, allThreadsCount : Int, contextThreadsCount : Int, threadIds : String) : ExecutorContextRuntimeDto = {
+    val dto = new ExecutorContextRuntimeDto(0,0,new Date(),new Date(),executorHostId,executorContextId,availableProcessors,freeMemory,maxMemory,totalMemory,diskInfo,currentDiskFreeSpace,allThreadsCount,contextThreadsCount,threadIds)
     insertExecutorContextRuntimeDto(dto);   
   }   
   def updateExecutorContextRuntimeDto(dto : ExecutorContextRuntimeDto): ExecutorContextRuntimeDto = {  
     implicit val connection = getConnection();  
-      val resCnt = SQL("update executorContextRuntime set  lastUpdatedDate = {lastUpdatedDate} ,  executorHostId = {executorHostId} ,  executorContextId = {executorContextId} ,  availableProcessors = {availableProcessors} ,  freeMemory = {freeMemory} ,  maxMemory = {maxMemory} ,  totalMemory = {totalMemory}  where  executorContextRuntimeId = {executorContextRuntimeId}  ")
-      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "executorHostId" -> dto.executorHostId , "executorContextId" -> dto.executorContextId , "availableProcessors" -> dto.availableProcessors , "freeMemory" -> dto.freeMemory , "maxMemory" -> dto.maxMemory , "totalMemory" -> dto.totalMemory, "executorContextRuntimeId" -> dto.executorContextRuntimeId ).executeInsert() 
+      val resCnt = SQL("update executorContextRuntime set  lastUpdatedDate = {lastUpdatedDate} ,  executorHostId = {executorHostId} ,  executorContextId = {executorContextId} ,  availableProcessors = {availableProcessors} ,  freeMemory = {freeMemory} ,  maxMemory = {maxMemory} ,  totalMemory = {totalMemory} ,  diskInfo = {diskInfo} ,  currentDiskFreeSpace = {currentDiskFreeSpace} ,  allThreadsCount = {allThreadsCount} ,  contextThreadsCount = {contextThreadsCount} ,  threadIds = {threadIds}  where  executorContextRuntimeId = {executorContextRuntimeId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "executorHostId" -> dto.executorHostId , "executorContextId" -> dto.executorContextId , "availableProcessors" -> dto.availableProcessors , "freeMemory" -> dto.freeMemory , "maxMemory" -> dto.maxMemory , "totalMemory" -> dto.totalMemory , "diskInfo" -> dto.diskInfo , "currentDiskFreeSpace" -> dto.currentDiskFreeSpace , "allThreadsCount" -> dto.allThreadsCount , "contextThreadsCount" -> dto.contextThreadsCount , "threadIds" -> dto.threadIds, "executorContextRuntimeId" -> dto.executorContextRuntimeId ).executeInsert() 
      getExecutorContextRuntimeByPk(dto.executorContextRuntimeId) 
     } 
 

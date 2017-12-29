@@ -14,39 +14,18 @@ case class ExecutorStorageTypeDto (
      , val executorStorageTypeName : String
      , val executorStorageTypeClass : String 
      ) extends BaseDto {  
-   def tableName : String = { 
-   "executorStorageType"; 
-   }  
-   def fields : String = { 
-   "executorStorageTypeId,guid,insertedRowDate,lastUpdatedDate,executorStorageTypeName,executorStorageTypeClass"; 
-   }  
-   def pkFields : String = { 
-   "executorStorageTypeId"; 
-   }  
-   def fkFields : String = { 
-   ""; 
-   }  
-   def nameField : String = { 
-   "executorStorageTypeName"; 
-   }  
- def getPk() : Long = {
-    executorStorageTypeId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(executorStorageTypeId,guid,insertedRowDate,lastUpdatedDate,executorStorageTypeName,executorStorageTypeClass)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+executorStorageTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorStorageTypeName,""+executorStorageTypeClass) 
-  } 
+   def tableName : String = {    "executorStorageType";    }  
+   def fields : String = {    "executorStorageTypeId,guid,insertedRowDate,lastUpdatedDate,executorStorageTypeName,executorStorageTypeClass";    }  
+   def pkFields : String = {    "executorStorageTypeId";    }  
+   def fkFields : String = {    "";    }  
+   def nameField : String = {    "executorStorageTypeName";    }  
+ def getPk() : Long = {    executorStorageTypeId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(executorStorageTypeId,guid,insertedRowDate,lastUpdatedDate,executorStorageTypeName,executorStorageTypeClass)  }  
+ def toStringArray() : Array[String] = {    Array(""+executorStorageTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorStorageTypeName,""+executorStorageTypeClass)   }  
+ def toFullString() : String = {    "executorStorageTypeId:'"+executorStorageTypeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorStorageTypeName:'"+executorStorageTypeName+"'"+","+"executorStorageTypeClass:'"+executorStorageTypeClass+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "executorStorageTypeId" => executorStorageTypeId  

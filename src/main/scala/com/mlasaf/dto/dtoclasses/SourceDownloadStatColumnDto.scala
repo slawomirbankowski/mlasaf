@@ -19,39 +19,18 @@ case class SourceDownloadStatColumnDto (
      , val columnMaxStr : String
      , val columnNonemptyCount : Long 
      ) extends BaseDto {  
-   def tableName : String = { 
-   "sourceDownloadStatColumn"; 
-   }  
-   def fields : String = { 
-   "sourceDownloadStatColumnId,guid,insertedRowDate,lastUpdatedDate,sourceDownloadId,sourceViewColumnId,columnMinNumber,columnMaxNumber,columnMinStr,columnMaxStr,columnNonemptyCount"; 
-   }  
-   def pkFields : String = { 
-   "sourceDownloadStatColumnId"; 
-   }  
-   def fkFields : String = { 
-   "sourceDownloadId,sourceViewColumnId"; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    sourceDownloadStatColumnId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(sourceDownloadStatColumnId,guid,insertedRowDate,lastUpdatedDate,sourceDownloadId,sourceViewColumnId,columnMinNumber,columnMaxNumber,columnMinStr,columnMaxStr,columnNonemptyCount)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+sourceDownloadStatColumnId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceDownloadId,""+sourceViewColumnId,""+columnMinNumber,""+columnMaxNumber,""+columnMinStr,""+columnMaxStr,""+columnNonemptyCount) 
-  } 
+   def tableName : String = {    "sourceDownloadStatColumn";    }  
+   def fields : String = {    "sourceDownloadStatColumnId,guid,insertedRowDate,lastUpdatedDate,sourceDownloadId,sourceViewColumnId,columnMinNumber,columnMaxNumber,columnMinStr,columnMaxStr,columnNonemptyCount";    }  
+   def pkFields : String = {    "sourceDownloadStatColumnId";    }  
+   def fkFields : String = {    "sourceDownloadId,sourceViewColumnId";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    sourceDownloadStatColumnId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(sourceDownloadStatColumnId,guid,insertedRowDate,lastUpdatedDate,sourceDownloadId,sourceViewColumnId,columnMinNumber,columnMaxNumber,columnMinStr,columnMaxStr,columnNonemptyCount)  }  
+ def toStringArray() : Array[String] = {    Array(""+sourceDownloadStatColumnId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceDownloadId,""+sourceViewColumnId,""+columnMinNumber,""+columnMaxNumber,""+columnMinStr,""+columnMaxStr,""+columnNonemptyCount)   }  
+ def toFullString() : String = {    "sourceDownloadStatColumnId:'"+sourceDownloadStatColumnId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"sourceDownloadId:'"+sourceDownloadId+"'"+","+"sourceViewColumnId:'"+sourceViewColumnId+"'"+","+"columnMinNumber:'"+columnMinNumber+"'"+","+"columnMaxNumber:'"+columnMaxNumber+"'"+","+"columnMinStr:'"+columnMinStr+"'"+","+"columnMaxStr:'"+columnMaxStr+"'"+","+"columnNonemptyCount:'"+columnNonemptyCount+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "sourceDownloadStatColumnId" => sourceDownloadStatColumnId  

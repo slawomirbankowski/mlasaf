@@ -13,39 +13,18 @@ case class AlgorithmRunTypeDto (
      , val lastUpdatedDate : java.util.Date
      , val algorithmRunTypeName : String 
      ) extends BaseDto {  
-   def tableName : String = { 
-   "algorithmRunType"; 
-   }  
-   def fields : String = { 
-   "algorithmRunTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmRunTypeName"; 
-   }  
-   def pkFields : String = { 
-   "algorithmRunTypeId"; 
-   }  
-   def fkFields : String = { 
-   ""; 
-   }  
-   def nameField : String = { 
-   "algorithmRunTypeName"; 
-   }  
- def getPk() : Long = {
-    algorithmRunTypeId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(algorithmRunTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmRunTypeName)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+algorithmRunTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmRunTypeName) 
-  } 
+   def tableName : String = {    "algorithmRunType";    }  
+   def fields : String = {    "algorithmRunTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmRunTypeName";    }  
+   def pkFields : String = {    "algorithmRunTypeId";    }  
+   def fkFields : String = {    "";    }  
+   def nameField : String = {    "algorithmRunTypeName";    }  
+ def getPk() : Long = {    algorithmRunTypeId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(algorithmRunTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmRunTypeName)  }  
+ def toStringArray() : Array[String] = {    Array(""+algorithmRunTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmRunTypeName)   }  
+ def toFullString() : String = {    "algorithmRunTypeId:'"+algorithmRunTypeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmRunTypeName:'"+algorithmRunTypeName+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "algorithmRunTypeId" => algorithmRunTypeId  

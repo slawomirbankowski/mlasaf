@@ -14,39 +14,18 @@ case class SourceViewTypeDto (
      , val sourceViewTypeName : String
      , val sourceViewTypeClass : String 
      ) extends BaseDto {  
-   def tableName : String = { 
-   "sourceViewType"; 
-   }  
-   def fields : String = { 
-   "sourceViewTypeId,guid,insertedRowDate,lastUpdatedDate,sourceViewTypeName,sourceViewTypeClass"; 
-   }  
-   def pkFields : String = { 
-   "sourceViewTypeId"; 
-   }  
-   def fkFields : String = { 
-   ""; 
-   }  
-   def nameField : String = { 
-   "sourceViewTypeName"; 
-   }  
- def getPk() : Long = {
-    sourceViewTypeId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(sourceViewTypeId,guid,insertedRowDate,lastUpdatedDate,sourceViewTypeName,sourceViewTypeClass)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+sourceViewTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceViewTypeName,""+sourceViewTypeClass) 
-  } 
+   def tableName : String = {    "sourceViewType";    }  
+   def fields : String = {    "sourceViewTypeId,guid,insertedRowDate,lastUpdatedDate,sourceViewTypeName,sourceViewTypeClass";    }  
+   def pkFields : String = {    "sourceViewTypeId";    }  
+   def fkFields : String = {    "";    }  
+   def nameField : String = {    "sourceViewTypeName";    }  
+ def getPk() : Long = {    sourceViewTypeId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(sourceViewTypeId,guid,insertedRowDate,lastUpdatedDate,sourceViewTypeName,sourceViewTypeClass)  }  
+ def toStringArray() : Array[String] = {    Array(""+sourceViewTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceViewTypeName,""+sourceViewTypeClass)   }  
+ def toFullString() : String = {    "sourceViewTypeId:'"+sourceViewTypeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"sourceViewTypeName:'"+sourceViewTypeName+"'"+","+"sourceViewTypeClass:'"+sourceViewTypeClass+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "sourceViewTypeId" => sourceViewTypeId  

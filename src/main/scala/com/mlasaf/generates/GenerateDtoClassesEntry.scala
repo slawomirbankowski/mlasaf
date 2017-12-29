@@ -12,6 +12,7 @@ import anorm.SQL
 import com.mlasaf.dto._
 import com.mlasaf.structures.GenerateEntryOptions
 
+/** generate all DTO classes */
 object GenerateDtoClassesEntry {
 
   def main(args : Array[String]) = {
@@ -21,7 +22,6 @@ object GenerateDtoClassesEntry {
     val jdbcPass = entryOptions.jdbcPass.getOrElse("")
     val jdbcDriver = entryOptions.jdbcDriver.getOrElse("")
     val baseFolder = entryOptions.baseFolder.getOrElse("")
-
     Class.forName(jdbcDriver);
     implicit val connmssql = java.sql.DriverManager.getConnection(jdbcString, jdbcUser, jdbcPass);
     val cols : List[ColumnDetailDto]=  SQL("select TABLE_NAME, COLUMN_NAME, ORDINAL_POSITION, case DATA_TYPE when 'bigint' then 'Long' when 'int' then 'Int' when 'nvarchar' then 'String' when 'varchar' then 'String' when 'datetime' then 'java.util.Date' when 'float' then 'Double'  else '' end as SCALA_TYPE from INFORMATION_SCHEMA.COLUMNS where  TABLE_NAME not like 'DATABASE%'")
@@ -65,7 +65,7 @@ object GenerateDtoClassesEntry {
       var getGuidMethod  = " \n def getGuid() : Long = {    guid  } ";
       var toAnyArray = " \n def toAnyArray() : Array[Any] = {    Array(" + fieldList + ")  } ";
       var toStringArray = " \n def toStringArray() : Array[String] = {    Array(" + fieldList.split(",").map(f => "\"\"+" + f).mkString(",") + ")   } ";
-      var toFullString = " \n def toFullString() : String = {    " + fieldList.split(",").map(f => "\"" + f + ":'\"+" + f + "+\"'\"").mkString("+") + "   } ";
+      var toFullString = " \n def toFullString() : String = {    " + fieldList.split(",").map(f => "\"" + f + ":'\"+" + f + "+\"'\"").mkString("+\",\"+") + "   } ";
       val getFieldValueMethodBody =  "\n   def getFieldValue(name : String) : Any = { \n    val ret = name match { \n" + caseValueList + "  \n    case _ => null \n    } \n    ret \n  } ";
       val getFieldNameeMethodBody =  "\n   def getFieldTypeName(name : String) : String = { \n    val ret = name match { \n" + caseTypeNameList + "  \n    case _ => \"Object\" \n    } \n    ret \n  } ";
       val prepareInsertMethod =(if (isTable) "\n   def prepareInsert(connection : java.sql.Connection) : java.sql.PreparedStatement = {\n " + prepareInsertStat + "" + prepareInsertSet + "\n    return stat; \n   } " else "");

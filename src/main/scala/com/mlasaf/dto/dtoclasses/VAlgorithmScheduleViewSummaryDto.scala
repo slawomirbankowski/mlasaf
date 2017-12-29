@@ -18,39 +18,18 @@ case class VAlgorithmScheduleViewSummaryDto (
      , val algorithmScheduleColumn_count : Int
      , val algorithmRunView_count : Int 
      ) extends BaseReadOnlyDto {  
-   def tableName : String = { 
-   "vAlgorithmScheduleViewSummary"; 
-   }  
-   def fields : String = { 
-   "algorithmScheduleViewId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleViewTypeId,algorithmScheduleId,sourceViewId,joinOnDefinition,algorithmScheduleColumn_count,algorithmRunView_count"; 
-   }  
-   def pkFields : String = { 
-   ""; 
-   }  
-   def fkFields : String = { 
-   ""; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    algorithmScheduleViewId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(algorithmScheduleViewId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleViewTypeId,algorithmScheduleId,sourceViewId,joinOnDefinition,algorithmScheduleColumn_count,algorithmRunView_count)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+algorithmScheduleViewId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmScheduleViewTypeId,""+algorithmScheduleId,""+sourceViewId,""+joinOnDefinition,""+algorithmScheduleColumn_count,""+algorithmRunView_count) 
-  } 
+   def tableName : String = {    "vAlgorithmScheduleViewSummary";    }  
+   def fields : String = {    "algorithmScheduleViewId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleViewTypeId,algorithmScheduleId,sourceViewId,joinOnDefinition,algorithmScheduleColumn_count,algorithmRunView_count";    }  
+   def pkFields : String = {    "";    }  
+   def fkFields : String = {    "";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    algorithmScheduleViewId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(algorithmScheduleViewId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleViewTypeId,algorithmScheduleId,sourceViewId,joinOnDefinition,algorithmScheduleColumn_count,algorithmRunView_count)  }  
+ def toStringArray() : Array[String] = {    Array(""+algorithmScheduleViewId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmScheduleViewTypeId,""+algorithmScheduleId,""+sourceViewId,""+joinOnDefinition,""+algorithmScheduleColumn_count,""+algorithmRunView_count)   }  
+ def toFullString() : String = {    "algorithmScheduleViewId:'"+algorithmScheduleViewId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmScheduleViewTypeId:'"+algorithmScheduleViewTypeId+"'"+","+"algorithmScheduleId:'"+algorithmScheduleId+"'"+","+"sourceViewId:'"+sourceViewId+"'"+","+"joinOnDefinition:'"+joinOnDefinition+"'"+","+"algorithmScheduleColumn_count:'"+algorithmScheduleColumn_count+"'"+","+"algorithmRunView_count:'"+algorithmRunView_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "algorithmScheduleViewId" => algorithmScheduleViewId  

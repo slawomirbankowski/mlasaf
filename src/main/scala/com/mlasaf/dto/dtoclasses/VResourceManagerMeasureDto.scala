@@ -28,39 +28,18 @@ case class VResourceManagerMeasureDto (
      , val resourceMeasure_lastUpdatedDate : java.util.Date
      , val resourceMeasure_resourceMeasureName : String 
      ) extends BaseReadOnlyDto {  
-   def tableName : String = { 
-   "vResourceManagerMeasure"; 
-   }  
-   def fields : String = { 
-   "resourceManagerMeasureId,guid,insertedRowDate,lastUpdatedDate,resourceManagerId,resourceMeasureId,measureString,measureValue,resourceManager_resourceManagerId,resourceManager_guid,resourceManager_insertedRowDate,resourceManager_lastUpdatedDate,resourceManager_resourceManagerTypeId,resourceManager_executorHostId,resourceManager_resourceManagerStatus,resourceMeasure_resourceMeasureId,resourceMeasure_guid,resourceMeasure_insertedRowDate,resourceMeasure_lastUpdatedDate,resourceMeasure_resourceMeasureName"; 
-   }  
-   def pkFields : String = { 
-   ""; 
-   }  
-   def fkFields : String = { 
-   ""; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    resourceManagerMeasureId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(resourceManagerMeasureId,guid,insertedRowDate,lastUpdatedDate,resourceManagerId,resourceMeasureId,measureString,measureValue,resourceManager_resourceManagerId,resourceManager_guid,resourceManager_insertedRowDate,resourceManager_lastUpdatedDate,resourceManager_resourceManagerTypeId,resourceManager_executorHostId,resourceManager_resourceManagerStatus,resourceMeasure_resourceMeasureId,resourceMeasure_guid,resourceMeasure_insertedRowDate,resourceMeasure_lastUpdatedDate,resourceMeasure_resourceMeasureName)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+resourceManagerMeasureId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+resourceManagerId,""+resourceMeasureId,""+measureString,""+measureValue,""+resourceManager_resourceManagerId,""+resourceManager_guid,""+resourceManager_insertedRowDate,""+resourceManager_lastUpdatedDate,""+resourceManager_resourceManagerTypeId,""+resourceManager_executorHostId,""+resourceManager_resourceManagerStatus,""+resourceMeasure_resourceMeasureId,""+resourceMeasure_guid,""+resourceMeasure_insertedRowDate,""+resourceMeasure_lastUpdatedDate,""+resourceMeasure_resourceMeasureName) 
-  } 
+   def tableName : String = {    "vResourceManagerMeasure";    }  
+   def fields : String = {    "resourceManagerMeasureId,guid,insertedRowDate,lastUpdatedDate,resourceManagerId,resourceMeasureId,measureString,measureValue,resourceManager_resourceManagerId,resourceManager_guid,resourceManager_insertedRowDate,resourceManager_lastUpdatedDate,resourceManager_resourceManagerTypeId,resourceManager_executorHostId,resourceManager_resourceManagerStatus,resourceMeasure_resourceMeasureId,resourceMeasure_guid,resourceMeasure_insertedRowDate,resourceMeasure_lastUpdatedDate,resourceMeasure_resourceMeasureName";    }  
+   def pkFields : String = {    "";    }  
+   def fkFields : String = {    "";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    resourceManagerMeasureId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(resourceManagerMeasureId,guid,insertedRowDate,lastUpdatedDate,resourceManagerId,resourceMeasureId,measureString,measureValue,resourceManager_resourceManagerId,resourceManager_guid,resourceManager_insertedRowDate,resourceManager_lastUpdatedDate,resourceManager_resourceManagerTypeId,resourceManager_executorHostId,resourceManager_resourceManagerStatus,resourceMeasure_resourceMeasureId,resourceMeasure_guid,resourceMeasure_insertedRowDate,resourceMeasure_lastUpdatedDate,resourceMeasure_resourceMeasureName)  }  
+ def toStringArray() : Array[String] = {    Array(""+resourceManagerMeasureId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+resourceManagerId,""+resourceMeasureId,""+measureString,""+measureValue,""+resourceManager_resourceManagerId,""+resourceManager_guid,""+resourceManager_insertedRowDate,""+resourceManager_lastUpdatedDate,""+resourceManager_resourceManagerTypeId,""+resourceManager_executorHostId,""+resourceManager_resourceManagerStatus,""+resourceMeasure_resourceMeasureId,""+resourceMeasure_guid,""+resourceMeasure_insertedRowDate,""+resourceMeasure_lastUpdatedDate,""+resourceMeasure_resourceMeasureName)   }  
+ def toFullString() : String = {    "resourceManagerMeasureId:'"+resourceManagerMeasureId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"resourceManagerId:'"+resourceManagerId+"'"+","+"resourceMeasureId:'"+resourceMeasureId+"'"+","+"measureString:'"+measureString+"'"+","+"measureValue:'"+measureValue+"'"+","+"resourceManager_resourceManagerId:'"+resourceManager_resourceManagerId+"'"+","+"resourceManager_guid:'"+resourceManager_guid+"'"+","+"resourceManager_insertedRowDate:'"+resourceManager_insertedRowDate+"'"+","+"resourceManager_lastUpdatedDate:'"+resourceManager_lastUpdatedDate+"'"+","+"resourceManager_resourceManagerTypeId:'"+resourceManager_resourceManagerTypeId+"'"+","+"resourceManager_executorHostId:'"+resourceManager_executorHostId+"'"+","+"resourceManager_resourceManagerStatus:'"+resourceManager_resourceManagerStatus+"'"+","+"resourceMeasure_resourceMeasureId:'"+resourceMeasure_resourceMeasureId+"'"+","+"resourceMeasure_guid:'"+resourceMeasure_guid+"'"+","+"resourceMeasure_insertedRowDate:'"+resourceMeasure_insertedRowDate+"'"+","+"resourceMeasure_lastUpdatedDate:'"+resourceMeasure_lastUpdatedDate+"'"+","+"resourceMeasure_resourceMeasureName:'"+resourceMeasure_resourceMeasureName+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "resourceManagerMeasureId" => resourceManagerMeasureId  

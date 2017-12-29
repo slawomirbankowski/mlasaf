@@ -15,39 +15,18 @@ case class VResourceMeasureSummaryDto (
      , val resourceManagerMeasure_count : Int
      , val resourceManagerAllocation_count : Int 
      ) extends BaseReadOnlyDto {  
-   def tableName : String = { 
-   "vResourceMeasureSummary"; 
-   }  
-   def fields : String = { 
-   "resourceMeasureId,guid,insertedRowDate,lastUpdatedDate,resourceMeasureName,resourceManagerMeasure_count,resourceManagerAllocation_count"; 
-   }  
-   def pkFields : String = { 
-   ""; 
-   }  
-   def fkFields : String = { 
-   ""; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    resourceMeasureId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(resourceMeasureId,guid,insertedRowDate,lastUpdatedDate,resourceMeasureName,resourceManagerMeasure_count,resourceManagerAllocation_count)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+resourceMeasureId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+resourceMeasureName,""+resourceManagerMeasure_count,""+resourceManagerAllocation_count) 
-  } 
+   def tableName : String = {    "vResourceMeasureSummary";    }  
+   def fields : String = {    "resourceMeasureId,guid,insertedRowDate,lastUpdatedDate,resourceMeasureName,resourceManagerMeasure_count,resourceManagerAllocation_count";    }  
+   def pkFields : String = {    "";    }  
+   def fkFields : String = {    "";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    resourceMeasureId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(resourceMeasureId,guid,insertedRowDate,lastUpdatedDate,resourceMeasureName,resourceManagerMeasure_count,resourceManagerAllocation_count)  }  
+ def toStringArray() : Array[String] = {    Array(""+resourceMeasureId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+resourceMeasureName,""+resourceManagerMeasure_count,""+resourceManagerAllocation_count)   }  
+ def toFullString() : String = {    "resourceMeasureId:'"+resourceMeasureId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"resourceMeasureName:'"+resourceMeasureName+"'"+","+"resourceManagerMeasure_count:'"+resourceManagerMeasure_count+"'"+","+"resourceManagerAllocation_count:'"+resourceManagerAllocation_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "resourceMeasureId" => resourceMeasureId  

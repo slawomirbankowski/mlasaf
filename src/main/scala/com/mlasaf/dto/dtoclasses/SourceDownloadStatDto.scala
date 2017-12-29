@@ -17,39 +17,18 @@ case class SourceDownloadStatDto (
      , val totalBytesCount : Long
      , val empryRowsCount : Long 
      ) extends BaseDto {  
-   def tableName : String = { 
-   "sourceDownloadStat"; 
-   }  
-   def fields : String = { 
-   "sourceDownloadStatId,guid,sourceDownloadId,insertedRowDate,lastUpdatedDate,rowsCount,errorRowsCount,totalBytesCount,empryRowsCount"; 
-   }  
-   def pkFields : String = { 
-   "sourceDownloadStatId"; 
-   }  
-   def fkFields : String = { 
-   "sourceDownloadId"; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    sourceDownloadStatId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(sourceDownloadStatId,guid,sourceDownloadId,insertedRowDate,lastUpdatedDate,rowsCount,errorRowsCount,totalBytesCount,empryRowsCount)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+sourceDownloadStatId,""+guid,""+sourceDownloadId,""+insertedRowDate,""+lastUpdatedDate,""+rowsCount,""+errorRowsCount,""+totalBytesCount,""+empryRowsCount) 
-  } 
+   def tableName : String = {    "sourceDownloadStat";    }  
+   def fields : String = {    "sourceDownloadStatId,guid,sourceDownloadId,insertedRowDate,lastUpdatedDate,rowsCount,errorRowsCount,totalBytesCount,empryRowsCount";    }  
+   def pkFields : String = {    "sourceDownloadStatId";    }  
+   def fkFields : String = {    "sourceDownloadId";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    sourceDownloadStatId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(sourceDownloadStatId,guid,sourceDownloadId,insertedRowDate,lastUpdatedDate,rowsCount,errorRowsCount,totalBytesCount,empryRowsCount)  }  
+ def toStringArray() : Array[String] = {    Array(""+sourceDownloadStatId,""+guid,""+sourceDownloadId,""+insertedRowDate,""+lastUpdatedDate,""+rowsCount,""+errorRowsCount,""+totalBytesCount,""+empryRowsCount)   }  
+ def toFullString() : String = {    "sourceDownloadStatId:'"+sourceDownloadStatId+"'"+","+"guid:'"+guid+"'"+","+"sourceDownloadId:'"+sourceDownloadId+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"rowsCount:'"+rowsCount+"'"+","+"errorRowsCount:'"+errorRowsCount+"'"+","+"totalBytesCount:'"+totalBytesCount+"'"+","+"empryRowsCount:'"+empryRowsCount+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "sourceDownloadStatId" => sourceDownloadStatId  

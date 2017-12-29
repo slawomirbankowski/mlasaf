@@ -39,39 +39,18 @@ case class VSourceScheduleDto (
      , val sourceView_sourceViewDefinition : String
      , val sourceView_isExisting : Int 
      ) extends BaseReadOnlyDto {  
-   def tableName : String = { 
-   "vSourceSchedule"; 
-   }  
-   def fields : String = { 
-   "sourceScheduleId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,executorStorageId,onDemand,startTime,intervalValue,isScheduled,deleteOldCopies,executorStorage_executorStorageId,executorStorage_guid,executorStorage_insertedRowDate,executorStorage_lastUpdatedDate,executorStorage_executorHostId,executorStorage_executorStorageTypeId,executorStorage_storageDefinition,executorStorage_storageBasePath,executorStorage_storageFulllPath,executorStorage_isRunning,executorStorage_portNumber,sourceView_sourceViewId,sourceView_guid,sourceView_insertedRowDate,sourceView_lastUpdatedDate,sourceView_sourceInstanceId,sourceView_sourceViewTypeId,sourceView_sourceViewName,sourceView_sourceViewDefinition,sourceView_isExisting"; 
-   }  
-   def pkFields : String = { 
-   ""; 
-   }  
-   def fkFields : String = { 
-   ""; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    sourceScheduleId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(sourceScheduleId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,executorStorageId,onDemand,startTime,intervalValue,isScheduled,deleteOldCopies,executorStorage_executorStorageId,executorStorage_guid,executorStorage_insertedRowDate,executorStorage_lastUpdatedDate,executorStorage_executorHostId,executorStorage_executorStorageTypeId,executorStorage_storageDefinition,executorStorage_storageBasePath,executorStorage_storageFulllPath,executorStorage_isRunning,executorStorage_portNumber,sourceView_sourceViewId,sourceView_guid,sourceView_insertedRowDate,sourceView_lastUpdatedDate,sourceView_sourceInstanceId,sourceView_sourceViewTypeId,sourceView_sourceViewName,sourceView_sourceViewDefinition,sourceView_isExisting)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+sourceScheduleId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceViewId,""+executorStorageId,""+onDemand,""+startTime,""+intervalValue,""+isScheduled,""+deleteOldCopies,""+executorStorage_executorStorageId,""+executorStorage_guid,""+executorStorage_insertedRowDate,""+executorStorage_lastUpdatedDate,""+executorStorage_executorHostId,""+executorStorage_executorStorageTypeId,""+executorStorage_storageDefinition,""+executorStorage_storageBasePath,""+executorStorage_storageFulllPath,""+executorStorage_isRunning,""+executorStorage_portNumber,""+sourceView_sourceViewId,""+sourceView_guid,""+sourceView_insertedRowDate,""+sourceView_lastUpdatedDate,""+sourceView_sourceInstanceId,""+sourceView_sourceViewTypeId,""+sourceView_sourceViewName,""+sourceView_sourceViewDefinition,""+sourceView_isExisting) 
-  } 
+   def tableName : String = {    "vSourceSchedule";    }  
+   def fields : String = {    "sourceScheduleId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,executorStorageId,onDemand,startTime,intervalValue,isScheduled,deleteOldCopies,executorStorage_executorStorageId,executorStorage_guid,executorStorage_insertedRowDate,executorStorage_lastUpdatedDate,executorStorage_executorHostId,executorStorage_executorStorageTypeId,executorStorage_storageDefinition,executorStorage_storageBasePath,executorStorage_storageFulllPath,executorStorage_isRunning,executorStorage_portNumber,sourceView_sourceViewId,sourceView_guid,sourceView_insertedRowDate,sourceView_lastUpdatedDate,sourceView_sourceInstanceId,sourceView_sourceViewTypeId,sourceView_sourceViewName,sourceView_sourceViewDefinition,sourceView_isExisting";    }  
+   def pkFields : String = {    "";    }  
+   def fkFields : String = {    "";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    sourceScheduleId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(sourceScheduleId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,executorStorageId,onDemand,startTime,intervalValue,isScheduled,deleteOldCopies,executorStorage_executorStorageId,executorStorage_guid,executorStorage_insertedRowDate,executorStorage_lastUpdatedDate,executorStorage_executorHostId,executorStorage_executorStorageTypeId,executorStorage_storageDefinition,executorStorage_storageBasePath,executorStorage_storageFulllPath,executorStorage_isRunning,executorStorage_portNumber,sourceView_sourceViewId,sourceView_guid,sourceView_insertedRowDate,sourceView_lastUpdatedDate,sourceView_sourceInstanceId,sourceView_sourceViewTypeId,sourceView_sourceViewName,sourceView_sourceViewDefinition,sourceView_isExisting)  }  
+ def toStringArray() : Array[String] = {    Array(""+sourceScheduleId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceViewId,""+executorStorageId,""+onDemand,""+startTime,""+intervalValue,""+isScheduled,""+deleteOldCopies,""+executorStorage_executorStorageId,""+executorStorage_guid,""+executorStorage_insertedRowDate,""+executorStorage_lastUpdatedDate,""+executorStorage_executorHostId,""+executorStorage_executorStorageTypeId,""+executorStorage_storageDefinition,""+executorStorage_storageBasePath,""+executorStorage_storageFulllPath,""+executorStorage_isRunning,""+executorStorage_portNumber,""+sourceView_sourceViewId,""+sourceView_guid,""+sourceView_insertedRowDate,""+sourceView_lastUpdatedDate,""+sourceView_sourceInstanceId,""+sourceView_sourceViewTypeId,""+sourceView_sourceViewName,""+sourceView_sourceViewDefinition,""+sourceView_isExisting)   }  
+ def toFullString() : String = {    "sourceScheduleId:'"+sourceScheduleId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"sourceViewId:'"+sourceViewId+"'"+","+"executorStorageId:'"+executorStorageId+"'"+","+"onDemand:'"+onDemand+"'"+","+"startTime:'"+startTime+"'"+","+"intervalValue:'"+intervalValue+"'"+","+"isScheduled:'"+isScheduled+"'"+","+"deleteOldCopies:'"+deleteOldCopies+"'"+","+"executorStorage_executorStorageId:'"+executorStorage_executorStorageId+"'"+","+"executorStorage_guid:'"+executorStorage_guid+"'"+","+"executorStorage_insertedRowDate:'"+executorStorage_insertedRowDate+"'"+","+"executorStorage_lastUpdatedDate:'"+executorStorage_lastUpdatedDate+"'"+","+"executorStorage_executorHostId:'"+executorStorage_executorHostId+"'"+","+"executorStorage_executorStorageTypeId:'"+executorStorage_executorStorageTypeId+"'"+","+"executorStorage_storageDefinition:'"+executorStorage_storageDefinition+"'"+","+"executorStorage_storageBasePath:'"+executorStorage_storageBasePath+"'"+","+"executorStorage_storageFulllPath:'"+executorStorage_storageFulllPath+"'"+","+"executorStorage_isRunning:'"+executorStorage_isRunning+"'"+","+"executorStorage_portNumber:'"+executorStorage_portNumber+"'"+","+"sourceView_sourceViewId:'"+sourceView_sourceViewId+"'"+","+"sourceView_guid:'"+sourceView_guid+"'"+","+"sourceView_insertedRowDate:'"+sourceView_insertedRowDate+"'"+","+"sourceView_lastUpdatedDate:'"+sourceView_lastUpdatedDate+"'"+","+"sourceView_sourceInstanceId:'"+sourceView_sourceInstanceId+"'"+","+"sourceView_sourceViewTypeId:'"+sourceView_sourceViewTypeId+"'"+","+"sourceView_sourceViewName:'"+sourceView_sourceViewName+"'"+","+"sourceView_sourceViewDefinition:'"+sourceView_sourceViewDefinition+"'"+","+"sourceView_isExisting:'"+sourceView_isExisting+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "sourceScheduleId" => sourceScheduleId  

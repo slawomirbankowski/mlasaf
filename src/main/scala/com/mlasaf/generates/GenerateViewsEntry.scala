@@ -8,6 +8,7 @@ import anorm.SQL
 import com.mlasaf.dto._
 import com.mlasaf.structures.GenerateEntryOptions
 
+/** generate summary views for DB */
 object GenerateViewsEntry {
 
   def main(args : Array[String]) = {

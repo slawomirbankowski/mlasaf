@@ -18,39 +18,18 @@ case class SourceInstanceDto (
      , val lastStatus : String
      , val lastConnectionDate : java.util.Date 
      ) extends BaseDto {  
-   def tableName : String = { 
-   "sourceInstance"; 
-   }  
-   def fields : String = { 
-   "sourceInstanceId,guid,insertedRowDate,lastUpdatedDate,sourceTypeId,sourceInstanceName,errorCount,correctCount,lastStatus,lastConnectionDate"; 
-   }  
-   def pkFields : String = { 
-   "sourceInstanceId"; 
-   }  
-   def fkFields : String = { 
-   "sourceTypeId"; 
-   }  
-   def nameField : String = { 
-   "sourceInstanceName"; 
-   }  
- def getPk() : Long = {
-    sourceInstanceId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(sourceInstanceId,guid,insertedRowDate,lastUpdatedDate,sourceTypeId,sourceInstanceName,errorCount,correctCount,lastStatus,lastConnectionDate)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+sourceInstanceId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceTypeId,""+sourceInstanceName,""+errorCount,""+correctCount,""+lastStatus,""+lastConnectionDate) 
-  } 
+   def tableName : String = {    "sourceInstance";    }  
+   def fields : String = {    "sourceInstanceId,guid,insertedRowDate,lastUpdatedDate,sourceTypeId,sourceInstanceName,errorCount,correctCount,lastStatus,lastConnectionDate";    }  
+   def pkFields : String = {    "sourceInstanceId";    }  
+   def fkFields : String = {    "sourceTypeId";    }  
+   def nameField : String = {    "sourceInstanceName";    }  
+ def getPk() : Long = {    sourceInstanceId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(sourceInstanceId,guid,insertedRowDate,lastUpdatedDate,sourceTypeId,sourceInstanceName,errorCount,correctCount,lastStatus,lastConnectionDate)  }  
+ def toStringArray() : Array[String] = {    Array(""+sourceInstanceId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceTypeId,""+sourceInstanceName,""+errorCount,""+correctCount,""+lastStatus,""+lastConnectionDate)   }  
+ def toFullString() : String = {    "sourceInstanceId:'"+sourceInstanceId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"sourceTypeId:'"+sourceTypeId+"'"+","+"sourceInstanceName:'"+sourceInstanceName+"'"+","+"errorCount:'"+errorCount+"'"+","+"correctCount:'"+correctCount+"'"+","+"lastStatus:'"+lastStatus+"'"+","+"lastConnectionDate:'"+lastConnectionDate+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "sourceInstanceId" => sourceInstanceId  

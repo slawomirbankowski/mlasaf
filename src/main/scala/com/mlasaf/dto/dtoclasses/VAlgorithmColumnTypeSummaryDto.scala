@@ -16,39 +16,18 @@ case class VAlgorithmColumnTypeSummaryDto (
      , val algorithmTypeColumnType_count : Int
      , val algorithmScheduleColumn_count : Int 
      ) extends BaseReadOnlyDto {  
-   def tableName : String = { 
-   "vAlgorithmColumnTypeSummary"; 
-   }  
-   def fields : String = { 
-   "algorithmColumnTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmColumnTypeName,algorithmColumnTypeDescription,algorithmTypeColumnType_count,algorithmScheduleColumn_count"; 
-   }  
-   def pkFields : String = { 
-   ""; 
-   }  
-   def fkFields : String = { 
-   ""; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    algorithmColumnTypeId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(algorithmColumnTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmColumnTypeName,algorithmColumnTypeDescription,algorithmTypeColumnType_count,algorithmScheduleColumn_count)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+algorithmColumnTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmColumnTypeName,""+algorithmColumnTypeDescription,""+algorithmTypeColumnType_count,""+algorithmScheduleColumn_count) 
-  } 
+   def tableName : String = {    "vAlgorithmColumnTypeSummary";    }  
+   def fields : String = {    "algorithmColumnTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmColumnTypeName,algorithmColumnTypeDescription,algorithmTypeColumnType_count,algorithmScheduleColumn_count";    }  
+   def pkFields : String = {    "";    }  
+   def fkFields : String = {    "";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    algorithmColumnTypeId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(algorithmColumnTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmColumnTypeName,algorithmColumnTypeDescription,algorithmTypeColumnType_count,algorithmScheduleColumn_count)  }  
+ def toStringArray() : Array[String] = {    Array(""+algorithmColumnTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmColumnTypeName,""+algorithmColumnTypeDescription,""+algorithmTypeColumnType_count,""+algorithmScheduleColumn_count)   }  
+ def toFullString() : String = {    "algorithmColumnTypeId:'"+algorithmColumnTypeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmColumnTypeName:'"+algorithmColumnTypeName+"'"+","+"algorithmColumnTypeDescription:'"+algorithmColumnTypeDescription+"'"+","+"algorithmTypeColumnType_count:'"+algorithmTypeColumnType_count+"'"+","+"algorithmScheduleColumn_count:'"+algorithmScheduleColumn_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "algorithmColumnTypeId" => algorithmColumnTypeId  

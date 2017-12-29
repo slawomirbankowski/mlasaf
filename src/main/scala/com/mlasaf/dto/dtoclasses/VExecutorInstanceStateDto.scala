@@ -26,39 +26,18 @@ case class VExecutorInstanceStateDto (
      , val executorInstance_portNumber : Int
      , val executorInstance_endDate : java.util.Date 
      ) extends BaseReadOnlyDto {  
-   def tableName : String = { 
-   "vExecutorInstanceState"; 
-   }  
-   def fields : String = { 
-   "executorInstanceStateId,guid,insertedRowDate,lastUpdatedDate,executorInstanceId,stateName,executorInstance_executorInstanceId,executorInstance_guid,executorInstance_insertedRowDate,executorInstance_lastUpdatedDate,executorInstance_executorTypeId,executorInstance_executorHostId,executorInstance_executorContextId,executorInstance_executorInstanceName,executorInstance_isRunning,executorInstance_isFinished,executorInstance_portNumber,executorInstance_endDate"; 
-   }  
-   def pkFields : String = { 
-   ""; 
-   }  
-   def fkFields : String = { 
-   ""; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    executorInstanceStateId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(executorInstanceStateId,guid,insertedRowDate,lastUpdatedDate,executorInstanceId,stateName,executorInstance_executorInstanceId,executorInstance_guid,executorInstance_insertedRowDate,executorInstance_lastUpdatedDate,executorInstance_executorTypeId,executorInstance_executorHostId,executorInstance_executorContextId,executorInstance_executorInstanceName,executorInstance_isRunning,executorInstance_isFinished,executorInstance_portNumber,executorInstance_endDate)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+executorInstanceStateId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorInstanceId,""+stateName,""+executorInstance_executorInstanceId,""+executorInstance_guid,""+executorInstance_insertedRowDate,""+executorInstance_lastUpdatedDate,""+executorInstance_executorTypeId,""+executorInstance_executorHostId,""+executorInstance_executorContextId,""+executorInstance_executorInstanceName,""+executorInstance_isRunning,""+executorInstance_isFinished,""+executorInstance_portNumber,""+executorInstance_endDate) 
-  } 
+   def tableName : String = {    "vExecutorInstanceState";    }  
+   def fields : String = {    "executorInstanceStateId,guid,insertedRowDate,lastUpdatedDate,executorInstanceId,stateName,executorInstance_executorInstanceId,executorInstance_guid,executorInstance_insertedRowDate,executorInstance_lastUpdatedDate,executorInstance_executorTypeId,executorInstance_executorHostId,executorInstance_executorContextId,executorInstance_executorInstanceName,executorInstance_isRunning,executorInstance_isFinished,executorInstance_portNumber,executorInstance_endDate";    }  
+   def pkFields : String = {    "";    }  
+   def fkFields : String = {    "";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    executorInstanceStateId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(executorInstanceStateId,guid,insertedRowDate,lastUpdatedDate,executorInstanceId,stateName,executorInstance_executorInstanceId,executorInstance_guid,executorInstance_insertedRowDate,executorInstance_lastUpdatedDate,executorInstance_executorTypeId,executorInstance_executorHostId,executorInstance_executorContextId,executorInstance_executorInstanceName,executorInstance_isRunning,executorInstance_isFinished,executorInstance_portNumber,executorInstance_endDate)  }  
+ def toStringArray() : Array[String] = {    Array(""+executorInstanceStateId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorInstanceId,""+stateName,""+executorInstance_executorInstanceId,""+executorInstance_guid,""+executorInstance_insertedRowDate,""+executorInstance_lastUpdatedDate,""+executorInstance_executorTypeId,""+executorInstance_executorHostId,""+executorInstance_executorContextId,""+executorInstance_executorInstanceName,""+executorInstance_isRunning,""+executorInstance_isFinished,""+executorInstance_portNumber,""+executorInstance_endDate)   }  
+ def toFullString() : String = {    "executorInstanceStateId:'"+executorInstanceStateId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorInstanceId:'"+executorInstanceId+"'"+","+"stateName:'"+stateName+"'"+","+"executorInstance_executorInstanceId:'"+executorInstance_executorInstanceId+"'"+","+"executorInstance_guid:'"+executorInstance_guid+"'"+","+"executorInstance_insertedRowDate:'"+executorInstance_insertedRowDate+"'"+","+"executorInstance_lastUpdatedDate:'"+executorInstance_lastUpdatedDate+"'"+","+"executorInstance_executorTypeId:'"+executorInstance_executorTypeId+"'"+","+"executorInstance_executorHostId:'"+executorInstance_executorHostId+"'"+","+"executorInstance_executorContextId:'"+executorInstance_executorContextId+"'"+","+"executorInstance_executorInstanceName:'"+executorInstance_executorInstanceName+"'"+","+"executorInstance_isRunning:'"+executorInstance_isRunning+"'"+","+"executorInstance_isFinished:'"+executorInstance_isFinished+"'"+","+"executorInstance_portNumber:'"+executorInstance_portNumber+"'"+","+"executorInstance_endDate:'"+executorInstance_endDate+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "executorInstanceStateId" => executorInstanceStateId  

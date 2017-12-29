@@ -13,39 +13,18 @@ case class AlgorithmScheduleViewTypeDto (
      , val lastUpdatedDate : java.util.Date
      , val algorithmScheduleViewTypeName : String 
      ) extends BaseDto {  
-   def tableName : String = { 
-   "algorithmScheduleViewType"; 
-   }  
-   def fields : String = { 
-   "algorithmScheduleViewTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleViewTypeName"; 
-   }  
-   def pkFields : String = { 
-   "algorithmScheduleViewTypeId"; 
-   }  
-   def fkFields : String = { 
-   ""; 
-   }  
-   def nameField : String = { 
-   "algorithmScheduleViewTypeName"; 
-   }  
- def getPk() : Long = {
-    algorithmScheduleViewTypeId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(algorithmScheduleViewTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleViewTypeName)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+algorithmScheduleViewTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmScheduleViewTypeName) 
-  } 
+   def tableName : String = {    "algorithmScheduleViewType";    }  
+   def fields : String = {    "algorithmScheduleViewTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleViewTypeName";    }  
+   def pkFields : String = {    "algorithmScheduleViewTypeId";    }  
+   def fkFields : String = {    "";    }  
+   def nameField : String = {    "algorithmScheduleViewTypeName";    }  
+ def getPk() : Long = {    algorithmScheduleViewTypeId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(algorithmScheduleViewTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleViewTypeName)  }  
+ def toStringArray() : Array[String] = {    Array(""+algorithmScheduleViewTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmScheduleViewTypeName)   }  
+ def toFullString() : String = {    "algorithmScheduleViewTypeId:'"+algorithmScheduleViewTypeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmScheduleViewTypeName:'"+algorithmScheduleViewTypeName+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "algorithmScheduleViewTypeId" => algorithmScheduleViewTypeId  

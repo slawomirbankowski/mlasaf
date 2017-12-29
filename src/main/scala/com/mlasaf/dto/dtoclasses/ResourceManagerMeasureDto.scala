@@ -16,39 +16,18 @@ case class ResourceManagerMeasureDto (
      , val measureString : String
      , val measureValue : Double 
      ) extends BaseDto {  
-   def tableName : String = { 
-   "resourceManagerMeasure"; 
-   }  
-   def fields : String = { 
-   "resourceManagerMeasureId,guid,insertedRowDate,lastUpdatedDate,resourceManagerId,resourceMeasureId,measureString,measureValue"; 
-   }  
-   def pkFields : String = { 
-   "resourceManagerMeasureId"; 
-   }  
-   def fkFields : String = { 
-   "resourceManagerId,resourceMeasureId"; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    resourceManagerMeasureId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(resourceManagerMeasureId,guid,insertedRowDate,lastUpdatedDate,resourceManagerId,resourceMeasureId,measureString,measureValue)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+resourceManagerMeasureId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+resourceManagerId,""+resourceMeasureId,""+measureString,""+measureValue) 
-  } 
+   def tableName : String = {    "resourceManagerMeasure";    }  
+   def fields : String = {    "resourceManagerMeasureId,guid,insertedRowDate,lastUpdatedDate,resourceManagerId,resourceMeasureId,measureString,measureValue";    }  
+   def pkFields : String = {    "resourceManagerMeasureId";    }  
+   def fkFields : String = {    "resourceManagerId,resourceMeasureId";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    resourceManagerMeasureId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(resourceManagerMeasureId,guid,insertedRowDate,lastUpdatedDate,resourceManagerId,resourceMeasureId,measureString,measureValue)  }  
+ def toStringArray() : Array[String] = {    Array(""+resourceManagerMeasureId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+resourceManagerId,""+resourceMeasureId,""+measureString,""+measureValue)   }  
+ def toFullString() : String = {    "resourceManagerMeasureId:'"+resourceManagerMeasureId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"resourceManagerId:'"+resourceManagerId+"'"+","+"resourceMeasureId:'"+resourceMeasureId+"'"+","+"measureString:'"+measureString+"'"+","+"measureValue:'"+measureValue+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "resourceManagerMeasureId" => resourceManagerMeasureId  

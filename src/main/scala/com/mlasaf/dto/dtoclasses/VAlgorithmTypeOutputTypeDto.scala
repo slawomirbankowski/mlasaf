@@ -26,39 +26,18 @@ case class VAlgorithmTypeOutputTypeDto (
      , val algorithmTypeVersion_algorithmTypeId : Long
      , val algorithmTypeVersion_algorithmTypeVersionName : String 
      ) extends BaseReadOnlyDto {  
-   def tableName : String = { 
-   "vAlgorithmTypeOutputType"; 
-   }  
-   def fields : String = { 
-   "algorithmTypeOutputTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,algorithmOutputTypeId,isMandatory,algorithmOutputType_algorithmOutputTypeId,algorithmOutputType_guid,algorithmOutputType_insertedRowDate,algorithmOutputType_lastUpdatedDate,algorithmOutputType_algorithmOutputTypeName,algorithmTypeVersion_algorithmTypeVersionId,algorithmTypeVersion_insertedRowDate,algorithmTypeVersion_lastUpdatedDate,algorithmTypeVersion_guid,algorithmTypeVersion_algorithmTypeId,algorithmTypeVersion_algorithmTypeVersionName"; 
-   }  
-   def pkFields : String = { 
-   ""; 
-   }  
-   def fkFields : String = { 
-   ""; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    algorithmTypeOutputTypeId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(algorithmTypeOutputTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,algorithmOutputTypeId,isMandatory,algorithmOutputType_algorithmOutputTypeId,algorithmOutputType_guid,algorithmOutputType_insertedRowDate,algorithmOutputType_lastUpdatedDate,algorithmOutputType_algorithmOutputTypeName,algorithmTypeVersion_algorithmTypeVersionId,algorithmTypeVersion_insertedRowDate,algorithmTypeVersion_lastUpdatedDate,algorithmTypeVersion_guid,algorithmTypeVersion_algorithmTypeId,algorithmTypeVersion_algorithmTypeVersionName)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+algorithmTypeOutputTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmTypeVersionId,""+algorithmOutputTypeId,""+isMandatory,""+algorithmOutputType_algorithmOutputTypeId,""+algorithmOutputType_guid,""+algorithmOutputType_insertedRowDate,""+algorithmOutputType_lastUpdatedDate,""+algorithmOutputType_algorithmOutputTypeName,""+algorithmTypeVersion_algorithmTypeVersionId,""+algorithmTypeVersion_insertedRowDate,""+algorithmTypeVersion_lastUpdatedDate,""+algorithmTypeVersion_guid,""+algorithmTypeVersion_algorithmTypeId,""+algorithmTypeVersion_algorithmTypeVersionName) 
-  } 
+   def tableName : String = {    "vAlgorithmTypeOutputType";    }  
+   def fields : String = {    "algorithmTypeOutputTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,algorithmOutputTypeId,isMandatory,algorithmOutputType_algorithmOutputTypeId,algorithmOutputType_guid,algorithmOutputType_insertedRowDate,algorithmOutputType_lastUpdatedDate,algorithmOutputType_algorithmOutputTypeName,algorithmTypeVersion_algorithmTypeVersionId,algorithmTypeVersion_insertedRowDate,algorithmTypeVersion_lastUpdatedDate,algorithmTypeVersion_guid,algorithmTypeVersion_algorithmTypeId,algorithmTypeVersion_algorithmTypeVersionName";    }  
+   def pkFields : String = {    "";    }  
+   def fkFields : String = {    "";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    algorithmTypeOutputTypeId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(algorithmTypeOutputTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,algorithmOutputTypeId,isMandatory,algorithmOutputType_algorithmOutputTypeId,algorithmOutputType_guid,algorithmOutputType_insertedRowDate,algorithmOutputType_lastUpdatedDate,algorithmOutputType_algorithmOutputTypeName,algorithmTypeVersion_algorithmTypeVersionId,algorithmTypeVersion_insertedRowDate,algorithmTypeVersion_lastUpdatedDate,algorithmTypeVersion_guid,algorithmTypeVersion_algorithmTypeId,algorithmTypeVersion_algorithmTypeVersionName)  }  
+ def toStringArray() : Array[String] = {    Array(""+algorithmTypeOutputTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmTypeVersionId,""+algorithmOutputTypeId,""+isMandatory,""+algorithmOutputType_algorithmOutputTypeId,""+algorithmOutputType_guid,""+algorithmOutputType_insertedRowDate,""+algorithmOutputType_lastUpdatedDate,""+algorithmOutputType_algorithmOutputTypeName,""+algorithmTypeVersion_algorithmTypeVersionId,""+algorithmTypeVersion_insertedRowDate,""+algorithmTypeVersion_lastUpdatedDate,""+algorithmTypeVersion_guid,""+algorithmTypeVersion_algorithmTypeId,""+algorithmTypeVersion_algorithmTypeVersionName)   }  
+ def toFullString() : String = {    "algorithmTypeOutputTypeId:'"+algorithmTypeOutputTypeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmTypeVersionId:'"+algorithmTypeVersionId+"'"+","+"algorithmOutputTypeId:'"+algorithmOutputTypeId+"'"+","+"isMandatory:'"+isMandatory+"'"+","+"algorithmOutputType_algorithmOutputTypeId:'"+algorithmOutputType_algorithmOutputTypeId+"'"+","+"algorithmOutputType_guid:'"+algorithmOutputType_guid+"'"+","+"algorithmOutputType_insertedRowDate:'"+algorithmOutputType_insertedRowDate+"'"+","+"algorithmOutputType_lastUpdatedDate:'"+algorithmOutputType_lastUpdatedDate+"'"+","+"algorithmOutputType_algorithmOutputTypeName:'"+algorithmOutputType_algorithmOutputTypeName+"'"+","+"algorithmTypeVersion_algorithmTypeVersionId:'"+algorithmTypeVersion_algorithmTypeVersionId+"'"+","+"algorithmTypeVersion_insertedRowDate:'"+algorithmTypeVersion_insertedRowDate+"'"+","+"algorithmTypeVersion_lastUpdatedDate:'"+algorithmTypeVersion_lastUpdatedDate+"'"+","+"algorithmTypeVersion_guid:'"+algorithmTypeVersion_guid+"'"+","+"algorithmTypeVersion_algorithmTypeId:'"+algorithmTypeVersion_algorithmTypeId+"'"+","+"algorithmTypeVersion_algorithmTypeVersionName:'"+algorithmTypeVersion_algorithmTypeVersionName+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "algorithmTypeOutputTypeId" => algorithmTypeOutputTypeId  

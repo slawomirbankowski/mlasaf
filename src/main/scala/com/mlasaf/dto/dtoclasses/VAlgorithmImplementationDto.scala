@@ -28,39 +28,18 @@ case class VAlgorithmImplementationDto (
      , val executorType_executorTypeName : String
      , val executorType_executorTypeClass : String 
      ) extends BaseReadOnlyDto {  
-   def tableName : String = { 
-   "vAlgorithmImplementation"; 
-   }  
-   def fields : String = { 
-   "algorithmImplementationId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,executorTypeId,algorithmImplementationName,algorithmImplementationClass,algorithmTypeVersion_algorithmTypeVersionId,algorithmTypeVersion_insertedRowDate,algorithmTypeVersion_lastUpdatedDate,algorithmTypeVersion_guid,algorithmTypeVersion_algorithmTypeId,algorithmTypeVersion_algorithmTypeVersionName,executorType_executorTypeId,executorType_guid,executorType_insertedRowDate,executorType_lastUpdatedDate,executorType_executorTypeName,executorType_executorTypeClass"; 
-   }  
-   def pkFields : String = { 
-   ""; 
-   }  
-   def fkFields : String = { 
-   ""; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    algorithmImplementationId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(algorithmImplementationId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,executorTypeId,algorithmImplementationName,algorithmImplementationClass,algorithmTypeVersion_algorithmTypeVersionId,algorithmTypeVersion_insertedRowDate,algorithmTypeVersion_lastUpdatedDate,algorithmTypeVersion_guid,algorithmTypeVersion_algorithmTypeId,algorithmTypeVersion_algorithmTypeVersionName,executorType_executorTypeId,executorType_guid,executorType_insertedRowDate,executorType_lastUpdatedDate,executorType_executorTypeName,executorType_executorTypeClass)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+algorithmImplementationId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmTypeVersionId,""+executorTypeId,""+algorithmImplementationName,""+algorithmImplementationClass,""+algorithmTypeVersion_algorithmTypeVersionId,""+algorithmTypeVersion_insertedRowDate,""+algorithmTypeVersion_lastUpdatedDate,""+algorithmTypeVersion_guid,""+algorithmTypeVersion_algorithmTypeId,""+algorithmTypeVersion_algorithmTypeVersionName,""+executorType_executorTypeId,""+executorType_guid,""+executorType_insertedRowDate,""+executorType_lastUpdatedDate,""+executorType_executorTypeName,""+executorType_executorTypeClass) 
-  } 
+   def tableName : String = {    "vAlgorithmImplementation";    }  
+   def fields : String = {    "algorithmImplementationId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,executorTypeId,algorithmImplementationName,algorithmImplementationClass,algorithmTypeVersion_algorithmTypeVersionId,algorithmTypeVersion_insertedRowDate,algorithmTypeVersion_lastUpdatedDate,algorithmTypeVersion_guid,algorithmTypeVersion_algorithmTypeId,algorithmTypeVersion_algorithmTypeVersionName,executorType_executorTypeId,executorType_guid,executorType_insertedRowDate,executorType_lastUpdatedDate,executorType_executorTypeName,executorType_executorTypeClass";    }  
+   def pkFields : String = {    "";    }  
+   def fkFields : String = {    "";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    algorithmImplementationId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(algorithmImplementationId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,executorTypeId,algorithmImplementationName,algorithmImplementationClass,algorithmTypeVersion_algorithmTypeVersionId,algorithmTypeVersion_insertedRowDate,algorithmTypeVersion_lastUpdatedDate,algorithmTypeVersion_guid,algorithmTypeVersion_algorithmTypeId,algorithmTypeVersion_algorithmTypeVersionName,executorType_executorTypeId,executorType_guid,executorType_insertedRowDate,executorType_lastUpdatedDate,executorType_executorTypeName,executorType_executorTypeClass)  }  
+ def toStringArray() : Array[String] = {    Array(""+algorithmImplementationId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmTypeVersionId,""+executorTypeId,""+algorithmImplementationName,""+algorithmImplementationClass,""+algorithmTypeVersion_algorithmTypeVersionId,""+algorithmTypeVersion_insertedRowDate,""+algorithmTypeVersion_lastUpdatedDate,""+algorithmTypeVersion_guid,""+algorithmTypeVersion_algorithmTypeId,""+algorithmTypeVersion_algorithmTypeVersionName,""+executorType_executorTypeId,""+executorType_guid,""+executorType_insertedRowDate,""+executorType_lastUpdatedDate,""+executorType_executorTypeName,""+executorType_executorTypeClass)   }  
+ def toFullString() : String = {    "algorithmImplementationId:'"+algorithmImplementationId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmTypeVersionId:'"+algorithmTypeVersionId+"'"+","+"executorTypeId:'"+executorTypeId+"'"+","+"algorithmImplementationName:'"+algorithmImplementationName+"'"+","+"algorithmImplementationClass:'"+algorithmImplementationClass+"'"+","+"algorithmTypeVersion_algorithmTypeVersionId:'"+algorithmTypeVersion_algorithmTypeVersionId+"'"+","+"algorithmTypeVersion_insertedRowDate:'"+algorithmTypeVersion_insertedRowDate+"'"+","+"algorithmTypeVersion_lastUpdatedDate:'"+algorithmTypeVersion_lastUpdatedDate+"'"+","+"algorithmTypeVersion_guid:'"+algorithmTypeVersion_guid+"'"+","+"algorithmTypeVersion_algorithmTypeId:'"+algorithmTypeVersion_algorithmTypeId+"'"+","+"algorithmTypeVersion_algorithmTypeVersionName:'"+algorithmTypeVersion_algorithmTypeVersionName+"'"+","+"executorType_executorTypeId:'"+executorType_executorTypeId+"'"+","+"executorType_guid:'"+executorType_guid+"'"+","+"executorType_insertedRowDate:'"+executorType_insertedRowDate+"'"+","+"executorType_lastUpdatedDate:'"+executorType_lastUpdatedDate+"'"+","+"executorType_executorTypeName:'"+executorType_executorTypeName+"'"+","+"executorType_executorTypeClass:'"+executorType_executorTypeClass+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "algorithmImplementationId" => algorithmImplementationId  

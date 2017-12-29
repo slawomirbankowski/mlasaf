@@ -23,10 +23,21 @@ object CustomUtils {
   def randomLong() : Long = {
     Math.abs(random.nextLong())
   }
+  def sequenceId() : String = {
+    System.currentTimeMillis() + "" + Math.abs(random.nextInt(10000));
+  }
+  def yearMonthDay : String = {
+    //java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_MONTH);
+    //var d = new java.util.Date();
+    ""
+  }
   def diskSpaces : String = {
     "[" + java.io.File.listRoots().map(rd =>  "{'path':'" + rd.getPath + "','name':'" + rd.getName + "','total':'" + rd.getTotalSpace + "','usable':'" +  rd.getUsableSpace + "','free':'" + rd.getFreeSpace + "'}").mkString(",") + "]"
   }
+  def getRootFreeSpace() : String = {
+    ""
 
+  }
   def executeQuery(conn : java.sql.Connection, sql : String) = {
 
   }

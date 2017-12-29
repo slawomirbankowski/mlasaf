@@ -19,39 +19,18 @@ case class ExecutorStorageDto (
      , val isRunning : Int
      , val portNumber : Int 
      ) extends BaseDto {  
-   def tableName : String = { 
-   "executorStorage"; 
-   }  
-   def fields : String = { 
-   "executorStorageId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorStorageTypeId,storageDefinition,storageBasePath,storageFulllPath,isRunning,portNumber"; 
-   }  
-   def pkFields : String = { 
-   "executorStorageId"; 
-   }  
-   def fkFields : String = { 
-   "executorStorageTypeId,executorHostId"; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    executorStorageId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(executorStorageId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorStorageTypeId,storageDefinition,storageBasePath,storageFulllPath,isRunning,portNumber)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+executorStorageId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+executorStorageTypeId,""+storageDefinition,""+storageBasePath,""+storageFulllPath,""+isRunning,""+portNumber) 
-  } 
+   def tableName : String = {    "executorStorage";    }  
+   def fields : String = {    "executorStorageId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorStorageTypeId,storageDefinition,storageBasePath,storageFulllPath,isRunning,portNumber";    }  
+   def pkFields : String = {    "executorStorageId";    }  
+   def fkFields : String = {    "executorStorageTypeId,executorHostId";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    executorStorageId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(executorStorageId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorStorageTypeId,storageDefinition,storageBasePath,storageFulllPath,isRunning,portNumber)  }  
+ def toStringArray() : Array[String] = {    Array(""+executorStorageId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+executorStorageTypeId,""+storageDefinition,""+storageBasePath,""+storageFulllPath,""+isRunning,""+portNumber)   }  
+ def toFullString() : String = {    "executorStorageId:'"+executorStorageId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorHostId:'"+executorHostId+"'"+","+"executorStorageTypeId:'"+executorStorageTypeId+"'"+","+"storageDefinition:'"+storageDefinition+"'"+","+"storageBasePath:'"+storageBasePath+"'"+","+"storageFulllPath:'"+storageFulllPath+"'"+","+"isRunning:'"+isRunning+"'"+","+"portNumber:'"+portNumber+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "executorStorageId" => executorStorageId  

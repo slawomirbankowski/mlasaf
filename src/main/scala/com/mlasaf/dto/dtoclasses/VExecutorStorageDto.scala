@@ -35,39 +35,18 @@ case class VExecutorStorageDto (
      , val executorHost_hostOsVersion : String
      , val executorHost_isWorking : Int 
      ) extends BaseReadOnlyDto {  
-   def tableName : String = { 
-   "vExecutorStorage"; 
-   }  
-   def fields : String = { 
-   "executorStorageId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorStorageTypeId,storageDefinition,storageBasePath,storageFulllPath,isRunning,portNumber,executorStorageType_executorStorageTypeId,executorStorageType_guid,executorStorageType_insertedRowDate,executorStorageType_lastUpdatedDate,executorStorageType_executorStorageTypeName,executorStorageType_executorStorageTypeClass,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking"; 
-   }  
-   def pkFields : String = { 
-   ""; 
-   }  
-   def fkFields : String = { 
-   ""; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    executorStorageId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(executorStorageId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorStorageTypeId,storageDefinition,storageBasePath,storageFulllPath,isRunning,portNumber,executorStorageType_executorStorageTypeId,executorStorageType_guid,executorStorageType_insertedRowDate,executorStorageType_lastUpdatedDate,executorStorageType_executorStorageTypeName,executorStorageType_executorStorageTypeClass,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+executorStorageId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+executorStorageTypeId,""+storageDefinition,""+storageBasePath,""+storageFulllPath,""+isRunning,""+portNumber,""+executorStorageType_executorStorageTypeId,""+executorStorageType_guid,""+executorStorageType_insertedRowDate,""+executorStorageType_lastUpdatedDate,""+executorStorageType_executorStorageTypeName,""+executorStorageType_executorStorageTypeClass,""+executorHost_executorHostId,""+executorHost_guid,""+executorHost_insertedRowDate,""+executorHost_lastUpdatedDate,""+executorHost_hostName,""+executorHost_hostIp,""+executorHost_hostDomain,""+executorHost_hostOsType,""+executorHost_hostOsVersion,""+executorHost_isWorking) 
-  } 
+   def tableName : String = {    "vExecutorStorage";    }  
+   def fields : String = {    "executorStorageId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorStorageTypeId,storageDefinition,storageBasePath,storageFulllPath,isRunning,portNumber,executorStorageType_executorStorageTypeId,executorStorageType_guid,executorStorageType_insertedRowDate,executorStorageType_lastUpdatedDate,executorStorageType_executorStorageTypeName,executorStorageType_executorStorageTypeClass,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking";    }  
+   def pkFields : String = {    "";    }  
+   def fkFields : String = {    "";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    executorStorageId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(executorStorageId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorStorageTypeId,storageDefinition,storageBasePath,storageFulllPath,isRunning,portNumber,executorStorageType_executorStorageTypeId,executorStorageType_guid,executorStorageType_insertedRowDate,executorStorageType_lastUpdatedDate,executorStorageType_executorStorageTypeName,executorStorageType_executorStorageTypeClass,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking)  }  
+ def toStringArray() : Array[String] = {    Array(""+executorStorageId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+executorStorageTypeId,""+storageDefinition,""+storageBasePath,""+storageFulllPath,""+isRunning,""+portNumber,""+executorStorageType_executorStorageTypeId,""+executorStorageType_guid,""+executorStorageType_insertedRowDate,""+executorStorageType_lastUpdatedDate,""+executorStorageType_executorStorageTypeName,""+executorStorageType_executorStorageTypeClass,""+executorHost_executorHostId,""+executorHost_guid,""+executorHost_insertedRowDate,""+executorHost_lastUpdatedDate,""+executorHost_hostName,""+executorHost_hostIp,""+executorHost_hostDomain,""+executorHost_hostOsType,""+executorHost_hostOsVersion,""+executorHost_isWorking)   }  
+ def toFullString() : String = {    "executorStorageId:'"+executorStorageId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorHostId:'"+executorHostId+"'"+","+"executorStorageTypeId:'"+executorStorageTypeId+"'"+","+"storageDefinition:'"+storageDefinition+"'"+","+"storageBasePath:'"+storageBasePath+"'"+","+"storageFulllPath:'"+storageFulllPath+"'"+","+"isRunning:'"+isRunning+"'"+","+"portNumber:'"+portNumber+"'"+","+"executorStorageType_executorStorageTypeId:'"+executorStorageType_executorStorageTypeId+"'"+","+"executorStorageType_guid:'"+executorStorageType_guid+"'"+","+"executorStorageType_insertedRowDate:'"+executorStorageType_insertedRowDate+"'"+","+"executorStorageType_lastUpdatedDate:'"+executorStorageType_lastUpdatedDate+"'"+","+"executorStorageType_executorStorageTypeName:'"+executorStorageType_executorStorageTypeName+"'"+","+"executorStorageType_executorStorageTypeClass:'"+executorStorageType_executorStorageTypeClass+"'"+","+"executorHost_executorHostId:'"+executorHost_executorHostId+"'"+","+"executorHost_guid:'"+executorHost_guid+"'"+","+"executorHost_insertedRowDate:'"+executorHost_insertedRowDate+"'"+","+"executorHost_lastUpdatedDate:'"+executorHost_lastUpdatedDate+"'"+","+"executorHost_hostName:'"+executorHost_hostName+"'"+","+"executorHost_hostIp:'"+executorHost_hostIp+"'"+","+"executorHost_hostDomain:'"+executorHost_hostDomain+"'"+","+"executorHost_hostOsType:'"+executorHost_hostOsType+"'"+","+"executorHost_hostOsVersion:'"+executorHost_hostOsVersion+"'"+","+"executorHost_isWorking:'"+executorHost_isWorking+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "executorStorageId" => executorStorageId  

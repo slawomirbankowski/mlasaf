@@ -32,39 +32,18 @@ case class VAlgorithmScheduleParamDto (
      , val algorithmSchedule_intervalValue : Long
      , val algorithmSchedule_isRunning : Int 
      ) extends BaseReadOnlyDto {  
-   def tableName : String = { 
-   "vAlgorithmScheduleParam"; 
-   }  
-   def fields : String = { 
-   "algorithmScheduleParamId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleId,algorithmParamId,algorithmParamValue,algorithmParam_algorithmParamId,algorithmParam_guid,algorithmParam_insertedRowDate,algorithmParam_lastUpdatedDate,algorithmParam_algorithmParamName,algorithmParam_algorithmParamDescription,algorithmParam_algorithmParamType,algorithmSchedule_algorithmScheduleId,algorithmSchedule_guid,algorithmSchedule_insertedRowDate,algorithmSchedule_lastUpdatedDate,algorithmSchedule_algorithmImplementationId,algorithmSchedule_algorithmScheduleTypeId,algorithmSchedule_algorithmScheduleName,algorithmSchedule_isScheduled,algorithmSchedule_intervalValue,algorithmSchedule_isRunning"; 
-   }  
-   def pkFields : String = { 
-   ""; 
-   }  
-   def fkFields : String = { 
-   ""; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    algorithmScheduleParamId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(algorithmScheduleParamId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleId,algorithmParamId,algorithmParamValue,algorithmParam_algorithmParamId,algorithmParam_guid,algorithmParam_insertedRowDate,algorithmParam_lastUpdatedDate,algorithmParam_algorithmParamName,algorithmParam_algorithmParamDescription,algorithmParam_algorithmParamType,algorithmSchedule_algorithmScheduleId,algorithmSchedule_guid,algorithmSchedule_insertedRowDate,algorithmSchedule_lastUpdatedDate,algorithmSchedule_algorithmImplementationId,algorithmSchedule_algorithmScheduleTypeId,algorithmSchedule_algorithmScheduleName,algorithmSchedule_isScheduled,algorithmSchedule_intervalValue,algorithmSchedule_isRunning)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+algorithmScheduleParamId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmScheduleId,""+algorithmParamId,""+algorithmParamValue,""+algorithmParam_algorithmParamId,""+algorithmParam_guid,""+algorithmParam_insertedRowDate,""+algorithmParam_lastUpdatedDate,""+algorithmParam_algorithmParamName,""+algorithmParam_algorithmParamDescription,""+algorithmParam_algorithmParamType,""+algorithmSchedule_algorithmScheduleId,""+algorithmSchedule_guid,""+algorithmSchedule_insertedRowDate,""+algorithmSchedule_lastUpdatedDate,""+algorithmSchedule_algorithmImplementationId,""+algorithmSchedule_algorithmScheduleTypeId,""+algorithmSchedule_algorithmScheduleName,""+algorithmSchedule_isScheduled,""+algorithmSchedule_intervalValue,""+algorithmSchedule_isRunning) 
-  } 
+   def tableName : String = {    "vAlgorithmScheduleParam";    }  
+   def fields : String = {    "algorithmScheduleParamId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleId,algorithmParamId,algorithmParamValue,algorithmParam_algorithmParamId,algorithmParam_guid,algorithmParam_insertedRowDate,algorithmParam_lastUpdatedDate,algorithmParam_algorithmParamName,algorithmParam_algorithmParamDescription,algorithmParam_algorithmParamType,algorithmSchedule_algorithmScheduleId,algorithmSchedule_guid,algorithmSchedule_insertedRowDate,algorithmSchedule_lastUpdatedDate,algorithmSchedule_algorithmImplementationId,algorithmSchedule_algorithmScheduleTypeId,algorithmSchedule_algorithmScheduleName,algorithmSchedule_isScheduled,algorithmSchedule_intervalValue,algorithmSchedule_isRunning";    }  
+   def pkFields : String = {    "";    }  
+   def fkFields : String = {    "";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    algorithmScheduleParamId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(algorithmScheduleParamId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleId,algorithmParamId,algorithmParamValue,algorithmParam_algorithmParamId,algorithmParam_guid,algorithmParam_insertedRowDate,algorithmParam_lastUpdatedDate,algorithmParam_algorithmParamName,algorithmParam_algorithmParamDescription,algorithmParam_algorithmParamType,algorithmSchedule_algorithmScheduleId,algorithmSchedule_guid,algorithmSchedule_insertedRowDate,algorithmSchedule_lastUpdatedDate,algorithmSchedule_algorithmImplementationId,algorithmSchedule_algorithmScheduleTypeId,algorithmSchedule_algorithmScheduleName,algorithmSchedule_isScheduled,algorithmSchedule_intervalValue,algorithmSchedule_isRunning)  }  
+ def toStringArray() : Array[String] = {    Array(""+algorithmScheduleParamId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmScheduleId,""+algorithmParamId,""+algorithmParamValue,""+algorithmParam_algorithmParamId,""+algorithmParam_guid,""+algorithmParam_insertedRowDate,""+algorithmParam_lastUpdatedDate,""+algorithmParam_algorithmParamName,""+algorithmParam_algorithmParamDescription,""+algorithmParam_algorithmParamType,""+algorithmSchedule_algorithmScheduleId,""+algorithmSchedule_guid,""+algorithmSchedule_insertedRowDate,""+algorithmSchedule_lastUpdatedDate,""+algorithmSchedule_algorithmImplementationId,""+algorithmSchedule_algorithmScheduleTypeId,""+algorithmSchedule_algorithmScheduleName,""+algorithmSchedule_isScheduled,""+algorithmSchedule_intervalValue,""+algorithmSchedule_isRunning)   }  
+ def toFullString() : String = {    "algorithmScheduleParamId:'"+algorithmScheduleParamId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmScheduleId:'"+algorithmScheduleId+"'"+","+"algorithmParamId:'"+algorithmParamId+"'"+","+"algorithmParamValue:'"+algorithmParamValue+"'"+","+"algorithmParam_algorithmParamId:'"+algorithmParam_algorithmParamId+"'"+","+"algorithmParam_guid:'"+algorithmParam_guid+"'"+","+"algorithmParam_insertedRowDate:'"+algorithmParam_insertedRowDate+"'"+","+"algorithmParam_lastUpdatedDate:'"+algorithmParam_lastUpdatedDate+"'"+","+"algorithmParam_algorithmParamName:'"+algorithmParam_algorithmParamName+"'"+","+"algorithmParam_algorithmParamDescription:'"+algorithmParam_algorithmParamDescription+"'"+","+"algorithmParam_algorithmParamType:'"+algorithmParam_algorithmParamType+"'"+","+"algorithmSchedule_algorithmScheduleId:'"+algorithmSchedule_algorithmScheduleId+"'"+","+"algorithmSchedule_guid:'"+algorithmSchedule_guid+"'"+","+"algorithmSchedule_insertedRowDate:'"+algorithmSchedule_insertedRowDate+"'"+","+"algorithmSchedule_lastUpdatedDate:'"+algorithmSchedule_lastUpdatedDate+"'"+","+"algorithmSchedule_algorithmImplementationId:'"+algorithmSchedule_algorithmImplementationId+"'"+","+"algorithmSchedule_algorithmScheduleTypeId:'"+algorithmSchedule_algorithmScheduleTypeId+"'"+","+"algorithmSchedule_algorithmScheduleName:'"+algorithmSchedule_algorithmScheduleName+"'"+","+"algorithmSchedule_isScheduled:'"+algorithmSchedule_isScheduled+"'"+","+"algorithmSchedule_intervalValue:'"+algorithmSchedule_intervalValue+"'"+","+"algorithmSchedule_isRunning:'"+algorithmSchedule_isRunning+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "algorithmScheduleParamId" => algorithmScheduleParamId  

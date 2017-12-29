@@ -16,39 +16,18 @@ case class AlgorithmTypeColumnTypeDto (
      , val allowMultiple : Int
      , val allowEmpty : Int 
      ) extends BaseDto {  
-   def tableName : String = { 
-   "algorithmTypeColumnType"; 
-   }  
-   def fields : String = { 
-   "algorithmTypeColumnTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,algorithmColumnTypeId,allowMultiple,allowEmpty"; 
-   }  
-   def pkFields : String = { 
-   "algorithmTypeColumnTypeId"; 
-   }  
-   def fkFields : String = { 
-   "algorithmColumnTypeId,algorithmTypeVersionId"; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    algorithmTypeColumnTypeId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(algorithmTypeColumnTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,algorithmColumnTypeId,allowMultiple,allowEmpty)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+algorithmTypeColumnTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmTypeVersionId,""+algorithmColumnTypeId,""+allowMultiple,""+allowEmpty) 
-  } 
+   def tableName : String = {    "algorithmTypeColumnType";    }  
+   def fields : String = {    "algorithmTypeColumnTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,algorithmColumnTypeId,allowMultiple,allowEmpty";    }  
+   def pkFields : String = {    "algorithmTypeColumnTypeId";    }  
+   def fkFields : String = {    "algorithmColumnTypeId,algorithmTypeVersionId";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    algorithmTypeColumnTypeId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(algorithmTypeColumnTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,algorithmColumnTypeId,allowMultiple,allowEmpty)  }  
+ def toStringArray() : Array[String] = {    Array(""+algorithmTypeColumnTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmTypeVersionId,""+algorithmColumnTypeId,""+allowMultiple,""+allowEmpty)   }  
+ def toFullString() : String = {    "algorithmTypeColumnTypeId:'"+algorithmTypeColumnTypeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmTypeVersionId:'"+algorithmTypeVersionId+"'"+","+"algorithmColumnTypeId:'"+algorithmColumnTypeId+"'"+","+"allowMultiple:'"+allowMultiple+"'"+","+"allowEmpty:'"+allowEmpty+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "algorithmTypeColumnTypeId" => algorithmTypeColumnTypeId  

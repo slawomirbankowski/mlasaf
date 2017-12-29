@@ -24,39 +24,18 @@ case class VSourceDownloadSummaryDto (
      , val sourceDownloadStatColumn_count : Int
      , val executorStorageView_count : Int 
      ) extends BaseReadOnlyDto {  
-   def tableName : String = { 
-   "vSourceDownloadSummary"; 
-   }  
-   def fields : String = { 
-   "sourceDownloadId,guid,insertedRowDate,lastUpdatedDate,sourceScheduleId,executorHostId,executorContextId,sourceViewId,retryNumber,isRunning,isFinished,isExcecption,excecptionDescription,sourceDownloadStat_count,sourceDownloadStatColumn_count,executorStorageView_count"; 
-   }  
-   def pkFields : String = { 
-   ""; 
-   }  
-   def fkFields : String = { 
-   ""; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    sourceDownloadId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(sourceDownloadId,guid,insertedRowDate,lastUpdatedDate,sourceScheduleId,executorHostId,executorContextId,sourceViewId,retryNumber,isRunning,isFinished,isExcecption,excecptionDescription,sourceDownloadStat_count,sourceDownloadStatColumn_count,executorStorageView_count)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+sourceDownloadId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceScheduleId,""+executorHostId,""+executorContextId,""+sourceViewId,""+retryNumber,""+isRunning,""+isFinished,""+isExcecption,""+excecptionDescription,""+sourceDownloadStat_count,""+sourceDownloadStatColumn_count,""+executorStorageView_count) 
-  } 
+   def tableName : String = {    "vSourceDownloadSummary";    }  
+   def fields : String = {    "sourceDownloadId,guid,insertedRowDate,lastUpdatedDate,sourceScheduleId,executorHostId,executorContextId,sourceViewId,retryNumber,isRunning,isFinished,isExcecption,excecptionDescription,sourceDownloadStat_count,sourceDownloadStatColumn_count,executorStorageView_count";    }  
+   def pkFields : String = {    "";    }  
+   def fkFields : String = {    "";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    sourceDownloadId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(sourceDownloadId,guid,insertedRowDate,lastUpdatedDate,sourceScheduleId,executorHostId,executorContextId,sourceViewId,retryNumber,isRunning,isFinished,isExcecption,excecptionDescription,sourceDownloadStat_count,sourceDownloadStatColumn_count,executorStorageView_count)  }  
+ def toStringArray() : Array[String] = {    Array(""+sourceDownloadId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceScheduleId,""+executorHostId,""+executorContextId,""+sourceViewId,""+retryNumber,""+isRunning,""+isFinished,""+isExcecption,""+excecptionDescription,""+sourceDownloadStat_count,""+sourceDownloadStatColumn_count,""+executorStorageView_count)   }  
+ def toFullString() : String = {    "sourceDownloadId:'"+sourceDownloadId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"sourceScheduleId:'"+sourceScheduleId+"'"+","+"executorHostId:'"+executorHostId+"'"+","+"executorContextId:'"+executorContextId+"'"+","+"sourceViewId:'"+sourceViewId+"'"+","+"retryNumber:'"+retryNumber+"'"+","+"isRunning:'"+isRunning+"'"+","+"isFinished:'"+isFinished+"'"+","+"isExcecption:'"+isExcecption+"'"+","+"excecptionDescription:'"+excecptionDescription+"'"+","+"sourceDownloadStat_count:'"+sourceDownloadStat_count+"'"+","+"sourceDownloadStatColumn_count:'"+sourceDownloadStatColumn_count+"'"+","+"executorStorageView_count:'"+executorStorageView_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "sourceDownloadId" => sourceDownloadId  

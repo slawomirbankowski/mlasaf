@@ -16,39 +16,18 @@ case class VExecutorTypeSummaryDto (
      , val executorInstance_count : Int
      , val algorithmImplementation_count : Int 
      ) extends BaseReadOnlyDto {  
-   def tableName : String = { 
-   "vExecutorTypeSummary"; 
-   }  
-   def fields : String = { 
-   "executorTypeId,guid,insertedRowDate,lastUpdatedDate,executorTypeName,executorTypeClass,executorInstance_count,algorithmImplementation_count"; 
-   }  
-   def pkFields : String = { 
-   ""; 
-   }  
-   def fkFields : String = { 
-   ""; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    executorTypeId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(executorTypeId,guid,insertedRowDate,lastUpdatedDate,executorTypeName,executorTypeClass,executorInstance_count,algorithmImplementation_count)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+executorTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorTypeName,""+executorTypeClass,""+executorInstance_count,""+algorithmImplementation_count) 
-  } 
+   def tableName : String = {    "vExecutorTypeSummary";    }  
+   def fields : String = {    "executorTypeId,guid,insertedRowDate,lastUpdatedDate,executorTypeName,executorTypeClass,executorInstance_count,algorithmImplementation_count";    }  
+   def pkFields : String = {    "";    }  
+   def fkFields : String = {    "";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    executorTypeId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(executorTypeId,guid,insertedRowDate,lastUpdatedDate,executorTypeName,executorTypeClass,executorInstance_count,algorithmImplementation_count)  }  
+ def toStringArray() : Array[String] = {    Array(""+executorTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorTypeName,""+executorTypeClass,""+executorInstance_count,""+algorithmImplementation_count)   }  
+ def toFullString() : String = {    "executorTypeId:'"+executorTypeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorTypeName:'"+executorTypeName+"'"+","+"executorTypeClass:'"+executorTypeClass+"'"+","+"executorInstance_count:'"+executorInstance_count+"'"+","+"algorithmImplementation_count:'"+algorithmImplementation_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "executorTypeId" => executorTypeId  

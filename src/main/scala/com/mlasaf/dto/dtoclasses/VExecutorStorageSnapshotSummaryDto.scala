@@ -14,39 +14,18 @@ case class VExecutorStorageSnapshotSummaryDto (
      , val executorInstanceId : Long
      , val executorStorageView_count : Int 
      ) extends BaseReadOnlyDto {  
-   def tableName : String = { 
-   "vExecutorStorageSnapshotSummary"; 
-   }  
-   def fields : String = { 
-   "executorStorageSnapshotId,guid,insertedRowDate,lastUpdatedDate,executorInstanceId,executorStorageView_count"; 
-   }  
-   def pkFields : String = { 
-   ""; 
-   }  
-   def fkFields : String = { 
-   ""; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    executorStorageSnapshotId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(executorStorageSnapshotId,guid,insertedRowDate,lastUpdatedDate,executorInstanceId,executorStorageView_count)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+executorStorageSnapshotId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorInstanceId,""+executorStorageView_count) 
-  } 
+   def tableName : String = {    "vExecutorStorageSnapshotSummary";    }  
+   def fields : String = {    "executorStorageSnapshotId,guid,insertedRowDate,lastUpdatedDate,executorInstanceId,executorStorageView_count";    }  
+   def pkFields : String = {    "";    }  
+   def fkFields : String = {    "";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    executorStorageSnapshotId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(executorStorageSnapshotId,guid,insertedRowDate,lastUpdatedDate,executorInstanceId,executorStorageView_count)  }  
+ def toStringArray() : Array[String] = {    Array(""+executorStorageSnapshotId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorInstanceId,""+executorStorageView_count)   }  
+ def toFullString() : String = {    "executorStorageSnapshotId:'"+executorStorageSnapshotId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorInstanceId:'"+executorInstanceId+"'"+","+"executorStorageView_count:'"+executorStorageView_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "executorStorageSnapshotId" => executorStorageSnapshotId  

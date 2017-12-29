@@ -74,14 +74,14 @@ import java.util.Date
       null; 
     } 
  } 
-  def createAndInsertExecutorContextDto(executorHostId : Long, isWorking : Int, properties : String) : ExecutorContextDto = {
-    val dto = new ExecutorContextDto(0,0,new Date(),new Date(),executorHostId,isWorking,properties)
+  def createAndInsertExecutorContextDto(executorHostId : Long, isWorking : Int, properties : String, properties2 : String, properties3 : String, entryParams : String) : ExecutorContextDto = {
+    val dto = new ExecutorContextDto(0,0,new Date(),new Date(),executorHostId,isWorking,properties,properties2,properties3,entryParams)
     insertExecutorContextDto(dto);   
   }   
   def updateExecutorContextDto(dto : ExecutorContextDto): ExecutorContextDto = {  
     implicit val connection = getConnection();  
-      val resCnt = SQL("update executorContext set  lastUpdatedDate = {lastUpdatedDate} ,  executorHostId = {executorHostId} ,  isWorking = {isWorking} ,  properties = {properties}  where  executorContextId = {executorContextId}  ")
-      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "executorHostId" -> dto.executorHostId , "isWorking" -> dto.isWorking , "properties" -> dto.properties, "executorContextId" -> dto.executorContextId ).executeInsert() 
+      val resCnt = SQL("update executorContext set  lastUpdatedDate = {lastUpdatedDate} ,  executorHostId = {executorHostId} ,  isWorking = {isWorking} ,  properties = {properties} ,  properties2 = {properties2} ,  properties3 = {properties3} ,  entryParams = {entryParams}  where  executorContextId = {executorContextId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "executorHostId" -> dto.executorHostId , "isWorking" -> dto.isWorking , "properties" -> dto.properties , "properties2" -> dto.properties2 , "properties3" -> dto.properties3 , "entryParams" -> dto.entryParams, "executorContextId" -> dto.executorContextId ).executeInsert() 
      getExecutorContextByPk(dto.executorContextId) 
     } 
 

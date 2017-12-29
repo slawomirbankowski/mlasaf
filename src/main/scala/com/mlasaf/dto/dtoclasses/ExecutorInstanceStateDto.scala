@@ -14,39 +14,18 @@ case class ExecutorInstanceStateDto (
      , val executorInstanceId : Long
      , val stateName : String 
      ) extends BaseDto {  
-   def tableName : String = { 
-   "executorInstanceState"; 
-   }  
-   def fields : String = { 
-   "executorInstanceStateId,guid,insertedRowDate,lastUpdatedDate,executorInstanceId,stateName"; 
-   }  
-   def pkFields : String = { 
-   "executorInstanceStateId"; 
-   }  
-   def fkFields : String = { 
-   "executorInstanceId"; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    executorInstanceStateId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(executorInstanceStateId,guid,insertedRowDate,lastUpdatedDate,executorInstanceId,stateName)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+executorInstanceStateId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorInstanceId,""+stateName) 
-  } 
+   def tableName : String = {    "executorInstanceState";    }  
+   def fields : String = {    "executorInstanceStateId,guid,insertedRowDate,lastUpdatedDate,executorInstanceId,stateName";    }  
+   def pkFields : String = {    "executorInstanceStateId";    }  
+   def fkFields : String = {    "executorInstanceId";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    executorInstanceStateId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(executorInstanceStateId,guid,insertedRowDate,lastUpdatedDate,executorInstanceId,stateName)  }  
+ def toStringArray() : Array[String] = {    Array(""+executorInstanceStateId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorInstanceId,""+stateName)   }  
+ def toFullString() : String = {    "executorInstanceStateId:'"+executorInstanceStateId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorInstanceId:'"+executorInstanceId+"'"+","+"stateName:'"+stateName+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "executorInstanceStateId" => executorInstanceStateId  

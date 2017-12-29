@@ -22,39 +22,18 @@ case class VExecutorStorageSummaryDto (
      , val sourceSchedule_count : Int
      , val executorStorageView_count : Int 
      ) extends BaseReadOnlyDto {  
-   def tableName : String = { 
-   "vExecutorStorageSummary"; 
-   }  
-   def fields : String = { 
-   "executorStorageId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorStorageTypeId,storageDefinition,storageBasePath,storageFulllPath,isRunning,portNumber,algorithmRun_count,sourceSchedule_count,executorStorageView_count"; 
-   }  
-   def pkFields : String = { 
-   ""; 
-   }  
-   def fkFields : String = { 
-   ""; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    executorStorageId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(executorStorageId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorStorageTypeId,storageDefinition,storageBasePath,storageFulllPath,isRunning,portNumber,algorithmRun_count,sourceSchedule_count,executorStorageView_count)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+executorStorageId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+executorStorageTypeId,""+storageDefinition,""+storageBasePath,""+storageFulllPath,""+isRunning,""+portNumber,""+algorithmRun_count,""+sourceSchedule_count,""+executorStorageView_count) 
-  } 
+   def tableName : String = {    "vExecutorStorageSummary";    }  
+   def fields : String = {    "executorStorageId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorStorageTypeId,storageDefinition,storageBasePath,storageFulllPath,isRunning,portNumber,algorithmRun_count,sourceSchedule_count,executorStorageView_count";    }  
+   def pkFields : String = {    "";    }  
+   def fkFields : String = {    "";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    executorStorageId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(executorStorageId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorStorageTypeId,storageDefinition,storageBasePath,storageFulllPath,isRunning,portNumber,algorithmRun_count,sourceSchedule_count,executorStorageView_count)  }  
+ def toStringArray() : Array[String] = {    Array(""+executorStorageId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+executorStorageTypeId,""+storageDefinition,""+storageBasePath,""+storageFulllPath,""+isRunning,""+portNumber,""+algorithmRun_count,""+sourceSchedule_count,""+executorStorageView_count)   }  
+ def toFullString() : String = {    "executorStorageId:'"+executorStorageId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorHostId:'"+executorHostId+"'"+","+"executorStorageTypeId:'"+executorStorageTypeId+"'"+","+"storageDefinition:'"+storageDefinition+"'"+","+"storageBasePath:'"+storageBasePath+"'"+","+"storageFulllPath:'"+storageFulllPath+"'"+","+"isRunning:'"+isRunning+"'"+","+"portNumber:'"+portNumber+"'"+","+"algorithmRun_count:'"+algorithmRun_count+"'"+","+"sourceSchedule_count:'"+sourceSchedule_count+"'"+","+"executorStorageView_count:'"+executorStorageView_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "executorStorageId" => executorStorageId  

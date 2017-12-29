@@ -9,10 +9,12 @@ import com.mlasaf.domain._
 /** local executor that is using current disk space in specified path */
 class LocalExecutor extends Executor {
 
+  /** */
   def onRunExecutor(): Unit = {
     println("Local Executor run  ");
     // check algorithms for LOCAL to be run
   }
+  /** */
   def getTypeName() : String = {
     "LOCAL"
   }

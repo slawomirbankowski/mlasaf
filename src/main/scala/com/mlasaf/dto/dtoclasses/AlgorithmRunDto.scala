@@ -23,39 +23,18 @@ case class AlgorithmRunDto (
      , val isRunning : Int
      , val isFinished : Int 
      ) extends BaseDto {  
-   def tableName : String = { 
-   "algorithmRun"; 
-   }  
-   def fields : String = { 
-   "algorithmRunId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleId,executorInstanceId,executorStorageId,algorithmRunTypeId,algorithmRunName,runDate,runStatus,isError,errorDescription,isRunning,isFinished"; 
-   }  
-   def pkFields : String = { 
-   "algorithmRunId"; 
-   }  
-   def fkFields : String = { 
-   "algorithmRunTypeId,algorithmScheduleId,executorInstanceId,executorStorageId"; 
-   }  
-   def nameField : String = { 
-   "algorithmRunName"; 
-   }  
- def getPk() : Long = {
-    algorithmRunId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(algorithmRunId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleId,executorInstanceId,executorStorageId,algorithmRunTypeId,algorithmRunName,runDate,runStatus,isError,errorDescription,isRunning,isFinished)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+algorithmRunId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmScheduleId,""+executorInstanceId,""+executorStorageId,""+algorithmRunTypeId,""+algorithmRunName,""+runDate,""+runStatus,""+isError,""+errorDescription,""+isRunning,""+isFinished) 
-  } 
+   def tableName : String = {    "algorithmRun";    }  
+   def fields : String = {    "algorithmRunId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleId,executorInstanceId,executorStorageId,algorithmRunTypeId,algorithmRunName,runDate,runStatus,isError,errorDescription,isRunning,isFinished";    }  
+   def pkFields : String = {    "algorithmRunId";    }  
+   def fkFields : String = {    "algorithmRunTypeId,algorithmScheduleId,executorInstanceId,executorStorageId";    }  
+   def nameField : String = {    "algorithmRunName";    }  
+ def getPk() : Long = {    algorithmRunId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(algorithmRunId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleId,executorInstanceId,executorStorageId,algorithmRunTypeId,algorithmRunName,runDate,runStatus,isError,errorDescription,isRunning,isFinished)  }  
+ def toStringArray() : Array[String] = {    Array(""+algorithmRunId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmScheduleId,""+executorInstanceId,""+executorStorageId,""+algorithmRunTypeId,""+algorithmRunName,""+runDate,""+runStatus,""+isError,""+errorDescription,""+isRunning,""+isFinished)   }  
+ def toFullString() : String = {    "algorithmRunId:'"+algorithmRunId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmScheduleId:'"+algorithmScheduleId+"'"+","+"executorInstanceId:'"+executorInstanceId+"'"+","+"executorStorageId:'"+executorStorageId+"'"+","+"algorithmRunTypeId:'"+algorithmRunTypeId+"'"+","+"algorithmRunName:'"+algorithmRunName+"'"+","+"runDate:'"+runDate+"'"+","+"runStatus:'"+runStatus+"'"+","+"isError:'"+isError+"'"+","+"errorDescription:'"+errorDescription+"'"+","+"isRunning:'"+isRunning+"'"+","+"isFinished:'"+isFinished+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "algorithmRunId" => algorithmRunId  

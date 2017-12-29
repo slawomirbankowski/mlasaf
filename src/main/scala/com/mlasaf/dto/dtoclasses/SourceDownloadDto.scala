@@ -21,39 +21,18 @@ case class SourceDownloadDto (
      , val isExcecption : Int
      , val excecptionDescription : String 
      ) extends BaseDto {  
-   def tableName : String = { 
-   "sourceDownload"; 
-   }  
-   def fields : String = { 
-   "sourceDownloadId,guid,insertedRowDate,lastUpdatedDate,sourceScheduleId,executorHostId,executorContextId,sourceViewId,retryNumber,isRunning,isFinished,isExcecption,excecptionDescription"; 
-   }  
-   def pkFields : String = { 
-   "sourceDownloadId"; 
-   }  
-   def fkFields : String = { 
-   "executorHostId,executorContextId,sourceScheduleId,sourceViewId"; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    sourceDownloadId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(sourceDownloadId,guid,insertedRowDate,lastUpdatedDate,sourceScheduleId,executorHostId,executorContextId,sourceViewId,retryNumber,isRunning,isFinished,isExcecption,excecptionDescription)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+sourceDownloadId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceScheduleId,""+executorHostId,""+executorContextId,""+sourceViewId,""+retryNumber,""+isRunning,""+isFinished,""+isExcecption,""+excecptionDescription) 
-  } 
+   def tableName : String = {    "sourceDownload";    }  
+   def fields : String = {    "sourceDownloadId,guid,insertedRowDate,lastUpdatedDate,sourceScheduleId,executorHostId,executorContextId,sourceViewId,retryNumber,isRunning,isFinished,isExcecption,excecptionDescription";    }  
+   def pkFields : String = {    "sourceDownloadId";    }  
+   def fkFields : String = {    "executorHostId,executorContextId,sourceScheduleId,sourceViewId";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    sourceDownloadId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(sourceDownloadId,guid,insertedRowDate,lastUpdatedDate,sourceScheduleId,executorHostId,executorContextId,sourceViewId,retryNumber,isRunning,isFinished,isExcecption,excecptionDescription)  }  
+ def toStringArray() : Array[String] = {    Array(""+sourceDownloadId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceScheduleId,""+executorHostId,""+executorContextId,""+sourceViewId,""+retryNumber,""+isRunning,""+isFinished,""+isExcecption,""+excecptionDescription)   }  
+ def toFullString() : String = {    "sourceDownloadId:'"+sourceDownloadId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"sourceScheduleId:'"+sourceScheduleId+"'"+","+"executorHostId:'"+executorHostId+"'"+","+"executorContextId:'"+executorContextId+"'"+","+"sourceViewId:'"+sourceViewId+"'"+","+"retryNumber:'"+retryNumber+"'"+","+"isRunning:'"+isRunning+"'"+","+"isFinished:'"+isFinished+"'"+","+"isExcecption:'"+isExcecption+"'"+","+"excecptionDescription:'"+excecptionDescription+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "sourceDownloadId" => sourceDownloadId  

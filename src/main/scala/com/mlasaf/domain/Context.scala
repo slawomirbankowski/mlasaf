@@ -18,7 +18,9 @@ import scala.collection.mutable._
 /** main context class - entry point for all other services, rest servers, http servers, listeners and executors */
 class Context {
 
+  /** logger */
   val logger = org.slf4j.LoggerFactory.getLogger("Context");
+  /** GUID */
   val guid : Long = Math.abs((new java.util.Random()).nextLong());
   /** current host that context is run on */
   var hostDto : ExecutorHostDto = null;
@@ -53,9 +55,8 @@ class Context {
     hostDto = daoFactory.daoCustom.registerHost();
     println("---> Registered host: " + hostDto);
     // register context
-    contextDto = daoFactory.daos.executorContextDao.createAndInsertExecutorContextDto(hostDto.executorHostId, 1, javaProperties.substring(0, 7999));
+    contextDto = daoFactory.daos.executorContextDao.createAndInsertExecutorContextDto(hostDto.executorHostId, 1, javaProperties.substring(0, 3999), "", "", "");
     println("---> Registered context: " + contextDto);
-
 
     // initialization of ALL sources - each source has own thread to run refresh methods
     val allSourcesInDb = daoFactory.daos.vSourceInstanceDao.getVSourceInstancesList();

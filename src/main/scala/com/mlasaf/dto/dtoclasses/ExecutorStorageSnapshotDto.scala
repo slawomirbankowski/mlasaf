@@ -13,39 +13,18 @@ case class ExecutorStorageSnapshotDto (
      , val lastUpdatedDate : java.util.Date
      , val executorInstanceId : Long 
      ) extends BaseDto {  
-   def tableName : String = { 
-   "executorStorageSnapshot"; 
-   }  
-   def fields : String = { 
-   "executorStorageSnapshotId,guid,insertedRowDate,lastUpdatedDate,executorInstanceId"; 
-   }  
-   def pkFields : String = { 
-   "executorStorageSnapshotId"; 
-   }  
-   def fkFields : String = { 
-   "executorInstanceId"; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    executorStorageSnapshotId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(executorStorageSnapshotId,guid,insertedRowDate,lastUpdatedDate,executorInstanceId)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+executorStorageSnapshotId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorInstanceId) 
-  } 
+   def tableName : String = {    "executorStorageSnapshot";    }  
+   def fields : String = {    "executorStorageSnapshotId,guid,insertedRowDate,lastUpdatedDate,executorInstanceId";    }  
+   def pkFields : String = {    "executorStorageSnapshotId";    }  
+   def fkFields : String = {    "executorInstanceId";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    executorStorageSnapshotId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(executorStorageSnapshotId,guid,insertedRowDate,lastUpdatedDate,executorInstanceId)  }  
+ def toStringArray() : Array[String] = {    Array(""+executorStorageSnapshotId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorInstanceId)   }  
+ def toFullString() : String = {    "executorStorageSnapshotId:'"+executorStorageSnapshotId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorInstanceId:'"+executorInstanceId+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "executorStorageSnapshotId" => executorStorageSnapshotId  

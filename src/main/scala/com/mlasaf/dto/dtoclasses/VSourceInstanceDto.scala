@@ -24,39 +24,18 @@ case class VSourceInstanceDto (
      , val sourceType_sourceTypeName : String
      , val sourceType_sourceTypeClass : String 
      ) extends BaseReadOnlyDto {  
-   def tableName : String = { 
-   "vSourceInstance"; 
-   }  
-   def fields : String = { 
-   "sourceInstanceId,guid,insertedRowDate,lastUpdatedDate,sourceTypeId,sourceInstanceName,errorCount,correctCount,lastStatus,lastConnectionDate,sourceType_sourceTypeId,sourceType_guid,sourceType_insertedRowDate,sourceType_lastUpdatedDate,sourceType_sourceTypeName,sourceType_sourceTypeClass"; 
-   }  
-   def pkFields : String = { 
-   ""; 
-   }  
-   def fkFields : String = { 
-   ""; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    sourceInstanceId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(sourceInstanceId,guid,insertedRowDate,lastUpdatedDate,sourceTypeId,sourceInstanceName,errorCount,correctCount,lastStatus,lastConnectionDate,sourceType_sourceTypeId,sourceType_guid,sourceType_insertedRowDate,sourceType_lastUpdatedDate,sourceType_sourceTypeName,sourceType_sourceTypeClass)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+sourceInstanceId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceTypeId,""+sourceInstanceName,""+errorCount,""+correctCount,""+lastStatus,""+lastConnectionDate,""+sourceType_sourceTypeId,""+sourceType_guid,""+sourceType_insertedRowDate,""+sourceType_lastUpdatedDate,""+sourceType_sourceTypeName,""+sourceType_sourceTypeClass) 
-  } 
+   def tableName : String = {    "vSourceInstance";    }  
+   def fields : String = {    "sourceInstanceId,guid,insertedRowDate,lastUpdatedDate,sourceTypeId,sourceInstanceName,errorCount,correctCount,lastStatus,lastConnectionDate,sourceType_sourceTypeId,sourceType_guid,sourceType_insertedRowDate,sourceType_lastUpdatedDate,sourceType_sourceTypeName,sourceType_sourceTypeClass";    }  
+   def pkFields : String = {    "";    }  
+   def fkFields : String = {    "";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    sourceInstanceId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(sourceInstanceId,guid,insertedRowDate,lastUpdatedDate,sourceTypeId,sourceInstanceName,errorCount,correctCount,lastStatus,lastConnectionDate,sourceType_sourceTypeId,sourceType_guid,sourceType_insertedRowDate,sourceType_lastUpdatedDate,sourceType_sourceTypeName,sourceType_sourceTypeClass)  }  
+ def toStringArray() : Array[String] = {    Array(""+sourceInstanceId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceTypeId,""+sourceInstanceName,""+errorCount,""+correctCount,""+lastStatus,""+lastConnectionDate,""+sourceType_sourceTypeId,""+sourceType_guid,""+sourceType_insertedRowDate,""+sourceType_lastUpdatedDate,""+sourceType_sourceTypeName,""+sourceType_sourceTypeClass)   }  
+ def toFullString() : String = {    "sourceInstanceId:'"+sourceInstanceId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"sourceTypeId:'"+sourceTypeId+"'"+","+"sourceInstanceName:'"+sourceInstanceName+"'"+","+"errorCount:'"+errorCount+"'"+","+"correctCount:'"+correctCount+"'"+","+"lastStatus:'"+lastStatus+"'"+","+"lastConnectionDate:'"+lastConnectionDate+"'"+","+"sourceType_sourceTypeId:'"+sourceType_sourceTypeId+"'"+","+"sourceType_guid:'"+sourceType_guid+"'"+","+"sourceType_insertedRowDate:'"+sourceType_insertedRowDate+"'"+","+"sourceType_lastUpdatedDate:'"+sourceType_lastUpdatedDate+"'"+","+"sourceType_sourceTypeName:'"+sourceType_sourceTypeName+"'"+","+"sourceType_sourceTypeClass:'"+sourceType_sourceTypeClass+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "sourceInstanceId" => sourceInstanceId  

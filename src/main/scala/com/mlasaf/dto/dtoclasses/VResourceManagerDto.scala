@@ -31,39 +31,18 @@ case class VResourceManagerDto (
      , val resourceManagerType_resourceManagerTypeName : String
      , val resourceManagerType_resourceManagerTypeClass : String 
      ) extends BaseReadOnlyDto {  
-   def tableName : String = { 
-   "vResourceManager"; 
-   }  
-   def fields : String = { 
-   "resourceManagerId,guid,insertedRowDate,lastUpdatedDate,resourceManagerTypeId,executorHostId,resourceManagerStatus,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking,resourceManagerType_resourceManagerTypeId,resourceManagerType_guid,resourceManagerType_insertedRowDate,resourceManagerType_lastUpdatedDate,resourceManagerType_resourceManagerTypeName,resourceManagerType_resourceManagerTypeClass"; 
-   }  
-   def pkFields : String = { 
-   ""; 
-   }  
-   def fkFields : String = { 
-   ""; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    resourceManagerId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(resourceManagerId,guid,insertedRowDate,lastUpdatedDate,resourceManagerTypeId,executorHostId,resourceManagerStatus,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking,resourceManagerType_resourceManagerTypeId,resourceManagerType_guid,resourceManagerType_insertedRowDate,resourceManagerType_lastUpdatedDate,resourceManagerType_resourceManagerTypeName,resourceManagerType_resourceManagerTypeClass)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+resourceManagerId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+resourceManagerTypeId,""+executorHostId,""+resourceManagerStatus,""+executorHost_executorHostId,""+executorHost_guid,""+executorHost_insertedRowDate,""+executorHost_lastUpdatedDate,""+executorHost_hostName,""+executorHost_hostIp,""+executorHost_hostDomain,""+executorHost_hostOsType,""+executorHost_hostOsVersion,""+executorHost_isWorking,""+resourceManagerType_resourceManagerTypeId,""+resourceManagerType_guid,""+resourceManagerType_insertedRowDate,""+resourceManagerType_lastUpdatedDate,""+resourceManagerType_resourceManagerTypeName,""+resourceManagerType_resourceManagerTypeClass) 
-  } 
+   def tableName : String = {    "vResourceManager";    }  
+   def fields : String = {    "resourceManagerId,guid,insertedRowDate,lastUpdatedDate,resourceManagerTypeId,executorHostId,resourceManagerStatus,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking,resourceManagerType_resourceManagerTypeId,resourceManagerType_guid,resourceManagerType_insertedRowDate,resourceManagerType_lastUpdatedDate,resourceManagerType_resourceManagerTypeName,resourceManagerType_resourceManagerTypeClass";    }  
+   def pkFields : String = {    "";    }  
+   def fkFields : String = {    "";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    resourceManagerId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(resourceManagerId,guid,insertedRowDate,lastUpdatedDate,resourceManagerTypeId,executorHostId,resourceManagerStatus,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking,resourceManagerType_resourceManagerTypeId,resourceManagerType_guid,resourceManagerType_insertedRowDate,resourceManagerType_lastUpdatedDate,resourceManagerType_resourceManagerTypeName,resourceManagerType_resourceManagerTypeClass)  }  
+ def toStringArray() : Array[String] = {    Array(""+resourceManagerId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+resourceManagerTypeId,""+executorHostId,""+resourceManagerStatus,""+executorHost_executorHostId,""+executorHost_guid,""+executorHost_insertedRowDate,""+executorHost_lastUpdatedDate,""+executorHost_hostName,""+executorHost_hostIp,""+executorHost_hostDomain,""+executorHost_hostOsType,""+executorHost_hostOsVersion,""+executorHost_isWorking,""+resourceManagerType_resourceManagerTypeId,""+resourceManagerType_guid,""+resourceManagerType_insertedRowDate,""+resourceManagerType_lastUpdatedDate,""+resourceManagerType_resourceManagerTypeName,""+resourceManagerType_resourceManagerTypeClass)   }  
+ def toFullString() : String = {    "resourceManagerId:'"+resourceManagerId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"resourceManagerTypeId:'"+resourceManagerTypeId+"'"+","+"executorHostId:'"+executorHostId+"'"+","+"resourceManagerStatus:'"+resourceManagerStatus+"'"+","+"executorHost_executorHostId:'"+executorHost_executorHostId+"'"+","+"executorHost_guid:'"+executorHost_guid+"'"+","+"executorHost_insertedRowDate:'"+executorHost_insertedRowDate+"'"+","+"executorHost_lastUpdatedDate:'"+executorHost_lastUpdatedDate+"'"+","+"executorHost_hostName:'"+executorHost_hostName+"'"+","+"executorHost_hostIp:'"+executorHost_hostIp+"'"+","+"executorHost_hostDomain:'"+executorHost_hostDomain+"'"+","+"executorHost_hostOsType:'"+executorHost_hostOsType+"'"+","+"executorHost_hostOsVersion:'"+executorHost_hostOsVersion+"'"+","+"executorHost_isWorking:'"+executorHost_isWorking+"'"+","+"resourceManagerType_resourceManagerTypeId:'"+resourceManagerType_resourceManagerTypeId+"'"+","+"resourceManagerType_guid:'"+resourceManagerType_guid+"'"+","+"resourceManagerType_insertedRowDate:'"+resourceManagerType_insertedRowDate+"'"+","+"resourceManagerType_lastUpdatedDate:'"+resourceManagerType_lastUpdatedDate+"'"+","+"resourceManagerType_resourceManagerTypeName:'"+resourceManagerType_resourceManagerTypeName+"'"+","+"resourceManagerType_resourceManagerTypeClass:'"+resourceManagerType_resourceManagerTypeClass+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "resourceManagerId" => resourceManagerId  

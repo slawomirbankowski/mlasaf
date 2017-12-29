@@ -15,39 +15,18 @@ case class ResourceManagerCheckDto (
      , val executorHostId : Long
      , val resourceManagerStatus : String 
      ) extends BaseDto {  
-   def tableName : String = { 
-   "resourceManagerCheck"; 
-   }  
-   def fields : String = { 
-   "resourceManagerCheckId,guid,insertedRowDate,lastUpdatedDate,resourceManagerId,executorHostId,resourceManagerStatus"; 
-   }  
-   def pkFields : String = { 
-   "resourceManagerCheckId"; 
-   }  
-   def fkFields : String = { 
-   "executorHostId,resourceManagerId"; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    resourceManagerCheckId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(resourceManagerCheckId,guid,insertedRowDate,lastUpdatedDate,resourceManagerId,executorHostId,resourceManagerStatus)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+resourceManagerCheckId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+resourceManagerId,""+executorHostId,""+resourceManagerStatus) 
-  } 
+   def tableName : String = {    "resourceManagerCheck";    }  
+   def fields : String = {    "resourceManagerCheckId,guid,insertedRowDate,lastUpdatedDate,resourceManagerId,executorHostId,resourceManagerStatus";    }  
+   def pkFields : String = {    "resourceManagerCheckId";    }  
+   def fkFields : String = {    "executorHostId,resourceManagerId";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    resourceManagerCheckId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(resourceManagerCheckId,guid,insertedRowDate,lastUpdatedDate,resourceManagerId,executorHostId,resourceManagerStatus)  }  
+ def toStringArray() : Array[String] = {    Array(""+resourceManagerCheckId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+resourceManagerId,""+executorHostId,""+resourceManagerStatus)   }  
+ def toFullString() : String = {    "resourceManagerCheckId:'"+resourceManagerCheckId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"resourceManagerId:'"+resourceManagerId+"'"+","+"executorHostId:'"+executorHostId+"'"+","+"resourceManagerStatus:'"+resourceManagerStatus+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "resourceManagerCheckId" => resourceManagerCheckId  

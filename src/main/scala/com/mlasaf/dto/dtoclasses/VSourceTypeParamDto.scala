@@ -30,39 +30,18 @@ case class VSourceTypeParamDto (
      , val sourceType_sourceTypeName : String
      , val sourceType_sourceTypeClass : String 
      ) extends BaseReadOnlyDto {  
-   def tableName : String = { 
-   "vSourceTypeParam"; 
-   }  
-   def fields : String = { 
-   "sourceTypeParamId,guid,insertedRowDate,lastUpdatedDate,sourceTypeId,sourceParamId,sourceTypeName,sourceParamName,isRequired,sourceParam_sourceParamId,sourceParam_guid,sourceParam_insertedRowDate,sourceParam_lastUpdatedDate,sourceParam_sourceParamName,sourceParam_sourceParamType,sourceParam_possibleValues,sourceType_sourceTypeId,sourceType_guid,sourceType_insertedRowDate,sourceType_lastUpdatedDate,sourceType_sourceTypeName,sourceType_sourceTypeClass"; 
-   }  
-   def pkFields : String = { 
-   ""; 
-   }  
-   def fkFields : String = { 
-   ""; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    sourceTypeParamId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(sourceTypeParamId,guid,insertedRowDate,lastUpdatedDate,sourceTypeId,sourceParamId,sourceTypeName,sourceParamName,isRequired,sourceParam_sourceParamId,sourceParam_guid,sourceParam_insertedRowDate,sourceParam_lastUpdatedDate,sourceParam_sourceParamName,sourceParam_sourceParamType,sourceParam_possibleValues,sourceType_sourceTypeId,sourceType_guid,sourceType_insertedRowDate,sourceType_lastUpdatedDate,sourceType_sourceTypeName,sourceType_sourceTypeClass)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+sourceTypeParamId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceTypeId,""+sourceParamId,""+sourceTypeName,""+sourceParamName,""+isRequired,""+sourceParam_sourceParamId,""+sourceParam_guid,""+sourceParam_insertedRowDate,""+sourceParam_lastUpdatedDate,""+sourceParam_sourceParamName,""+sourceParam_sourceParamType,""+sourceParam_possibleValues,""+sourceType_sourceTypeId,""+sourceType_guid,""+sourceType_insertedRowDate,""+sourceType_lastUpdatedDate,""+sourceType_sourceTypeName,""+sourceType_sourceTypeClass) 
-  } 
+   def tableName : String = {    "vSourceTypeParam";    }  
+   def fields : String = {    "sourceTypeParamId,guid,insertedRowDate,lastUpdatedDate,sourceTypeId,sourceParamId,sourceTypeName,sourceParamName,isRequired,sourceParam_sourceParamId,sourceParam_guid,sourceParam_insertedRowDate,sourceParam_lastUpdatedDate,sourceParam_sourceParamName,sourceParam_sourceParamType,sourceParam_possibleValues,sourceType_sourceTypeId,sourceType_guid,sourceType_insertedRowDate,sourceType_lastUpdatedDate,sourceType_sourceTypeName,sourceType_sourceTypeClass";    }  
+   def pkFields : String = {    "";    }  
+   def fkFields : String = {    "";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    sourceTypeParamId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(sourceTypeParamId,guid,insertedRowDate,lastUpdatedDate,sourceTypeId,sourceParamId,sourceTypeName,sourceParamName,isRequired,sourceParam_sourceParamId,sourceParam_guid,sourceParam_insertedRowDate,sourceParam_lastUpdatedDate,sourceParam_sourceParamName,sourceParam_sourceParamType,sourceParam_possibleValues,sourceType_sourceTypeId,sourceType_guid,sourceType_insertedRowDate,sourceType_lastUpdatedDate,sourceType_sourceTypeName,sourceType_sourceTypeClass)  }  
+ def toStringArray() : Array[String] = {    Array(""+sourceTypeParamId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceTypeId,""+sourceParamId,""+sourceTypeName,""+sourceParamName,""+isRequired,""+sourceParam_sourceParamId,""+sourceParam_guid,""+sourceParam_insertedRowDate,""+sourceParam_lastUpdatedDate,""+sourceParam_sourceParamName,""+sourceParam_sourceParamType,""+sourceParam_possibleValues,""+sourceType_sourceTypeId,""+sourceType_guid,""+sourceType_insertedRowDate,""+sourceType_lastUpdatedDate,""+sourceType_sourceTypeName,""+sourceType_sourceTypeClass)   }  
+ def toFullString() : String = {    "sourceTypeParamId:'"+sourceTypeParamId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"sourceTypeId:'"+sourceTypeId+"'"+","+"sourceParamId:'"+sourceParamId+"'"+","+"sourceTypeName:'"+sourceTypeName+"'"+","+"sourceParamName:'"+sourceParamName+"'"+","+"isRequired:'"+isRequired+"'"+","+"sourceParam_sourceParamId:'"+sourceParam_sourceParamId+"'"+","+"sourceParam_guid:'"+sourceParam_guid+"'"+","+"sourceParam_insertedRowDate:'"+sourceParam_insertedRowDate+"'"+","+"sourceParam_lastUpdatedDate:'"+sourceParam_lastUpdatedDate+"'"+","+"sourceParam_sourceParamName:'"+sourceParam_sourceParamName+"'"+","+"sourceParam_sourceParamType:'"+sourceParam_sourceParamType+"'"+","+"sourceParam_possibleValues:'"+sourceParam_possibleValues+"'"+","+"sourceType_sourceTypeId:'"+sourceType_sourceTypeId+"'"+","+"sourceType_guid:'"+sourceType_guid+"'"+","+"sourceType_insertedRowDate:'"+sourceType_insertedRowDate+"'"+","+"sourceType_lastUpdatedDate:'"+sourceType_lastUpdatedDate+"'"+","+"sourceType_sourceTypeName:'"+sourceType_sourceTypeName+"'"+","+"sourceType_sourceTypeClass:'"+sourceType_sourceTypeClass+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "sourceTypeParamId" => sourceTypeParamId  

@@ -17,39 +17,18 @@ case class VExecutorRestSummaryDto (
      , val restStatus : String
      , val executorRestCall_count : Int 
      ) extends BaseReadOnlyDto {  
-   def tableName : String = { 
-   "vExecutorRestSummary"; 
-   }  
-   def fields : String = { 
-   "executorRestId,guid,insertedRowDate,lastUpdatedDate,executorHostId,restPort,restVersion,restStatus,executorRestCall_count"; 
-   }  
-   def pkFields : String = { 
-   ""; 
-   }  
-   def fkFields : String = { 
-   ""; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    executorRestId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(executorRestId,guid,insertedRowDate,lastUpdatedDate,executorHostId,restPort,restVersion,restStatus,executorRestCall_count)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+executorRestId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+restPort,""+restVersion,""+restStatus,""+executorRestCall_count) 
-  } 
+   def tableName : String = {    "vExecutorRestSummary";    }  
+   def fields : String = {    "executorRestId,guid,insertedRowDate,lastUpdatedDate,executorHostId,restPort,restVersion,restStatus,executorRestCall_count";    }  
+   def pkFields : String = {    "";    }  
+   def fkFields : String = {    "";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    executorRestId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(executorRestId,guid,insertedRowDate,lastUpdatedDate,executorHostId,restPort,restVersion,restStatus,executorRestCall_count)  }  
+ def toStringArray() : Array[String] = {    Array(""+executorRestId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+restPort,""+restVersion,""+restStatus,""+executorRestCall_count)   }  
+ def toFullString() : String = {    "executorRestId:'"+executorRestId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorHostId:'"+executorHostId+"'"+","+"restPort:'"+restPort+"'"+","+"restVersion:'"+restVersion+"'"+","+"restStatus:'"+restStatus+"'"+","+"executorRestCall_count:'"+executorRestCall_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "executorRestId" => executorRestId  

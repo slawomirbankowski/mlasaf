@@ -20,39 +20,18 @@ case class ExecutorStorageViewDto (
      , val viewRowsCount : Long
      , val isValid : Int 
      ) extends BaseDto {  
-   def tableName : String = { 
-   "executorStorageView"; 
-   }  
-   def fields : String = { 
-   "executorStorageViewId,guid,insertedRowDate,lastUpdatedDate,executorStorageSnapshotId,executorStorageId,sourceDownloadId,sourceViewId,storagePath,viewSize,viewRowsCount,isValid"; 
-   }  
-   def pkFields : String = { 
-   "executorStorageViewId"; 
-   }  
-   def fkFields : String = { 
-   "executorStorageId,executorStorageSnapshotId,sourceDownloadId,sourceViewId"; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    executorStorageViewId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(executorStorageViewId,guid,insertedRowDate,lastUpdatedDate,executorStorageSnapshotId,executorStorageId,sourceDownloadId,sourceViewId,storagePath,viewSize,viewRowsCount,isValid)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+executorStorageViewId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorStorageSnapshotId,""+executorStorageId,""+sourceDownloadId,""+sourceViewId,""+storagePath,""+viewSize,""+viewRowsCount,""+isValid) 
-  } 
+   def tableName : String = {    "executorStorageView";    }  
+   def fields : String = {    "executorStorageViewId,guid,insertedRowDate,lastUpdatedDate,executorStorageSnapshotId,executorStorageId,sourceDownloadId,sourceViewId,storagePath,viewSize,viewRowsCount,isValid";    }  
+   def pkFields : String = {    "executorStorageViewId";    }  
+   def fkFields : String = {    "executorStorageId,executorStorageSnapshotId,sourceDownloadId,sourceViewId";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    executorStorageViewId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(executorStorageViewId,guid,insertedRowDate,lastUpdatedDate,executorStorageSnapshotId,executorStorageId,sourceDownloadId,sourceViewId,storagePath,viewSize,viewRowsCount,isValid)  }  
+ def toStringArray() : Array[String] = {    Array(""+executorStorageViewId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorStorageSnapshotId,""+executorStorageId,""+sourceDownloadId,""+sourceViewId,""+storagePath,""+viewSize,""+viewRowsCount,""+isValid)   }  
+ def toFullString() : String = {    "executorStorageViewId:'"+executorStorageViewId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorStorageSnapshotId:'"+executorStorageSnapshotId+"'"+","+"executorStorageId:'"+executorStorageId+"'"+","+"sourceDownloadId:'"+sourceDownloadId+"'"+","+"sourceViewId:'"+sourceViewId+"'"+","+"storagePath:'"+storagePath+"'"+","+"viewSize:'"+viewSize+"'"+","+"viewRowsCount:'"+viewRowsCount+"'"+","+"isValid:'"+isValid+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "executorStorageViewId" => executorStorageViewId  

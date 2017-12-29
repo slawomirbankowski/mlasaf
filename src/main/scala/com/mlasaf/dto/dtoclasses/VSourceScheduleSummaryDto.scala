@@ -20,39 +20,18 @@ case class VSourceScheduleSummaryDto (
      , val deleteOldCopies : Int
      , val sourceDownload_count : Int 
      ) extends BaseReadOnlyDto {  
-   def tableName : String = { 
-   "vSourceScheduleSummary"; 
-   }  
-   def fields : String = { 
-   "sourceScheduleId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,executorStorageId,onDemand,startTime,intervalValue,isScheduled,deleteOldCopies,sourceDownload_count"; 
-   }  
-   def pkFields : String = { 
-   ""; 
-   }  
-   def fkFields : String = { 
-   ""; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    sourceScheduleId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(sourceScheduleId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,executorStorageId,onDemand,startTime,intervalValue,isScheduled,deleteOldCopies,sourceDownload_count)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+sourceScheduleId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceViewId,""+executorStorageId,""+onDemand,""+startTime,""+intervalValue,""+isScheduled,""+deleteOldCopies,""+sourceDownload_count) 
-  } 
+   def tableName : String = {    "vSourceScheduleSummary";    }  
+   def fields : String = {    "sourceScheduleId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,executorStorageId,onDemand,startTime,intervalValue,isScheduled,deleteOldCopies,sourceDownload_count";    }  
+   def pkFields : String = {    "";    }  
+   def fkFields : String = {    "";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    sourceScheduleId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(sourceScheduleId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,executorStorageId,onDemand,startTime,intervalValue,isScheduled,deleteOldCopies,sourceDownload_count)  }  
+ def toStringArray() : Array[String] = {    Array(""+sourceScheduleId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceViewId,""+executorStorageId,""+onDemand,""+startTime,""+intervalValue,""+isScheduled,""+deleteOldCopies,""+sourceDownload_count)   }  
+ def toFullString() : String = {    "sourceScheduleId:'"+sourceScheduleId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"sourceViewId:'"+sourceViewId+"'"+","+"executorStorageId:'"+executorStorageId+"'"+","+"onDemand:'"+onDemand+"'"+","+"startTime:'"+startTime+"'"+","+"intervalValue:'"+intervalValue+"'"+","+"isScheduled:'"+isScheduled+"'"+","+"deleteOldCopies:'"+deleteOldCopies+"'"+","+"sourceDownload_count:'"+sourceDownload_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "sourceScheduleId" => sourceScheduleId  

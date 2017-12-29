@@ -14,39 +14,18 @@ case class VAlgorithmRunTypeSummaryDto (
      , val algorithmRunTypeName : String
      , val algorithmRun_count : Int 
      ) extends BaseReadOnlyDto {  
-   def tableName : String = { 
-   "vAlgorithmRunTypeSummary"; 
-   }  
-   def fields : String = { 
-   "algorithmRunTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmRunTypeName,algorithmRun_count"; 
-   }  
-   def pkFields : String = { 
-   ""; 
-   }  
-   def fkFields : String = { 
-   ""; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    algorithmRunTypeId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(algorithmRunTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmRunTypeName,algorithmRun_count)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+algorithmRunTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmRunTypeName,""+algorithmRun_count) 
-  } 
+   def tableName : String = {    "vAlgorithmRunTypeSummary";    }  
+   def fields : String = {    "algorithmRunTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmRunTypeName,algorithmRun_count";    }  
+   def pkFields : String = {    "";    }  
+   def fkFields : String = {    "";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    algorithmRunTypeId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(algorithmRunTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmRunTypeName,algorithmRun_count)  }  
+ def toStringArray() : Array[String] = {    Array(""+algorithmRunTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmRunTypeName,""+algorithmRun_count)   }  
+ def toFullString() : String = {    "algorithmRunTypeId:'"+algorithmRunTypeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmRunTypeName:'"+algorithmRunTypeName+"'"+","+"algorithmRun_count:'"+algorithmRun_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "algorithmRunTypeId" => algorithmRunTypeId  

@@ -20,39 +20,18 @@ case class ExecutorInstanceDto (
      , val portNumber : Int
      , val endDate : java.util.Date 
      ) extends BaseDto {  
-   def tableName : String = { 
-   "executorInstance"; 
-   }  
-   def fields : String = { 
-   "executorInstanceId,guid,insertedRowDate,lastUpdatedDate,executorTypeId,executorHostId,executorContextId,executorInstanceName,isRunning,isFinished,portNumber,endDate"; 
-   }  
-   def pkFields : String = { 
-   "executorInstanceId"; 
-   }  
-   def fkFields : String = { 
-   "executorContextId,executorHostId,executorTypeId"; 
-   }  
-   def nameField : String = { 
-   "executorInstanceName"; 
-   }  
- def getPk() : Long = {
-    executorInstanceId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(executorInstanceId,guid,insertedRowDate,lastUpdatedDate,executorTypeId,executorHostId,executorContextId,executorInstanceName,isRunning,isFinished,portNumber,endDate)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+executorInstanceId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorTypeId,""+executorHostId,""+executorContextId,""+executorInstanceName,""+isRunning,""+isFinished,""+portNumber,""+endDate) 
-  } 
+   def tableName : String = {    "executorInstance";    }  
+   def fields : String = {    "executorInstanceId,guid,insertedRowDate,lastUpdatedDate,executorTypeId,executorHostId,executorContextId,executorInstanceName,isRunning,isFinished,portNumber,endDate";    }  
+   def pkFields : String = {    "executorInstanceId";    }  
+   def fkFields : String = {    "executorContextId,executorHostId,executorTypeId";    }  
+   def nameField : String = {    "executorInstanceName";    }  
+ def getPk() : Long = {    executorInstanceId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(executorInstanceId,guid,insertedRowDate,lastUpdatedDate,executorTypeId,executorHostId,executorContextId,executorInstanceName,isRunning,isFinished,portNumber,endDate)  }  
+ def toStringArray() : Array[String] = {    Array(""+executorInstanceId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorTypeId,""+executorHostId,""+executorContextId,""+executorInstanceName,""+isRunning,""+isFinished,""+portNumber,""+endDate)   }  
+ def toFullString() : String = {    "executorInstanceId:'"+executorInstanceId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorTypeId:'"+executorTypeId+"'"+","+"executorHostId:'"+executorHostId+"'"+","+"executorContextId:'"+executorContextId+"'"+","+"executorInstanceName:'"+executorInstanceName+"'"+","+"isRunning:'"+isRunning+"'"+","+"isFinished:'"+isFinished+"'"+","+"portNumber:'"+portNumber+"'"+","+"endDate:'"+endDate+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "executorInstanceId" => executorInstanceId  

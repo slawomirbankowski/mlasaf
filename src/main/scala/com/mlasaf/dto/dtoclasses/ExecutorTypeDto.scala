@@ -14,39 +14,18 @@ case class ExecutorTypeDto (
      , val executorTypeName : String
      , val executorTypeClass : String 
      ) extends BaseDto {  
-   def tableName : String = { 
-   "executorType"; 
-   }  
-   def fields : String = { 
-   "executorTypeId,guid,insertedRowDate,lastUpdatedDate,executorTypeName,executorTypeClass"; 
-   }  
-   def pkFields : String = { 
-   "executorTypeId"; 
-   }  
-   def fkFields : String = { 
-   ""; 
-   }  
-   def nameField : String = { 
-   "executorTypeName"; 
-   }  
- def getPk() : Long = {
-    executorTypeId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(executorTypeId,guid,insertedRowDate,lastUpdatedDate,executorTypeName,executorTypeClass)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+executorTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorTypeName,""+executorTypeClass) 
-  } 
+   def tableName : String = {    "executorType";    }  
+   def fields : String = {    "executorTypeId,guid,insertedRowDate,lastUpdatedDate,executorTypeName,executorTypeClass";    }  
+   def pkFields : String = {    "executorTypeId";    }  
+   def fkFields : String = {    "";    }  
+   def nameField : String = {    "executorTypeName";    }  
+ def getPk() : Long = {    executorTypeId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(executorTypeId,guid,insertedRowDate,lastUpdatedDate,executorTypeName,executorTypeClass)  }  
+ def toStringArray() : Array[String] = {    Array(""+executorTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorTypeName,""+executorTypeClass)   }  
+ def toFullString() : String = {    "executorTypeId:'"+executorTypeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorTypeName:'"+executorTypeName+"'"+","+"executorTypeClass:'"+executorTypeClass+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "executorTypeId" => executorTypeId  

@@ -17,39 +17,18 @@ case class VSourceParamSummaryDto (
      , val sourceTypeParam_count : Int
      , val sourceParamValue_count : Int 
      ) extends BaseReadOnlyDto {  
-   def tableName : String = { 
-   "vSourceParamSummary"; 
-   }  
-   def fields : String = { 
-   "sourceParamId,guid,insertedRowDate,lastUpdatedDate,sourceParamName,sourceParamType,possibleValues,sourceTypeParam_count,sourceParamValue_count"; 
-   }  
-   def pkFields : String = { 
-   ""; 
-   }  
-   def fkFields : String = { 
-   ""; 
-   }  
-   def nameField : String = { 
-   ""; 
-   }  
- def getPk() : Long = {
-    sourceParamId
-  }  
- def getInsertedRowDate() : java.util.Date = {
-    insertedRowDate
-  }  
- def getLastUpdatedDate() : java.util.Date = {
-    lastUpdatedDate
-  }  
- def getGuid() : Long = {
-    guid
-  }  
- def toAnyArray() : Array[Any] = {
-    Array(sourceParamId,guid,insertedRowDate,lastUpdatedDate,sourceParamName,sourceParamType,possibleValues,sourceTypeParam_count,sourceParamValue_count)
-  }  
- def toStringArray() : Array[String] = {
-    Array(""+sourceParamId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceParamName,""+sourceParamType,""+possibleValues,""+sourceTypeParam_count,""+sourceParamValue_count) 
-  } 
+   def tableName : String = {    "vSourceParamSummary";    }  
+   def fields : String = {    "sourceParamId,guid,insertedRowDate,lastUpdatedDate,sourceParamName,sourceParamType,possibleValues,sourceTypeParam_count,sourceParamValue_count";    }  
+   def pkFields : String = {    "";    }  
+   def fkFields : String = {    "";    }  
+   def nameField : String = {    "";    }  
+ def getPk() : Long = {    sourceParamId  }  
+ def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
+ def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
+ def getGuid() : Long = {    guid  }  
+ def toAnyArray() : Array[Any] = {    Array(sourceParamId,guid,insertedRowDate,lastUpdatedDate,sourceParamName,sourceParamType,possibleValues,sourceTypeParam_count,sourceParamValue_count)  }  
+ def toStringArray() : Array[String] = {    Array(""+sourceParamId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceParamName,""+sourceParamType,""+possibleValues,""+sourceTypeParam_count,""+sourceParamValue_count)   }  
+ def toFullString() : String = {    "sourceParamId:'"+sourceParamId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"sourceParamName:'"+sourceParamName+"'"+","+"sourceParamType:'"+sourceParamType+"'"+","+"possibleValues:'"+possibleValues+"'"+","+"sourceTypeParam_count:'"+sourceTypeParam_count+"'"+","+"sourceParamValue_count:'"+sourceParamValue_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "sourceParamId" => sourceParamId  

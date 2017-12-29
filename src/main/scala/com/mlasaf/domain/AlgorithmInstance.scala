@@ -7,8 +7,15 @@ package com.mlasaf.domain
 /** base class for any implementation of ML algorithm */
 trait AlgorithmInstance {
 
-  /** */
-  def run(run : AlgorithmRun) : Unit;
+  /** run of algorithm to produce outputs */
+  def run(run : AlgorithmRun) : String;
 
+}
+object AlgorithmInstance {
+  val STATUS_OK = "OK";
+  val STATUS_WARNING = "WARNING";
+  val STATUS_ERROR = "ERROR";
+  val STATUS_ERROR_INCORRECT_INPUT = "ERROR_INCORRECT_INPUT";
+  val STATUS_ERROR_INCORRECT_OUTPUT = "ERROR_INCORRECT_OUTPUT";
 
 }

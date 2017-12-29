@@ -9,8 +9,8 @@ import com.mlasaf.domain.{AlgorithmInstance, AlgorithmRun}
 class PredictionR extends AlgorithmInstance  {
 
   /** */
-  def run(run : AlgorithmRun) : Unit = {
+  def run(run : AlgorithmRun) : String = {
     println(" ===================== RUNNING R PREDICTION ALGORITHM FOR RUN: " + run.algorithmRunDto.algorithmRunId);
-
+    AlgorithmInstance.STATUS_OK
   }
 }
