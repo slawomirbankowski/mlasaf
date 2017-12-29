@@ -26,7 +26,6 @@ class MlasafEntryOptions(args : Array[String]) extends ScallopConf(args) {
     val execDef = mapper.readValue[ExecutorsDefinition](eDef, classOf[ExecutorsDefinition])
     execDef
   }
-
 }
 
 case class ExecutorDefinition(executorType : String, portNumber : Int) { }

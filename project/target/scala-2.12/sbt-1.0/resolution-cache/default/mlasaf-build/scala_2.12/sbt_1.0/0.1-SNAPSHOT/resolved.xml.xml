@@ -4,7 +4,7 @@
 		module="mlasaf-build"
 		revision="0.1-SNAPSHOT"
 		status="integration"
-		publication="20171221215254"
+		publication="20171229003242"
 		e:sbtVersion="1.0" e:scalaVersion="2.12"
 	>
 		<description>

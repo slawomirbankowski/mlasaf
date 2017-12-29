@@ -12,6 +12,7 @@ import com.mlasaf.common._
 
 class LocalStorage extends Storage {
 
+  /** download view to local storage */
   def downloadView(sourceView : VSourceViewDto, sourceSchedule : VSourceScheduleDto, sourceDownloadDto : SourceDownloadDto, source : Source, downloader : SouceViewDownloader) : ExecutorStorageViewDto = {
     val storageViewFolderPath = this.storageDto.storageFulllPath + java.io.File.separator + CustomUtils.randomLong();
     println("Download view to LOCAL storage to path: " + storageViewFolderPath)

@@ -58,7 +58,7 @@ class DaoCustom {
       currentHost
     }
   }
-
+  /**  */
   def registerExecutorInstance(executorTypeId : Long, executorContextId : Long) : ExecutorInstanceDto = {
     implicit val conn = daoFactory.daoConn.getConnection();
     val hostDto : ExecutorHostDto = registerHost();
@@ -66,10 +66,8 @@ class DaoCustom {
     val execInst = daoFactory.daos.executorInstanceDao.createAndInsertExecutorInstanceDto(executorTypeId, hostDto.executorHostId, executorContextId, "executor_name", 1, 0, 8888, new java.util.Date());
     execInst;
   }
-
-
+  /** */
   def unregisterExecutorInstance(guid : Long) : Unit = {
-
     //sql""" update executorInstance set isRunning = 0, isFinished = 1 where guid = $guid  """.executeUpdate()
   }
 

@@ -55,6 +55,9 @@
             <column name="executorHostId" type="bigint" remarks="FK to executorHost table" />
             <column name="isWorking" type="int" defaultValueNumeric="1"/>
             <column name="properties" type="varchar(8000)" defaultValue=""/>
+            <column name="properties2" type="varchar(8000)" defaultValue=""/>
+            <column name="properties3" type="varchar(8000)" defaultValue=""/>
+            <column name="entryParams" type="varchar(8000)" defaultValue=""/>
         </createTable>
         <createIndex indexName="idx_ec_executorHostId" tableName="executorContext" unique="false">
             <column name="executorHostId" />
@@ -75,6 +78,11 @@
             <column name="freeMemory" type="float"/>
             <column name="maxMemory" type="float"/>
             <column name="totalMemory" type="float"/>
+            <column name="diskInfo" type="nvarchar(2000)"/>
+            <column name="currentDiskFreeSpace" type="float"/>
+            <column name="allThreadsCount" type="int"/>
+            <column name="contextThreadsCount" type="int"/>
+            <column name="threadIds" type="nvarchar(2000)"/>
         </createTable>
         <createIndex indexName="idx_ecr_executorHostId" tableName="executorContextRuntime" unique="false">
             <column name="executorHostId" />
@@ -1231,6 +1239,18 @@
         <createIndex indexName="idx_aot_aotName" tableName="algorithmOutputType" unique="false">
             <column name="algorithmOutputTypeName" />
         </createIndex>
+        <insert tableName="algorithmOutputType">
+            <column name="algorithmOutputTypeName" value="PRIMARY_PREDICTED"/>
+        </insert>
+        <insert tableName="algorithmOutputType">
+            <column name="algorithmOutputTypeName" value="MERGED"/>
+        </insert>
+        <insert tableName="algorithmOutputType">
+            <column name="algorithmOutputTypeName" value="SECONDARY"/>
+        </insert>
+        <insert tableName="algorithmOutputType">
+            <column name="algorithmOutputTypeName" value="SUMMARY"/>
+        </insert>
 
 
         <createTable tableName="algorithmTypeOutputType" remarks="DICTIONARY - mapping between type of algorithm and type of output" >
@@ -1274,12 +1294,17 @@
         </createIndex>
         <addForeignKeyConstraint baseTableName="algorithmOutput" baseColumnNames="algorithmOutputTypeId" referencedTableName="algorithmOutputType" referencedColumnNames="algorithmOutputTypeId"  constraintName="fk_ao_aotId"  />
         <addForeignKeyConstraint baseTableName="algorithmOutput" baseColumnNames="executorStorageViewId" referencedTableName="executorStorageView" referencedColumnNames="executorStorageViewId"  constraintName="fk_ao_esvId"  />
+        <addForeignKeyConstraint baseTableName="algorithmOutput" baseColumnNames="algorithmRunId" referencedTableName="algorithmRun" referencedColumnNames="algorithmRunId"  constraintName="fk_ao_arId"  />
 
 
 
 
         <addForeignKeyConstraint baseTableName="executorStorageView" baseColumnNames="sourceDownloadId" referencedTableName="sourceDownload" referencedColumnNames="sourceDownloadId"  constraintName="fk_esv_sourceDownload"  />
         <addForeignKeyConstraint baseTableName="executorStorageView" baseColumnNames="sourceViewId" referencedTableName="sourceView" referencedColumnNames="sourceViewId"  constraintName="fk_esv_sourceView"  />
+
+
+
+
 
 
 
@@ -1330,11 +1355,13 @@
 
 
         <createView  viewName="vAlgorithmRunView">
-            select algorithmRunView1.algorithmRunViewId, algorithmRunView1.guid, algorithmRunView1.insertedRowDate, algorithmRunView1.lastUpdatedDate, algorithmRunView1.algorithmRunId, algorithmRunView1.executorStorageViewId, algorithmRunView1.isDownloaded
+            select algorithmRunView1.algorithmRunViewId, algorithmRunView1.guid, algorithmRunView1.insertedRowDate, algorithmRunView1.lastUpdatedDate, algorithmRunView1.algorithmRunId, algorithmRunView1.executorStorageViewId, algorithmRunView1.algorithmScheduleViewId, algorithmRunView1.isDownloaded
             ,  algorithmRun1.algorithmRunId as algorithmRun_algorithmRunId ,  algorithmRun1.guid as algorithmRun_guid ,  algorithmRun1.insertedRowDate as algorithmRun_insertedRowDate ,  algorithmRun1.lastUpdatedDate as algorithmRun_lastUpdatedDate ,  algorithmRun1.algorithmScheduleId as algorithmRun_algorithmScheduleId ,  algorithmRun1.executorInstanceId as algorithmRun_executorInstanceId ,  algorithmRun1.executorStorageId as algorithmRun_executorStorageId ,  algorithmRun1.algorithmRunTypeId as algorithmRun_algorithmRunTypeId ,  algorithmRun1.algorithmRunName as algorithmRun_algorithmRunName ,  algorithmRun1.runDate as algorithmRun_runDate ,  algorithmRun1.runStatus as algorithmRun_runStatus ,  algorithmRun1.isError as algorithmRun_isError ,  algorithmRun1.errorDescription as algorithmRun_errorDescription ,  algorithmRun1.isRunning as algorithmRun_isRunning ,  algorithmRun1.isFinished as algorithmRun_isFinished
+            ,  algorithmScheduleView1.algorithmScheduleViewId as algorithmScheduleView_algorithmScheduleViewId ,  algorithmScheduleView1.guid as algorithmScheduleView_guid ,  algorithmScheduleView1.insertedRowDate as algorithmScheduleView_insertedRowDate ,  algorithmScheduleView1.lastUpdatedDate as algorithmScheduleView_lastUpdatedDate ,  algorithmScheduleView1.algorithmScheduleViewTypeId as algorithmScheduleView_algorithmScheduleViewTypeId ,  algorithmScheduleView1.algorithmScheduleId as algorithmScheduleView_algorithmScheduleId ,  algorithmScheduleView1.sourceViewId as algorithmScheduleView_sourceViewId ,  algorithmScheduleView1.joinOnDefinition as algorithmScheduleView_joinOnDefinition
             ,  executorStorageView1.executorStorageViewId as executorStorageView_executorStorageViewId ,  executorStorageView1.guid as executorStorageView_guid ,  executorStorageView1.insertedRowDate as executorStorageView_insertedRowDate ,  executorStorageView1.lastUpdatedDate as executorStorageView_lastUpdatedDate ,  executorStorageView1.executorStorageSnapshotId as executorStorageView_executorStorageSnapshotId ,  executorStorageView1.executorStorageId as executorStorageView_executorStorageId ,  executorStorageView1.sourceDownloadId as executorStorageView_sourceDownloadId ,  executorStorageView1.sourceViewId as executorStorageView_sourceViewId ,  executorStorageView1.storagePath as executorStorageView_storagePath ,  executorStorageView1.viewSize as executorStorageView_viewSize ,  executorStorageView1.viewRowsCount as executorStorageView_viewRowsCount ,  executorStorageView1.isValid as executorStorageView_isValid
             from algorithmRunView algorithmRunView1
             join algorithmRun algorithmRun1 on algorithmRunView1.algorithmRunId = algorithmRun1.algorithmRunId
+            join algorithmScheduleView algorithmScheduleView1 on algorithmRunView1.algorithmScheduleViewId = algorithmScheduleView1.algorithmScheduleViewId
             join executorStorageView executorStorageView1 on algorithmRunView1.executorStorageViewId = executorStorageView1.executorStorageViewId;
         </createView>
 
@@ -1654,6 +1681,10 @@
 
 
 
+
+
+
+
         <createView  viewName="vAlgorithmColumnTypeSummary">
             select algorithmColumnType1.algorithmColumnTypeId, algorithmColumnType1.guid, algorithmColumnType1.insertedRowDate, algorithmColumnType1.lastUpdatedDate, algorithmColumnType1.algorithmColumnTypeName, algorithmColumnType1.algorithmColumnTypeDescription
             ,  algorithmTypeColumnType1.algorithmTypeColumnType_count,  algorithmScheduleColumn1.algorithmScheduleColumn_count
@@ -1728,9 +1759,10 @@
 
         <createView  viewName="vAlgorithmScheduleViewSummary">
             select algorithmScheduleView1.algorithmScheduleViewId, algorithmScheduleView1.guid, algorithmScheduleView1.insertedRowDate, algorithmScheduleView1.lastUpdatedDate, algorithmScheduleView1.algorithmScheduleViewTypeId, algorithmScheduleView1.algorithmScheduleId, algorithmScheduleView1.sourceViewId, algorithmScheduleView1.joinOnDefinition
-            ,  algorithmScheduleColumn1.algorithmScheduleColumn_count
+            ,  algorithmScheduleColumn1.algorithmScheduleColumn_count,  algorithmRunView1.algorithmRunView_count
             from algorithmScheduleView algorithmScheduleView1
-            join (select algorithmScheduleViewId, count(*) as algorithmScheduleColumn_count from algorithmScheduleColumn group by algorithmScheduleViewId) algorithmScheduleColumn1 on algorithmScheduleColumn1.algorithmScheduleViewId = algorithmScheduleView1.algorithmScheduleViewId ;
+            join (select algorithmScheduleViewId, count(*) as algorithmScheduleColumn_count from algorithmScheduleColumn group by algorithmScheduleViewId) algorithmScheduleColumn1 on algorithmScheduleColumn1.algorithmScheduleViewId = algorithmScheduleView1.algorithmScheduleViewId
+            join (select algorithmScheduleViewId, count(*) as algorithmRunView_count from algorithmRunView group by algorithmScheduleViewId) algorithmRunView1 on algorithmRunView1.algorithmScheduleViewId = algorithmScheduleView1.algorithmScheduleViewId ;
         </createView>
 
 

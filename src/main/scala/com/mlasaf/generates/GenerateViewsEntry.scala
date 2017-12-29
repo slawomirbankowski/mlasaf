@@ -6,14 +6,23 @@ package com.mlasaf.generates
 
 import anorm.SQL
 import com.mlasaf.dto._
+import com.mlasaf.structures.GenerateEntryOptions
 
 object GenerateViewsEntry {
 
   def main(args : Array[String]) = {
-    val jdbcString = "jdbc:sqlserver://localhost\\SQLEXPRESS2014;DatabaseName=mlasaf23";
-    val jdbcUser = System.getenv("MLASAF_DDL_USER");
-    val jdbcPass = System.getenv("MLASAF_DDL_PASS");
-    val jdbcDriver = System.getenv("MLASAF_DDL_DRIVER");
+    val entryOptions = new GenerateEntryOptions(args);
+    val jdbcString = entryOptions.jdbcString.getOrElse("")
+    val jdbcUser = entryOptions.jdbcUser.getOrElse("")
+    val jdbcPass = entryOptions.jdbcPass.getOrElse("")
+    val jdbcDriver = entryOptions.jdbcDriver.getOrElse("")
+    val baseFolder = entryOptions.baseFolder.getOrElse("")
+
+    val generatedFileName = baseFolder + "views.xml";
+    val outputContent : java.io.BufferedWriter = new java.io.BufferedWriter(new java.io.FileWriter(generatedFileName));
+    outputContent.write(" \n");
+    outputContent.write(" \n");
+    outputContent.write(" \n");
     Class.forName(jdbcDriver);
     implicit val connmssql = java.sql.DriverManager.getConnection(jdbcString, jdbcUser, jdbcPass);
     val cols : List[ColumnDetailDto]=  SQL("select TABLE_NAME, COLUMN_NAME, ORDINAL_POSITION, case DATA_TYPE when 'bigint' then 'Long' when 'int' then 'Int' when 'nvarchar' then 'String' when 'varchar' then 'String' when 'datetime' then 'java.util.Date' when 'float' then 'Double'  else '' end as SCALA_TYPE from INFORMATION_SCHEMA.COLUMNS where  TABLE_NAME not like 'DATABASE%'")
@@ -45,9 +54,11 @@ object GenerateViewsEntry {
       val selectDefinition = "select " + colListDefinition + fromDefinition + " " + joinDefinition ;
       val viewFullDefinition = "\n\n <createView  viewName=\"" + viewName + "\"> \n " + selectDefinition + "; \n </createView> ";
        if  (fkList.size > 0) {
-         println(viewFullDefinition);
+         outputContent.write(viewFullDefinition);
+         outputContent.write(" \n");
        }
     });
+    outputContent.close();
     connmssql.close();
   }
 

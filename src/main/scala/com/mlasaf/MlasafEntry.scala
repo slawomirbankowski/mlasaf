@@ -19,6 +19,7 @@ object MlasafEntry {
     println("START MLASAF " + MLASAF_VERSION);
     System.getProperties.list(System.out);
     println("MLASAF Parameters: " + args.mkString(" "));
+    println("DISK spaces: " + com.mlasaf.common.CustomUtils.diskSpaces);
     val context = new Context();
     val entryOptions = new MlasafEntryOptions(args);
     println("restPort: " + entryOptions.restPort)

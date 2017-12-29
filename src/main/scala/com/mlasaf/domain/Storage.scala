@@ -10,23 +10,28 @@ import com.mlasaf.dto._
 /** storage base class */
 trait Storage extends ThreadBase {
 
+  /** */
   var storageDto : ExecutorStorageDto = null;
-
+  /** */
   def initialize(ctx : Context, dto : ExecutorStorageDto): Unit = {
     println("Initialization of Storage: " + dto);
     parentContext = ctx;
     storageDto = dto;
   }
+  /**  */
   def onRunBegin() = {
     println("Start THREAD for Storage: " + storageDto.executorStorageId);
     downloadSourceSchedules();
   }
+  /**  */
   def onRunEnd() = {
     println("End THREAD for Storage: " + storageDto.executorStorageId);
   }
+  /**  */
   def onStop(): Unit = {
     isStopped = true;
   }
+  /** get name of thread */
   def getName() : String = "STORAGE";
   /** download all schedules for given source instance */
   def downloadSourceSchedules() : Unit = {
@@ -63,6 +68,7 @@ trait Storage extends ThreadBase {
       }
     });
   }
+  /** download view */
   def downloadView(sourceView : VSourceViewDto, sourceSchedule : VSourceScheduleDto, sourceDownloadDto : SourceDownloadDto, source : Source, downloader : SouceViewDownloader) : ExecutorStorageViewDto;
 
 

@@ -21,8 +21,10 @@ object DaoTests {
     //val restAlternativePort = 8301;
     //val executorDefinition = " [ {executor='RExecutor', port='8806'}, {executor='LocalExecutor', port='8808'} ] "
     //val storageDefinitions = " [ {storage='./', type='local'}, {storage='./', type='local'} ] "
+
+
+
     val daoFactory = new DaoFactory();
-    //context.daoFactory.registerExecutorInstance();
     daoFactory.initialize(jdbcString, jdbcUser, jdbcPass, jdbcDriver);
     val algTypesList = daoFactory.daos.algorithmTypeDao.getAlgorithmTypesList().map(x => x.toStringArray().mkString(",")).mkString(" | ");
     println("Defined algorithm types: " + algTypesList)

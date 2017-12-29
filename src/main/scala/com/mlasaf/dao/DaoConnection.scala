@@ -19,6 +19,9 @@ class DaoConnection {
   var jdbcUser = ""
   /** JDBC password */
   var jdbcPass = "";
+  /** driverClass */
+  var jdbcDriverClass = "";
+
   /** logger for DAO */
   val logger = org.slf4j.LoggerFactory.getLogger("Context");
 
@@ -30,7 +33,7 @@ class DaoConnection {
         Class.forName(driverClass)
       } catch {
         case ex : Exception => {
-
+          println("Cannot find driver for class: " + driverClass);
         }
       }
       Thread.sleep(1000);
@@ -70,7 +73,7 @@ class DaoConnection {
     bds.setUsername(jdbcUser);
     bds.setPassword(jdbcPass);
     bds.setInitialSize(3);
-    //bds.setDriverClassName("")
+    //bds.setDriverClassName(jdbcDriverClass)
     //bds.setValidationQuery("select 1")
     println("DS: " + bds)
     val conn = bds.getConnection;
