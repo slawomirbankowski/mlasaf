@@ -8,10 +8,13 @@ import org.rogach.scallop.ScallopConf
 
 object DatabaseCreateNew {
 
+  /** logger for DAO */
+  val logger = org.slf4j.LoggerFactory.getLogger("DatabaseCreateNew");
+
   /** main entry point to run all services for MLASAF, initialization from command line arguments or from xml file */
   def main(args : Array[String]) : Unit = {
     val entryOptions = new DatabaseCreateNewEntryOptions(args);
-    val jdbcStringTemplate = "jdbc:mysql://localhost:3307/DBTEMPLATENAME"
+    val jdbcStringTemplate = entryOptions.jdbcStringTemplate.getOrElse("");
     val jdbcUser = entryOptions.jdbcUser.getOrElse("");
     val jdbcPass = entryOptions.jdbcPass.getOrElse("");
     val jdbcDriver = entryOptions.jdbcDriver.getOrElse("");
@@ -23,19 +26,19 @@ object DatabaseCreateNew {
     // connect to database
     val connMaster = java.sql.DriverManager.getConnection(jdbcStringMaster, jdbcUser, jdbcPass);
     // create new database
-    println("Creating new DB: " + newDbName);
+    logger.info("Creating new DB: " + newDbName);
     connMaster.createStatement().execute("create database " + newDbName);
-    println("Database created, disconnecting");
+    logger.info("Database created, disconnecting");
     connMaster.close();
     //conn.createStatement().execute("create user xxx identified by yyy ");
     // create user and grant access
     // only for Oracle this is needed to have: create user mlasafxxx identified by mlasafxxxpass; grant DBA to mlasafxxx;
     // update db with new schema
-    println("Conecting to new DB");
+    logger.info("Conecting to new DB");
     val connNew = java.sql.DriverManager.getConnection(jdbcStringNew, jdbcUser, jdbcPass);
-    println("Connected");
+    logger.info("Connected");
     connNew.close();
-    println("Disconnected");
+    logger.info("Disconnected");
   }
 }
 

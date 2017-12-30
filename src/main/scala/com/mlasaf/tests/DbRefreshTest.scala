@@ -5,9 +5,10 @@
 package com.mlasaf.tests
 
 import com.mlasaf.loaders._
-import com.mlasaf.tests.DbNewTest.logger
 
 object DbRefreshTest {
+
+  val logger = org.slf4j.LoggerFactory.getLogger("MlasafEntry");
 
   def main(args : Array[String]) = {
     logger.info("START NEW DB");
@@ -19,8 +20,8 @@ object DbRefreshTest {
     val changeLogFile = "./src/main/resources/db/db_1.0.xml";
     val changeLogFilePath = new java.io.File(changeLogFile).getCanonicalPath;
     //val changeLogResourceFile = DbRefreshTest.getClass.getResource(changeLogFile).getPath;
-    println("CURRENT_PATH: " + changeLogFile);
-    println("CURRENT_PATH resource: " + changeLogFilePath);
+    logger.info("CURRENT_PATH: " + changeLogFile);
+    logger.info("CURRENT_PATH resource: " + changeLogFilePath);
     DatabaseRefreshSchema.main(Array(
       "--jdbcString", jdbcString
       , "--jdbcUser", System.getenv("MLASAF_USER")

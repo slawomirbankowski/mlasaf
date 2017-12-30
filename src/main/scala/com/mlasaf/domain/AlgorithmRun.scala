@@ -9,6 +9,8 @@ import com.mlasaf.dto._
 /** representation of algorithm run to run algorithm */
 class AlgorithmRun {
 
+  /** logger */
+  val logger = org.slf4j.LoggerFactory.getLogger("DaoCustom");
   /** current status of RUN */
   var status : String = "CREATED";
   /** parent EXECUTOR */
@@ -29,7 +31,7 @@ class AlgorithmRun {
 
   /** RUN algorithm */
   def runAlgorithm() = {
-    println(" +++++++++++++++++++++++ AlgorithmRun status: " + status + ", algorithmRunId: " + algorithmRunDto.algorithmRunId + ", algorithmScheduleViewDtos: " + algorithmScheduleViewDtos.size + ", executorStorageViewDtos: " + executorStorageViewDtos.size)
+    logger.info(" +++++++++++++++++++++++ AlgorithmRun status: " + status + ", algorithmRunId: " + algorithmRunDto.algorithmRunId + ", algorithmScheduleViewDtos: " + algorithmScheduleViewDtos.size + ", executorStorageViewDtos: " + executorStorageViewDtos.size)
     // TODO: finish proper flow for AlgorithmRun
     status match {
       case "CREATED" => {
@@ -39,7 +41,7 @@ class AlgorithmRun {
           allDownloadedViewIds ++= parentExecutor.parentContext.daoFactory.daos.vSourceDownloadDao.getDtosBySourceDownloadId(sdid).map(x => x.sourceSchedule_sourceViewId);
         });
         val viewsToBeDownloaded = neededViewIds.filter(svid => !allDownloadedViewIds.contains(svid));
-        println("AlgorithmRun - All needed viewIds: " + neededViewIds.mkString(",") + "; downloaded views: " + allDownloadedViewIds.distinct.mkString(",") + "; left views: " + viewsToBeDownloaded.mkString(","));
+        logger.info("AlgorithmRun - All needed viewIds: " + neededViewIds.mkString(",") + "; downloaded views: " + allDownloadedViewIds.distinct.mkString(",") + "; left views: " + viewsToBeDownloaded.mkString(","));
         if (viewsToBeDownloaded.size > 0) {
           status = "DOWNLOADING"
         } else {

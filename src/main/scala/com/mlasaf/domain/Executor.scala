@@ -6,6 +6,7 @@ package com.mlasaf.domain
 
 import com.mlasaf.base.ThreadBase
 import com.mlasaf.dto._
+import com.mlasaf.rest.ExecutorRest
 
 /** Executor to run any external or internal ML algorithm */
 trait Executor extends ThreadBase {
@@ -24,43 +25,43 @@ trait Executor extends ThreadBase {
   def onRunBegin() = {
     val exeTypeId = parentContext.daoFactory.daos.executorTypeDao.getExecutorTypeFirstByName(getTypeName()).get.executorTypeId
     executorInstanceDto = parentContext.daoFactory.daoCustom.registerExecutorInstance(exeTypeId , parentContext.contextDto.executorContextId);
-    println("Start executor: " + executorInstanceDto)
+    logger.info("Start executor: " + executorInstanceDto)
   }
   def onRun() = {
-    println("Executor run in thread: " + executorInstanceDto + ", searching for schedules");
+    logger.info("Executor run in thread: " + executorInstanceDto + ", searching for schedules");
     searchForSchedules();
     algorithmRuns();
     onRunExecutor();
   }
   def onRunEnd() = {
     isWorking = false;
-    println("End of working, try to unregister Executor: " + executorInstanceDto)
+    logger.info("End of working, try to unregister Executor: " + executorInstanceDto)
     parentContext.daoFactory.daos.executorInstanceDao.updateField(executorInstanceDto, ExecutorInstanceDto.FIELD_isRunning, 0);
     parentContext.daoFactory.daos.executorInstanceDao.updateField(executorInstanceDto, ExecutorInstanceDto.FIELD_isFinished, 1);
     parentContext.daoFactory.daos.executorInstanceDao.changeUpdatedDate(executorInstanceDto);
-    println("End executor " + executorInstanceDto)
+    logger.info("End executor " + executorInstanceDto)
   }
   def onStop() : Unit = {
-    println("Stopping EXECUTOR...");
+    logger.info("Stopping EXECUTOR...");
   }
   /** search for schedules to create algorithm runs */
   def searchForSchedules() {
     val schedulesForExecutorDto = parentContext.daoFactory.daos.vAlgorithmScheduleDao
       .getDtosByAlgorithmImplementation_executorTypeId(executorInstanceDto.executorTypeId)
       .filter(s => s.isScheduled == 1);
-    println("Schedules: " + schedulesForExecutorDto.size + ", current algorithm runs: " + algoRunObjs.size);
+    logger.info("Schedules: " + schedulesForExecutorDto.size + ", current algorithm runs: " + algoRunObjs.size);
     schedulesForExecutorDto.foreach(sch => {
       val runsForSchedule = parentContext.daoFactory.daos.algorithmRunDao
         .getAlgorithmRunByFkAlgorithmScheduleId(sch.algorithmScheduleId); // TODO: need to add search by date of last run
       // check - no actual runs - create new one
       if (runsForSchedule.size == 0) {
-        println("Create new Run for schedule: " + sch);
+        logger.info("Create new Run for schedule: " + sch);
         // select storage for run
         var runTypeId = parentContext.daoFactory.daos.algorithmRunTypeDao.getAlgorithmRunTypeFirstByName("NORMAL").get.algorithmRunTypeId;
         val storageObj = parentContext.storages.head;
         val storageId = storageObj.storageDto.executorStorageId; // TODO: change this to better assignment storage to download views into
         val runDto = parentContext.daoFactory.daos.algorithmRunDao.createAndInsertAlgorithmRunDto(sch.algorithmScheduleId, executorInstanceDto.executorInstanceId, storageId, runTypeId, "any custom name for RUN", new java.util.Date(), "CREATED", 0, "", 1, 0);
-        println("Created AlgorithmRun object to run algorithm in LOCAL Executor: " + executorInstanceDto);
+        logger.info("Created AlgorithmRun object to run algorithm in LOCAL Executor: " + executorInstanceDto);
         // get all views needed for this run
         val algSchView = parentContext.daoFactory.daos.algorithmScheduleViewDao.getAlgorithmScheduleViewByFkAlgorithmScheduleId(runDto.algorithmScheduleId);
         var algoRun : AlgorithmRun = new AlgorithmRun();
@@ -83,7 +84,7 @@ trait Executor extends ThreadBase {
             execStorageViews ++= storageViews;
           });
           if (execStorageViews.size > 0) {
-            println("For algorithmSchedule: " + schView.algorithmScheduleId + " got storage views: " + execStorageViews.size);
+            logger.info("For algorithmSchedule: " + schView.algorithmScheduleId + " got storage views: " + execStorageViews.size);
             val storageViewLatestDto = execStorageViews.sortBy(x => -x.insertedRowDate.getTime).head;
             algoRun.executorStorageViewDtos += storageViewLatestDto;
             val algSchCols = parentContext.daoFactory.daos.vAlgorithmScheduleColumnDao.getDtosByAlgorithmScheduleView_algorithmScheduleViewId(schView.algorithmScheduleViewId);
@@ -93,11 +94,11 @@ trait Executor extends ThreadBase {
             var srcSchedule = parentContext.daoFactory.daos.sourceScheduleDao.createAndInsertSourceScheduleDto(schView.sourceViewId, storageId, 1, new java.util.Date(), 0, 1, 0);
             algoRun.sourceScheduleDtos += srcSchedule;
           }
-          println("-------------> Algorithm RUN object ready to run: " + algoRun.toString);
+          logger.info("-------------> Algorithm RUN object ready to run: " + algoRun.toString);
           algoRun.runAlgorithm();
         });
       } else {
-        println("There are runs for algorithmSchedule: " + sch);
+        logger.info("There are runs for algorithmSchedule: " + sch);
       }
     });
   }

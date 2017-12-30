@@ -10,6 +10,9 @@ import org.rogach.scallop.ScallopConf
 
 object CreateAlgorithmImplementation {
 
+  /** logger for DAO */
+  val logger = org.slf4j.LoggerFactory.getLogger("CreateAlgorithmImplementation");
+
   /** main entry point to run all services for MLASAF, initialization from command line arguments or from xml file */
   def main(args : Array[String]) : Unit = {
     val entryOptions = new CreateAlgorithmImplementationEntryOptions(args);
@@ -28,13 +31,13 @@ object CreateAlgorithmImplementation {
     val daoFactory = new DaoFactory();
     daoFactory.initialize(jdbcString, jdbcUser, jdbcPass, jdbcDriver);
     val execTypeId = daoFactory.daos.executorTypeDao.getExecutorTypeByName(executorType).head.executorTypeId;
-    println("execTypeId: " + execTypeId);
+    logger.info("execTypeId: " + execTypeId);
     val algTypeId = daoFactory.daos.algorithmTypeDao.getAlgorithmTypeByName(algorithmType).head.algorithmTypeId;
-    println("algTypeId: " + algTypeId);
+    logger.info("algTypeId: " + algTypeId);
     val algTypeVerId = daoFactory.daos.algorithmTypeVersionDao.getAlgorithmTypeVersionsList().filter(a => (a.algorithmTypeVersionName.equals(algorithmVersion) && a.algorithmTypeId == algTypeId)).head.algorithmTypeVersionId;
-    println("algTypeVerId: " + algTypeVerId);
+    logger.info("algTypeVerId: " + algTypeVerId);
     val algImplDto = daoFactory.daos.algorithmImplementationDao.createAndInsertAlgorithmImplementationDto(algTypeVerId, execTypeId, algorithmImplementationName, algorithmImplementationClass);
-    println("algImplDto: " + algImplDto);
+    logger.info("algImplDto: " + algImplDto);
     var algOutypeId = daoFactory.daos.algorithmOutputTypeDao.getAlgorithmOutputTypeFirstByName(outputType).get.algorithmOutputTypeId;
     // columns
     daoFactory.daos.algorithmTypeColumnTypeDao.createAndInsertAlgorithmTypeColumnTypeDto(algTypeVerId, daoFactory.daos.algorithmColumnTypeDao.getAlgorithmColumnTypeFirstByName("Time").get.algorithmColumnTypeId, 0, 0);

@@ -6,12 +6,15 @@ package com.mlasaf.sample
 
 object CreateSampleData {
 
+  /** logger for DAO */
+  val logger = org.slf4j.LoggerFactory.getLogger("CreateSampleData");
+
   /** main entry point to run all services for MLASAF, initialization from command line arguments or from xml file */
   def main(args : Array[String]) = {
-    println(" MSSQLSERVER - DRIVER ")
+    logger.info(" MSSQLSERVER - DRIVER ")
     Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
     val connmssql = java.sql.DriverManager.getConnection("jdbc:sqlserver://localhost\\SQLEXPRESS2014;DatabaseName=client_test", "sa", "sapass");
-    println(" MSSQLSERVER - CONNECTED ")
+    logger.info(" MSSQLSERVER - CONNECTED ")
     connmssql.createStatement().execute("create table dbo.sales(yearmonth int, product varchar(50), sale_value float, sale_units float)");
 
     connmssql.createStatement().execute("insert into sales(yearmonth, product, sale_value, sale_units) values (201501, 'Bike', 5000, 5)");
@@ -38,9 +41,9 @@ object CreateSampleData {
     connmssql.createStatement().execute("insert into sales(yearmonth, product, sale_value, sale_units) values (201506, 'Tennis Table', 6000, 6)");
     connmssql.createStatement().execute("insert into sales(yearmonth, product, sale_value, sale_units) values (201507, 'Tennis Table', 5000, 5)");
 
-    println(" MSSQLSERVER - EXECUTED SQL ")
+    logger.info(" MSSQLSERVER - EXECUTED SQL ")
     connmssql.close();
-    println(" MSSQLSERVER - DISCONNECTED ")
+    logger.info(" MSSQLSERVER - DISCONNECTED ")
   }
 
 

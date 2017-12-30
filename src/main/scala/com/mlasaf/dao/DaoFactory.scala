@@ -31,7 +31,7 @@ import java.sql.Connection
     }
     /** initialize connection - create template */
     def initialize(jdbc : String, user: String, pass : String, driverClass : String) = {
-      println("Creating connection to configurational DB: " + jdbc + " with user: " + user + ", driver: " + driverClass);
+      logger.info("Creating connection to configurational DB: " + jdbc + " with user: " + user + ", driver: " + driverClass);
       daoConn.initialize(jdbc, user, pass, driverClass)
       daos.initialize(daoConn);
       daoCustom.initialize(this);
@@ -39,6 +39,7 @@ import java.sql.Connection
     def selectCount(d : BaseDto) : Long = {
       implicit val conn = daoConn.getConnection();
       val sql = "select count(*) as cnt from " + d.tableName
+      logger.info("Executing QUERY: " + sql);
       val queryRes = SQL(sql)
         .executeQuery()(conn).as[Int](SqlParser.int("cnt").single)(conn);;
       queryRes
@@ -46,6 +47,7 @@ import java.sql.Connection
     def selectCount(d : java.lang.Class[BaseDto]) : Long = {
       implicit val conn = daoConn.getConnection();
       val sql = "select count(*) as cnt from " + d.getName
+      logger.info("Executing QUERY: " + sql);
       val queryRes = SQL(sql)
         .executeQuery()(conn).as[Int](SqlParser.int("cnt").single)(conn);;
       queryRes

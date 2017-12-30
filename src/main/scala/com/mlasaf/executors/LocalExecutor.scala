@@ -11,7 +11,7 @@ class LocalExecutor extends Executor {
 
   /** */
   def onRunExecutor(): Unit = {
-    println("Local Executor run  ");
+    logger.info("Local Executor run  ");
     // check algorithms for LOCAL to be run
   }
   /** */

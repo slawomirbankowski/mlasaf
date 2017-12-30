@@ -6,6 +6,9 @@ import liquibase._
 
 object DatabaseRefreshSchema {
 
+  /** logger for DAO */
+  val logger = org.slf4j.LoggerFactory.getLogger("DatabaseRefreshSchema");
+
   /** main entry point to run all services for MLASAF, initialization from command line arguments or from xml file */
   def main(args : Array[String]) : Unit = {
     val entryOptions = new DatabaseRefreshSchemaEntryOptions(args);
@@ -15,11 +18,11 @@ object DatabaseRefreshSchema {
     val jdbcDriver = entryOptions.jdbcDriver.getOrElse("");
     val jdbcJarPath = entryOptions.jdbcJarPath.getOrElse("");
     val changeLogFile = entryOptions.changeLogFile.getOrElse("");
-    println("Writing output to change log file: " + changeLogFile);
+    logger.info("Writing output to change log file: " + changeLogFile);
     val conn = java.sql.DriverManager.getConnection(jdbcString, jdbcUser, jdbcPass);
-    println("Connected to database: " + conn);
+    logger.info("Connected to database: " + conn);
     val db = liquibase.database.DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new liquibase.database.jvm.JdbcConnection(conn));
-    println("Got DB object for Liquibase: " + db);
+    logger.info("Got DB object for Liquibase: " + db);
     liquibase.integration.commandline.Main.main(Array("--classpath=" + jdbcJarPath
       , "--driver=" + jdbcDriver
       , "--changeLogFile=" + changeLogFile
@@ -29,7 +32,7 @@ object DatabaseRefreshSchema {
       , "--password=" + jdbcPass
       , "migrate"
     ));
-    println("End of updating DB ");
+    logger.info("End of updating DB ");
   }
 }
 

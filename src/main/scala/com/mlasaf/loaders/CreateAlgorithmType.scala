@@ -9,6 +9,9 @@ import org.rogach.scallop.ScallopConf
 
 object CreateAlgorithmType {
 
+  /** logger for DAO */
+  val logger = org.slf4j.LoggerFactory.getLogger("CreateAlgorithmType");
+
   /** main entry point to run all services for MLASAF, initialization from command line arguments or from xml file */
   def main(args : Array[String]) : Unit = {
     val entryOptions = new CreateAlgorithmTypeEntryOptions(args);
@@ -25,9 +28,9 @@ object CreateAlgorithmType {
 
     if (currentAlgoTypes.size == 0 ) {
       val algType = daoFactory.daos.algorithmTypeDao.createAndInsertAlgorithmTypeDto(algorithmType, "");
-      println("NEW algType: " + algType);
+      logger.info("NEW algType: " + algType);
     } else {
-      println("EXISTING algType: " );
+      logger.info("EXISTING algType: " );
     }
   }
 }

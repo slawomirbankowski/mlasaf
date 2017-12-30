@@ -1,4 +1,2 @@
-[0m[[0m[31merror[0m] [0m[0mC:\Project\mlasaf\src\mlasaf\src\main\scala\com\mlasaf\algorithms\local\PredictionLocalSma5.scala:21:90: value and is not a member of Boolean[0m
-[0m[[0m[31merror[0m] [0m[0m    if (run.executorStorageViewDtos.size == 0 && timeColsCount > 0 && groupColsCount > 0 and valueColsCount > 0) {[0m
-[0m[[0m[31merror[0m] [0m[0m                                                                                         ^[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[33mwarn[0m] [0m[0mthere was one feature warning; re-run with -feature for details[0m
+[0m[[0m[33mwarn[0m] [0m[0mone warning found[0m

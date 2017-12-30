@@ -10,13 +10,18 @@ import com.mlasaf.domain.Context
 trait ThreadBase extends Runnable {
 
   val logger = org.slf4j.LoggerFactory.getLogger("Context");
+  /** if object is still working - set internally by methods */
   var isWorking : Boolean = true;
+  /** is object is stopped by external run of stop() method */
   var isStopped : Boolean = false;
+  /** interval between run onRun() method */
   var runInterval : Long = 10000L;
+  /** parent context for thread object */
   var parentContext : Context = null;
+  /** thread for this object */
   var thread : Thread = null;
 
-  /**  */
+  /** set parent context object */
   def setParentContext(pc : Context): Unit = {
     parentContext = pc;
   }
@@ -27,12 +32,12 @@ trait ThreadBase extends Runnable {
     th.setDaemon(true);
     th.start();
   }
-  /** */
+  /** run method for thread */
   def run() : Unit = {
-    println("Start running inThread: " + thread.getId);
+    logger.info("Start running inThread: " + thread.getId);
     onRunBegin();
     while (!isStopped) {
-      println("Run in thread: " + thread.getId);
+      logger.info("Run in thread: " + thread.getId);
       try {
         onRun();
       } catch {
@@ -40,19 +45,24 @@ trait ThreadBase extends Runnable {
       }
       Thread.sleep(runInterval);
     }
-    println("Stopping thread: " + thread.getId);
+    logger.info("Stopping thread: " + thread.getId);
     onRunEnd();
-    println("Run stopped: " + thread.getId);
+    logger.info("Run stopped: " + thread.getId);
   }
+  /** get name for threadable object */
   def getName() : String;
+  /** run at the begin of working in thread */
   def onRunBegin() : Unit;
+  /** */
   def onRun() : Unit;
   def onRunEnd() : Unit;
   def onRunError(ex : Exception) : Unit = {
   }
+  /** run in case of invoke stop() method */
   def onStop() : Unit;
+  /** stop method to be invoked by external classes */
   def stop() = {
-    println("Stop thread: " + this);
+    logger.info("Stop thread: " + this);
     onStop();
     isStopped = true;
   }

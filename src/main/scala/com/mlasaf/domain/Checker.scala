@@ -25,13 +25,13 @@ class Checker extends ThreadBase {
     val currentDiskFreeSpace : Float = 0;
     val diskSpaceInfo = com.mlasaf.common.CustomUtils.diskSpaces;
     this.parentContext.latestContextRuntimeDto = parentContext.daoFactory.daos.executorContextRuntimeDao.createAndInsertExecutorContextRuntimeDto(parentContext.hostDto.executorHostId, parentContext.contextDto.executorContextId, java.lang.Runtime.getRuntime.availableProcessors(), java.lang.Runtime.getRuntime.freeMemory(), java.lang.Runtime.getRuntime.maxMemory(), java.lang.Runtime.getRuntime.totalMemory(), diskSpaceInfo, currentDiskFreeSpace, allThreadsCount, thCnt, threadIds)
-    println(">>>>>>>>>>>>>>>>>> Checker run in thread, threads: " + thCnt + ", non empty threads: " + thNnCnt + ", alive: " + thAliveCnt + ", threadIds: " + threadIds + ", latestRuntime: " + this.parentContext.latestContextRuntimeDto);
+    logger.info(">>>>>>>>>>>>>>>>>> Checker run in thread, threads: " + thCnt + ", non empty threads: " + thNnCnt + ", alive: " + thAliveCnt + ", threadIds: " + threadIds + ", latestRuntime: " + this.parentContext.latestContextRuntimeDto);
   }
   def onRunEnd() = {
-    println(">>>>>>>>>>>>>>>>>> End of working for Checker")
+    logger.info(">>>>>>>>>>>>>>>>>> End of working for Checker")
  }
   def onStop() : Unit = {
-    println(">>>>>>>>>>>>>>>>>> Stopping Checker...");
+    logger.info(">>>>>>>>>>>>>>>>>> Stopping Checker...");
   }
 
 }

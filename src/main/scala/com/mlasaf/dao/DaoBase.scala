@@ -13,7 +13,7 @@ import com.mlasaf.dto._
 class DaoBase {
 
   /** logger for subclasses*/
-  val logger = org.slf4j.LoggerFactory.getLogger("Context");
+  val logger = org.slf4j.LoggerFactory.getLogger("DaoBase");
   /** if current DAO is initialized and DAO connection is set*/
   var isInitialized = false;
   /** DAO to be used by connection*/
@@ -22,7 +22,7 @@ class DaoBase {
   /** initialize connection - create template */
   def initialize(daoConn : DaoConnection) = {
     daoConnection = daoConn;
-    println("Initialization of new DAO of class: " + this.getClass.getName + " with DaoConnection: " + daoConn);
+    logger.info("Initialization of new DAO of class: " + this.getClass.getName + " with DaoConnection: " + daoConn);
     isInitialized = true;
   }
   /** get JDBC connection object for subclass to read/write data */
@@ -41,7 +41,7 @@ class DaoBase {
     val id = dto.getFieldValue(dto.pkFields).asInstanceOf[Long];
     val lastUpdatedDate = new java.util.Date();
     val sql = "update " + dto.tableName + " set lastUpdatedDate = {lastUpdatedDate} where " + dto.pkFields + " = {id}";
-    println("EXECUTING: " + sql)
+    logger.info("EXECUTING: " + sql)
     val resCnt = SQL(sql)
       .on("id" -> id, "lastUpdatedDate" -> lastUpdatedDate).executeUpdate();
     resCnt
@@ -50,7 +50,7 @@ class DaoBase {
   def getFieldValue(dto: BaseDto, fieldName : String) : Any = {
     implicit val connection = getConnection();
     val sql = "select  " + fieldName + " from " + dto.tableName + " where " + dto.pkFields + " = {id} ";
-    println("EXECUTING: " + sql)
+    logger.info("EXECUTING: " + sql)
     val retValue = SQL(sql).on("id" -> dto.getPk())
         .executeQuery().as[String](SqlParser.str(fieldName).single)(connection);;
     retValue
@@ -60,7 +60,7 @@ class DaoBase {
     implicit val connection = getConnection();
     val pkName = DtoMetadata.getPkNameForTable(tableName);
     val sql = "select  " + fieldName + " from " + tableName + " where " + pkName + " = {id} ";
-    println("EXECUTING: " + sql)
+    logger.info("EXECUTING: " + sql)
     val retValue = SQL(sql).on("id" -> id)
       .executeQuery().as[String](SqlParser.str(fieldName).single)(connection);
     retValue
@@ -77,7 +77,7 @@ class DaoBase {
   def updateField(dto : BaseDto, fieldName : String, newValue : Any) : Int = {
     implicit val connection = getConnection();
     val sql = "update " + dto.tableName + " set " + fieldName + " = {fieldName} where " + dto.pkFields + " = {id} ";
-    println("EXECUTING: " + sql)
+    logger.info("EXECUTING: " + sql)
     val resCnt = SQL(sql)
       .on("fieldName" -> newValue.toString, "id" -> dto.getPk())
       .executeUpdate();
@@ -87,7 +87,7 @@ class DaoBase {
     implicit val connection = getConnection();
     val pkName = "id";
     val sql = "update " + tableName + " set " + fieldName + " = {fieldName} where " + pkName + " = {id} ";
-    println("EXECUTING: " + sql)
+    logger.info("EXECUTING: " + sql)
     val resCnt = SQL(sql)
       .on("fieldName" -> newValue.toString, "id" -> id)
       .executeUpdate();

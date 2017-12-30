@@ -41,28 +41,33 @@ class Context {
   var checker : Checker = new Checker();
   /** Factory for all DAO objects to read/write data from/to configurational database */
   var daoFactory : DaoFactory = null;
+  /** */
+  var isStopped : Boolean = false;
+  /** */
+  val startTime : java.util.Date = new java.util.Date();
+
+  val DEFAULT_MAX_WORKING_TIME = 60000L;
 
   /** entry point for MLASAF application */
   def run(opts : MlasafEntryOptions) = {
-    println("Start context for guid: " + guid);
+    logger.info("Start context for guid: " + guid);
     val javaProperties = System.getProperties.stringPropertyNames().toArray.map(prop => "" + prop + "='" + System.getProperties.getProperty("" + prop) + "'").mkString(";");
-    println("Java properties: " + javaProperties);
+    logger.info("Java properties: " + javaProperties);
     // initialize DAO to read data from DB - creates new factory with all DAOs
     daoFactory = new DaoFactory();
      //context.daoFactory.registerExecutorInstance();
     daoFactory.initialize(opts.jdbcString.toOption.getOrElse(""), opts.jdbcUser.toOption.getOrElse(""), opts.jdbcPass.toOption.getOrElse(""), opts.jdbcDriver.toOption.getOrElse(""));
     // register current HOST
     hostDto = daoFactory.daoCustom.registerHost();
-    println("---> Registered host: " + hostDto);
+    logger.info("---> Registered host: " + hostDto);
     // register context
     contextDto = daoFactory.daos.executorContextDao.createAndInsertExecutorContextDto(hostDto.executorHostId, 1, javaProperties.substring(0, 3999), "", "", "");
-    println("---> Registered context: " + contextDto);
-
+    logger.info("---> Registered context: " + contextDto);
     // initialization of ALL sources - each source has own thread to run refresh methods
     val allSourcesInDb = daoFactory.daos.vSourceInstanceDao.getVSourceInstancesList();
-    println("Number of all sources: " + allSourcesInDb.size + ", types: " + allSourcesInDb.map(x => x.sourceType_sourceTypeName).mkString(", "));
+    logger.info("Number of all sources: " + allSourcesInDb.size + ", types: " + allSourcesInDb.map(x => x.sourceType_sourceTypeName).mkString(", "));
     allSourcesInDb.foreach(siDto => {
-      println("Creating SourceInstance for DTO: " + siDto);
+      logger.info("Creating SourceInstance for DTO: " + siDto);
       val srcObj = Class.forName(siDto.sourceType_sourceTypeClass).newInstance().asInstanceOf[Source];
       val sourceParams = daoFactory.daos.vSourceParamValueDao.getDtosBySourceInstance_sourceInstanceId(siDto.sourceInstanceId);
       srcObj.initialize(this, siDto, sourceParams);
@@ -70,10 +75,10 @@ class Context {
       threads += srcObj;
       sources += srcObj;
     });
-    println("All initialized sources: " + sources.size);
+    logger.info("All initialized sources: " + sources.size);
     // initialize SIMPLE storage - each storage has own thread to download data
     val storagesInHost = daoFactory.daos.executorStorageDao.getExecutorStorageByFkExecutorHostId(hostDto.executorHostId);
-    println("Number of storages in host: " + storagesInHost.size + ", paths: " + storagesInHost.map(s => s.storageFulllPath).mkString(", ") );
+    logger.info("Number of storages in host: " + storagesInHost.size + ", paths: " + storagesInHost.map(s => s.storageFulllPath).mkString(", ") );
     if (opts.simpleStorage.isDefined ) {
       val storTypeId = daoFactory.daos.executorStorageTypeDao.getExecutorStorageTypeFirstByName(LocalStorage.NAME).get.executorStorageTypeId
       val simpleStoragePath = opts.simpleStorage.getOrElse(LocalStorage.DEFAULT_PATH);
@@ -94,14 +99,14 @@ class Context {
     val executrs = opts.executorClasses.getOrElse("").split(",")
       .map(cn => Class.forName(cn).newInstance().asInstanceOf[Executor])
       .toArray;
-    println("Starting initialization for executors: " + executrs.map(e => e.getClass.getName).mkString(", "));
+    logger.info("Starting initialization for executors: " + executrs.map(e => e.getClass.getName).mkString(", "));
     executrs.foreach(exec => {
       println("Created new executor for class: " + exec.getClass.getName);
       exec.setParentContext(this);
       executors.add(exec);
       exec.start();
       threads += exec;
-      println("Thread started for executor: " + exec.getClass.getName);
+      logger.info("Thread started for executor: " + exec.getClass.getName);
     });
     // initialize REST service for context
     contextRest.setParentContext(this);
@@ -114,9 +119,21 @@ class Context {
     checker.start();
     threads += checker;
     //
-    println("Total executors running: " + executors.size() + ", total threads: " + threads.size + ", total storages: " + storages.size + ", total sources: " + sources.size);
+    logger.info("Total executors running: " + executors.size() + ", total threads: " + threads.size + ", total storages: " + storages.size + ", total sources: " + sources.size);
     // end of all Executors
-    Thread.sleep(60000L);
+    // MAIN WORKING LOOP - checking STOP condition, refresh context, receive commands
+    while (!isStopped) {
+      Thread.sleep(10000L);
+      if (actualWorkingTime() > opts.maxWorkingTimeSeconds.getOrElse(DEFAULT_MAX_WORKING_TIME)) {
+        isStopped = true;
+        logger.info("Time is UP - stopping context, actualWorkingTime: " + actualWorkingTime() + ", maxWorkingTime: " + opts.maxWorkingTimeSeconds.getOrElse(DEFAULT_MAX_WORKING_TIME));
+      }
+      // change updated date for context
+      daoFactory.daos.executorContextDao.changeUpdatedDate(contextDto);
+      // TODO: check all threads
+      // check commands for context
+    }
+    logger.info("STOPPING context: " + contextDto);
     daoFactory.daos.executorContextDao.updateField(contextDto, ExecutorContextDto.FIELD_isWorking, 0);
     daoFactory.daos.executorContextDao.changeUpdatedDate(contextDto);
     contextRest.stop();
@@ -124,7 +141,9 @@ class Context {
     sources.foreach(x => { x.stop(); });
     storages.foreach(x => { x.stop() });
     checker.stop();
-    println("END context for guid: " + guid);
+    logger.info("END context for guid: " + guid);
   }
 
+  def actualWorkingTime() : Long = (new java.util.Date().getTime) - startTime.getTime;
+  def actualWorkingTimeSeconds() : Long = actualWorkingTime / 1000;
 }

@@ -19,7 +19,7 @@ object MlasafEntryTest {
       , "--restPort" , System.getenv("MLASAF_PORT")
       , "--restAlternativePort", System.getenv("MLASAF_PORT_ALTERNATIVE")
       , "--executorDefinition", " { \"executors\" : [ {\"executorType\"=\"RExecutor\", \"portNumber\"=\"8806\"}, {\"executorType\"=\"LocalExecutor\", \"portNumber\"=\"8808\" } ] } "
-      //, "--storageDefinition", " { \"storages\" : [ {\"storage\"=\"./\", \"type\"=\"local\"}, {\"storage\"=\"./\", \"storageType\"=\"local\"} ] } "
+      , "--storageDefinition", " { \"storages\" : [ {\"storage\"=\"./\", \"type\"=\"local\"}, {\"storage\"=\"../data/\", \"storageType\"=\"local\"} ] } "
       , "--executorClasses", System.getenv("MLASAF_EXECUTOR_CLASSES")
       , "--simpleStorage", System.getenv("MLASAF_SIMPLE_STORAGE")
     );

@@ -9,6 +9,9 @@ import org.rogach.scallop.ScallopConf
 
 object CreateAlgorithmSchedule {
 
+  /** logger for DAO */
+  val logger = org.slf4j.LoggerFactory.getLogger("CreateAlgorithmSchedule");
+
   /** main entry point to run all services for MLASAF, initialization from command line arguments or from xml file */
   def main(args : Array[String]) : Unit = {
     val entryOptions = new CreateAlgorithmScheduleEntryOptions(args);
@@ -30,29 +33,29 @@ object CreateAlgorithmSchedule {
     daoFactory.initialize(jdbcString, jdbcUser, jdbcPass, jdbcDriver);
 
     var schTypeId = daoFactory.daos.algorithmScheduleTypeDao.getAlgorithmScheduleTypeByName(algScheduleType).head.algorithmScheduleTypeId;
-    println("schTypeId: " + schTypeId);
+    logger.info("schTypeId: " + schTypeId);
     var algImplId = daoFactory.daos.algorithmImplementationDao.getAlgorithmImplementationFirstByName(implementationName).get.algorithmImplementationId;
-    println("algImplId: " + algImplId);
+    logger.info("algImplId: " + algImplId);
     var algScheduleDto = daoFactory.daos.algorithmScheduleDao.createAndInsertAlgorithmScheduleDto(algImplId, schTypeId, scheduleName, 1, 20000, 0);
-    println("algScheduleDto: " + algScheduleDto);
+    logger.info("algScheduleDto: " + algScheduleDto);
 
     val algSchViewTypeId = daoFactory.daos.algorithmScheduleViewTypeDao.getAlgorithmScheduleViewTypeFirstByName(scheduleViewType).get.algorithmScheduleViewTypeId;
-    println("algSchViewTypeId: " + algSchViewTypeId);
+    logger.info("algSchViewTypeId: " + algSchViewTypeId);
     val allViews = daoFactory.daos.vSourceViewDao.getDtosBySourceInstance_sourceInstanceName(sourceInstanceName);
-    println("allViews.size: " + allViews.size + ", views: " + allViews.map(x => x.sourceViewName).mkString(","));
+    logger.info("allViews.size: " + allViews.size + ", views: " + allViews.map(x => x.sourceViewName).mkString(","));
     val viewId = allViews.filter(v => v.sourceViewName.equals(sourceViewName)).head.sourceViewId;
-    println("viewId: " + viewId);
+    logger.info("viewId: " + viewId);
     val algSchViewDto = daoFactory.daos.algorithmScheduleViewDao.createAndInsertAlgorithmScheduleViewDto(algSchViewTypeId, algScheduleDto.algorithmScheduleId, viewId, "");
-    println("algSchViewDto: " + algSchViewDto);
+    logger.info("algSchViewDto: " + algSchViewDto);
     val salesViewColumns = daoFactory.daos.sourceViewColumnDao.getSourceViewColumnByFkSourceViewId(algSchViewDto.sourceViewId);
 
     algoColumns.split(",").zip(inputColumns.split(",")).foreach(algoInputCol=> {
       val colTypeId = daoFactory.daos.algorithmColumnTypeDao.getAlgorithmColumnTypeFirstByName(algoInputCol._1).get.algorithmColumnTypeId;
-      println("colTypeId: " + colTypeId);
+      logger.info("colTypeId: " + colTypeId);
       val viewColumnId = salesViewColumns.filter(c => c.columnName.equals(algoInputCol._2)).head.sourceViewColumnId;
-      println("timeViewColumnId: " + viewColumnId);
+      logger.info("timeViewColumnId: " + viewColumnId);
       val asc = daoFactory.daos.algorithmScheduleColumnDao.createAndInsertAlgorithmScheduleColumnDto(algScheduleDto.algorithmScheduleId, colTypeId, algSchViewDto.algorithmScheduleViewId, algSchViewDto.sourceViewId, viewColumnId, "")
-      println("asc: " + asc);
+      logger.info("asc: " + asc);
     });
 
     /*

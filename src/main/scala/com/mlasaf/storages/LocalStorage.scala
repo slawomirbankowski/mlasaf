@@ -15,7 +15,7 @@ class LocalStorage extends Storage {
   /** download view to local storage */
   def downloadView(sourceView : VSourceViewDto, sourceSchedule : VSourceScheduleDto, sourceDownloadDto : SourceDownloadDto, source : Source, downloader : SouceViewDownloader) : ExecutorStorageViewDto = {
     val storageViewFolderPath = this.storageDto.storageFulllPath + java.io.File.separator + CustomUtils.randomLong();
-    println("Download view to LOCAL storage to path: " + storageViewFolderPath)
+    logger.info("Download view to LOCAL storage to path: " + storageViewFolderPath)
     new java.io.File(storageViewFolderPath).mkdirs();
     val storageViewFilePath = storageViewFolderPath + java.io.File.separator + "data.csv";
     val bos = new java.io.BufferedWriter(new FileWriter(storageViewFilePath));
@@ -32,7 +32,7 @@ class LocalStorage extends Storage {
       nextRow = downloader.getNextRow();
     }
     bos.close();
-    println("File downloaded from view to path: " + storageViewFilePath + ", rows: " + viewRowsCount + ", size: " + viewSize);
+    logger.info("File downloaded from view to path: " + storageViewFilePath + ", rows: " + viewRowsCount + ", size: " + viewSize);
     val storageSnapshotDto = parentContext.daoFactory.daos.executorStorageSnapshotDao.createAndInsertExecutorStorageSnapshotDto(1);
     val storageViewDto = parentContext.daoFactory.daos.executorStorageViewDao.createAndInsertExecutorStorageViewDto(storageSnapshotDto.executorStorageSnapshotId, this.storageDto.executorStorageId, sourceDownloadDto.sourceDownloadId, sourceView.sourceViewId, storageViewFilePath, viewSize, viewRowsCount, 1);
     storageViewDto

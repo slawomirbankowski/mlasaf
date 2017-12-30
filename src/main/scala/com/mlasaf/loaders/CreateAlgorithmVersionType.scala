@@ -9,6 +9,9 @@ import org.rogach.scallop.ScallopConf
 
 object CreateAlgorithmVersionType {
 
+  /** logger for DAO */
+  val logger = org.slf4j.LoggerFactory.getLogger("CreateAlgorithmVersionType");
+
   /** main entry point to run all services for MLASAF, initialization from command line arguments or from xml file */
   def main(args : Array[String]) : Unit = {
     val entryOptions = new CreateAlgorithmVersionTypeEntryOptions(args);
@@ -20,33 +23,33 @@ object CreateAlgorithmVersionType {
     val algorithmType = entryOptions.algorithmType.getOrElse("")
     val algorithmVersion = entryOptions.algorithmVersion.getOrElse("")
     val columns = entryOptions.columns.getOrElse("");
-    println("columns: " + columns);
+    logger.info("columns: " + columns);
     val parameters = entryOptions.parameters.getOrElse("");
-    println("parameters: " + parameters);
+    logger.info("parameters: " + parameters);
     val outputTypes = entryOptions.outputTypes.getOrElse("");
-    println("outputTypes: " + outputTypes);
+    logger.info("outputTypes: " + outputTypes);
 
     val daoFactory = new DaoFactory();
     daoFactory.initialize(jdbcString, jdbcUser, jdbcPass, jdbcDriver);
     val algType = daoFactory.daos.algorithmTypeDao.getAlgorithmTypeByName(algorithmType).head;
-    println("algTypeId: " + algType);
+    logger.info("algTypeId: " + algType);
     val algTypeVer = daoFactory.daos.algorithmTypeVersionDao.createAndInsertAlgorithmTypeVersionDto(algType.algorithmTypeId, algorithmVersion);
-    println("algTypeVer: " + algTypeVer);
+    logger.info("algTypeVer: " + algTypeVer);
     // columns
     columns.split(",").foreach(algColName => {
       val algTypeColType = daoFactory.daos.algorithmTypeColumnTypeDao.createAndInsertAlgorithmTypeColumnTypeDto(algTypeVer.algorithmTypeVersionId, daoFactory.daos.algorithmColumnTypeDao.getAlgorithmColumnTypeFirstByName(algColName).get.algorithmColumnTypeId, 0, 0);
-      println("algTypeColType: " + algTypeColType);
+      logger.info("algTypeColType: " + algTypeColType);
     });
     // parameters
     parameters.split(",").foreach(algColName => {
       val algParType = daoFactory.daos.algorithmParamTypeDao.createAndInsertAlgorithmParamTypeDto(daoFactory.daos.algorithmParamDao.getAlgorithmParamFirstByName(algColName).get.algorithmParamId, algType.algorithmTypeId, algTypeVer.algorithmTypeVersionId);
-      println("algParType: " + algParType);
+      logger.info("algParType: " + algParType);
     });
     // outputs
     outputTypes.split(",").foreach(outputTypeName => {
       val algOutypeId = daoFactory.daos.algorithmOutputTypeDao.getAlgorithmOutputTypeFirstByName(outputTypeName).get.algorithmOutputTypeId;
       val algTypeOutType = daoFactory.daos.algorithmTypeOutputTypeDao.createAndInsertAlgorithmTypeOutputTypeDto(algTypeVer.algorithmTypeVersionId, algOutypeId, 1);
-      println("algTypeOutType: " + algTypeOutType);
+      logger.info("algTypeOutType: " + algTypeOutType);
     });
   }
 }

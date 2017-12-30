@@ -14,18 +14,18 @@ trait Storage extends ThreadBase {
   var storageDto : ExecutorStorageDto = null;
   /** */
   def initialize(ctx : Context, dto : ExecutorStorageDto): Unit = {
-    println("Initialization of Storage: " + dto);
+    logger.info("Initialization of Storage: " + dto);
     parentContext = ctx;
     storageDto = dto;
   }
   /**  */
   def onRunBegin() = {
-    println("Start THREAD for Storage: " + storageDto.executorStorageId);
+    logger.info("Start THREAD for Storage: " + storageDto.executorStorageId);
     downloadSourceSchedules();
   }
   /**  */
   def onRunEnd() = {
-    println("End THREAD for Storage: " + storageDto.executorStorageId);
+    logger.info("End THREAD for Storage: " + storageDto.executorStorageId);
   }
   /**  */
   def onStop(): Unit = {
@@ -36,15 +36,15 @@ trait Storage extends ThreadBase {
   /** download all schedules for given source instance */
   def downloadSourceSchedules() : Unit = {
     val allSourceSchedules = parentContext.daoFactory.daos.vSourceScheduleDao.getDtosByExecutorStorage_executorStorageId(this.storageDto.executorStorageId);
-    println("Got views to be downloaded to storage: (" + this.storageDto + "), views count: " + allSourceSchedules.size);
+    logger.info("Got views to be downloaded to storage: (" + this.storageDto + "), views count: " + allSourceSchedules.size);
     allSourceSchedules.foreach(srcSch => {
-      println("Starting downloading schedule: " + srcSch);
+      logger.info("Starting downloading schedule: " + srcSch);
       val vSourceViewsDto = parentContext.daoFactory.daos.vSourceViewDao.getDtosBySourceViewId(srcSch.sourceView_sourceViewId);
       if (vSourceViewsDto.size > 0) {
         vSourceViewsDto.foreach(sv => {
           val sourceInstances = parentContext.sources.filter(x => (x.vSourceDto.sourceInstanceId == sv.sourceInstance_sourceInstanceId));
           if (sourceInstances.size > 0) {
-            println("Got view to be downloaded: " + sv);
+            logger.info("Got view to be downloaded: " + sv);
             val sourceDownloadDto = parentContext.daoFactory.daos.sourceDownloadDao.createAndInsertSourceDownloadDto(srcSch.sourceScheduleId, srcSch.executorStorage_executorHostId, parentContext.contextDto.executorContextId, srcSch.sourceView_sourceViewId, 1, 0, 0, 0, "");
             try {
               val downloader = sourceInstances.head.downloadView(sv);
@@ -62,7 +62,7 @@ trait Storage extends ThreadBase {
               }
             }
           } else {
-            println("There is no defined source to download view: " + sv);
+            logger.info("There is no defined source to download view: " + sv);
           }
         });
       }

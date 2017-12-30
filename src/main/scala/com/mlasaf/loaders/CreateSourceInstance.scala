@@ -9,6 +9,9 @@ import org.rogach.scallop.ScallopConf
 
 object CreateSourceInstance {
 
+  /** logger for DAO */
+  val logger = org.slf4j.LoggerFactory.getLogger("CreateSourceInstance");
+
   /** main entry point to run all services for MLASAF, initialization from command line arguments or from xml file */
   def main(args : Array[String]) : Unit = {
     val entryOptions = new CreateSourceInstanceEntryOptions(args);
@@ -26,9 +29,9 @@ object CreateSourceInstance {
     daoFactory.initialize(jdbcString, jdbcUser, jdbcPass, jdbcDriver);
 
     val srcTypeId = daoFactory.daos.sourceTypeDao.getSourceTypeFirstByName(sourceType).get.sourceTypeId;
-    println("Got ID of JDBC source: " + srcTypeId)
+    logger.info("Got ID of JDBC source: " + srcTypeId)
     val srcInstanceDto = daoFactory.daos.sourceInstanceDao.createAndInsertSourceInstanceDto(srcTypeId, sourceInstanceName, 0, 0, "OK", new java.util.Date());
-    println("Created SourceInstance: " + srcInstanceDto);
+    logger.info("Created SourceInstance: " + srcInstanceDto);
     sourceParamNames.split(",").zip(sourceParamValues.split(",")).foreach(pv => {
       daoFactory.daos.sourceParamValueDao.createAndInsertSourceParamValueDto(srcInstanceDto.sourceInstanceId,  daoFactory.daos.sourceParamDao.getSourceParamFirstByName(pv._1).get.sourceParamId, "1", pv._2);
     });

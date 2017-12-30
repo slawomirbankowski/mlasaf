@@ -26,14 +26,14 @@ trait Source extends ThreadBase {
     parentContext = ctx;
     vSourceDto = vSrcDto;
     vSourceParamsDtos = params;
-    println("Initializing SourceInstance " + vSourceDto.sourceInstanceName + ", parameters: " + params.map(p => p.sourceParam_sourceParamName + "=" + p.paramValue).mkString(", "))
+    logger.info("Initializing SourceInstance " + vSourceDto.sourceInstanceName + ", parameters: " + params.map(p => p.sourceParam_sourceParamName + "=" + p.paramValue).mkString(", "))
     onInitialize();
   }
   /** name of thread - SOURCE */
   def getName() : String = "SOURCE";
   /** */
   def onRunBegin() = {
-    println("Start THREAD for Source: " + vSourceDto.sourceInstanceId);
+    logger.info("Start THREAD for Source: " + vSourceDto.sourceInstanceId);
     getSourceViews();
   }
   def onRunEnd(): Unit = {

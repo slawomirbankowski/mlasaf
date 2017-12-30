@@ -23,28 +23,28 @@ class DaoConnection {
   var jdbcDriverClass = "";
 
   /** logger for DAO */
-  val logger = org.slf4j.LoggerFactory.getLogger("Context");
+  val logger = org.slf4j.LoggerFactory.getLogger("DaoConnection");
 
   /** initialize connection - create template */
   def initialize(jdbc : String, user: String, pass : String, driverClass : String) = {
     if (! driverClass.isEmpty) {
-      println("Try to initialize driver for class: " + driverClass);
+      logger.info("Try to initialize driver for class: " + driverClass);
       try {
         Class.forName(driverClass)
       } catch {
         case ex : Exception => {
-          println("Cannot find driver for class: " + driverClass);
+          logger.info("Cannot find driver for class: " + driverClass);
         }
       }
       Thread.sleep(1000);
     }
-    println("Try to connect to:  " + jdbc + " using user: " + user);
+    logger.info("Try to connect to:  " + jdbc + " using user: " + user);
     connection = DriverManager.getConnection(jdbc, user, pass);
     //val dataSource : javax.sql.DataSource = null;
     //dataSource.getConnection();
-    println("Got connection: " + connection);
-    println("Got connection catalog: " + connection.getCatalog);
-    println("Got connection AutoCommit: " + connection.getAutoCommit);
+    logger.info("Got connection: " + connection);
+    logger.info("Got connection catalog: " + connection.getCatalog);
+    logger.info("Got connection AutoCommit: " + connection.getAutoCommit);
     //logger.info("Got connection NetworkTimeout: " + connection.getNetworkTimeout);
     jdbcString = jdbc;
     jdbcUser = user;
@@ -65,10 +65,10 @@ class DaoConnection {
     //DriverManagerConnectionFactory
     //PoolingDataSource<PoolableConnection> dataSource = new PoolingDataSource<>(connectionPool);
     val pds = new org.apache.commons.dbcp.PoolingDataSource
-    println("Pooling data source: " + pds)
+    logger.info("Pooling data source: " + pds)
     //val org.apache.commons.dbcp.PoolingDataSource
     val bds : org.apache.commons.dbcp.BasicDataSource = new org.apache.commons.dbcp.BasicDataSource();
-    println("Basic Data source: " + bds);
+    logger.info("Basic Data source: " + bds);
     bds.setUrl(jdbcString);
     bds.setUsername(jdbcUser);
     bds.setPassword(jdbcPass);
@@ -77,8 +77,8 @@ class DaoConnection {
     //bds.setValidationQuery("select 1")
     println("DS: " + bds)
     val conn = bds.getConnection;
-    println("Connection: " + conn);
-    println("  Catalog: " + conn.getCatalog);
+    logger.info("Connection: " + conn);
+    logger.info("  Catalog: " + conn.getCatalog);
     conn.createStatement().executeQuery("select * from INFORMATION_SCHEMA.TABLES");
     conn.close();
     bds.isClosed();

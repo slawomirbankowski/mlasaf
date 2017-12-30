@@ -9,7 +9,7 @@ import com.mlasaf.domain._
 class RExecutor extends Executor {
 
   def onRunExecutor(): Unit = {
-    println("R Executor run  ")
+    logger.info("R Executor run  ")
   }
   def getTypeName() : String = {
     "R"

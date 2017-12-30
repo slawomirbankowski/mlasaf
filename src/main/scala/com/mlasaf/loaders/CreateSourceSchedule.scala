@@ -9,6 +9,9 @@ import org.rogach.scallop.ScallopConf
 
 object CreateSourceSchedule {
 
+  /** logger for DAO */
+  val logger = org.slf4j.LoggerFactory.getLogger("CreateSourceSchedule");
+
   /** main entry point to run all services for MLASAF, initialization from command line arguments or from xml file */
   def main(args : Array[String]) : Unit = {
     val entryOptions = new CreateSourceScheduleEntryOptions(args);
@@ -25,14 +28,14 @@ object CreateSourceSchedule {
     daoFactory.initialize(jdbcString, jdbcUser, jdbcPass, jdbcDriver);
 
     val srcViewId = daoFactory.daos.sourceViewDao.getSourceViewByName(viewName).head.sourceViewId;
-    println("srcViewId: " + srcViewId);
+    logger.info("srcViewId: " + srcViewId);
     val storageTypeId = daoFactory.daos.executorStorageTypeDao.getExecutorStorageTypeFirstByName(storageTypeName).get.executorStorageTypeId;
-    println("storageTypeId: " + storageTypeId);
+    logger.info("storageTypeId: " + storageTypeId);
     val hostId = daoFactory.daos.executorHostDao.getExecutorHostsList().filter(h => h.hostIp.equals(storageHostIp)).head.executorHostId;
-    println("hostId: " + hostId);
+    logger.info("hostId: " + hostId);
     val execStorageId = daoFactory.daos.executorStorageDao.getExecutorStorageByFkExecutorHostId(hostId).filter(s => s.executorStorageTypeId == storageTypeId).head.executorStorageId;
-    println("execStorageId: " + execStorageId);
-    println("Creating SourceSchedule for view: " + srcViewId + ", storage: " + execStorageId)
+    logger.info("execStorageId: " + execStorageId);
+    logger.info("Creating SourceSchedule for view: " + srcViewId + ", storage: " + execStorageId)
     daoFactory.daos.sourceScheduleDao.createAndInsertSourceScheduleDto(srcViewId, execStorageId, 0, new java.util.Date(), 0, 1, 0);
 
   }
