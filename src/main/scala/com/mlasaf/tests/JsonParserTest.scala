@@ -16,7 +16,7 @@ object JsonParserTest {
     val e2 = parse(executorDef2).extract[Array[CEDefinition]];
     println("executors: " + e2.size + ", " +e2.map(e => e.executorType + "-" + e.portNumber).mkString(",") );
     //println(e2.executors.map(e => e.executorType + "-" + e.portNumber).mkString(" , "));
-
+    //org.json4s.native.JsonMethods.compact(org.json4s.native.JsonMethods.render(e2));
 
     //val mapper = new com.fasterxml.jackson.databind.ObjectMapper();
     //val execDef = mapper.readValue[CEDefinitions](executorDef2, classOf[CEDefinitions])

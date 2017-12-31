@@ -89,27 +89,24 @@ trait Executor extends ThreadBase {
         algoRun.algorithmInstance = Class.forName(sch.algorithmImplementation_algorithmImplementationClass).newInstance().asInstanceOf[AlgorithmInstance];
         // create runViews for existing views in storage
         algSchView.foreach(schView => {
-          //val srcView = parentContext.daoFactory.daos.sourceViewDao.getSourceViewByPk(schView.sourceViewId);
-          val srcDownloads = parentContext.daoFactory.daos.vSourceDownloadDao.getDtosBySourceSchedule_sourceViewId(schView.sourceViewId);
-          val execStorageViews : scala.collection.mutable.ListBuffer[VExecutorStorageViewDto] = new scala.collection.mutable.ListBuffer();
-          algoRun.algorithmScheduleViewDtos += schView;
-          srcDownloads.foreach(sd => {
-            val storageViews = parentContext.daoFactory.daos.vExecutorStorageViewDao.getDtosBySourceDownloadId(sd.sourceDownloadId);
-            //storageViews.sortBy(x => -x.insertedRowDate.getTime);
-            execStorageViews ++= storageViews;
-          });
-          if (execStorageViews.size > 0) {
-            logger.info("==>For algorithmRun: " + runDto.algorithmRunId + ", viewId: " + schView.sourceViewId  + " got storage views: " + execStorageViews.size);
-            val storageViewLatestDto = execStorageViews.sortBy(x => -x.insertedRowDate.getTime).head;
-            algoRun.executorStorageViewDtos += storageViewLatestDto;
+          val allStorageViews = parentContext.daoFactory.daos.vExecutorStorageViewDao.getDtosBySourceView_sourceViewId(schView.sourceViewId);
+          if (allStorageViews.size > 0) {
+            // view already downloaded
+            val storageViewDto = allStorageViews.sortBy(-_.lastUpdatedDate.getTime).head
+            logger.info("View already downloaded: " + storageViewDto.executorStorageViewId + ", path: " + storageViewDto.executorStorageResource_resourcePath + ", rows: " + storageViewDto.executorStorageResource_resourceRowsCount);
+            //val srcDownloads = parentContext.daoFactory.daos.vSourceDownloadDao.get.getDtosBySourceSchedule_sourceViewId(schView.sourceViewId);
+            algoRun.executorStorageViewDtos += storageViewDto;
             val algSchCols = parentContext.daoFactory.daos.vAlgorithmScheduleColumnDao.getDtosByAlgorithmScheduleView_algorithmScheduleViewId(schView.algorithmScheduleViewId);
             algoRun.algorithmScheduleColumnDtos ++= algSchCols;
+            val algoRunViewDto = parentContext.daoFactory.daos.algorithmRunViewDao.createAndInsertAlgorithmRunViewDto(runDto.algorithmRunId, storageViewDto.executorStorageViewId, schView.algorithmScheduleViewId, 1);
+            algoRun.algorithmRunViewDtos += algoRunViewDto;
           } else {
-            // create souceSchedule to download view from source to storage
+            // view not downloaded - need to schedule
             var srcSchedule = parentContext.daoFactory.daos.sourceScheduleDao.createAndInsertSourceScheduleDto(schView.sourceViewId, storageId, 1, new java.util.Date(), 0, 1, 0);
-            logger.info("==>For algorithmRun: " + runDto.algorithmRunId + ", viewId: " + schView.sourceViewId  + " create schedules to download views: " + srcSchedule.sourceScheduleId);
-            algoRun.sourceScheduleDtos += srcSchedule;
+            logger.info("==>For algorithmRun: " + runDto.algorithmRunId + ", viewId: " + schView.sourceViewId  + " create schedule to download view for viewId: " + schView.sourceViewId + ", NEW schedule: " + srcSchedule.sourceScheduleId);
+            algoRun.algorithmScheduleViewDtos += schView;
           }
+          val execStorageViews : scala.collection.mutable.ListBuffer[VExecutorStorageViewDto] = new scala.collection.mutable.ListBuffer();
         });
         logger.info("==> Algorithm RUN object ready to run: " + algoRun.toString);
         algoRun.runAlgorithm();
