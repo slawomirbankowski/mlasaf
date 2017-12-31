@@ -13,11 +13,11 @@ case class VAlgorithmTypeSummaryDto (
      , val lastUpdatedDate : java.util.Date
      , val algorithmTypeName : String
      , val algorithmTypeDescription : String
-     , val algorithmTypeVersion_count : Int
-     , val algorithmParamType_count : Int 
+     , val algorithmParamType_count : Int
+     , val algorithmTypeVersion_count : Int 
      ) extends BaseReadOnlyDto {  
    def tableName : String = {    "vAlgorithmTypeSummary";    }  
-   def fields : String = {    "algorithmTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeName,algorithmTypeDescription,algorithmTypeVersion_count,algorithmParamType_count";    }  
+   def fields : String = {    "algorithmTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeName,algorithmTypeDescription,algorithmParamType_count,algorithmTypeVersion_count";    }  
    def pkFields : String = {    "";    }  
    def fkFields : String = {    "";    }  
    def nameField : String = {    "";    }  
@@ -25,9 +25,9 @@ case class VAlgorithmTypeSummaryDto (
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(algorithmTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeName,algorithmTypeDescription,algorithmTypeVersion_count,algorithmParamType_count)  }  
- def toStringArray() : Array[String] = {    Array(""+algorithmTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmTypeName,""+algorithmTypeDescription,""+algorithmTypeVersion_count,""+algorithmParamType_count)   }  
- def toFullString() : String = {    "algorithmTypeId:'"+algorithmTypeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmTypeName:'"+algorithmTypeName+"'"+","+"algorithmTypeDescription:'"+algorithmTypeDescription+"'"+","+"algorithmTypeVersion_count:'"+algorithmTypeVersion_count+"'"+","+"algorithmParamType_count:'"+algorithmParamType_count+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(algorithmTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeName,algorithmTypeDescription,algorithmParamType_count,algorithmTypeVersion_count)  }  
+ def toStringArray() : Array[String] = {    Array(""+algorithmTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmTypeName,""+algorithmTypeDescription,""+algorithmParamType_count,""+algorithmTypeVersion_count)   }  
+ def toFullString() : String = {    "algorithmTypeId:'"+algorithmTypeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmTypeName:'"+algorithmTypeName+"'"+","+"algorithmTypeDescription:'"+algorithmTypeDescription+"'"+","+"algorithmParamType_count:'"+algorithmParamType_count+"'"+","+"algorithmTypeVersion_count:'"+algorithmTypeVersion_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "algorithmTypeId" => algorithmTypeId  
@@ -36,8 +36,8 @@ case class VAlgorithmTypeSummaryDto (
      case "lastUpdatedDate" => lastUpdatedDate  
      case "algorithmTypeName" => algorithmTypeName  
      case "algorithmTypeDescription" => algorithmTypeDescription  
-     case "algorithmTypeVersion_count" => algorithmTypeVersion_count  
-     case "algorithmParamType_count" => algorithmParamType_count   
+     case "algorithmParamType_count" => algorithmParamType_count  
+     case "algorithmTypeVersion_count" => algorithmTypeVersion_count   
     case _ => null 
     } 
     ret 
@@ -50,8 +50,8 @@ case class VAlgorithmTypeSummaryDto (
      case "lastUpdatedDate" => "java.util.Date"  
      case "algorithmTypeName" => "String"  
      case "algorithmTypeDescription" => "String"  
-     case "algorithmTypeVersion_count" => "Int"  
-     case "algorithmParamType_count" => "Int"   
+     case "algorithmParamType_count" => "Int"  
+     case "algorithmTypeVersion_count" => "Int"   
     case _ => "Object" 
     } 
     ret 
@@ -65,8 +65,8 @@ object VAlgorithmTypeSummaryDto {
    val FIELD_lastUpdatedDate = "lastUpdatedDate";
    val FIELD_algorithmTypeName = "algorithmTypeName";
    val FIELD_algorithmTypeDescription = "algorithmTypeDescription";
-   val FIELD_algorithmTypeVersion_count = "algorithmTypeVersion_count";
    val FIELD_algorithmParamType_count = "algorithmParamType_count";
+   val FIELD_algorithmTypeVersion_count = "algorithmTypeVersion_count";
 
 }
 

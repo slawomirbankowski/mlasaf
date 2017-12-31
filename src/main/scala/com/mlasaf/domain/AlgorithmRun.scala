@@ -28,6 +28,8 @@ class AlgorithmRun {
   var algorithmScheduleColumnDtos : scala.collection.mutable.ListBuffer[VAlgorithmScheduleColumnDto] = new scala.collection.mutable.ListBuffer();
   var sourceScheduleDtos : scala.collection.mutable.ListBuffer[SourceScheduleDto] = new scala.collection.mutable.ListBuffer();
   var executorStorageViewDtos : scala.collection.mutable.ListBuffer[VExecutorStorageViewDto] = new scala.collection.mutable.ListBuffer();
+  /** all outputs to be created for this run of algorithm */
+  var outputs : scala.collection.mutable.ListBuffer[VAlgorithmOutputDto] = new scala.collection.mutable.ListBuffer();
 
   /** RUN algorithm */
   def runAlgorithm() = {

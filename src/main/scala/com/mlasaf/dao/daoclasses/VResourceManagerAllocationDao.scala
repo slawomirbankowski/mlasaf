@@ -252,6 +252,31 @@ import java.util.Date
    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where resourceManager_resourceManagerStatus = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);  
    dtos  
  }  
+ def getDtosByResourceMeasure_resourceMeasureId(colValue : Long) : List[VResourceManagerAllocationDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where resourceMeasure_resourceMeasureId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);  
+   dtos  
+ }  
+ def getDtosByResourceMeasure_guid(colValue : Long) : List[VResourceManagerAllocationDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where resourceMeasure_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);  
+   dtos  
+ }  
+ def getDtosByResourceMeasure_insertedRowDate(colValue : java.util.Date) : List[VResourceManagerAllocationDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where resourceMeasure_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);  
+   dtos  
+ }  
+ def getDtosByResourceMeasure_lastUpdatedDate(colValue : java.util.Date) : List[VResourceManagerAllocationDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where resourceMeasure_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);  
+   dtos  
+ }  
+ def getDtosByResourceMeasure_resourceMeasureName(colValue : String) : List[VResourceManagerAllocationDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where resourceMeasure_resourceMeasureName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);  
+   dtos  
+ }  
  def getDtosByResourceManagerType_resourceManagerTypeId(colValue : Long) : List[VResourceManagerAllocationDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where resourceManagerType_resourceManagerTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);  
@@ -280,31 +305,6 @@ import java.util.Date
  def getDtosByResourceManagerType_resourceManagerTypeClass(colValue : String) : List[VResourceManagerAllocationDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where resourceManagerType_resourceManagerTypeClass = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);  
-   dtos  
- }  
- def getDtosByResourceMeasure_resourceMeasureId(colValue : Long) : List[VResourceManagerAllocationDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where resourceMeasure_resourceMeasureId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);  
-   dtos  
- }  
- def getDtosByResourceMeasure_guid(colValue : Long) : List[VResourceManagerAllocationDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where resourceMeasure_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);  
-   dtos  
- }  
- def getDtosByResourceMeasure_insertedRowDate(colValue : java.util.Date) : List[VResourceManagerAllocationDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where resourceMeasure_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);  
-   dtos  
- }  
- def getDtosByResourceMeasure_lastUpdatedDate(colValue : java.util.Date) : List[VResourceManagerAllocationDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where resourceMeasure_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);  
-   dtos  
- }  
- def getDtosByResourceMeasure_resourceMeasureName(colValue : String) : List[VResourceManagerAllocationDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where resourceMeasure_resourceMeasureName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);  
    dtos  
  }  
 

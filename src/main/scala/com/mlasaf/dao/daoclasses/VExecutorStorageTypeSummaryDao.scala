@@ -77,14 +77,14 @@ import java.util.Date
    val dtos : List[VExecutorStorageTypeSummaryDto] = SQL("select * from vExecutorStorageTypeSummary where executorStorageTypeClass = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageTypeSummaryDto].*);  
    dtos  
  }  
- def getDtosByExecutorStorage_count(colValue : Int) : List[VExecutorStorageTypeSummaryDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VExecutorStorageTypeSummaryDto] = SQL("select * from vExecutorStorageTypeSummary where executorStorage_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageTypeSummaryDto].*);  
-   dtos  
- }  
  def getDtosByAlgorithmStorageSupport_count(colValue : Int) : List[VExecutorStorageTypeSummaryDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VExecutorStorageTypeSummaryDto] = SQL("select * from vExecutorStorageTypeSummary where algorithmStorageSupport_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageTypeSummaryDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorStorage_count(colValue : Int) : List[VExecutorStorageTypeSummaryDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorStorageTypeSummaryDto] = SQL("select * from vExecutorStorageTypeSummary where executorStorage_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageTypeSummaryDto].*);  
    dtos  
  }  
 

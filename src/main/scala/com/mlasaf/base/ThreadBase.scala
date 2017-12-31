@@ -9,7 +9,7 @@ import com.mlasaf.domain.Context
 /** base class for all object with Thread assigned */
 trait ThreadBase extends Runnable {
 
-  val logger = org.slf4j.LoggerFactory.getLogger("Context");
+  val logger = org.slf4j.LoggerFactory.getLogger("ThreadBase");
   /** if object is still working - set internally by methods */
   var isWorking : Boolean = true;
   /** is object is stopped by external run of stop() method */

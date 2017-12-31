@@ -97,9 +97,24 @@ import java.util.Date
    val dtos : List[VExecutorHostSummaryDto] = SQL("select * from vExecutorHostSummary where isWorking = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorHostSummaryDto].*);  
    dtos  
  }  
+ def getDtosByResourceManager_count(colValue : Int) : List[VExecutorHostSummaryDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorHostSummaryDto] = SQL("select * from vExecutorHostSummary where resourceManager_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorHostSummaryDto].*);  
+   dtos  
+ }  
+ def getDtosByResourceManagerCheck_count(colValue : Int) : List[VExecutorHostSummaryDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorHostSummaryDto] = SQL("select * from vExecutorHostSummary where resourceManagerCheck_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorHostSummaryDto].*);  
+   dtos  
+ }  
  def getDtosByExecutorContext_count(colValue : Int) : List[VExecutorHostSummaryDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VExecutorHostSummaryDto] = SQL("select * from vExecutorHostSummary where executorContext_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorHostSummaryDto].*);  
+   dtos  
+ }  
+ def getDtosByResourceManagerAllocation_count(colValue : Int) : List[VExecutorHostSummaryDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorHostSummaryDto] = SQL("select * from vExecutorHostSummary where resourceManagerAllocation_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorHostSummaryDto].*);  
    dtos  
  }  
  def getDtosByExecutorContextRuntime_count(colValue : Int) : List[VExecutorHostSummaryDto] = { 
@@ -130,21 +145,6 @@ import java.util.Date
  def getDtosByExecutorStorage_count(colValue : Int) : List[VExecutorHostSummaryDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VExecutorHostSummaryDto] = SQL("select * from vExecutorHostSummary where executorStorage_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorHostSummaryDto].*);  
-   dtos  
- }  
- def getDtosByResourceManager_count(colValue : Int) : List[VExecutorHostSummaryDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VExecutorHostSummaryDto] = SQL("select * from vExecutorHostSummary where resourceManager_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorHostSummaryDto].*);  
-   dtos  
- }  
- def getDtosByResourceManagerCheck_count(colValue : Int) : List[VExecutorHostSummaryDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VExecutorHostSummaryDto] = SQL("select * from vExecutorHostSummary where resourceManagerCheck_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorHostSummaryDto].*);  
-   dtos  
- }  
- def getDtosByResourceManagerAllocation_count(colValue : Int) : List[VExecutorHostSummaryDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VExecutorHostSummaryDto] = SQL("select * from vExecutorHostSummary where resourceManagerAllocation_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorHostSummaryDto].*);  
    dtos  
  }  
 

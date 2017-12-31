@@ -87,34 +87,19 @@ import java.util.Date
    val dtos : List[VExecutorStorageViewSummaryDto] = SQL("select * from vExecutorStorageViewSummary where sourceViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewSummaryDto].*);  
    dtos  
  }  
- def getDtosByStoragePath(colValue : String) : List[VExecutorStorageViewSummaryDto] = { 
+ def getDtosByExecutorStorageResourceId(colValue : Long) : List[VExecutorStorageViewSummaryDto] = { 
    implicit val connection = getConnection();  
-   val dtos : List[VExecutorStorageViewSummaryDto] = SQL("select * from vExecutorStorageViewSummary where storagePath = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewSummaryDto].*);  
+   val dtos : List[VExecutorStorageViewSummaryDto] = SQL("select * from vExecutorStorageViewSummary where executorStorageResourceId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewSummaryDto].*);  
    dtos  
  }  
- def getDtosByViewSize(colValue : Long) : List[VExecutorStorageViewSummaryDto] = { 
+ def getDtosByDownloadTransformExecutorStorage_count(colValue : Int) : List[VExecutorStorageViewSummaryDto] = { 
    implicit val connection = getConnection();  
-   val dtos : List[VExecutorStorageViewSummaryDto] = SQL("select * from vExecutorStorageViewSummary where viewSize = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewSummaryDto].*);  
-   dtos  
- }  
- def getDtosByViewRowsCount(colValue : Long) : List[VExecutorStorageViewSummaryDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VExecutorStorageViewSummaryDto] = SQL("select * from vExecutorStorageViewSummary where viewRowsCount = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewSummaryDto].*);  
-   dtos  
- }  
- def getDtosByIsValid(colValue : Int) : List[VExecutorStorageViewSummaryDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VExecutorStorageViewSummaryDto] = SQL("select * from vExecutorStorageViewSummary where isValid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewSummaryDto].*);  
+   val dtos : List[VExecutorStorageViewSummaryDto] = SQL("select * from vExecutorStorageViewSummary where downloadTransformExecutorStorage_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewSummaryDto].*);  
    dtos  
  }  
  def getDtosByAlgorithmRunView_count(colValue : Int) : List[VExecutorStorageViewSummaryDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VExecutorStorageViewSummaryDto] = SQL("select * from vExecutorStorageViewSummary where algorithmRunView_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewSummaryDto].*);  
-   dtos  
- }  
- def getDtosByAlgorithmOutput_count(colValue : Int) : List[VExecutorStorageViewSummaryDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VExecutorStorageViewSummaryDto] = SQL("select * from vExecutorStorageViewSummary where algorithmOutput_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewSummaryDto].*);  
    dtos  
  }  
 

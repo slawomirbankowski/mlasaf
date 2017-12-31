@@ -21,10 +21,15 @@ resolvers += "Maven Repository" at "https://mvnrepository.com/artifact/"
 
 libraryDependencies ++= Seq(
 
+ // logging
  "org.slf4j" % "slf4j-api" % "1.7.21",
  "log4j" % "log4j" % "1.2.17",
- "net.sourceforge.jexcelapi" % "jxl" % "2.6.12",
+
+ // options and entry parameters
  "com.github.scopt" %% "scopt" % "3.7.0",
+
+ // utils
+ "net.sourceforge.jexcelapi" % "jxl" % "2.6.12",
  "commons-collections" % "commons-collections" % "3.2.2",
  "org.apache.commons" % "commons-lang3" % "3.1",
  "commons-lang" % "commons-lang" % "2.2",
@@ -34,12 +39,13 @@ libraryDependencies ++= Seq(
  "commons-dbcp" % "commons-dbcp" % "1.4",
  "commons-io" % "commons-io" % "2.6",
  "com.google.guava" % "guava" % "23.4-jre",
+ "javax.mail" % "javax.mail-api" % "1.5.6",
+ "org.rogach" % "scallop_2.11" % "3.1.1",
 
+ // Big Data
  "org.apache.hadoop" % "hadoop-common" % "2.6.3",
  "org.apache.hadoop" % "hadoop-nfs" % "2.6.3",
  "gov.nist.math" % "jama" % "1.0.2",
- "javax.mail" % "javax.mail-api" % "1.5.6",
- "org.rogach" % "scallop_2.11" % "3.1.1",
 
  // JDBC drivers
  "com.microsoft.sqlserver" % "sqljdbc4" % "4.0" % "test",
@@ -55,6 +61,7 @@ libraryDependencies ++= Seq(
  "net.java.dev.jna" % "jna-platform" % "4.1.0",
  "net.java.dev.jna" % "jna" % "4.1.0",
 
+ // WEB - HTTP - REST
  "javax.servlet" % "servlet-api" % "2.5",
  "com.sparkjava" % "spark-core" % "2.6.0",
  "org.eclipse.jetty" % "jetty-server" % "9.3.14.v20161028",
@@ -70,10 +77,10 @@ libraryDependencies ++= Seq(
  "com.typesafe.play" % "anorm_2.11" % "2.5.1",
  //"org.liquibase" % "liquibase-maven-plugin" % "3.1.1",
 
- "net.sourceforge.jtds" % "jtds" % "1.3.1",
+
+ "org.json4s" %% "json4s-native" % "3.6.0-M2",
  "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.7.8",
  "com.fasterxml.jackson.core"   %  "jackson-databind"  % "2.7.8",
-  //"org.fitnesse" % "fitnesse" % "20161106",
 
  "org.scalatest" %% "scalatest" % "3.0.0",
  "com.veact" %% "scala-ssh" % "0.8.0" exclude("net.schmizz", "sshj" /*net.schmizz:sshj:[0.8.1,) - unbounded version caused problems*/ ),

@@ -13,6 +13,8 @@ object DbTotalTest {
     val jdbcPass = System.getenv("MLASAF_PASS");
     val jdbcDriver = System.getenv("MLASAF_DRIVER");
 
+    val d : java.util.Date = new java.util.Date();
+
 
 
     println(" END ")

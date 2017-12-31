@@ -242,24 +242,9 @@ import java.util.Date
    val dtos : List[VAlgorithmRunViewDto] = SQL("select * from vAlgorithmRunView where executorStorageView_sourceViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunViewDto].*);  
    dtos  
  }  
- def getDtosByExecutorStorageView_storagePath(colValue : String) : List[VAlgorithmRunViewDto] = { 
+ def getDtosByExecutorStorageView_executorStorageResourceId(colValue : Long) : List[VAlgorithmRunViewDto] = { 
    implicit val connection = getConnection();  
-   val dtos : List[VAlgorithmRunViewDto] = SQL("select * from vAlgorithmRunView where executorStorageView_storagePath = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunViewDto].*);  
-   dtos  
- }  
- def getDtosByExecutorStorageView_viewSize(colValue : Long) : List[VAlgorithmRunViewDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VAlgorithmRunViewDto] = SQL("select * from vAlgorithmRunView where executorStorageView_viewSize = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunViewDto].*);  
-   dtos  
- }  
- def getDtosByExecutorStorageView_viewRowsCount(colValue : Long) : List[VAlgorithmRunViewDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VAlgorithmRunViewDto] = SQL("select * from vAlgorithmRunView where executorStorageView_viewRowsCount = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunViewDto].*);  
-   dtos  
- }  
- def getDtosByExecutorStorageView_isValid(colValue : Int) : List[VAlgorithmRunViewDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VAlgorithmRunViewDto] = SQL("select * from vAlgorithmRunView where executorStorageView_isValid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunViewDto].*);  
+   val dtos : List[VAlgorithmRunViewDto] = SQL("select * from vAlgorithmRunView where executorStorageView_executorStorageResourceId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunViewDto].*);  
    dtos  
  }  
 

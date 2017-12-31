@@ -72,14 +72,14 @@ import java.util.Date
    val dtos : List[ResourceManagerAllocationDto] = SQL("select * from resourceManagerAllocation where resourceManagerId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[ResourceManagerAllocationDto].*);  
    dtos  
  }  
- def getResourceManagerAllocationByFkResourceManagerTypeId(fkColValue : Long) : List[ResourceManagerAllocationDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[ResourceManagerAllocationDto] = SQL("select * from resourceManagerAllocation where resourceManagerTypeId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[ResourceManagerAllocationDto].*);  
-   dtos  
- }  
  def getResourceManagerAllocationByFkResourceMeasureId(fkColValue : Long) : List[ResourceManagerAllocationDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[ResourceManagerAllocationDto] = SQL("select * from resourceManagerAllocation where resourceMeasureId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[ResourceManagerAllocationDto].*);  
+   dtos  
+ }  
+ def getResourceManagerAllocationByFkResourceManagerTypeId(fkColValue : Long) : List[ResourceManagerAllocationDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[ResourceManagerAllocationDto] = SQL("select * from resourceManagerAllocation where resourceManagerTypeId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[ResourceManagerAllocationDto].*);  
    dtos  
  }  
  def insertResourceManagerAllocationDto(dto : ResourceManagerAllocationDto): ResourceManagerAllocationDto = { 

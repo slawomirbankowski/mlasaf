@@ -22,7 +22,7 @@ case class ExecutorStorageDto (
    def tableName : String = {    "executorStorage";    }  
    def fields : String = {    "executorStorageId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorStorageTypeId,storageDefinition,storageBasePath,storageFulllPath,isRunning,portNumber";    }  
    def pkFields : String = {    "executorStorageId";    }  
-   def fkFields : String = {    "executorStorageTypeId,executorHostId";    }  
+   def fkFields : String = {    "executorHostId,executorStorageTypeId";    }  
    def nameField : String = {    "";    }  
  def getPk() : Long = {    executorStorageId  }  
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  

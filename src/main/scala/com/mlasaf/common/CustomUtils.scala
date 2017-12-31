@@ -38,6 +38,14 @@ object CustomUtils {
     ""
 
   }
+  /** returns true is  d1 + hours > d2 */
+  def dateAfterWithHours(d1 : java.util.Date, hours : Int, d2 : java.util.Date) : Boolean = {
+    val c = java.util.Calendar.getInstance();
+    c.setTime(d1);
+    c.add(java.util.Calendar.HOUR, hours);
+    c.getTime.after(d2)
+  }
+
   def executeQuery(conn : java.sql.Connection, sql : String) = {
 
   }

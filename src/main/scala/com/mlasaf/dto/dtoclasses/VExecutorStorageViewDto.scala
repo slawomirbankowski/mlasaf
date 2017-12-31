@@ -15,10 +15,7 @@ case class VExecutorStorageViewDto (
      , val executorStorageId : Long
      , val sourceDownloadId : Long
      , val sourceViewId : Long
-     , val storagePath : String
-     , val viewSize : Long
-     , val viewRowsCount : Long
-     , val isValid : Int
+     , val executorStorageResourceId : Long
      , val executorStorage_executorStorageId : Long
      , val executorStorage_guid : Long
      , val executorStorage_insertedRowDate : java.util.Date
@@ -30,6 +27,15 @@ case class VExecutorStorageViewDto (
      , val executorStorage_storageFulllPath : String
      , val executorStorage_isRunning : Int
      , val executorStorage_portNumber : Int
+     , val executorStorageResource_executorStorageResourceId : Long
+     , val executorStorageResource_guid : Long
+     , val executorStorageResource_insertedRowDate : java.util.Date
+     , val executorStorageResource_lastUpdatedDate : java.util.Date
+     , val executorStorageResource_executorStorageId : Long
+     , val executorStorageResource_resourcePath : String
+     , val executorStorageResource_resourceSize : Long
+     , val executorStorageResource_resourceRowsCount : Long
+     , val executorStorageResource_isValid : Int
      , val executorStorageSnapshot_executorStorageSnapshotId : Long
      , val executorStorageSnapshot_guid : Long
      , val executorStorageSnapshot_insertedRowDate : java.util.Date
@@ -59,7 +65,7 @@ case class VExecutorStorageViewDto (
      , val sourceView_isExisting : Int 
      ) extends BaseReadOnlyDto {  
    def tableName : String = {    "vExecutorStorageView";    }  
-   def fields : String = {    "executorStorageViewId,guid,insertedRowDate,lastUpdatedDate,executorStorageSnapshotId,executorStorageId,sourceDownloadId,sourceViewId,storagePath,viewSize,viewRowsCount,isValid,executorStorage_executorStorageId,executorStorage_guid,executorStorage_insertedRowDate,executorStorage_lastUpdatedDate,executorStorage_executorHostId,executorStorage_executorStorageTypeId,executorStorage_storageDefinition,executorStorage_storageBasePath,executorStorage_storageFulllPath,executorStorage_isRunning,executorStorage_portNumber,executorStorageSnapshot_executorStorageSnapshotId,executorStorageSnapshot_guid,executorStorageSnapshot_insertedRowDate,executorStorageSnapshot_lastUpdatedDate,executorStorageSnapshot_executorInstanceId,sourceDownload_sourceDownloadId,sourceDownload_guid,sourceDownload_insertedRowDate,sourceDownload_lastUpdatedDate,sourceDownload_sourceScheduleId,sourceDownload_executorHostId,sourceDownload_executorContextId,sourceDownload_sourceViewId,sourceDownload_retryNumber,sourceDownload_isRunning,sourceDownload_isFinished,sourceDownload_isExcecption,sourceDownload_excecptionDescription,sourceView_sourceViewId,sourceView_guid,sourceView_insertedRowDate,sourceView_lastUpdatedDate,sourceView_sourceInstanceId,sourceView_sourceViewTypeId,sourceView_sourceViewName,sourceView_sourceViewDefinition,sourceView_isExisting";    }  
+   def fields : String = {    "executorStorageViewId,guid,insertedRowDate,lastUpdatedDate,executorStorageSnapshotId,executorStorageId,sourceDownloadId,sourceViewId,executorStorageResourceId,executorStorage_executorStorageId,executorStorage_guid,executorStorage_insertedRowDate,executorStorage_lastUpdatedDate,executorStorage_executorHostId,executorStorage_executorStorageTypeId,executorStorage_storageDefinition,executorStorage_storageBasePath,executorStorage_storageFulllPath,executorStorage_isRunning,executorStorage_portNumber,executorStorageResource_executorStorageResourceId,executorStorageResource_guid,executorStorageResource_insertedRowDate,executorStorageResource_lastUpdatedDate,executorStorageResource_executorStorageId,executorStorageResource_resourcePath,executorStorageResource_resourceSize,executorStorageResource_resourceRowsCount,executorStorageResource_isValid,executorStorageSnapshot_executorStorageSnapshotId,executorStorageSnapshot_guid,executorStorageSnapshot_insertedRowDate,executorStorageSnapshot_lastUpdatedDate,executorStorageSnapshot_executorInstanceId,sourceDownload_sourceDownloadId,sourceDownload_guid,sourceDownload_insertedRowDate,sourceDownload_lastUpdatedDate,sourceDownload_sourceScheduleId,sourceDownload_executorHostId,sourceDownload_executorContextId,sourceDownload_sourceViewId,sourceDownload_retryNumber,sourceDownload_isRunning,sourceDownload_isFinished,sourceDownload_isExcecption,sourceDownload_excecptionDescription,sourceView_sourceViewId,sourceView_guid,sourceView_insertedRowDate,sourceView_lastUpdatedDate,sourceView_sourceInstanceId,sourceView_sourceViewTypeId,sourceView_sourceViewName,sourceView_sourceViewDefinition,sourceView_isExisting";    }  
    def pkFields : String = {    "";    }  
    def fkFields : String = {    "";    }  
    def nameField : String = {    "";    }  
@@ -67,9 +73,9 @@ case class VExecutorStorageViewDto (
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(executorStorageViewId,guid,insertedRowDate,lastUpdatedDate,executorStorageSnapshotId,executorStorageId,sourceDownloadId,sourceViewId,storagePath,viewSize,viewRowsCount,isValid,executorStorage_executorStorageId,executorStorage_guid,executorStorage_insertedRowDate,executorStorage_lastUpdatedDate,executorStorage_executorHostId,executorStorage_executorStorageTypeId,executorStorage_storageDefinition,executorStorage_storageBasePath,executorStorage_storageFulllPath,executorStorage_isRunning,executorStorage_portNumber,executorStorageSnapshot_executorStorageSnapshotId,executorStorageSnapshot_guid,executorStorageSnapshot_insertedRowDate,executorStorageSnapshot_lastUpdatedDate,executorStorageSnapshot_executorInstanceId,sourceDownload_sourceDownloadId,sourceDownload_guid,sourceDownload_insertedRowDate,sourceDownload_lastUpdatedDate,sourceDownload_sourceScheduleId,sourceDownload_executorHostId,sourceDownload_executorContextId,sourceDownload_sourceViewId,sourceDownload_retryNumber,sourceDownload_isRunning,sourceDownload_isFinished,sourceDownload_isExcecption,sourceDownload_excecptionDescription,sourceView_sourceViewId,sourceView_guid,sourceView_insertedRowDate,sourceView_lastUpdatedDate,sourceView_sourceInstanceId,sourceView_sourceViewTypeId,sourceView_sourceViewName,sourceView_sourceViewDefinition,sourceView_isExisting)  }  
- def toStringArray() : Array[String] = {    Array(""+executorStorageViewId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorStorageSnapshotId,""+executorStorageId,""+sourceDownloadId,""+sourceViewId,""+storagePath,""+viewSize,""+viewRowsCount,""+isValid,""+executorStorage_executorStorageId,""+executorStorage_guid,""+executorStorage_insertedRowDate,""+executorStorage_lastUpdatedDate,""+executorStorage_executorHostId,""+executorStorage_executorStorageTypeId,""+executorStorage_storageDefinition,""+executorStorage_storageBasePath,""+executorStorage_storageFulllPath,""+executorStorage_isRunning,""+executorStorage_portNumber,""+executorStorageSnapshot_executorStorageSnapshotId,""+executorStorageSnapshot_guid,""+executorStorageSnapshot_insertedRowDate,""+executorStorageSnapshot_lastUpdatedDate,""+executorStorageSnapshot_executorInstanceId,""+sourceDownload_sourceDownloadId,""+sourceDownload_guid,""+sourceDownload_insertedRowDate,""+sourceDownload_lastUpdatedDate,""+sourceDownload_sourceScheduleId,""+sourceDownload_executorHostId,""+sourceDownload_executorContextId,""+sourceDownload_sourceViewId,""+sourceDownload_retryNumber,""+sourceDownload_isRunning,""+sourceDownload_isFinished,""+sourceDownload_isExcecption,""+sourceDownload_excecptionDescription,""+sourceView_sourceViewId,""+sourceView_guid,""+sourceView_insertedRowDate,""+sourceView_lastUpdatedDate,""+sourceView_sourceInstanceId,""+sourceView_sourceViewTypeId,""+sourceView_sourceViewName,""+sourceView_sourceViewDefinition,""+sourceView_isExisting)   }  
- def toFullString() : String = {    "executorStorageViewId:'"+executorStorageViewId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorStorageSnapshotId:'"+executorStorageSnapshotId+"'"+","+"executorStorageId:'"+executorStorageId+"'"+","+"sourceDownloadId:'"+sourceDownloadId+"'"+","+"sourceViewId:'"+sourceViewId+"'"+","+"storagePath:'"+storagePath+"'"+","+"viewSize:'"+viewSize+"'"+","+"viewRowsCount:'"+viewRowsCount+"'"+","+"isValid:'"+isValid+"'"+","+"executorStorage_executorStorageId:'"+executorStorage_executorStorageId+"'"+","+"executorStorage_guid:'"+executorStorage_guid+"'"+","+"executorStorage_insertedRowDate:'"+executorStorage_insertedRowDate+"'"+","+"executorStorage_lastUpdatedDate:'"+executorStorage_lastUpdatedDate+"'"+","+"executorStorage_executorHostId:'"+executorStorage_executorHostId+"'"+","+"executorStorage_executorStorageTypeId:'"+executorStorage_executorStorageTypeId+"'"+","+"executorStorage_storageDefinition:'"+executorStorage_storageDefinition+"'"+","+"executorStorage_storageBasePath:'"+executorStorage_storageBasePath+"'"+","+"executorStorage_storageFulllPath:'"+executorStorage_storageFulllPath+"'"+","+"executorStorage_isRunning:'"+executorStorage_isRunning+"'"+","+"executorStorage_portNumber:'"+executorStorage_portNumber+"'"+","+"executorStorageSnapshot_executorStorageSnapshotId:'"+executorStorageSnapshot_executorStorageSnapshotId+"'"+","+"executorStorageSnapshot_guid:'"+executorStorageSnapshot_guid+"'"+","+"executorStorageSnapshot_insertedRowDate:'"+executorStorageSnapshot_insertedRowDate+"'"+","+"executorStorageSnapshot_lastUpdatedDate:'"+executorStorageSnapshot_lastUpdatedDate+"'"+","+"executorStorageSnapshot_executorInstanceId:'"+executorStorageSnapshot_executorInstanceId+"'"+","+"sourceDownload_sourceDownloadId:'"+sourceDownload_sourceDownloadId+"'"+","+"sourceDownload_guid:'"+sourceDownload_guid+"'"+","+"sourceDownload_insertedRowDate:'"+sourceDownload_insertedRowDate+"'"+","+"sourceDownload_lastUpdatedDate:'"+sourceDownload_lastUpdatedDate+"'"+","+"sourceDownload_sourceScheduleId:'"+sourceDownload_sourceScheduleId+"'"+","+"sourceDownload_executorHostId:'"+sourceDownload_executorHostId+"'"+","+"sourceDownload_executorContextId:'"+sourceDownload_executorContextId+"'"+","+"sourceDownload_sourceViewId:'"+sourceDownload_sourceViewId+"'"+","+"sourceDownload_retryNumber:'"+sourceDownload_retryNumber+"'"+","+"sourceDownload_isRunning:'"+sourceDownload_isRunning+"'"+","+"sourceDownload_isFinished:'"+sourceDownload_isFinished+"'"+","+"sourceDownload_isExcecption:'"+sourceDownload_isExcecption+"'"+","+"sourceDownload_excecptionDescription:'"+sourceDownload_excecptionDescription+"'"+","+"sourceView_sourceViewId:'"+sourceView_sourceViewId+"'"+","+"sourceView_guid:'"+sourceView_guid+"'"+","+"sourceView_insertedRowDate:'"+sourceView_insertedRowDate+"'"+","+"sourceView_lastUpdatedDate:'"+sourceView_lastUpdatedDate+"'"+","+"sourceView_sourceInstanceId:'"+sourceView_sourceInstanceId+"'"+","+"sourceView_sourceViewTypeId:'"+sourceView_sourceViewTypeId+"'"+","+"sourceView_sourceViewName:'"+sourceView_sourceViewName+"'"+","+"sourceView_sourceViewDefinition:'"+sourceView_sourceViewDefinition+"'"+","+"sourceView_isExisting:'"+sourceView_isExisting+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(executorStorageViewId,guid,insertedRowDate,lastUpdatedDate,executorStorageSnapshotId,executorStorageId,sourceDownloadId,sourceViewId,executorStorageResourceId,executorStorage_executorStorageId,executorStorage_guid,executorStorage_insertedRowDate,executorStorage_lastUpdatedDate,executorStorage_executorHostId,executorStorage_executorStorageTypeId,executorStorage_storageDefinition,executorStorage_storageBasePath,executorStorage_storageFulllPath,executorStorage_isRunning,executorStorage_portNumber,executorStorageResource_executorStorageResourceId,executorStorageResource_guid,executorStorageResource_insertedRowDate,executorStorageResource_lastUpdatedDate,executorStorageResource_executorStorageId,executorStorageResource_resourcePath,executorStorageResource_resourceSize,executorStorageResource_resourceRowsCount,executorStorageResource_isValid,executorStorageSnapshot_executorStorageSnapshotId,executorStorageSnapshot_guid,executorStorageSnapshot_insertedRowDate,executorStorageSnapshot_lastUpdatedDate,executorStorageSnapshot_executorInstanceId,sourceDownload_sourceDownloadId,sourceDownload_guid,sourceDownload_insertedRowDate,sourceDownload_lastUpdatedDate,sourceDownload_sourceScheduleId,sourceDownload_executorHostId,sourceDownload_executorContextId,sourceDownload_sourceViewId,sourceDownload_retryNumber,sourceDownload_isRunning,sourceDownload_isFinished,sourceDownload_isExcecption,sourceDownload_excecptionDescription,sourceView_sourceViewId,sourceView_guid,sourceView_insertedRowDate,sourceView_lastUpdatedDate,sourceView_sourceInstanceId,sourceView_sourceViewTypeId,sourceView_sourceViewName,sourceView_sourceViewDefinition,sourceView_isExisting)  }  
+ def toStringArray() : Array[String] = {    Array(""+executorStorageViewId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorStorageSnapshotId,""+executorStorageId,""+sourceDownloadId,""+sourceViewId,""+executorStorageResourceId,""+executorStorage_executorStorageId,""+executorStorage_guid,""+executorStorage_insertedRowDate,""+executorStorage_lastUpdatedDate,""+executorStorage_executorHostId,""+executorStorage_executorStorageTypeId,""+executorStorage_storageDefinition,""+executorStorage_storageBasePath,""+executorStorage_storageFulllPath,""+executorStorage_isRunning,""+executorStorage_portNumber,""+executorStorageResource_executorStorageResourceId,""+executorStorageResource_guid,""+executorStorageResource_insertedRowDate,""+executorStorageResource_lastUpdatedDate,""+executorStorageResource_executorStorageId,""+executorStorageResource_resourcePath,""+executorStorageResource_resourceSize,""+executorStorageResource_resourceRowsCount,""+executorStorageResource_isValid,""+executorStorageSnapshot_executorStorageSnapshotId,""+executorStorageSnapshot_guid,""+executorStorageSnapshot_insertedRowDate,""+executorStorageSnapshot_lastUpdatedDate,""+executorStorageSnapshot_executorInstanceId,""+sourceDownload_sourceDownloadId,""+sourceDownload_guid,""+sourceDownload_insertedRowDate,""+sourceDownload_lastUpdatedDate,""+sourceDownload_sourceScheduleId,""+sourceDownload_executorHostId,""+sourceDownload_executorContextId,""+sourceDownload_sourceViewId,""+sourceDownload_retryNumber,""+sourceDownload_isRunning,""+sourceDownload_isFinished,""+sourceDownload_isExcecption,""+sourceDownload_excecptionDescription,""+sourceView_sourceViewId,""+sourceView_guid,""+sourceView_insertedRowDate,""+sourceView_lastUpdatedDate,""+sourceView_sourceInstanceId,""+sourceView_sourceViewTypeId,""+sourceView_sourceViewName,""+sourceView_sourceViewDefinition,""+sourceView_isExisting)   }  
+ def toFullString() : String = {    "executorStorageViewId:'"+executorStorageViewId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorStorageSnapshotId:'"+executorStorageSnapshotId+"'"+","+"executorStorageId:'"+executorStorageId+"'"+","+"sourceDownloadId:'"+sourceDownloadId+"'"+","+"sourceViewId:'"+sourceViewId+"'"+","+"executorStorageResourceId:'"+executorStorageResourceId+"'"+","+"executorStorage_executorStorageId:'"+executorStorage_executorStorageId+"'"+","+"executorStorage_guid:'"+executorStorage_guid+"'"+","+"executorStorage_insertedRowDate:'"+executorStorage_insertedRowDate+"'"+","+"executorStorage_lastUpdatedDate:'"+executorStorage_lastUpdatedDate+"'"+","+"executorStorage_executorHostId:'"+executorStorage_executorHostId+"'"+","+"executorStorage_executorStorageTypeId:'"+executorStorage_executorStorageTypeId+"'"+","+"executorStorage_storageDefinition:'"+executorStorage_storageDefinition+"'"+","+"executorStorage_storageBasePath:'"+executorStorage_storageBasePath+"'"+","+"executorStorage_storageFulllPath:'"+executorStorage_storageFulllPath+"'"+","+"executorStorage_isRunning:'"+executorStorage_isRunning+"'"+","+"executorStorage_portNumber:'"+executorStorage_portNumber+"'"+","+"executorStorageResource_executorStorageResourceId:'"+executorStorageResource_executorStorageResourceId+"'"+","+"executorStorageResource_guid:'"+executorStorageResource_guid+"'"+","+"executorStorageResource_insertedRowDate:'"+executorStorageResource_insertedRowDate+"'"+","+"executorStorageResource_lastUpdatedDate:'"+executorStorageResource_lastUpdatedDate+"'"+","+"executorStorageResource_executorStorageId:'"+executorStorageResource_executorStorageId+"'"+","+"executorStorageResource_resourcePath:'"+executorStorageResource_resourcePath+"'"+","+"executorStorageResource_resourceSize:'"+executorStorageResource_resourceSize+"'"+","+"executorStorageResource_resourceRowsCount:'"+executorStorageResource_resourceRowsCount+"'"+","+"executorStorageResource_isValid:'"+executorStorageResource_isValid+"'"+","+"executorStorageSnapshot_executorStorageSnapshotId:'"+executorStorageSnapshot_executorStorageSnapshotId+"'"+","+"executorStorageSnapshot_guid:'"+executorStorageSnapshot_guid+"'"+","+"executorStorageSnapshot_insertedRowDate:'"+executorStorageSnapshot_insertedRowDate+"'"+","+"executorStorageSnapshot_lastUpdatedDate:'"+executorStorageSnapshot_lastUpdatedDate+"'"+","+"executorStorageSnapshot_executorInstanceId:'"+executorStorageSnapshot_executorInstanceId+"'"+","+"sourceDownload_sourceDownloadId:'"+sourceDownload_sourceDownloadId+"'"+","+"sourceDownload_guid:'"+sourceDownload_guid+"'"+","+"sourceDownload_insertedRowDate:'"+sourceDownload_insertedRowDate+"'"+","+"sourceDownload_lastUpdatedDate:'"+sourceDownload_lastUpdatedDate+"'"+","+"sourceDownload_sourceScheduleId:'"+sourceDownload_sourceScheduleId+"'"+","+"sourceDownload_executorHostId:'"+sourceDownload_executorHostId+"'"+","+"sourceDownload_executorContextId:'"+sourceDownload_executorContextId+"'"+","+"sourceDownload_sourceViewId:'"+sourceDownload_sourceViewId+"'"+","+"sourceDownload_retryNumber:'"+sourceDownload_retryNumber+"'"+","+"sourceDownload_isRunning:'"+sourceDownload_isRunning+"'"+","+"sourceDownload_isFinished:'"+sourceDownload_isFinished+"'"+","+"sourceDownload_isExcecption:'"+sourceDownload_isExcecption+"'"+","+"sourceDownload_excecptionDescription:'"+sourceDownload_excecptionDescription+"'"+","+"sourceView_sourceViewId:'"+sourceView_sourceViewId+"'"+","+"sourceView_guid:'"+sourceView_guid+"'"+","+"sourceView_insertedRowDate:'"+sourceView_insertedRowDate+"'"+","+"sourceView_lastUpdatedDate:'"+sourceView_lastUpdatedDate+"'"+","+"sourceView_sourceInstanceId:'"+sourceView_sourceInstanceId+"'"+","+"sourceView_sourceViewTypeId:'"+sourceView_sourceViewTypeId+"'"+","+"sourceView_sourceViewName:'"+sourceView_sourceViewName+"'"+","+"sourceView_sourceViewDefinition:'"+sourceView_sourceViewDefinition+"'"+","+"sourceView_isExisting:'"+sourceView_isExisting+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "executorStorageViewId" => executorStorageViewId  
@@ -80,10 +86,7 @@ case class VExecutorStorageViewDto (
      case "executorStorageId" => executorStorageId  
      case "sourceDownloadId" => sourceDownloadId  
      case "sourceViewId" => sourceViewId  
-     case "storagePath" => storagePath  
-     case "viewSize" => viewSize  
-     case "viewRowsCount" => viewRowsCount  
-     case "isValid" => isValid  
+     case "executorStorageResourceId" => executorStorageResourceId  
      case "executorStorage_executorStorageId" => executorStorage_executorStorageId  
      case "executorStorage_guid" => executorStorage_guid  
      case "executorStorage_insertedRowDate" => executorStorage_insertedRowDate  
@@ -95,6 +98,15 @@ case class VExecutorStorageViewDto (
      case "executorStorage_storageFulllPath" => executorStorage_storageFulllPath  
      case "executorStorage_isRunning" => executorStorage_isRunning  
      case "executorStorage_portNumber" => executorStorage_portNumber  
+     case "executorStorageResource_executorStorageResourceId" => executorStorageResource_executorStorageResourceId  
+     case "executorStorageResource_guid" => executorStorageResource_guid  
+     case "executorStorageResource_insertedRowDate" => executorStorageResource_insertedRowDate  
+     case "executorStorageResource_lastUpdatedDate" => executorStorageResource_lastUpdatedDate  
+     case "executorStorageResource_executorStorageId" => executorStorageResource_executorStorageId  
+     case "executorStorageResource_resourcePath" => executorStorageResource_resourcePath  
+     case "executorStorageResource_resourceSize" => executorStorageResource_resourceSize  
+     case "executorStorageResource_resourceRowsCount" => executorStorageResource_resourceRowsCount  
+     case "executorStorageResource_isValid" => executorStorageResource_isValid  
      case "executorStorageSnapshot_executorStorageSnapshotId" => executorStorageSnapshot_executorStorageSnapshotId  
      case "executorStorageSnapshot_guid" => executorStorageSnapshot_guid  
      case "executorStorageSnapshot_insertedRowDate" => executorStorageSnapshot_insertedRowDate  
@@ -136,10 +148,7 @@ case class VExecutorStorageViewDto (
      case "executorStorageId" => "Long"  
      case "sourceDownloadId" => "Long"  
      case "sourceViewId" => "Long"  
-     case "storagePath" => "String"  
-     case "viewSize" => "Long"  
-     case "viewRowsCount" => "Long"  
-     case "isValid" => "Int"  
+     case "executorStorageResourceId" => "Long"  
      case "executorStorage_executorStorageId" => "Long"  
      case "executorStorage_guid" => "Long"  
      case "executorStorage_insertedRowDate" => "java.util.Date"  
@@ -151,6 +160,15 @@ case class VExecutorStorageViewDto (
      case "executorStorage_storageFulllPath" => "String"  
      case "executorStorage_isRunning" => "Int"  
      case "executorStorage_portNumber" => "Int"  
+     case "executorStorageResource_executorStorageResourceId" => "Long"  
+     case "executorStorageResource_guid" => "Long"  
+     case "executorStorageResource_insertedRowDate" => "java.util.Date"  
+     case "executorStorageResource_lastUpdatedDate" => "java.util.Date"  
+     case "executorStorageResource_executorStorageId" => "Long"  
+     case "executorStorageResource_resourcePath" => "String"  
+     case "executorStorageResource_resourceSize" => "Long"  
+     case "executorStorageResource_resourceRowsCount" => "Long"  
+     case "executorStorageResource_isValid" => "Int"  
      case "executorStorageSnapshot_executorStorageSnapshotId" => "Long"  
      case "executorStorageSnapshot_guid" => "Long"  
      case "executorStorageSnapshot_insertedRowDate" => "java.util.Date"  
@@ -193,10 +211,7 @@ object VExecutorStorageViewDto {
    val FIELD_executorStorageId = "executorStorageId";
    val FIELD_sourceDownloadId = "sourceDownloadId";
    val FIELD_sourceViewId = "sourceViewId";
-   val FIELD_storagePath = "storagePath";
-   val FIELD_viewSize = "viewSize";
-   val FIELD_viewRowsCount = "viewRowsCount";
-   val FIELD_isValid = "isValid";
+   val FIELD_executorStorageResourceId = "executorStorageResourceId";
    val FIELD_executorStorage_executorStorageId = "executorStorage_executorStorageId";
    val FIELD_executorStorage_guid = "executorStorage_guid";
    val FIELD_executorStorage_insertedRowDate = "executorStorage_insertedRowDate";
@@ -208,6 +223,15 @@ object VExecutorStorageViewDto {
    val FIELD_executorStorage_storageFulllPath = "executorStorage_storageFulllPath";
    val FIELD_executorStorage_isRunning = "executorStorage_isRunning";
    val FIELD_executorStorage_portNumber = "executorStorage_portNumber";
+   val FIELD_executorStorageResource_executorStorageResourceId = "executorStorageResource_executorStorageResourceId";
+   val FIELD_executorStorageResource_guid = "executorStorageResource_guid";
+   val FIELD_executorStorageResource_insertedRowDate = "executorStorageResource_insertedRowDate";
+   val FIELD_executorStorageResource_lastUpdatedDate = "executorStorageResource_lastUpdatedDate";
+   val FIELD_executorStorageResource_executorStorageId = "executorStorageResource_executorStorageId";
+   val FIELD_executorStorageResource_resourcePath = "executorStorageResource_resourcePath";
+   val FIELD_executorStorageResource_resourceSize = "executorStorageResource_resourceSize";
+   val FIELD_executorStorageResource_resourceRowsCount = "executorStorageResource_resourceRowsCount";
+   val FIELD_executorStorageResource_isValid = "executorStorageResource_isValid";
    val FIELD_executorStorageSnapshot_executorStorageSnapshotId = "executorStorageSnapshot_executorStorageSnapshotId";
    val FIELD_executorStorageSnapshot_guid = "executorStorageSnapshot_guid";
    val FIELD_executorStorageSnapshot_insertedRowDate = "executorStorageSnapshot_insertedRowDate";

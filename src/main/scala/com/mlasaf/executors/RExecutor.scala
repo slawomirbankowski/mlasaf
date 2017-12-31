@@ -6,6 +6,7 @@ package com.mlasaf.executors
 
 import com.mlasaf.domain._
 
+/** executor using R scripts */
 class RExecutor extends Executor {
 
   def onRunExecutor(): Unit = {

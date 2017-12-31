@@ -29,6 +29,8 @@ object DaoTests {
 
     val daoFactory = new DaoFactory();
     daoFactory.initialize(jdbcString, jdbcUser, jdbcPass, jdbcDriver);
+
+
     val algTypesList = daoFactory.daos.algorithmTypeDao.getAlgorithmTypesList().map(x => x.toStringArray().mkString(",")).mkString(" | ");
     logger.info("Defined algorithm types: " + algTypesList)
     val execTypeList = daoFactory.daos.executorTypeDao.getExecutorTypesList().map(x => x.toStringArray().mkString(",")).mkString(" | ");
@@ -63,7 +65,14 @@ object DaoTests {
 
     //daoFactory.daos.executorHostDao.up
     val freshAnotherHostDto = daoFactory.daos.executorHostDao.getExecutorHostByPk(anotherHostDto.getPk());
-    logger.info("Fresh another host: " + freshAnotherHostDto)
+    logger.info("Fresh another host: " + freshAnotherHostDto);
+
+    //daoFactory.daos.executorCommandDao.
+
+    daoFactory.daos.executorContextCommandDao.createAndInsertExecutorContextCommandDto(1, 1, 0, 0, "", "", "", "", "");
+
+
+
 
   }
 

@@ -112,6 +112,56 @@ import java.util.Date
    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where excecptionDescription = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);  
    dtos  
  }  
+ def getDtosByExecutorContext_executorContextId(colValue : Long) : List[VSourceDownloadDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where executorContext_executorContextId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorContext_guid(colValue : Long) : List[VSourceDownloadDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where executorContext_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorContext_insertedRowDate(colValue : java.util.Date) : List[VSourceDownloadDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where executorContext_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorContext_lastUpdatedDate(colValue : java.util.Date) : List[VSourceDownloadDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where executorContext_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorContext_executorHostId(colValue : Long) : List[VSourceDownloadDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where executorContext_executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorContext_isWorking(colValue : Int) : List[VSourceDownloadDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where executorContext_isWorking = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorContext_properties(colValue : String) : List[VSourceDownloadDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where executorContext_properties = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorContext_properties2(colValue : String) : List[VSourceDownloadDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where executorContext_properties2 = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorContext_properties3(colValue : String) : List[VSourceDownloadDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where executorContext_properties3 = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorContext_entryParams(colValue : String) : List[VSourceDownloadDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where executorContext_entryParams = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);  
+   dtos  
+ }  
  def getDtosByExecutorHost_executorHostId(colValue : Long) : List[VSourceDownloadDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where executorHost_executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);  
@@ -160,41 +210,6 @@ import java.util.Date
  def getDtosByExecutorHost_isWorking(colValue : Int) : List[VSourceDownloadDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where executorHost_isWorking = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);  
-   dtos  
- }  
- def getDtosByExecutorContext_executorContextId(colValue : Long) : List[VSourceDownloadDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where executorContext_executorContextId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);  
-   dtos  
- }  
- def getDtosByExecutorContext_guid(colValue : Long) : List[VSourceDownloadDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where executorContext_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);  
-   dtos  
- }  
- def getDtosByExecutorContext_insertedRowDate(colValue : java.util.Date) : List[VSourceDownloadDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where executorContext_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);  
-   dtos  
- }  
- def getDtosByExecutorContext_lastUpdatedDate(colValue : java.util.Date) : List[VSourceDownloadDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where executorContext_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);  
-   dtos  
- }  
- def getDtosByExecutorContext_executorHostId(colValue : Long) : List[VSourceDownloadDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where executorContext_executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);  
-   dtos  
- }  
- def getDtosByExecutorContext_isWorking(colValue : Int) : List[VSourceDownloadDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where executorContext_isWorking = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);  
-   dtos  
- }  
- def getDtosByExecutorContext_properties(colValue : String) : List[VSourceDownloadDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VSourceDownloadDto] = SQL("select * from vSourceDownload where executorContext_properties = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadDto].*);  
    dtos  
  }  
  def getDtosBySourceSchedule_sourceScheduleId(colValue : Long) : List[VSourceDownloadDto] = { 

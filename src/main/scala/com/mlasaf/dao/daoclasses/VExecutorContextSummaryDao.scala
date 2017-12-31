@@ -82,6 +82,26 @@ import java.util.Date
    val dtos : List[VExecutorContextSummaryDto] = SQL("select * from vExecutorContextSummary where properties = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextSummaryDto].*);  
    dtos  
  }  
+ def getDtosByProperties2(colValue : String) : List[VExecutorContextSummaryDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorContextSummaryDto] = SQL("select * from vExecutorContextSummary where properties2 = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextSummaryDto].*);  
+   dtos  
+ }  
+ def getDtosByProperties3(colValue : String) : List[VExecutorContextSummaryDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorContextSummaryDto] = SQL("select * from vExecutorContextSummary where properties3 = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextSummaryDto].*);  
+   dtos  
+ }  
+ def getDtosByEntryParams(colValue : String) : List[VExecutorContextSummaryDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorContextSummaryDto] = SQL("select * from vExecutorContextSummary where entryParams = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextSummaryDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorContextCommand_count(colValue : Int) : List[VExecutorContextSummaryDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorContextSummaryDto] = SQL("select * from vExecutorContextSummary where executorContextCommand_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextSummaryDto].*);  
+   dtos  
+ }  
  def getDtosByExecutorContextRuntime_count(colValue : Int) : List[VExecutorContextSummaryDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VExecutorContextSummaryDto] = SQL("select * from vExecutorContextSummary where executorContextRuntime_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextSummaryDto].*);  

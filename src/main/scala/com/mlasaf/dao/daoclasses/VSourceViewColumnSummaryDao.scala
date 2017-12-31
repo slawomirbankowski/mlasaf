@@ -82,6 +82,11 @@ import java.util.Date
    val dtos : List[VSourceViewColumnSummaryDto] = SQL("select * from vSourceViewColumnSummary where columnType = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewColumnSummaryDto].*);  
    dtos  
  }  
+ def getDtosByDownloadTransformColumn_count(colValue : Int) : List[VSourceViewColumnSummaryDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VSourceViewColumnSummaryDto] = SQL("select * from vSourceViewColumnSummary where downloadTransformColumn_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewColumnSummaryDto].*);  
+   dtos  
+ }  
  def getDtosByAlgorithmScheduleColumn_count(colValue : Int) : List[VSourceViewColumnSummaryDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VSourceViewColumnSummaryDto] = SQL("select * from vSourceViewColumnSummary where algorithmScheduleColumn_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewColumnSummaryDto].*);  

@@ -49,6 +49,7 @@ object LoadSampleDataTest {
       , "--algorithmImplementationName", "PredictionLocalSma5"
       , "--algorithmImplementationClass", "com.mlasaf.algorithms.local.PredictionLocalSma5"
       , "--outputType", "PRIMARY_PREDICTED"
+      , "--supportedStorages", "LOCAL_DISK"
     ));
 
     CreateSourceInstance.main(Array(

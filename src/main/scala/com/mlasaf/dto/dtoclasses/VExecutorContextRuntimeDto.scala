@@ -17,6 +17,11 @@ case class VExecutorContextRuntimeDto (
      , val freeMemory : Double
      , val maxMemory : Double
      , val totalMemory : Double
+     , val diskInfo : String
+     , val currentDiskFreeSpace : Double
+     , val allThreadsCount : Int
+     , val contextThreadsCount : Int
+     , val threadIds : String
      , val executorContext_executorContextId : Long
      , val executorContext_guid : Long
      , val executorContext_insertedRowDate : java.util.Date
@@ -24,6 +29,9 @@ case class VExecutorContextRuntimeDto (
      , val executorContext_executorHostId : Long
      , val executorContext_isWorking : Int
      , val executorContext_properties : String
+     , val executorContext_properties2 : String
+     , val executorContext_properties3 : String
+     , val executorContext_entryParams : String
      , val executorHost_executorHostId : Long
      , val executorHost_guid : Long
      , val executorHost_insertedRowDate : java.util.Date
@@ -36,7 +44,7 @@ case class VExecutorContextRuntimeDto (
      , val executorHost_isWorking : Int 
      ) extends BaseReadOnlyDto {  
    def tableName : String = {    "vExecutorContextRuntime";    }  
-   def fields : String = {    "executorContextRuntimeId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorContextId,availableProcessors,freeMemory,maxMemory,totalMemory,executorContext_executorContextId,executorContext_guid,executorContext_insertedRowDate,executorContext_lastUpdatedDate,executorContext_executorHostId,executorContext_isWorking,executorContext_properties,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking";    }  
+   def fields : String = {    "executorContextRuntimeId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorContextId,availableProcessors,freeMemory,maxMemory,totalMemory,diskInfo,currentDiskFreeSpace,allThreadsCount,contextThreadsCount,threadIds,executorContext_executorContextId,executorContext_guid,executorContext_insertedRowDate,executorContext_lastUpdatedDate,executorContext_executorHostId,executorContext_isWorking,executorContext_properties,executorContext_properties2,executorContext_properties3,executorContext_entryParams,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking";    }  
    def pkFields : String = {    "";    }  
    def fkFields : String = {    "";    }  
    def nameField : String = {    "";    }  
@@ -44,9 +52,9 @@ case class VExecutorContextRuntimeDto (
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(executorContextRuntimeId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorContextId,availableProcessors,freeMemory,maxMemory,totalMemory,executorContext_executorContextId,executorContext_guid,executorContext_insertedRowDate,executorContext_lastUpdatedDate,executorContext_executorHostId,executorContext_isWorking,executorContext_properties,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking)  }  
- def toStringArray() : Array[String] = {    Array(""+executorContextRuntimeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+executorContextId,""+availableProcessors,""+freeMemory,""+maxMemory,""+totalMemory,""+executorContext_executorContextId,""+executorContext_guid,""+executorContext_insertedRowDate,""+executorContext_lastUpdatedDate,""+executorContext_executorHostId,""+executorContext_isWorking,""+executorContext_properties,""+executorHost_executorHostId,""+executorHost_guid,""+executorHost_insertedRowDate,""+executorHost_lastUpdatedDate,""+executorHost_hostName,""+executorHost_hostIp,""+executorHost_hostDomain,""+executorHost_hostOsType,""+executorHost_hostOsVersion,""+executorHost_isWorking)   }  
- def toFullString() : String = {    "executorContextRuntimeId:'"+executorContextRuntimeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorHostId:'"+executorHostId+"'"+","+"executorContextId:'"+executorContextId+"'"+","+"availableProcessors:'"+availableProcessors+"'"+","+"freeMemory:'"+freeMemory+"'"+","+"maxMemory:'"+maxMemory+"'"+","+"totalMemory:'"+totalMemory+"'"+","+"executorContext_executorContextId:'"+executorContext_executorContextId+"'"+","+"executorContext_guid:'"+executorContext_guid+"'"+","+"executorContext_insertedRowDate:'"+executorContext_insertedRowDate+"'"+","+"executorContext_lastUpdatedDate:'"+executorContext_lastUpdatedDate+"'"+","+"executorContext_executorHostId:'"+executorContext_executorHostId+"'"+","+"executorContext_isWorking:'"+executorContext_isWorking+"'"+","+"executorContext_properties:'"+executorContext_properties+"'"+","+"executorHost_executorHostId:'"+executorHost_executorHostId+"'"+","+"executorHost_guid:'"+executorHost_guid+"'"+","+"executorHost_insertedRowDate:'"+executorHost_insertedRowDate+"'"+","+"executorHost_lastUpdatedDate:'"+executorHost_lastUpdatedDate+"'"+","+"executorHost_hostName:'"+executorHost_hostName+"'"+","+"executorHost_hostIp:'"+executorHost_hostIp+"'"+","+"executorHost_hostDomain:'"+executorHost_hostDomain+"'"+","+"executorHost_hostOsType:'"+executorHost_hostOsType+"'"+","+"executorHost_hostOsVersion:'"+executorHost_hostOsVersion+"'"+","+"executorHost_isWorking:'"+executorHost_isWorking+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(executorContextRuntimeId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorContextId,availableProcessors,freeMemory,maxMemory,totalMemory,diskInfo,currentDiskFreeSpace,allThreadsCount,contextThreadsCount,threadIds,executorContext_executorContextId,executorContext_guid,executorContext_insertedRowDate,executorContext_lastUpdatedDate,executorContext_executorHostId,executorContext_isWorking,executorContext_properties,executorContext_properties2,executorContext_properties3,executorContext_entryParams,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking)  }  
+ def toStringArray() : Array[String] = {    Array(""+executorContextRuntimeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+executorContextId,""+availableProcessors,""+freeMemory,""+maxMemory,""+totalMemory,""+diskInfo,""+currentDiskFreeSpace,""+allThreadsCount,""+contextThreadsCount,""+threadIds,""+executorContext_executorContextId,""+executorContext_guid,""+executorContext_insertedRowDate,""+executorContext_lastUpdatedDate,""+executorContext_executorHostId,""+executorContext_isWorking,""+executorContext_properties,""+executorContext_properties2,""+executorContext_properties3,""+executorContext_entryParams,""+executorHost_executorHostId,""+executorHost_guid,""+executorHost_insertedRowDate,""+executorHost_lastUpdatedDate,""+executorHost_hostName,""+executorHost_hostIp,""+executorHost_hostDomain,""+executorHost_hostOsType,""+executorHost_hostOsVersion,""+executorHost_isWorking)   }  
+ def toFullString() : String = {    "executorContextRuntimeId:'"+executorContextRuntimeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorHostId:'"+executorHostId+"'"+","+"executorContextId:'"+executorContextId+"'"+","+"availableProcessors:'"+availableProcessors+"'"+","+"freeMemory:'"+freeMemory+"'"+","+"maxMemory:'"+maxMemory+"'"+","+"totalMemory:'"+totalMemory+"'"+","+"diskInfo:'"+diskInfo+"'"+","+"currentDiskFreeSpace:'"+currentDiskFreeSpace+"'"+","+"allThreadsCount:'"+allThreadsCount+"'"+","+"contextThreadsCount:'"+contextThreadsCount+"'"+","+"threadIds:'"+threadIds+"'"+","+"executorContext_executorContextId:'"+executorContext_executorContextId+"'"+","+"executorContext_guid:'"+executorContext_guid+"'"+","+"executorContext_insertedRowDate:'"+executorContext_insertedRowDate+"'"+","+"executorContext_lastUpdatedDate:'"+executorContext_lastUpdatedDate+"'"+","+"executorContext_executorHostId:'"+executorContext_executorHostId+"'"+","+"executorContext_isWorking:'"+executorContext_isWorking+"'"+","+"executorContext_properties:'"+executorContext_properties+"'"+","+"executorContext_properties2:'"+executorContext_properties2+"'"+","+"executorContext_properties3:'"+executorContext_properties3+"'"+","+"executorContext_entryParams:'"+executorContext_entryParams+"'"+","+"executorHost_executorHostId:'"+executorHost_executorHostId+"'"+","+"executorHost_guid:'"+executorHost_guid+"'"+","+"executorHost_insertedRowDate:'"+executorHost_insertedRowDate+"'"+","+"executorHost_lastUpdatedDate:'"+executorHost_lastUpdatedDate+"'"+","+"executorHost_hostName:'"+executorHost_hostName+"'"+","+"executorHost_hostIp:'"+executorHost_hostIp+"'"+","+"executorHost_hostDomain:'"+executorHost_hostDomain+"'"+","+"executorHost_hostOsType:'"+executorHost_hostOsType+"'"+","+"executorHost_hostOsVersion:'"+executorHost_hostOsVersion+"'"+","+"executorHost_isWorking:'"+executorHost_isWorking+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "executorContextRuntimeId" => executorContextRuntimeId  
@@ -59,6 +67,11 @@ case class VExecutorContextRuntimeDto (
      case "freeMemory" => freeMemory  
      case "maxMemory" => maxMemory  
      case "totalMemory" => totalMemory  
+     case "diskInfo" => diskInfo  
+     case "currentDiskFreeSpace" => currentDiskFreeSpace  
+     case "allThreadsCount" => allThreadsCount  
+     case "contextThreadsCount" => contextThreadsCount  
+     case "threadIds" => threadIds  
      case "executorContext_executorContextId" => executorContext_executorContextId  
      case "executorContext_guid" => executorContext_guid  
      case "executorContext_insertedRowDate" => executorContext_insertedRowDate  
@@ -66,6 +79,9 @@ case class VExecutorContextRuntimeDto (
      case "executorContext_executorHostId" => executorContext_executorHostId  
      case "executorContext_isWorking" => executorContext_isWorking  
      case "executorContext_properties" => executorContext_properties  
+     case "executorContext_properties2" => executorContext_properties2  
+     case "executorContext_properties3" => executorContext_properties3  
+     case "executorContext_entryParams" => executorContext_entryParams  
      case "executorHost_executorHostId" => executorHost_executorHostId  
      case "executorHost_guid" => executorHost_guid  
      case "executorHost_insertedRowDate" => executorHost_insertedRowDate  
@@ -92,6 +108,11 @@ case class VExecutorContextRuntimeDto (
      case "freeMemory" => "Double"  
      case "maxMemory" => "Double"  
      case "totalMemory" => "Double"  
+     case "diskInfo" => "String"  
+     case "currentDiskFreeSpace" => "Double"  
+     case "allThreadsCount" => "Int"  
+     case "contextThreadsCount" => "Int"  
+     case "threadIds" => "String"  
      case "executorContext_executorContextId" => "Long"  
      case "executorContext_guid" => "Long"  
      case "executorContext_insertedRowDate" => "java.util.Date"  
@@ -99,6 +120,9 @@ case class VExecutorContextRuntimeDto (
      case "executorContext_executorHostId" => "Long"  
      case "executorContext_isWorking" => "Int"  
      case "executorContext_properties" => "String"  
+     case "executorContext_properties2" => "String"  
+     case "executorContext_properties3" => "String"  
+     case "executorContext_entryParams" => "String"  
      case "executorHost_executorHostId" => "Long"  
      case "executorHost_guid" => "Long"  
      case "executorHost_insertedRowDate" => "java.util.Date"  
@@ -126,6 +150,11 @@ object VExecutorContextRuntimeDto {
    val FIELD_freeMemory = "freeMemory";
    val FIELD_maxMemory = "maxMemory";
    val FIELD_totalMemory = "totalMemory";
+   val FIELD_diskInfo = "diskInfo";
+   val FIELD_currentDiskFreeSpace = "currentDiskFreeSpace";
+   val FIELD_allThreadsCount = "allThreadsCount";
+   val FIELD_contextThreadsCount = "contextThreadsCount";
+   val FIELD_threadIds = "threadIds";
    val FIELD_executorContext_executorContextId = "executorContext_executorContextId";
    val FIELD_executorContext_guid = "executorContext_guid";
    val FIELD_executorContext_insertedRowDate = "executorContext_insertedRowDate";
@@ -133,6 +162,9 @@ object VExecutorContextRuntimeDto {
    val FIELD_executorContext_executorHostId = "executorContext_executorHostId";
    val FIELD_executorContext_isWorking = "executorContext_isWorking";
    val FIELD_executorContext_properties = "executorContext_properties";
+   val FIELD_executorContext_properties2 = "executorContext_properties2";
+   val FIELD_executorContext_properties3 = "executorContext_properties3";
+   val FIELD_executorContext_entryParams = "executorContext_entryParams";
    val FIELD_executorHost_executorHostId = "executorHost_executorHostId";
    val FIELD_executorHost_guid = "executorHost_guid";
    val FIELD_executorHost_insertedRowDate = "executorHost_insertedRowDate";

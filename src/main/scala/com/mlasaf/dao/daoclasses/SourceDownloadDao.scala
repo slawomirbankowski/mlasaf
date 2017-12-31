@@ -57,14 +57,14 @@ import java.util.Date
    val maxid : Long = SQL("select max(sourceDownloadId) as maxId from sourceDownload ").executeQuery()(connection).as[Long](SqlParser.long("maxId").single)(connection);;  
    maxid  
  }  
- def getSourceDownloadByFkExecutorHostId(fkColValue : Long) : List[SourceDownloadDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[SourceDownloadDto] = SQL("select * from sourceDownload where executorHostId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[SourceDownloadDto].*);  
-   dtos  
- }  
  def getSourceDownloadByFkExecutorContextId(fkColValue : Long) : List[SourceDownloadDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[SourceDownloadDto] = SQL("select * from sourceDownload where executorContextId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[SourceDownloadDto].*);  
+   dtos  
+ }  
+ def getSourceDownloadByFkExecutorHostId(fkColValue : Long) : List[SourceDownloadDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[SourceDownloadDto] = SQL("select * from sourceDownload where executorHostId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[SourceDownloadDto].*);  
    dtos  
  }  
  def getSourceDownloadByFkSourceScheduleId(fkColValue : Long) : List[SourceDownloadDto] = { 

@@ -23,7 +23,7 @@ case class ResourceManagerAllocationDto (
    def tableName : String = {    "resourceManagerAllocation";    }  
    def fields : String = {    "resourceManagerAllocationId,guid,insertedRowDate,lastUpdatedDate,resourceManagerTypeId,resourceManagerId,executorHostId,executorInstanceId,resourceMeasureId,allocationValue,allocationValueMin,allocationValueMax";    }  
    def pkFields : String = {    "resourceManagerAllocationId";    }  
-   def fkFields : String = {    "executorHostId,executorInstanceId,resourceManagerId,resourceManagerTypeId,resourceMeasureId";    }  
+   def fkFields : String = {    "executorHostId,executorInstanceId,resourceManagerId,resourceMeasureId,resourceManagerTypeId";    }  
    def nameField : String = {    "";    }  
  def getPk() : Long = {    resourceManagerAllocationId  }  
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  

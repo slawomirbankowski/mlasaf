@@ -15,15 +15,12 @@ case class VExecutorStorageViewSummaryDto (
      , val executorStorageId : Long
      , val sourceDownloadId : Long
      , val sourceViewId : Long
-     , val storagePath : String
-     , val viewSize : Long
-     , val viewRowsCount : Long
-     , val isValid : Int
-     , val algorithmRunView_count : Int
-     , val algorithmOutput_count : Int 
+     , val executorStorageResourceId : Long
+     , val downloadTransformExecutorStorage_count : Int
+     , val algorithmRunView_count : Int 
      ) extends BaseReadOnlyDto {  
    def tableName : String = {    "vExecutorStorageViewSummary";    }  
-   def fields : String = {    "executorStorageViewId,guid,insertedRowDate,lastUpdatedDate,executorStorageSnapshotId,executorStorageId,sourceDownloadId,sourceViewId,storagePath,viewSize,viewRowsCount,isValid,algorithmRunView_count,algorithmOutput_count";    }  
+   def fields : String = {    "executorStorageViewId,guid,insertedRowDate,lastUpdatedDate,executorStorageSnapshotId,executorStorageId,sourceDownloadId,sourceViewId,executorStorageResourceId,downloadTransformExecutorStorage_count,algorithmRunView_count";    }  
    def pkFields : String = {    "";    }  
    def fkFields : String = {    "";    }  
    def nameField : String = {    "";    }  
@@ -31,9 +28,9 @@ case class VExecutorStorageViewSummaryDto (
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(executorStorageViewId,guid,insertedRowDate,lastUpdatedDate,executorStorageSnapshotId,executorStorageId,sourceDownloadId,sourceViewId,storagePath,viewSize,viewRowsCount,isValid,algorithmRunView_count,algorithmOutput_count)  }  
- def toStringArray() : Array[String] = {    Array(""+executorStorageViewId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorStorageSnapshotId,""+executorStorageId,""+sourceDownloadId,""+sourceViewId,""+storagePath,""+viewSize,""+viewRowsCount,""+isValid,""+algorithmRunView_count,""+algorithmOutput_count)   }  
- def toFullString() : String = {    "executorStorageViewId:'"+executorStorageViewId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorStorageSnapshotId:'"+executorStorageSnapshotId+"'"+","+"executorStorageId:'"+executorStorageId+"'"+","+"sourceDownloadId:'"+sourceDownloadId+"'"+","+"sourceViewId:'"+sourceViewId+"'"+","+"storagePath:'"+storagePath+"'"+","+"viewSize:'"+viewSize+"'"+","+"viewRowsCount:'"+viewRowsCount+"'"+","+"isValid:'"+isValid+"'"+","+"algorithmRunView_count:'"+algorithmRunView_count+"'"+","+"algorithmOutput_count:'"+algorithmOutput_count+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(executorStorageViewId,guid,insertedRowDate,lastUpdatedDate,executorStorageSnapshotId,executorStorageId,sourceDownloadId,sourceViewId,executorStorageResourceId,downloadTransformExecutorStorage_count,algorithmRunView_count)  }  
+ def toStringArray() : Array[String] = {    Array(""+executorStorageViewId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorStorageSnapshotId,""+executorStorageId,""+sourceDownloadId,""+sourceViewId,""+executorStorageResourceId,""+downloadTransformExecutorStorage_count,""+algorithmRunView_count)   }  
+ def toFullString() : String = {    "executorStorageViewId:'"+executorStorageViewId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorStorageSnapshotId:'"+executorStorageSnapshotId+"'"+","+"executorStorageId:'"+executorStorageId+"'"+","+"sourceDownloadId:'"+sourceDownloadId+"'"+","+"sourceViewId:'"+sourceViewId+"'"+","+"executorStorageResourceId:'"+executorStorageResourceId+"'"+","+"downloadTransformExecutorStorage_count:'"+downloadTransformExecutorStorage_count+"'"+","+"algorithmRunView_count:'"+algorithmRunView_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "executorStorageViewId" => executorStorageViewId  
@@ -44,12 +41,9 @@ case class VExecutorStorageViewSummaryDto (
      case "executorStorageId" => executorStorageId  
      case "sourceDownloadId" => sourceDownloadId  
      case "sourceViewId" => sourceViewId  
-     case "storagePath" => storagePath  
-     case "viewSize" => viewSize  
-     case "viewRowsCount" => viewRowsCount  
-     case "isValid" => isValid  
-     case "algorithmRunView_count" => algorithmRunView_count  
-     case "algorithmOutput_count" => algorithmOutput_count   
+     case "executorStorageResourceId" => executorStorageResourceId  
+     case "downloadTransformExecutorStorage_count" => downloadTransformExecutorStorage_count  
+     case "algorithmRunView_count" => algorithmRunView_count   
     case _ => null 
     } 
     ret 
@@ -64,12 +58,9 @@ case class VExecutorStorageViewSummaryDto (
      case "executorStorageId" => "Long"  
      case "sourceDownloadId" => "Long"  
      case "sourceViewId" => "Long"  
-     case "storagePath" => "String"  
-     case "viewSize" => "Long"  
-     case "viewRowsCount" => "Long"  
-     case "isValid" => "Int"  
-     case "algorithmRunView_count" => "Int"  
-     case "algorithmOutput_count" => "Int"   
+     case "executorStorageResourceId" => "Long"  
+     case "downloadTransformExecutorStorage_count" => "Int"  
+     case "algorithmRunView_count" => "Int"   
     case _ => "Object" 
     } 
     ret 
@@ -85,12 +76,9 @@ object VExecutorStorageViewSummaryDto {
    val FIELD_executorStorageId = "executorStorageId";
    val FIELD_sourceDownloadId = "sourceDownloadId";
    val FIELD_sourceViewId = "sourceViewId";
-   val FIELD_storagePath = "storagePath";
-   val FIELD_viewSize = "viewSize";
-   val FIELD_viewRowsCount = "viewRowsCount";
-   val FIELD_isValid = "isValid";
+   val FIELD_executorStorageResourceId = "executorStorageResourceId";
+   val FIELD_downloadTransformExecutorStorage_count = "downloadTransformExecutorStorage_count";
    val FIELD_algorithmRunView_count = "algorithmRunView_count";
-   val FIELD_algorithmOutput_count = "algorithmOutput_count";
 
 }
 

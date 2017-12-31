@@ -13,21 +13,21 @@ case class AlgorithmOutputDto (
      , val lastUpdatedDate : java.util.Date
      , val algorithmRunId : Long
      , val algorithmOutputTypeId : Long
-     , val executorStorageViewId : Long
-     , val outputPath : String 
+     , val executorStorageId : Long
+     , val executorStorageResourceId : Long 
      ) extends BaseDto {  
    def tableName : String = {    "algorithmOutput";    }  
-   def fields : String = {    "algorithmOutputId,guid,insertedRowDate,lastUpdatedDate,algorithmRunId,algorithmOutputTypeId,executorStorageViewId,outputPath";    }  
+   def fields : String = {    "algorithmOutputId,guid,insertedRowDate,lastUpdatedDate,algorithmRunId,algorithmOutputTypeId,executorStorageId,executorStorageResourceId";    }  
    def pkFields : String = {    "algorithmOutputId";    }  
-   def fkFields : String = {    "algorithmOutputTypeId,algorithmRunId,executorStorageViewId";    }  
+   def fkFields : String = {    "algorithmOutputTypeId,algorithmRunId,executorStorageId,executorStorageResourceId";    }  
    def nameField : String = {    "";    }  
  def getPk() : Long = {    algorithmOutputId  }  
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(algorithmOutputId,guid,insertedRowDate,lastUpdatedDate,algorithmRunId,algorithmOutputTypeId,executorStorageViewId,outputPath)  }  
- def toStringArray() : Array[String] = {    Array(""+algorithmOutputId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmRunId,""+algorithmOutputTypeId,""+executorStorageViewId,""+outputPath)   }  
- def toFullString() : String = {    "algorithmOutputId:'"+algorithmOutputId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmRunId:'"+algorithmRunId+"'"+","+"algorithmOutputTypeId:'"+algorithmOutputTypeId+"'"+","+"executorStorageViewId:'"+executorStorageViewId+"'"+","+"outputPath:'"+outputPath+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(algorithmOutputId,guid,insertedRowDate,lastUpdatedDate,algorithmRunId,algorithmOutputTypeId,executorStorageId,executorStorageResourceId)  }  
+ def toStringArray() : Array[String] = {    Array(""+algorithmOutputId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmRunId,""+algorithmOutputTypeId,""+executorStorageId,""+executorStorageResourceId)   }  
+ def toFullString() : String = {    "algorithmOutputId:'"+algorithmOutputId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmRunId:'"+algorithmRunId+"'"+","+"algorithmOutputTypeId:'"+algorithmOutputTypeId+"'"+","+"executorStorageId:'"+executorStorageId+"'"+","+"executorStorageResourceId:'"+executorStorageResourceId+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "algorithmOutputId" => algorithmOutputId  
@@ -36,8 +36,8 @@ case class AlgorithmOutputDto (
      case "lastUpdatedDate" => lastUpdatedDate  
      case "algorithmRunId" => algorithmRunId  
      case "algorithmOutputTypeId" => algorithmOutputTypeId  
-     case "executorStorageViewId" => executorStorageViewId  
-     case "outputPath" => outputPath   
+     case "executorStorageId" => executorStorageId  
+     case "executorStorageResourceId" => executorStorageResourceId   
     case _ => null 
     } 
     ret 
@@ -50,23 +50,23 @@ case class AlgorithmOutputDto (
      case "lastUpdatedDate" => "java.util.Date"  
      case "algorithmRunId" => "Long"  
      case "algorithmOutputTypeId" => "Long"  
-     case "executorStorageViewId" => "Long"  
-     case "outputPath" => "String"   
+     case "executorStorageId" => "Long"  
+     case "executorStorageResourceId" => "Long"   
     case _ => "Object" 
     } 
     ret 
   } 
    def prepareInsert(connection : java.sql.Connection) : java.sql.PreparedStatement = {
-     val stat = connection.prepareStatement("insert into algorithmOutput(guid,algorithmRunId,algorithmOutputTypeId,executorStorageViewId,outputPath) values (?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
+     val stat = connection.prepareStatement("insert into algorithmOutput(guid,algorithmRunId,algorithmOutputTypeId,executorStorageId,executorStorageResourceId) values (?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
     stat.setObject(1, guid);
     stat.setObject(2, algorithmRunId);
     stat.setObject(3, algorithmOutputTypeId);
-    stat.setObject(4, executorStorageViewId);
-    stat.setObject(5, outputPath);
+    stat.setObject(4, executorStorageId);
+    stat.setObject(5, executorStorageResourceId);
     return stat; 
    } 
-   def modify(algorithmRunId : Long, algorithmOutputTypeId : Long, executorStorageViewId : Long, outputPath : String) : AlgorithmOutputDto = {
-    val dtoModified = new AlgorithmOutputDto(this.algorithmOutputId,this.guid,this.insertedRowDate,new java.util.Date(),algorithmRunId,algorithmOutputTypeId,executorStorageViewId,outputPath);
+   def modify(algorithmRunId : Long, algorithmOutputTypeId : Long, executorStorageId : Long, executorStorageResourceId : Long) : AlgorithmOutputDto = {
+    val dtoModified = new AlgorithmOutputDto(this.algorithmOutputId,this.guid,this.insertedRowDate,new java.util.Date(),algorithmRunId,algorithmOutputTypeId,executorStorageId,executorStorageResourceId);
     dtoModified
   }
  } 
@@ -78,11 +78,11 @@ object AlgorithmOutputDto {
    val FIELD_lastUpdatedDate = "lastUpdatedDate";
    val FIELD_algorithmRunId = "algorithmRunId";
    val FIELD_algorithmOutputTypeId = "algorithmOutputTypeId";
-   val FIELD_executorStorageViewId = "executorStorageViewId";
-   val FIELD_outputPath = "outputPath";
+   val FIELD_executorStorageId = "executorStorageId";
+   val FIELD_executorStorageResourceId = "executorStorageResourceId";
 
-  def createNewAlgorithmOutputDto(algorithmRunId : Long, algorithmOutputTypeId : Long, executorStorageViewId : Long, outputPath : String) : AlgorithmOutputDto = {  
-     val dto = new AlgorithmOutputDto(0,0,new java.util.Date(),new java.util.Date(),algorithmRunId,algorithmOutputTypeId,executorStorageViewId,outputPath)   
+  def createNewAlgorithmOutputDto(algorithmRunId : Long, algorithmOutputTypeId : Long, executorStorageId : Long, executorStorageResourceId : Long) : AlgorithmOutputDto = {  
+     val dto = new AlgorithmOutputDto(0,0,new java.util.Date(),new java.util.Date(),algorithmRunId,algorithmOutputTypeId,executorStorageId,executorStorageResourceId)   
     dto 
   } 
 

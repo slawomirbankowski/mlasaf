@@ -82,6 +82,21 @@ import java.util.Date
    val dtos : List[VExecutorContextDto] = SQL("select * from vExecutorContext where properties = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextDto].*);  
    dtos  
  }  
+ def getDtosByProperties2(colValue : String) : List[VExecutorContextDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorContextDto] = SQL("select * from vExecutorContext where properties2 = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextDto].*);  
+   dtos  
+ }  
+ def getDtosByProperties3(colValue : String) : List[VExecutorContextDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorContextDto] = SQL("select * from vExecutorContext where properties3 = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextDto].*);  
+   dtos  
+ }  
+ def getDtosByEntryParams(colValue : String) : List[VExecutorContextDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorContextDto] = SQL("select * from vExecutorContext where entryParams = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextDto].*);  
+   dtos  
+ }  
  def getDtosByExecutorHost_executorHostId(colValue : Long) : List[VExecutorContextDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VExecutorContextDto] = SQL("select * from vExecutorContext where executorHost_executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextDto].*);  

@@ -11,7 +11,7 @@ class PredictionLocalSma5 extends AlgorithmInstance {
 
   /** */
   def run(run : AlgorithmRun) : String = {
-    println(" ===================== RUNNING LOCAL PREDICTION ALGORITHM FOR RUN: " + run.algorithmRunDto.algorithmRunId + ", input files: " + run.executorStorageViewDtos.map(sv => sv.storagePath).mkString(","));
+    println(" ===================== RUNNING LOCAL PREDICTION ALGORITHM FOR RUN: " + run.algorithmRunDto.algorithmRunId + ", input files: " + run.executorStorageViewDtos.map(sv => sv.executorStorageResource_resourcePath).mkString(","));
     println("======================     Parent ExecutorType: " + run.parentExecutor.getTypeName())
     println("======================     algorithmScheduleDto: " + run.algorithmScheduleDto);
     val timeColsCount : Int = run.algorithmScheduleColumnDtos.filter(c => c.algorithmColumnType_algorithmColumnTypeName.equals("Time")).size;
@@ -23,12 +23,11 @@ class PredictionLocalSma5 extends AlgorithmInstance {
 
 
       AlgorithmInstance.STATUS_ERROR
-
     } else {
       val timeColName = run.algorithmScheduleColumnDtos.filter(c => c.algorithmColumnType_algorithmColumnTypeName.equals("Time")).head.sourceViewColumn_columnName;
       val groupColName = run.algorithmScheduleColumnDtos.filter(c => c.algorithmColumnType_algorithmColumnTypeName.equals("SingleGroup")).head.sourceViewColumn_columnName;
       val valueColName = run.algorithmScheduleColumnDtos.filter(c => c.algorithmColumnType_algorithmColumnTypeName.equals("NumericValue")).head.sourceViewColumn_columnName;
-      val fileFullPath = run.executorStorageViewDtos.head.storagePath;
+      val fileFullPath = run.executorStorageViewDtos.head.executorStorageResource_resourcePath;
       println("======================     timeColName: " + timeColName);
       println("======================     groupColName: " + groupColName);
       println("======================     valueColName: " + valueColName);

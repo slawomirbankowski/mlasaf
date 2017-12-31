@@ -14,8 +14,8 @@ object MlasafEntry {
   val MLASAF_VERSION = "0.5.0";
   val logger = org.slf4j.LoggerFactory.getLogger("MlasafEntry");
 
+  // TODO: prepare output initialization and storage support for output
   // TODO: prepare full testing scenario: create DB - refresh schema - execute all tests - save testing results - drop database
-  // TODO: change Context options to add execution minimum time and number of flows
   // TODO: add thread checker and memory consumption checker
   // TODO: DaoFactory STOP method - implement
   // TODO: prepare full testing environment - Docker + scripts
@@ -23,7 +23,6 @@ object MlasafEntry {
   // TODO: prepare shell scripts for running different actions
   // TODO: implement REST methods to access DB to be used by GUI
   // TODO: implement basic UI page to create
-  // TODO: complex definitions for executors and storages
   /** main entry point to run all services for MLASAF, initialization from command line arguments or from xml file */
   def main(args : Array[String]) = {
     logger.info("START MLASAF " + MLASAF_VERSION);

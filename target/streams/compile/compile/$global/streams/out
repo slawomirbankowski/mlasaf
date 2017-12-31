@@ -1,2 +1,7 @@
-[0m[[0m[33mwarn[0m] [0m[0mthere was one feature warning; re-run with -feature for details[0m
-[0m[[0m[33mwarn[0m] [0m[0mone warning found[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Project\mlasaf\src\mlasaf\src\main\scala\com\mlasaf\algorithms\local\PredictionLocalSma5.scala:14:183: value storagePath is not a member of com.mlasaf.dto.VExecutorStorageViewDto[0m
+[0m[[0m[31merror[0m] [0m[0m    println(" ===================== RUNNING LOCAL PREDICTION ALGORITHM FOR RUN: " + run.algorithmRunDto.algorithmRunId + ", input files: " + run.executorStorageViewDtos.map(sv => sv.storagePath).mkString(","));[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                                                                                                                                      ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Project\mlasaf\src\mlasaf\src\main\scala\com\mlasaf\storages\LocalDiskStorage.scala:61:116: too many arguments for method createAndInsertExecutorStorageViewDto: (executorStorageSnapshotId: Long, executorStorageId: Long, sourceDownloadId: Long, sourceViewId: Long, executorStorageResourceId: Long)com.mlasaf.dto.ExecutorStorageViewDto[0m
+[0m[[0m[31merror[0m] [0m[0m    val storageViewDto = parentContext.daoFactory.daos.executorStorageViewDao.createAndInsertExecutorStorageViewDto(storageSnapshotDto.executorStorageSnapshotId, this.storageDto.executorStorageId, sourceDownloadDto.sourceDownloadId, sourceView.sourceViewId, storageViewFilePath, viewSize, viewRowsCount, 1);[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                                                                   ^[0m
+[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m

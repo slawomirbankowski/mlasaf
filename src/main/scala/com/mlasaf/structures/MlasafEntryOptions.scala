@@ -4,13 +4,16 @@
 */
 package com.mlasaf.structures
 
+import com.mlasaf.tests.CEDefinition
 import org.rogach.scallop.ScallopConf
+import org.json4s.native.JsonMethods._
+import org.json4s.Formats._
 
 /** entry options for MlasafEntry class - all input options that should be provided with values */
 class MlasafEntryOptions(args : Array[String]) extends ScallopConf(args) {
 
   /** logger for DAO */
-  val logger = org.slf4j.LoggerFactory.getLogger("CreateSampleData");
+  val logger = org.slf4j.LoggerFactory.getLogger("MlasafEntryOptions");
 
   var restAlternativePort =  opt[Int](descr="Alternative port number for storages and extenrnal API", name = "restAlternativePort", short='a')
   var jdbcString =  opt[String](descr="JDBC connection string", name = "jdbcString", short='c', required = true)
@@ -24,17 +27,26 @@ class MlasafEntryOptions(args : Array[String]) extends ScallopConf(args) {
   var simpleStorage = opt[String](descr="Simple definition for local storages", name = "simpleStorage")
   var maxWorkingTimeSeconds =  opt[Long](descr="maximum working time in seconds for Context", name = "maxWorkingTimeSeconds")
   verify()
-  def getExecutorDefinitions() : ExecutorsDefinition = {
-    val mapper = new com.fasterxml.jackson.databind.ObjectMapper();
-    val eDef : String = "" + executorDefinition.getOrElse("");
-    logger.info("Parsing executors: " + eDef);
-    val execDef = mapper.readValue[ExecutorsDefinition](eDef, classOf[ExecutorsDefinition])
-    execDef
+
+  /** parse definitions for executors from JSON to Array of ExecutorDefinition */
+  def getExecutorDefinitions() : Array[ExecutorDefinition] = {
+    implicit val formats = org.json4s.DefaultFormats
+    val eDef : String = "" + executorDefinition.getOrElse(" [ ] ")
+    val executors = parse(eDef).extract[Array[ExecutorDefinition]];
+    logger.info("Parsed executors: " + executors.size);
+    executors
   }
+  def getStorageDefinitions() : Array[StorageDefinition] = {
+    implicit val formats = org.json4s.DefaultFormats
+    val sDef : String = "" + storageDefinition.getOrElse(" [ ] ")
+    val storages = parse(sDef).extract[Array[StorageDefinition]];
+    logger.info("Parsed storages: " + storages.size);
+    storages
+  }
+
 }
 
-case class ExecutorDefinition(executorType : String, portNumber : Int) { }
-case class ExecutorsDefinition(executors : Seq[ExecutorDefinition]) { }
-class StorageDefinition(val storage : String, val storageType : String) { }
-class StorageDefinitions(val storaged :  Array[StorageDefinition]) { }
+case class ExecutorDefinition(executorType : String, portNumber : Int) {}
+
+case class StorageDefinition(storageType : String, storageSimplePath : String, storageFullPath : String, storagePort : Int) { }
 

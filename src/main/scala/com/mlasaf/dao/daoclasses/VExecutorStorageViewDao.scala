@@ -87,24 +87,9 @@ import java.util.Date
    val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where sourceViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);  
    dtos  
  }  
- def getDtosByStoragePath(colValue : String) : List[VExecutorStorageViewDto] = { 
+ def getDtosByExecutorStorageResourceId(colValue : Long) : List[VExecutorStorageViewDto] = { 
    implicit val connection = getConnection();  
-   val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where storagePath = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);  
-   dtos  
- }  
- def getDtosByViewSize(colValue : Long) : List[VExecutorStorageViewDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where viewSize = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);  
-   dtos  
- }  
- def getDtosByViewRowsCount(colValue : Long) : List[VExecutorStorageViewDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where viewRowsCount = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);  
-   dtos  
- }  
- def getDtosByIsValid(colValue : Int) : List[VExecutorStorageViewDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where isValid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);  
+   val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where executorStorageResourceId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);  
    dtos  
  }  
  def getDtosByExecutorStorage_executorStorageId(colValue : Long) : List[VExecutorStorageViewDto] = { 
@@ -160,6 +145,51 @@ import java.util.Date
  def getDtosByExecutorStorage_portNumber(colValue : Int) : List[VExecutorStorageViewDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where executorStorage_portNumber = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorStorageResource_executorStorageResourceId(colValue : Long) : List[VExecutorStorageViewDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where executorStorageResource_executorStorageResourceId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorStorageResource_guid(colValue : Long) : List[VExecutorStorageViewDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where executorStorageResource_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorStorageResource_insertedRowDate(colValue : java.util.Date) : List[VExecutorStorageViewDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where executorStorageResource_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorStorageResource_lastUpdatedDate(colValue : java.util.Date) : List[VExecutorStorageViewDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where executorStorageResource_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorStorageResource_executorStorageId(colValue : Long) : List[VExecutorStorageViewDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where executorStorageResource_executorStorageId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorStorageResource_resourcePath(colValue : String) : List[VExecutorStorageViewDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where executorStorageResource_resourcePath = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorStorageResource_resourceSize(colValue : Long) : List[VExecutorStorageViewDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where executorStorageResource_resourceSize = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorStorageResource_resourceRowsCount(colValue : Long) : List[VExecutorStorageViewDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where executorStorageResource_resourceRowsCount = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorStorageResource_isValid(colValue : Int) : List[VExecutorStorageViewDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorStorageViewDto] = SQL("select * from vExecutorStorageView where executorStorageResource_isValid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewDto].*);  
    dtos  
  }  
  def getDtosByExecutorStorageSnapshot_executorStorageSnapshotId(colValue : Long) : List[VExecutorStorageViewDto] = { 

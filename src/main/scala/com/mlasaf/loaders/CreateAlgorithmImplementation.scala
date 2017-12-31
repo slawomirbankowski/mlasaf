@@ -5,7 +5,6 @@
 package com.mlasaf.loaders
 
 import com.mlasaf.dao.DaoFactory
-import com.mlasaf.structures.{ExecutorsDefinition, MlasafEntryOptions}
 import org.rogach.scallop.ScallopConf
 
 object CreateAlgorithmImplementation {
@@ -27,6 +26,7 @@ object CreateAlgorithmImplementation {
     val algorithmImplementationName = entryOptions.algorithmImplementationName.getOrElse("")
     val algorithmImplementationClass = entryOptions.algorithmImplementationClass.getOrElse("")
     val outputType = entryOptions.outputType.getOrElse("")
+    val supportedStorages = entryOptions.supportedStorages.getOrElse("LOCAL_DISK")
 
     val daoFactory = new DaoFactory();
     daoFactory.initialize(jdbcString, jdbcUser, jdbcPass, jdbcDriver);
@@ -47,6 +47,11 @@ object CreateAlgorithmImplementation {
     daoFactory.daos.algorithmParamTypeDao.createAndInsertAlgorithmParamTypeDto(daoFactory.daos.algorithmParamDao.getAlgorithmParamFirstByName("Prediction Times").get.algorithmParamId, algTypeId, algTypeVerId);
     // outputs
     daoFactory.daos.algorithmTypeOutputTypeDao.createAndInsertAlgorithmTypeOutputTypeDto(algTypeVerId, algOutypeId, 1);
+    // supported storages
+    supportedStorages.split(",").foreach(supsto => {
+      val storageTypeId = daoFactory.daos.executorStorageTypeDao.getExecutorStorageTypeFirstByName(supsto).get.executorStorageTypeId;
+      daoFactory.daos.algorithmStorageSupportDao.createAndInsertAlgorithmStorageSupportDto(algImplDto.algorithmImplementationId, storageTypeId, 3);
+    });
   }
 }
 
@@ -64,6 +69,7 @@ class CreateAlgorithmImplementationEntryOptions(args : Array[String]) extends Sc
   var algorithmImplementationName = opt[String](descr="algorithmImplementationName", name = "algorithmImplementationName", short='n')
   var algorithmImplementationClass = opt[String](descr="algorithmImplementationClass", name = "algorithmImplementationClass", short='c')
   var outputType = opt[String](descr="outputType", name = "outputType")
+  var supportedStorages = opt[String](descr="supportedStorages", name = "supportedStorages")
 
   verify()
 

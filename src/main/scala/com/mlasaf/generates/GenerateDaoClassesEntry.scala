@@ -78,6 +78,11 @@ object GenerateDaoClassesEntry {
            |   val dtos : ${dtoName}= SQL("select * from ${tableName} order by insertedRowDate desc ").as(anorm.Macro.namedParser[${dtoName}].*).head;
            |   dtos
            |  }
+           |  def get${objName}sByField(fieldName : String, fieldValue : Any) : List[${dtoName}] = {
+           |   implicit val connection = getConnection();
+           |   val dtos : List[${dtoName}]= SQL("select * from ${tableName} where " + fieldName + " = {fieldValue} ").on("fieldValue" -> fieldValue).as(anorm.Macro.namedParser[${dtoName}].*);
+           |   dtos
+           |  }
            |  def get${objName}ByGuid(guid : Long) : ${dtoName} = {
            |   implicit val connection = getConnection();
            |   val dtos : ${dtoName}= SQL("select * from ${tableName} where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[${dtoName}].single);

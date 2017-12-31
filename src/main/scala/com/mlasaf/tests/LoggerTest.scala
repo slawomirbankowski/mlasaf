@@ -5,14 +5,18 @@ object LoggerTest {
 
   def main(args : Array[String]) : Unit = {
     logger.info(" START ")
-    val jdbcString = System.getenv("MLASAF_JDBC");
-    val jdbcUser = System.getenv("MLASAF_USER");
-    val jdbcPass = System.getenv("MLASAF_PASS");
-    val jdbcDriver = System.getenv("MLASAF_DRIVER");
-
-    logger.warn("This is warning !!! ")
-
     logger.warn("Logger object: " + logger.toString)
+    logger.warn("This is warning !!! ")
+    val f1 = 10;
+    val f2 = 0;
+    try {
+      logger.info("This is info")
+      val f3 = f1 / f2;
+    } catch {
+      case ex : Exception => {
+        logger.error("This is error", ex)
+      }
+    }
     logger.info(" END ")
   }
 

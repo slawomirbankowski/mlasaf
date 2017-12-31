@@ -77,14 +77,14 @@ import java.util.Date
    val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where algorithmOutputTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
    dtos  
  }  
- def getDtosByExecutorStorageViewId(colValue : Long) : List[VAlgorithmOutputDto] = { 
+ def getDtosByExecutorStorageId(colValue : Long) : List[VAlgorithmOutputDto] = { 
    implicit val connection = getConnection();  
-   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorageViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
+   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorageId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
    dtos  
  }  
- def getDtosByOutputPath(colValue : String) : List[VAlgorithmOutputDto] = { 
+ def getDtosByExecutorStorageResourceId(colValue : Long) : List[VAlgorithmOutputDto] = { 
    implicit val connection = getConnection();  
-   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where outputPath = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
+   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorageResourceId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
    dtos  
  }  
  def getDtosByAlgorithmOutputType_algorithmOutputTypeId(colValue : Long) : List[VAlgorithmOutputDto] = { 
@@ -112,64 +112,179 @@ import java.util.Date
    val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where algorithmOutputType_algorithmOutputTypeName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
    dtos  
  }  
- def getDtosByExecutorStorageView_executorStorageViewId(colValue : Long) : List[VAlgorithmOutputDto] = { 
+ def getDtosByAlgorithmRun_algorithmRunId(colValue : Long) : List[VAlgorithmOutputDto] = { 
    implicit val connection = getConnection();  
-   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorageView_executorStorageViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
+   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where algorithmRun_algorithmRunId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
    dtos  
  }  
- def getDtosByExecutorStorageView_guid(colValue : Long) : List[VAlgorithmOutputDto] = { 
+ def getDtosByAlgorithmRun_guid(colValue : Long) : List[VAlgorithmOutputDto] = { 
    implicit val connection = getConnection();  
-   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorageView_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
+   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where algorithmRun_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
    dtos  
  }  
- def getDtosByExecutorStorageView_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmOutputDto] = { 
+ def getDtosByAlgorithmRun_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmOutputDto] = { 
    implicit val connection = getConnection();  
-   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorageView_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
+   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where algorithmRun_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
    dtos  
  }  
- def getDtosByExecutorStorageView_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmOutputDto] = { 
+ def getDtosByAlgorithmRun_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmOutputDto] = { 
    implicit val connection = getConnection();  
-   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorageView_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
+   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where algorithmRun_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
    dtos  
  }  
- def getDtosByExecutorStorageView_executorStorageSnapshotId(colValue : Long) : List[VAlgorithmOutputDto] = { 
+ def getDtosByAlgorithmRun_algorithmScheduleId(colValue : Long) : List[VAlgorithmOutputDto] = { 
    implicit val connection = getConnection();  
-   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorageView_executorStorageSnapshotId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
+   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where algorithmRun_algorithmScheduleId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
    dtos  
  }  
- def getDtosByExecutorStorageView_executorStorageId(colValue : Long) : List[VAlgorithmOutputDto] = { 
+ def getDtosByAlgorithmRun_executorInstanceId(colValue : Long) : List[VAlgorithmOutputDto] = { 
    implicit val connection = getConnection();  
-   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorageView_executorStorageId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
+   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where algorithmRun_executorInstanceId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
    dtos  
  }  
- def getDtosByExecutorStorageView_sourceDownloadId(colValue : Long) : List[VAlgorithmOutputDto] = { 
+ def getDtosByAlgorithmRun_executorStorageId(colValue : Long) : List[VAlgorithmOutputDto] = { 
    implicit val connection = getConnection();  
-   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorageView_sourceDownloadId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
+   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where algorithmRun_executorStorageId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
    dtos  
  }  
- def getDtosByExecutorStorageView_sourceViewId(colValue : Long) : List[VAlgorithmOutputDto] = { 
+ def getDtosByAlgorithmRun_algorithmRunTypeId(colValue : Long) : List[VAlgorithmOutputDto] = { 
    implicit val connection = getConnection();  
-   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorageView_sourceViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
+   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where algorithmRun_algorithmRunTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
    dtos  
  }  
- def getDtosByExecutorStorageView_storagePath(colValue : String) : List[VAlgorithmOutputDto] = { 
+ def getDtosByAlgorithmRun_algorithmRunName(colValue : String) : List[VAlgorithmOutputDto] = { 
    implicit val connection = getConnection();  
-   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorageView_storagePath = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
+   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where algorithmRun_algorithmRunName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
    dtos  
  }  
- def getDtosByExecutorStorageView_viewSize(colValue : Long) : List[VAlgorithmOutputDto] = { 
+ def getDtosByAlgorithmRun_runDate(colValue : java.util.Date) : List[VAlgorithmOutputDto] = { 
    implicit val connection = getConnection();  
-   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorageView_viewSize = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
+   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where algorithmRun_runDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
    dtos  
  }  
- def getDtosByExecutorStorageView_viewRowsCount(colValue : Long) : List[VAlgorithmOutputDto] = { 
+ def getDtosByAlgorithmRun_runStatus(colValue : String) : List[VAlgorithmOutputDto] = { 
    implicit val connection = getConnection();  
-   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorageView_viewRowsCount = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
+   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where algorithmRun_runStatus = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
    dtos  
  }  
- def getDtosByExecutorStorageView_isValid(colValue : Int) : List[VAlgorithmOutputDto] = { 
+ def getDtosByAlgorithmRun_isError(colValue : Int) : List[VAlgorithmOutputDto] = { 
    implicit val connection = getConnection();  
-   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorageView_isValid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
+   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where algorithmRun_isError = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
+   dtos  
+ }  
+ def getDtosByAlgorithmRun_errorDescription(colValue : String) : List[VAlgorithmOutputDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where algorithmRun_errorDescription = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
+   dtos  
+ }  
+ def getDtosByAlgorithmRun_isRunning(colValue : Int) : List[VAlgorithmOutputDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where algorithmRun_isRunning = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
+   dtos  
+ }  
+ def getDtosByAlgorithmRun_isFinished(colValue : Int) : List[VAlgorithmOutputDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where algorithmRun_isFinished = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorStorage_executorStorageId(colValue : Long) : List[VAlgorithmOutputDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorage_executorStorageId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorStorage_guid(colValue : Long) : List[VAlgorithmOutputDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorage_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorStorage_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmOutputDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorage_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorStorage_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmOutputDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorage_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorStorage_executorHostId(colValue : Long) : List[VAlgorithmOutputDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorage_executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorStorage_executorStorageTypeId(colValue : Long) : List[VAlgorithmOutputDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorage_executorStorageTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorStorage_storageDefinition(colValue : String) : List[VAlgorithmOutputDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorage_storageDefinition = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorStorage_storageBasePath(colValue : String) : List[VAlgorithmOutputDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorage_storageBasePath = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorStorage_storageFulllPath(colValue : String) : List[VAlgorithmOutputDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorage_storageFulllPath = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorStorage_isRunning(colValue : Int) : List[VAlgorithmOutputDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorage_isRunning = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorStorage_portNumber(colValue : Int) : List[VAlgorithmOutputDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorage_portNumber = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorStorageResource_executorStorageResourceId(colValue : Long) : List[VAlgorithmOutputDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorageResource_executorStorageResourceId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorStorageResource_guid(colValue : Long) : List[VAlgorithmOutputDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorageResource_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorStorageResource_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmOutputDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorageResource_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorStorageResource_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmOutputDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorageResource_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorStorageResource_executorStorageId(colValue : Long) : List[VAlgorithmOutputDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorageResource_executorStorageId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorStorageResource_resourcePath(colValue : String) : List[VAlgorithmOutputDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorageResource_resourcePath = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorStorageResource_resourceSize(colValue : Long) : List[VAlgorithmOutputDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorageResource_resourceSize = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorStorageResource_resourceRowsCount(colValue : Long) : List[VAlgorithmOutputDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorageResource_resourceRowsCount = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorStorageResource_isValid(colValue : Int) : List[VAlgorithmOutputDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmOutputDto] = SQL("select * from vAlgorithmOutput where executorStorageResource_isValid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputDto].*);  
    dtos  
  }  
 

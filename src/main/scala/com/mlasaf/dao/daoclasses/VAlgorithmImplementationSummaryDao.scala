@@ -87,14 +87,14 @@ import java.util.Date
    val dtos : List[VAlgorithmImplementationSummaryDto] = SQL("select * from vAlgorithmImplementationSummary where algorithmImplementationClass = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationSummaryDto].*);  
    dtos  
  }  
- def getDtosByAlgorithmSchedule_count(colValue : Int) : List[VAlgorithmImplementationSummaryDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VAlgorithmImplementationSummaryDto] = SQL("select * from vAlgorithmImplementationSummary where algorithmSchedule_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationSummaryDto].*);  
-   dtos  
- }  
  def getDtosByAlgorithmStorageSupport_count(colValue : Int) : List[VAlgorithmImplementationSummaryDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VAlgorithmImplementationSummaryDto] = SQL("select * from vAlgorithmImplementationSummary where algorithmStorageSupport_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationSummaryDto].*);  
+   dtos  
+ }  
+ def getDtosByAlgorithmSchedule_count(colValue : Int) : List[VAlgorithmImplementationSummaryDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmImplementationSummaryDto] = SQL("select * from vAlgorithmImplementationSummary where algorithmSchedule_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationSummaryDto].*);  
    dtos  
  }  
 

@@ -13,11 +13,11 @@ case class VExecutorStorageTypeSummaryDto (
      , val lastUpdatedDate : java.util.Date
      , val executorStorageTypeName : String
      , val executorStorageTypeClass : String
-     , val executorStorage_count : Int
-     , val algorithmStorageSupport_count : Int 
+     , val algorithmStorageSupport_count : Int
+     , val executorStorage_count : Int 
      ) extends BaseReadOnlyDto {  
    def tableName : String = {    "vExecutorStorageTypeSummary";    }  
-   def fields : String = {    "executorStorageTypeId,guid,insertedRowDate,lastUpdatedDate,executorStorageTypeName,executorStorageTypeClass,executorStorage_count,algorithmStorageSupport_count";    }  
+   def fields : String = {    "executorStorageTypeId,guid,insertedRowDate,lastUpdatedDate,executorStorageTypeName,executorStorageTypeClass,algorithmStorageSupport_count,executorStorage_count";    }  
    def pkFields : String = {    "";    }  
    def fkFields : String = {    "";    }  
    def nameField : String = {    "";    }  
@@ -25,9 +25,9 @@ case class VExecutorStorageTypeSummaryDto (
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(executorStorageTypeId,guid,insertedRowDate,lastUpdatedDate,executorStorageTypeName,executorStorageTypeClass,executorStorage_count,algorithmStorageSupport_count)  }  
- def toStringArray() : Array[String] = {    Array(""+executorStorageTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorStorageTypeName,""+executorStorageTypeClass,""+executorStorage_count,""+algorithmStorageSupport_count)   }  
- def toFullString() : String = {    "executorStorageTypeId:'"+executorStorageTypeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorStorageTypeName:'"+executorStorageTypeName+"'"+","+"executorStorageTypeClass:'"+executorStorageTypeClass+"'"+","+"executorStorage_count:'"+executorStorage_count+"'"+","+"algorithmStorageSupport_count:'"+algorithmStorageSupport_count+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(executorStorageTypeId,guid,insertedRowDate,lastUpdatedDate,executorStorageTypeName,executorStorageTypeClass,algorithmStorageSupport_count,executorStorage_count)  }  
+ def toStringArray() : Array[String] = {    Array(""+executorStorageTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorStorageTypeName,""+executorStorageTypeClass,""+algorithmStorageSupport_count,""+executorStorage_count)   }  
+ def toFullString() : String = {    "executorStorageTypeId:'"+executorStorageTypeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorStorageTypeName:'"+executorStorageTypeName+"'"+","+"executorStorageTypeClass:'"+executorStorageTypeClass+"'"+","+"algorithmStorageSupport_count:'"+algorithmStorageSupport_count+"'"+","+"executorStorage_count:'"+executorStorage_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "executorStorageTypeId" => executorStorageTypeId  
@@ -36,8 +36,8 @@ case class VExecutorStorageTypeSummaryDto (
      case "lastUpdatedDate" => lastUpdatedDate  
      case "executorStorageTypeName" => executorStorageTypeName  
      case "executorStorageTypeClass" => executorStorageTypeClass  
-     case "executorStorage_count" => executorStorage_count  
-     case "algorithmStorageSupport_count" => algorithmStorageSupport_count   
+     case "algorithmStorageSupport_count" => algorithmStorageSupport_count  
+     case "executorStorage_count" => executorStorage_count   
     case _ => null 
     } 
     ret 
@@ -50,8 +50,8 @@ case class VExecutorStorageTypeSummaryDto (
      case "lastUpdatedDate" => "java.util.Date"  
      case "executorStorageTypeName" => "String"  
      case "executorStorageTypeClass" => "String"  
-     case "executorStorage_count" => "Int"  
-     case "algorithmStorageSupport_count" => "Int"   
+     case "algorithmStorageSupport_count" => "Int"  
+     case "executorStorage_count" => "Int"   
     case _ => "Object" 
     } 
     ret 
@@ -65,8 +65,8 @@ object VExecutorStorageTypeSummaryDto {
    val FIELD_lastUpdatedDate = "lastUpdatedDate";
    val FIELD_executorStorageTypeName = "executorStorageTypeName";
    val FIELD_executorStorageTypeClass = "executorStorageTypeClass";
-   val FIELD_executorStorage_count = "executorStorage_count";
    val FIELD_algorithmStorageSupport_count = "algorithmStorageSupport_count";
+   val FIELD_executorStorage_count = "executorStorage_count";
 
 }
 

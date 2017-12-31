@@ -67,9 +67,14 @@ import java.util.Date
    val dtos : List[AlgorithmOutputDto] = SQL("select * from algorithmOutput where algorithmRunId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[AlgorithmOutputDto].*);  
    dtos  
  }  
- def getAlgorithmOutputByFkExecutorStorageViewId(fkColValue : Long) : List[AlgorithmOutputDto] = { 
+ def getAlgorithmOutputByFkExecutorStorageId(fkColValue : Long) : List[AlgorithmOutputDto] = { 
    implicit val connection = getConnection();  
-   val dtos : List[AlgorithmOutputDto] = SQL("select * from algorithmOutput where executorStorageViewId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[AlgorithmOutputDto].*);  
+   val dtos : List[AlgorithmOutputDto] = SQL("select * from algorithmOutput where executorStorageId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[AlgorithmOutputDto].*);  
+   dtos  
+ }  
+ def getAlgorithmOutputByFkExecutorStorageResourceId(fkColValue : Long) : List[AlgorithmOutputDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[AlgorithmOutputDto] = SQL("select * from algorithmOutput where executorStorageResourceId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[AlgorithmOutputDto].*);  
    dtos  
  }  
  def insertAlgorithmOutputDto(dto : AlgorithmOutputDto): AlgorithmOutputDto = { 
@@ -84,14 +89,14 @@ import java.util.Date
       null; 
     } 
  } 
-  def createAndInsertAlgorithmOutputDto(algorithmRunId : Long, algorithmOutputTypeId : Long, executorStorageViewId : Long, outputPath : String) : AlgorithmOutputDto = {
-    val dto = new AlgorithmOutputDto(0,0,new Date(),new Date(),algorithmRunId,algorithmOutputTypeId,executorStorageViewId,outputPath)
+  def createAndInsertAlgorithmOutputDto(algorithmRunId : Long, algorithmOutputTypeId : Long, executorStorageId : Long, executorStorageResourceId : Long) : AlgorithmOutputDto = {
+    val dto = new AlgorithmOutputDto(0,0,new Date(),new Date(),algorithmRunId,algorithmOutputTypeId,executorStorageId,executorStorageResourceId)
     insertAlgorithmOutputDto(dto);   
   }   
   def updateAlgorithmOutputDto(dto : AlgorithmOutputDto): AlgorithmOutputDto = {  
     implicit val connection = getConnection();  
-      val resCnt = SQL("update algorithmOutput set  lastUpdatedDate = {lastUpdatedDate} ,  algorithmRunId = {algorithmRunId} ,  algorithmOutputTypeId = {algorithmOutputTypeId} ,  executorStorageViewId = {executorStorageViewId} ,  outputPath = {outputPath}  where  algorithmOutputId = {algorithmOutputId}  ")
-      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "algorithmRunId" -> dto.algorithmRunId , "algorithmOutputTypeId" -> dto.algorithmOutputTypeId , "executorStorageViewId" -> dto.executorStorageViewId , "outputPath" -> dto.outputPath, "algorithmOutputId" -> dto.algorithmOutputId ).executeInsert() 
+      val resCnt = SQL("update algorithmOutput set  lastUpdatedDate = {lastUpdatedDate} ,  algorithmRunId = {algorithmRunId} ,  algorithmOutputTypeId = {algorithmOutputTypeId} ,  executorStorageId = {executorStorageId} ,  executorStorageResourceId = {executorStorageResourceId}  where  algorithmOutputId = {algorithmOutputId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "algorithmRunId" -> dto.algorithmRunId , "algorithmOutputTypeId" -> dto.algorithmOutputTypeId , "executorStorageId" -> dto.executorStorageId , "executorStorageResourceId" -> dto.executorStorageResourceId, "algorithmOutputId" -> dto.algorithmOutputId ).executeInsert() 
      getAlgorithmOutputByPk(dto.algorithmOutputId) 
     } 
 

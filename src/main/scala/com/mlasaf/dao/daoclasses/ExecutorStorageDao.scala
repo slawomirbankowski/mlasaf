@@ -57,14 +57,14 @@ import java.util.Date
    val maxid : Long = SQL("select max(executorStorageId) as maxId from executorStorage ").executeQuery()(connection).as[Long](SqlParser.long("maxId").single)(connection);;  
    maxid  
  }  
- def getExecutorStorageByFkExecutorStorageTypeId(fkColValue : Long) : List[ExecutorStorageDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[ExecutorStorageDto] = SQL("select * from executorStorage where executorStorageTypeId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[ExecutorStorageDto].*);  
-   dtos  
- }  
  def getExecutorStorageByFkExecutorHostId(fkColValue : Long) : List[ExecutorStorageDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[ExecutorStorageDto] = SQL("select * from executorStorage where executorHostId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[ExecutorStorageDto].*);  
+   dtos  
+ }  
+ def getExecutorStorageByFkExecutorStorageTypeId(fkColValue : Long) : List[ExecutorStorageDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[ExecutorStorageDto] = SQL("select * from executorStorage where executorStorageTypeId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[ExecutorStorageDto].*);  
    dtos  
  }  
  def insertExecutorStorageDto(dto : ExecutorStorageDto): ExecutorStorageDto = { 

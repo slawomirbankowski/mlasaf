@@ -97,6 +97,31 @@ import java.util.Date
    val dtos : List[VExecutorContextRuntimeDto] = SQL("select * from vExecutorContextRuntime where totalMemory = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);  
    dtos  
  }  
+ def getDtosByDiskInfo(colValue : String) : List[VExecutorContextRuntimeDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorContextRuntimeDto] = SQL("select * from vExecutorContextRuntime where diskInfo = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);  
+   dtos  
+ }  
+ def getDtosByCurrentDiskFreeSpace(colValue : Double) : List[VExecutorContextRuntimeDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorContextRuntimeDto] = SQL("select * from vExecutorContextRuntime where currentDiskFreeSpace = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);  
+   dtos  
+ }  
+ def getDtosByAllThreadsCount(colValue : Int) : List[VExecutorContextRuntimeDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorContextRuntimeDto] = SQL("select * from vExecutorContextRuntime where allThreadsCount = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);  
+   dtos  
+ }  
+ def getDtosByContextThreadsCount(colValue : Int) : List[VExecutorContextRuntimeDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorContextRuntimeDto] = SQL("select * from vExecutorContextRuntime where contextThreadsCount = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);  
+   dtos  
+ }  
+ def getDtosByThreadIds(colValue : String) : List[VExecutorContextRuntimeDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorContextRuntimeDto] = SQL("select * from vExecutorContextRuntime where threadIds = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);  
+   dtos  
+ }  
  def getDtosByExecutorContext_executorContextId(colValue : Long) : List[VExecutorContextRuntimeDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VExecutorContextRuntimeDto] = SQL("select * from vExecutorContextRuntime where executorContext_executorContextId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);  
@@ -130,6 +155,21 @@ import java.util.Date
  def getDtosByExecutorContext_properties(colValue : String) : List[VExecutorContextRuntimeDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VExecutorContextRuntimeDto] = SQL("select * from vExecutorContextRuntime where executorContext_properties = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorContext_properties2(colValue : String) : List[VExecutorContextRuntimeDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorContextRuntimeDto] = SQL("select * from vExecutorContextRuntime where executorContext_properties2 = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorContext_properties3(colValue : String) : List[VExecutorContextRuntimeDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorContextRuntimeDto] = SQL("select * from vExecutorContextRuntime where executorContext_properties3 = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorContext_entryParams(colValue : String) : List[VExecutorContextRuntimeDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorContextRuntimeDto] = SQL("select * from vExecutorContextRuntime where executorContext_entryParams = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextRuntimeDto].*);  
    dtos  
  }  
  def getDtosByExecutorHost_executorHostId(colValue : Long) : List[VExecutorContextRuntimeDto] = { 

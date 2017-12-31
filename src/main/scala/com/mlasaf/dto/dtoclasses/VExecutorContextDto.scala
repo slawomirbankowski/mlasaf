@@ -14,6 +14,9 @@ case class VExecutorContextDto (
      , val executorHostId : Long
      , val isWorking : Int
      , val properties : String
+     , val properties2 : String
+     , val properties3 : String
+     , val entryParams : String
      , val executorHost_executorHostId : Long
      , val executorHost_guid : Long
      , val executorHost_insertedRowDate : java.util.Date
@@ -26,7 +29,7 @@ case class VExecutorContextDto (
      , val executorHost_isWorking : Int 
      ) extends BaseReadOnlyDto {  
    def tableName : String = {    "vExecutorContext";    }  
-   def fields : String = {    "executorContextId,guid,insertedRowDate,lastUpdatedDate,executorHostId,isWorking,properties,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking";    }  
+   def fields : String = {    "executorContextId,guid,insertedRowDate,lastUpdatedDate,executorHostId,isWorking,properties,properties2,properties3,entryParams,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking";    }  
    def pkFields : String = {    "";    }  
    def fkFields : String = {    "";    }  
    def nameField : String = {    "";    }  
@@ -34,9 +37,9 @@ case class VExecutorContextDto (
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(executorContextId,guid,insertedRowDate,lastUpdatedDate,executorHostId,isWorking,properties,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking)  }  
- def toStringArray() : Array[String] = {    Array(""+executorContextId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+isWorking,""+properties,""+executorHost_executorHostId,""+executorHost_guid,""+executorHost_insertedRowDate,""+executorHost_lastUpdatedDate,""+executorHost_hostName,""+executorHost_hostIp,""+executorHost_hostDomain,""+executorHost_hostOsType,""+executorHost_hostOsVersion,""+executorHost_isWorking)   }  
- def toFullString() : String = {    "executorContextId:'"+executorContextId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorHostId:'"+executorHostId+"'"+","+"isWorking:'"+isWorking+"'"+","+"properties:'"+properties+"'"+","+"executorHost_executorHostId:'"+executorHost_executorHostId+"'"+","+"executorHost_guid:'"+executorHost_guid+"'"+","+"executorHost_insertedRowDate:'"+executorHost_insertedRowDate+"'"+","+"executorHost_lastUpdatedDate:'"+executorHost_lastUpdatedDate+"'"+","+"executorHost_hostName:'"+executorHost_hostName+"'"+","+"executorHost_hostIp:'"+executorHost_hostIp+"'"+","+"executorHost_hostDomain:'"+executorHost_hostDomain+"'"+","+"executorHost_hostOsType:'"+executorHost_hostOsType+"'"+","+"executorHost_hostOsVersion:'"+executorHost_hostOsVersion+"'"+","+"executorHost_isWorking:'"+executorHost_isWorking+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(executorContextId,guid,insertedRowDate,lastUpdatedDate,executorHostId,isWorking,properties,properties2,properties3,entryParams,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking)  }  
+ def toStringArray() : Array[String] = {    Array(""+executorContextId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+isWorking,""+properties,""+properties2,""+properties3,""+entryParams,""+executorHost_executorHostId,""+executorHost_guid,""+executorHost_insertedRowDate,""+executorHost_lastUpdatedDate,""+executorHost_hostName,""+executorHost_hostIp,""+executorHost_hostDomain,""+executorHost_hostOsType,""+executorHost_hostOsVersion,""+executorHost_isWorking)   }  
+ def toFullString() : String = {    "executorContextId:'"+executorContextId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorHostId:'"+executorHostId+"'"+","+"isWorking:'"+isWorking+"'"+","+"properties:'"+properties+"'"+","+"properties2:'"+properties2+"'"+","+"properties3:'"+properties3+"'"+","+"entryParams:'"+entryParams+"'"+","+"executorHost_executorHostId:'"+executorHost_executorHostId+"'"+","+"executorHost_guid:'"+executorHost_guid+"'"+","+"executorHost_insertedRowDate:'"+executorHost_insertedRowDate+"'"+","+"executorHost_lastUpdatedDate:'"+executorHost_lastUpdatedDate+"'"+","+"executorHost_hostName:'"+executorHost_hostName+"'"+","+"executorHost_hostIp:'"+executorHost_hostIp+"'"+","+"executorHost_hostDomain:'"+executorHost_hostDomain+"'"+","+"executorHost_hostOsType:'"+executorHost_hostOsType+"'"+","+"executorHost_hostOsVersion:'"+executorHost_hostOsVersion+"'"+","+"executorHost_isWorking:'"+executorHost_isWorking+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "executorContextId" => executorContextId  
@@ -46,6 +49,9 @@ case class VExecutorContextDto (
      case "executorHostId" => executorHostId  
      case "isWorking" => isWorking  
      case "properties" => properties  
+     case "properties2" => properties2  
+     case "properties3" => properties3  
+     case "entryParams" => entryParams  
      case "executorHost_executorHostId" => executorHost_executorHostId  
      case "executorHost_guid" => executorHost_guid  
      case "executorHost_insertedRowDate" => executorHost_insertedRowDate  
@@ -69,6 +75,9 @@ case class VExecutorContextDto (
      case "executorHostId" => "Long"  
      case "isWorking" => "Int"  
      case "properties" => "String"  
+     case "properties2" => "String"  
+     case "properties3" => "String"  
+     case "entryParams" => "String"  
      case "executorHost_executorHostId" => "Long"  
      case "executorHost_guid" => "Long"  
      case "executorHost_insertedRowDate" => "java.util.Date"  
@@ -93,6 +102,9 @@ object VExecutorContextDto {
    val FIELD_executorHostId = "executorHostId";
    val FIELD_isWorking = "isWorking";
    val FIELD_properties = "properties";
+   val FIELD_properties2 = "properties2";
+   val FIELD_properties3 = "properties3";
+   val FIELD_entryParams = "entryParams";
    val FIELD_executorHost_executorHostId = "executorHost_executorHostId";
    val FIELD_executorHost_guid = "executorHost_guid";
    val FIELD_executorHost_insertedRowDate = "executorHost_insertedRowDate";

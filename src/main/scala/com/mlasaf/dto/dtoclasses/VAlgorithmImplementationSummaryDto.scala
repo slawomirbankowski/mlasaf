@@ -15,11 +15,11 @@ case class VAlgorithmImplementationSummaryDto (
      , val executorTypeId : Long
      , val algorithmImplementationName : String
      , val algorithmImplementationClass : String
-     , val algorithmSchedule_count : Int
-     , val algorithmStorageSupport_count : Int 
+     , val algorithmStorageSupport_count : Int
+     , val algorithmSchedule_count : Int 
      ) extends BaseReadOnlyDto {  
    def tableName : String = {    "vAlgorithmImplementationSummary";    }  
-   def fields : String = {    "algorithmImplementationId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,executorTypeId,algorithmImplementationName,algorithmImplementationClass,algorithmSchedule_count,algorithmStorageSupport_count";    }  
+   def fields : String = {    "algorithmImplementationId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,executorTypeId,algorithmImplementationName,algorithmImplementationClass,algorithmStorageSupport_count,algorithmSchedule_count";    }  
    def pkFields : String = {    "";    }  
    def fkFields : String = {    "";    }  
    def nameField : String = {    "";    }  
@@ -27,9 +27,9 @@ case class VAlgorithmImplementationSummaryDto (
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(algorithmImplementationId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,executorTypeId,algorithmImplementationName,algorithmImplementationClass,algorithmSchedule_count,algorithmStorageSupport_count)  }  
- def toStringArray() : Array[String] = {    Array(""+algorithmImplementationId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmTypeVersionId,""+executorTypeId,""+algorithmImplementationName,""+algorithmImplementationClass,""+algorithmSchedule_count,""+algorithmStorageSupport_count)   }  
- def toFullString() : String = {    "algorithmImplementationId:'"+algorithmImplementationId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmTypeVersionId:'"+algorithmTypeVersionId+"'"+","+"executorTypeId:'"+executorTypeId+"'"+","+"algorithmImplementationName:'"+algorithmImplementationName+"'"+","+"algorithmImplementationClass:'"+algorithmImplementationClass+"'"+","+"algorithmSchedule_count:'"+algorithmSchedule_count+"'"+","+"algorithmStorageSupport_count:'"+algorithmStorageSupport_count+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(algorithmImplementationId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,executorTypeId,algorithmImplementationName,algorithmImplementationClass,algorithmStorageSupport_count,algorithmSchedule_count)  }  
+ def toStringArray() : Array[String] = {    Array(""+algorithmImplementationId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmTypeVersionId,""+executorTypeId,""+algorithmImplementationName,""+algorithmImplementationClass,""+algorithmStorageSupport_count,""+algorithmSchedule_count)   }  
+ def toFullString() : String = {    "algorithmImplementationId:'"+algorithmImplementationId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmTypeVersionId:'"+algorithmTypeVersionId+"'"+","+"executorTypeId:'"+executorTypeId+"'"+","+"algorithmImplementationName:'"+algorithmImplementationName+"'"+","+"algorithmImplementationClass:'"+algorithmImplementationClass+"'"+","+"algorithmStorageSupport_count:'"+algorithmStorageSupport_count+"'"+","+"algorithmSchedule_count:'"+algorithmSchedule_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "algorithmImplementationId" => algorithmImplementationId  
@@ -40,8 +40,8 @@ case class VAlgorithmImplementationSummaryDto (
      case "executorTypeId" => executorTypeId  
      case "algorithmImplementationName" => algorithmImplementationName  
      case "algorithmImplementationClass" => algorithmImplementationClass  
-     case "algorithmSchedule_count" => algorithmSchedule_count  
-     case "algorithmStorageSupport_count" => algorithmStorageSupport_count   
+     case "algorithmStorageSupport_count" => algorithmStorageSupport_count  
+     case "algorithmSchedule_count" => algorithmSchedule_count   
     case _ => null 
     } 
     ret 
@@ -56,8 +56,8 @@ case class VAlgorithmImplementationSummaryDto (
      case "executorTypeId" => "Long"  
      case "algorithmImplementationName" => "String"  
      case "algorithmImplementationClass" => "String"  
-     case "algorithmSchedule_count" => "Int"  
-     case "algorithmStorageSupport_count" => "Int"   
+     case "algorithmStorageSupport_count" => "Int"  
+     case "algorithmSchedule_count" => "Int"   
     case _ => "Object" 
     } 
     ret 
@@ -73,8 +73,8 @@ object VAlgorithmImplementationSummaryDto {
    val FIELD_executorTypeId = "executorTypeId";
    val FIELD_algorithmImplementationName = "algorithmImplementationName";
    val FIELD_algorithmImplementationClass = "algorithmImplementationClass";
-   val FIELD_algorithmSchedule_count = "algorithmSchedule_count";
    val FIELD_algorithmStorageSupport_count = "algorithmStorageSupport_count";
+   val FIELD_algorithmSchedule_count = "algorithmSchedule_count";
 
 }
 

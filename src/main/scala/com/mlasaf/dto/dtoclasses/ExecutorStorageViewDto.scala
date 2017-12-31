@@ -15,23 +15,20 @@ case class ExecutorStorageViewDto (
      , val executorStorageId : Long
      , val sourceDownloadId : Long
      , val sourceViewId : Long
-     , val storagePath : String
-     , val viewSize : Long
-     , val viewRowsCount : Long
-     , val isValid : Int 
+     , val executorStorageResourceId : Long 
      ) extends BaseDto {  
    def tableName : String = {    "executorStorageView";    }  
-   def fields : String = {    "executorStorageViewId,guid,insertedRowDate,lastUpdatedDate,executorStorageSnapshotId,executorStorageId,sourceDownloadId,sourceViewId,storagePath,viewSize,viewRowsCount,isValid";    }  
+   def fields : String = {    "executorStorageViewId,guid,insertedRowDate,lastUpdatedDate,executorStorageSnapshotId,executorStorageId,sourceDownloadId,sourceViewId,executorStorageResourceId";    }  
    def pkFields : String = {    "executorStorageViewId";    }  
-   def fkFields : String = {    "executorStorageId,executorStorageSnapshotId,sourceDownloadId,sourceViewId";    }  
+   def fkFields : String = {    "executorStorageId,executorStorageResourceId,executorStorageSnapshotId,sourceDownloadId,sourceViewId";    }  
    def nameField : String = {    "";    }  
  def getPk() : Long = {    executorStorageViewId  }  
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(executorStorageViewId,guid,insertedRowDate,lastUpdatedDate,executorStorageSnapshotId,executorStorageId,sourceDownloadId,sourceViewId,storagePath,viewSize,viewRowsCount,isValid)  }  
- def toStringArray() : Array[String] = {    Array(""+executorStorageViewId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorStorageSnapshotId,""+executorStorageId,""+sourceDownloadId,""+sourceViewId,""+storagePath,""+viewSize,""+viewRowsCount,""+isValid)   }  
- def toFullString() : String = {    "executorStorageViewId:'"+executorStorageViewId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorStorageSnapshotId:'"+executorStorageSnapshotId+"'"+","+"executorStorageId:'"+executorStorageId+"'"+","+"sourceDownloadId:'"+sourceDownloadId+"'"+","+"sourceViewId:'"+sourceViewId+"'"+","+"storagePath:'"+storagePath+"'"+","+"viewSize:'"+viewSize+"'"+","+"viewRowsCount:'"+viewRowsCount+"'"+","+"isValid:'"+isValid+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(executorStorageViewId,guid,insertedRowDate,lastUpdatedDate,executorStorageSnapshotId,executorStorageId,sourceDownloadId,sourceViewId,executorStorageResourceId)  }  
+ def toStringArray() : Array[String] = {    Array(""+executorStorageViewId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorStorageSnapshotId,""+executorStorageId,""+sourceDownloadId,""+sourceViewId,""+executorStorageResourceId)   }  
+ def toFullString() : String = {    "executorStorageViewId:'"+executorStorageViewId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorStorageSnapshotId:'"+executorStorageSnapshotId+"'"+","+"executorStorageId:'"+executorStorageId+"'"+","+"sourceDownloadId:'"+sourceDownloadId+"'"+","+"sourceViewId:'"+sourceViewId+"'"+","+"executorStorageResourceId:'"+executorStorageResourceId+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "executorStorageViewId" => executorStorageViewId  
@@ -42,10 +39,7 @@ case class ExecutorStorageViewDto (
      case "executorStorageId" => executorStorageId  
      case "sourceDownloadId" => sourceDownloadId  
      case "sourceViewId" => sourceViewId  
-     case "storagePath" => storagePath  
-     case "viewSize" => viewSize  
-     case "viewRowsCount" => viewRowsCount  
-     case "isValid" => isValid   
+     case "executorStorageResourceId" => executorStorageResourceId   
     case _ => null 
     } 
     ret 
@@ -60,29 +54,23 @@ case class ExecutorStorageViewDto (
      case "executorStorageId" => "Long"  
      case "sourceDownloadId" => "Long"  
      case "sourceViewId" => "Long"  
-     case "storagePath" => "String"  
-     case "viewSize" => "Long"  
-     case "viewRowsCount" => "Long"  
-     case "isValid" => "Int"   
+     case "executorStorageResourceId" => "Long"   
     case _ => "Object" 
     } 
     ret 
   } 
    def prepareInsert(connection : java.sql.Connection) : java.sql.PreparedStatement = {
-     val stat = connection.prepareStatement("insert into executorStorageView(guid,executorStorageSnapshotId,executorStorageId,sourceDownloadId,sourceViewId,storagePath,viewSize,viewRowsCount,isValid) values (?,?,?,?,?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
+     val stat = connection.prepareStatement("insert into executorStorageView(guid,executorStorageSnapshotId,executorStorageId,sourceDownloadId,sourceViewId,executorStorageResourceId) values (?,?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
     stat.setObject(1, guid);
     stat.setObject(2, executorStorageSnapshotId);
     stat.setObject(3, executorStorageId);
     stat.setObject(4, sourceDownloadId);
     stat.setObject(5, sourceViewId);
-    stat.setObject(6, storagePath);
-    stat.setObject(7, viewSize);
-    stat.setObject(8, viewRowsCount);
-    stat.setObject(9, isValid);
+    stat.setObject(6, executorStorageResourceId);
     return stat; 
    } 
-   def modify(executorStorageSnapshotId : Long, executorStorageId : Long, sourceDownloadId : Long, sourceViewId : Long, storagePath : String, viewSize : Long, viewRowsCount : Long, isValid : Int) : ExecutorStorageViewDto = {
-    val dtoModified = new ExecutorStorageViewDto(this.executorStorageViewId,this.guid,this.insertedRowDate,new java.util.Date(),executorStorageSnapshotId,executorStorageId,sourceDownloadId,sourceViewId,storagePath,viewSize,viewRowsCount,isValid);
+   def modify(executorStorageSnapshotId : Long, executorStorageId : Long, sourceDownloadId : Long, sourceViewId : Long, executorStorageResourceId : Long) : ExecutorStorageViewDto = {
+    val dtoModified = new ExecutorStorageViewDto(this.executorStorageViewId,this.guid,this.insertedRowDate,new java.util.Date(),executorStorageSnapshotId,executorStorageId,sourceDownloadId,sourceViewId,executorStorageResourceId);
     dtoModified
   }
  } 
@@ -96,13 +84,10 @@ object ExecutorStorageViewDto {
    val FIELD_executorStorageId = "executorStorageId";
    val FIELD_sourceDownloadId = "sourceDownloadId";
    val FIELD_sourceViewId = "sourceViewId";
-   val FIELD_storagePath = "storagePath";
-   val FIELD_viewSize = "viewSize";
-   val FIELD_viewRowsCount = "viewRowsCount";
-   val FIELD_isValid = "isValid";
+   val FIELD_executorStorageResourceId = "executorStorageResourceId";
 
-  def createNewExecutorStorageViewDto(executorStorageSnapshotId : Long, executorStorageId : Long, sourceDownloadId : Long, sourceViewId : Long, storagePath : String, viewSize : Long, viewRowsCount : Long, isValid : Int) : ExecutorStorageViewDto = {  
-     val dto = new ExecutorStorageViewDto(0,0,new java.util.Date(),new java.util.Date(),executorStorageSnapshotId,executorStorageId,sourceDownloadId,sourceViewId,storagePath,viewSize,viewRowsCount,isValid)   
+  def createNewExecutorStorageViewDto(executorStorageSnapshotId : Long, executorStorageId : Long, sourceDownloadId : Long, sourceViewId : Long, executorStorageResourceId : Long) : ExecutorStorageViewDto = {  
+     val dto = new ExecutorStorageViewDto(0,0,new java.util.Date(),new java.util.Date(),executorStorageSnapshotId,executorStorageId,sourceDownloadId,sourceViewId,executorStorageResourceId)   
     dto 
   } 
 

@@ -97,5 +97,10 @@ import java.util.Date
    val dtos : List[VAlgorithmScheduleViewSummaryDto] = SQL("select * from vAlgorithmScheduleViewSummary where algorithmRunView_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewSummaryDto].*);  
    dtos  
  }  
+ def getDtosByDownloadTransformAlgorithmSchedule_count(colValue : Int) : List[VAlgorithmScheduleViewSummaryDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmScheduleViewSummaryDto] = SQL("select * from vAlgorithmScheduleViewSummary where downloadTransformAlgorithmSchedule_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewSummaryDto].*);  
+   dtos  
+ }  
 
 } 

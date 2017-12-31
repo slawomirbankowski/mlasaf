@@ -13,28 +13,51 @@ case class VAlgorithmOutputDto (
      , val lastUpdatedDate : java.util.Date
      , val algorithmRunId : Long
      , val algorithmOutputTypeId : Long
-     , val executorStorageViewId : Long
-     , val outputPath : String
+     , val executorStorageId : Long
+     , val executorStorageResourceId : Long
      , val algorithmOutputType_algorithmOutputTypeId : Long
      , val algorithmOutputType_guid : Long
      , val algorithmOutputType_insertedRowDate : java.util.Date
      , val algorithmOutputType_lastUpdatedDate : java.util.Date
      , val algorithmOutputType_algorithmOutputTypeName : String
-     , val executorStorageView_executorStorageViewId : Long
-     , val executorStorageView_guid : Long
-     , val executorStorageView_insertedRowDate : java.util.Date
-     , val executorStorageView_lastUpdatedDate : java.util.Date
-     , val executorStorageView_executorStorageSnapshotId : Long
-     , val executorStorageView_executorStorageId : Long
-     , val executorStorageView_sourceDownloadId : Long
-     , val executorStorageView_sourceViewId : Long
-     , val executorStorageView_storagePath : String
-     , val executorStorageView_viewSize : Long
-     , val executorStorageView_viewRowsCount : Long
-     , val executorStorageView_isValid : Int 
+     , val algorithmRun_algorithmRunId : Long
+     , val algorithmRun_guid : Long
+     , val algorithmRun_insertedRowDate : java.util.Date
+     , val algorithmRun_lastUpdatedDate : java.util.Date
+     , val algorithmRun_algorithmScheduleId : Long
+     , val algorithmRun_executorInstanceId : Long
+     , val algorithmRun_executorStorageId : Long
+     , val algorithmRun_algorithmRunTypeId : Long
+     , val algorithmRun_algorithmRunName : String
+     , val algorithmRun_runDate : java.util.Date
+     , val algorithmRun_runStatus : String
+     , val algorithmRun_isError : Int
+     , val algorithmRun_errorDescription : String
+     , val algorithmRun_isRunning : Int
+     , val algorithmRun_isFinished : Int
+     , val executorStorage_executorStorageId : Long
+     , val executorStorage_guid : Long
+     , val executorStorage_insertedRowDate : java.util.Date
+     , val executorStorage_lastUpdatedDate : java.util.Date
+     , val executorStorage_executorHostId : Long
+     , val executorStorage_executorStorageTypeId : Long
+     , val executorStorage_storageDefinition : String
+     , val executorStorage_storageBasePath : String
+     , val executorStorage_storageFulllPath : String
+     , val executorStorage_isRunning : Int
+     , val executorStorage_portNumber : Int
+     , val executorStorageResource_executorStorageResourceId : Long
+     , val executorStorageResource_guid : Long
+     , val executorStorageResource_insertedRowDate : java.util.Date
+     , val executorStorageResource_lastUpdatedDate : java.util.Date
+     , val executorStorageResource_executorStorageId : Long
+     , val executorStorageResource_resourcePath : String
+     , val executorStorageResource_resourceSize : Long
+     , val executorStorageResource_resourceRowsCount : Long
+     , val executorStorageResource_isValid : Int 
      ) extends BaseReadOnlyDto {  
    def tableName : String = {    "vAlgorithmOutput";    }  
-   def fields : String = {    "algorithmOutputId,guid,insertedRowDate,lastUpdatedDate,algorithmRunId,algorithmOutputTypeId,executorStorageViewId,outputPath,algorithmOutputType_algorithmOutputTypeId,algorithmOutputType_guid,algorithmOutputType_insertedRowDate,algorithmOutputType_lastUpdatedDate,algorithmOutputType_algorithmOutputTypeName,executorStorageView_executorStorageViewId,executorStorageView_guid,executorStorageView_insertedRowDate,executorStorageView_lastUpdatedDate,executorStorageView_executorStorageSnapshotId,executorStorageView_executorStorageId,executorStorageView_sourceDownloadId,executorStorageView_sourceViewId,executorStorageView_storagePath,executorStorageView_viewSize,executorStorageView_viewRowsCount,executorStorageView_isValid";    }  
+   def fields : String = {    "algorithmOutputId,guid,insertedRowDate,lastUpdatedDate,algorithmRunId,algorithmOutputTypeId,executorStorageId,executorStorageResourceId,algorithmOutputType_algorithmOutputTypeId,algorithmOutputType_guid,algorithmOutputType_insertedRowDate,algorithmOutputType_lastUpdatedDate,algorithmOutputType_algorithmOutputTypeName,algorithmRun_algorithmRunId,algorithmRun_guid,algorithmRun_insertedRowDate,algorithmRun_lastUpdatedDate,algorithmRun_algorithmScheduleId,algorithmRun_executorInstanceId,algorithmRun_executorStorageId,algorithmRun_algorithmRunTypeId,algorithmRun_algorithmRunName,algorithmRun_runDate,algorithmRun_runStatus,algorithmRun_isError,algorithmRun_errorDescription,algorithmRun_isRunning,algorithmRun_isFinished,executorStorage_executorStorageId,executorStorage_guid,executorStorage_insertedRowDate,executorStorage_lastUpdatedDate,executorStorage_executorHostId,executorStorage_executorStorageTypeId,executorStorage_storageDefinition,executorStorage_storageBasePath,executorStorage_storageFulllPath,executorStorage_isRunning,executorStorage_portNumber,executorStorageResource_executorStorageResourceId,executorStorageResource_guid,executorStorageResource_insertedRowDate,executorStorageResource_lastUpdatedDate,executorStorageResource_executorStorageId,executorStorageResource_resourcePath,executorStorageResource_resourceSize,executorStorageResource_resourceRowsCount,executorStorageResource_isValid";    }  
    def pkFields : String = {    "";    }  
    def fkFields : String = {    "";    }  
    def nameField : String = {    "";    }  
@@ -42,9 +65,9 @@ case class VAlgorithmOutputDto (
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(algorithmOutputId,guid,insertedRowDate,lastUpdatedDate,algorithmRunId,algorithmOutputTypeId,executorStorageViewId,outputPath,algorithmOutputType_algorithmOutputTypeId,algorithmOutputType_guid,algorithmOutputType_insertedRowDate,algorithmOutputType_lastUpdatedDate,algorithmOutputType_algorithmOutputTypeName,executorStorageView_executorStorageViewId,executorStorageView_guid,executorStorageView_insertedRowDate,executorStorageView_lastUpdatedDate,executorStorageView_executorStorageSnapshotId,executorStorageView_executorStorageId,executorStorageView_sourceDownloadId,executorStorageView_sourceViewId,executorStorageView_storagePath,executorStorageView_viewSize,executorStorageView_viewRowsCount,executorStorageView_isValid)  }  
- def toStringArray() : Array[String] = {    Array(""+algorithmOutputId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmRunId,""+algorithmOutputTypeId,""+executorStorageViewId,""+outputPath,""+algorithmOutputType_algorithmOutputTypeId,""+algorithmOutputType_guid,""+algorithmOutputType_insertedRowDate,""+algorithmOutputType_lastUpdatedDate,""+algorithmOutputType_algorithmOutputTypeName,""+executorStorageView_executorStorageViewId,""+executorStorageView_guid,""+executorStorageView_insertedRowDate,""+executorStorageView_lastUpdatedDate,""+executorStorageView_executorStorageSnapshotId,""+executorStorageView_executorStorageId,""+executorStorageView_sourceDownloadId,""+executorStorageView_sourceViewId,""+executorStorageView_storagePath,""+executorStorageView_viewSize,""+executorStorageView_viewRowsCount,""+executorStorageView_isValid)   }  
- def toFullString() : String = {    "algorithmOutputId:'"+algorithmOutputId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmRunId:'"+algorithmRunId+"'"+","+"algorithmOutputTypeId:'"+algorithmOutputTypeId+"'"+","+"executorStorageViewId:'"+executorStorageViewId+"'"+","+"outputPath:'"+outputPath+"'"+","+"algorithmOutputType_algorithmOutputTypeId:'"+algorithmOutputType_algorithmOutputTypeId+"'"+","+"algorithmOutputType_guid:'"+algorithmOutputType_guid+"'"+","+"algorithmOutputType_insertedRowDate:'"+algorithmOutputType_insertedRowDate+"'"+","+"algorithmOutputType_lastUpdatedDate:'"+algorithmOutputType_lastUpdatedDate+"'"+","+"algorithmOutputType_algorithmOutputTypeName:'"+algorithmOutputType_algorithmOutputTypeName+"'"+","+"executorStorageView_executorStorageViewId:'"+executorStorageView_executorStorageViewId+"'"+","+"executorStorageView_guid:'"+executorStorageView_guid+"'"+","+"executorStorageView_insertedRowDate:'"+executorStorageView_insertedRowDate+"'"+","+"executorStorageView_lastUpdatedDate:'"+executorStorageView_lastUpdatedDate+"'"+","+"executorStorageView_executorStorageSnapshotId:'"+executorStorageView_executorStorageSnapshotId+"'"+","+"executorStorageView_executorStorageId:'"+executorStorageView_executorStorageId+"'"+","+"executorStorageView_sourceDownloadId:'"+executorStorageView_sourceDownloadId+"'"+","+"executorStorageView_sourceViewId:'"+executorStorageView_sourceViewId+"'"+","+"executorStorageView_storagePath:'"+executorStorageView_storagePath+"'"+","+"executorStorageView_viewSize:'"+executorStorageView_viewSize+"'"+","+"executorStorageView_viewRowsCount:'"+executorStorageView_viewRowsCount+"'"+","+"executorStorageView_isValid:'"+executorStorageView_isValid+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(algorithmOutputId,guid,insertedRowDate,lastUpdatedDate,algorithmRunId,algorithmOutputTypeId,executorStorageId,executorStorageResourceId,algorithmOutputType_algorithmOutputTypeId,algorithmOutputType_guid,algorithmOutputType_insertedRowDate,algorithmOutputType_lastUpdatedDate,algorithmOutputType_algorithmOutputTypeName,algorithmRun_algorithmRunId,algorithmRun_guid,algorithmRun_insertedRowDate,algorithmRun_lastUpdatedDate,algorithmRun_algorithmScheduleId,algorithmRun_executorInstanceId,algorithmRun_executorStorageId,algorithmRun_algorithmRunTypeId,algorithmRun_algorithmRunName,algorithmRun_runDate,algorithmRun_runStatus,algorithmRun_isError,algorithmRun_errorDescription,algorithmRun_isRunning,algorithmRun_isFinished,executorStorage_executorStorageId,executorStorage_guid,executorStorage_insertedRowDate,executorStorage_lastUpdatedDate,executorStorage_executorHostId,executorStorage_executorStorageTypeId,executorStorage_storageDefinition,executorStorage_storageBasePath,executorStorage_storageFulllPath,executorStorage_isRunning,executorStorage_portNumber,executorStorageResource_executorStorageResourceId,executorStorageResource_guid,executorStorageResource_insertedRowDate,executorStorageResource_lastUpdatedDate,executorStorageResource_executorStorageId,executorStorageResource_resourcePath,executorStorageResource_resourceSize,executorStorageResource_resourceRowsCount,executorStorageResource_isValid)  }  
+ def toStringArray() : Array[String] = {    Array(""+algorithmOutputId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmRunId,""+algorithmOutputTypeId,""+executorStorageId,""+executorStorageResourceId,""+algorithmOutputType_algorithmOutputTypeId,""+algorithmOutputType_guid,""+algorithmOutputType_insertedRowDate,""+algorithmOutputType_lastUpdatedDate,""+algorithmOutputType_algorithmOutputTypeName,""+algorithmRun_algorithmRunId,""+algorithmRun_guid,""+algorithmRun_insertedRowDate,""+algorithmRun_lastUpdatedDate,""+algorithmRun_algorithmScheduleId,""+algorithmRun_executorInstanceId,""+algorithmRun_executorStorageId,""+algorithmRun_algorithmRunTypeId,""+algorithmRun_algorithmRunName,""+algorithmRun_runDate,""+algorithmRun_runStatus,""+algorithmRun_isError,""+algorithmRun_errorDescription,""+algorithmRun_isRunning,""+algorithmRun_isFinished,""+executorStorage_executorStorageId,""+executorStorage_guid,""+executorStorage_insertedRowDate,""+executorStorage_lastUpdatedDate,""+executorStorage_executorHostId,""+executorStorage_executorStorageTypeId,""+executorStorage_storageDefinition,""+executorStorage_storageBasePath,""+executorStorage_storageFulllPath,""+executorStorage_isRunning,""+executorStorage_portNumber,""+executorStorageResource_executorStorageResourceId,""+executorStorageResource_guid,""+executorStorageResource_insertedRowDate,""+executorStorageResource_lastUpdatedDate,""+executorStorageResource_executorStorageId,""+executorStorageResource_resourcePath,""+executorStorageResource_resourceSize,""+executorStorageResource_resourceRowsCount,""+executorStorageResource_isValid)   }  
+ def toFullString() : String = {    "algorithmOutputId:'"+algorithmOutputId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmRunId:'"+algorithmRunId+"'"+","+"algorithmOutputTypeId:'"+algorithmOutputTypeId+"'"+","+"executorStorageId:'"+executorStorageId+"'"+","+"executorStorageResourceId:'"+executorStorageResourceId+"'"+","+"algorithmOutputType_algorithmOutputTypeId:'"+algorithmOutputType_algorithmOutputTypeId+"'"+","+"algorithmOutputType_guid:'"+algorithmOutputType_guid+"'"+","+"algorithmOutputType_insertedRowDate:'"+algorithmOutputType_insertedRowDate+"'"+","+"algorithmOutputType_lastUpdatedDate:'"+algorithmOutputType_lastUpdatedDate+"'"+","+"algorithmOutputType_algorithmOutputTypeName:'"+algorithmOutputType_algorithmOutputTypeName+"'"+","+"algorithmRun_algorithmRunId:'"+algorithmRun_algorithmRunId+"'"+","+"algorithmRun_guid:'"+algorithmRun_guid+"'"+","+"algorithmRun_insertedRowDate:'"+algorithmRun_insertedRowDate+"'"+","+"algorithmRun_lastUpdatedDate:'"+algorithmRun_lastUpdatedDate+"'"+","+"algorithmRun_algorithmScheduleId:'"+algorithmRun_algorithmScheduleId+"'"+","+"algorithmRun_executorInstanceId:'"+algorithmRun_executorInstanceId+"'"+","+"algorithmRun_executorStorageId:'"+algorithmRun_executorStorageId+"'"+","+"algorithmRun_algorithmRunTypeId:'"+algorithmRun_algorithmRunTypeId+"'"+","+"algorithmRun_algorithmRunName:'"+algorithmRun_algorithmRunName+"'"+","+"algorithmRun_runDate:'"+algorithmRun_runDate+"'"+","+"algorithmRun_runStatus:'"+algorithmRun_runStatus+"'"+","+"algorithmRun_isError:'"+algorithmRun_isError+"'"+","+"algorithmRun_errorDescription:'"+algorithmRun_errorDescription+"'"+","+"algorithmRun_isRunning:'"+algorithmRun_isRunning+"'"+","+"algorithmRun_isFinished:'"+algorithmRun_isFinished+"'"+","+"executorStorage_executorStorageId:'"+executorStorage_executorStorageId+"'"+","+"executorStorage_guid:'"+executorStorage_guid+"'"+","+"executorStorage_insertedRowDate:'"+executorStorage_insertedRowDate+"'"+","+"executorStorage_lastUpdatedDate:'"+executorStorage_lastUpdatedDate+"'"+","+"executorStorage_executorHostId:'"+executorStorage_executorHostId+"'"+","+"executorStorage_executorStorageTypeId:'"+executorStorage_executorStorageTypeId+"'"+","+"executorStorage_storageDefinition:'"+executorStorage_storageDefinition+"'"+","+"executorStorage_storageBasePath:'"+executorStorage_storageBasePath+"'"+","+"executorStorage_storageFulllPath:'"+executorStorage_storageFulllPath+"'"+","+"executorStorage_isRunning:'"+executorStorage_isRunning+"'"+","+"executorStorage_portNumber:'"+executorStorage_portNumber+"'"+","+"executorStorageResource_executorStorageResourceId:'"+executorStorageResource_executorStorageResourceId+"'"+","+"executorStorageResource_guid:'"+executorStorageResource_guid+"'"+","+"executorStorageResource_insertedRowDate:'"+executorStorageResource_insertedRowDate+"'"+","+"executorStorageResource_lastUpdatedDate:'"+executorStorageResource_lastUpdatedDate+"'"+","+"executorStorageResource_executorStorageId:'"+executorStorageResource_executorStorageId+"'"+","+"executorStorageResource_resourcePath:'"+executorStorageResource_resourcePath+"'"+","+"executorStorageResource_resourceSize:'"+executorStorageResource_resourceSize+"'"+","+"executorStorageResource_resourceRowsCount:'"+executorStorageResource_resourceRowsCount+"'"+","+"executorStorageResource_isValid:'"+executorStorageResource_isValid+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "algorithmOutputId" => algorithmOutputId  
@@ -53,25 +76,48 @@ case class VAlgorithmOutputDto (
      case "lastUpdatedDate" => lastUpdatedDate  
      case "algorithmRunId" => algorithmRunId  
      case "algorithmOutputTypeId" => algorithmOutputTypeId  
-     case "executorStorageViewId" => executorStorageViewId  
-     case "outputPath" => outputPath  
+     case "executorStorageId" => executorStorageId  
+     case "executorStorageResourceId" => executorStorageResourceId  
      case "algorithmOutputType_algorithmOutputTypeId" => algorithmOutputType_algorithmOutputTypeId  
      case "algorithmOutputType_guid" => algorithmOutputType_guid  
      case "algorithmOutputType_insertedRowDate" => algorithmOutputType_insertedRowDate  
      case "algorithmOutputType_lastUpdatedDate" => algorithmOutputType_lastUpdatedDate  
      case "algorithmOutputType_algorithmOutputTypeName" => algorithmOutputType_algorithmOutputTypeName  
-     case "executorStorageView_executorStorageViewId" => executorStorageView_executorStorageViewId  
-     case "executorStorageView_guid" => executorStorageView_guid  
-     case "executorStorageView_insertedRowDate" => executorStorageView_insertedRowDate  
-     case "executorStorageView_lastUpdatedDate" => executorStorageView_lastUpdatedDate  
-     case "executorStorageView_executorStorageSnapshotId" => executorStorageView_executorStorageSnapshotId  
-     case "executorStorageView_executorStorageId" => executorStorageView_executorStorageId  
-     case "executorStorageView_sourceDownloadId" => executorStorageView_sourceDownloadId  
-     case "executorStorageView_sourceViewId" => executorStorageView_sourceViewId  
-     case "executorStorageView_storagePath" => executorStorageView_storagePath  
-     case "executorStorageView_viewSize" => executorStorageView_viewSize  
-     case "executorStorageView_viewRowsCount" => executorStorageView_viewRowsCount  
-     case "executorStorageView_isValid" => executorStorageView_isValid   
+     case "algorithmRun_algorithmRunId" => algorithmRun_algorithmRunId  
+     case "algorithmRun_guid" => algorithmRun_guid  
+     case "algorithmRun_insertedRowDate" => algorithmRun_insertedRowDate  
+     case "algorithmRun_lastUpdatedDate" => algorithmRun_lastUpdatedDate  
+     case "algorithmRun_algorithmScheduleId" => algorithmRun_algorithmScheduleId  
+     case "algorithmRun_executorInstanceId" => algorithmRun_executorInstanceId  
+     case "algorithmRun_executorStorageId" => algorithmRun_executorStorageId  
+     case "algorithmRun_algorithmRunTypeId" => algorithmRun_algorithmRunTypeId  
+     case "algorithmRun_algorithmRunName" => algorithmRun_algorithmRunName  
+     case "algorithmRun_runDate" => algorithmRun_runDate  
+     case "algorithmRun_runStatus" => algorithmRun_runStatus  
+     case "algorithmRun_isError" => algorithmRun_isError  
+     case "algorithmRun_errorDescription" => algorithmRun_errorDescription  
+     case "algorithmRun_isRunning" => algorithmRun_isRunning  
+     case "algorithmRun_isFinished" => algorithmRun_isFinished  
+     case "executorStorage_executorStorageId" => executorStorage_executorStorageId  
+     case "executorStorage_guid" => executorStorage_guid  
+     case "executorStorage_insertedRowDate" => executorStorage_insertedRowDate  
+     case "executorStorage_lastUpdatedDate" => executorStorage_lastUpdatedDate  
+     case "executorStorage_executorHostId" => executorStorage_executorHostId  
+     case "executorStorage_executorStorageTypeId" => executorStorage_executorStorageTypeId  
+     case "executorStorage_storageDefinition" => executorStorage_storageDefinition  
+     case "executorStorage_storageBasePath" => executorStorage_storageBasePath  
+     case "executorStorage_storageFulllPath" => executorStorage_storageFulllPath  
+     case "executorStorage_isRunning" => executorStorage_isRunning  
+     case "executorStorage_portNumber" => executorStorage_portNumber  
+     case "executorStorageResource_executorStorageResourceId" => executorStorageResource_executorStorageResourceId  
+     case "executorStorageResource_guid" => executorStorageResource_guid  
+     case "executorStorageResource_insertedRowDate" => executorStorageResource_insertedRowDate  
+     case "executorStorageResource_lastUpdatedDate" => executorStorageResource_lastUpdatedDate  
+     case "executorStorageResource_executorStorageId" => executorStorageResource_executorStorageId  
+     case "executorStorageResource_resourcePath" => executorStorageResource_resourcePath  
+     case "executorStorageResource_resourceSize" => executorStorageResource_resourceSize  
+     case "executorStorageResource_resourceRowsCount" => executorStorageResource_resourceRowsCount  
+     case "executorStorageResource_isValid" => executorStorageResource_isValid   
     case _ => null 
     } 
     ret 
@@ -84,25 +130,48 @@ case class VAlgorithmOutputDto (
      case "lastUpdatedDate" => "java.util.Date"  
      case "algorithmRunId" => "Long"  
      case "algorithmOutputTypeId" => "Long"  
-     case "executorStorageViewId" => "Long"  
-     case "outputPath" => "String"  
+     case "executorStorageId" => "Long"  
+     case "executorStorageResourceId" => "Long"  
      case "algorithmOutputType_algorithmOutputTypeId" => "Long"  
      case "algorithmOutputType_guid" => "Long"  
      case "algorithmOutputType_insertedRowDate" => "java.util.Date"  
      case "algorithmOutputType_lastUpdatedDate" => "java.util.Date"  
      case "algorithmOutputType_algorithmOutputTypeName" => "String"  
-     case "executorStorageView_executorStorageViewId" => "Long"  
-     case "executorStorageView_guid" => "Long"  
-     case "executorStorageView_insertedRowDate" => "java.util.Date"  
-     case "executorStorageView_lastUpdatedDate" => "java.util.Date"  
-     case "executorStorageView_executorStorageSnapshotId" => "Long"  
-     case "executorStorageView_executorStorageId" => "Long"  
-     case "executorStorageView_sourceDownloadId" => "Long"  
-     case "executorStorageView_sourceViewId" => "Long"  
-     case "executorStorageView_storagePath" => "String"  
-     case "executorStorageView_viewSize" => "Long"  
-     case "executorStorageView_viewRowsCount" => "Long"  
-     case "executorStorageView_isValid" => "Int"   
+     case "algorithmRun_algorithmRunId" => "Long"  
+     case "algorithmRun_guid" => "Long"  
+     case "algorithmRun_insertedRowDate" => "java.util.Date"  
+     case "algorithmRun_lastUpdatedDate" => "java.util.Date"  
+     case "algorithmRun_algorithmScheduleId" => "Long"  
+     case "algorithmRun_executorInstanceId" => "Long"  
+     case "algorithmRun_executorStorageId" => "Long"  
+     case "algorithmRun_algorithmRunTypeId" => "Long"  
+     case "algorithmRun_algorithmRunName" => "String"  
+     case "algorithmRun_runDate" => "java.util.Date"  
+     case "algorithmRun_runStatus" => "String"  
+     case "algorithmRun_isError" => "Int"  
+     case "algorithmRun_errorDescription" => "String"  
+     case "algorithmRun_isRunning" => "Int"  
+     case "algorithmRun_isFinished" => "Int"  
+     case "executorStorage_executorStorageId" => "Long"  
+     case "executorStorage_guid" => "Long"  
+     case "executorStorage_insertedRowDate" => "java.util.Date"  
+     case "executorStorage_lastUpdatedDate" => "java.util.Date"  
+     case "executorStorage_executorHostId" => "Long"  
+     case "executorStorage_executorStorageTypeId" => "Long"  
+     case "executorStorage_storageDefinition" => "String"  
+     case "executorStorage_storageBasePath" => "String"  
+     case "executorStorage_storageFulllPath" => "String"  
+     case "executorStorage_isRunning" => "Int"  
+     case "executorStorage_portNumber" => "Int"  
+     case "executorStorageResource_executorStorageResourceId" => "Long"  
+     case "executorStorageResource_guid" => "Long"  
+     case "executorStorageResource_insertedRowDate" => "java.util.Date"  
+     case "executorStorageResource_lastUpdatedDate" => "java.util.Date"  
+     case "executorStorageResource_executorStorageId" => "Long"  
+     case "executorStorageResource_resourcePath" => "String"  
+     case "executorStorageResource_resourceSize" => "Long"  
+     case "executorStorageResource_resourceRowsCount" => "Long"  
+     case "executorStorageResource_isValid" => "Int"   
     case _ => "Object" 
     } 
     ret 
@@ -116,25 +185,48 @@ object VAlgorithmOutputDto {
    val FIELD_lastUpdatedDate = "lastUpdatedDate";
    val FIELD_algorithmRunId = "algorithmRunId";
    val FIELD_algorithmOutputTypeId = "algorithmOutputTypeId";
-   val FIELD_executorStorageViewId = "executorStorageViewId";
-   val FIELD_outputPath = "outputPath";
+   val FIELD_executorStorageId = "executorStorageId";
+   val FIELD_executorStorageResourceId = "executorStorageResourceId";
    val FIELD_algorithmOutputType_algorithmOutputTypeId = "algorithmOutputType_algorithmOutputTypeId";
    val FIELD_algorithmOutputType_guid = "algorithmOutputType_guid";
    val FIELD_algorithmOutputType_insertedRowDate = "algorithmOutputType_insertedRowDate";
    val FIELD_algorithmOutputType_lastUpdatedDate = "algorithmOutputType_lastUpdatedDate";
    val FIELD_algorithmOutputType_algorithmOutputTypeName = "algorithmOutputType_algorithmOutputTypeName";
-   val FIELD_executorStorageView_executorStorageViewId = "executorStorageView_executorStorageViewId";
-   val FIELD_executorStorageView_guid = "executorStorageView_guid";
-   val FIELD_executorStorageView_insertedRowDate = "executorStorageView_insertedRowDate";
-   val FIELD_executorStorageView_lastUpdatedDate = "executorStorageView_lastUpdatedDate";
-   val FIELD_executorStorageView_executorStorageSnapshotId = "executorStorageView_executorStorageSnapshotId";
-   val FIELD_executorStorageView_executorStorageId = "executorStorageView_executorStorageId";
-   val FIELD_executorStorageView_sourceDownloadId = "executorStorageView_sourceDownloadId";
-   val FIELD_executorStorageView_sourceViewId = "executorStorageView_sourceViewId";
-   val FIELD_executorStorageView_storagePath = "executorStorageView_storagePath";
-   val FIELD_executorStorageView_viewSize = "executorStorageView_viewSize";
-   val FIELD_executorStorageView_viewRowsCount = "executorStorageView_viewRowsCount";
-   val FIELD_executorStorageView_isValid = "executorStorageView_isValid";
+   val FIELD_algorithmRun_algorithmRunId = "algorithmRun_algorithmRunId";
+   val FIELD_algorithmRun_guid = "algorithmRun_guid";
+   val FIELD_algorithmRun_insertedRowDate = "algorithmRun_insertedRowDate";
+   val FIELD_algorithmRun_lastUpdatedDate = "algorithmRun_lastUpdatedDate";
+   val FIELD_algorithmRun_algorithmScheduleId = "algorithmRun_algorithmScheduleId";
+   val FIELD_algorithmRun_executorInstanceId = "algorithmRun_executorInstanceId";
+   val FIELD_algorithmRun_executorStorageId = "algorithmRun_executorStorageId";
+   val FIELD_algorithmRun_algorithmRunTypeId = "algorithmRun_algorithmRunTypeId";
+   val FIELD_algorithmRun_algorithmRunName = "algorithmRun_algorithmRunName";
+   val FIELD_algorithmRun_runDate = "algorithmRun_runDate";
+   val FIELD_algorithmRun_runStatus = "algorithmRun_runStatus";
+   val FIELD_algorithmRun_isError = "algorithmRun_isError";
+   val FIELD_algorithmRun_errorDescription = "algorithmRun_errorDescription";
+   val FIELD_algorithmRun_isRunning = "algorithmRun_isRunning";
+   val FIELD_algorithmRun_isFinished = "algorithmRun_isFinished";
+   val FIELD_executorStorage_executorStorageId = "executorStorage_executorStorageId";
+   val FIELD_executorStorage_guid = "executorStorage_guid";
+   val FIELD_executorStorage_insertedRowDate = "executorStorage_insertedRowDate";
+   val FIELD_executorStorage_lastUpdatedDate = "executorStorage_lastUpdatedDate";
+   val FIELD_executorStorage_executorHostId = "executorStorage_executorHostId";
+   val FIELD_executorStorage_executorStorageTypeId = "executorStorage_executorStorageTypeId";
+   val FIELD_executorStorage_storageDefinition = "executorStorage_storageDefinition";
+   val FIELD_executorStorage_storageBasePath = "executorStorage_storageBasePath";
+   val FIELD_executorStorage_storageFulllPath = "executorStorage_storageFulllPath";
+   val FIELD_executorStorage_isRunning = "executorStorage_isRunning";
+   val FIELD_executorStorage_portNumber = "executorStorage_portNumber";
+   val FIELD_executorStorageResource_executorStorageResourceId = "executorStorageResource_executorStorageResourceId";
+   val FIELD_executorStorageResource_guid = "executorStorageResource_guid";
+   val FIELD_executorStorageResource_insertedRowDate = "executorStorageResource_insertedRowDate";
+   val FIELD_executorStorageResource_lastUpdatedDate = "executorStorageResource_lastUpdatedDate";
+   val FIELD_executorStorageResource_executorStorageId = "executorStorageResource_executorStorageId";
+   val FIELD_executorStorageResource_resourcePath = "executorStorageResource_resourcePath";
+   val FIELD_executorStorageResource_resourceSize = "executorStorageResource_resourceSize";
+   val FIELD_executorStorageResource_resourceRowsCount = "executorStorageResource_resourceRowsCount";
+   val FIELD_executorStorageResource_isValid = "executorStorageResource_isValid";
 
 }
 

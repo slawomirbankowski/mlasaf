@@ -102,36 +102,6 @@ import java.util.Date
    val dtos : List[VExecutorStorageDto] = SQL("select * from vExecutorStorage where portNumber = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageDto].*);  
    dtos  
  }  
- def getDtosByExecutorStorageType_executorStorageTypeId(colValue : Long) : List[VExecutorStorageDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VExecutorStorageDto] = SQL("select * from vExecutorStorage where executorStorageType_executorStorageTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageDto].*);  
-   dtos  
- }  
- def getDtosByExecutorStorageType_guid(colValue : Long) : List[VExecutorStorageDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VExecutorStorageDto] = SQL("select * from vExecutorStorage where executorStorageType_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageDto].*);  
-   dtos  
- }  
- def getDtosByExecutorStorageType_insertedRowDate(colValue : java.util.Date) : List[VExecutorStorageDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VExecutorStorageDto] = SQL("select * from vExecutorStorage where executorStorageType_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageDto].*);  
-   dtos  
- }  
- def getDtosByExecutorStorageType_lastUpdatedDate(colValue : java.util.Date) : List[VExecutorStorageDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VExecutorStorageDto] = SQL("select * from vExecutorStorage where executorStorageType_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageDto].*);  
-   dtos  
- }  
- def getDtosByExecutorStorageType_executorStorageTypeName(colValue : String) : List[VExecutorStorageDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VExecutorStorageDto] = SQL("select * from vExecutorStorage where executorStorageType_executorStorageTypeName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageDto].*);  
-   dtos  
- }  
- def getDtosByExecutorStorageType_executorStorageTypeClass(colValue : String) : List[VExecutorStorageDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VExecutorStorageDto] = SQL("select * from vExecutorStorage where executorStorageType_executorStorageTypeClass = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageDto].*);  
-   dtos  
- }  
  def getDtosByExecutorHost_executorHostId(colValue : Long) : List[VExecutorStorageDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VExecutorStorageDto] = SQL("select * from vExecutorStorage where executorHost_executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageDto].*);  
@@ -180,6 +150,36 @@ import java.util.Date
  def getDtosByExecutorHost_isWorking(colValue : Int) : List[VExecutorStorageDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VExecutorStorageDto] = SQL("select * from vExecutorStorage where executorHost_isWorking = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorStorageType_executorStorageTypeId(colValue : Long) : List[VExecutorStorageDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorStorageDto] = SQL("select * from vExecutorStorage where executorStorageType_executorStorageTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorStorageType_guid(colValue : Long) : List[VExecutorStorageDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorStorageDto] = SQL("select * from vExecutorStorage where executorStorageType_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorStorageType_insertedRowDate(colValue : java.util.Date) : List[VExecutorStorageDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorStorageDto] = SQL("select * from vExecutorStorage where executorStorageType_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorStorageType_lastUpdatedDate(colValue : java.util.Date) : List[VExecutorStorageDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorStorageDto] = SQL("select * from vExecutorStorage where executorStorageType_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorStorageType_executorStorageTypeName(colValue : String) : List[VExecutorStorageDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorStorageDto] = SQL("select * from vExecutorStorage where executorStorageType_executorStorageTypeName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageDto].*);  
+   dtos  
+ }  
+ def getDtosByExecutorStorageType_executorStorageTypeClass(colValue : String) : List[VExecutorStorageDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorStorageDto] = SQL("select * from vExecutorStorage where executorStorageType_executorStorageTypeClass = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageDto].*);  
    dtos  
  }  
 

@@ -4,7 +4,7 @@
 		module="mlasaf"
 		revision="0.1.0"
 		status="integration"
-		publication="20171229183713"
+		publication="20171231032549"
 	>
 		<description>
 		mlasaf
@@ -34,8 +34,8 @@
 		<dependency org="org.scala-lang" name="scala-library" rev="2.11.8" conf="scala-tool->default,optional(default);compile->default(compile)"/>
 		<dependency org="org.slf4j" name="slf4j-api" rev="1.7.21" conf="compile->default(compile)"/>
 		<dependency org="log4j" name="log4j" rev="1.2.17" conf="compile->default(compile)"/>
-		<dependency org="net.sourceforge.jexcelapi" name="jxl" rev="2.6.12" conf="compile->default(compile)"/>
 		<dependency org="com.github.scopt" name="scopt_2.11" rev="3.7.0" conf="compile->default(compile)"/>
+		<dependency org="net.sourceforge.jexcelapi" name="jxl" rev="2.6.12" conf="compile->default(compile)"/>
 		<dependency org="commons-collections" name="commons-collections" rev="3.2.2" conf="compile->default(compile)"/>
 		<dependency org="org.apache.commons" name="commons-lang3" rev="3.1" conf="compile->default(compile)"/>
 		<dependency org="commons-lang" name="commons-lang" rev="2.2" conf="compile->default(compile)"/>
@@ -45,11 +45,11 @@
 		<dependency org="commons-dbcp" name="commons-dbcp" rev="1.4" conf="compile->default(compile)"/>
 		<dependency org="commons-io" name="commons-io" rev="2.6" conf="compile->default(compile)"/>
 		<dependency org="com.google.guava" name="guava" rev="23.4-jre" conf="compile->default(compile)"/>
+		<dependency org="javax.mail" name="javax.mail-api" rev="1.5.6" conf="compile->default(compile)"/>
+		<dependency org="org.rogach" name="scallop_2.11" rev="3.1.1" conf="compile->default(compile)"/>
 		<dependency org="org.apache.hadoop" name="hadoop-common" rev="2.6.3" conf="compile->default(compile)"/>
 		<dependency org="org.apache.hadoop" name="hadoop-nfs" rev="2.6.3" conf="compile->default(compile)"/>
 		<dependency org="gov.nist.math" name="jama" rev="1.0.2" conf="compile->default(compile)"/>
-		<dependency org="javax.mail" name="javax.mail-api" rev="1.5.6" conf="compile->default(compile)"/>
-		<dependency org="org.rogach" name="scallop_2.11" rev="3.1.1" conf="compile->default(compile)"/>
 		<dependency org="com.microsoft.sqlserver" name="sqljdbc4" rev="4.0" conf="test->default(compile)"/>
 		<dependency org="com.oracle" name="ojdbc6" rev="11.2.0.4.0-atlassian-hosted" conf="compile->default(compile)"/>
 		<dependency org="mysql" name="mysql-connector-java" rev="5.1.16" conf="compile->default(compile)"/>
@@ -74,6 +74,7 @@
 		<dependency org="com.typesafe.scala-logging" name="scala-logging_2.11" rev="3.5.0" conf="compile->default(compile)"/>
 		<dependency org="com.lucidchart" name="relate_2.11" rev="2.0.1" conf="compile->default(compile)"/>
 		<dependency org="com.typesafe.play" name="anorm_2.11" rev="2.5.1" conf="compile->default(compile)"/>
+		<dependency org="org.json4s" name="json4s-native_2.11" rev="3.6.0-M2" conf="compile->default(compile)"/>
 		<dependency org="com.fasterxml.jackson.module" name="jackson-module-scala_2.11" rev="2.7.8" conf="compile->default(compile)"/>
 		<dependency org="com.fasterxml.jackson.core" name="jackson-databind" rev="2.7.8" conf="compile->default(compile)"/>
 		<dependency org="org.scalatest" name="scalatest_2.11" rev="3.0.0" conf="compile->default(compile)"/>

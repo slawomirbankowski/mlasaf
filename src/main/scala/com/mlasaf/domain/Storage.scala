@@ -5,6 +5,7 @@
 package com.mlasaf.domain
 
 import com.mlasaf.base.ThreadBase
+import com.mlasaf.common.CustomUtils
 import com.mlasaf.dto._
 
 /** storage base class */
@@ -17,7 +18,10 @@ trait Storage extends ThreadBase {
     logger.info("Initialization of Storage: " + dto);
     parentContext = ctx;
     storageDto = dto;
+    onInitialize()
   }
+  /** actions after initializations */
+  def onInitialize(): Unit;
   /**  */
   def onRunBegin() = {
     logger.info("Start THREAD for Storage: " + storageDto.executorStorageId);
@@ -33,6 +37,8 @@ trait Storage extends ThreadBase {
   }
   /** get name of thread */
   def getName() : String = "STORAGE";
+
+  def generateOutputPath() : String;
   /** download all schedules for given source instance */
   def downloadSourceSchedules() : Unit = {
     val allSourceSchedules = parentContext.daoFactory.daos.vSourceScheduleDao.getDtosByExecutorStorage_executorStorageId(this.storageDto.executorStorageId);
