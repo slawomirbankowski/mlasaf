@@ -21,6 +21,7 @@ class CreateRests extends RestBase  {
 
   def initialize() : Unit = {
     spark.Spark.post("/algorithm-schedule", (req: spark.Request, resp: spark.Response) => {
+      resp.`type`("application/json");
       logger.info("Executing algorithm-schedule CREATE (POST) with body: " + req.body());
       implicit val formats = org.json4s.DefaultFormats
       val algoScheduleParams = parse(req.body()).extract[CreateAlgorithmScheduleParams];
@@ -50,6 +51,7 @@ class CreateRests extends RestBase  {
       algScheduleDto.toJson();
     } );
     spark.Spark.post("/algorithm-implementation", (req: spark.Request, resp: spark.Response) => {
+      resp.`type`("application/json");
       logger.info("Executing algorithm-schedule CREATE (POST) with body: " + req.body());
       implicit val formats = org.json4s.DefaultFormats
       val algoImplParams = parse(req.body()).extract[CreateAlgorithmImplementationParams];
@@ -69,6 +71,7 @@ class CreateRests extends RestBase  {
       algImplDto.toJson();
     });
     spark.Spark.post("/algorithm-type", (req: spark.Request, resp: spark.Response) => {
+      resp.`type`("application/json");
       logger.info("Executing algorithm-schedule CREATE (POST) with body: " + req.body());
       implicit val formats = org.json4s.DefaultFormats
       val algTypeParams = parse(req.body()).extract[CreateAlgorithmTypeParams];
@@ -83,6 +86,7 @@ class CreateRests extends RestBase  {
       }
     });
     spark.Spark.post("/algorithm-type-version", (req: spark.Request, resp: spark.Response) => {
+      resp.`type`("application/json");
       logger.info("Executing algorithm-schedule CREATE (POST) with body: " + req.body());
       implicit val formats = org.json4s.DefaultFormats
       val algTypeVersionParams = parse(req.body()).extract[CreateAlgorithmTypeVersionParams];
@@ -108,6 +112,7 @@ class CreateRests extends RestBase  {
       algTypeVer.toJson();
     });
     spark.Spark.post("/source-instance", (req: spark.Request, resp: spark.Response) => {
+      resp.`type`("application/json");
       logger.info("Executing algorithm-schedule CREATE (POST) with body: " + req.body());
       implicit val formats = org.json4s.DefaultFormats
       val siParams = parse(req.body()).extract[CreateSourceInstanceParams];
@@ -122,6 +127,7 @@ class CreateRests extends RestBase  {
       srcInstanceDto.toJson();
     });
     spark.Spark.post("/source-schedule", (req: spark.Request, resp: spark.Response) => {
+      resp.`type`("application/json");
       logger.info("Executing source-schedule CREATE (POST) with body: " + req.body());
       implicit val formats = org.json4s.DefaultFormats
       val srcScheduleParams = parse(req.body()).extract[CreateSourceScheduleParams];

@@ -1,4 +1,4 @@
-package com.mlasaf.tests
+package com.mlasaf.tests.standalone
 
 object LoggerTest {
   val logger = org.slf4j.LoggerFactory.getLogger("LoggerTest");

@@ -14,12 +14,16 @@ object MlasafEntry {
   val MLASAF_VERSION = "0.5.0";
   val logger = org.slf4j.LoggerFactory.getLogger("MlasafEntry");
 
-  // TODO: prepare full testing scenario: create DB - refresh schema - execute all tests - save testing results - drop database
-  // TODO: add thread checker and memory consumption checker
-  // TODO: prepare full testing environment - Docker + scripts
+  // TODO: prepare RESTs for storage
+  // TODO: prepare RESTs for executor
+  // TODO: prepare RESTs for source
+  // TODO: prepare RESTs for commands
+  // TODO: implement transformation basic classes and include to source downloader
+  // TODO: run full flow for algorithm with reading output and merging with input
   // TODO: prepare building script with deployment
   // TODO: prepare shell scripts for running different actions
   // TODO: implement basic UI page to create basic flow
+  // TODO: prepare full testing environment - Docker + scripts
 
   /** main entry point to run all services for MLASAF, initialization from command line arguments or from xml file */
   def main(args : Array[String]) = {
@@ -36,8 +40,9 @@ object MlasafEntry {
     logger.info("jdbcDriver: " + entryOptions.jdbcDriver.toString())
     logger.info("storageDefinition: " + entryOptions.storageDefinition.toString())
     logger.info("executorDefinitionStr: " + entryOptions.executorDefinition.toString())
-    context.run(entryOptions);
-    Thread.sleep(20000L);
+    context.setRunningOptions(entryOptions)
+    context.start();
+    context.waitTillEnd(0L);
     logger.info("End MLASAF " + MLASAF_VERSION);
   }
 

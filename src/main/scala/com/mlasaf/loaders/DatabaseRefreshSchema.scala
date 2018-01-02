@@ -1,3 +1,7 @@
+/*
+  Author(s): Slawomir Bankowski
+  Project: mlasaf
+*/
 package com.mlasaf.loaders
 
 import org.rogach.scallop.ScallopConf
@@ -23,7 +27,7 @@ object DatabaseRefreshSchema {
     logger.info("Connected to database: " + conn);
     val db = liquibase.database.DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new liquibase.database.jvm.JdbcConnection(conn));
     logger.info("Got DB object for Liquibase: " + db);
-    liquibase.integration.commandline.Main.main(Array("--classpath=" + jdbcJarPath
+    liquibase.integration.commandline.Main.run(Array("--classpath=" + jdbcJarPath
       , "--driver=" + jdbcDriver
       , "--changeLogFile=" + changeLogFile
       , "--url=" + jdbcString

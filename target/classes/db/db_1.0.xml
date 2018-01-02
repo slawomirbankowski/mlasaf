@@ -106,6 +106,7 @@
             <column name="commandParam3" type="varchar(2000)" defaultValue="" remarks="parameter 3 for command " />
             <column name="commandParam4" type="varchar(2000)" defaultValue="" remarks="parameter 4 for command " />
             <column name="commandParam5" type="varchar(2000)" defaultValue="" remarks="parameter 5 for command " />
+            <column name="resultStatus" type="varchar(200)" defaultValue="" remarks="status of running this command in given context " />
         </createTable>
         <createIndex indexName="idx_eccomm_executorContextId" tableName="executorContextCommand" unique="false">
             <column name="executorContextId" />

@@ -24,8 +24,6 @@ object DaoTests {
     //val executorDefinition = " [ {executor='RExecutor', port='8806'}, {executor='LocalExecutor', port='8808'} ] "
     //val storageDefinitions = " [ {storage='./', type='local'}, {storage='./', type='local'} ] "
 
-
-
     val daoFactory = new DaoFactory();
     daoFactory.initialize(jdbcString, jdbcUser, jdbcPass, jdbcDriver);
 

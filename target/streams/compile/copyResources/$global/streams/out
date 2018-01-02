@@ -3,6 +3,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	(C:\Project\mlasaf\src\mlasaf\src\main\resources\log4j.properties,C:\Project\mlasaf\src\mlasaf\target\classes\log4j.properties)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	(C:\Project\mlasaf\src\mlasaf\src\main\resources\metadata,C:\Project\mlasaf\src\mlasaf\target\classes\metadata)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	(C:\Project\mlasaf\src\mlasaf\src\main\resources\queries,C:\Project\mlasaf\src\mlasaf\target\classes\queries)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(C:\Project\mlasaf\src\mlasaf\src\main\resources\test,C:\Project\mlasaf\src\mlasaf\target\classes\test)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	(C:\Project\mlasaf\src\mlasaf\src\main\resources\db\db_1.0.xml,C:\Project\mlasaf\src\mlasaf\target\classes\db\db_1.0.xml)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	(C:\Project\mlasaf\src\mlasaf\src\main\resources\metadata\columns.json,C:\Project\mlasaf\src\mlasaf\target\classes\metadata\columns.json)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	(C:\Project\mlasaf\src\mlasaf\src\main\resources\queries\queries.xml,C:\Project\mlasaf\src\mlasaf\target\classes\queries\queries.xml)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(C:\Project\mlasaf\src\mlasaf\src\main\resources\test\scenario_tests.json,C:\Project\mlasaf\src\mlasaf\target\classes\test\scenario_tests.json)[0m

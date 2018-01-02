@@ -7,7 +7,11 @@ package com.mlasaf.common
 /** all static util classes */
 object CustomUtils {
 
+  val simpleDateFormat = new java.text.SimpleDateFormat("YYYY-MM-dd");
+  val fullDateFormat = new java.text.SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
+  val identifierDateFormat = new java.text.SimpleDateFormat("YYYYMMddHHmmss");
   val random = new java.util.Random()
+
   def getHostName = {
     java.net.InetAddress.getLocalHost.getHostName
   }
@@ -26,17 +30,22 @@ object CustomUtils {
   def sequenceId() : String = {
     System.currentTimeMillis() + "" + Math.abs(random.nextInt(10000));
   }
+  def dateTimeSequenceId() : String = {
+    yyyyMMDDHHmmss + "" + Math.abs(random.nextInt(10000));
+  }
   def yearMonthDay : String = {
-    //java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_MONTH);
-    //var d = new java.util.Date();
-    ""
+    simpleDateFormat.format(new java.util.Date());
+  }
+  def yyyyMMDDHHmmss : String = {
+    identifierDateFormat.format(new java.util.Date());
   }
   def diskSpaces : String = {
     "[" + java.io.File.listRoots().map(rd =>  "{'path':'" + rd.getPath + "','name':'" + rd.getName + "','total':'" + rd.getTotalSpace + "','usable':'" +  rd.getUsableSpace + "','free':'" + rd.getFreeSpace + "'}").mkString(",") + "]"
   }
-  def getRootFreeSpace() : String = {
-    ""
-
+  /** get total free space on main disk */
+  def getRootFreeSpace() : Float = {
+    val currentFolder = new java.io.File(".");
+    currentFolder.getTotalSpace
   }
   /** returns true is  d1 + hours > d2 */
   def dateAfterWithHours(d1 : java.util.Date, hours : Int, d2 : java.util.Date) : Boolean = {

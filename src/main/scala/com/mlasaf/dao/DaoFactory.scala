@@ -65,7 +65,7 @@ class DaoFactory extends ThreadBase {
     def executeQuery(sql : String, params : Seq[Object]) = {
     }
     def getInfoJson() : String = {
-      " { connectionCounter:" + daoConn.connTotalCounter + "daoCount:" + daos.getClass.getFields.size + ",connectionsInUseCount:" + daoConn.connInUse.size() + ", jdbcString:" + daoConn.jdbcString + ", jdbcUser:" + daoConn.jdbcUser + ",jdbcDriverClass:" + daoConn.jdbcDriverClass + " } "
+      " { \"connectionCounter\":" + daoConn.connTotalCounter + ",\"daoCount\":" + daos.getClass.getFields.size + ",\"connectionsInUseCount\":" + daoConn.connInUse.size() + ", \"jdbcString\":\"" + daoConn.jdbcString + "\", \"jdbcUser\":\"" + daoConn.jdbcUser + "\",\"jdbcDriverClass\":\"" + daoConn.jdbcDriverClass + "\" } "
     }
 
 }

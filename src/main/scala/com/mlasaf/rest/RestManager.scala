@@ -9,21 +9,25 @@ import com.mlasaf.loaders.CreateAlgorithmSchedule.logger
 import org.apache.http.{HttpRequest, HttpResponse}
 import spark.Spark._;
 
-/** */
+/** manager for all REST methods */
 class RestManager extends ThreadBase  {
 
   /** default PORT number for REST */
   var restDefaultPort : Int = 8301;
   /** */
   var restAlternativePort : Int = 8305;
-  /** */
+  /** all RESTs for DAO methods - automatically generated */
   val daoRest : DaoRests = new DaoRests();
-  /** */
+  /** all RESTs for context methods */
   val contextRest : ContextRests = new ContextRests();
-  /** */
+  /** all RESTs for creating DAO elements */
   val createRest : CreateRests = new CreateRests();
-  /** */
+  /** all RESTs for Executors */
   val executorRest : ExecutorRests = new ExecutorRests();
+  /** all RESTs for storage to get view list and download view as JSON */
+  val storageRest : StorageRests = new StorageRests();
+  /** all RESTs for sources */
+  val sourceRest : SourceRests = new SourceRests();
 
     /** ROUTE METHOD for SparkJava*/
     implicit def functionToRoute(fun: (spark.Request, spark.Response) => AnyRef): spark.Route = {
@@ -36,41 +40,26 @@ class RestManager extends ThreadBase  {
       logger.info("Start REST for Context on port " + restDefaultPort);
       spark.Spark.port(restDefaultPort);
       spark.Spark.get("/ping", (req: spark.Request, resp: spark.Response) => {
-        println("========================== attributes: " + req.attributes().toArray.mkString(","))
-        println("========================== body: " + req.body())
-        println("========================== contentLength: " + req.contentLength())
-        println("========================== headers: " + req.headers().toArray.mkString(","))
-        println("========================== host: " + req.host())
-        println("========================== ip: " + req.ip())
-        println("========================== pathInfo: " + req.pathInfo())
-        println("========================== contentType: " + req.contentType())
-        println("========================== contextPath: " + req.contextPath())
-        println("========================== pathInfo: " + req.pathInfo())
-        println("========================== port: " + req.port())
-        println("========================== protocol: " + req.protocol())
-        println("========================== queryString: " + req.queryString())
-        println("========================== params.keySet: " + req.params().keySet().toArray().mkString(","));
-        println("========================== params.values: " + req.params().values().toArray().mkString(","));
         "pong"
       } );
-      spark.Spark.post("/ping", (req: spark.Request, resp: spark.Response) => {
-        println("========================== attributes: " + req.attributes().toArray.mkString(","))
-        println("========================== body: " + req.body())
-        println("========================== contentLength: " + req.contentLength())
-        println("========================== headers: " + req.headers().toArray.mkString(","))
-        println("========================== host: " + req.host())
-        println("========================== ip: " + req.ip())
-        println("========================== pathInfo: " + req.pathInfo())
-        println("========================== contentType: " + req.contentType())
-        println("========================== contextPath: " + req.contextPath())
-        println("========================== pathInfo: " + req.pathInfo())
-        println("========================== port: " + req.port())
-        println("========================== protocol: " + req.protocol())
-        println("========================== queryString: " + req.queryString())
-        println("========================== params.keySet: " + req.params().keySet().toArray().mkString(","));
-        println("========================== params.values: " + req.params().values().toArray().mkString(","));
-        "pong"
-
+      spark.Spark.post("/check", (req: spark.Request, resp: spark.Response) => {
+        val buff = new StringBuilder();
+        buff.append(" attributes: " + req.attributes().toArray.mkString(","))
+        buff.append(", body: " + req.body())
+        buff.append(", contentLength: " + req.contentLength())
+        buff.append(", headers: " + req.headers().toArray.mkString(","))
+        buff.append(", host: " + req.host())
+        buff.append(", ip: " + req.ip())
+        buff.append(", pathInfo: " + req.pathInfo())
+        buff.append(", contentType: " + req.contentType())
+        buff.append(", contextPath: " + req.contextPath())
+        buff.append(", pathInfo: " + req.pathInfo())
+        buff.append(", port: " + req.port())
+        buff.append(", protocol: " + req.protocol())
+        buff.append(", queryString: " + req.queryString())
+        buff.append(", params.keySet: " + req.params().keySet().toArray().mkString(","));
+        buff.append(", params.values: " + req.params().values().toArray().mkString(","));
+        buff.toString();
       } );
       logger.info("Initialize REST - contextRest " );
       contextRest.setParentRest(this);
@@ -81,6 +70,12 @@ class RestManager extends ThreadBase  {
       logger.info("Initialize REST - executorRest " );
       executorRest.setParentRest(this);
       executorRest.initialize();
+      logger.info("Initialize REST - storageRest " );
+      storageRest.setParentRest(this);
+      storageRest.initialize();
+      logger.info("Initialize REST - sourceRest " );
+      sourceRest.setParentRest(this);
+      sourceRest.initialize();
       logger.info("Initialize REST - daoRest " );
       daoRest.setParentRest(this);
       daoRest.initialize();
@@ -97,7 +92,7 @@ class RestManager extends ThreadBase  {
       logger.info("All REST methods for Context have been stopped");
     }
     def getInfoJson() : String = {
-      " { restDefaultPort: " + restDefaultPort + " } "
+      " { \"restDefaultPort\": " + restDefaultPort + " } "
     }
 
 }

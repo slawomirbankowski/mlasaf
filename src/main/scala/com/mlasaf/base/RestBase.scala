@@ -20,7 +20,10 @@ trait RestBase {
   /** */
   implicit def functionToRoute(fun: (spark.Request, spark.Response) => AnyRef): spark.Route = {
     new spark.Route {
-      override def handle(request: spark.Request, response: spark.Response): AnyRef = fun(request, response)
+      override def handle(request: spark.Request, response: spark.Response): AnyRef = {
+        // response.raw().setContentType("")
+        fun(request, response)
+      }
     }
   }
   /** initialization for all RESTs */

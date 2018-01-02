@@ -1,0 +1,4 @@
+[
+  { "testClass":"com.mlasaf.tests.scenario.EmptyScenarioTest" }
+  , { "testClass":"com.mlasaf.tests.scenario.RestCheckScenarioTest"}
+]

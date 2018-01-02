@@ -1,11 +1,9 @@
-package com.mlasaf.tests
+package com.mlasaf.tests.standalone
 
 import com.mlasaf.dao.DaoFactory
-import org.json4s.native.JsonMethods._
-import org.json4s.Formats._
-import org.json4s._
-import org.json4s.JsonDSL._
 import com.mlasaf.dto._
+import org.json4s._
+import org.json4s.native.JsonMethods._
 
 
 object JsonParserTest {

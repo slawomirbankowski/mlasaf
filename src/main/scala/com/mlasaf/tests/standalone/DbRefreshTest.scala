@@ -2,7 +2,7 @@
   Author(s): Slawomir Bankowski
   Project: mlasaf
 */
-package com.mlasaf.tests
+package com.mlasaf.tests.standalone
 
 import com.mlasaf.loaders._
 

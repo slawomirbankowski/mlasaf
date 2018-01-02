@@ -16,10 +16,8 @@ import com.mlasaf.storages._
 import scala.collection.mutable._
 
 /** main context class - entry point for all other services, rest servers, http servers, listeners and executors */
-class Context {
+class Context extends ThreadBase {
 
-  /** logger */
-  val logger = org.slf4j.LoggerFactory.getLogger("Context");
   /** GUID */
   val guid : Long = Math.abs((new java.util.Random()).nextLong());
   /** current host that context is run on */
@@ -44,24 +42,30 @@ class Context {
   var checker : Checker = new Checker();
   /** Factory for all DAO objects to read/write data from/to configurational database */
   var daoFactory : DaoFactory = null;
-  /** if context is stopped */
-  var isStopped : Boolean = false;
-  /** start time of context */
-  val startTime : java.util.Date = new java.util.Date();
+
   /** default max working time in seconds */
   val DEFAULT_MAX_WORKING_TIME = 60000L;
   var DEFAULT_RUN_INTERVAL = 10000L;
 
-  /** entry point for MLASAF application */
-  def run(opts : MlasafEntryOptions) = {
+  /** */
+  def setRunningOptions(opts : MlasafEntryOptions) = {
     runOptions = opts;
+  }
+  /** get name for threadable object */
+  def getName() : String = "CONTEXT"
+  /** run at the begin of working in thread */
+  def onRunBegin() : Unit = {
+    //runOptions = opts;
     logger.info("Start context for guid: " + guid);
+    // add CONTEXT to threads
+    this.setParentContext(this);
+    threads += this;
     val javaProperties = System.getProperties.stringPropertyNames().toArray.map(prop => "" + prop + "='" + System.getProperties.getProperty("" + prop) + "'").mkString(";");
     logger.info("Java properties: " + javaProperties);
     // initialize DAO to read data from DB - creates new factory with all DAOs
     daoFactory = new DaoFactory();
-     //context.daoFactory.registerExecutorInstance();
-    daoFactory.initialize(opts.jdbcString.toOption.getOrElse(""), opts.jdbcUser.toOption.getOrElse(""), opts.jdbcPass.toOption.getOrElse(""), opts.jdbcDriver.toOption.getOrElse(""));
+    //context.daoFactory.registerExecutorInstance();
+    daoFactory.initialize(runOptions.jdbcString.toOption.getOrElse(""), runOptions.jdbcUser.toOption.getOrElse(""), runOptions.jdbcPass.toOption.getOrElse(""), runOptions.jdbcDriver.toOption.getOrElse(""));
     daoFactory.start();
     threads += daoFactory;
     // register current HOST
@@ -86,25 +90,25 @@ class Context {
     // initialize SIMPLE storage - each storage has own thread to download data
     val storagesInHost = daoFactory.daos.executorStorageDao.getExecutorStorageByFkExecutorHostId(hostDto.executorHostId);
     logger.info("Number of storages in host: " + storagesInHost.size + ", paths: " + storagesInHost.map(s => "{id:" + s.executorStorageId + ",typeId:" + s.executorStorageTypeId + ",path:" + s.storageFulllPath + "}").mkString(", ") );
-    if (opts.simpleStorage.isDefined ) {
+    if (runOptions.simpleStorage.isDefined ) {
       //daoFactory.daos.executorStorageTypeDao.getExecutorStorageTypeFirstByName(LocalStorage.NAME).get.executorStorageTypeClass
-      val simpleStoragePath = opts.simpleStorage.getOrElse(LocalDiskStorage.DEFAULT_PATH);
+      val simpleStoragePath = runOptions.simpleStorage.getOrElse(LocalDiskStorage.DEFAULT_PATH);
       val storageFullPath = new java.io.File(simpleStoragePath).getCanonicalPath
       defineStorage(LocalDiskStorage.NAME, simpleStoragePath, storageFullPath, 8888);
     }
     // initialize ALL storages - each storage has own thread to download data
-    opts.getStorageDefinitions().foreach(storageDef => {
+    runOptions.getStorageDefinitions().foreach(storageDef => {
       defineStorage(storageDef.storageType, storageDef.storageSimplePath, storageDef.storageFullPath, storageDef.storagePort );
     });
     // initialize ALL executors - each executor has own thread to run and control algorithm
     logger.info("Starting initialization for executors ");
-    opts.executorClasses.getOrElse("").split(",").foreach(exeClass => {
+    runOptions.executorClasses.getOrElse("").split(",").foreach(exeClass => {
       defineExecutor(exeClass, 0);
     });
     // initialize REST service for context
     restManager.setParentContext(this);
-    restManager.restDefaultPort = opts.restPort.getOrElse(8301);
-    restManager.restAlternativePort = opts.restAlternativePort.getOrElse(8305);
+    restManager.restDefaultPort = runOptions.restPort.getOrElse(8301);
+    restManager.restAlternativePort = runOptions.restAlternativePort.getOrElse(8305);
     restManager.start();
     threads += restManager;
     // initailize internal checker
@@ -113,20 +117,29 @@ class Context {
     threads += checker;
     // BEGIN info
     logger.info("BEGIN CONTEXT INFO => Total executors running: " + executors.size + ", total threads: " + threads.size + ", total storages: " + storages.size + ", total sources: " + sources.size);
-    // end of all Executors
-    // MAIN WORKING LOOP - checking STOP condition, refresh context, receive commands
-    while (!isStopped) {
-      Thread.sleep(DEFAULT_RUN_INTERVAL);
-      // change updated date for context
-      daoFactory.daos.executorContextDao.changeUpdatedDate(contextDto);
-      // check if context should be stopped because of end of time
-      if (actualWorkingTimeSeconds() > opts.maxWorkingTimeSeconds.getOrElse(DEFAULT_MAX_WORKING_TIME)) {
-        isStopped = true;
-        logger.info("Time is UP - stopping context, actualWorkingTime: " + actualWorkingTime() + ", maxWorkingTime: " + opts.maxWorkingTimeSeconds.getOrElse(DEFAULT_MAX_WORKING_TIME));
-      }
-      // check commands for context
-      readExecuteCommands()
+  }
+  /** run in case of invoke start() method */
+  override def onStart() : Unit = {
+
+
+  };
+  def delayedStop() : Unit = {
+
+  }
+
+  /** */
+  def onRun() : Unit = {
+    // change updated date for context
+    daoFactory.daos.executorContextDao.changeUpdatedDate(contextDto);
+    // check if context should be stopped because of end of time
+    if (actualWorkingTimeSeconds() > runOptions.maxWorkingTimeSeconds.getOrElse(DEFAULT_MAX_WORKING_TIME)) {
+      isStopped = true;
+      logger.info("Time is UP - stopping context, actualWorkingTime: " + actualWorkingTime() + ", maxWorkingTime: " + runOptions.maxWorkingTimeSeconds.getOrElse(DEFAULT_MAX_WORKING_TIME));
     }
+    // check commands for context
+    readExecuteCommands()
+  }
+  def onRunEnd() : Unit = {
     logger.info("STOPPING context: " + contextDto);
     daoFactory.daos.executorContextDao.updateField(contextDto, ExecutorContextDto.FIELD_isWorking, 0);
     daoFactory.daos.executorContextDao.changeUpdatedDate(contextDto);
@@ -136,7 +149,13 @@ class Context {
     storages.foreach(x => { x.stop() });
     checker.stop();
     daoFactory.stop();
+    Thread.sleep(10000L);
     logger.info("END context for guid: " + guid);
+  }
+  override def onRunError(ex : Exception) : Unit = {
+  }
+  /** run in case of invoke stop() method */
+  def onStop() : Unit = {
   }
   /** read commands to be executed */
   def readExecuteCommands() : Unit = {
@@ -211,6 +230,6 @@ class Context {
   /** */
   def actualWorkingTimeSeconds() : Long = actualWorkingTime / 1000;
   def getInfoJson() : String = {
-    " { guid:" + this.guid + ",startTime:" + this.startTime + ",actualWorkingTime:" + actualWorkingTime() + ", isStopped:" + this.isStopped + ", threadsCount:" + this.threads.size+ ", sourcesCount:" + this.sources.size + ", storagesCount:" + this.storages.size + ", executorsCount:" + this.executors.size + ", contextDto:" + this.contextDto.toJson() + ", hostDto:" + this.hostDto.toJson() + " }"
+    " { \"guid\":" + this.guid + ",\"startTime\":\"" + this.startTime + "\",\"actualWorkingTime\":" + actualWorkingTime() + ", \"isStopped\":" + this.isStopped + ", \"threadsCount\":" + this.threads.size+ ", \"sourcesCount\":" + this.sources.size + ", \"storagesCount\":" + this.storages.size + ", \"executorsCount\":" + this.executors.size + ", \"contextDto\":" + this.contextDto.toJson() + ", \"hostDto\":" + this.hostDto.toJson() + " }"
   }
 }
