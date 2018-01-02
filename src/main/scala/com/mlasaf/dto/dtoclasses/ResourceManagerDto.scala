@@ -26,6 +26,7 @@ case class ResourceManagerDto (
  def getGuid() : Long = {    guid  }  
  def toAnyArray() : Array[Any] = {    Array(resourceManagerId,guid,insertedRowDate,lastUpdatedDate,resourceManagerTypeId,executorHostId,resourceManagerStatus)  }  
  def toStringArray() : Array[String] = {    Array(""+resourceManagerId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+resourceManagerTypeId,""+executorHostId,""+resourceManagerStatus)   }  
+ def toJson() : String = {   "{" + "\"resourceManagerId\":\""+resourceManagerId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"resourceManagerTypeId\":\""+resourceManagerTypeId+"\""+","+"\"executorHostId\":\""+executorHostId+"\""+","+"\"resourceManagerStatus\":\""+resourceManagerStatus+"\"" + "}"   }  
  def toFullString() : String = {    "resourceManagerId:'"+resourceManagerId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"resourceManagerTypeId:'"+resourceManagerTypeId+"'"+","+"executorHostId:'"+executorHostId+"'"+","+"resourceManagerStatus:'"+resourceManagerStatus+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 

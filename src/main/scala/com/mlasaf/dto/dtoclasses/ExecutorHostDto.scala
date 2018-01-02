@@ -29,6 +29,7 @@ case class ExecutorHostDto (
  def getGuid() : Long = {    guid  }  
  def toAnyArray() : Array[Any] = {    Array(executorHostId,guid,insertedRowDate,lastUpdatedDate,hostName,hostIp,hostDomain,hostOsType,hostOsVersion,isWorking)  }  
  def toStringArray() : Array[String] = {    Array(""+executorHostId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+hostName,""+hostIp,""+hostDomain,""+hostOsType,""+hostOsVersion,""+isWorking)   }  
+ def toJson() : String = {   "{" + "\"executorHostId\":\""+executorHostId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"hostName\":\""+hostName+"\""+","+"\"hostIp\":\""+hostIp+"\""+","+"\"hostDomain\":\""+hostDomain+"\""+","+"\"hostOsType\":\""+hostOsType+"\""+","+"\"hostOsVersion\":\""+hostOsVersion+"\""+","+"\"isWorking\":\""+isWorking+"\"" + "}"   }  
  def toFullString() : String = {    "executorHostId:'"+executorHostId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"hostName:'"+hostName+"'"+","+"hostIp:'"+hostIp+"'"+","+"hostDomain:'"+hostDomain+"'"+","+"hostOsType:'"+hostOsType+"'"+","+"hostOsVersion:'"+hostOsVersion+"'"+","+"isWorking:'"+isWorking+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 

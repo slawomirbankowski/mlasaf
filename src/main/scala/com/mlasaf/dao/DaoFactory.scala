@@ -5,17 +5,18 @@
 package com.mlasaf.dao
 
 import java.sql._
+
 import anorm._
+import com.mlasaf.base.ThreadBase
 import com.mlasaf.dto._
 import com.mlasaf.utils._
 import org.apache.commons.dbcp._
-//import com.lucidchart.relate._
 
 
 import java.sql.Connection
 
 /** main factory class for all DAOs and connection managers */
-  class DaoFactory {
+class DaoFactory extends ThreadBase {
 
     /** add DAO objects for all DTOs */
     val daos : Daos = new Daos();
@@ -23,8 +24,6 @@ import java.sql.Connection
     val daoConn : DaoConnection = new DaoConnection();
     /** dao with custom functions */
     val daoCustom : DaoCustom = new DaoCustom();
-    /** logger for current class*/
-    val logger = org.slf4j.LoggerFactory.getLogger("Context");
 
     /** */
     def DaoFactory() = {
@@ -35,6 +34,17 @@ import java.sql.Connection
       daoConn.initialize(jdbc, user, pass, driverClass)
       daos.initialize(daoConn);
       daoCustom.initialize(this);
+    }
+    def getName() : String = "DAO_FACTORY";
+    def onRunBegin() = {
+    }
+    def onRun() = {
+      logger.info("Connections free: " + daoConn.connectionsFree.size + ", inUse: " + daoConn.connectionsInUse.size + ", isInitialized: " + daoConn.isInitialized)
+    }
+    def onRunEnd() = {
+    }
+    def onStop() : Unit = {
+      logger.info("Stopping DAO Factory...");
     }
     def selectCount(d : BaseDto) : Long = {
       implicit val conn = daoConn.getConnection();
@@ -53,7 +63,9 @@ import java.sql.Connection
       queryRes
     }
     def executeQuery(sql : String, params : Seq[Object]) = {
-
+    }
+    def getInfoJson() : String = {
+      " { connectionCounter:" + daoConn.connTotalCounter + "daoCount:" + daos.getClass.getFields.size + ",connectionsInUseCount:" + daoConn.connInUse.size() + ", jdbcString:" + daoConn.jdbcString + ", jdbcUser:" + daoConn.jdbcUser + ",jdbcDriverClass:" + daoConn.jdbcDriverClass + " } "
     }
 
 }

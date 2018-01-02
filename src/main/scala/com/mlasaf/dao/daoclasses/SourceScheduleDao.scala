@@ -15,56 +15,73 @@ import java.util.Date
   def getSourceSchedulesList() : List[SourceScheduleDto] = {
    implicit val connection = getConnection();
    val dtos : List[SourceScheduleDto]= SQL("select * from sourceSchedule").as(anorm.Macro.namedParser[SourceScheduleDto].*);
+   releaseConnection(connection);
    dtos
   }
   def getSourceSchedulesCount() : Long = {
    implicit val connection = getConnection();
-   val cnt : Long = SQL("select count(*) as cnt from sourceSchedule").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+   val cnt : Long = SQL("select count(*) as cnt from sourceSchedule").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);
+   releaseConnection(connection);
    cnt
   }
   def getSourceSchedulesLastInsertDate() : java.util.Date = {
    implicit val connection = getConnection();
-   val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from sourceSchedule").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+   val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from sourceSchedule").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);
+   releaseConnection(connection);
    ld
   }
   def getSourceSchedulesLastUpdatedDate() : java.util.Date = {
    implicit val connection = getConnection();
-   val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from sourceSchedule").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+   val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from sourceSchedule").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);
+   releaseConnection(connection);
    ld
   }
   def getSourceScheduleFirst() : SourceScheduleDto = {
    implicit val connection = getConnection();
    val dtos : SourceScheduleDto= SQL("select * from sourceSchedule order by insertedRowDate asc ").as(anorm.Macro.namedParser[SourceScheduleDto].*).head;
+   releaseConnection(connection);
    dtos
   }
   def getSourceScheduleLast() : SourceScheduleDto = {
    implicit val connection = getConnection();
    val dtos : SourceScheduleDto= SQL("select * from sourceSchedule order by insertedRowDate desc ").as(anorm.Macro.namedParser[SourceScheduleDto].*).head;
+   releaseConnection(connection);
+   dtos
+  }
+  def getSourceSchedulesByField(fieldName : String, fieldValue : String) : List[SourceScheduleDto] = {
+   implicit val connection = getConnection();
+   val dtos : List[SourceScheduleDto]= SQL("select * from sourceSchedule where " + fieldName + " = {fieldValue} ").on("fieldValue" -> fieldValue).as(anorm.Macro.namedParser[SourceScheduleDto].*);
+   releaseConnection(connection);
    dtos
   }
   def getSourceScheduleByGuid(guid : Long) : SourceScheduleDto = {
    implicit val connection = getConnection();
    val dtos : SourceScheduleDto= SQL("select * from sourceSchedule where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[SourceScheduleDto].single);
+   releaseConnection(connection);
    dtos
   }  
  def getSourceScheduleByPk(pkColValue : Long) : SourceScheduleDto = { 
    implicit val connection = getConnection();  
    val dto : SourceScheduleDto = SQL("select * from sourceSchedule where sourceScheduleId = {pkColValue} ").on("pkColValue" -> pkColValue).as(anorm.Macro.namedParser[SourceScheduleDto].single);  
+   releaseConnection(connection);  
    dto  
  }  
  def getSourceScheduleMaxId() : Long = { 
    implicit val connection = getConnection();  
    val maxid : Long = SQL("select max(sourceScheduleId) as maxId from sourceSchedule ").executeQuery()(connection).as[Long](SqlParser.long("maxId").single)(connection);;  
+   releaseConnection(connection);  
    maxid  
  }  
  def getSourceScheduleByFkExecutorStorageId(fkColValue : Long) : List[SourceScheduleDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[SourceScheduleDto] = SQL("select * from sourceSchedule where executorStorageId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[SourceScheduleDto].*);  
+   releaseConnection(connection);  
    dtos  
  }  
  def getSourceScheduleByFkSourceViewId(fkColValue : Long) : List[SourceScheduleDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[SourceScheduleDto] = SQL("select * from sourceSchedule where sourceViewId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[SourceScheduleDto].*);  
+   releaseConnection(connection);  
    dtos  
  }  
  def insertSourceScheduleDto(dto : SourceScheduleDto): SourceScheduleDto = { 
@@ -74,8 +91,11 @@ import java.util.Date
     val rs = stat.getGeneratedKeys(); 
     if (rs.next()) { 
       val pkValue = rs.getLong(1); 
-      SQL("select * from sourceSchedule where sourceScheduleId = {pkValue} ").on("pkValue" -> pkValue).as(anorm.Macro.namedParser[SourceScheduleDto].single); 
+      val r = SQL("select * from sourceSchedule where sourceScheduleId = {pkValue} ").on("pkValue" -> pkValue).as(anorm.Macro.namedParser[SourceScheduleDto].single); 
+      releaseConnection(connection);  
+      r 
     } else { 
+      releaseConnection(connection);  
       null; 
     } 
  } 
@@ -87,6 +107,7 @@ import java.util.Date
     implicit val connection = getConnection();  
       val resCnt = SQL("update sourceSchedule set  lastUpdatedDate = {lastUpdatedDate} ,  sourceViewId = {sourceViewId} ,  executorStorageId = {executorStorageId} ,  onDemand = {onDemand} ,  startTime = {startTime} ,  intervalValue = {intervalValue} ,  isScheduled = {isScheduled} ,  deleteOldCopies = {deleteOldCopies}  where  sourceScheduleId = {sourceScheduleId}  ")
       .on("lastUpdatedDate" -> dto.lastUpdatedDate , "sourceViewId" -> dto.sourceViewId , "executorStorageId" -> dto.executorStorageId , "onDemand" -> dto.onDemand , "startTime" -> dto.startTime , "intervalValue" -> dto.intervalValue , "isScheduled" -> dto.isScheduled , "deleteOldCopies" -> dto.deleteOldCopies, "sourceScheduleId" -> dto.sourceScheduleId ).executeInsert() 
+   releaseConnection(connection);  
      getSourceScheduleByPk(dto.sourceScheduleId) 
     } 
 

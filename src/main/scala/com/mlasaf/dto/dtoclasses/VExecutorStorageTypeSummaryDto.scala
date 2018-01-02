@@ -27,6 +27,7 @@ case class VExecutorStorageTypeSummaryDto (
  def getGuid() : Long = {    guid  }  
  def toAnyArray() : Array[Any] = {    Array(executorStorageTypeId,guid,insertedRowDate,lastUpdatedDate,executorStorageTypeName,executorStorageTypeClass,algorithmStorageSupport_count,executorStorage_count)  }  
  def toStringArray() : Array[String] = {    Array(""+executorStorageTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorStorageTypeName,""+executorStorageTypeClass,""+algorithmStorageSupport_count,""+executorStorage_count)   }  
+ def toJson() : String = {   "{" + "\"executorStorageTypeId\":\""+executorStorageTypeId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"executorStorageTypeName\":\""+executorStorageTypeName+"\""+","+"\"executorStorageTypeClass\":\""+executorStorageTypeClass+"\""+","+"\"algorithmStorageSupport_count\":\""+algorithmStorageSupport_count+"\""+","+"\"executorStorage_count\":\""+executorStorage_count+"\"" + "}"   }  
  def toFullString() : String = {    "executorStorageTypeId:'"+executorStorageTypeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorStorageTypeName:'"+executorStorageTypeName+"'"+","+"executorStorageTypeClass:'"+executorStorageTypeClass+"'"+","+"algorithmStorageSupport_count:'"+algorithmStorageSupport_count+"'"+","+"executorStorage_count:'"+executorStorage_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 

@@ -15,51 +15,67 @@ import java.util.Date
   def getSourceViewColumnsList() : List[SourceViewColumnDto] = {
    implicit val connection = getConnection();
    val dtos : List[SourceViewColumnDto]= SQL("select * from sourceViewColumn").as(anorm.Macro.namedParser[SourceViewColumnDto].*);
+   releaseConnection(connection);
    dtos
   }
   def getSourceViewColumnsCount() : Long = {
    implicit val connection = getConnection();
-   val cnt : Long = SQL("select count(*) as cnt from sourceViewColumn").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+   val cnt : Long = SQL("select count(*) as cnt from sourceViewColumn").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);
+   releaseConnection(connection);
    cnt
   }
   def getSourceViewColumnsLastInsertDate() : java.util.Date = {
    implicit val connection = getConnection();
-   val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from sourceViewColumn").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+   val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from sourceViewColumn").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);
+   releaseConnection(connection);
    ld
   }
   def getSourceViewColumnsLastUpdatedDate() : java.util.Date = {
    implicit val connection = getConnection();
-   val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from sourceViewColumn").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+   val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from sourceViewColumn").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);
+   releaseConnection(connection);
    ld
   }
   def getSourceViewColumnFirst() : SourceViewColumnDto = {
    implicit val connection = getConnection();
    val dtos : SourceViewColumnDto= SQL("select * from sourceViewColumn order by insertedRowDate asc ").as(anorm.Macro.namedParser[SourceViewColumnDto].*).head;
+   releaseConnection(connection);
    dtos
   }
   def getSourceViewColumnLast() : SourceViewColumnDto = {
    implicit val connection = getConnection();
    val dtos : SourceViewColumnDto= SQL("select * from sourceViewColumn order by insertedRowDate desc ").as(anorm.Macro.namedParser[SourceViewColumnDto].*).head;
+   releaseConnection(connection);
+   dtos
+  }
+  def getSourceViewColumnsByField(fieldName : String, fieldValue : String) : List[SourceViewColumnDto] = {
+   implicit val connection = getConnection();
+   val dtos : List[SourceViewColumnDto]= SQL("select * from sourceViewColumn where " + fieldName + " = {fieldValue} ").on("fieldValue" -> fieldValue).as(anorm.Macro.namedParser[SourceViewColumnDto].*);
+   releaseConnection(connection);
    dtos
   }
   def getSourceViewColumnByGuid(guid : Long) : SourceViewColumnDto = {
    implicit val connection = getConnection();
    val dtos : SourceViewColumnDto= SQL("select * from sourceViewColumn where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[SourceViewColumnDto].single);
+   releaseConnection(connection);
    dtos
   }  
  def getSourceViewColumnByPk(pkColValue : Long) : SourceViewColumnDto = { 
    implicit val connection = getConnection();  
    val dto : SourceViewColumnDto = SQL("select * from sourceViewColumn where sourceViewColumnId = {pkColValue} ").on("pkColValue" -> pkColValue).as(anorm.Macro.namedParser[SourceViewColumnDto].single);  
+   releaseConnection(connection);  
    dto  
  }  
  def getSourceViewColumnMaxId() : Long = { 
    implicit val connection = getConnection();  
    val maxid : Long = SQL("select max(sourceViewColumnId) as maxId from sourceViewColumn ").executeQuery()(connection).as[Long](SqlParser.long("maxId").single)(connection);;  
+   releaseConnection(connection);  
    maxid  
  }  
  def getSourceViewColumnByFkSourceViewId(fkColValue : Long) : List[SourceViewColumnDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[SourceViewColumnDto] = SQL("select * from sourceViewColumn where sourceViewId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[SourceViewColumnDto].*);  
+   releaseConnection(connection);  
    dtos  
  }  
  def insertSourceViewColumnDto(dto : SourceViewColumnDto): SourceViewColumnDto = { 
@@ -69,8 +85,11 @@ import java.util.Date
     val rs = stat.getGeneratedKeys(); 
     if (rs.next()) { 
       val pkValue = rs.getLong(1); 
-      SQL("select * from sourceViewColumn where sourceViewColumnId = {pkValue} ").on("pkValue" -> pkValue).as(anorm.Macro.namedParser[SourceViewColumnDto].single); 
+      val r = SQL("select * from sourceViewColumn where sourceViewColumnId = {pkValue} ").on("pkValue" -> pkValue).as(anorm.Macro.namedParser[SourceViewColumnDto].single); 
+      releaseConnection(connection);  
+      r 
     } else { 
+      releaseConnection(connection);  
       null; 
     } 
  } 
@@ -82,6 +101,7 @@ import java.util.Date
     implicit val connection = getConnection();  
       val resCnt = SQL("update sourceViewColumn set  lastUpdatedDate = {lastUpdatedDate} ,  sourceViewId = {sourceViewId} ,  columnName = {columnName} ,  columnType = {columnType}  where  sourceViewColumnId = {sourceViewColumnId}  ")
       .on("lastUpdatedDate" -> dto.lastUpdatedDate , "sourceViewId" -> dto.sourceViewId , "columnName" -> dto.columnName , "columnType" -> dto.columnType, "sourceViewColumnId" -> dto.sourceViewColumnId ).executeInsert() 
+   releaseConnection(connection);  
      getSourceViewColumnByPk(dto.sourceViewColumnId) 
     } 
 

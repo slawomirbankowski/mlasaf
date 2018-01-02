@@ -30,6 +30,7 @@ case class SourceScheduleDto (
  def getGuid() : Long = {    guid  }  
  def toAnyArray() : Array[Any] = {    Array(sourceScheduleId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,executorStorageId,onDemand,startTime,intervalValue,isScheduled,deleteOldCopies)  }  
  def toStringArray() : Array[String] = {    Array(""+sourceScheduleId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceViewId,""+executorStorageId,""+onDemand,""+startTime,""+intervalValue,""+isScheduled,""+deleteOldCopies)   }  
+ def toJson() : String = {   "{" + "\"sourceScheduleId\":\""+sourceScheduleId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"sourceViewId\":\""+sourceViewId+"\""+","+"\"executorStorageId\":\""+executorStorageId+"\""+","+"\"onDemand\":\""+onDemand+"\""+","+"\"startTime\":\""+startTime+"\""+","+"\"intervalValue\":\""+intervalValue+"\""+","+"\"isScheduled\":\""+isScheduled+"\""+","+"\"deleteOldCopies\":\""+deleteOldCopies+"\"" + "}"   }  
  def toFullString() : String = {    "sourceScheduleId:'"+sourceScheduleId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"sourceViewId:'"+sourceViewId+"'"+","+"executorStorageId:'"+executorStorageId+"'"+","+"onDemand:'"+onDemand+"'"+","+"startTime:'"+startTime+"'"+","+"intervalValue:'"+intervalValue+"'"+","+"isScheduled:'"+isScheduled+"'"+","+"deleteOldCopies:'"+deleteOldCopies+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 

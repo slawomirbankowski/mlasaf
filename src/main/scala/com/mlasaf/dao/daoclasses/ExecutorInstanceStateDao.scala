@@ -15,51 +15,67 @@ import java.util.Date
   def getExecutorInstanceStatesList() : List[ExecutorInstanceStateDto] = {
    implicit val connection = getConnection();
    val dtos : List[ExecutorInstanceStateDto]= SQL("select * from executorInstanceState").as(anorm.Macro.namedParser[ExecutorInstanceStateDto].*);
+   releaseConnection(connection);
    dtos
   }
   def getExecutorInstanceStatesCount() : Long = {
    implicit val connection = getConnection();
-   val cnt : Long = SQL("select count(*) as cnt from executorInstanceState").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+   val cnt : Long = SQL("select count(*) as cnt from executorInstanceState").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);
+   releaseConnection(connection);
    cnt
   }
   def getExecutorInstanceStatesLastInsertDate() : java.util.Date = {
    implicit val connection = getConnection();
-   val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from executorInstanceState").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+   val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from executorInstanceState").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);
+   releaseConnection(connection);
    ld
   }
   def getExecutorInstanceStatesLastUpdatedDate() : java.util.Date = {
    implicit val connection = getConnection();
-   val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from executorInstanceState").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+   val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from executorInstanceState").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);
+   releaseConnection(connection);
    ld
   }
   def getExecutorInstanceStateFirst() : ExecutorInstanceStateDto = {
    implicit val connection = getConnection();
    val dtos : ExecutorInstanceStateDto= SQL("select * from executorInstanceState order by insertedRowDate asc ").as(anorm.Macro.namedParser[ExecutorInstanceStateDto].*).head;
+   releaseConnection(connection);
    dtos
   }
   def getExecutorInstanceStateLast() : ExecutorInstanceStateDto = {
    implicit val connection = getConnection();
    val dtos : ExecutorInstanceStateDto= SQL("select * from executorInstanceState order by insertedRowDate desc ").as(anorm.Macro.namedParser[ExecutorInstanceStateDto].*).head;
+   releaseConnection(connection);
+   dtos
+  }
+  def getExecutorInstanceStatesByField(fieldName : String, fieldValue : String) : List[ExecutorInstanceStateDto] = {
+   implicit val connection = getConnection();
+   val dtos : List[ExecutorInstanceStateDto]= SQL("select * from executorInstanceState where " + fieldName + " = {fieldValue} ").on("fieldValue" -> fieldValue).as(anorm.Macro.namedParser[ExecutorInstanceStateDto].*);
+   releaseConnection(connection);
    dtos
   }
   def getExecutorInstanceStateByGuid(guid : Long) : ExecutorInstanceStateDto = {
    implicit val connection = getConnection();
    val dtos : ExecutorInstanceStateDto= SQL("select * from executorInstanceState where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[ExecutorInstanceStateDto].single);
+   releaseConnection(connection);
    dtos
   }  
  def getExecutorInstanceStateByPk(pkColValue : Long) : ExecutorInstanceStateDto = { 
    implicit val connection = getConnection();  
    val dto : ExecutorInstanceStateDto = SQL("select * from executorInstanceState where executorInstanceStateId = {pkColValue} ").on("pkColValue" -> pkColValue).as(anorm.Macro.namedParser[ExecutorInstanceStateDto].single);  
+   releaseConnection(connection);  
    dto  
  }  
  def getExecutorInstanceStateMaxId() : Long = { 
    implicit val connection = getConnection();  
    val maxid : Long = SQL("select max(executorInstanceStateId) as maxId from executorInstanceState ").executeQuery()(connection).as[Long](SqlParser.long("maxId").single)(connection);;  
+   releaseConnection(connection);  
    maxid  
  }  
  def getExecutorInstanceStateByFkExecutorInstanceId(fkColValue : Long) : List[ExecutorInstanceStateDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[ExecutorInstanceStateDto] = SQL("select * from executorInstanceState where executorInstanceId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[ExecutorInstanceStateDto].*);  
+   releaseConnection(connection);  
    dtos  
  }  
  def insertExecutorInstanceStateDto(dto : ExecutorInstanceStateDto): ExecutorInstanceStateDto = { 
@@ -69,8 +85,11 @@ import java.util.Date
     val rs = stat.getGeneratedKeys(); 
     if (rs.next()) { 
       val pkValue = rs.getLong(1); 
-      SQL("select * from executorInstanceState where executorInstanceStateId = {pkValue} ").on("pkValue" -> pkValue).as(anorm.Macro.namedParser[ExecutorInstanceStateDto].single); 
+      val r = SQL("select * from executorInstanceState where executorInstanceStateId = {pkValue} ").on("pkValue" -> pkValue).as(anorm.Macro.namedParser[ExecutorInstanceStateDto].single); 
+      releaseConnection(connection);  
+      r 
     } else { 
+      releaseConnection(connection);  
       null; 
     } 
  } 
@@ -82,6 +101,7 @@ import java.util.Date
     implicit val connection = getConnection();  
       val resCnt = SQL("update executorInstanceState set  lastUpdatedDate = {lastUpdatedDate} ,  executorInstanceId = {executorInstanceId} ,  stateName = {stateName}  where  executorInstanceStateId = {executorInstanceStateId}  ")
       .on("lastUpdatedDate" -> dto.lastUpdatedDate , "executorInstanceId" -> dto.executorInstanceId , "stateName" -> dto.stateName, "executorInstanceStateId" -> dto.executorInstanceStateId ).executeInsert() 
+   releaseConnection(connection);  
      getExecutorInstanceStateByPk(dto.executorInstanceStateId) 
     } 
 

@@ -25,6 +25,7 @@ case class ExecutorStorageTypeDto (
  def getGuid() : Long = {    guid  }  
  def toAnyArray() : Array[Any] = {    Array(executorStorageTypeId,guid,insertedRowDate,lastUpdatedDate,executorStorageTypeName,executorStorageTypeClass)  }  
  def toStringArray() : Array[String] = {    Array(""+executorStorageTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorStorageTypeName,""+executorStorageTypeClass)   }  
+ def toJson() : String = {   "{" + "\"executorStorageTypeId\":\""+executorStorageTypeId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"executorStorageTypeName\":\""+executorStorageTypeName+"\""+","+"\"executorStorageTypeClass\":\""+executorStorageTypeClass+"\"" + "}"   }  
  def toFullString() : String = {    "executorStorageTypeId:'"+executorStorageTypeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorStorageTypeName:'"+executorStorageTypeName+"'"+","+"executorStorageTypeClass:'"+executorStorageTypeClass+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 

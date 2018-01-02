@@ -28,6 +28,7 @@ case class SourceDownloadStatDto (
  def getGuid() : Long = {    guid  }  
  def toAnyArray() : Array[Any] = {    Array(sourceDownloadStatId,guid,sourceDownloadId,insertedRowDate,lastUpdatedDate,rowsCount,errorRowsCount,totalBytesCount,empryRowsCount)  }  
  def toStringArray() : Array[String] = {    Array(""+sourceDownloadStatId,""+guid,""+sourceDownloadId,""+insertedRowDate,""+lastUpdatedDate,""+rowsCount,""+errorRowsCount,""+totalBytesCount,""+empryRowsCount)   }  
+ def toJson() : String = {   "{" + "\"sourceDownloadStatId\":\""+sourceDownloadStatId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"sourceDownloadId\":\""+sourceDownloadId+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"rowsCount\":\""+rowsCount+"\""+","+"\"errorRowsCount\":\""+errorRowsCount+"\""+","+"\"totalBytesCount\":\""+totalBytesCount+"\""+","+"\"empryRowsCount\":\""+empryRowsCount+"\"" + "}"   }  
  def toFullString() : String = {    "sourceDownloadStatId:'"+sourceDownloadStatId+"'"+","+"guid:'"+guid+"'"+","+"sourceDownloadId:'"+sourceDownloadId+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"rowsCount:'"+rowsCount+"'"+","+"errorRowsCount:'"+errorRowsCount+"'"+","+"totalBytesCount:'"+totalBytesCount+"'"+","+"empryRowsCount:'"+empryRowsCount+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 

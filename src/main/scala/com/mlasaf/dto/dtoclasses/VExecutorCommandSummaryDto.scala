@@ -26,6 +26,7 @@ case class VExecutorCommandSummaryDto (
  def getGuid() : Long = {    guid  }  
  def toAnyArray() : Array[Any] = {    Array(executorCommandId,guid,insertedRowDate,lastUpdatedDate,executorCommandName,executorCommandClass,executorContextCommand_count)  }  
  def toStringArray() : Array[String] = {    Array(""+executorCommandId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorCommandName,""+executorCommandClass,""+executorContextCommand_count)   }  
+ def toJson() : String = {   "{" + "\"executorCommandId\":\""+executorCommandId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"executorCommandName\":\""+executorCommandName+"\""+","+"\"executorCommandClass\":\""+executorCommandClass+"\""+","+"\"executorContextCommand_count\":\""+executorContextCommand_count+"\"" + "}"   }  
  def toFullString() : String = {    "executorCommandId:'"+executorCommandId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorCommandName:'"+executorCommandName+"'"+","+"executorCommandClass:'"+executorCommandClass+"'"+","+"executorContextCommand_count:'"+executorContextCommand_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 

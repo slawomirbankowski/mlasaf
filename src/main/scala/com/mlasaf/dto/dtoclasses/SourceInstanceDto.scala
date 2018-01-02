@@ -29,6 +29,7 @@ case class SourceInstanceDto (
  def getGuid() : Long = {    guid  }  
  def toAnyArray() : Array[Any] = {    Array(sourceInstanceId,guid,insertedRowDate,lastUpdatedDate,sourceTypeId,sourceInstanceName,errorCount,correctCount,lastStatus,lastConnectionDate)  }  
  def toStringArray() : Array[String] = {    Array(""+sourceInstanceId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceTypeId,""+sourceInstanceName,""+errorCount,""+correctCount,""+lastStatus,""+lastConnectionDate)   }  
+ def toJson() : String = {   "{" + "\"sourceInstanceId\":\""+sourceInstanceId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"sourceTypeId\":\""+sourceTypeId+"\""+","+"\"sourceInstanceName\":\""+sourceInstanceName+"\""+","+"\"errorCount\":\""+errorCount+"\""+","+"\"correctCount\":\""+correctCount+"\""+","+"\"lastStatus\":\""+lastStatus+"\""+","+"\"lastConnectionDate\":\""+lastConnectionDate+"\"" + "}"   }  
  def toFullString() : String = {    "sourceInstanceId:'"+sourceInstanceId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"sourceTypeId:'"+sourceTypeId+"'"+","+"sourceInstanceName:'"+sourceInstanceName+"'"+","+"errorCount:'"+errorCount+"'"+","+"correctCount:'"+correctCount+"'"+","+"lastStatus:'"+lastStatus+"'"+","+"lastConnectionDate:'"+lastConnectionDate+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 

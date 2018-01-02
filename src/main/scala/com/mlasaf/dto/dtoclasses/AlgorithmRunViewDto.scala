@@ -27,6 +27,7 @@ case class AlgorithmRunViewDto (
  def getGuid() : Long = {    guid  }  
  def toAnyArray() : Array[Any] = {    Array(algorithmRunViewId,guid,insertedRowDate,lastUpdatedDate,algorithmRunId,executorStorageViewId,algorithmScheduleViewId,isDownloaded)  }  
  def toStringArray() : Array[String] = {    Array(""+algorithmRunViewId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmRunId,""+executorStorageViewId,""+algorithmScheduleViewId,""+isDownloaded)   }  
+ def toJson() : String = {   "{" + "\"algorithmRunViewId\":\""+algorithmRunViewId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"algorithmRunId\":\""+algorithmRunId+"\""+","+"\"executorStorageViewId\":\""+executorStorageViewId+"\""+","+"\"algorithmScheduleViewId\":\""+algorithmScheduleViewId+"\""+","+"\"isDownloaded\":\""+isDownloaded+"\"" + "}"   }  
  def toFullString() : String = {    "algorithmRunViewId:'"+algorithmRunViewId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmRunId:'"+algorithmRunId+"'"+","+"executorStorageViewId:'"+executorStorageViewId+"'"+","+"algorithmScheduleViewId:'"+algorithmScheduleViewId+"'"+","+"isDownloaded:'"+isDownloaded+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 

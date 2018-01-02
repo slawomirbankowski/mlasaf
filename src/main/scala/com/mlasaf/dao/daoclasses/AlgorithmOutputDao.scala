@@ -15,66 +15,85 @@ import java.util.Date
   def getAlgorithmOutputsList() : List[AlgorithmOutputDto] = {
    implicit val connection = getConnection();
    val dtos : List[AlgorithmOutputDto]= SQL("select * from algorithmOutput").as(anorm.Macro.namedParser[AlgorithmOutputDto].*);
+   releaseConnection(connection);
    dtos
   }
   def getAlgorithmOutputsCount() : Long = {
    implicit val connection = getConnection();
-   val cnt : Long = SQL("select count(*) as cnt from algorithmOutput").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+   val cnt : Long = SQL("select count(*) as cnt from algorithmOutput").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);
+   releaseConnection(connection);
    cnt
   }
   def getAlgorithmOutputsLastInsertDate() : java.util.Date = {
    implicit val connection = getConnection();
-   val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from algorithmOutput").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+   val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from algorithmOutput").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);
+   releaseConnection(connection);
    ld
   }
   def getAlgorithmOutputsLastUpdatedDate() : java.util.Date = {
    implicit val connection = getConnection();
-   val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from algorithmOutput").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+   val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from algorithmOutput").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);
+   releaseConnection(connection);
    ld
   }
   def getAlgorithmOutputFirst() : AlgorithmOutputDto = {
    implicit val connection = getConnection();
    val dtos : AlgorithmOutputDto= SQL("select * from algorithmOutput order by insertedRowDate asc ").as(anorm.Macro.namedParser[AlgorithmOutputDto].*).head;
+   releaseConnection(connection);
    dtos
   }
   def getAlgorithmOutputLast() : AlgorithmOutputDto = {
    implicit val connection = getConnection();
    val dtos : AlgorithmOutputDto= SQL("select * from algorithmOutput order by insertedRowDate desc ").as(anorm.Macro.namedParser[AlgorithmOutputDto].*).head;
+   releaseConnection(connection);
+   dtos
+  }
+  def getAlgorithmOutputsByField(fieldName : String, fieldValue : String) : List[AlgorithmOutputDto] = {
+   implicit val connection = getConnection();
+   val dtos : List[AlgorithmOutputDto]= SQL("select * from algorithmOutput where " + fieldName + " = {fieldValue} ").on("fieldValue" -> fieldValue).as(anorm.Macro.namedParser[AlgorithmOutputDto].*);
+   releaseConnection(connection);
    dtos
   }
   def getAlgorithmOutputByGuid(guid : Long) : AlgorithmOutputDto = {
    implicit val connection = getConnection();
    val dtos : AlgorithmOutputDto= SQL("select * from algorithmOutput where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[AlgorithmOutputDto].single);
+   releaseConnection(connection);
    dtos
   }  
  def getAlgorithmOutputByPk(pkColValue : Long) : AlgorithmOutputDto = { 
    implicit val connection = getConnection();  
    val dto : AlgorithmOutputDto = SQL("select * from algorithmOutput where algorithmOutputId = {pkColValue} ").on("pkColValue" -> pkColValue).as(anorm.Macro.namedParser[AlgorithmOutputDto].single);  
+   releaseConnection(connection);  
    dto  
  }  
  def getAlgorithmOutputMaxId() : Long = { 
    implicit val connection = getConnection();  
    val maxid : Long = SQL("select max(algorithmOutputId) as maxId from algorithmOutput ").executeQuery()(connection).as[Long](SqlParser.long("maxId").single)(connection);;  
+   releaseConnection(connection);  
    maxid  
  }  
  def getAlgorithmOutputByFkAlgorithmOutputTypeId(fkColValue : Long) : List[AlgorithmOutputDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[AlgorithmOutputDto] = SQL("select * from algorithmOutput where algorithmOutputTypeId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[AlgorithmOutputDto].*);  
+   releaseConnection(connection);  
    dtos  
  }  
  def getAlgorithmOutputByFkAlgorithmRunId(fkColValue : Long) : List[AlgorithmOutputDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[AlgorithmOutputDto] = SQL("select * from algorithmOutput where algorithmRunId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[AlgorithmOutputDto].*);  
+   releaseConnection(connection);  
    dtos  
  }  
  def getAlgorithmOutputByFkExecutorStorageId(fkColValue : Long) : List[AlgorithmOutputDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[AlgorithmOutputDto] = SQL("select * from algorithmOutput where executorStorageId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[AlgorithmOutputDto].*);  
+   releaseConnection(connection);  
    dtos  
  }  
  def getAlgorithmOutputByFkExecutorStorageResourceId(fkColValue : Long) : List[AlgorithmOutputDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[AlgorithmOutputDto] = SQL("select * from algorithmOutput where executorStorageResourceId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[AlgorithmOutputDto].*);  
+   releaseConnection(connection);  
    dtos  
  }  
  def insertAlgorithmOutputDto(dto : AlgorithmOutputDto): AlgorithmOutputDto = { 
@@ -84,8 +103,11 @@ import java.util.Date
     val rs = stat.getGeneratedKeys(); 
     if (rs.next()) { 
       val pkValue = rs.getLong(1); 
-      SQL("select * from algorithmOutput where algorithmOutputId = {pkValue} ").on("pkValue" -> pkValue).as(anorm.Macro.namedParser[AlgorithmOutputDto].single); 
+      val r = SQL("select * from algorithmOutput where algorithmOutputId = {pkValue} ").on("pkValue" -> pkValue).as(anorm.Macro.namedParser[AlgorithmOutputDto].single); 
+      releaseConnection(connection);  
+      r 
     } else { 
+      releaseConnection(connection);  
       null; 
     } 
  } 
@@ -97,6 +119,7 @@ import java.util.Date
     implicit val connection = getConnection();  
       val resCnt = SQL("update algorithmOutput set  lastUpdatedDate = {lastUpdatedDate} ,  algorithmRunId = {algorithmRunId} ,  algorithmOutputTypeId = {algorithmOutputTypeId} ,  executorStorageId = {executorStorageId} ,  executorStorageResourceId = {executorStorageResourceId}  where  algorithmOutputId = {algorithmOutputId}  ")
       .on("lastUpdatedDate" -> dto.lastUpdatedDate , "algorithmRunId" -> dto.algorithmRunId , "algorithmOutputTypeId" -> dto.algorithmOutputTypeId , "executorStorageId" -> dto.executorStorageId , "executorStorageResourceId" -> dto.executorStorageResourceId, "algorithmOutputId" -> dto.algorithmOutputId ).executeInsert() 
+   releaseConnection(connection);  
      getAlgorithmOutputByPk(dto.algorithmOutputId) 
     } 
 

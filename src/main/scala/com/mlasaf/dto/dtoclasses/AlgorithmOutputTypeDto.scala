@@ -24,6 +24,7 @@ case class AlgorithmOutputTypeDto (
  def getGuid() : Long = {    guid  }  
  def toAnyArray() : Array[Any] = {    Array(algorithmOutputTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmOutputTypeName)  }  
  def toStringArray() : Array[String] = {    Array(""+algorithmOutputTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmOutputTypeName)   }  
+ def toJson() : String = {   "{" + "\"algorithmOutputTypeId\":\""+algorithmOutputTypeId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"algorithmOutputTypeName\":\""+algorithmOutputTypeName+"\"" + "}"   }  
  def toFullString() : String = {    "algorithmOutputTypeId:'"+algorithmOutputTypeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmOutputTypeName:'"+algorithmOutputTypeName+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 

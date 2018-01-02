@@ -25,7 +25,9 @@ object CreateAlgorithmImplementation {
     val algorithmVersion = entryOptions.algorithmVersion.getOrElse("")
     val algorithmImplementationName = entryOptions.algorithmImplementationName.getOrElse("")
     val algorithmImplementationClass = entryOptions.algorithmImplementationClass.getOrElse("")
-    val outputType = entryOptions.outputType.getOrElse("")
+    //val algorithmColumns = entryOptions.algorithmColumns.getOrElse("")
+   // val algorithmParameters = entryOptions.algorithmParameters.getOrElse("")
+    //val outputTypes = entryOptions.outputType.getOrElse("")
     val supportedStorages = entryOptions.supportedStorages.getOrElse("LOCAL_DISK")
 
     val daoFactory = new DaoFactory();
@@ -38,15 +40,22 @@ object CreateAlgorithmImplementation {
     logger.info("algTypeVerId: " + algTypeVerId);
     val algImplDto = daoFactory.daos.algorithmImplementationDao.createAndInsertAlgorithmImplementationDto(algTypeVerId, execTypeId, algorithmImplementationName, algorithmImplementationClass);
     logger.info("algImplDto: " + algImplDto);
-    var algOutypeId = daoFactory.daos.algorithmOutputTypeDao.getAlgorithmOutputTypeFirstByName(outputType).get.algorithmOutputTypeId;
+
+    /*
     // columns
-    daoFactory.daos.algorithmTypeColumnTypeDao.createAndInsertAlgorithmTypeColumnTypeDto(algTypeVerId, daoFactory.daos.algorithmColumnTypeDao.getAlgorithmColumnTypeFirstByName("Time").get.algorithmColumnTypeId, 0, 0);
-    daoFactory.daos.algorithmTypeColumnTypeDao.createAndInsertAlgorithmTypeColumnTypeDto(algTypeVerId, daoFactory.daos.algorithmColumnTypeDao.getAlgorithmColumnTypeFirstByName("SingleGroup").get.algorithmColumnTypeId, 0, 0);
-    daoFactory.daos.algorithmTypeColumnTypeDao.createAndInsertAlgorithmTypeColumnTypeDto(algTypeVerId, daoFactory.daos.algorithmColumnTypeDao.getAlgorithmColumnTypeFirstByName("NumericValue").get.algorithmColumnTypeId, 0, 0);
+    algorithmColumns.split(",").foreach(col => {
+      daoFactory.daos.algorithmTypeColumnTypeDao.createAndInsertAlgorithmTypeColumnTypeDto(algTypeVerId, daoFactory.daos.algorithmColumnTypeDao.getAlgorithmColumnTypeFirstByName(col).get.algorithmColumnTypeId, 0, 0);
+    });
     // parameters
-    daoFactory.daos.algorithmParamTypeDao.createAndInsertAlgorithmParamTypeDto(daoFactory.daos.algorithmParamDao.getAlgorithmParamFirstByName("Prediction Times").get.algorithmParamId, algTypeId, algTypeVerId);
+    algorithmParameters.split(",").foreach(par => {
+      daoFactory.daos.algorithmParamTypeDao.createAndInsertAlgorithmParamTypeDto(daoFactory.daos.algorithmParamDao.getAlgorithmParamFirstByName(par).get.algorithmParamId, algTypeId, algTypeVerId);
+    })
     // outputs
-    daoFactory.daos.algorithmTypeOutputTypeDao.createAndInsertAlgorithmTypeOutputTypeDto(algTypeVerId, algOutypeId, 1);
+    outputTypes.split(",").foreach(outputType => {
+      var algOutypeId = daoFactory.daos.algorithmOutputTypeDao.getAlgorithmOutputTypeFirstByName(outputType).get.algorithmOutputTypeId;
+      daoFactory.daos.algorithmTypeOutputTypeDao.createAndInsertAlgorithmTypeOutputTypeDto(algTypeVerId, algOutypeId, 1);
+    })
+    */
     // supported storages
     supportedStorages.split(",").foreach(supsto => {
       val storageTypeId = daoFactory.daos.executorStorageTypeDao.getExecutorStorageTypeFirstByName(supsto).get.executorStorageTypeId;
@@ -68,8 +77,10 @@ class CreateAlgorithmImplementationEntryOptions(args : Array[String]) extends Sc
   var algorithmVersion = opt[String](descr="algorithmVersion", name = "algorithmVersion", short='v')
   var algorithmImplementationName = opt[String](descr="algorithmImplementationName", name = "algorithmImplementationName", short='n')
   var algorithmImplementationClass = opt[String](descr="algorithmImplementationClass", name = "algorithmImplementationClass", short='c')
-  var outputType = opt[String](descr="outputType", name = "outputType")
+  //var outputType = opt[String](descr="outputType", name = "outputType")
   var supportedStorages = opt[String](descr="supportedStorages", name = "supportedStorages")
+  //var algorithmColumns = opt[String](descr="algorithmColumns", name = "algorithmColumns")
+  //var algorithmParameters = opt[String](descr="algorithmParameters", name = "algorithmParameters")
 
   verify()
 

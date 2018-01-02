@@ -15,71 +15,91 @@ import java.util.Date
   def getAlgorithmScheduleColumnsList() : List[AlgorithmScheduleColumnDto] = {
    implicit val connection = getConnection();
    val dtos : List[AlgorithmScheduleColumnDto]= SQL("select * from algorithmScheduleColumn").as(anorm.Macro.namedParser[AlgorithmScheduleColumnDto].*);
+   releaseConnection(connection);
    dtos
   }
   def getAlgorithmScheduleColumnsCount() : Long = {
    implicit val connection = getConnection();
-   val cnt : Long = SQL("select count(*) as cnt from algorithmScheduleColumn").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+   val cnt : Long = SQL("select count(*) as cnt from algorithmScheduleColumn").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);
+   releaseConnection(connection);
    cnt
   }
   def getAlgorithmScheduleColumnsLastInsertDate() : java.util.Date = {
    implicit val connection = getConnection();
-   val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from algorithmScheduleColumn").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+   val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from algorithmScheduleColumn").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);
+   releaseConnection(connection);
    ld
   }
   def getAlgorithmScheduleColumnsLastUpdatedDate() : java.util.Date = {
    implicit val connection = getConnection();
-   val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from algorithmScheduleColumn").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+   val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from algorithmScheduleColumn").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);
+   releaseConnection(connection);
    ld
   }
   def getAlgorithmScheduleColumnFirst() : AlgorithmScheduleColumnDto = {
    implicit val connection = getConnection();
    val dtos : AlgorithmScheduleColumnDto= SQL("select * from algorithmScheduleColumn order by insertedRowDate asc ").as(anorm.Macro.namedParser[AlgorithmScheduleColumnDto].*).head;
+   releaseConnection(connection);
    dtos
   }
   def getAlgorithmScheduleColumnLast() : AlgorithmScheduleColumnDto = {
    implicit val connection = getConnection();
    val dtos : AlgorithmScheduleColumnDto= SQL("select * from algorithmScheduleColumn order by insertedRowDate desc ").as(anorm.Macro.namedParser[AlgorithmScheduleColumnDto].*).head;
+   releaseConnection(connection);
+   dtos
+  }
+  def getAlgorithmScheduleColumnsByField(fieldName : String, fieldValue : String) : List[AlgorithmScheduleColumnDto] = {
+   implicit val connection = getConnection();
+   val dtos : List[AlgorithmScheduleColumnDto]= SQL("select * from algorithmScheduleColumn where " + fieldName + " = {fieldValue} ").on("fieldValue" -> fieldValue).as(anorm.Macro.namedParser[AlgorithmScheduleColumnDto].*);
+   releaseConnection(connection);
    dtos
   }
   def getAlgorithmScheduleColumnByGuid(guid : Long) : AlgorithmScheduleColumnDto = {
    implicit val connection = getConnection();
    val dtos : AlgorithmScheduleColumnDto= SQL("select * from algorithmScheduleColumn where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[AlgorithmScheduleColumnDto].single);
+   releaseConnection(connection);
    dtos
   }  
  def getAlgorithmScheduleColumnByPk(pkColValue : Long) : AlgorithmScheduleColumnDto = { 
    implicit val connection = getConnection();  
    val dto : AlgorithmScheduleColumnDto = SQL("select * from algorithmScheduleColumn where algorithmScheduleColumnId = {pkColValue} ").on("pkColValue" -> pkColValue).as(anorm.Macro.namedParser[AlgorithmScheduleColumnDto].single);  
+   releaseConnection(connection);  
    dto  
  }  
  def getAlgorithmScheduleColumnMaxId() : Long = { 
    implicit val connection = getConnection();  
    val maxid : Long = SQL("select max(algorithmScheduleColumnId) as maxId from algorithmScheduleColumn ").executeQuery()(connection).as[Long](SqlParser.long("maxId").single)(connection);;  
+   releaseConnection(connection);  
    maxid  
  }  
  def getAlgorithmScheduleColumnByFkAlgorithmColumnTypeId(fkColValue : Long) : List[AlgorithmScheduleColumnDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[AlgorithmScheduleColumnDto] = SQL("select * from algorithmScheduleColumn where algorithmColumnTypeId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[AlgorithmScheduleColumnDto].*);  
+   releaseConnection(connection);  
    dtos  
  }  
  def getAlgorithmScheduleColumnByFkAlgorithmScheduleId(fkColValue : Long) : List[AlgorithmScheduleColumnDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[AlgorithmScheduleColumnDto] = SQL("select * from algorithmScheduleColumn where algorithmScheduleId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[AlgorithmScheduleColumnDto].*);  
+   releaseConnection(connection);  
    dtos  
  }  
  def getAlgorithmScheduleColumnByFkAlgorithmScheduleViewId(fkColValue : Long) : List[AlgorithmScheduleColumnDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[AlgorithmScheduleColumnDto] = SQL("select * from algorithmScheduleColumn where algorithmScheduleViewId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[AlgorithmScheduleColumnDto].*);  
+   releaseConnection(connection);  
    dtos  
  }  
  def getAlgorithmScheduleColumnByFkSourceViewId(fkColValue : Long) : List[AlgorithmScheduleColumnDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[AlgorithmScheduleColumnDto] = SQL("select * from algorithmScheduleColumn where sourceViewId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[AlgorithmScheduleColumnDto].*);  
+   releaseConnection(connection);  
    dtos  
  }  
  def getAlgorithmScheduleColumnByFkSourceViewColumnId(fkColValue : Long) : List[AlgorithmScheduleColumnDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[AlgorithmScheduleColumnDto] = SQL("select * from algorithmScheduleColumn where sourceViewColumnId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[AlgorithmScheduleColumnDto].*);  
+   releaseConnection(connection);  
    dtos  
  }  
  def insertAlgorithmScheduleColumnDto(dto : AlgorithmScheduleColumnDto): AlgorithmScheduleColumnDto = { 
@@ -89,8 +109,11 @@ import java.util.Date
     val rs = stat.getGeneratedKeys(); 
     if (rs.next()) { 
       val pkValue = rs.getLong(1); 
-      SQL("select * from algorithmScheduleColumn where algorithmScheduleColumnId = {pkValue} ").on("pkValue" -> pkValue).as(anorm.Macro.namedParser[AlgorithmScheduleColumnDto].single); 
+      val r = SQL("select * from algorithmScheduleColumn where algorithmScheduleColumnId = {pkValue} ").on("pkValue" -> pkValue).as(anorm.Macro.namedParser[AlgorithmScheduleColumnDto].single); 
+      releaseConnection(connection);  
+      r 
     } else { 
+      releaseConnection(connection);  
       null; 
     } 
  } 
@@ -102,6 +125,7 @@ import java.util.Date
     implicit val connection = getConnection();  
       val resCnt = SQL("update algorithmScheduleColumn set  lastUpdatedDate = {lastUpdatedDate} ,  algorithmScheduleId = {algorithmScheduleId} ,  algorithmColumnTypeId = {algorithmColumnTypeId} ,  algorithmScheduleViewId = {algorithmScheduleViewId} ,  sourceViewId = {sourceViewId} ,  sourceViewColumnId = {sourceViewColumnId} ,  extendedProperties = {extendedProperties}  where  algorithmScheduleColumnId = {algorithmScheduleColumnId}  ")
       .on("lastUpdatedDate" -> dto.lastUpdatedDate , "algorithmScheduleId" -> dto.algorithmScheduleId , "algorithmColumnTypeId" -> dto.algorithmColumnTypeId , "algorithmScheduleViewId" -> dto.algorithmScheduleViewId , "sourceViewId" -> dto.sourceViewId , "sourceViewColumnId" -> dto.sourceViewColumnId , "extendedProperties" -> dto.extendedProperties, "algorithmScheduleColumnId" -> dto.algorithmScheduleColumnId ).executeInsert() 
+   releaseConnection(connection);  
      getAlgorithmScheduleColumnByPk(dto.algorithmScheduleColumnId) 
     } 
 

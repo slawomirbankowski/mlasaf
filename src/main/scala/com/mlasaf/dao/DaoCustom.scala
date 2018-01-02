@@ -28,6 +28,7 @@ class DaoCustom {
     SQL("insert into executorHost( executorHostId, hostName, hostIp, hostDomain, hostOsType, hostOsVersion) values( {executorHostId}, {hostName}, {hostIp}, {hostDomain}, {hostOsType}, {hostOsVersion}) ")
       .on("executorHostId" -> dto.executorHostId, "hostName" -> dto.hostName, "hostIp" -> dto.hostIp, "hostDomain" -> dto.hostDomain, "hostOsType" -> dto.hostOsType, "hostOsVersion" -> dto.hostOsVersion)
       .executeInsert()(connection)
+    daoFactory.daoConn.releaseConnection(connection);
   }
   /**  */
   def registerHost() : ExecutorHostDto = {
@@ -48,12 +49,14 @@ class DaoCustom {
     if (cnt == 0) {
       val currentHost : ExecutorHostDto = daoFactory.daos.executorHostDao.createAndInsertExecutorHostDto(hostName, hostIp, "", osName, osVersion, 1);
       logger.info("Registering Executor Host for host: " +  hostName + ", hostAddress: " + hostAddress + ", IP: " + hostIp + ", canonicalHost: " + canonicalHost)
+      daoFactory.daoConn.releaseConnection(connection);
       currentHost
     } else {
       logger.info("Try to search for current host in DB: " +  hostName)
       val currentHost : ExecutorHostDto = SQL("select * from executorHost where hostName = {hostName} and hostIp = {hostIp}")
         .on("hostName" -> hostName, "hostIp" -> hostIp)
         .as[ExecutorHostDto](anorm.Macro.namedParser[ExecutorHostDto].single)(connection)
+      daoFactory.daoConn.releaseConnection(connection);
       logger.info("Current host in DB: " +  currentHost)
       currentHost
     }
@@ -64,6 +67,7 @@ class DaoCustom {
     val hostDto : ExecutorHostDto = registerHost();
     logger.info("Registering new Executor for host: " + hostDto);
     val execInst = daoFactory.daos.executorInstanceDao.createAndInsertExecutorInstanceDto(executorTypeId, hostDto.executorHostId, executorContextId, "executor_name", 1, 0, 8888, new java.util.Date());
+    daoFactory.daoConn.releaseConnection(conn);
     execInst;
   }
 

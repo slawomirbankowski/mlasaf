@@ -15,56 +15,73 @@ import java.util.Date
   def getDownloadTransformExecutorStoragesList() : List[DownloadTransformExecutorStorageDto] = {
    implicit val connection = getConnection();
    val dtos : List[DownloadTransformExecutorStorageDto]= SQL("select * from downloadTransformExecutorStorage").as(anorm.Macro.namedParser[DownloadTransformExecutorStorageDto].*);
+   releaseConnection(connection);
    dtos
   }
   def getDownloadTransformExecutorStoragesCount() : Long = {
    implicit val connection = getConnection();
-   val cnt : Long = SQL("select count(*) as cnt from downloadTransformExecutorStorage").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+   val cnt : Long = SQL("select count(*) as cnt from downloadTransformExecutorStorage").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);
+   releaseConnection(connection);
    cnt
   }
   def getDownloadTransformExecutorStoragesLastInsertDate() : java.util.Date = {
    implicit val connection = getConnection();
-   val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from downloadTransformExecutorStorage").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+   val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from downloadTransformExecutorStorage").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);
+   releaseConnection(connection);
    ld
   }
   def getDownloadTransformExecutorStoragesLastUpdatedDate() : java.util.Date = {
    implicit val connection = getConnection();
-   val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from downloadTransformExecutorStorage").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+   val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from downloadTransformExecutorStorage").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);
+   releaseConnection(connection);
    ld
   }
   def getDownloadTransformExecutorStorageFirst() : DownloadTransformExecutorStorageDto = {
    implicit val connection = getConnection();
    val dtos : DownloadTransformExecutorStorageDto= SQL("select * from downloadTransformExecutorStorage order by insertedRowDate asc ").as(anorm.Macro.namedParser[DownloadTransformExecutorStorageDto].*).head;
+   releaseConnection(connection);
    dtos
   }
   def getDownloadTransformExecutorStorageLast() : DownloadTransformExecutorStorageDto = {
    implicit val connection = getConnection();
    val dtos : DownloadTransformExecutorStorageDto= SQL("select * from downloadTransformExecutorStorage order by insertedRowDate desc ").as(anorm.Macro.namedParser[DownloadTransformExecutorStorageDto].*).head;
+   releaseConnection(connection);
+   dtos
+  }
+  def getDownloadTransformExecutorStoragesByField(fieldName : String, fieldValue : String) : List[DownloadTransformExecutorStorageDto] = {
+   implicit val connection = getConnection();
+   val dtos : List[DownloadTransformExecutorStorageDto]= SQL("select * from downloadTransformExecutorStorage where " + fieldName + " = {fieldValue} ").on("fieldValue" -> fieldValue).as(anorm.Macro.namedParser[DownloadTransformExecutorStorageDto].*);
+   releaseConnection(connection);
    dtos
   }
   def getDownloadTransformExecutorStorageByGuid(guid : Long) : DownloadTransformExecutorStorageDto = {
    implicit val connection = getConnection();
    val dtos : DownloadTransformExecutorStorageDto= SQL("select * from downloadTransformExecutorStorage where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[DownloadTransformExecutorStorageDto].single);
+   releaseConnection(connection);
    dtos
   }  
  def getDownloadTransformExecutorStorageByPk(pkColValue : Long) : DownloadTransformExecutorStorageDto = { 
    implicit val connection = getConnection();  
    val dto : DownloadTransformExecutorStorageDto = SQL("select * from downloadTransformExecutorStorage where downloadTransformExecutorStorageId = {pkColValue} ").on("pkColValue" -> pkColValue).as(anorm.Macro.namedParser[DownloadTransformExecutorStorageDto].single);  
+   releaseConnection(connection);  
    dto  
  }  
  def getDownloadTransformExecutorStorageMaxId() : Long = { 
    implicit val connection = getConnection();  
    val maxid : Long = SQL("select max(downloadTransformExecutorStorageId) as maxId from downloadTransformExecutorStorage ").executeQuery()(connection).as[Long](SqlParser.long("maxId").single)(connection);;  
+   releaseConnection(connection);  
    maxid  
  }  
  def getDownloadTransformExecutorStorageByFkDownloadTransformGroupId(fkColValue : Long) : List[DownloadTransformExecutorStorageDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[DownloadTransformExecutorStorageDto] = SQL("select * from downloadTransformExecutorStorage where downloadTransformGroupId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[DownloadTransformExecutorStorageDto].*);  
+   releaseConnection(connection);  
    dtos  
  }  
  def getDownloadTransformExecutorStorageByFkExecutorStorageViewId(fkColValue : Long) : List[DownloadTransformExecutorStorageDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[DownloadTransformExecutorStorageDto] = SQL("select * from downloadTransformExecutorStorage where executorStorageViewId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[DownloadTransformExecutorStorageDto].*);  
+   releaseConnection(connection);  
    dtos  
  }  
  def insertDownloadTransformExecutorStorageDto(dto : DownloadTransformExecutorStorageDto): DownloadTransformExecutorStorageDto = { 
@@ -74,8 +91,11 @@ import java.util.Date
     val rs = stat.getGeneratedKeys(); 
     if (rs.next()) { 
       val pkValue = rs.getLong(1); 
-      SQL("select * from downloadTransformExecutorStorage where downloadTransformExecutorStorageId = {pkValue} ").on("pkValue" -> pkValue).as(anorm.Macro.namedParser[DownloadTransformExecutorStorageDto].single); 
+      val r = SQL("select * from downloadTransformExecutorStorage where downloadTransformExecutorStorageId = {pkValue} ").on("pkValue" -> pkValue).as(anorm.Macro.namedParser[DownloadTransformExecutorStorageDto].single); 
+      releaseConnection(connection);  
+      r 
     } else { 
+      releaseConnection(connection);  
       null; 
     } 
  } 
@@ -87,6 +107,7 @@ import java.util.Date
     implicit val connection = getConnection();  
       val resCnt = SQL("update downloadTransformExecutorStorage set  lastUpdatedDate = {lastUpdatedDate} ,  downloadTransformGroupId = {downloadTransformGroupId} ,  executorStorageViewId = {executorStorageViewId}  where  downloadTransformExecutorStorageId = {downloadTransformExecutorStorageId}  ")
       .on("lastUpdatedDate" -> dto.lastUpdatedDate , "downloadTransformGroupId" -> dto.downloadTransformGroupId , "executorStorageViewId" -> dto.executorStorageViewId, "downloadTransformExecutorStorageId" -> dto.downloadTransformExecutorStorageId ).executeInsert() 
+   releaseConnection(connection);  
      getDownloadTransformExecutorStorageByPk(dto.downloadTransformExecutorStorageId) 
     } 
 

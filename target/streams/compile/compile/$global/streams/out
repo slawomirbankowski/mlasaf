@@ -1,5 +1,2 @@
-[0m[[0m[33mwarn[0m] [0m[0mC:\Project\mlasaf\src\mlasaf\src\main\scala\com\mlasaf\tests\DaoTests.scala:11:8: DaoTests has a main method with parameter type Array[String], but com.mlasaf.tests.DaoTests will not be a runnable program.[0m
-[0m[[0m[33mwarn[0m] [0m[0m  Reason: main method must have exact signature (Array[String])Unit[0m
-[0m[[0m[33mwarn[0m] [0m[0mobject DaoTests {[0m
-[0m[[0m[33mwarn[0m] [0m[0m       ^[0m
+[0m[[0m[33mwarn[0m] [0m[0mthere was one feature warning; re-run with -feature for details[0m
 [0m[[0m[33mwarn[0m] [0m[0mone warning found[0m

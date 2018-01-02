@@ -25,6 +25,7 @@ case class SourceTypeDto (
  def getGuid() : Long = {    guid  }  
  def toAnyArray() : Array[Any] = {    Array(sourceTypeId,guid,insertedRowDate,lastUpdatedDate,sourceTypeName,sourceTypeClass)  }  
  def toStringArray() : Array[String] = {    Array(""+sourceTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceTypeName,""+sourceTypeClass)   }  
+ def toJson() : String = {   "{" + "\"sourceTypeId\":\""+sourceTypeId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"sourceTypeName\":\""+sourceTypeName+"\""+","+"\"sourceTypeClass\":\""+sourceTypeClass+"\"" + "}"   }  
  def toFullString() : String = {    "sourceTypeId:'"+sourceTypeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"sourceTypeName:'"+sourceTypeName+"'"+","+"sourceTypeClass:'"+sourceTypeClass+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 

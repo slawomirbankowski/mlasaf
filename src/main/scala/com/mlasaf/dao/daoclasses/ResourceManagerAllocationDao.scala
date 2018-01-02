@@ -15,71 +15,91 @@ import java.util.Date
   def getResourceManagerAllocationsList() : List[ResourceManagerAllocationDto] = {
    implicit val connection = getConnection();
    val dtos : List[ResourceManagerAllocationDto]= SQL("select * from resourceManagerAllocation").as(anorm.Macro.namedParser[ResourceManagerAllocationDto].*);
+   releaseConnection(connection);
    dtos
   }
   def getResourceManagerAllocationsCount() : Long = {
    implicit val connection = getConnection();
-   val cnt : Long = SQL("select count(*) as cnt from resourceManagerAllocation").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+   val cnt : Long = SQL("select count(*) as cnt from resourceManagerAllocation").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);
+   releaseConnection(connection);
    cnt
   }
   def getResourceManagerAllocationsLastInsertDate() : java.util.Date = {
    implicit val connection = getConnection();
-   val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from resourceManagerAllocation").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+   val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from resourceManagerAllocation").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);
+   releaseConnection(connection);
    ld
   }
   def getResourceManagerAllocationsLastUpdatedDate() : java.util.Date = {
    implicit val connection = getConnection();
-   val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from resourceManagerAllocation").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+   val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from resourceManagerAllocation").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);
+   releaseConnection(connection);
    ld
   }
   def getResourceManagerAllocationFirst() : ResourceManagerAllocationDto = {
    implicit val connection = getConnection();
    val dtos : ResourceManagerAllocationDto= SQL("select * from resourceManagerAllocation order by insertedRowDate asc ").as(anorm.Macro.namedParser[ResourceManagerAllocationDto].*).head;
+   releaseConnection(connection);
    dtos
   }
   def getResourceManagerAllocationLast() : ResourceManagerAllocationDto = {
    implicit val connection = getConnection();
    val dtos : ResourceManagerAllocationDto= SQL("select * from resourceManagerAllocation order by insertedRowDate desc ").as(anorm.Macro.namedParser[ResourceManagerAllocationDto].*).head;
+   releaseConnection(connection);
+   dtos
+  }
+  def getResourceManagerAllocationsByField(fieldName : String, fieldValue : String) : List[ResourceManagerAllocationDto] = {
+   implicit val connection = getConnection();
+   val dtos : List[ResourceManagerAllocationDto]= SQL("select * from resourceManagerAllocation where " + fieldName + " = {fieldValue} ").on("fieldValue" -> fieldValue).as(anorm.Macro.namedParser[ResourceManagerAllocationDto].*);
+   releaseConnection(connection);
    dtos
   }
   def getResourceManagerAllocationByGuid(guid : Long) : ResourceManagerAllocationDto = {
    implicit val connection = getConnection();
    val dtos : ResourceManagerAllocationDto= SQL("select * from resourceManagerAllocation where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[ResourceManagerAllocationDto].single);
+   releaseConnection(connection);
    dtos
   }  
  def getResourceManagerAllocationByPk(pkColValue : Long) : ResourceManagerAllocationDto = { 
    implicit val connection = getConnection();  
    val dto : ResourceManagerAllocationDto = SQL("select * from resourceManagerAllocation where resourceManagerAllocationId = {pkColValue} ").on("pkColValue" -> pkColValue).as(anorm.Macro.namedParser[ResourceManagerAllocationDto].single);  
+   releaseConnection(connection);  
    dto  
  }  
  def getResourceManagerAllocationMaxId() : Long = { 
    implicit val connection = getConnection();  
    val maxid : Long = SQL("select max(resourceManagerAllocationId) as maxId from resourceManagerAllocation ").executeQuery()(connection).as[Long](SqlParser.long("maxId").single)(connection);;  
+   releaseConnection(connection);  
    maxid  
  }  
  def getResourceManagerAllocationByFkExecutorHostId(fkColValue : Long) : List[ResourceManagerAllocationDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[ResourceManagerAllocationDto] = SQL("select * from resourceManagerAllocation where executorHostId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[ResourceManagerAllocationDto].*);  
+   releaseConnection(connection);  
    dtos  
  }  
  def getResourceManagerAllocationByFkExecutorInstanceId(fkColValue : Long) : List[ResourceManagerAllocationDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[ResourceManagerAllocationDto] = SQL("select * from resourceManagerAllocation where executorInstanceId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[ResourceManagerAllocationDto].*);  
+   releaseConnection(connection);  
    dtos  
  }  
  def getResourceManagerAllocationByFkResourceManagerId(fkColValue : Long) : List[ResourceManagerAllocationDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[ResourceManagerAllocationDto] = SQL("select * from resourceManagerAllocation where resourceManagerId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[ResourceManagerAllocationDto].*);  
+   releaseConnection(connection);  
    dtos  
  }  
  def getResourceManagerAllocationByFkResourceMeasureId(fkColValue : Long) : List[ResourceManagerAllocationDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[ResourceManagerAllocationDto] = SQL("select * from resourceManagerAllocation where resourceMeasureId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[ResourceManagerAllocationDto].*);  
+   releaseConnection(connection);  
    dtos  
  }  
  def getResourceManagerAllocationByFkResourceManagerTypeId(fkColValue : Long) : List[ResourceManagerAllocationDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[ResourceManagerAllocationDto] = SQL("select * from resourceManagerAllocation where resourceManagerTypeId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[ResourceManagerAllocationDto].*);  
+   releaseConnection(connection);  
    dtos  
  }  
  def insertResourceManagerAllocationDto(dto : ResourceManagerAllocationDto): ResourceManagerAllocationDto = { 
@@ -89,8 +109,11 @@ import java.util.Date
     val rs = stat.getGeneratedKeys(); 
     if (rs.next()) { 
       val pkValue = rs.getLong(1); 
-      SQL("select * from resourceManagerAllocation where resourceManagerAllocationId = {pkValue} ").on("pkValue" -> pkValue).as(anorm.Macro.namedParser[ResourceManagerAllocationDto].single); 
+      val r = SQL("select * from resourceManagerAllocation where resourceManagerAllocationId = {pkValue} ").on("pkValue" -> pkValue).as(anorm.Macro.namedParser[ResourceManagerAllocationDto].single); 
+      releaseConnection(connection);  
+      r 
     } else { 
+      releaseConnection(connection);  
       null; 
     } 
  } 
@@ -102,6 +125,7 @@ import java.util.Date
     implicit val connection = getConnection();  
       val resCnt = SQL("update resourceManagerAllocation set  lastUpdatedDate = {lastUpdatedDate} ,  resourceManagerTypeId = {resourceManagerTypeId} ,  resourceManagerId = {resourceManagerId} ,  executorHostId = {executorHostId} ,  executorInstanceId = {executorInstanceId} ,  resourceMeasureId = {resourceMeasureId} ,  allocationValue = {allocationValue} ,  allocationValueMin = {allocationValueMin} ,  allocationValueMax = {allocationValueMax}  where  resourceManagerAllocationId = {resourceManagerAllocationId}  ")
       .on("lastUpdatedDate" -> dto.lastUpdatedDate , "resourceManagerTypeId" -> dto.resourceManagerTypeId , "resourceManagerId" -> dto.resourceManagerId , "executorHostId" -> dto.executorHostId , "executorInstanceId" -> dto.executorInstanceId , "resourceMeasureId" -> dto.resourceMeasureId , "allocationValue" -> dto.allocationValue , "allocationValueMin" -> dto.allocationValueMin , "allocationValueMax" -> dto.allocationValueMax, "resourceManagerAllocationId" -> dto.resourceManagerAllocationId ).executeInsert() 
+   releaseConnection(connection);  
      getResourceManagerAllocationByPk(dto.resourceManagerAllocationId) 
     } 
 

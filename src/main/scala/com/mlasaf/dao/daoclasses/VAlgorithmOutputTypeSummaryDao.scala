@@ -15,71 +15,91 @@ import java.util.Date
   def getVAlgorithmOutputTypeSummarysList() : List[VAlgorithmOutputTypeSummaryDto] = {
    implicit val connection = getConnection();
    val dtos : List[VAlgorithmOutputTypeSummaryDto]= SQL("select * from vAlgorithmOutputTypeSummary").as(anorm.Macro.namedParser[VAlgorithmOutputTypeSummaryDto].*);
+   releaseConnection(connection);
    dtos
   }
   def getVAlgorithmOutputTypeSummarysCount() : Long = {
    implicit val connection = getConnection();
-   val cnt : Long = SQL("select count(*) as cnt from vAlgorithmOutputTypeSummary").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+   val cnt : Long = SQL("select count(*) as cnt from vAlgorithmOutputTypeSummary").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);
+   releaseConnection(connection);
    cnt
   }
   def getVAlgorithmOutputTypeSummarysLastInsertDate() : java.util.Date = {
    implicit val connection = getConnection();
-   val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vAlgorithmOutputTypeSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+   val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from vAlgorithmOutputTypeSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);
+   releaseConnection(connection);
    ld
   }
   def getVAlgorithmOutputTypeSummarysLastUpdatedDate() : java.util.Date = {
    implicit val connection = getConnection();
-   val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vAlgorithmOutputTypeSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+   val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from vAlgorithmOutputTypeSummary").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);
+   releaseConnection(connection);
    ld
   }
   def getVAlgorithmOutputTypeSummaryFirst() : VAlgorithmOutputTypeSummaryDto = {
    implicit val connection = getConnection();
    val dtos : VAlgorithmOutputTypeSummaryDto= SQL("select * from vAlgorithmOutputTypeSummary order by insertedRowDate asc ").as(anorm.Macro.namedParser[VAlgorithmOutputTypeSummaryDto].*).head;
+   releaseConnection(connection);
    dtos
   }
   def getVAlgorithmOutputTypeSummaryLast() : VAlgorithmOutputTypeSummaryDto = {
    implicit val connection = getConnection();
    val dtos : VAlgorithmOutputTypeSummaryDto= SQL("select * from vAlgorithmOutputTypeSummary order by insertedRowDate desc ").as(anorm.Macro.namedParser[VAlgorithmOutputTypeSummaryDto].*).head;
+   releaseConnection(connection);
+   dtos
+  }
+  def getVAlgorithmOutputTypeSummarysByField(fieldName : String, fieldValue : String) : List[VAlgorithmOutputTypeSummaryDto] = {
+   implicit val connection = getConnection();
+   val dtos : List[VAlgorithmOutputTypeSummaryDto]= SQL("select * from vAlgorithmOutputTypeSummary where " + fieldName + " = {fieldValue} ").on("fieldValue" -> fieldValue).as(anorm.Macro.namedParser[VAlgorithmOutputTypeSummaryDto].*);
+   releaseConnection(connection);
    dtos
   }
   def getVAlgorithmOutputTypeSummaryByGuid(guid : Long) : VAlgorithmOutputTypeSummaryDto = {
    implicit val connection = getConnection();
    val dtos : VAlgorithmOutputTypeSummaryDto= SQL("select * from vAlgorithmOutputTypeSummary where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[VAlgorithmOutputTypeSummaryDto].single);
+   releaseConnection(connection);
    dtos
   }  
  def getDtosByAlgorithmOutputTypeId(colValue : Long) : List[VAlgorithmOutputTypeSummaryDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VAlgorithmOutputTypeSummaryDto] = SQL("select * from vAlgorithmOutputTypeSummary where algorithmOutputTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputTypeSummaryDto].*);  
+   releaseConnection(connection);  
    dtos  
  }  
  def getDtosByGuid(colValue : Long) : List[VAlgorithmOutputTypeSummaryDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VAlgorithmOutputTypeSummaryDto] = SQL("select * from vAlgorithmOutputTypeSummary where guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputTypeSummaryDto].*);  
+   releaseConnection(connection);  
    dtos  
  }  
  def getDtosByInsertedRowDate(colValue : java.util.Date) : List[VAlgorithmOutputTypeSummaryDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VAlgorithmOutputTypeSummaryDto] = SQL("select * from vAlgorithmOutputTypeSummary where insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputTypeSummaryDto].*);  
+   releaseConnection(connection);  
    dtos  
  }  
  def getDtosByLastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmOutputTypeSummaryDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VAlgorithmOutputTypeSummaryDto] = SQL("select * from vAlgorithmOutputTypeSummary where lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputTypeSummaryDto].*);  
+   releaseConnection(connection);  
    dtos  
  }  
  def getDtosByAlgorithmOutputTypeName(colValue : String) : List[VAlgorithmOutputTypeSummaryDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VAlgorithmOutputTypeSummaryDto] = SQL("select * from vAlgorithmOutputTypeSummary where algorithmOutputTypeName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputTypeSummaryDto].*);  
+   releaseConnection(connection);  
    dtos  
  }  
  def getDtosByAlgorithmTypeOutputType_count(colValue : Int) : List[VAlgorithmOutputTypeSummaryDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VAlgorithmOutputTypeSummaryDto] = SQL("select * from vAlgorithmOutputTypeSummary where algorithmTypeOutputType_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputTypeSummaryDto].*);  
+   releaseConnection(connection);  
    dtos  
  }  
  def getDtosByAlgorithmOutput_count(colValue : Int) : List[VAlgorithmOutputTypeSummaryDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VAlgorithmOutputTypeSummaryDto] = SQL("select * from vAlgorithmOutputTypeSummary where algorithmOutput_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputTypeSummaryDto].*);  
+   releaseConnection(connection);  
    dtos  
  }  
 

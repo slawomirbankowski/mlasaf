@@ -4,7 +4,7 @@
 */
 package com.mlasaf.domain
 
-import com.mlasaf.base.ThreadBase
+import com.mlasaf.base.{SouceViewDownloader, ThreadBase}
 import com.mlasaf.common.CustomUtils
 import com.mlasaf.dto._
 

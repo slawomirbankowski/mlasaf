@@ -901,26 +901,6 @@
             <column name="algorithmTypeVersionName" />
         </createIndex>
         <addForeignKeyConstraint baseTableName="algorithmTypeVersion" baseColumnNames="algorithmTypeId" referencedTableName="algorithmType" referencedColumnNames="algorithmTypeId"  constraintName="fk_atv_atId"  />
-        <insert tableName="algorithmTypeVersion">
-            <column name="algorithmTypeId" value="1"/>
-            <column name="algorithmTypeVersionName" value="1.0"/>
-        </insert>
-        <insert tableName="algorithmTypeVersion">
-            <column name="algorithmTypeId" value="2"/>
-            <column name="algorithmTypeVersionName" value="1.0"/>
-        </insert>
-        <insert tableName="algorithmTypeVersion">
-            <column name="algorithmTypeId" value="3"/>
-            <column name="algorithmTypeVersionName" value="1.0"/>
-        </insert>
-        <insert tableName="algorithmTypeVersion">
-            <column name="algorithmTypeId" value="4"/>
-            <column name="algorithmTypeVersionName" value="1.0"/>
-        </insert>
-        <insert tableName="algorithmTypeVersion">
-            <column name="algorithmTypeId" value="5"/>
-            <column name="algorithmTypeVersionName" value="1.0"/>
-        </insert>
 
 
         <createTable tableName="algorithmImplementation" remarks="DICTIONARY - implementation of algorithm version for given type of executor" >

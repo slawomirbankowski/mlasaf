@@ -7,7 +7,7 @@
 		revision="0.1.0"
 		conf="test-internal"
 		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, pom, scala-tool"
-		date="20171231032549"/>
+		date="20180102005146"/>
 	<dependencies>
 		<module organisation="com.microsoft.sqlserver" name="sqljdbc4">
 			<revision name="4.0" status="release" pubdate="20170831085705" resolver="sbt-chain" artresolver="sbt-chain" homepage="" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="157">

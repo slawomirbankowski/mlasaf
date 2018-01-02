@@ -26,6 +26,7 @@ case class AlgorithmStorageSupportDto (
  def getGuid() : Long = {    guid  }  
  def toAnyArray() : Array[Any] = {    Array(algorithmStorageSupportId,guid,insertedRowDate,lastUpdatedDate,algorithmImplementationId,executorStorageTypeId,supportPriority)  }  
  def toStringArray() : Array[String] = {    Array(""+algorithmStorageSupportId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmImplementationId,""+executorStorageTypeId,""+supportPriority)   }  
+ def toJson() : String = {   "{" + "\"algorithmStorageSupportId\":\""+algorithmStorageSupportId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"algorithmImplementationId\":\""+algorithmImplementationId+"\""+","+"\"executorStorageTypeId\":\""+executorStorageTypeId+"\""+","+"\"supportPriority\":\""+supportPriority+"\"" + "}"   }  
  def toFullString() : String = {    "algorithmStorageSupportId:'"+algorithmStorageSupportId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmImplementationId:'"+algorithmImplementationId+"'"+","+"executorStorageTypeId:'"+executorStorageTypeId+"'"+","+"supportPriority:'"+supportPriority+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 

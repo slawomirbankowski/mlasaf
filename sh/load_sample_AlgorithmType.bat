@@ -1,0 +1,1 @@
+java -cp "./target/mlasaf-1.0.jar;" com.mlasaf.MlasafEntry --executorClasses "com.mlasaf.executors.LocalExecutor" --jdbcString "%MLASAF_DDL_JDBC%" --jdbcUser "%MLASAF_USER%" --jdbcPass %MLASAF_PASS% --restPort "%MLASAF_PORT%" --restAlternativePort "%MLASAF_PORT_ALTERNATIVE%" 

@@ -28,6 +28,7 @@ case class SourceTypeParamDto (
  def getGuid() : Long = {    guid  }  
  def toAnyArray() : Array[Any] = {    Array(sourceTypeParamId,guid,insertedRowDate,lastUpdatedDate,sourceTypeId,sourceParamId,sourceTypeName,sourceParamName,isRequired)  }  
  def toStringArray() : Array[String] = {    Array(""+sourceTypeParamId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceTypeId,""+sourceParamId,""+sourceTypeName,""+sourceParamName,""+isRequired)   }  
+ def toJson() : String = {   "{" + "\"sourceTypeParamId\":\""+sourceTypeParamId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"sourceTypeId\":\""+sourceTypeId+"\""+","+"\"sourceParamId\":\""+sourceParamId+"\""+","+"\"sourceTypeName\":\""+sourceTypeName+"\""+","+"\"sourceParamName\":\""+sourceParamName+"\""+","+"\"isRequired\":\""+isRequired+"\"" + "}"   }  
  def toFullString() : String = {    "sourceTypeParamId:'"+sourceTypeParamId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"sourceTypeId:'"+sourceTypeId+"'"+","+"sourceParamId:'"+sourceParamId+"'"+","+"sourceTypeName:'"+sourceTypeName+"'"+","+"sourceParamName:'"+sourceParamName+"'"+","+"isRequired:'"+isRequired+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 

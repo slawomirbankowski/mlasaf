@@ -15,56 +15,73 @@ import java.util.Date
   def getResourceManagerMeasuresList() : List[ResourceManagerMeasureDto] = {
    implicit val connection = getConnection();
    val dtos : List[ResourceManagerMeasureDto]= SQL("select * from resourceManagerMeasure").as(anorm.Macro.namedParser[ResourceManagerMeasureDto].*);
+   releaseConnection(connection);
    dtos
   }
   def getResourceManagerMeasuresCount() : Long = {
    implicit val connection = getConnection();
-   val cnt : Long = SQL("select count(*) as cnt from resourceManagerMeasure").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+   val cnt : Long = SQL("select count(*) as cnt from resourceManagerMeasure").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);
+   releaseConnection(connection);
    cnt
   }
   def getResourceManagerMeasuresLastInsertDate() : java.util.Date = {
    implicit val connection = getConnection();
-   val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from resourceManagerMeasure").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+   val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from resourceManagerMeasure").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);
+   releaseConnection(connection);
    ld
   }
   def getResourceManagerMeasuresLastUpdatedDate() : java.util.Date = {
    implicit val connection = getConnection();
-   val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from resourceManagerMeasure").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+   val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from resourceManagerMeasure").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);
+   releaseConnection(connection);
    ld
   }
   def getResourceManagerMeasureFirst() : ResourceManagerMeasureDto = {
    implicit val connection = getConnection();
    val dtos : ResourceManagerMeasureDto= SQL("select * from resourceManagerMeasure order by insertedRowDate asc ").as(anorm.Macro.namedParser[ResourceManagerMeasureDto].*).head;
+   releaseConnection(connection);
    dtos
   }
   def getResourceManagerMeasureLast() : ResourceManagerMeasureDto = {
    implicit val connection = getConnection();
    val dtos : ResourceManagerMeasureDto= SQL("select * from resourceManagerMeasure order by insertedRowDate desc ").as(anorm.Macro.namedParser[ResourceManagerMeasureDto].*).head;
+   releaseConnection(connection);
+   dtos
+  }
+  def getResourceManagerMeasuresByField(fieldName : String, fieldValue : String) : List[ResourceManagerMeasureDto] = {
+   implicit val connection = getConnection();
+   val dtos : List[ResourceManagerMeasureDto]= SQL("select * from resourceManagerMeasure where " + fieldName + " = {fieldValue} ").on("fieldValue" -> fieldValue).as(anorm.Macro.namedParser[ResourceManagerMeasureDto].*);
+   releaseConnection(connection);
    dtos
   }
   def getResourceManagerMeasureByGuid(guid : Long) : ResourceManagerMeasureDto = {
    implicit val connection = getConnection();
    val dtos : ResourceManagerMeasureDto= SQL("select * from resourceManagerMeasure where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[ResourceManagerMeasureDto].single);
+   releaseConnection(connection);
    dtos
   }  
  def getResourceManagerMeasureByPk(pkColValue : Long) : ResourceManagerMeasureDto = { 
    implicit val connection = getConnection();  
    val dto : ResourceManagerMeasureDto = SQL("select * from resourceManagerMeasure where resourceManagerMeasureId = {pkColValue} ").on("pkColValue" -> pkColValue).as(anorm.Macro.namedParser[ResourceManagerMeasureDto].single);  
+   releaseConnection(connection);  
    dto  
  }  
  def getResourceManagerMeasureMaxId() : Long = { 
    implicit val connection = getConnection();  
    val maxid : Long = SQL("select max(resourceManagerMeasureId) as maxId from resourceManagerMeasure ").executeQuery()(connection).as[Long](SqlParser.long("maxId").single)(connection);;  
+   releaseConnection(connection);  
    maxid  
  }  
  def getResourceManagerMeasureByFkResourceManagerId(fkColValue : Long) : List[ResourceManagerMeasureDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[ResourceManagerMeasureDto] = SQL("select * from resourceManagerMeasure where resourceManagerId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[ResourceManagerMeasureDto].*);  
+   releaseConnection(connection);  
    dtos  
  }  
  def getResourceManagerMeasureByFkResourceMeasureId(fkColValue : Long) : List[ResourceManagerMeasureDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[ResourceManagerMeasureDto] = SQL("select * from resourceManagerMeasure where resourceMeasureId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[ResourceManagerMeasureDto].*);  
+   releaseConnection(connection);  
    dtos  
  }  
  def insertResourceManagerMeasureDto(dto : ResourceManagerMeasureDto): ResourceManagerMeasureDto = { 
@@ -74,8 +91,11 @@ import java.util.Date
     val rs = stat.getGeneratedKeys(); 
     if (rs.next()) { 
       val pkValue = rs.getLong(1); 
-      SQL("select * from resourceManagerMeasure where resourceManagerMeasureId = {pkValue} ").on("pkValue" -> pkValue).as(anorm.Macro.namedParser[ResourceManagerMeasureDto].single); 
+      val r = SQL("select * from resourceManagerMeasure where resourceManagerMeasureId = {pkValue} ").on("pkValue" -> pkValue).as(anorm.Macro.namedParser[ResourceManagerMeasureDto].single); 
+      releaseConnection(connection);  
+      r 
     } else { 
+      releaseConnection(connection);  
       null; 
     } 
  } 
@@ -87,6 +107,7 @@ import java.util.Date
     implicit val connection = getConnection();  
       val resCnt = SQL("update resourceManagerMeasure set  lastUpdatedDate = {lastUpdatedDate} ,  resourceManagerId = {resourceManagerId} ,  resourceMeasureId = {resourceMeasureId} ,  measureString = {measureString} ,  measureValue = {measureValue}  where  resourceManagerMeasureId = {resourceManagerMeasureId}  ")
       .on("lastUpdatedDate" -> dto.lastUpdatedDate , "resourceManagerId" -> dto.resourceManagerId , "resourceMeasureId" -> dto.resourceMeasureId , "measureString" -> dto.measureString , "measureValue" -> dto.measureValue, "resourceManagerMeasureId" -> dto.resourceManagerMeasureId ).executeInsert() 
+   releaseConnection(connection);  
      getResourceManagerMeasureByPk(dto.resourceManagerMeasureId) 
     } 
 

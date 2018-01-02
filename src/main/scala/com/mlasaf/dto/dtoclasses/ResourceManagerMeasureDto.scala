@@ -27,6 +27,7 @@ case class ResourceManagerMeasureDto (
  def getGuid() : Long = {    guid  }  
  def toAnyArray() : Array[Any] = {    Array(resourceManagerMeasureId,guid,insertedRowDate,lastUpdatedDate,resourceManagerId,resourceMeasureId,measureString,measureValue)  }  
  def toStringArray() : Array[String] = {    Array(""+resourceManagerMeasureId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+resourceManagerId,""+resourceMeasureId,""+measureString,""+measureValue)   }  
+ def toJson() : String = {   "{" + "\"resourceManagerMeasureId\":\""+resourceManagerMeasureId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"resourceManagerId\":\""+resourceManagerId+"\""+","+"\"resourceMeasureId\":\""+resourceMeasureId+"\""+","+"\"measureString\":\""+measureString+"\""+","+"\"measureValue\":\""+measureValue+"\"" + "}"   }  
  def toFullString() : String = {    "resourceManagerMeasureId:'"+resourceManagerMeasureId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"resourceManagerId:'"+resourceManagerId+"'"+","+"resourceMeasureId:'"+resourceMeasureId+"'"+","+"measureString:'"+measureString+"'"+","+"measureValue:'"+measureValue+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 

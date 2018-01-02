@@ -25,6 +25,7 @@ case class ResourceManagerTypeDto (
  def getGuid() : Long = {    guid  }  
  def toAnyArray() : Array[Any] = {    Array(resourceManagerTypeId,guid,insertedRowDate,lastUpdatedDate,resourceManagerTypeName,resourceManagerTypeClass)  }  
  def toStringArray() : Array[String] = {    Array(""+resourceManagerTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+resourceManagerTypeName,""+resourceManagerTypeClass)   }  
+ def toJson() : String = {   "{" + "\"resourceManagerTypeId\":\""+resourceManagerTypeId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"resourceManagerTypeName\":\""+resourceManagerTypeName+"\""+","+"\"resourceManagerTypeClass\":\""+resourceManagerTypeClass+"\"" + "}"   }  
  def toFullString() : String = {    "resourceManagerTypeId:'"+resourceManagerTypeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"resourceManagerTypeName:'"+resourceManagerTypeName+"'"+","+"resourceManagerTypeClass:'"+resourceManagerTypeClass+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 

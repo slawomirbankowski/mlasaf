@@ -24,6 +24,7 @@ case class DownloadTransformTypeDto (
  def getGuid() : Long = {    guid  }  
  def toAnyArray() : Array[Any] = {    Array(downloadTransformTypeId,guid,insertedRowDate,lastUpdatedDate,downloadTransformTypeName)  }  
  def toStringArray() : Array[String] = {    Array(""+downloadTransformTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+downloadTransformTypeName)   }  
+ def toJson() : String = {   "{" + "\"downloadTransformTypeId\":\""+downloadTransformTypeId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"downloadTransformTypeName\":\""+downloadTransformTypeName+"\"" + "}"   }  
  def toFullString() : String = {    "downloadTransformTypeId:'"+downloadTransformTypeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"downloadTransformTypeName:'"+downloadTransformTypeName+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 

@@ -9,7 +9,7 @@ import java.util
 import com.mlasaf.dto._
 import com.mlasaf.dao._
 import com.mlasaf.base._
-import com.mlasaf.rest.ContextRest
+import com.mlasaf.rest.RestManager
 import com.mlasaf.structures.MlasafEntryOptions
 import com.mlasaf.storages._
 
@@ -26,6 +26,9 @@ class Context {
   var hostDto : ExecutorHostDto = null;
   /** current Context created in JVM */
   var contextDto : ExecutorContextDto = null;
+  /** options for RUN MLASAF server */
+  var runOptions : MlasafEntryOptions = null;
+  /** */
   var latestContextRuntimeDto : ExecutorContextRuntimeDto = null;
   /** all threads created/run by context */
   var threads : scala.collection.mutable.ListBuffer[ThreadBase] = new scala.collection.mutable.ListBuffer();
@@ -36,7 +39,7 @@ class Context {
   /** all sources to download data to be processed */
   var sources : scala.collection.mutable.ListBuffer[Source] = new scala.collection.mutable.ListBuffer();
   /** REST for configurational database and Context */
-  var contextRest : ContextRest = new ContextRest();
+  var restManager : RestManager = new RestManager();
   /** internal checker for controlling context */
   var checker : Checker = new Checker();
   /** Factory for all DAO objects to read/write data from/to configurational database */
@@ -47,9 +50,11 @@ class Context {
   val startTime : java.util.Date = new java.util.Date();
   /** default max working time in seconds */
   val DEFAULT_MAX_WORKING_TIME = 60000L;
+  var DEFAULT_RUN_INTERVAL = 10000L;
 
   /** entry point for MLASAF application */
   def run(opts : MlasafEntryOptions) = {
+    runOptions = opts;
     logger.info("Start context for guid: " + guid);
     val javaProperties = System.getProperties.stringPropertyNames().toArray.map(prop => "" + prop + "='" + System.getProperties.getProperty("" + prop) + "'").mkString(";");
     logger.info("Java properties: " + javaProperties);
@@ -57,6 +62,8 @@ class Context {
     daoFactory = new DaoFactory();
      //context.daoFactory.registerExecutorInstance();
     daoFactory.initialize(opts.jdbcString.toOption.getOrElse(""), opts.jdbcUser.toOption.getOrElse(""), opts.jdbcPass.toOption.getOrElse(""), opts.jdbcDriver.toOption.getOrElse(""));
+    daoFactory.start();
+    threads += daoFactory;
     // register current HOST
     hostDto = daoFactory.daoCustom.registerHost();
     logger.info("---> Registered host: " + hostDto);
@@ -95,11 +102,11 @@ class Context {
       defineExecutor(exeClass, 0);
     });
     // initialize REST service for context
-    contextRest.setParentContext(this);
-    contextRest.restDefaultPort = opts.restPort.getOrElse(8301);
-    contextRest.restAlternativePort = opts.restAlternativePort.getOrElse(8305);
-    contextRest.start();
-    threads += contextRest;
+    restManager.setParentContext(this);
+    restManager.restDefaultPort = opts.restPort.getOrElse(8301);
+    restManager.restAlternativePort = opts.restAlternativePort.getOrElse(8305);
+    restManager.start();
+    threads += restManager;
     // initailize internal checker
     checker.setParentContext(this);
     checker.start();
@@ -109,7 +116,7 @@ class Context {
     // end of all Executors
     // MAIN WORKING LOOP - checking STOP condition, refresh context, receive commands
     while (!isStopped) {
-      Thread.sleep(10000L);
+      Thread.sleep(DEFAULT_RUN_INTERVAL);
       // change updated date for context
       daoFactory.daos.executorContextDao.changeUpdatedDate(contextDto);
       // check if context should be stopped because of end of time
@@ -117,20 +124,43 @@ class Context {
         isStopped = true;
         logger.info("Time is UP - stopping context, actualWorkingTime: " + actualWorkingTime() + ", maxWorkingTime: " + opts.maxWorkingTimeSeconds.getOrElse(DEFAULT_MAX_WORKING_TIME));
       }
-      // TODO: check all threads
-
-      // TODO: check commands for context
-
+      // check commands for context
+      readExecuteCommands()
     }
     logger.info("STOPPING context: " + contextDto);
     daoFactory.daos.executorContextDao.updateField(contextDto, ExecutorContextDto.FIELD_isWorking, 0);
     daoFactory.daos.executorContextDao.changeUpdatedDate(contextDto);
-    contextRest.stop();
+    restManager.stop();
     executors.foreach(x => x.stop());
     sources.foreach(x => { x.stop(); });
     storages.foreach(x => { x.stop() });
     checker.stop();
+    daoFactory.stop();
     logger.info("END context for guid: " + guid);
+  }
+  /** read commands to be executed */
+  def readExecuteCommands() : Unit = {
+    val commands = daoFactory.daos.vExecutorContextCommandDao.getDtosByExecutorContext_executorContextId(contextDto.executorContextId).filter(cmd => cmd.isExecuted == 0);
+    commands.foreach(command => {
+      logger.info("Running command: " + command.executorCommand_executorCommandName + ", dto: " + command.toString);
+      executeCommand(command);
+    });
+  }
+  /** execute command for given DTO */
+  def executeCommand(vcommandDto : VExecutorContextCommandDto) : Unit = {
+    val commandDto : ExecutorContextCommandDto = daoFactory.daos.executorContextCommandDao.getExecutorContextCommandByPk(vcommandDto.executorContextCommandId);
+    try {
+      val commandObj = Class.forName(vcommandDto.executorCommand_executorCommandClass).newInstance().asInstanceOf[ExecutorCommand];
+      daoFactory.daos.executorContextCommandDao.updateField(commandDto, ExecutorContextCommandDto.FIELD_isRunning, 1);
+      commandObj.runCommand(this, Array(vcommandDto.commandParam1, vcommandDto.commandParam2, vcommandDto.commandParam3, vcommandDto.commandParam4, vcommandDto.commandParam5));
+      daoFactory.daos.executorContextCommandDao.changeUpdatedDate(commandDto);
+      daoFactory.daos.executorContextCommandDao.updateField(commandDto, ExecutorContextCommandDto.FIELD_isExecuted, 1);
+    } catch {
+      case ex : Exception => {
+        logger.info("Exception while executing command, reason: " + ex.getMessage, ex);
+      }
+    }
+    daoFactory.daos.executorContextCommandDao.updateField(commandDto, ExecutorContextCommandDto.FIELD_isRunning, 0);
   }
   /** define new executor and add to executors and threads */
   def defineExecutor(executorTypeOrClass : String, portNumber : Int) : Executor = {
@@ -175,8 +205,12 @@ class Context {
         null
       }
     }
-
   }
+  /** */
   def actualWorkingTime() : Long = (new java.util.Date().getTime) - startTime.getTime;
+  /** */
   def actualWorkingTimeSeconds() : Long = actualWorkingTime / 1000;
+  def getInfoJson() : String = {
+    " { guid:" + this.guid + ",startTime:" + this.startTime + ",actualWorkingTime:" + actualWorkingTime() + ", isStopped:" + this.isStopped + ", threadsCount:" + this.threads.size+ ", sourcesCount:" + this.sources.size + ", storagesCount:" + this.storages.size + ", executorsCount:" + this.executors.size + ", contextDto:" + this.contextDto.toJson() + ", hostDto:" + this.hostDto.toJson() + " }"
+  }
 }

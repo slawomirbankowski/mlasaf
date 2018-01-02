@@ -27,6 +27,7 @@ case class AlgorithmScheduleViewDto (
  def getGuid() : Long = {    guid  }  
  def toAnyArray() : Array[Any] = {    Array(algorithmScheduleViewId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleViewTypeId,algorithmScheduleId,sourceViewId,joinOnDefinition)  }  
  def toStringArray() : Array[String] = {    Array(""+algorithmScheduleViewId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmScheduleViewTypeId,""+algorithmScheduleId,""+sourceViewId,""+joinOnDefinition)   }  
+ def toJson() : String = {   "{" + "\"algorithmScheduleViewId\":\""+algorithmScheduleViewId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"algorithmScheduleViewTypeId\":\""+algorithmScheduleViewTypeId+"\""+","+"\"algorithmScheduleId\":\""+algorithmScheduleId+"\""+","+"\"sourceViewId\":\""+sourceViewId+"\""+","+"\"joinOnDefinition\":\""+joinOnDefinition+"\"" + "}"   }  
  def toFullString() : String = {    "algorithmScheduleViewId:'"+algorithmScheduleViewId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmScheduleViewTypeId:'"+algorithmScheduleViewTypeId+"'"+","+"algorithmScheduleId:'"+algorithmScheduleId+"'"+","+"sourceViewId:'"+sourceViewId+"'"+","+"joinOnDefinition:'"+joinOnDefinition+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 

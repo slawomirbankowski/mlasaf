@@ -28,6 +28,7 @@ case class VExecutorRestSummaryDto (
  def getGuid() : Long = {    guid  }  
  def toAnyArray() : Array[Any] = {    Array(executorRestId,guid,insertedRowDate,lastUpdatedDate,executorHostId,restPort,restVersion,restStatus,executorRestCall_count)  }  
  def toStringArray() : Array[String] = {    Array(""+executorRestId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+restPort,""+restVersion,""+restStatus,""+executorRestCall_count)   }  
+ def toJson() : String = {   "{" + "\"executorRestId\":\""+executorRestId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"executorHostId\":\""+executorHostId+"\""+","+"\"restPort\":\""+restPort+"\""+","+"\"restVersion\":\""+restVersion+"\""+","+"\"restStatus\":\""+restStatus+"\""+","+"\"executorRestCall_count\":\""+executorRestCall_count+"\"" + "}"   }  
  def toFullString() : String = {    "executorRestId:'"+executorRestId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorHostId:'"+executorHostId+"'"+","+"restPort:'"+restPort+"'"+","+"restVersion:'"+restVersion+"'"+","+"restStatus:'"+restStatus+"'"+","+"executorRestCall_count:'"+executorRestCall_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 

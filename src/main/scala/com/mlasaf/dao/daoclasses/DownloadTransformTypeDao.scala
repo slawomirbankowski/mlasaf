@@ -15,56 +15,73 @@ import java.util.Date
   def getDownloadTransformTypesList() : List[DownloadTransformTypeDto] = {
    implicit val connection = getConnection();
    val dtos : List[DownloadTransformTypeDto]= SQL("select * from downloadTransformType").as(anorm.Macro.namedParser[DownloadTransformTypeDto].*);
+   releaseConnection(connection);
    dtos
   }
   def getDownloadTransformTypesCount() : Long = {
    implicit val connection = getConnection();
-   val cnt : Long = SQL("select count(*) as cnt from downloadTransformType").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+   val cnt : Long = SQL("select count(*) as cnt from downloadTransformType").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);
+   releaseConnection(connection);
    cnt
   }
   def getDownloadTransformTypesLastInsertDate() : java.util.Date = {
    implicit val connection = getConnection();
-   val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from downloadTransformType").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+   val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from downloadTransformType").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);
+   releaseConnection(connection);
    ld
   }
   def getDownloadTransformTypesLastUpdatedDate() : java.util.Date = {
    implicit val connection = getConnection();
-   val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from downloadTransformType").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+   val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from downloadTransformType").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);
+   releaseConnection(connection);
    ld
   }
   def getDownloadTransformTypeFirst() : DownloadTransformTypeDto = {
    implicit val connection = getConnection();
    val dtos : DownloadTransformTypeDto= SQL("select * from downloadTransformType order by insertedRowDate asc ").as(anorm.Macro.namedParser[DownloadTransformTypeDto].*).head;
+   releaseConnection(connection);
    dtos
   }
   def getDownloadTransformTypeLast() : DownloadTransformTypeDto = {
    implicit val connection = getConnection();
    val dtos : DownloadTransformTypeDto= SQL("select * from downloadTransformType order by insertedRowDate desc ").as(anorm.Macro.namedParser[DownloadTransformTypeDto].*).head;
+   releaseConnection(connection);
+   dtos
+  }
+  def getDownloadTransformTypesByField(fieldName : String, fieldValue : String) : List[DownloadTransformTypeDto] = {
+   implicit val connection = getConnection();
+   val dtos : List[DownloadTransformTypeDto]= SQL("select * from downloadTransformType where " + fieldName + " = {fieldValue} ").on("fieldValue" -> fieldValue).as(anorm.Macro.namedParser[DownloadTransformTypeDto].*);
+   releaseConnection(connection);
    dtos
   }
   def getDownloadTransformTypeByGuid(guid : Long) : DownloadTransformTypeDto = {
    implicit val connection = getConnection();
    val dtos : DownloadTransformTypeDto= SQL("select * from downloadTransformType where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[DownloadTransformTypeDto].single);
+   releaseConnection(connection);
    dtos
   }  
  def getDownloadTransformTypeByPk(pkColValue : Long) : DownloadTransformTypeDto = { 
    implicit val connection = getConnection();  
    val dto : DownloadTransformTypeDto = SQL("select * from downloadTransformType where downloadTransformTypeId = {pkColValue} ").on("pkColValue" -> pkColValue).as(anorm.Macro.namedParser[DownloadTransformTypeDto].single);  
+   releaseConnection(connection);  
    dto  
  }  
  def getDownloadTransformTypeMaxId() : Long = { 
    implicit val connection = getConnection();  
    val maxid : Long = SQL("select max(downloadTransformTypeId) as maxId from downloadTransformType ").executeQuery()(connection).as[Long](SqlParser.long("maxId").single)(connection);;  
+   releaseConnection(connection);  
    maxid  
  }  
  def getDownloadTransformTypeByName(nameColValue : String) : List[DownloadTransformTypeDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[DownloadTransformTypeDto] = SQL("select * from downloadTransformType where downloadTransformTypeName = {nameColValue} ").on("nameColValue" -> nameColValue).as(anorm.Macro.namedParser[DownloadTransformTypeDto].*);  
+   releaseConnection(connection);  
    dtos  
  }  
  def getDownloadTransformTypeFirstByName(nameColValue : String) : Option[DownloadTransformTypeDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[DownloadTransformTypeDto] = SQL("select * from downloadTransformType where downloadTransformTypeName = {nameColValue} ").on("nameColValue" -> nameColValue).as(anorm.Macro.namedParser[DownloadTransformTypeDto].*);  
+   releaseConnection(connection);  
    if (dtos.size > 0) Some(dtos.head) else None  
  }  
  def insertDownloadTransformTypeDto(dto : DownloadTransformTypeDto): DownloadTransformTypeDto = { 
@@ -74,8 +91,11 @@ import java.util.Date
     val rs = stat.getGeneratedKeys(); 
     if (rs.next()) { 
       val pkValue = rs.getLong(1); 
-      SQL("select * from downloadTransformType where downloadTransformTypeId = {pkValue} ").on("pkValue" -> pkValue).as(anorm.Macro.namedParser[DownloadTransformTypeDto].single); 
+      val r = SQL("select * from downloadTransformType where downloadTransformTypeId = {pkValue} ").on("pkValue" -> pkValue).as(anorm.Macro.namedParser[DownloadTransformTypeDto].single); 
+      releaseConnection(connection);  
+      r 
     } else { 
+      releaseConnection(connection);  
       null; 
     } 
  } 
@@ -87,6 +107,7 @@ import java.util.Date
     implicit val connection = getConnection();  
       val resCnt = SQL("update downloadTransformType set  lastUpdatedDate = {lastUpdatedDate} ,  downloadTransformTypeName = {downloadTransformTypeName}  where  downloadTransformTypeId = {downloadTransformTypeId}  ")
       .on("lastUpdatedDate" -> dto.lastUpdatedDate , "downloadTransformTypeName" -> dto.downloadTransformTypeName, "downloadTransformTypeId" -> dto.downloadTransformTypeId ).executeInsert() 
+   releaseConnection(connection);  
      getDownloadTransformTypeByPk(dto.downloadTransformTypeId) 
     } 
 

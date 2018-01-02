@@ -15,56 +15,73 @@ import java.util.Date
   def getResourceManagerTypesList() : List[ResourceManagerTypeDto] = {
    implicit val connection = getConnection();
    val dtos : List[ResourceManagerTypeDto]= SQL("select * from resourceManagerType").as(anorm.Macro.namedParser[ResourceManagerTypeDto].*);
+   releaseConnection(connection);
    dtos
   }
   def getResourceManagerTypesCount() : Long = {
    implicit val connection = getConnection();
-   val cnt : Long = SQL("select count(*) as cnt from resourceManagerType").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+   val cnt : Long = SQL("select count(*) as cnt from resourceManagerType").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);
+   releaseConnection(connection);
    cnt
   }
   def getResourceManagerTypesLastInsertDate() : java.util.Date = {
    implicit val connection = getConnection();
-   val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from resourceManagerType").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+   val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from resourceManagerType").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);
+   releaseConnection(connection);
    ld
   }
   def getResourceManagerTypesLastUpdatedDate() : java.util.Date = {
    implicit val connection = getConnection();
-   val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from resourceManagerType").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+   val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from resourceManagerType").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);
+   releaseConnection(connection);
    ld
   }
   def getResourceManagerTypeFirst() : ResourceManagerTypeDto = {
    implicit val connection = getConnection();
    val dtos : ResourceManagerTypeDto= SQL("select * from resourceManagerType order by insertedRowDate asc ").as(anorm.Macro.namedParser[ResourceManagerTypeDto].*).head;
+   releaseConnection(connection);
    dtos
   }
   def getResourceManagerTypeLast() : ResourceManagerTypeDto = {
    implicit val connection = getConnection();
    val dtos : ResourceManagerTypeDto= SQL("select * from resourceManagerType order by insertedRowDate desc ").as(anorm.Macro.namedParser[ResourceManagerTypeDto].*).head;
+   releaseConnection(connection);
+   dtos
+  }
+  def getResourceManagerTypesByField(fieldName : String, fieldValue : String) : List[ResourceManagerTypeDto] = {
+   implicit val connection = getConnection();
+   val dtos : List[ResourceManagerTypeDto]= SQL("select * from resourceManagerType where " + fieldName + " = {fieldValue} ").on("fieldValue" -> fieldValue).as(anorm.Macro.namedParser[ResourceManagerTypeDto].*);
+   releaseConnection(connection);
    dtos
   }
   def getResourceManagerTypeByGuid(guid : Long) : ResourceManagerTypeDto = {
    implicit val connection = getConnection();
    val dtos : ResourceManagerTypeDto= SQL("select * from resourceManagerType where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[ResourceManagerTypeDto].single);
+   releaseConnection(connection);
    dtos
   }  
  def getResourceManagerTypeByPk(pkColValue : Long) : ResourceManagerTypeDto = { 
    implicit val connection = getConnection();  
    val dto : ResourceManagerTypeDto = SQL("select * from resourceManagerType where resourceManagerTypeId = {pkColValue} ").on("pkColValue" -> pkColValue).as(anorm.Macro.namedParser[ResourceManagerTypeDto].single);  
+   releaseConnection(connection);  
    dto  
  }  
  def getResourceManagerTypeMaxId() : Long = { 
    implicit val connection = getConnection();  
    val maxid : Long = SQL("select max(resourceManagerTypeId) as maxId from resourceManagerType ").executeQuery()(connection).as[Long](SqlParser.long("maxId").single)(connection);;  
+   releaseConnection(connection);  
    maxid  
  }  
  def getResourceManagerTypeByName(nameColValue : String) : List[ResourceManagerTypeDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[ResourceManagerTypeDto] = SQL("select * from resourceManagerType where resourceManagerTypeName = {nameColValue} ").on("nameColValue" -> nameColValue).as(anorm.Macro.namedParser[ResourceManagerTypeDto].*);  
+   releaseConnection(connection);  
    dtos  
  }  
  def getResourceManagerTypeFirstByName(nameColValue : String) : Option[ResourceManagerTypeDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[ResourceManagerTypeDto] = SQL("select * from resourceManagerType where resourceManagerTypeName = {nameColValue} ").on("nameColValue" -> nameColValue).as(anorm.Macro.namedParser[ResourceManagerTypeDto].*);  
+   releaseConnection(connection);  
    if (dtos.size > 0) Some(dtos.head) else None  
  }  
  def insertResourceManagerTypeDto(dto : ResourceManagerTypeDto): ResourceManagerTypeDto = { 
@@ -74,8 +91,11 @@ import java.util.Date
     val rs = stat.getGeneratedKeys(); 
     if (rs.next()) { 
       val pkValue = rs.getLong(1); 
-      SQL("select * from resourceManagerType where resourceManagerTypeId = {pkValue} ").on("pkValue" -> pkValue).as(anorm.Macro.namedParser[ResourceManagerTypeDto].single); 
+      val r = SQL("select * from resourceManagerType where resourceManagerTypeId = {pkValue} ").on("pkValue" -> pkValue).as(anorm.Macro.namedParser[ResourceManagerTypeDto].single); 
+      releaseConnection(connection);  
+      r 
     } else { 
+      releaseConnection(connection);  
       null; 
     } 
  } 
@@ -87,6 +107,7 @@ import java.util.Date
     implicit val connection = getConnection();  
       val resCnt = SQL("update resourceManagerType set  lastUpdatedDate = {lastUpdatedDate} ,  resourceManagerTypeName = {resourceManagerTypeName} ,  resourceManagerTypeClass = {resourceManagerTypeClass}  where  resourceManagerTypeId = {resourceManagerTypeId}  ")
       .on("lastUpdatedDate" -> dto.lastUpdatedDate , "resourceManagerTypeName" -> dto.resourceManagerTypeName , "resourceManagerTypeClass" -> dto.resourceManagerTypeClass, "resourceManagerTypeId" -> dto.resourceManagerTypeId ).executeInsert() 
+   releaseConnection(connection);  
      getResourceManagerTypeByPk(dto.resourceManagerTypeId) 
     } 
 

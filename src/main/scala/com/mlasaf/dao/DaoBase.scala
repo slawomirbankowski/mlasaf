@@ -29,6 +29,9 @@ class DaoBase {
   def getConnection() : Connection = {
     daoConnection.getConnection();
   }
+  def releaseConnection(conn : Connection): Unit = {
+    daoConnection.releaseConnection(conn);
+  }
   /** insert DTO to DB with new PK value */
   def insertDto(dto : BaseDto): Int = {
     val stat = dto.prepareInsert(getConnection());
@@ -44,6 +47,7 @@ class DaoBase {
     logger.info("EXECUTING: " + sql)
     val resCnt = SQL(sql)
       .on("id" -> id, "lastUpdatedDate" -> lastUpdatedDate).executeUpdate();
+    releaseConnection(connection);
     resCnt
   }
   /** */
@@ -52,7 +56,8 @@ class DaoBase {
     val sql = "select  " + fieldName + " from " + dto.tableName + " where " + dto.pkFields + " = {id} ";
     logger.info("EXECUTING: " + sql)
     val retValue = SQL(sql).on("id" -> dto.getPk())
-        .executeQuery().as[String](SqlParser.str(fieldName).single)(connection);;
+        .executeQuery().as[String](SqlParser.str(fieldName).single)(connection);
+    releaseConnection(connection);
     retValue
   }
   /** */
@@ -63,6 +68,7 @@ class DaoBase {
     logger.info("EXECUTING: " + sql)
     val retValue = SQL(sql).on("id" -> id)
       .executeQuery().as[String](SqlParser.str(fieldName).single)(connection);
+    releaseConnection(connection);
     retValue
   }
   def getFieldValues(tableName : String, fieldName : String) : List[String] = {
@@ -71,7 +77,8 @@ class DaoBase {
     val sql = "select  cast(" + fieldName + " as char(2000)) as " + fieldName + " from " + tableName;
     println("EXECUTING: " + sql)
     val retValue = SQL(sql)
-      .executeQuery().as[List[String]](SqlParser.str(fieldName).*)(connection);;
+      .executeQuery().as[List[String]](SqlParser.str(fieldName).*)(connection);
+    releaseConnection(connection);
     retValue
   }
   def updateField(dto : BaseDto, fieldName : String, newValue : Any) : Int = {
@@ -81,6 +88,7 @@ class DaoBase {
     val resCnt = SQL(sql)
       .on("fieldName" -> newValue.toString, "id" -> dto.getPk())
       .executeUpdate();
+    releaseConnection(connection);
     resCnt
   }
   def updateField(tableName : String, id: Long, fieldName : String, newValue : Any) : Int = {
@@ -91,6 +99,8 @@ class DaoBase {
     val resCnt = SQL(sql)
       .on("fieldName" -> newValue.toString, "id" -> id)
       .executeUpdate();
+    releaseConnection(connection);
     resCnt
   }
+
 }

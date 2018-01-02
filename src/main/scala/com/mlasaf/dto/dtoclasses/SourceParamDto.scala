@@ -26,6 +26,7 @@ case class SourceParamDto (
  def getGuid() : Long = {    guid  }  
  def toAnyArray() : Array[Any] = {    Array(sourceParamId,guid,insertedRowDate,lastUpdatedDate,sourceParamName,sourceParamType,possibleValues)  }  
  def toStringArray() : Array[String] = {    Array(""+sourceParamId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceParamName,""+sourceParamType,""+possibleValues)   }  
+ def toJson() : String = {   "{" + "\"sourceParamId\":\""+sourceParamId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"sourceParamName\":\""+sourceParamName+"\""+","+"\"sourceParamType\":\""+sourceParamType+"\""+","+"\"possibleValues\":\""+possibleValues+"\"" + "}"   }  
  def toFullString() : String = {    "sourceParamId:'"+sourceParamId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"sourceParamName:'"+sourceParamName+"'"+","+"sourceParamType:'"+sourceParamType+"'"+","+"possibleValues:'"+possibleValues+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 

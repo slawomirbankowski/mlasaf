@@ -30,6 +30,7 @@ trait ThreadBase extends Runnable {
     val th : Thread = new Thread(this);
     thread = th;
     th.setDaemon(true);
+    th.setName(this.getName());
     th.start();
   }
   /** run method for thread */

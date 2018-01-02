@@ -65,6 +65,8 @@ object GenerateDtoClassesEntry {
       var getGuidMethod  = " \n def getGuid() : Long = {    guid  } ";
       var toAnyArray = " \n def toAnyArray() : Array[Any] = {    Array(" + fieldList + ")  } ";
       var toStringArray = " \n def toStringArray() : Array[String] = {    Array(" + fieldList.split(",").map(f => "\"\"+" + f).mkString(",") + ")   } ";
+
+      var toJson = " \n def toJson() : String = {   \"{\" + " + fieldList.split(",").map(f => "\"\\\"" + f + "\\\":\\\"\"+" + f + "+\"\\\"\"").mkString("+\",\"+") + " + \"}\"   } ";
       var toFullString = " \n def toFullString() : String = {    " + fieldList.split(",").map(f => "\"" + f + ":'\"+" + f + "+\"'\"").mkString("+\",\"+") + "   } ";
       val getFieldValueMethodBody =  "\n   def getFieldValue(name : String) : Any = { \n    val ret = name match { \n" + caseValueList + "  \n    case _ => null \n    } \n    ret \n  } ";
       val getFieldNameeMethodBody =  "\n   def getFieldTypeName(name : String) : String = { \n    val ret = name match { \n" + caseTypeNameList + "  \n    case _ => \"Object\" \n    } \n    ret \n  } ";
@@ -87,7 +89,7 @@ object GenerateDtoClassesEntry {
       val modifyHeaderDef = "\n   def modify(" + createNewParams + ") : " + dtoClassName + " = {";
       val modifyCreateNewDef = "    val dtoModified = new " + dtoClassName + "(" + modifyParamsList + ");";
       val modifyDef =  if (isTable) modifyHeaderDef + "\n" + modifyCreateNewDef +  "\n    dtoModified\n  }" else "";
-      val allDefsList = tableNameDef + fieldsDef + pkFields + fkFields + nameField + getPkMethod + getInsertedRowDateMethod +getLastUpdatedDateMethod + getGuidMethod + toAnyArray + toStringArray + toFullString + getFieldValueMethodBody + getFieldNameeMethodBody + prepareInsertMethod + modifyDef + "\n";
+      val allDefsList = tableNameDef + fieldsDef + pkFields + fkFields + nameField + getPkMethod + getInsertedRowDateMethod +getLastUpdatedDateMethod + getGuidMethod + toAnyArray + toStringArray + toJson + toFullString + getFieldValueMethodBody + getFieldNameeMethodBody + prepareInsertMethod + modifyDef + "\n";
       val fieldsCaseClassDefinitions = cols.filter(c => c.TABLE_NAME.equals(tableName)).map(col => "val " + col.COLUMN_NAME + " : " + col.SCALA_TYPE).mkString("\n     , ");
       val caseClassDef = "case class " + dtoClassName + " ( \n     " + fieldsCaseClassDefinitions + " \n     ) extends " + baseDtoClassName + " { " + allDefsList + " } ";
       val objectFieldsDef =allFieldsForDto.map(c => "   val FIELD_" + c.COLUMN_NAME + " = \"" + c.COLUMN_NAME + "\";").mkString("\n");

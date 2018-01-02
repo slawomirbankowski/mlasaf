@@ -4,7 +4,8 @@
 */
 package com.mlasaf.algorithms.local
 
-import com.mlasaf.domain.{AlgorithmInstance, AlgorithmRun}
+import com.mlasaf.base.AlgorithmInstance
+import com.mlasaf.domain.AlgorithmRun
 
 class PredictionR extends AlgorithmInstance  {
 

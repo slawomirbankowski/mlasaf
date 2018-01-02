@@ -26,6 +26,7 @@ case class AlgorithmTypeOutputTypeDto (
  def getGuid() : Long = {    guid  }  
  def toAnyArray() : Array[Any] = {    Array(algorithmTypeOutputTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,algorithmOutputTypeId,isMandatory)  }  
  def toStringArray() : Array[String] = {    Array(""+algorithmTypeOutputTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmTypeVersionId,""+algorithmOutputTypeId,""+isMandatory)   }  
+ def toJson() : String = {   "{" + "\"algorithmTypeOutputTypeId\":\""+algorithmTypeOutputTypeId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"algorithmTypeVersionId\":\""+algorithmTypeVersionId+"\""+","+"\"algorithmOutputTypeId\":\""+algorithmOutputTypeId+"\""+","+"\"isMandatory\":\""+isMandatory+"\"" + "}"   }  
  def toFullString() : String = {    "algorithmTypeOutputTypeId:'"+algorithmTypeOutputTypeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmTypeVersionId:'"+algorithmTypeVersionId+"'"+","+"algorithmOutputTypeId:'"+algorithmOutputTypeId+"'"+","+"isMandatory:'"+isMandatory+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 

@@ -28,6 +28,7 @@ case class ExecutorStorageResourceDto (
  def getGuid() : Long = {    guid  }  
  def toAnyArray() : Array[Any] = {    Array(executorStorageResourceId,guid,insertedRowDate,lastUpdatedDate,executorStorageId,resourcePath,resourceSize,resourceRowsCount,isValid)  }  
  def toStringArray() : Array[String] = {    Array(""+executorStorageResourceId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorStorageId,""+resourcePath,""+resourceSize,""+resourceRowsCount,""+isValid)   }  
+ def toJson() : String = {   "{" + "\"executorStorageResourceId\":\""+executorStorageResourceId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"executorStorageId\":\""+executorStorageId+"\""+","+"\"resourcePath\":\""+resourcePath+"\""+","+"\"resourceSize\":\""+resourceSize+"\""+","+"\"resourceRowsCount\":\""+resourceRowsCount+"\""+","+"\"isValid\":\""+isValid+"\"" + "}"   }  
  def toFullString() : String = {    "executorStorageResourceId:'"+executorStorageResourceId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorStorageId:'"+executorStorageId+"'"+","+"resourcePath:'"+resourcePath+"'"+","+"resourceSize:'"+resourceSize+"'"+","+"resourceRowsCount:'"+resourceRowsCount+"'"+","+"isValid:'"+isValid+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 

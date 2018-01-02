@@ -27,6 +27,7 @@ case class ExecutorRestDto (
  def getGuid() : Long = {    guid  }  
  def toAnyArray() : Array[Any] = {    Array(executorRestId,guid,insertedRowDate,lastUpdatedDate,executorHostId,restPort,restVersion,restStatus)  }  
  def toStringArray() : Array[String] = {    Array(""+executorRestId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+restPort,""+restVersion,""+restStatus)   }  
+ def toJson() : String = {   "{" + "\"executorRestId\":\""+executorRestId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"executorHostId\":\""+executorHostId+"\""+","+"\"restPort\":\""+restPort+"\""+","+"\"restVersion\":\""+restVersion+"\""+","+"\"restStatus\":\""+restStatus+"\"" + "}"   }  
  def toFullString() : String = {    "executorRestId:'"+executorRestId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorHostId:'"+executorHostId+"'"+","+"restPort:'"+restPort+"'"+","+"restVersion:'"+restVersion+"'"+","+"restStatus:'"+restStatus+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 

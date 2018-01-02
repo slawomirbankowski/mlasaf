@@ -29,6 +29,7 @@ case class ExecutorContextDto (
  def getGuid() : Long = {    guid  }  
  def toAnyArray() : Array[Any] = {    Array(executorContextId,guid,insertedRowDate,lastUpdatedDate,executorHostId,isWorking,properties,properties2,properties3,entryParams)  }  
  def toStringArray() : Array[String] = {    Array(""+executorContextId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+isWorking,""+properties,""+properties2,""+properties3,""+entryParams)   }  
+ def toJson() : String = {   "{" + "\"executorContextId\":\""+executorContextId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"executorHostId\":\""+executorHostId+"\""+","+"\"isWorking\":\""+isWorking+"\""+","+"\"properties\":\""+properties+"\""+","+"\"properties2\":\""+properties2+"\""+","+"\"properties3\":\""+properties3+"\""+","+"\"entryParams\":\""+entryParams+"\"" + "}"   }  
  def toFullString() : String = {    "executorContextId:'"+executorContextId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorHostId:'"+executorHostId+"'"+","+"isWorking:'"+isWorking+"'"+","+"properties:'"+properties+"'"+","+"properties2:'"+properties2+"'"+","+"properties3:'"+properties3+"'"+","+"entryParams:'"+entryParams+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 

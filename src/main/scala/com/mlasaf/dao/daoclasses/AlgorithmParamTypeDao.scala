@@ -15,61 +15,79 @@ import java.util.Date
   def getAlgorithmParamTypesList() : List[AlgorithmParamTypeDto] = {
    implicit val connection = getConnection();
    val dtos : List[AlgorithmParamTypeDto]= SQL("select * from algorithmParamType").as(anorm.Macro.namedParser[AlgorithmParamTypeDto].*);
+   releaseConnection(connection);
    dtos
   }
   def getAlgorithmParamTypesCount() : Long = {
    implicit val connection = getConnection();
-   val cnt : Long = SQL("select count(*) as cnt from algorithmParamType").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+   val cnt : Long = SQL("select count(*) as cnt from algorithmParamType").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);
+   releaseConnection(connection);
    cnt
   }
   def getAlgorithmParamTypesLastInsertDate() : java.util.Date = {
    implicit val connection = getConnection();
-   val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from algorithmParamType").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+   val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from algorithmParamType").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);
+   releaseConnection(connection);
    ld
   }
   def getAlgorithmParamTypesLastUpdatedDate() : java.util.Date = {
    implicit val connection = getConnection();
-   val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from algorithmParamType").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+   val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from algorithmParamType").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);
+   releaseConnection(connection);
    ld
   }
   def getAlgorithmParamTypeFirst() : AlgorithmParamTypeDto = {
    implicit val connection = getConnection();
    val dtos : AlgorithmParamTypeDto= SQL("select * from algorithmParamType order by insertedRowDate asc ").as(anorm.Macro.namedParser[AlgorithmParamTypeDto].*).head;
+   releaseConnection(connection);
    dtos
   }
   def getAlgorithmParamTypeLast() : AlgorithmParamTypeDto = {
    implicit val connection = getConnection();
    val dtos : AlgorithmParamTypeDto= SQL("select * from algorithmParamType order by insertedRowDate desc ").as(anorm.Macro.namedParser[AlgorithmParamTypeDto].*).head;
+   releaseConnection(connection);
+   dtos
+  }
+  def getAlgorithmParamTypesByField(fieldName : String, fieldValue : String) : List[AlgorithmParamTypeDto] = {
+   implicit val connection = getConnection();
+   val dtos : List[AlgorithmParamTypeDto]= SQL("select * from algorithmParamType where " + fieldName + " = {fieldValue} ").on("fieldValue" -> fieldValue).as(anorm.Macro.namedParser[AlgorithmParamTypeDto].*);
+   releaseConnection(connection);
    dtos
   }
   def getAlgorithmParamTypeByGuid(guid : Long) : AlgorithmParamTypeDto = {
    implicit val connection = getConnection();
    val dtos : AlgorithmParamTypeDto= SQL("select * from algorithmParamType where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[AlgorithmParamTypeDto].single);
+   releaseConnection(connection);
    dtos
   }  
  def getAlgorithmParamTypeByPk(pkColValue : Long) : AlgorithmParamTypeDto = { 
    implicit val connection = getConnection();  
    val dto : AlgorithmParamTypeDto = SQL("select * from algorithmParamType where algorithmParamTypeId = {pkColValue} ").on("pkColValue" -> pkColValue).as(anorm.Macro.namedParser[AlgorithmParamTypeDto].single);  
+   releaseConnection(connection);  
    dto  
  }  
  def getAlgorithmParamTypeMaxId() : Long = { 
    implicit val connection = getConnection();  
    val maxid : Long = SQL("select max(algorithmParamTypeId) as maxId from algorithmParamType ").executeQuery()(connection).as[Long](SqlParser.long("maxId").single)(connection);;  
+   releaseConnection(connection);  
    maxid  
  }  
  def getAlgorithmParamTypeByFkAlgorithmParamId(fkColValue : Long) : List[AlgorithmParamTypeDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[AlgorithmParamTypeDto] = SQL("select * from algorithmParamType where algorithmParamId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[AlgorithmParamTypeDto].*);  
+   releaseConnection(connection);  
    dtos  
  }  
  def getAlgorithmParamTypeByFkAlgorithmTypeId(fkColValue : Long) : List[AlgorithmParamTypeDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[AlgorithmParamTypeDto] = SQL("select * from algorithmParamType where algorithmTypeId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[AlgorithmParamTypeDto].*);  
+   releaseConnection(connection);  
    dtos  
  }  
  def getAlgorithmParamTypeByFkAlgorithmTypeVersionId(fkColValue : Long) : List[AlgorithmParamTypeDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[AlgorithmParamTypeDto] = SQL("select * from algorithmParamType where algorithmTypeVersionId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[AlgorithmParamTypeDto].*);  
+   releaseConnection(connection);  
    dtos  
  }  
  def insertAlgorithmParamTypeDto(dto : AlgorithmParamTypeDto): AlgorithmParamTypeDto = { 
@@ -79,8 +97,11 @@ import java.util.Date
     val rs = stat.getGeneratedKeys(); 
     if (rs.next()) { 
       val pkValue = rs.getLong(1); 
-      SQL("select * from algorithmParamType where algorithmParamTypeId = {pkValue} ").on("pkValue" -> pkValue).as(anorm.Macro.namedParser[AlgorithmParamTypeDto].single); 
+      val r = SQL("select * from algorithmParamType where algorithmParamTypeId = {pkValue} ").on("pkValue" -> pkValue).as(anorm.Macro.namedParser[AlgorithmParamTypeDto].single); 
+      releaseConnection(connection);  
+      r 
     } else { 
+      releaseConnection(connection);  
       null; 
     } 
  } 
@@ -92,6 +113,7 @@ import java.util.Date
     implicit val connection = getConnection();  
       val resCnt = SQL("update algorithmParamType set  lastUpdatedDate = {lastUpdatedDate} ,  algorithmParamId = {algorithmParamId} ,  algorithmTypeId = {algorithmTypeId} ,  algorithmTypeVersionId = {algorithmTypeVersionId}  where  algorithmParamTypeId = {algorithmParamTypeId}  ")
       .on("lastUpdatedDate" -> dto.lastUpdatedDate , "algorithmParamId" -> dto.algorithmParamId , "algorithmTypeId" -> dto.algorithmTypeId , "algorithmTypeVersionId" -> dto.algorithmTypeVersionId, "algorithmParamTypeId" -> dto.algorithmParamTypeId ).executeInsert() 
+   releaseConnection(connection);  
      getAlgorithmParamTypeByPk(dto.algorithmParamTypeId) 
     } 
 

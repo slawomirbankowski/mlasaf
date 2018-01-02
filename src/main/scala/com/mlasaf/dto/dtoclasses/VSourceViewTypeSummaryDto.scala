@@ -26,6 +26,7 @@ case class VSourceViewTypeSummaryDto (
  def getGuid() : Long = {    guid  }  
  def toAnyArray() : Array[Any] = {    Array(sourceViewTypeId,guid,insertedRowDate,lastUpdatedDate,sourceViewTypeName,sourceViewTypeClass,sourceView_count)  }  
  def toStringArray() : Array[String] = {    Array(""+sourceViewTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceViewTypeName,""+sourceViewTypeClass,""+sourceView_count)   }  
+ def toJson() : String = {   "{" + "\"sourceViewTypeId\":\""+sourceViewTypeId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"sourceViewTypeName\":\""+sourceViewTypeName+"\""+","+"\"sourceViewTypeClass\":\""+sourceViewTypeClass+"\""+","+"\"sourceView_count\":\""+sourceView_count+"\"" + "}"   }  
  def toFullString() : String = {    "sourceViewTypeId:'"+sourceViewTypeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"sourceViewTypeName:'"+sourceViewTypeName+"'"+","+"sourceViewTypeClass:'"+sourceViewTypeClass+"'"+","+"sourceView_count:'"+sourceView_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 

@@ -4,15 +4,15 @@
 */
 package com.mlasaf.domain
 
-import com.mlasaf.base.ThreadBase
+import com.mlasaf.base.{AlgorithmInstance, ThreadBase}
 import com.mlasaf.dto._
-import com.mlasaf.rest.ExecutorRest
+import com.mlasaf.rest.ExecutorRests
 
 /** Executor to run any external or internal ML algorithm */
 trait Executor extends ThreadBase {
 
   var executorInstanceDto : ExecutorInstanceDto = null
-  var executorRest : ExecutorRest = null
+  var executorRest : ExecutorRests = null
   val algoRunObjs : scala.collection.mutable.ListBuffer[AlgorithmRun] = new scala.collection.mutable.ListBuffer();
 
   def Executor() = {
@@ -117,8 +117,7 @@ trait Executor extends ThreadBase {
   }
   /** check of all algorithm runs */
   def algorithmRuns() : Unit = {
-    algoRunObjs.filter(ar => ar.status.equals(""));
-    algoRunObjs.foreach(ar => {
+    algoRunObjs.filter(ar => !ar.isFinished).foreach(ar => {
       ar.runAlgorithm();
     });
   }

@@ -25,6 +25,7 @@ case class ExecutorCommandDto (
  def getGuid() : Long = {    guid  }  
  def toAnyArray() : Array[Any] = {    Array(executorCommandId,guid,insertedRowDate,lastUpdatedDate,executorCommandName,executorCommandClass)  }  
  def toStringArray() : Array[String] = {    Array(""+executorCommandId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorCommandName,""+executorCommandClass)   }  
+ def toJson() : String = {   "{" + "\"executorCommandId\":\""+executorCommandId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"executorCommandName\":\""+executorCommandName+"\""+","+"\"executorCommandClass\":\""+executorCommandClass+"\"" + "}"   }  
  def toFullString() : String = {    "executorCommandId:'"+executorCommandId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorCommandName:'"+executorCommandName+"'"+","+"executorCommandClass:'"+executorCommandClass+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 

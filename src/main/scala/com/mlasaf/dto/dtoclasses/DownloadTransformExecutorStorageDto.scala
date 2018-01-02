@@ -25,6 +25,7 @@ case class DownloadTransformExecutorStorageDto (
  def getGuid() : Long = {    guid  }  
  def toAnyArray() : Array[Any] = {    Array(downloadTransformExecutorStorageId,guid,insertedRowDate,lastUpdatedDate,downloadTransformGroupId,executorStorageViewId)  }  
  def toStringArray() : Array[String] = {    Array(""+downloadTransformExecutorStorageId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+downloadTransformGroupId,""+executorStorageViewId)   }  
+ def toJson() : String = {   "{" + "\"downloadTransformExecutorStorageId\":\""+downloadTransformExecutorStorageId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"downloadTransformGroupId\":\""+downloadTransformGroupId+"\""+","+"\"executorStorageViewId\":\""+executorStorageViewId+"\"" + "}"   }  
  def toFullString() : String = {    "downloadTransformExecutorStorageId:'"+downloadTransformExecutorStorageId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"downloadTransformGroupId:'"+downloadTransformGroupId+"'"+","+"executorStorageViewId:'"+executorStorageViewId+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 

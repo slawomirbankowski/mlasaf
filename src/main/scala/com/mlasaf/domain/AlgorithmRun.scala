@@ -4,6 +4,7 @@
 */
 package com.mlasaf.domain
 
+import com.mlasaf.base.AlgorithmInstance
 import com.mlasaf.dto._
 
 /** representation of algorithm run to run algorithm */
@@ -15,6 +16,7 @@ class AlgorithmRun {
   var status : String = "CREATED";
   /** parent EXECUTOR */
   var parentExecutor : Executor = null;
+  var isFinished : Boolean = false;
   /** storage for all materialized views */
   var storage : Storage = null;
   /** instance of algorithm */
@@ -83,6 +85,7 @@ class AlgorithmRun {
             logger.error("Exception while run algorithm instance, algorithmRunId: " + algorithmRunDto.algorithmRunId, ex);
             parentExecutor.parentContext.daoFactory.daos.algorithmRunDao.updateField(algorithmRunDto, AlgorithmRunDto.FIELD_errorDescription, ex.getMessage);
             parentExecutor.parentContext.daoFactory.daos.algorithmRunDao.updateField(algorithmRunDto, AlgorithmRunDto.FIELD_isRunning, 0);
+            isFinished = true;
           }
         }
       }
@@ -90,6 +93,7 @@ class AlgorithmRun {
         logger.info("End of run algorithm RUN: " + algorithmRunDto.algorithmRunId);
         parentExecutor.parentContext.daoFactory.daos.algorithmRunDao.updateField(algorithmRunDto, AlgorithmRunDto.FIELD_isFinished, 1);
         parentExecutor.parentContext.daoFactory.daos.algorithmRunDao.updateField(algorithmRunDto, AlgorithmRunDto.FIELD_isRunning, 0);
+        isFinished = true;
       }
       case "_" => {
         logger.info("")

@@ -15,56 +15,73 @@ import java.util.Date
   def getAlgorithmScheduleParamsList() : List[AlgorithmScheduleParamDto] = {
    implicit val connection = getConnection();
    val dtos : List[AlgorithmScheduleParamDto]= SQL("select * from algorithmScheduleParam").as(anorm.Macro.namedParser[AlgorithmScheduleParamDto].*);
+   releaseConnection(connection);
    dtos
   }
   def getAlgorithmScheduleParamsCount() : Long = {
    implicit val connection = getConnection();
-   val cnt : Long = SQL("select count(*) as cnt from algorithmScheduleParam").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);;
+   val cnt : Long = SQL("select count(*) as cnt from algorithmScheduleParam").executeQuery()(connection).as[Long](SqlParser.long("cnt").single)(connection);
+   releaseConnection(connection);
    cnt
   }
   def getAlgorithmScheduleParamsLastInsertDate() : java.util.Date = {
    implicit val connection = getConnection();
-   val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from algorithmScheduleParam").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);;
+   val ld : java.util.Date = SQL("select max(insertedRowDate) as lastDate from algorithmScheduleParam").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastDate").single)(connection);
+   releaseConnection(connection);
    ld
   }
   def getAlgorithmScheduleParamsLastUpdatedDate() : java.util.Date = {
    implicit val connection = getConnection();
-   val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from algorithmScheduleParam").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);;
+   val ld : java.util.Date = SQL("select max(lastUpdatedDate) as lastUpdatedDate from algorithmScheduleParam").executeQuery()(connection).as[java.util.Date](SqlParser.date("lastUpdatedDate").single)(connection);
+   releaseConnection(connection);
    ld
   }
   def getAlgorithmScheduleParamFirst() : AlgorithmScheduleParamDto = {
    implicit val connection = getConnection();
    val dtos : AlgorithmScheduleParamDto= SQL("select * from algorithmScheduleParam order by insertedRowDate asc ").as(anorm.Macro.namedParser[AlgorithmScheduleParamDto].*).head;
+   releaseConnection(connection);
    dtos
   }
   def getAlgorithmScheduleParamLast() : AlgorithmScheduleParamDto = {
    implicit val connection = getConnection();
    val dtos : AlgorithmScheduleParamDto= SQL("select * from algorithmScheduleParam order by insertedRowDate desc ").as(anorm.Macro.namedParser[AlgorithmScheduleParamDto].*).head;
+   releaseConnection(connection);
+   dtos
+  }
+  def getAlgorithmScheduleParamsByField(fieldName : String, fieldValue : String) : List[AlgorithmScheduleParamDto] = {
+   implicit val connection = getConnection();
+   val dtos : List[AlgorithmScheduleParamDto]= SQL("select * from algorithmScheduleParam where " + fieldName + " = {fieldValue} ").on("fieldValue" -> fieldValue).as(anorm.Macro.namedParser[AlgorithmScheduleParamDto].*);
+   releaseConnection(connection);
    dtos
   }
   def getAlgorithmScheduleParamByGuid(guid : Long) : AlgorithmScheduleParamDto = {
    implicit val connection = getConnection();
    val dtos : AlgorithmScheduleParamDto= SQL("select * from algorithmScheduleParam where guid = {guid} ").on("guid" -> guid).as(anorm.Macro.namedParser[AlgorithmScheduleParamDto].single);
+   releaseConnection(connection);
    dtos
   }  
  def getAlgorithmScheduleParamByPk(pkColValue : Long) : AlgorithmScheduleParamDto = { 
    implicit val connection = getConnection();  
    val dto : AlgorithmScheduleParamDto = SQL("select * from algorithmScheduleParam where algorithmScheduleParamId = {pkColValue} ").on("pkColValue" -> pkColValue).as(anorm.Macro.namedParser[AlgorithmScheduleParamDto].single);  
+   releaseConnection(connection);  
    dto  
  }  
  def getAlgorithmScheduleParamMaxId() : Long = { 
    implicit val connection = getConnection();  
    val maxid : Long = SQL("select max(algorithmScheduleParamId) as maxId from algorithmScheduleParam ").executeQuery()(connection).as[Long](SqlParser.long("maxId").single)(connection);;  
+   releaseConnection(connection);  
    maxid  
  }  
  def getAlgorithmScheduleParamByFkAlgorithmParamId(fkColValue : Long) : List[AlgorithmScheduleParamDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[AlgorithmScheduleParamDto] = SQL("select * from algorithmScheduleParam where algorithmParamId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[AlgorithmScheduleParamDto].*);  
+   releaseConnection(connection);  
    dtos  
  }  
  def getAlgorithmScheduleParamByFkAlgorithmScheduleId(fkColValue : Long) : List[AlgorithmScheduleParamDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[AlgorithmScheduleParamDto] = SQL("select * from algorithmScheduleParam where algorithmScheduleId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[AlgorithmScheduleParamDto].*);  
+   releaseConnection(connection);  
    dtos  
  }  
  def insertAlgorithmScheduleParamDto(dto : AlgorithmScheduleParamDto): AlgorithmScheduleParamDto = { 
@@ -74,8 +91,11 @@ import java.util.Date
     val rs = stat.getGeneratedKeys(); 
     if (rs.next()) { 
       val pkValue = rs.getLong(1); 
-      SQL("select * from algorithmScheduleParam where algorithmScheduleParamId = {pkValue} ").on("pkValue" -> pkValue).as(anorm.Macro.namedParser[AlgorithmScheduleParamDto].single); 
+      val r = SQL("select * from algorithmScheduleParam where algorithmScheduleParamId = {pkValue} ").on("pkValue" -> pkValue).as(anorm.Macro.namedParser[AlgorithmScheduleParamDto].single); 
+      releaseConnection(connection);  
+      r 
     } else { 
+      releaseConnection(connection);  
       null; 
     } 
  } 
@@ -87,6 +107,7 @@ import java.util.Date
     implicit val connection = getConnection();  
       val resCnt = SQL("update algorithmScheduleParam set  lastUpdatedDate = {lastUpdatedDate} ,  algorithmScheduleId = {algorithmScheduleId} ,  algorithmParamId = {algorithmParamId} ,  algorithmParamValue = {algorithmParamValue}  where  algorithmScheduleParamId = {algorithmScheduleParamId}  ")
       .on("lastUpdatedDate" -> dto.lastUpdatedDate , "algorithmScheduleId" -> dto.algorithmScheduleId , "algorithmParamId" -> dto.algorithmParamId , "algorithmParamValue" -> dto.algorithmParamValue, "algorithmScheduleParamId" -> dto.algorithmScheduleParamId ).executeInsert() 
+   releaseConnection(connection);  
      getAlgorithmScheduleParamByPk(dto.algorithmScheduleParamId) 
     } 
 

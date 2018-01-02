@@ -6,6 +6,8 @@ package com.mlasaf.dao
 
 import java.sql.{Connection, DriverManager}
 
+import com.mlasaf.domain.Storage
+
 /** connection manager for all DAO objects - main method getConnection() should be used to acquire new connection */
 class DaoConnection {
 
@@ -21,7 +23,12 @@ class DaoConnection {
   var jdbcPass = "";
   /** driverClass */
   var jdbcDriverClass = "";
-
+  var connInUse : java.util.concurrent.ConcurrentLinkedQueue[java.sql.Connection] = new java.util.concurrent.ConcurrentLinkedQueue();
+  /** */
+  var connectionsInUse : scala.collection.mutable.ListBuffer[java.sql.Connection] = new scala.collection.mutable.ListBuffer();
+  /** */
+  var connectionsFree : scala.collection.mutable.ListBuffer[java.sql.Connection] = new scala.collection.mutable.ListBuffer();
+  var connTotalCounter : Long = 0;
   /** logger for DAO */
   val logger = org.slf4j.LoggerFactory.getLogger("DaoConnection");
 
@@ -58,10 +65,22 @@ class DaoConnection {
   }
   /** acquire new connection for all operations on configurational database */
   def getConnection() : Connection = {
-    DriverManager.getConnection(jdbcString, jdbcUser, jdbcPass);
+    connTotalCounter = connTotalCounter + 1;
+    // TODO: change this to use DataSource and internal pool
+    val conn = DriverManager.getConnection(jdbcString, jdbcUser, jdbcPass);
+    connInUse.add(conn);
+    //connectionsInUse += conn;
+    conn;
+  }
+  def releaseConnection(conn : Connection): Unit = {
+    //connectionsInUse -= conn;
+    connInUse.remove(conn);
+    conn.close();
+    //connectionsFree += conn;
   }
   /** */
   def createDataSource() : javax.sql.DataSource = {
+    // TODO: finish DataSource for a connection pool, use internal synchronization to prevent large number of opened connections
     //DriverManagerConnectionFactory
     //PoolingDataSource<PoolableConnection> dataSource = new PoolingDataSource<>(connectionPool);
     val pds = new org.apache.commons.dbcp.PoolingDataSource

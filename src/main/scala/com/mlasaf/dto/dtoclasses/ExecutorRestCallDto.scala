@@ -29,6 +29,7 @@ case class ExecutorRestCallDto (
  def getGuid() : Long = {    guid  }  
  def toAnyArray() : Array[Any] = {    Array(executorRestCallId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorRestId,requestMethod,requestHeader,requestBody,responseBody)  }  
  def toStringArray() : Array[String] = {    Array(""+executorRestCallId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+executorRestId,""+requestMethod,""+requestHeader,""+requestBody,""+responseBody)   }  
+ def toJson() : String = {   "{" + "\"executorRestCallId\":\""+executorRestCallId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"executorHostId\":\""+executorHostId+"\""+","+"\"executorRestId\":\""+executorRestId+"\""+","+"\"requestMethod\":\""+requestMethod+"\""+","+"\"requestHeader\":\""+requestHeader+"\""+","+"\"requestBody\":\""+requestBody+"\""+","+"\"responseBody\":\""+responseBody+"\"" + "}"   }  
  def toFullString() : String = {    "executorRestCallId:'"+executorRestCallId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorHostId:'"+executorHostId+"'"+","+"executorRestId:'"+executorRestId+"'"+","+"requestMethod:'"+requestMethod+"'"+","+"requestHeader:'"+requestHeader+"'"+","+"requestBody:'"+requestBody+"'"+","+"responseBody:'"+responseBody+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
