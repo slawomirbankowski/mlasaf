@@ -1,6 +1,2 @@
-[0m[[0m[31merror[0m] [0m[0mC:\Project\mlasaf\src\mlasaf\src\main\scala\com\mlasaf\rest\ContextRests.scala:19:101: type mismatch;[0m
-[0m[[0m[31merror[0m] [0m[0m found   : Unit[0m
-[0m[[0m[31merror[0m] [0m[0m required: Unit => Unit[0m
-[0m[[0m[31merror[0m] [0m[0m      val delayedRun = new com.mlasaf.structures.DelayedRun(1000)(this.parentRest.parentContext.stop())[0m
-[0m[[0m[31merror[0m] [0m[0m                                                                                                    ^[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[33mwarn[0m] [0m[0mthere was one feature warning; re-run with -feature for details[0m
+[0m[[0m[33mwarn[0m] [0m[0mone warning found[0m

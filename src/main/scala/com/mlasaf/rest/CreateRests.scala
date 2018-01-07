@@ -59,9 +59,9 @@ class CreateRests extends RestBase  {
       logger.info("execTypeId: " + execTypeId);
       val algTypeId = parentRest.parentContext.daoFactory.daos.algorithmTypeDao.getAlgorithmTypeByName(algoImplParams.algorithmType).head.algorithmTypeId;
       logger.info("algTypeId: " + algTypeId);
-      val algTypeVerId = parentRest.parentContext.daoFactory.daos.algorithmTypeVersionDao.getAlgorithmTypeVersionsList().filter(a => (a.algorithmTypeVersionName.equals(algoImplParams.algorithmVersion) && a.algorithmTypeId == algTypeId)).head.algorithmTypeVersionId;
-      logger.info("algTypeVerId: " + algTypeVerId);
-      val algImplDto = parentRest.parentContext.daoFactory.daos.algorithmImplementationDao.createAndInsertAlgorithmImplementationDto(algTypeVerId, execTypeId, algoImplParams.algorithmImplementationName, algoImplParams.algorithmImplementationClass);
+      val algVerId = parentRest.parentContext.daoFactory.daos.algorithmVersionDao.getAlgorithmVersionsList().filter(a => (a.algorithmVersionName.equals(algoImplParams.algorithmVersion) && a.algorithmTypeId == algTypeId)).head.algorithmVersionId;
+      logger.info("algTypeVerId: " + algVerId);
+      val algImplDto = parentRest.parentContext.daoFactory.daos.algorithmImplementationDao.createAndInsertAlgorithmImplementationDto(algTypeId, algVerId, execTypeId, algoImplParams.algorithmImplementationName, algoImplParams.algorithmImplementationClass, "");
       logger.info("algImplDto: " + algImplDto);
       // supported storages
       algoImplParams.supportedStorages.split(",").foreach(supsto => {
@@ -85,28 +85,28 @@ class CreateRests extends RestBase  {
         currentAlgoTypes.head.toJson();
       }
     });
-    spark.Spark.post("/algorithm-type-version", (req: spark.Request, resp: spark.Response) => {
-      resp.`type`("application/json");
+    spark.Spark.post("/algorithm-version", (req: spark.Request, resp: spark.Response) => {
+      //resp.`type`("application/json");
       logger.info("Executing algorithm-schedule CREATE (POST) with body: " + req.body());
       implicit val formats = org.json4s.DefaultFormats
       val algTypeVersionParams = parse(req.body()).extract[CreateAlgorithmTypeVersionParams];
       val algType = parentRest.parentContext.daoFactory.daos.algorithmTypeDao.getAlgorithmTypeByName(algTypeVersionParams.algorithmType).head;
       logger.info("algTypeId: " + algType);
-      val algTypeVer = parentRest.parentContext.daoFactory.daos.algorithmTypeVersionDao.createAndInsertAlgorithmTypeVersionDto(algType.algorithmTypeId, algTypeVersionParams.algorithmVersion);
+      val algTypeVer = parentRest.parentContext.daoFactory.daos.algorithmVersionDao.createAndInsertAlgorithmVersionDto(algType.algorithmTypeId, algTypeVersionParams.algorithmVersion);
       logger.info("algTypeVer: " + algTypeVer);
       // columns
       algTypeVersionParams.columns.split(",").foreach(algColName => {
-        val algTypeColType = parentRest.parentContext.daoFactory.daos.algorithmTypeColumnTypeDao.createAndInsertAlgorithmTypeColumnTypeDto(algTypeVer.algorithmTypeVersionId, parentRest.parentContext.daoFactory.daos.algorithmColumnTypeDao.getAlgorithmColumnTypeFirstByName(algColName).get.algorithmColumnTypeId, 0, 0);
+        val algTypeColType = parentRest.parentContext.daoFactory.daos.algorithmVersionColumnTypeDao.createAndInsertAlgorithmVersionColumnTypeDto(algTypeVer.algorithmVersionId, parentRest.parentContext.daoFactory.daos.algorithmColumnTypeDao.getAlgorithmColumnTypeFirstByName(algColName).get.algorithmColumnTypeId, 0, 0);
         logger.info("algTypeColType: " + algTypeColType);
       });
       // parameters
       algTypeVersionParams.parameters.split(",").foreach(algColName => {
-        val algParType = parentRest.parentContext.daoFactory.daos.algorithmParamTypeDao.createAndInsertAlgorithmParamTypeDto(parentRest.parentContext.daoFactory.daos.algorithmParamDao.getAlgorithmParamFirstByName(algColName).get.algorithmParamId, algType.algorithmTypeId, algTypeVer.algorithmTypeVersionId);
+        val algParType = parentRest.parentContext.daoFactory.daos.algorithmVersionParamTypeDao.createAndInsertAlgorithmVersionParamTypeDto(parentRest.parentContext.daoFactory.daos.algorithmParamDao.getAlgorithmParamFirstByName(algColName).get.algorithmParamId, algType.algorithmTypeId, algTypeVer.algorithmVersionId);
         logger.info("algParType: " + algParType);
       });
       algTypeVersionParams.outputTypes.split(",").foreach(outputTypeName => {
         val algOutypeId = parentRest.parentContext.daoFactory.daos.algorithmOutputTypeDao.getAlgorithmOutputTypeFirstByName(outputTypeName).get.algorithmOutputTypeId;
-        val algTypeOutType = parentRest.parentContext.daoFactory.daos.algorithmTypeOutputTypeDao.createAndInsertAlgorithmTypeOutputTypeDto(algTypeVer.algorithmTypeVersionId, algOutypeId, 1);
+        val algTypeOutType = parentRest.parentContext.daoFactory.daos.algorithmVersionOutputTypeDao.createAndInsertAlgorithmVersionOutputTypeDto(algTypeVer.algorithmVersionId, algOutypeId, 1, 0);
         logger.info("algTypeOutType: " + algTypeOutType);
       });
       algTypeVer.toJson();

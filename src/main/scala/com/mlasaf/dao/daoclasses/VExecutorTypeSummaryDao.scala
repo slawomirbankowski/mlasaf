@@ -108,5 +108,11 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
+ def getDtosByExecutorTypeHostParam_count(colValue : Int) : List[VExecutorTypeSummaryDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorTypeSummaryDto] = SQL("select * from vExecutorTypeSummary where executorTypeHostParam_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorTypeSummaryDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
 
 } 

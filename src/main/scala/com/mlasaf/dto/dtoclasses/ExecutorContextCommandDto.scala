@@ -19,10 +19,11 @@ case class ExecutorContextCommandDto (
      , val commandParam2 : String
      , val commandParam3 : String
      , val commandParam4 : String
-     , val commandParam5 : String 
+     , val commandParam5 : String
+     , val resultStatus : String 
      ) extends BaseDto {  
    def tableName : String = {    "executorContextCommand";    }  
-   def fields : String = {    "executorContextCommandId,guid,insertedRowDate,lastUpdatedDate,executorContextId,executorCommandId,isRunning,isExecuted,commandParam1,commandParam2,commandParam3,commandParam4,commandParam5";    }  
+   def fields : String = {    "executorContextCommandId,guid,insertedRowDate,lastUpdatedDate,executorContextId,executorCommandId,isRunning,isExecuted,commandParam1,commandParam2,commandParam3,commandParam4,commandParam5,resultStatus";    }  
    def pkFields : String = {    "executorContextCommandId";    }  
    def fkFields : String = {    "executorContextId,executorCommandId";    }  
    def nameField : String = {    "";    }  
@@ -30,10 +31,10 @@ case class ExecutorContextCommandDto (
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(executorContextCommandId,guid,insertedRowDate,lastUpdatedDate,executorContextId,executorCommandId,isRunning,isExecuted,commandParam1,commandParam2,commandParam3,commandParam4,commandParam5)  }  
- def toStringArray() : Array[String] = {    Array(""+executorContextCommandId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorContextId,""+executorCommandId,""+isRunning,""+isExecuted,""+commandParam1,""+commandParam2,""+commandParam3,""+commandParam4,""+commandParam5)   }  
- def toJson() : String = {   "{" + "\"executorContextCommandId\":\""+executorContextCommandId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"executorContextId\":\""+executorContextId+"\""+","+"\"executorCommandId\":\""+executorCommandId+"\""+","+"\"isRunning\":\""+isRunning+"\""+","+"\"isExecuted\":\""+isExecuted+"\""+","+"\"commandParam1\":\""+commandParam1+"\""+","+"\"commandParam2\":\""+commandParam2+"\""+","+"\"commandParam3\":\""+commandParam3+"\""+","+"\"commandParam4\":\""+commandParam4+"\""+","+"\"commandParam5\":\""+commandParam5+"\"" + "}"   }  
- def toFullString() : String = {    "executorContextCommandId:'"+executorContextCommandId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorContextId:'"+executorContextId+"'"+","+"executorCommandId:'"+executorCommandId+"'"+","+"isRunning:'"+isRunning+"'"+","+"isExecuted:'"+isExecuted+"'"+","+"commandParam1:'"+commandParam1+"'"+","+"commandParam2:'"+commandParam2+"'"+","+"commandParam3:'"+commandParam3+"'"+","+"commandParam4:'"+commandParam4+"'"+","+"commandParam5:'"+commandParam5+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(executorContextCommandId,guid,insertedRowDate,lastUpdatedDate,executorContextId,executorCommandId,isRunning,isExecuted,commandParam1,commandParam2,commandParam3,commandParam4,commandParam5,resultStatus)  }  
+ def toStringArray() : Array[String] = {    Array(""+executorContextCommandId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorContextId,""+executorCommandId,""+isRunning,""+isExecuted,""+commandParam1,""+commandParam2,""+commandParam3,""+commandParam4,""+commandParam5,""+resultStatus)   }  
+ def toJson() : String = {   "{" + "\"executorContextCommandId\":\""+executorContextCommandId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"executorContextId\":\""+executorContextId+"\""+","+"\"executorCommandId\":\""+executorCommandId+"\""+","+"\"isRunning\":\""+isRunning+"\""+","+"\"isExecuted\":\""+isExecuted+"\""+","+"\"commandParam1\":\""+commandParam1+"\""+","+"\"commandParam2\":\""+commandParam2+"\""+","+"\"commandParam3\":\""+commandParam3+"\""+","+"\"commandParam4\":\""+commandParam4+"\""+","+"\"commandParam5\":\""+commandParam5+"\""+","+"\"resultStatus\":\""+resultStatus+"\"" + "}"   }  
+ def toFullString() : String = {    "executorContextCommandId:'"+executorContextCommandId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorContextId:'"+executorContextId+"'"+","+"executorCommandId:'"+executorCommandId+"'"+","+"isRunning:'"+isRunning+"'"+","+"isExecuted:'"+isExecuted+"'"+","+"commandParam1:'"+commandParam1+"'"+","+"commandParam2:'"+commandParam2+"'"+","+"commandParam3:'"+commandParam3+"'"+","+"commandParam4:'"+commandParam4+"'"+","+"commandParam5:'"+commandParam5+"'"+","+"resultStatus:'"+resultStatus+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "executorContextCommandId" => executorContextCommandId  
@@ -48,7 +49,8 @@ case class ExecutorContextCommandDto (
      case "commandParam2" => commandParam2  
      case "commandParam3" => commandParam3  
      case "commandParam4" => commandParam4  
-     case "commandParam5" => commandParam5   
+     case "commandParam5" => commandParam5  
+     case "resultStatus" => resultStatus   
     case _ => null 
     } 
     ret 
@@ -67,13 +69,14 @@ case class ExecutorContextCommandDto (
      case "commandParam2" => "String"  
      case "commandParam3" => "String"  
      case "commandParam4" => "String"  
-     case "commandParam5" => "String"   
+     case "commandParam5" => "String"  
+     case "resultStatus" => "String"   
     case _ => "Object" 
     } 
     ret 
   } 
    def prepareInsert(connection : java.sql.Connection) : java.sql.PreparedStatement = {
-     val stat = connection.prepareStatement("insert into executorContextCommand(guid,executorContextId,executorCommandId,isRunning,isExecuted,commandParam1,commandParam2,commandParam3,commandParam4,commandParam5) values (?,?,?,?,?,?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
+     val stat = connection.prepareStatement("insert into executorContextCommand(guid,executorContextId,executorCommandId,isRunning,isExecuted,commandParam1,commandParam2,commandParam3,commandParam4,commandParam5,resultStatus) values (?,?,?,?,?,?,?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
     stat.setObject(1, guid);
     stat.setObject(2, executorContextId);
     stat.setObject(3, executorCommandId);
@@ -84,10 +87,11 @@ case class ExecutorContextCommandDto (
     stat.setObject(8, commandParam3);
     stat.setObject(9, commandParam4);
     stat.setObject(10, commandParam5);
+    stat.setObject(11, resultStatus);
     return stat; 
    } 
-   def modify(executorContextId : Long, executorCommandId : Long, isRunning : Int, isExecuted : Int, commandParam1 : String, commandParam2 : String, commandParam3 : String, commandParam4 : String, commandParam5 : String) : ExecutorContextCommandDto = {
-    val dtoModified = new ExecutorContextCommandDto(this.executorContextCommandId,this.guid,this.insertedRowDate,new java.util.Date(),executorContextId,executorCommandId,isRunning,isExecuted,commandParam1,commandParam2,commandParam3,commandParam4,commandParam5);
+   def modify(executorContextId : Long, executorCommandId : Long, isRunning : Int, isExecuted : Int, commandParam1 : String, commandParam2 : String, commandParam3 : String, commandParam4 : String, commandParam5 : String, resultStatus : String) : ExecutorContextCommandDto = {
+    val dtoModified = new ExecutorContextCommandDto(this.executorContextCommandId,this.guid,this.insertedRowDate,new java.util.Date(),executorContextId,executorCommandId,isRunning,isExecuted,commandParam1,commandParam2,commandParam3,commandParam4,commandParam5,resultStatus);
     dtoModified
   }
  } 
@@ -106,9 +110,10 @@ object ExecutorContextCommandDto {
    val FIELD_commandParam3 = "commandParam3";
    val FIELD_commandParam4 = "commandParam4";
    val FIELD_commandParam5 = "commandParam5";
+   val FIELD_resultStatus = "resultStatus";
 
-  def createNewExecutorContextCommandDto(executorContextId : Long, executorCommandId : Long, isRunning : Int, isExecuted : Int, commandParam1 : String, commandParam2 : String, commandParam3 : String, commandParam4 : String, commandParam5 : String) : ExecutorContextCommandDto = {  
-     val dto = new ExecutorContextCommandDto(0,0,new java.util.Date(),new java.util.Date(),executorContextId,executorCommandId,isRunning,isExecuted,commandParam1,commandParam2,commandParam3,commandParam4,commandParam5)   
+  def createNewExecutorContextCommandDto(executorContextId : Long, executorCommandId : Long, isRunning : Int, isExecuted : Int, commandParam1 : String, commandParam2 : String, commandParam3 : String, commandParam4 : String, commandParam5 : String, resultStatus : String) : ExecutorContextCommandDto = {  
+     val dto = new ExecutorContextCommandDto(0,0,new java.util.Date(),new java.util.Date(),executorContextId,executorCommandId,isRunning,isExecuted,commandParam1,commandParam2,commandParam3,commandParam4,commandParam5,resultStatus)   
     dto 
   } 
 

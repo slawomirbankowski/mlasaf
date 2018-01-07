@@ -86,7 +86,7 @@ import java.util.Date
  }  
  def insertExecutorRestCallDto(dto : ExecutorRestCallDto): ExecutorRestCallDto = { 
     implicit val connection = getConnection(); 
-    val stat = dto.prepareInsert(getConnection()); 
+    val stat = dto.prepareInsert(connection); 
     val resCnt = stat.executeUpdate(); 
     val rs = stat.getGeneratedKeys(); 
     if (rs.next()) { 
@@ -99,14 +99,14 @@ import java.util.Date
       null; 
     } 
  } 
-  def createAndInsertExecutorRestCallDto(executorHostId : Long, executorRestId : Long, requestMethod : String, requestHeader : String, requestBody : String, responseBody : String) : ExecutorRestCallDto = {
-    val dto = new ExecutorRestCallDto(0,0,new Date(),new Date(),executorHostId,executorRestId,requestMethod,requestHeader,requestBody,responseBody)
+  def createAndInsertExecutorRestCallDto(executorHostId : Long, executorRestId : Long, requestMethod : String, requestHeader : String, requestBody : String, responseBody : String, runTime : Long, headers : String, cookies : String, clientHost : String, protocol : String, session : String) : ExecutorRestCallDto = {
+    val dto = new ExecutorRestCallDto(0,0,new Date(),new Date(),executorHostId,executorRestId,requestMethod,requestHeader,requestBody,responseBody,runTime,headers,cookies,clientHost,protocol,session)
     insertExecutorRestCallDto(dto);   
   }   
   def updateExecutorRestCallDto(dto : ExecutorRestCallDto): ExecutorRestCallDto = {  
     implicit val connection = getConnection();  
-      val resCnt = SQL("update executorRestCall set  lastUpdatedDate = {lastUpdatedDate} ,  executorHostId = {executorHostId} ,  executorRestId = {executorRestId} ,  requestMethod = {requestMethod} ,  requestHeader = {requestHeader} ,  requestBody = {requestBody} ,  responseBody = {responseBody}  where  executorRestCallId = {executorRestCallId}  ")
-      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "executorHostId" -> dto.executorHostId , "executorRestId" -> dto.executorRestId , "requestMethod" -> dto.requestMethod , "requestHeader" -> dto.requestHeader , "requestBody" -> dto.requestBody , "responseBody" -> dto.responseBody, "executorRestCallId" -> dto.executorRestCallId ).executeInsert() 
+      val resCnt = SQL("update executorRestCall set  lastUpdatedDate = {lastUpdatedDate} ,  executorHostId = {executorHostId} ,  executorRestId = {executorRestId} ,  requestMethod = {requestMethod} ,  requestHeader = {requestHeader} ,  requestBody = {requestBody} ,  responseBody = {responseBody} ,  runTime = {runTime} ,  headers = {headers} ,  cookies = {cookies} ,  clientHost = {clientHost} ,  protocol = {protocol} ,  session = {session}  where  executorRestCallId = {executorRestCallId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "executorHostId" -> dto.executorHostId , "executorRestId" -> dto.executorRestId , "requestMethod" -> dto.requestMethod , "requestHeader" -> dto.requestHeader , "requestBody" -> dto.requestBody , "responseBody" -> dto.responseBody , "runTime" -> dto.runTime , "headers" -> dto.headers , "cookies" -> dto.cookies , "clientHost" -> dto.clientHost , "protocol" -> dto.protocol , "session" -> dto.session, "executorRestCallId" -> dto.executorRestCallId ).executeInsert() 
    releaseConnection(connection);  
      getExecutorRestCallByPk(dto.executorRestCallId) 
     } 

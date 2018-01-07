@@ -80,7 +80,7 @@ import java.util.Date
  }  
  def insertExecutorStorageSnapshotDto(dto : ExecutorStorageSnapshotDto): ExecutorStorageSnapshotDto = { 
     implicit val connection = getConnection(); 
-    val stat = dto.prepareInsert(getConnection()); 
+    val stat = dto.prepareInsert(connection); 
     val resCnt = stat.executeUpdate(); 
     val rs = stat.getGeneratedKeys(); 
     if (rs.next()) { 

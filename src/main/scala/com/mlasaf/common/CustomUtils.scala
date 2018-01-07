@@ -54,7 +54,14 @@ object CustomUtils {
     c.add(java.util.Calendar.HOUR, hours);
     c.getTime.after(d2)
   }
-
+  def cutString(s : String, maxPartLen : Int, minParts : Int) : Array[String] = {
+    val partsNum = Math.max(minParts, s.length / maxPartLen);
+    val resParts = new Array[String](partsNum)
+    (0 to partsNum-1).foreach(partNum => {
+      resParts(partNum) = ""
+    });
+    resParts
+  }
   def executeQuery(conn : java.sql.Connection, sql : String) = {
 
   }

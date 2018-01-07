@@ -104,7 +104,7 @@ import java.util.Date
  }  
  def insertExecutorInstanceDto(dto : ExecutorInstanceDto): ExecutorInstanceDto = { 
     implicit val connection = getConnection(); 
-    val stat = dto.prepareInsert(getConnection()); 
+    val stat = dto.prepareInsert(connection); 
     val resCnt = stat.executeUpdate(); 
     val rs = stat.getGeneratedKeys(); 
     if (rs.next()) { 
@@ -117,14 +117,14 @@ import java.util.Date
       null; 
     } 
  } 
-  def createAndInsertExecutorInstanceDto(executorTypeId : Long, executorHostId : Long, executorContextId : Long, executorInstanceName : String, isRunning : Int, isFinished : Int, portNumber : Int, endDate : java.util.Date) : ExecutorInstanceDto = {
-    val dto = new ExecutorInstanceDto(0,0,new Date(),new Date(),executorTypeId,executorHostId,executorContextId,executorInstanceName,isRunning,isFinished,portNumber,endDate)
+  def createAndInsertExecutorInstanceDto(executorTypeId : Long, executorHostId : Long, executorContextId : Long, executorInstanceName : String, executorDefinition : String, executorParameters : String, isRunning : Int, isFinished : Int, portNumber : Int, endDate : java.util.Date) : ExecutorInstanceDto = {
+    val dto = new ExecutorInstanceDto(0,0,new Date(),new Date(),executorTypeId,executorHostId,executorContextId,executorInstanceName,executorDefinition,executorParameters,isRunning,isFinished,portNumber,endDate)
     insertExecutorInstanceDto(dto);   
   }   
   def updateExecutorInstanceDto(dto : ExecutorInstanceDto): ExecutorInstanceDto = {  
     implicit val connection = getConnection();  
-      val resCnt = SQL("update executorInstance set  lastUpdatedDate = {lastUpdatedDate} ,  executorTypeId = {executorTypeId} ,  executorHostId = {executorHostId} ,  executorContextId = {executorContextId} ,  executorInstanceName = {executorInstanceName} ,  isRunning = {isRunning} ,  isFinished = {isFinished} ,  portNumber = {portNumber} ,  endDate = {endDate}  where  executorInstanceId = {executorInstanceId}  ")
-      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "executorTypeId" -> dto.executorTypeId , "executorHostId" -> dto.executorHostId , "executorContextId" -> dto.executorContextId , "executorInstanceName" -> dto.executorInstanceName , "isRunning" -> dto.isRunning , "isFinished" -> dto.isFinished , "portNumber" -> dto.portNumber , "endDate" -> dto.endDate, "executorInstanceId" -> dto.executorInstanceId ).executeInsert() 
+      val resCnt = SQL("update executorInstance set  lastUpdatedDate = {lastUpdatedDate} ,  executorTypeId = {executorTypeId} ,  executorHostId = {executorHostId} ,  executorContextId = {executorContextId} ,  executorInstanceName = {executorInstanceName} ,  executorDefinition = {executorDefinition} ,  executorParameters = {executorParameters} ,  isRunning = {isRunning} ,  isFinished = {isFinished} ,  portNumber = {portNumber} ,  endDate = {endDate}  where  executorInstanceId = {executorInstanceId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "executorTypeId" -> dto.executorTypeId , "executorHostId" -> dto.executorHostId , "executorContextId" -> dto.executorContextId , "executorInstanceName" -> dto.executorInstanceName , "executorDefinition" -> dto.executorDefinition , "executorParameters" -> dto.executorParameters , "isRunning" -> dto.isRunning , "isFinished" -> dto.isFinished , "portNumber" -> dto.portNumber , "endDate" -> dto.endDate, "executorInstanceId" -> dto.executorInstanceId ).executeInsert() 
    releaseConnection(connection);  
      getExecutorInstanceByPk(dto.executorInstanceId) 
     } 

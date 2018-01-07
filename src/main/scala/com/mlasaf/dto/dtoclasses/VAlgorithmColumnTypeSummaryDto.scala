@@ -13,11 +13,11 @@ case class VAlgorithmColumnTypeSummaryDto (
      , val lastUpdatedDate : java.util.Date
      , val algorithmColumnTypeName : String
      , val algorithmColumnTypeDescription : String
-     , val algorithmTypeColumnType_count : Int
-     , val algorithmScheduleColumn_count : Int 
+     , val algorithmScheduleColumn_count : Int
+     , val algorithmVersionColumnType_count : Int 
      ) extends BaseReadOnlyDto {  
    def tableName : String = {    "vAlgorithmColumnTypeSummary";    }  
-   def fields : String = {    "algorithmColumnTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmColumnTypeName,algorithmColumnTypeDescription,algorithmTypeColumnType_count,algorithmScheduleColumn_count";    }  
+   def fields : String = {    "algorithmColumnTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmColumnTypeName,algorithmColumnTypeDescription,algorithmScheduleColumn_count,algorithmVersionColumnType_count";    }  
    def pkFields : String = {    "";    }  
    def fkFields : String = {    "";    }  
    def nameField : String = {    "";    }  
@@ -25,10 +25,10 @@ case class VAlgorithmColumnTypeSummaryDto (
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(algorithmColumnTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmColumnTypeName,algorithmColumnTypeDescription,algorithmTypeColumnType_count,algorithmScheduleColumn_count)  }  
- def toStringArray() : Array[String] = {    Array(""+algorithmColumnTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmColumnTypeName,""+algorithmColumnTypeDescription,""+algorithmTypeColumnType_count,""+algorithmScheduleColumn_count)   }  
- def toJson() : String = {   "{" + "\"algorithmColumnTypeId\":\""+algorithmColumnTypeId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"algorithmColumnTypeName\":\""+algorithmColumnTypeName+"\""+","+"\"algorithmColumnTypeDescription\":\""+algorithmColumnTypeDescription+"\""+","+"\"algorithmTypeColumnType_count\":\""+algorithmTypeColumnType_count+"\""+","+"\"algorithmScheduleColumn_count\":\""+algorithmScheduleColumn_count+"\"" + "}"   }  
- def toFullString() : String = {    "algorithmColumnTypeId:'"+algorithmColumnTypeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmColumnTypeName:'"+algorithmColumnTypeName+"'"+","+"algorithmColumnTypeDescription:'"+algorithmColumnTypeDescription+"'"+","+"algorithmTypeColumnType_count:'"+algorithmTypeColumnType_count+"'"+","+"algorithmScheduleColumn_count:'"+algorithmScheduleColumn_count+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(algorithmColumnTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmColumnTypeName,algorithmColumnTypeDescription,algorithmScheduleColumn_count,algorithmVersionColumnType_count)  }  
+ def toStringArray() : Array[String] = {    Array(""+algorithmColumnTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmColumnTypeName,""+algorithmColumnTypeDescription,""+algorithmScheduleColumn_count,""+algorithmVersionColumnType_count)   }  
+ def toJson() : String = {   "{" + "\"algorithmColumnTypeId\":\""+algorithmColumnTypeId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"algorithmColumnTypeName\":\""+algorithmColumnTypeName+"\""+","+"\"algorithmColumnTypeDescription\":\""+algorithmColumnTypeDescription+"\""+","+"\"algorithmScheduleColumn_count\":\""+algorithmScheduleColumn_count+"\""+","+"\"algorithmVersionColumnType_count\":\""+algorithmVersionColumnType_count+"\"" + "}"   }  
+ def toFullString() : String = {    "algorithmColumnTypeId:'"+algorithmColumnTypeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmColumnTypeName:'"+algorithmColumnTypeName+"'"+","+"algorithmColumnTypeDescription:'"+algorithmColumnTypeDescription+"'"+","+"algorithmScheduleColumn_count:'"+algorithmScheduleColumn_count+"'"+","+"algorithmVersionColumnType_count:'"+algorithmVersionColumnType_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "algorithmColumnTypeId" => algorithmColumnTypeId  
@@ -37,8 +37,8 @@ case class VAlgorithmColumnTypeSummaryDto (
      case "lastUpdatedDate" => lastUpdatedDate  
      case "algorithmColumnTypeName" => algorithmColumnTypeName  
      case "algorithmColumnTypeDescription" => algorithmColumnTypeDescription  
-     case "algorithmTypeColumnType_count" => algorithmTypeColumnType_count  
-     case "algorithmScheduleColumn_count" => algorithmScheduleColumn_count   
+     case "algorithmScheduleColumn_count" => algorithmScheduleColumn_count  
+     case "algorithmVersionColumnType_count" => algorithmVersionColumnType_count   
     case _ => null 
     } 
     ret 
@@ -51,8 +51,8 @@ case class VAlgorithmColumnTypeSummaryDto (
      case "lastUpdatedDate" => "java.util.Date"  
      case "algorithmColumnTypeName" => "String"  
      case "algorithmColumnTypeDescription" => "String"  
-     case "algorithmTypeColumnType_count" => "Int"  
-     case "algorithmScheduleColumn_count" => "Int"   
+     case "algorithmScheduleColumn_count" => "Int"  
+     case "algorithmVersionColumnType_count" => "Int"   
     case _ => "Object" 
     } 
     ret 
@@ -66,8 +66,8 @@ object VAlgorithmColumnTypeSummaryDto {
    val FIELD_lastUpdatedDate = "lastUpdatedDate";
    val FIELD_algorithmColumnTypeName = "algorithmColumnTypeName";
    val FIELD_algorithmColumnTypeDescription = "algorithmColumnTypeDescription";
-   val FIELD_algorithmTypeColumnType_count = "algorithmTypeColumnType_count";
    val FIELD_algorithmScheduleColumn_count = "algorithmScheduleColumn_count";
+   val FIELD_algorithmVersionColumnType_count = "algorithmVersionColumnType_count";
 
 }
 

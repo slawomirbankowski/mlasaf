@@ -12,10 +12,12 @@ case class ExecutorInstanceStateDto (
      , val insertedRowDate : java.util.Date
      , val lastUpdatedDate : java.util.Date
      , val executorInstanceId : Long
-     , val stateName : String 
+     , val stateName : String
+     , val infoContent : String
+     , val exceptionDescription : String 
      ) extends BaseDto {  
    def tableName : String = {    "executorInstanceState";    }  
-   def fields : String = {    "executorInstanceStateId,guid,insertedRowDate,lastUpdatedDate,executorInstanceId,stateName";    }  
+   def fields : String = {    "executorInstanceStateId,guid,insertedRowDate,lastUpdatedDate,executorInstanceId,stateName,infoContent,exceptionDescription";    }  
    def pkFields : String = {    "executorInstanceStateId";    }  
    def fkFields : String = {    "executorInstanceId";    }  
    def nameField : String = {    "";    }  
@@ -23,10 +25,10 @@ case class ExecutorInstanceStateDto (
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(executorInstanceStateId,guid,insertedRowDate,lastUpdatedDate,executorInstanceId,stateName)  }  
- def toStringArray() : Array[String] = {    Array(""+executorInstanceStateId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorInstanceId,""+stateName)   }  
- def toJson() : String = {   "{" + "\"executorInstanceStateId\":\""+executorInstanceStateId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"executorInstanceId\":\""+executorInstanceId+"\""+","+"\"stateName\":\""+stateName+"\"" + "}"   }  
- def toFullString() : String = {    "executorInstanceStateId:'"+executorInstanceStateId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorInstanceId:'"+executorInstanceId+"'"+","+"stateName:'"+stateName+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(executorInstanceStateId,guid,insertedRowDate,lastUpdatedDate,executorInstanceId,stateName,infoContent,exceptionDescription)  }  
+ def toStringArray() : Array[String] = {    Array(""+executorInstanceStateId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorInstanceId,""+stateName,""+infoContent,""+exceptionDescription)   }  
+ def toJson() : String = {   "{" + "\"executorInstanceStateId\":\""+executorInstanceStateId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"executorInstanceId\":\""+executorInstanceId+"\""+","+"\"stateName\":\""+stateName+"\""+","+"\"infoContent\":\""+infoContent+"\""+","+"\"exceptionDescription\":\""+exceptionDescription+"\"" + "}"   }  
+ def toFullString() : String = {    "executorInstanceStateId:'"+executorInstanceStateId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorInstanceId:'"+executorInstanceId+"'"+","+"stateName:'"+stateName+"'"+","+"infoContent:'"+infoContent+"'"+","+"exceptionDescription:'"+exceptionDescription+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "executorInstanceStateId" => executorInstanceStateId  
@@ -34,7 +36,9 @@ case class ExecutorInstanceStateDto (
      case "insertedRowDate" => insertedRowDate  
      case "lastUpdatedDate" => lastUpdatedDate  
      case "executorInstanceId" => executorInstanceId  
-     case "stateName" => stateName   
+     case "stateName" => stateName  
+     case "infoContent" => infoContent  
+     case "exceptionDescription" => exceptionDescription   
     case _ => null 
     } 
     ret 
@@ -46,20 +50,24 @@ case class ExecutorInstanceStateDto (
      case "insertedRowDate" => "java.util.Date"  
      case "lastUpdatedDate" => "java.util.Date"  
      case "executorInstanceId" => "Long"  
-     case "stateName" => "String"   
+     case "stateName" => "String"  
+     case "infoContent" => "String"  
+     case "exceptionDescription" => "String"   
     case _ => "Object" 
     } 
     ret 
   } 
    def prepareInsert(connection : java.sql.Connection) : java.sql.PreparedStatement = {
-     val stat = connection.prepareStatement("insert into executorInstanceState(guid,executorInstanceId,stateName) values (?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
+     val stat = connection.prepareStatement("insert into executorInstanceState(guid,executorInstanceId,stateName,infoContent,exceptionDescription) values (?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
     stat.setObject(1, guid);
     stat.setObject(2, executorInstanceId);
     stat.setObject(3, stateName);
+    stat.setObject(4, infoContent);
+    stat.setObject(5, exceptionDescription);
     return stat; 
    } 
-   def modify(executorInstanceId : Long, stateName : String) : ExecutorInstanceStateDto = {
-    val dtoModified = new ExecutorInstanceStateDto(this.executorInstanceStateId,this.guid,this.insertedRowDate,new java.util.Date(),executorInstanceId,stateName);
+   def modify(executorInstanceId : Long, stateName : String, infoContent : String, exceptionDescription : String) : ExecutorInstanceStateDto = {
+    val dtoModified = new ExecutorInstanceStateDto(this.executorInstanceStateId,this.guid,this.insertedRowDate,new java.util.Date(),executorInstanceId,stateName,infoContent,exceptionDescription);
     dtoModified
   }
  } 
@@ -71,9 +79,11 @@ object ExecutorInstanceStateDto {
    val FIELD_lastUpdatedDate = "lastUpdatedDate";
    val FIELD_executorInstanceId = "executorInstanceId";
    val FIELD_stateName = "stateName";
+   val FIELD_infoContent = "infoContent";
+   val FIELD_exceptionDescription = "exceptionDescription";
 
-  def createNewExecutorInstanceStateDto(executorInstanceId : Long, stateName : String) : ExecutorInstanceStateDto = {  
-     val dto = new ExecutorInstanceStateDto(0,0,new java.util.Date(),new java.util.Date(),executorInstanceId,stateName)   
+  def createNewExecutorInstanceStateDto(executorInstanceId : Long, stateName : String, infoContent : String, exceptionDescription : String) : ExecutorInstanceStateDto = {  
+     val dto = new ExecutorInstanceStateDto(0,0,new java.util.Date(),new java.util.Date(),executorInstanceId,stateName,infoContent,exceptionDescription)   
     dto 
   } 
 

@@ -176,7 +176,7 @@ object GenerateDaoClassesEntry {
 
         daoMethods.append(" def insert" + dtoName + "(dto : " + dtoName + "): " + dtoName + " = { \n");
         daoMethods.append("    implicit val connection = getConnection(); \n");
-        daoMethods.append("    val stat = dto.prepareInsert(getConnection()); \n");
+        daoMethods.append("    val stat = dto.prepareInsert(connection); \n");
         daoMethods.append("    val resCnt = stat.executeUpdate(); \n");
         daoMethods.append("    val rs = stat.getGeneratedKeys(); \n");
         daoMethods.append("    if (rs.next()) { \n");

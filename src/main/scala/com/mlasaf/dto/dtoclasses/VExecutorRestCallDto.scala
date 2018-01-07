@@ -17,6 +17,12 @@ case class VExecutorRestCallDto (
      , val requestHeader : String
      , val requestBody : String
      , val responseBody : String
+     , val runTime : Long
+     , val headers : String
+     , val cookies : String
+     , val clientHost : String
+     , val protocol : String
+     , val session : String
      , val executorHost_executorHostId : Long
      , val executorHost_guid : Long
      , val executorHost_insertedRowDate : java.util.Date
@@ -37,7 +43,7 @@ case class VExecutorRestCallDto (
      , val executorRest_restStatus : String 
      ) extends BaseReadOnlyDto {  
    def tableName : String = {    "vExecutorRestCall";    }  
-   def fields : String = {    "executorRestCallId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorRestId,requestMethod,requestHeader,requestBody,responseBody,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking,executorRest_executorRestId,executorRest_guid,executorRest_insertedRowDate,executorRest_lastUpdatedDate,executorRest_executorHostId,executorRest_restPort,executorRest_restVersion,executorRest_restStatus";    }  
+   def fields : String = {    "executorRestCallId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorRestId,requestMethod,requestHeader,requestBody,responseBody,runTime,headers,cookies,clientHost,protocol,session,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking,executorRest_executorRestId,executorRest_guid,executorRest_insertedRowDate,executorRest_lastUpdatedDate,executorRest_executorHostId,executorRest_restPort,executorRest_restVersion,executorRest_restStatus";    }  
    def pkFields : String = {    "";    }  
    def fkFields : String = {    "";    }  
    def nameField : String = {    "";    }  
@@ -45,10 +51,10 @@ case class VExecutorRestCallDto (
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(executorRestCallId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorRestId,requestMethod,requestHeader,requestBody,responseBody,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking,executorRest_executorRestId,executorRest_guid,executorRest_insertedRowDate,executorRest_lastUpdatedDate,executorRest_executorHostId,executorRest_restPort,executorRest_restVersion,executorRest_restStatus)  }  
- def toStringArray() : Array[String] = {    Array(""+executorRestCallId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+executorRestId,""+requestMethod,""+requestHeader,""+requestBody,""+responseBody,""+executorHost_executorHostId,""+executorHost_guid,""+executorHost_insertedRowDate,""+executorHost_lastUpdatedDate,""+executorHost_hostName,""+executorHost_hostIp,""+executorHost_hostDomain,""+executorHost_hostOsType,""+executorHost_hostOsVersion,""+executorHost_isWorking,""+executorRest_executorRestId,""+executorRest_guid,""+executorRest_insertedRowDate,""+executorRest_lastUpdatedDate,""+executorRest_executorHostId,""+executorRest_restPort,""+executorRest_restVersion,""+executorRest_restStatus)   }  
- def toJson() : String = {   "{" + "\"executorRestCallId\":\""+executorRestCallId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"executorHostId\":\""+executorHostId+"\""+","+"\"executorRestId\":\""+executorRestId+"\""+","+"\"requestMethod\":\""+requestMethod+"\""+","+"\"requestHeader\":\""+requestHeader+"\""+","+"\"requestBody\":\""+requestBody+"\""+","+"\"responseBody\":\""+responseBody+"\""+","+"\"executorHost_executorHostId\":\""+executorHost_executorHostId+"\""+","+"\"executorHost_guid\":\""+executorHost_guid+"\""+","+"\"executorHost_insertedRowDate\":\""+executorHost_insertedRowDate+"\""+","+"\"executorHost_lastUpdatedDate\":\""+executorHost_lastUpdatedDate+"\""+","+"\"executorHost_hostName\":\""+executorHost_hostName+"\""+","+"\"executorHost_hostIp\":\""+executorHost_hostIp+"\""+","+"\"executorHost_hostDomain\":\""+executorHost_hostDomain+"\""+","+"\"executorHost_hostOsType\":\""+executorHost_hostOsType+"\""+","+"\"executorHost_hostOsVersion\":\""+executorHost_hostOsVersion+"\""+","+"\"executorHost_isWorking\":\""+executorHost_isWorking+"\""+","+"\"executorRest_executorRestId\":\""+executorRest_executorRestId+"\""+","+"\"executorRest_guid\":\""+executorRest_guid+"\""+","+"\"executorRest_insertedRowDate\":\""+executorRest_insertedRowDate+"\""+","+"\"executorRest_lastUpdatedDate\":\""+executorRest_lastUpdatedDate+"\""+","+"\"executorRest_executorHostId\":\""+executorRest_executorHostId+"\""+","+"\"executorRest_restPort\":\""+executorRest_restPort+"\""+","+"\"executorRest_restVersion\":\""+executorRest_restVersion+"\""+","+"\"executorRest_restStatus\":\""+executorRest_restStatus+"\"" + "}"   }  
- def toFullString() : String = {    "executorRestCallId:'"+executorRestCallId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorHostId:'"+executorHostId+"'"+","+"executorRestId:'"+executorRestId+"'"+","+"requestMethod:'"+requestMethod+"'"+","+"requestHeader:'"+requestHeader+"'"+","+"requestBody:'"+requestBody+"'"+","+"responseBody:'"+responseBody+"'"+","+"executorHost_executorHostId:'"+executorHost_executorHostId+"'"+","+"executorHost_guid:'"+executorHost_guid+"'"+","+"executorHost_insertedRowDate:'"+executorHost_insertedRowDate+"'"+","+"executorHost_lastUpdatedDate:'"+executorHost_lastUpdatedDate+"'"+","+"executorHost_hostName:'"+executorHost_hostName+"'"+","+"executorHost_hostIp:'"+executorHost_hostIp+"'"+","+"executorHost_hostDomain:'"+executorHost_hostDomain+"'"+","+"executorHost_hostOsType:'"+executorHost_hostOsType+"'"+","+"executorHost_hostOsVersion:'"+executorHost_hostOsVersion+"'"+","+"executorHost_isWorking:'"+executorHost_isWorking+"'"+","+"executorRest_executorRestId:'"+executorRest_executorRestId+"'"+","+"executorRest_guid:'"+executorRest_guid+"'"+","+"executorRest_insertedRowDate:'"+executorRest_insertedRowDate+"'"+","+"executorRest_lastUpdatedDate:'"+executorRest_lastUpdatedDate+"'"+","+"executorRest_executorHostId:'"+executorRest_executorHostId+"'"+","+"executorRest_restPort:'"+executorRest_restPort+"'"+","+"executorRest_restVersion:'"+executorRest_restVersion+"'"+","+"executorRest_restStatus:'"+executorRest_restStatus+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(executorRestCallId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorRestId,requestMethod,requestHeader,requestBody,responseBody,runTime,headers,cookies,clientHost,protocol,session,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking,executorRest_executorRestId,executorRest_guid,executorRest_insertedRowDate,executorRest_lastUpdatedDate,executorRest_executorHostId,executorRest_restPort,executorRest_restVersion,executorRest_restStatus)  }  
+ def toStringArray() : Array[String] = {    Array(""+executorRestCallId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+executorRestId,""+requestMethod,""+requestHeader,""+requestBody,""+responseBody,""+runTime,""+headers,""+cookies,""+clientHost,""+protocol,""+session,""+executorHost_executorHostId,""+executorHost_guid,""+executorHost_insertedRowDate,""+executorHost_lastUpdatedDate,""+executorHost_hostName,""+executorHost_hostIp,""+executorHost_hostDomain,""+executorHost_hostOsType,""+executorHost_hostOsVersion,""+executorHost_isWorking,""+executorRest_executorRestId,""+executorRest_guid,""+executorRest_insertedRowDate,""+executorRest_lastUpdatedDate,""+executorRest_executorHostId,""+executorRest_restPort,""+executorRest_restVersion,""+executorRest_restStatus)   }  
+ def toJson() : String = {   "{" + "\"executorRestCallId\":\""+executorRestCallId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"executorHostId\":\""+executorHostId+"\""+","+"\"executorRestId\":\""+executorRestId+"\""+","+"\"requestMethod\":\""+requestMethod+"\""+","+"\"requestHeader\":\""+requestHeader+"\""+","+"\"requestBody\":\""+requestBody+"\""+","+"\"responseBody\":\""+responseBody+"\""+","+"\"runTime\":\""+runTime+"\""+","+"\"headers\":\""+headers+"\""+","+"\"cookies\":\""+cookies+"\""+","+"\"clientHost\":\""+clientHost+"\""+","+"\"protocol\":\""+protocol+"\""+","+"\"session\":\""+session+"\""+","+"\"executorHost_executorHostId\":\""+executorHost_executorHostId+"\""+","+"\"executorHost_guid\":\""+executorHost_guid+"\""+","+"\"executorHost_insertedRowDate\":\""+executorHost_insertedRowDate+"\""+","+"\"executorHost_lastUpdatedDate\":\""+executorHost_lastUpdatedDate+"\""+","+"\"executorHost_hostName\":\""+executorHost_hostName+"\""+","+"\"executorHost_hostIp\":\""+executorHost_hostIp+"\""+","+"\"executorHost_hostDomain\":\""+executorHost_hostDomain+"\""+","+"\"executorHost_hostOsType\":\""+executorHost_hostOsType+"\""+","+"\"executorHost_hostOsVersion\":\""+executorHost_hostOsVersion+"\""+","+"\"executorHost_isWorking\":\""+executorHost_isWorking+"\""+","+"\"executorRest_executorRestId\":\""+executorRest_executorRestId+"\""+","+"\"executorRest_guid\":\""+executorRest_guid+"\""+","+"\"executorRest_insertedRowDate\":\""+executorRest_insertedRowDate+"\""+","+"\"executorRest_lastUpdatedDate\":\""+executorRest_lastUpdatedDate+"\""+","+"\"executorRest_executorHostId\":\""+executorRest_executorHostId+"\""+","+"\"executorRest_restPort\":\""+executorRest_restPort+"\""+","+"\"executorRest_restVersion\":\""+executorRest_restVersion+"\""+","+"\"executorRest_restStatus\":\""+executorRest_restStatus+"\"" + "}"   }  
+ def toFullString() : String = {    "executorRestCallId:'"+executorRestCallId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorHostId:'"+executorHostId+"'"+","+"executorRestId:'"+executorRestId+"'"+","+"requestMethod:'"+requestMethod+"'"+","+"requestHeader:'"+requestHeader+"'"+","+"requestBody:'"+requestBody+"'"+","+"responseBody:'"+responseBody+"'"+","+"runTime:'"+runTime+"'"+","+"headers:'"+headers+"'"+","+"cookies:'"+cookies+"'"+","+"clientHost:'"+clientHost+"'"+","+"protocol:'"+protocol+"'"+","+"session:'"+session+"'"+","+"executorHost_executorHostId:'"+executorHost_executorHostId+"'"+","+"executorHost_guid:'"+executorHost_guid+"'"+","+"executorHost_insertedRowDate:'"+executorHost_insertedRowDate+"'"+","+"executorHost_lastUpdatedDate:'"+executorHost_lastUpdatedDate+"'"+","+"executorHost_hostName:'"+executorHost_hostName+"'"+","+"executorHost_hostIp:'"+executorHost_hostIp+"'"+","+"executorHost_hostDomain:'"+executorHost_hostDomain+"'"+","+"executorHost_hostOsType:'"+executorHost_hostOsType+"'"+","+"executorHost_hostOsVersion:'"+executorHost_hostOsVersion+"'"+","+"executorHost_isWorking:'"+executorHost_isWorking+"'"+","+"executorRest_executorRestId:'"+executorRest_executorRestId+"'"+","+"executorRest_guid:'"+executorRest_guid+"'"+","+"executorRest_insertedRowDate:'"+executorRest_insertedRowDate+"'"+","+"executorRest_lastUpdatedDate:'"+executorRest_lastUpdatedDate+"'"+","+"executorRest_executorHostId:'"+executorRest_executorHostId+"'"+","+"executorRest_restPort:'"+executorRest_restPort+"'"+","+"executorRest_restVersion:'"+executorRest_restVersion+"'"+","+"executorRest_restStatus:'"+executorRest_restStatus+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "executorRestCallId" => executorRestCallId  
@@ -61,6 +67,12 @@ case class VExecutorRestCallDto (
      case "requestHeader" => requestHeader  
      case "requestBody" => requestBody  
      case "responseBody" => responseBody  
+     case "runTime" => runTime  
+     case "headers" => headers  
+     case "cookies" => cookies  
+     case "clientHost" => clientHost  
+     case "protocol" => protocol  
+     case "session" => session  
      case "executorHost_executorHostId" => executorHost_executorHostId  
      case "executorHost_guid" => executorHost_guid  
      case "executorHost_insertedRowDate" => executorHost_insertedRowDate  
@@ -95,6 +107,12 @@ case class VExecutorRestCallDto (
      case "requestHeader" => "String"  
      case "requestBody" => "String"  
      case "responseBody" => "String"  
+     case "runTime" => "Long"  
+     case "headers" => "String"  
+     case "cookies" => "String"  
+     case "clientHost" => "String"  
+     case "protocol" => "String"  
+     case "session" => "String"  
      case "executorHost_executorHostId" => "Long"  
      case "executorHost_guid" => "Long"  
      case "executorHost_insertedRowDate" => "java.util.Date"  
@@ -130,6 +148,12 @@ object VExecutorRestCallDto {
    val FIELD_requestHeader = "requestHeader";
    val FIELD_requestBody = "requestBody";
    val FIELD_responseBody = "responseBody";
+   val FIELD_runTime = "runTime";
+   val FIELD_headers = "headers";
+   val FIELD_cookies = "cookies";
+   val FIELD_clientHost = "clientHost";
+   val FIELD_protocol = "protocol";
+   val FIELD_session = "session";
    val FIELD_executorHost_executorHostId = "executorHost_executorHostId";
    val FIELD_executorHost_guid = "executorHost_guid";
    val FIELD_executorHost_insertedRowDate = "executorHost_insertedRowDate";

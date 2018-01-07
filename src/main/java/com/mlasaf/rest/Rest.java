@@ -1,4 +1,4 @@
-package com.mlasaf.utils;
+package com.mlasaf.rest;
 
 public class Rest {
 

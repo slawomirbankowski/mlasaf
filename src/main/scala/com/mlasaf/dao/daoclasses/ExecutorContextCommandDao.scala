@@ -86,7 +86,7 @@ import java.util.Date
  }  
  def insertExecutorContextCommandDto(dto : ExecutorContextCommandDto): ExecutorContextCommandDto = { 
     implicit val connection = getConnection(); 
-    val stat = dto.prepareInsert(getConnection()); 
+    val stat = dto.prepareInsert(connection); 
     val resCnt = stat.executeUpdate(); 
     val rs = stat.getGeneratedKeys(); 
     if (rs.next()) { 
@@ -99,14 +99,14 @@ import java.util.Date
       null; 
     } 
  } 
-  def createAndInsertExecutorContextCommandDto(executorContextId : Long, executorCommandId : Long, isRunning : Int, isExecuted : Int, commandParam1 : String, commandParam2 : String, commandParam3 : String, commandParam4 : String, commandParam5 : String) : ExecutorContextCommandDto = {
-    val dto = new ExecutorContextCommandDto(0,0,new Date(),new Date(),executorContextId,executorCommandId,isRunning,isExecuted,commandParam1,commandParam2,commandParam3,commandParam4,commandParam5)
+  def createAndInsertExecutorContextCommandDto(executorContextId : Long, executorCommandId : Long, isRunning : Int, isExecuted : Int, commandParam1 : String, commandParam2 : String, commandParam3 : String, commandParam4 : String, commandParam5 : String, resultStatus : String) : ExecutorContextCommandDto = {
+    val dto = new ExecutorContextCommandDto(0,0,new Date(),new Date(),executorContextId,executorCommandId,isRunning,isExecuted,commandParam1,commandParam2,commandParam3,commandParam4,commandParam5,resultStatus)
     insertExecutorContextCommandDto(dto);   
   }   
   def updateExecutorContextCommandDto(dto : ExecutorContextCommandDto): ExecutorContextCommandDto = {  
     implicit val connection = getConnection();  
-      val resCnt = SQL("update executorContextCommand set  lastUpdatedDate = {lastUpdatedDate} ,  executorContextId = {executorContextId} ,  executorCommandId = {executorCommandId} ,  isRunning = {isRunning} ,  isExecuted = {isExecuted} ,  commandParam1 = {commandParam1} ,  commandParam2 = {commandParam2} ,  commandParam3 = {commandParam3} ,  commandParam4 = {commandParam4} ,  commandParam5 = {commandParam5}  where  executorContextCommandId = {executorContextCommandId}  ")
-      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "executorContextId" -> dto.executorContextId , "executorCommandId" -> dto.executorCommandId , "isRunning" -> dto.isRunning , "isExecuted" -> dto.isExecuted , "commandParam1" -> dto.commandParam1 , "commandParam2" -> dto.commandParam2 , "commandParam3" -> dto.commandParam3 , "commandParam4" -> dto.commandParam4 , "commandParam5" -> dto.commandParam5, "executorContextCommandId" -> dto.executorContextCommandId ).executeInsert() 
+      val resCnt = SQL("update executorContextCommand set  lastUpdatedDate = {lastUpdatedDate} ,  executorContextId = {executorContextId} ,  executorCommandId = {executorCommandId} ,  isRunning = {isRunning} ,  isExecuted = {isExecuted} ,  commandParam1 = {commandParam1} ,  commandParam2 = {commandParam2} ,  commandParam3 = {commandParam3} ,  commandParam4 = {commandParam4} ,  commandParam5 = {commandParam5} ,  resultStatus = {resultStatus}  where  executorContextCommandId = {executorContextCommandId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "executorContextId" -> dto.executorContextId , "executorCommandId" -> dto.executorCommandId , "isRunning" -> dto.isRunning , "isExecuted" -> dto.isExecuted , "commandParam1" -> dto.commandParam1 , "commandParam2" -> dto.commandParam2 , "commandParam3" -> dto.commandParam3 , "commandParam4" -> dto.commandParam4 , "commandParam5" -> dto.commandParam5 , "resultStatus" -> dto.resultStatus, "executorContextCommandId" -> dto.executorContextCommandId ).executeInsert() 
    releaseConnection(connection);  
      getExecutorContextCommandByPk(dto.executorContextCommandId) 
     } 

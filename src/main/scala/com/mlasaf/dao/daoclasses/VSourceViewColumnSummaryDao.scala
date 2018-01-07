@@ -102,12 +102,6 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
- def getDtosByDownloadTransformColumn_count(colValue : Int) : List[VSourceViewColumnSummaryDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VSourceViewColumnSummaryDto] = SQL("select * from vSourceViewColumnSummary where downloadTransformColumn_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewColumnSummaryDto].*);  
-   releaseConnection(connection);  
-   dtos  
- }  
  def getDtosByAlgorithmScheduleColumn_count(colValue : Int) : List[VSourceViewColumnSummaryDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VSourceViewColumnSummaryDto] = SQL("select * from vSourceViewColumnSummary where algorithmScheduleColumn_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewColumnSummaryDto].*);  
@@ -117,6 +111,12 @@ import java.util.Date
  def getDtosBySourceDownloadStatColumn_count(colValue : Int) : List[VSourceViewColumnSummaryDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VSourceViewColumnSummaryDto] = SQL("select * from vSourceViewColumnSummary where sourceDownloadStatColumn_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewColumnSummaryDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByDownloadTransformColumn_count(colValue : Int) : List[VSourceViewColumnSummaryDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VSourceViewColumnSummaryDto] = SQL("select * from vSourceViewColumnSummary where downloadTransformColumn_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewColumnSummaryDto].*);  
    releaseConnection(connection);  
    dtos  
  }  

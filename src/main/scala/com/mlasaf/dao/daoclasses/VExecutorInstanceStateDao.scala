@@ -96,6 +96,18 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
+ def getDtosByInfoContent(colValue : String) : List[VExecutorInstanceStateDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorInstanceStateDto] = SQL("select * from vExecutorInstanceState where infoContent = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceStateDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByExceptionDescription(colValue : String) : List[VExecutorInstanceStateDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorInstanceStateDto] = SQL("select * from vExecutorInstanceState where exceptionDescription = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceStateDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
  def getDtosByExecutorInstance_executorInstanceId(colValue : Long) : List[VExecutorInstanceStateDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VExecutorInstanceStateDto] = SQL("select * from vExecutorInstanceState where executorInstance_executorInstanceId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceStateDto].*);  
@@ -141,6 +153,18 @@ import java.util.Date
  def getDtosByExecutorInstance_executorInstanceName(colValue : String) : List[VExecutorInstanceStateDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VExecutorInstanceStateDto] = SQL("select * from vExecutorInstanceState where executorInstance_executorInstanceName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceStateDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByExecutorInstance_executorDefinition(colValue : String) : List[VExecutorInstanceStateDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorInstanceStateDto] = SQL("select * from vExecutorInstanceState where executorInstance_executorDefinition = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceStateDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByExecutorInstance_executorParameters(colValue : String) : List[VExecutorInstanceStateDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorInstanceStateDto] = SQL("select * from vExecutorInstanceState where executorInstance_executorParameters = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorInstanceStateDto].*);  
    releaseConnection(connection);  
    dtos  
  }  

@@ -288,6 +288,18 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
+ def getDtosByExecutorInstance_executorDefinition(colValue : String) : List[VAlgorithmRunDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where executorInstance_executorDefinition = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByExecutorInstance_executorParameters(colValue : String) : List[VAlgorithmRunDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where executorInstance_executorParameters = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
  def getDtosByExecutorInstance_isRunning(colValue : Int) : List[VAlgorithmRunDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VAlgorithmRunDto] = SQL("select * from vAlgorithmRun where executorInstance_isRunning = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunDto].*);  

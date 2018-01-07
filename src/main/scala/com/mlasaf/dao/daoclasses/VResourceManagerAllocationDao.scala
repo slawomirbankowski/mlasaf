@@ -240,6 +240,18 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
+ def getDtosByExecutorInstance_executorDefinition(colValue : String) : List[VResourceManagerAllocationDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where executorInstance_executorDefinition = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByExecutorInstance_executorParameters(colValue : String) : List[VResourceManagerAllocationDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where executorInstance_executorParameters = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
  def getDtosByExecutorInstance_isRunning(colValue : Int) : List[VResourceManagerAllocationDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where executorInstance_isRunning = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);  

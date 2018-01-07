@@ -54,6 +54,7 @@ libraryDependencies ++= Seq(
  "net.sourceforge.jtds" % "jtds" % "1.3.1",
  "org.postgresql" % "postgresql" % "9.4.1210",
  "com.ibm.db2.jcc" % "db2jcc4" % "10.1",
+ "com.h2database" % "h2" % "1.3.148",
 
  "tw.edu.ntu.csie" % "libsvm" % "3.17",
  "ch.qos.logback" % "logback-classic" % "1.1.7",
@@ -62,7 +63,6 @@ libraryDependencies ++= Seq(
  "net.java.dev.jna" % "jna" % "4.1.0",
 
  // WEB - HTTP - REST
- "javax.servlet" % "servlet-api" % "2.5",
  "com.sparkjava" % "spark-core" % "2.6.0",
  "org.eclipse.jetty" % "jetty-server" % "9.3.14.v20161028",
 

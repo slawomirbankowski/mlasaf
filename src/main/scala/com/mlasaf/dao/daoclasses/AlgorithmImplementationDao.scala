@@ -72,9 +72,15 @@ import java.util.Date
    releaseConnection(connection);  
    maxid  
  }  
- def getAlgorithmImplementationByFkAlgorithmTypeVersionId(fkColValue : Long) : List[AlgorithmImplementationDto] = { 
+ def getAlgorithmImplementationByFkAlgorithmTypeId(fkColValue : Long) : List[AlgorithmImplementationDto] = { 
    implicit val connection = getConnection();  
-   val dtos : List[AlgorithmImplementationDto] = SQL("select * from algorithmImplementation where algorithmTypeVersionId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[AlgorithmImplementationDto].*);  
+   val dtos : List[AlgorithmImplementationDto] = SQL("select * from algorithmImplementation where algorithmTypeId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[AlgorithmImplementationDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getAlgorithmImplementationByFkAlgorithmVersionId(fkColValue : Long) : List[AlgorithmImplementationDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[AlgorithmImplementationDto] = SQL("select * from algorithmImplementation where algorithmVersionId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[AlgorithmImplementationDto].*);  
    releaseConnection(connection);  
    dtos  
  }  
@@ -98,7 +104,7 @@ import java.util.Date
  }  
  def insertAlgorithmImplementationDto(dto : AlgorithmImplementationDto): AlgorithmImplementationDto = { 
     implicit val connection = getConnection(); 
-    val stat = dto.prepareInsert(getConnection()); 
+    val stat = dto.prepareInsert(connection); 
     val resCnt = stat.executeUpdate(); 
     val rs = stat.getGeneratedKeys(); 
     if (rs.next()) { 
@@ -111,14 +117,14 @@ import java.util.Date
       null; 
     } 
  } 
-  def createAndInsertAlgorithmImplementationDto(algorithmTypeVersionId : Long, executorTypeId : Long, algorithmImplementationName : String, algorithmImplementationClass : String) : AlgorithmImplementationDto = {
-    val dto = new AlgorithmImplementationDto(0,0,new Date(),new Date(),algorithmTypeVersionId,executorTypeId,algorithmImplementationName,algorithmImplementationClass)
+  def createAndInsertAlgorithmImplementationDto(algorithmTypeId : Long, algorithmVersionId : Long, executorTypeId : Long, algorithmImplementationName : String, algorithmImplementationClass : String, algorithmImplementationDescription : String) : AlgorithmImplementationDto = {
+    val dto = new AlgorithmImplementationDto(0,0,new Date(),new Date(),algorithmTypeId,algorithmVersionId,executorTypeId,algorithmImplementationName,algorithmImplementationClass,algorithmImplementationDescription)
     insertAlgorithmImplementationDto(dto);   
   }   
   def updateAlgorithmImplementationDto(dto : AlgorithmImplementationDto): AlgorithmImplementationDto = {  
     implicit val connection = getConnection();  
-      val resCnt = SQL("update algorithmImplementation set  lastUpdatedDate = {lastUpdatedDate} ,  algorithmTypeVersionId = {algorithmTypeVersionId} ,  executorTypeId = {executorTypeId} ,  algorithmImplementationName = {algorithmImplementationName} ,  algorithmImplementationClass = {algorithmImplementationClass}  where  algorithmImplementationId = {algorithmImplementationId}  ")
-      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "algorithmTypeVersionId" -> dto.algorithmTypeVersionId , "executorTypeId" -> dto.executorTypeId , "algorithmImplementationName" -> dto.algorithmImplementationName , "algorithmImplementationClass" -> dto.algorithmImplementationClass, "algorithmImplementationId" -> dto.algorithmImplementationId ).executeInsert() 
+      val resCnt = SQL("update algorithmImplementation set  lastUpdatedDate = {lastUpdatedDate} ,  algorithmTypeId = {algorithmTypeId} ,  algorithmVersionId = {algorithmVersionId} ,  executorTypeId = {executorTypeId} ,  algorithmImplementationName = {algorithmImplementationName} ,  algorithmImplementationClass = {algorithmImplementationClass} ,  algorithmImplementationDescription = {algorithmImplementationDescription}  where  algorithmImplementationId = {algorithmImplementationId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "algorithmTypeId" -> dto.algorithmTypeId , "algorithmVersionId" -> dto.algorithmVersionId , "executorTypeId" -> dto.executorTypeId , "algorithmImplementationName" -> dto.algorithmImplementationName , "algorithmImplementationClass" -> dto.algorithmImplementationClass , "algorithmImplementationDescription" -> dto.algorithmImplementationDescription, "algorithmImplementationId" -> dto.algorithmImplementationId ).executeInsert() 
    releaseConnection(connection);  
      getAlgorithmImplementationByPk(dto.algorithmImplementationId) 
     } 

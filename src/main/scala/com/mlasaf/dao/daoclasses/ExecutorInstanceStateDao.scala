@@ -80,7 +80,7 @@ import java.util.Date
  }  
  def insertExecutorInstanceStateDto(dto : ExecutorInstanceStateDto): ExecutorInstanceStateDto = { 
     implicit val connection = getConnection(); 
-    val stat = dto.prepareInsert(getConnection()); 
+    val stat = dto.prepareInsert(connection); 
     val resCnt = stat.executeUpdate(); 
     val rs = stat.getGeneratedKeys(); 
     if (rs.next()) { 
@@ -93,14 +93,14 @@ import java.util.Date
       null; 
     } 
  } 
-  def createAndInsertExecutorInstanceStateDto(executorInstanceId : Long, stateName : String) : ExecutorInstanceStateDto = {
-    val dto = new ExecutorInstanceStateDto(0,0,new Date(),new Date(),executorInstanceId,stateName)
+  def createAndInsertExecutorInstanceStateDto(executorInstanceId : Long, stateName : String, infoContent : String, exceptionDescription : String) : ExecutorInstanceStateDto = {
+    val dto = new ExecutorInstanceStateDto(0,0,new Date(),new Date(),executorInstanceId,stateName,infoContent,exceptionDescription)
     insertExecutorInstanceStateDto(dto);   
   }   
   def updateExecutorInstanceStateDto(dto : ExecutorInstanceStateDto): ExecutorInstanceStateDto = {  
     implicit val connection = getConnection();  
-      val resCnt = SQL("update executorInstanceState set  lastUpdatedDate = {lastUpdatedDate} ,  executorInstanceId = {executorInstanceId} ,  stateName = {stateName}  where  executorInstanceStateId = {executorInstanceStateId}  ")
-      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "executorInstanceId" -> dto.executorInstanceId , "stateName" -> dto.stateName, "executorInstanceStateId" -> dto.executorInstanceStateId ).executeInsert() 
+      val resCnt = SQL("update executorInstanceState set  lastUpdatedDate = {lastUpdatedDate} ,  executorInstanceId = {executorInstanceId} ,  stateName = {stateName} ,  infoContent = {infoContent} ,  exceptionDescription = {exceptionDescription}  where  executorInstanceStateId = {executorInstanceStateId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "executorInstanceId" -> dto.executorInstanceId , "stateName" -> dto.stateName , "infoContent" -> dto.infoContent , "exceptionDescription" -> dto.exceptionDescription, "executorInstanceStateId" -> dto.executorInstanceStateId ).executeInsert() 
    releaseConnection(connection);  
      getExecutorInstanceStateByPk(dto.executorInstanceStateId) 
     } 

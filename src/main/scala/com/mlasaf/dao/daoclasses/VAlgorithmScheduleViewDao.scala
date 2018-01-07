@@ -234,6 +234,12 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
+ def getDtosBySourceView_sourceViewFormatId(colValue : Long) : List[VAlgorithmScheduleViewDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmScheduleViewDto] = SQL("select * from vAlgorithmScheduleView where sourceView_sourceViewFormatId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
  def getDtosBySourceView_sourceViewName(colValue : String) : List[VAlgorithmScheduleViewDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VAlgorithmScheduleViewDto] = SQL("select * from vAlgorithmScheduleView where sourceView_sourceViewName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleViewDto].*);  

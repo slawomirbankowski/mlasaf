@@ -12,11 +12,11 @@ case class VAlgorithmOutputTypeSummaryDto (
      , val insertedRowDate : java.util.Date
      , val lastUpdatedDate : java.util.Date
      , val algorithmOutputTypeName : String
-     , val algorithmTypeOutputType_count : Int
+     , val algorithmVersionOutputType_count : Int
      , val algorithmOutput_count : Int 
      ) extends BaseReadOnlyDto {  
    def tableName : String = {    "vAlgorithmOutputTypeSummary";    }  
-   def fields : String = {    "algorithmOutputTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmOutputTypeName,algorithmTypeOutputType_count,algorithmOutput_count";    }  
+   def fields : String = {    "algorithmOutputTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmOutputTypeName,algorithmVersionOutputType_count,algorithmOutput_count";    }  
    def pkFields : String = {    "";    }  
    def fkFields : String = {    "";    }  
    def nameField : String = {    "";    }  
@@ -24,10 +24,10 @@ case class VAlgorithmOutputTypeSummaryDto (
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(algorithmOutputTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmOutputTypeName,algorithmTypeOutputType_count,algorithmOutput_count)  }  
- def toStringArray() : Array[String] = {    Array(""+algorithmOutputTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmOutputTypeName,""+algorithmTypeOutputType_count,""+algorithmOutput_count)   }  
- def toJson() : String = {   "{" + "\"algorithmOutputTypeId\":\""+algorithmOutputTypeId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"algorithmOutputTypeName\":\""+algorithmOutputTypeName+"\""+","+"\"algorithmTypeOutputType_count\":\""+algorithmTypeOutputType_count+"\""+","+"\"algorithmOutput_count\":\""+algorithmOutput_count+"\"" + "}"   }  
- def toFullString() : String = {    "algorithmOutputTypeId:'"+algorithmOutputTypeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmOutputTypeName:'"+algorithmOutputTypeName+"'"+","+"algorithmTypeOutputType_count:'"+algorithmTypeOutputType_count+"'"+","+"algorithmOutput_count:'"+algorithmOutput_count+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(algorithmOutputTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmOutputTypeName,algorithmVersionOutputType_count,algorithmOutput_count)  }  
+ def toStringArray() : Array[String] = {    Array(""+algorithmOutputTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmOutputTypeName,""+algorithmVersionOutputType_count,""+algorithmOutput_count)   }  
+ def toJson() : String = {   "{" + "\"algorithmOutputTypeId\":\""+algorithmOutputTypeId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"algorithmOutputTypeName\":\""+algorithmOutputTypeName+"\""+","+"\"algorithmVersionOutputType_count\":\""+algorithmVersionOutputType_count+"\""+","+"\"algorithmOutput_count\":\""+algorithmOutput_count+"\"" + "}"   }  
+ def toFullString() : String = {    "algorithmOutputTypeId:'"+algorithmOutputTypeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmOutputTypeName:'"+algorithmOutputTypeName+"'"+","+"algorithmVersionOutputType_count:'"+algorithmVersionOutputType_count+"'"+","+"algorithmOutput_count:'"+algorithmOutput_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "algorithmOutputTypeId" => algorithmOutputTypeId  
@@ -35,7 +35,7 @@ case class VAlgorithmOutputTypeSummaryDto (
      case "insertedRowDate" => insertedRowDate  
      case "lastUpdatedDate" => lastUpdatedDate  
      case "algorithmOutputTypeName" => algorithmOutputTypeName  
-     case "algorithmTypeOutputType_count" => algorithmTypeOutputType_count  
+     case "algorithmVersionOutputType_count" => algorithmVersionOutputType_count  
      case "algorithmOutput_count" => algorithmOutput_count   
     case _ => null 
     } 
@@ -48,7 +48,7 @@ case class VAlgorithmOutputTypeSummaryDto (
      case "insertedRowDate" => "java.util.Date"  
      case "lastUpdatedDate" => "java.util.Date"  
      case "algorithmOutputTypeName" => "String"  
-     case "algorithmTypeOutputType_count" => "Int"  
+     case "algorithmVersionOutputType_count" => "Int"  
      case "algorithmOutput_count" => "Int"   
     case _ => "Object" 
     } 
@@ -62,7 +62,7 @@ object VAlgorithmOutputTypeSummaryDto {
    val FIELD_insertedRowDate = "insertedRowDate";
    val FIELD_lastUpdatedDate = "lastUpdatedDate";
    val FIELD_algorithmOutputTypeName = "algorithmOutputTypeName";
-   val FIELD_algorithmTypeOutputType_count = "algorithmTypeOutputType_count";
+   val FIELD_algorithmVersionOutputType_count = "algorithmVersionOutputType_count";
    val FIELD_algorithmOutput_count = "algorithmOutput_count";
 
 }

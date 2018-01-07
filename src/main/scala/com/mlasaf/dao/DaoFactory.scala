@@ -33,13 +33,14 @@ class DaoFactory extends ThreadBase {
       logger.info("Creating connection to configurational DB: " + jdbc + " with user: " + user + ", driver: " + driverClass);
       daoConn.initialize(jdbc, user, pass, driverClass)
       daos.initialize(daoConn);
+      runInterval = 10000L;
       daoCustom.initialize(this);
     }
     def getName() : String = "DAO_FACTORY";
     def onRunBegin() = {
     }
     def onRun() = {
-      logger.info("Connections free: " + daoConn.connectionsFree.size + ", inUse: " + daoConn.connectionsInUse.size + ", isInitialized: " + daoConn.isInitialized)
+      logger.info("Connections free: " + daoConn.connectionsFree.size + ", inUse: " + daoConn.connectionsInUse.size + ", isInitialized: " + daoConn.isInitialized + ", connTotalCounter: " + daoConn.connTotalCounter + ", connReleaseCounter: " + daoConn.connReleaseCounter + ", connsInUseCount: " + daoConn.connInUse.size())
     }
     def onRunEnd() = {
     }
@@ -52,6 +53,7 @@ class DaoFactory extends ThreadBase {
       logger.info("Executing QUERY: " + sql);
       val queryRes = SQL(sql)
         .executeQuery()(conn).as[Int](SqlParser.int("cnt").single)(conn);;
+      daoConn.releaseConnection(conn);
       queryRes
     }
     def selectCount(d : java.lang.Class[BaseDto]) : Long = {
@@ -60,6 +62,7 @@ class DaoFactory extends ThreadBase {
       logger.info("Executing QUERY: " + sql);
       val queryRes = SQL(sql)
         .executeQuery()(conn).as[Int](SqlParser.int("cnt").single)(conn);;
+      daoConn.releaseConnection(conn);
       queryRes
     }
     def executeQuery(sql : String, params : Seq[Object]) = {

@@ -74,7 +74,7 @@ import java.util.Date
  }  
  def insertExecutorHostDto(dto : ExecutorHostDto): ExecutorHostDto = { 
     implicit val connection = getConnection(); 
-    val stat = dto.prepareInsert(getConnection()); 
+    val stat = dto.prepareInsert(connection); 
     val resCnt = stat.executeUpdate(); 
     val rs = stat.getGeneratedKeys(); 
     if (rs.next()) { 

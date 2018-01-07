@@ -11,16 +11,24 @@ case class VAlgorithmImplementationDto (
      , val guid : Long
      , val insertedRowDate : java.util.Date
      , val lastUpdatedDate : java.util.Date
-     , val algorithmTypeVersionId : Long
+     , val algorithmTypeId : Long
+     , val algorithmVersionId : Long
      , val executorTypeId : Long
      , val algorithmImplementationName : String
      , val algorithmImplementationClass : String
-     , val algorithmTypeVersion_algorithmTypeVersionId : Long
-     , val algorithmTypeVersion_insertedRowDate : java.util.Date
-     , val algorithmTypeVersion_lastUpdatedDate : java.util.Date
-     , val algorithmTypeVersion_guid : Long
-     , val algorithmTypeVersion_algorithmTypeId : Long
-     , val algorithmTypeVersion_algorithmTypeVersionName : String
+     , val algorithmImplementationDescription : String
+     , val algorithmType_algorithmTypeId : Long
+     , val algorithmType_guid : Long
+     , val algorithmType_insertedRowDate : java.util.Date
+     , val algorithmType_lastUpdatedDate : java.util.Date
+     , val algorithmType_algorithmTypeName : String
+     , val algorithmType_algorithmTypeDescription : String
+     , val algorithmVersion_algorithmVersionId : Long
+     , val algorithmVersion_insertedRowDate : java.util.Date
+     , val algorithmVersion_lastUpdatedDate : java.util.Date
+     , val algorithmVersion_guid : Long
+     , val algorithmVersion_algorithmTypeId : Long
+     , val algorithmVersion_algorithmVersionName : String
      , val executorType_executorTypeId : Long
      , val executorType_guid : Long
      , val executorType_insertedRowDate : java.util.Date
@@ -29,7 +37,7 @@ case class VAlgorithmImplementationDto (
      , val executorType_executorTypeClass : String 
      ) extends BaseReadOnlyDto {  
    def tableName : String = {    "vAlgorithmImplementation";    }  
-   def fields : String = {    "algorithmImplementationId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,executorTypeId,algorithmImplementationName,algorithmImplementationClass,algorithmTypeVersion_algorithmTypeVersionId,algorithmTypeVersion_insertedRowDate,algorithmTypeVersion_lastUpdatedDate,algorithmTypeVersion_guid,algorithmTypeVersion_algorithmTypeId,algorithmTypeVersion_algorithmTypeVersionName,executorType_executorTypeId,executorType_guid,executorType_insertedRowDate,executorType_lastUpdatedDate,executorType_executorTypeName,executorType_executorTypeClass";    }  
+   def fields : String = {    "algorithmImplementationId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeId,algorithmVersionId,executorTypeId,algorithmImplementationName,algorithmImplementationClass,algorithmImplementationDescription,algorithmType_algorithmTypeId,algorithmType_guid,algorithmType_insertedRowDate,algorithmType_lastUpdatedDate,algorithmType_algorithmTypeName,algorithmType_algorithmTypeDescription,algorithmVersion_algorithmVersionId,algorithmVersion_insertedRowDate,algorithmVersion_lastUpdatedDate,algorithmVersion_guid,algorithmVersion_algorithmTypeId,algorithmVersion_algorithmVersionName,executorType_executorTypeId,executorType_guid,executorType_insertedRowDate,executorType_lastUpdatedDate,executorType_executorTypeName,executorType_executorTypeClass";    }  
    def pkFields : String = {    "";    }  
    def fkFields : String = {    "";    }  
    def nameField : String = {    "";    }  
@@ -37,26 +45,34 @@ case class VAlgorithmImplementationDto (
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(algorithmImplementationId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,executorTypeId,algorithmImplementationName,algorithmImplementationClass,algorithmTypeVersion_algorithmTypeVersionId,algorithmTypeVersion_insertedRowDate,algorithmTypeVersion_lastUpdatedDate,algorithmTypeVersion_guid,algorithmTypeVersion_algorithmTypeId,algorithmTypeVersion_algorithmTypeVersionName,executorType_executorTypeId,executorType_guid,executorType_insertedRowDate,executorType_lastUpdatedDate,executorType_executorTypeName,executorType_executorTypeClass)  }  
- def toStringArray() : Array[String] = {    Array(""+algorithmImplementationId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmTypeVersionId,""+executorTypeId,""+algorithmImplementationName,""+algorithmImplementationClass,""+algorithmTypeVersion_algorithmTypeVersionId,""+algorithmTypeVersion_insertedRowDate,""+algorithmTypeVersion_lastUpdatedDate,""+algorithmTypeVersion_guid,""+algorithmTypeVersion_algorithmTypeId,""+algorithmTypeVersion_algorithmTypeVersionName,""+executorType_executorTypeId,""+executorType_guid,""+executorType_insertedRowDate,""+executorType_lastUpdatedDate,""+executorType_executorTypeName,""+executorType_executorTypeClass)   }  
- def toJson() : String = {   "{" + "\"algorithmImplementationId\":\""+algorithmImplementationId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"algorithmTypeVersionId\":\""+algorithmTypeVersionId+"\""+","+"\"executorTypeId\":\""+executorTypeId+"\""+","+"\"algorithmImplementationName\":\""+algorithmImplementationName+"\""+","+"\"algorithmImplementationClass\":\""+algorithmImplementationClass+"\""+","+"\"algorithmTypeVersion_algorithmTypeVersionId\":\""+algorithmTypeVersion_algorithmTypeVersionId+"\""+","+"\"algorithmTypeVersion_insertedRowDate\":\""+algorithmTypeVersion_insertedRowDate+"\""+","+"\"algorithmTypeVersion_lastUpdatedDate\":\""+algorithmTypeVersion_lastUpdatedDate+"\""+","+"\"algorithmTypeVersion_guid\":\""+algorithmTypeVersion_guid+"\""+","+"\"algorithmTypeVersion_algorithmTypeId\":\""+algorithmTypeVersion_algorithmTypeId+"\""+","+"\"algorithmTypeVersion_algorithmTypeVersionName\":\""+algorithmTypeVersion_algorithmTypeVersionName+"\""+","+"\"executorType_executorTypeId\":\""+executorType_executorTypeId+"\""+","+"\"executorType_guid\":\""+executorType_guid+"\""+","+"\"executorType_insertedRowDate\":\""+executorType_insertedRowDate+"\""+","+"\"executorType_lastUpdatedDate\":\""+executorType_lastUpdatedDate+"\""+","+"\"executorType_executorTypeName\":\""+executorType_executorTypeName+"\""+","+"\"executorType_executorTypeClass\":\""+executorType_executorTypeClass+"\"" + "}"   }  
- def toFullString() : String = {    "algorithmImplementationId:'"+algorithmImplementationId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmTypeVersionId:'"+algorithmTypeVersionId+"'"+","+"executorTypeId:'"+executorTypeId+"'"+","+"algorithmImplementationName:'"+algorithmImplementationName+"'"+","+"algorithmImplementationClass:'"+algorithmImplementationClass+"'"+","+"algorithmTypeVersion_algorithmTypeVersionId:'"+algorithmTypeVersion_algorithmTypeVersionId+"'"+","+"algorithmTypeVersion_insertedRowDate:'"+algorithmTypeVersion_insertedRowDate+"'"+","+"algorithmTypeVersion_lastUpdatedDate:'"+algorithmTypeVersion_lastUpdatedDate+"'"+","+"algorithmTypeVersion_guid:'"+algorithmTypeVersion_guid+"'"+","+"algorithmTypeVersion_algorithmTypeId:'"+algorithmTypeVersion_algorithmTypeId+"'"+","+"algorithmTypeVersion_algorithmTypeVersionName:'"+algorithmTypeVersion_algorithmTypeVersionName+"'"+","+"executorType_executorTypeId:'"+executorType_executorTypeId+"'"+","+"executorType_guid:'"+executorType_guid+"'"+","+"executorType_insertedRowDate:'"+executorType_insertedRowDate+"'"+","+"executorType_lastUpdatedDate:'"+executorType_lastUpdatedDate+"'"+","+"executorType_executorTypeName:'"+executorType_executorTypeName+"'"+","+"executorType_executorTypeClass:'"+executorType_executorTypeClass+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(algorithmImplementationId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeId,algorithmVersionId,executorTypeId,algorithmImplementationName,algorithmImplementationClass,algorithmImplementationDescription,algorithmType_algorithmTypeId,algorithmType_guid,algorithmType_insertedRowDate,algorithmType_lastUpdatedDate,algorithmType_algorithmTypeName,algorithmType_algorithmTypeDescription,algorithmVersion_algorithmVersionId,algorithmVersion_insertedRowDate,algorithmVersion_lastUpdatedDate,algorithmVersion_guid,algorithmVersion_algorithmTypeId,algorithmVersion_algorithmVersionName,executorType_executorTypeId,executorType_guid,executorType_insertedRowDate,executorType_lastUpdatedDate,executorType_executorTypeName,executorType_executorTypeClass)  }  
+ def toStringArray() : Array[String] = {    Array(""+algorithmImplementationId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmTypeId,""+algorithmVersionId,""+executorTypeId,""+algorithmImplementationName,""+algorithmImplementationClass,""+algorithmImplementationDescription,""+algorithmType_algorithmTypeId,""+algorithmType_guid,""+algorithmType_insertedRowDate,""+algorithmType_lastUpdatedDate,""+algorithmType_algorithmTypeName,""+algorithmType_algorithmTypeDescription,""+algorithmVersion_algorithmVersionId,""+algorithmVersion_insertedRowDate,""+algorithmVersion_lastUpdatedDate,""+algorithmVersion_guid,""+algorithmVersion_algorithmTypeId,""+algorithmVersion_algorithmVersionName,""+executorType_executorTypeId,""+executorType_guid,""+executorType_insertedRowDate,""+executorType_lastUpdatedDate,""+executorType_executorTypeName,""+executorType_executorTypeClass)   }  
+ def toJson() : String = {   "{" + "\"algorithmImplementationId\":\""+algorithmImplementationId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"algorithmTypeId\":\""+algorithmTypeId+"\""+","+"\"algorithmVersionId\":\""+algorithmVersionId+"\""+","+"\"executorTypeId\":\""+executorTypeId+"\""+","+"\"algorithmImplementationName\":\""+algorithmImplementationName+"\""+","+"\"algorithmImplementationClass\":\""+algorithmImplementationClass+"\""+","+"\"algorithmImplementationDescription\":\""+algorithmImplementationDescription+"\""+","+"\"algorithmType_algorithmTypeId\":\""+algorithmType_algorithmTypeId+"\""+","+"\"algorithmType_guid\":\""+algorithmType_guid+"\""+","+"\"algorithmType_insertedRowDate\":\""+algorithmType_insertedRowDate+"\""+","+"\"algorithmType_lastUpdatedDate\":\""+algorithmType_lastUpdatedDate+"\""+","+"\"algorithmType_algorithmTypeName\":\""+algorithmType_algorithmTypeName+"\""+","+"\"algorithmType_algorithmTypeDescription\":\""+algorithmType_algorithmTypeDescription+"\""+","+"\"algorithmVersion_algorithmVersionId\":\""+algorithmVersion_algorithmVersionId+"\""+","+"\"algorithmVersion_insertedRowDate\":\""+algorithmVersion_insertedRowDate+"\""+","+"\"algorithmVersion_lastUpdatedDate\":\""+algorithmVersion_lastUpdatedDate+"\""+","+"\"algorithmVersion_guid\":\""+algorithmVersion_guid+"\""+","+"\"algorithmVersion_algorithmTypeId\":\""+algorithmVersion_algorithmTypeId+"\""+","+"\"algorithmVersion_algorithmVersionName\":\""+algorithmVersion_algorithmVersionName+"\""+","+"\"executorType_executorTypeId\":\""+executorType_executorTypeId+"\""+","+"\"executorType_guid\":\""+executorType_guid+"\""+","+"\"executorType_insertedRowDate\":\""+executorType_insertedRowDate+"\""+","+"\"executorType_lastUpdatedDate\":\""+executorType_lastUpdatedDate+"\""+","+"\"executorType_executorTypeName\":\""+executorType_executorTypeName+"\""+","+"\"executorType_executorTypeClass\":\""+executorType_executorTypeClass+"\"" + "}"   }  
+ def toFullString() : String = {    "algorithmImplementationId:'"+algorithmImplementationId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmTypeId:'"+algorithmTypeId+"'"+","+"algorithmVersionId:'"+algorithmVersionId+"'"+","+"executorTypeId:'"+executorTypeId+"'"+","+"algorithmImplementationName:'"+algorithmImplementationName+"'"+","+"algorithmImplementationClass:'"+algorithmImplementationClass+"'"+","+"algorithmImplementationDescription:'"+algorithmImplementationDescription+"'"+","+"algorithmType_algorithmTypeId:'"+algorithmType_algorithmTypeId+"'"+","+"algorithmType_guid:'"+algorithmType_guid+"'"+","+"algorithmType_insertedRowDate:'"+algorithmType_insertedRowDate+"'"+","+"algorithmType_lastUpdatedDate:'"+algorithmType_lastUpdatedDate+"'"+","+"algorithmType_algorithmTypeName:'"+algorithmType_algorithmTypeName+"'"+","+"algorithmType_algorithmTypeDescription:'"+algorithmType_algorithmTypeDescription+"'"+","+"algorithmVersion_algorithmVersionId:'"+algorithmVersion_algorithmVersionId+"'"+","+"algorithmVersion_insertedRowDate:'"+algorithmVersion_insertedRowDate+"'"+","+"algorithmVersion_lastUpdatedDate:'"+algorithmVersion_lastUpdatedDate+"'"+","+"algorithmVersion_guid:'"+algorithmVersion_guid+"'"+","+"algorithmVersion_algorithmTypeId:'"+algorithmVersion_algorithmTypeId+"'"+","+"algorithmVersion_algorithmVersionName:'"+algorithmVersion_algorithmVersionName+"'"+","+"executorType_executorTypeId:'"+executorType_executorTypeId+"'"+","+"executorType_guid:'"+executorType_guid+"'"+","+"executorType_insertedRowDate:'"+executorType_insertedRowDate+"'"+","+"executorType_lastUpdatedDate:'"+executorType_lastUpdatedDate+"'"+","+"executorType_executorTypeName:'"+executorType_executorTypeName+"'"+","+"executorType_executorTypeClass:'"+executorType_executorTypeClass+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "algorithmImplementationId" => algorithmImplementationId  
      case "guid" => guid  
      case "insertedRowDate" => insertedRowDate  
      case "lastUpdatedDate" => lastUpdatedDate  
-     case "algorithmTypeVersionId" => algorithmTypeVersionId  
+     case "algorithmTypeId" => algorithmTypeId  
+     case "algorithmVersionId" => algorithmVersionId  
      case "executorTypeId" => executorTypeId  
      case "algorithmImplementationName" => algorithmImplementationName  
      case "algorithmImplementationClass" => algorithmImplementationClass  
-     case "algorithmTypeVersion_algorithmTypeVersionId" => algorithmTypeVersion_algorithmTypeVersionId  
-     case "algorithmTypeVersion_insertedRowDate" => algorithmTypeVersion_insertedRowDate  
-     case "algorithmTypeVersion_lastUpdatedDate" => algorithmTypeVersion_lastUpdatedDate  
-     case "algorithmTypeVersion_guid" => algorithmTypeVersion_guid  
-     case "algorithmTypeVersion_algorithmTypeId" => algorithmTypeVersion_algorithmTypeId  
-     case "algorithmTypeVersion_algorithmTypeVersionName" => algorithmTypeVersion_algorithmTypeVersionName  
+     case "algorithmImplementationDescription" => algorithmImplementationDescription  
+     case "algorithmType_algorithmTypeId" => algorithmType_algorithmTypeId  
+     case "algorithmType_guid" => algorithmType_guid  
+     case "algorithmType_insertedRowDate" => algorithmType_insertedRowDate  
+     case "algorithmType_lastUpdatedDate" => algorithmType_lastUpdatedDate  
+     case "algorithmType_algorithmTypeName" => algorithmType_algorithmTypeName  
+     case "algorithmType_algorithmTypeDescription" => algorithmType_algorithmTypeDescription  
+     case "algorithmVersion_algorithmVersionId" => algorithmVersion_algorithmVersionId  
+     case "algorithmVersion_insertedRowDate" => algorithmVersion_insertedRowDate  
+     case "algorithmVersion_lastUpdatedDate" => algorithmVersion_lastUpdatedDate  
+     case "algorithmVersion_guid" => algorithmVersion_guid  
+     case "algorithmVersion_algorithmTypeId" => algorithmVersion_algorithmTypeId  
+     case "algorithmVersion_algorithmVersionName" => algorithmVersion_algorithmVersionName  
      case "executorType_executorTypeId" => executorType_executorTypeId  
      case "executorType_guid" => executorType_guid  
      case "executorType_insertedRowDate" => executorType_insertedRowDate  
@@ -73,16 +89,24 @@ case class VAlgorithmImplementationDto (
      case "guid" => "Long"  
      case "insertedRowDate" => "java.util.Date"  
      case "lastUpdatedDate" => "java.util.Date"  
-     case "algorithmTypeVersionId" => "Long"  
+     case "algorithmTypeId" => "Long"  
+     case "algorithmVersionId" => "Long"  
      case "executorTypeId" => "Long"  
      case "algorithmImplementationName" => "String"  
      case "algorithmImplementationClass" => "String"  
-     case "algorithmTypeVersion_algorithmTypeVersionId" => "Long"  
-     case "algorithmTypeVersion_insertedRowDate" => "java.util.Date"  
-     case "algorithmTypeVersion_lastUpdatedDate" => "java.util.Date"  
-     case "algorithmTypeVersion_guid" => "Long"  
-     case "algorithmTypeVersion_algorithmTypeId" => "Long"  
-     case "algorithmTypeVersion_algorithmTypeVersionName" => "String"  
+     case "algorithmImplementationDescription" => "String"  
+     case "algorithmType_algorithmTypeId" => "Long"  
+     case "algorithmType_guid" => "Long"  
+     case "algorithmType_insertedRowDate" => "java.util.Date"  
+     case "algorithmType_lastUpdatedDate" => "java.util.Date"  
+     case "algorithmType_algorithmTypeName" => "String"  
+     case "algorithmType_algorithmTypeDescription" => "String"  
+     case "algorithmVersion_algorithmVersionId" => "Long"  
+     case "algorithmVersion_insertedRowDate" => "java.util.Date"  
+     case "algorithmVersion_lastUpdatedDate" => "java.util.Date"  
+     case "algorithmVersion_guid" => "Long"  
+     case "algorithmVersion_algorithmTypeId" => "Long"  
+     case "algorithmVersion_algorithmVersionName" => "String"  
      case "executorType_executorTypeId" => "Long"  
      case "executorType_guid" => "Long"  
      case "executorType_insertedRowDate" => "java.util.Date"  
@@ -100,16 +124,24 @@ object VAlgorithmImplementationDto {
    val FIELD_guid = "guid";
    val FIELD_insertedRowDate = "insertedRowDate";
    val FIELD_lastUpdatedDate = "lastUpdatedDate";
-   val FIELD_algorithmTypeVersionId = "algorithmTypeVersionId";
+   val FIELD_algorithmTypeId = "algorithmTypeId";
+   val FIELD_algorithmVersionId = "algorithmVersionId";
    val FIELD_executorTypeId = "executorTypeId";
    val FIELD_algorithmImplementationName = "algorithmImplementationName";
    val FIELD_algorithmImplementationClass = "algorithmImplementationClass";
-   val FIELD_algorithmTypeVersion_algorithmTypeVersionId = "algorithmTypeVersion_algorithmTypeVersionId";
-   val FIELD_algorithmTypeVersion_insertedRowDate = "algorithmTypeVersion_insertedRowDate";
-   val FIELD_algorithmTypeVersion_lastUpdatedDate = "algorithmTypeVersion_lastUpdatedDate";
-   val FIELD_algorithmTypeVersion_guid = "algorithmTypeVersion_guid";
-   val FIELD_algorithmTypeVersion_algorithmTypeId = "algorithmTypeVersion_algorithmTypeId";
-   val FIELD_algorithmTypeVersion_algorithmTypeVersionName = "algorithmTypeVersion_algorithmTypeVersionName";
+   val FIELD_algorithmImplementationDescription = "algorithmImplementationDescription";
+   val FIELD_algorithmType_algorithmTypeId = "algorithmType_algorithmTypeId";
+   val FIELD_algorithmType_guid = "algorithmType_guid";
+   val FIELD_algorithmType_insertedRowDate = "algorithmType_insertedRowDate";
+   val FIELD_algorithmType_lastUpdatedDate = "algorithmType_lastUpdatedDate";
+   val FIELD_algorithmType_algorithmTypeName = "algorithmType_algorithmTypeName";
+   val FIELD_algorithmType_algorithmTypeDescription = "algorithmType_algorithmTypeDescription";
+   val FIELD_algorithmVersion_algorithmVersionId = "algorithmVersion_algorithmVersionId";
+   val FIELD_algorithmVersion_insertedRowDate = "algorithmVersion_insertedRowDate";
+   val FIELD_algorithmVersion_lastUpdatedDate = "algorithmVersion_lastUpdatedDate";
+   val FIELD_algorithmVersion_guid = "algorithmVersion_guid";
+   val FIELD_algorithmVersion_algorithmTypeId = "algorithmVersion_algorithmTypeId";
+   val FIELD_algorithmVersion_algorithmVersionName = "algorithmVersion_algorithmVersionName";
    val FIELD_executorType_executorTypeId = "executorType_executorTypeId";
    val FIELD_executorType_guid = "executorType_guid";
    val FIELD_executorType_insertedRowDate = "executorType_insertedRowDate";

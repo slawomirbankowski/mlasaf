@@ -26,6 +26,7 @@ trait Source extends ThreadBase {
     parentContext = ctx;
     vSourceDto = vSrcDto;
     vSourceParamsDtos = params;
+    runInterval = 20000L;
     logger.info("Initializing SourceInstance " + vSourceDto.sourceInstanceName + ", parameters: " + params.map(p => p.sourceParam_sourceParamName + "=" + p.paramValue).mkString(", "))
     onInitialize();
   }

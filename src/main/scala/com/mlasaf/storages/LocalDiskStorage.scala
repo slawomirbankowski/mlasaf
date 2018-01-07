@@ -63,7 +63,7 @@ class LocalDiskStorage extends Storage {
     val storageViewDto = parentContext.daoFactory.daos.executorStorageViewDao.createAndInsertExecutorStorageViewDto(storageSnapshotDto.executorStorageSnapshotId, this.storageDto.executorStorageId, sourceDownloadDto.sourceDownloadId, sourceView.sourceViewId, storageResourceDto.executorStorageResourceId);
     storageViewDto
   }
-  def onRun() = {
+  def onRunStorage() = {
 
   };
 }

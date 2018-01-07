@@ -19,7 +19,7 @@ trait ThreadBase extends Runnable {
   /** is object is stopped by external run of stop() method */
   var isStopped : Boolean = false;
   /** interval between run onRun() method */
-  var runInterval : Long = 2000L;
+  var runInterval : Long = 5000L;
   /** parent context for thread object */
   var parentContext : Context = null;
   /** thread for this object */
@@ -63,18 +63,26 @@ trait ThreadBase extends Runnable {
     } else {
       logger.warn("Thread is ALREADY INITIALIZED, id: " + thread.getId + ", name: " + thread.getName + ", class: " + this.getClass.getName);
     }
+    var totalSleepCount = 0;
+    var totalRunCount = 0;
+    var lastRunDate = System.currentTimeMillis()
     isInitialized = true;
     while (!isStopped) {
-      logger.info("Run in thread: " + thread.getId);
-      try {
-        onRun();
-      } catch {
-        case ex : Exception => {
-          logger.error("Exception while running THREAD:" + this.thread.getId + ", name: " + thread.getName + ", class: " + this.getClass.getName, ex);
-          onRunError(ex);
+      if (System.currentTimeMillis() - lastRunDate >= runInterval) {
+        logger.info("Run in thread: " + thread.getId + ", class: " + this.getClass.getName + ", totalSleepCount: " + totalSleepCount + ", totalRunCount: " + totalRunCount + ", runInterval: " + this.runInterval + ", startTime: " + this.startTime + ", name: " + this.getName() + ", daemon: " + this.thread.isDaemon + ", thread.priority: " + this.thread.getPriority);
+        try {
+          totalRunCount = totalRunCount + 1;
+          onRun();
+        } catch {
+          case ex : Exception => {
+            logger.error("Exception while running THREAD:" + this.thread.getId + ", name: " + thread.getName + ", class: " + this.getClass.getName, ex);
+            onRunError(ex);
+          }
         }
+        lastRunDate = new java.util.Date().getTime;
       }
-      Thread.sleep(runInterval);
+      totalSleepCount = totalSleepCount + 1;
+      Thread.sleep(500L);
     }
     logger.info("Stopping thread: " + thread.getId + ", name: " + thread.getName + ", class: " + this.getClass.getName);
     onRunEnd();

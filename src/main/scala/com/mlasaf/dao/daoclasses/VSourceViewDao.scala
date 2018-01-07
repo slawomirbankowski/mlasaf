@@ -96,6 +96,12 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
+ def getDtosBySourceViewFormatId(colValue : Long) : List[VSourceViewDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VSourceViewDto] = SQL("select * from vSourceView where sourceViewFormatId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
  def getDtosBySourceViewName(colValue : String) : List[VSourceViewDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VSourceViewDto] = SQL("select * from vSourceView where sourceViewName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewDto].*);  
@@ -171,6 +177,42 @@ import java.util.Date
  def getDtosBySourceInstance_lastConnectionDate(colValue : java.util.Date) : List[VSourceViewDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VSourceViewDto] = SQL("select * from vSourceView where sourceInstance_lastConnectionDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosBySourceViewFormat_sourceViewFormatId(colValue : Long) : List[VSourceViewDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VSourceViewDto] = SQL("select * from vSourceView where sourceViewFormat_sourceViewFormatId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosBySourceViewFormat_guid(colValue : Long) : List[VSourceViewDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VSourceViewDto] = SQL("select * from vSourceView where sourceViewFormat_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosBySourceViewFormat_insertedRowDate(colValue : java.util.Date) : List[VSourceViewDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VSourceViewDto] = SQL("select * from vSourceView where sourceViewFormat_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosBySourceViewFormat_lastUpdatedDate(colValue : java.util.Date) : List[VSourceViewDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VSourceViewDto] = SQL("select * from vSourceView where sourceViewFormat_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosBySourceViewFormat_sourceViewFormatName(colValue : String) : List[VSourceViewDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VSourceViewDto] = SQL("select * from vSourceView where sourceViewFormat_sourceViewFormatName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosBySourceViewFormat_sourceViewFormatClass(colValue : String) : List[VSourceViewDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VSourceViewDto] = SQL("select * from vSourceView where sourceViewFormat_sourceViewFormatClass = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewDto].*);  
    releaseConnection(connection);  
    dtos  
  }  

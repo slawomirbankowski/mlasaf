@@ -102,15 +102,15 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
- def getDtosByAlgorithmParamType_count(colValue : Int) : List[VAlgorithmParamSummaryDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VAlgorithmParamSummaryDto] = SQL("select * from vAlgorithmParamSummary where algorithmParamType_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmParamSummaryDto].*);  
-   releaseConnection(connection);  
-   dtos  
- }  
  def getDtosByAlgorithmScheduleParam_count(colValue : Int) : List[VAlgorithmParamSummaryDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VAlgorithmParamSummaryDto] = SQL("select * from vAlgorithmParamSummary where algorithmScheduleParam_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmParamSummaryDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByAlgorithmVersionParamType_count(colValue : Int) : List[VAlgorithmParamSummaryDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmParamSummaryDto] = SQL("select * from vAlgorithmParamSummary where algorithmVersionParamType_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmParamSummaryDto].*);  
    releaseConnection(connection);  
    dtos  
  }  

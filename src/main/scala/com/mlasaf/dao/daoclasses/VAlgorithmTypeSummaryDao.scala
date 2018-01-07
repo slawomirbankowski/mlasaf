@@ -96,15 +96,21 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
- def getDtosByAlgorithmParamType_count(colValue : Int) : List[VAlgorithmTypeSummaryDto] = { 
+ def getDtosByAlgorithmVersion_count(colValue : Int) : List[VAlgorithmTypeSummaryDto] = { 
    implicit val connection = getConnection();  
-   val dtos : List[VAlgorithmTypeSummaryDto] = SQL("select * from vAlgorithmTypeSummary where algorithmParamType_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeSummaryDto].*);  
+   val dtos : List[VAlgorithmTypeSummaryDto] = SQL("select * from vAlgorithmTypeSummary where algorithmVersion_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeSummaryDto].*);  
    releaseConnection(connection);  
    dtos  
  }  
- def getDtosByAlgorithmTypeVersion_count(colValue : Int) : List[VAlgorithmTypeSummaryDto] = { 
+ def getDtosByAlgorithmImplementation_count(colValue : Int) : List[VAlgorithmTypeSummaryDto] = { 
    implicit val connection = getConnection();  
-   val dtos : List[VAlgorithmTypeSummaryDto] = SQL("select * from vAlgorithmTypeSummary where algorithmTypeVersion_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeSummaryDto].*);  
+   val dtos : List[VAlgorithmTypeSummaryDto] = SQL("select * from vAlgorithmTypeSummary where algorithmImplementation_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeSummaryDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByAlgorithmVersionParamType_count(colValue : Int) : List[VAlgorithmTypeSummaryDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmTypeSummaryDto] = SQL("select * from vAlgorithmTypeSummary where algorithmVersionParamType_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmTypeSummaryDto].*);  
    releaseConnection(connection);  
    dtos  
  }  

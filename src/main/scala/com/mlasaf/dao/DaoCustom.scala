@@ -66,7 +66,7 @@ class DaoCustom {
     implicit val conn = daoFactory.daoConn.getConnection();
     val hostDto : ExecutorHostDto = registerHost();
     logger.info("Registering new Executor for host: " + hostDto);
-    val execInst = daoFactory.daos.executorInstanceDao.createAndInsertExecutorInstanceDto(executorTypeId, hostDto.executorHostId, executorContextId, "executor_name", 1, 0, 8888, new java.util.Date());
+    val execInst = daoFactory.daos.executorInstanceDao.createAndInsertExecutorInstanceDto(executorTypeId, hostDto.executorHostId, executorContextId, "executor_name", "", "", 1, 0, 8888, new java.util.Date());
     daoFactory.daoConn.releaseConnection(conn);
     execInst;
   }

@@ -18,6 +18,7 @@ trait Storage extends ThreadBase {
     logger.info("Initialization of Storage: " + dto);
     parentContext = ctx;
     storageDto = dto;
+    runInterval = 20000L;
     onInitialize()
   }
   /** actions after initializations */
@@ -25,6 +26,11 @@ trait Storage extends ThreadBase {
   /**  */
   def onRunBegin() = {
     logger.info("Start THREAD for Storage: " + storageDto.executorStorageId);
+  }
+  def onRunStorage() : Unit;
+
+  /** */
+  def onRun() = {
     downloadSourceSchedules();
   }
   /**  */

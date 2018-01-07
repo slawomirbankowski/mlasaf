@@ -30,6 +30,7 @@ class DaoConnection {
   var connectionsFree : scala.collection.mutable.ListBuffer[java.sql.Connection] = new scala.collection.mutable.ListBuffer();
   /** counter for all created connections */
   var connTotalCounter : Long = 0;
+  var connReleaseCounter : Long = 0;
   /** logger for DAO */
   val logger = org.slf4j.LoggerFactory.getLogger("DaoConnection");
 
@@ -75,6 +76,7 @@ class DaoConnection {
   }
   def releaseConnection(conn : Connection): Unit = {
     //connectionsInUse -= conn;
+    connReleaseCounter = connReleaseCounter + 1;
     connInUse.remove(conn);
     conn.close();
     //connectionsFree += conn;

@@ -12,12 +12,13 @@ case class VDownloadTransformGroupSummaryDto (
      , val insertedRowDate : java.util.Date
      , val lastUpdatedDate : java.util.Date
      , val downloadTransformGroupName : String
+     , val downloadTransformGroupDescription : String
+     , val downloadTransformAlgorithmSchedule_count : Int
      , val downloadTransformExecutorStorage_count : Int
-     , val downloadTransform_count : Int
-     , val downloadTransformAlgorithmSchedule_count : Int 
+     , val downloadTransform_count : Int 
      ) extends BaseReadOnlyDto {  
    def tableName : String = {    "vDownloadTransformGroupSummary";    }  
-   def fields : String = {    "downloadTransformGroupId,guid,insertedRowDate,lastUpdatedDate,downloadTransformGroupName,downloadTransformExecutorStorage_count,downloadTransform_count,downloadTransformAlgorithmSchedule_count";    }  
+   def fields : String = {    "downloadTransformGroupId,guid,insertedRowDate,lastUpdatedDate,downloadTransformGroupName,downloadTransformGroupDescription,downloadTransformAlgorithmSchedule_count,downloadTransformExecutorStorage_count,downloadTransform_count";    }  
    def pkFields : String = {    "";    }  
    def fkFields : String = {    "";    }  
    def nameField : String = {    "";    }  
@@ -25,10 +26,10 @@ case class VDownloadTransformGroupSummaryDto (
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(downloadTransformGroupId,guid,insertedRowDate,lastUpdatedDate,downloadTransformGroupName,downloadTransformExecutorStorage_count,downloadTransform_count,downloadTransformAlgorithmSchedule_count)  }  
- def toStringArray() : Array[String] = {    Array(""+downloadTransformGroupId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+downloadTransformGroupName,""+downloadTransformExecutorStorage_count,""+downloadTransform_count,""+downloadTransformAlgorithmSchedule_count)   }  
- def toJson() : String = {   "{" + "\"downloadTransformGroupId\":\""+downloadTransformGroupId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"downloadTransformGroupName\":\""+downloadTransformGroupName+"\""+","+"\"downloadTransformExecutorStorage_count\":\""+downloadTransformExecutorStorage_count+"\""+","+"\"downloadTransform_count\":\""+downloadTransform_count+"\""+","+"\"downloadTransformAlgorithmSchedule_count\":\""+downloadTransformAlgorithmSchedule_count+"\"" + "}"   }  
- def toFullString() : String = {    "downloadTransformGroupId:'"+downloadTransformGroupId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"downloadTransformGroupName:'"+downloadTransformGroupName+"'"+","+"downloadTransformExecutorStorage_count:'"+downloadTransformExecutorStorage_count+"'"+","+"downloadTransform_count:'"+downloadTransform_count+"'"+","+"downloadTransformAlgorithmSchedule_count:'"+downloadTransformAlgorithmSchedule_count+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(downloadTransformGroupId,guid,insertedRowDate,lastUpdatedDate,downloadTransformGroupName,downloadTransformGroupDescription,downloadTransformAlgorithmSchedule_count,downloadTransformExecutorStorage_count,downloadTransform_count)  }  
+ def toStringArray() : Array[String] = {    Array(""+downloadTransformGroupId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+downloadTransformGroupName,""+downloadTransformGroupDescription,""+downloadTransformAlgorithmSchedule_count,""+downloadTransformExecutorStorage_count,""+downloadTransform_count)   }  
+ def toJson() : String = {   "{" + "\"downloadTransformGroupId\":\""+downloadTransformGroupId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"downloadTransformGroupName\":\""+downloadTransformGroupName+"\""+","+"\"downloadTransformGroupDescription\":\""+downloadTransformGroupDescription+"\""+","+"\"downloadTransformAlgorithmSchedule_count\":\""+downloadTransformAlgorithmSchedule_count+"\""+","+"\"downloadTransformExecutorStorage_count\":\""+downloadTransformExecutorStorage_count+"\""+","+"\"downloadTransform_count\":\""+downloadTransform_count+"\"" + "}"   }  
+ def toFullString() : String = {    "downloadTransformGroupId:'"+downloadTransformGroupId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"downloadTransformGroupName:'"+downloadTransformGroupName+"'"+","+"downloadTransformGroupDescription:'"+downloadTransformGroupDescription+"'"+","+"downloadTransformAlgorithmSchedule_count:'"+downloadTransformAlgorithmSchedule_count+"'"+","+"downloadTransformExecutorStorage_count:'"+downloadTransformExecutorStorage_count+"'"+","+"downloadTransform_count:'"+downloadTransform_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "downloadTransformGroupId" => downloadTransformGroupId  
@@ -36,9 +37,10 @@ case class VDownloadTransformGroupSummaryDto (
      case "insertedRowDate" => insertedRowDate  
      case "lastUpdatedDate" => lastUpdatedDate  
      case "downloadTransformGroupName" => downloadTransformGroupName  
+     case "downloadTransformGroupDescription" => downloadTransformGroupDescription  
+     case "downloadTransformAlgorithmSchedule_count" => downloadTransformAlgorithmSchedule_count  
      case "downloadTransformExecutorStorage_count" => downloadTransformExecutorStorage_count  
-     case "downloadTransform_count" => downloadTransform_count  
-     case "downloadTransformAlgorithmSchedule_count" => downloadTransformAlgorithmSchedule_count   
+     case "downloadTransform_count" => downloadTransform_count   
     case _ => null 
     } 
     ret 
@@ -50,9 +52,10 @@ case class VDownloadTransformGroupSummaryDto (
      case "insertedRowDate" => "java.util.Date"  
      case "lastUpdatedDate" => "java.util.Date"  
      case "downloadTransformGroupName" => "String"  
+     case "downloadTransformGroupDescription" => "String"  
+     case "downloadTransformAlgorithmSchedule_count" => "Int"  
      case "downloadTransformExecutorStorage_count" => "Int"  
-     case "downloadTransform_count" => "Int"  
-     case "downloadTransformAlgorithmSchedule_count" => "Int"   
+     case "downloadTransform_count" => "Int"   
     case _ => "Object" 
     } 
     ret 
@@ -65,9 +68,10 @@ object VDownloadTransformGroupSummaryDto {
    val FIELD_insertedRowDate = "insertedRowDate";
    val FIELD_lastUpdatedDate = "lastUpdatedDate";
    val FIELD_downloadTransformGroupName = "downloadTransformGroupName";
+   val FIELD_downloadTransformGroupDescription = "downloadTransformGroupDescription";
+   val FIELD_downloadTransformAlgorithmSchedule_count = "downloadTransformAlgorithmSchedule_count";
    val FIELD_downloadTransformExecutorStorage_count = "downloadTransformExecutorStorage_count";
    val FIELD_downloadTransform_count = "downloadTransform_count";
-   val FIELD_downloadTransformAlgorithmSchedule_count = "downloadTransformAlgorithmSchedule_count";
 
 }
 

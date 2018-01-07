@@ -10,7 +10,15 @@ import com.mlasaf.domain.AlgorithmRun
 trait AlgorithmInstance {
 
   /** run of algorithm to produce outputs */
-  def run(run : AlgorithmRun) : String;
+  def run(run : AlgorithmRun) : String = {
+    // basic check
+    // TODO: implement basic checks for input/output parameters for all algorithms
+    // run algorithm
+    onAlgorithmRun(run);
+
+  }
+  /** to override for all algorithms */
+  def onAlgorithmRun(run : AlgorithmRun) : String;
 
 }
 object AlgorithmInstance {

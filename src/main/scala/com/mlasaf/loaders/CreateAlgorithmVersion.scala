@@ -33,22 +33,22 @@ object CreateAlgorithmVersionType {
     daoFactory.initialize(jdbcString, jdbcUser, jdbcPass, jdbcDriver);
     val algType = daoFactory.daos.algorithmTypeDao.getAlgorithmTypeByName(algorithmType).head;
     logger.info("algTypeId: " + algType);
-    val algTypeVer = daoFactory.daos.algorithmTypeVersionDao.createAndInsertAlgorithmTypeVersionDto(algType.algorithmTypeId, algorithmVersion);
+    val algTypeVer = daoFactory.daos.algorithmVersionDao.createAndInsertAlgorithmVersionDto(algType.algorithmTypeId, algorithmVersion);
     logger.info("algTypeVer: " + algTypeVer);
     // columns
     columns.split(",").foreach(algColName => {
-      val algTypeColType = daoFactory.daos.algorithmTypeColumnTypeDao.createAndInsertAlgorithmTypeColumnTypeDto(algTypeVer.algorithmTypeVersionId, daoFactory.daos.algorithmColumnTypeDao.getAlgorithmColumnTypeFirstByName(algColName).get.algorithmColumnTypeId, 0, 0);
+      val algTypeColType = daoFactory.daos.algorithmVersionColumnTypeDao.createAndInsertAlgorithmVersionColumnTypeDto(algTypeVer.algorithmVersionId, daoFactory.daos.algorithmColumnTypeDao.getAlgorithmColumnTypeFirstByName(algColName).get.algorithmColumnTypeId, 0, 0);
       logger.info("algTypeColType: " + algTypeColType);
     });
     // parameters
     parameters.split(",").foreach(algColName => {
-      val algParType = daoFactory.daos.algorithmParamTypeDao.createAndInsertAlgorithmParamTypeDto(daoFactory.daos.algorithmParamDao.getAlgorithmParamFirstByName(algColName).get.algorithmParamId, algType.algorithmTypeId, algTypeVer.algorithmTypeVersionId);
+      val algParType = daoFactory.daos.algorithmVersionParamTypeDao.createAndInsertAlgorithmVersionParamTypeDto(daoFactory.daos.algorithmParamDao.getAlgorithmParamFirstByName(algColName).get.algorithmParamId, algType.algorithmTypeId, algTypeVer.algorithmVersionId);
       logger.info("algParType: " + algParType);
     });
     // outputs
     outputTypes.split(",").foreach(outputTypeName => {
       val algOutypeId = daoFactory.daos.algorithmOutputTypeDao.getAlgorithmOutputTypeFirstByName(outputTypeName).get.algorithmOutputTypeId;
-      val algTypeOutType = daoFactory.daos.algorithmTypeOutputTypeDao.createAndInsertAlgorithmTypeOutputTypeDto(algTypeVer.algorithmTypeVersionId, algOutypeId, 1);
+      val algTypeOutType = daoFactory.daos.algorithmVersionOutputTypeDao.createAndInsertAlgorithmVersionOutputTypeDto(algTypeVer.algorithmVersionId, algOutypeId, 1, 0);
       logger.info("algTypeOutType: " + algTypeOutType);
     });
   }

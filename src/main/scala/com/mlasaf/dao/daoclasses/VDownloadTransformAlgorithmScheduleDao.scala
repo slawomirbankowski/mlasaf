@@ -174,5 +174,11 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
+ def getDtosByDownloadTransformGroup_downloadTransformGroupDescription(colValue : String) : List[VDownloadTransformAlgorithmScheduleDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VDownloadTransformAlgorithmScheduleDto] = SQL("select * from vDownloadTransformAlgorithmSchedule where downloadTransformGroup_downloadTransformGroupDescription = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VDownloadTransformAlgorithmScheduleDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
 
 } 

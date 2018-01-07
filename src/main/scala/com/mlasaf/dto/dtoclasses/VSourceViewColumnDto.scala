@@ -20,12 +20,13 @@ case class VSourceViewColumnDto (
      , val sourceView_lastUpdatedDate : java.util.Date
      , val sourceView_sourceInstanceId : Long
      , val sourceView_sourceViewTypeId : Long
+     , val sourceView_sourceViewFormatId : Long
      , val sourceView_sourceViewName : String
      , val sourceView_sourceViewDefinition : String
      , val sourceView_isExisting : Int 
      ) extends BaseReadOnlyDto {  
    def tableName : String = {    "vSourceViewColumn";    }  
-   def fields : String = {    "sourceViewColumnId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,columnName,columnType,sourceView_sourceViewId,sourceView_guid,sourceView_insertedRowDate,sourceView_lastUpdatedDate,sourceView_sourceInstanceId,sourceView_sourceViewTypeId,sourceView_sourceViewName,sourceView_sourceViewDefinition,sourceView_isExisting";    }  
+   def fields : String = {    "sourceViewColumnId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,columnName,columnType,sourceView_sourceViewId,sourceView_guid,sourceView_insertedRowDate,sourceView_lastUpdatedDate,sourceView_sourceInstanceId,sourceView_sourceViewTypeId,sourceView_sourceViewFormatId,sourceView_sourceViewName,sourceView_sourceViewDefinition,sourceView_isExisting";    }  
    def pkFields : String = {    "";    }  
    def fkFields : String = {    "";    }  
    def nameField : String = {    "";    }  
@@ -33,10 +34,10 @@ case class VSourceViewColumnDto (
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(sourceViewColumnId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,columnName,columnType,sourceView_sourceViewId,sourceView_guid,sourceView_insertedRowDate,sourceView_lastUpdatedDate,sourceView_sourceInstanceId,sourceView_sourceViewTypeId,sourceView_sourceViewName,sourceView_sourceViewDefinition,sourceView_isExisting)  }  
- def toStringArray() : Array[String] = {    Array(""+sourceViewColumnId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceViewId,""+columnName,""+columnType,""+sourceView_sourceViewId,""+sourceView_guid,""+sourceView_insertedRowDate,""+sourceView_lastUpdatedDate,""+sourceView_sourceInstanceId,""+sourceView_sourceViewTypeId,""+sourceView_sourceViewName,""+sourceView_sourceViewDefinition,""+sourceView_isExisting)   }  
- def toJson() : String = {   "{" + "\"sourceViewColumnId\":\""+sourceViewColumnId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"sourceViewId\":\""+sourceViewId+"\""+","+"\"columnName\":\""+columnName+"\""+","+"\"columnType\":\""+columnType+"\""+","+"\"sourceView_sourceViewId\":\""+sourceView_sourceViewId+"\""+","+"\"sourceView_guid\":\""+sourceView_guid+"\""+","+"\"sourceView_insertedRowDate\":\""+sourceView_insertedRowDate+"\""+","+"\"sourceView_lastUpdatedDate\":\""+sourceView_lastUpdatedDate+"\""+","+"\"sourceView_sourceInstanceId\":\""+sourceView_sourceInstanceId+"\""+","+"\"sourceView_sourceViewTypeId\":\""+sourceView_sourceViewTypeId+"\""+","+"\"sourceView_sourceViewName\":\""+sourceView_sourceViewName+"\""+","+"\"sourceView_sourceViewDefinition\":\""+sourceView_sourceViewDefinition+"\""+","+"\"sourceView_isExisting\":\""+sourceView_isExisting+"\"" + "}"   }  
- def toFullString() : String = {    "sourceViewColumnId:'"+sourceViewColumnId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"sourceViewId:'"+sourceViewId+"'"+","+"columnName:'"+columnName+"'"+","+"columnType:'"+columnType+"'"+","+"sourceView_sourceViewId:'"+sourceView_sourceViewId+"'"+","+"sourceView_guid:'"+sourceView_guid+"'"+","+"sourceView_insertedRowDate:'"+sourceView_insertedRowDate+"'"+","+"sourceView_lastUpdatedDate:'"+sourceView_lastUpdatedDate+"'"+","+"sourceView_sourceInstanceId:'"+sourceView_sourceInstanceId+"'"+","+"sourceView_sourceViewTypeId:'"+sourceView_sourceViewTypeId+"'"+","+"sourceView_sourceViewName:'"+sourceView_sourceViewName+"'"+","+"sourceView_sourceViewDefinition:'"+sourceView_sourceViewDefinition+"'"+","+"sourceView_isExisting:'"+sourceView_isExisting+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(sourceViewColumnId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,columnName,columnType,sourceView_sourceViewId,sourceView_guid,sourceView_insertedRowDate,sourceView_lastUpdatedDate,sourceView_sourceInstanceId,sourceView_sourceViewTypeId,sourceView_sourceViewFormatId,sourceView_sourceViewName,sourceView_sourceViewDefinition,sourceView_isExisting)  }  
+ def toStringArray() : Array[String] = {    Array(""+sourceViewColumnId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceViewId,""+columnName,""+columnType,""+sourceView_sourceViewId,""+sourceView_guid,""+sourceView_insertedRowDate,""+sourceView_lastUpdatedDate,""+sourceView_sourceInstanceId,""+sourceView_sourceViewTypeId,""+sourceView_sourceViewFormatId,""+sourceView_sourceViewName,""+sourceView_sourceViewDefinition,""+sourceView_isExisting)   }  
+ def toJson() : String = {   "{" + "\"sourceViewColumnId\":\""+sourceViewColumnId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"sourceViewId\":\""+sourceViewId+"\""+","+"\"columnName\":\""+columnName+"\""+","+"\"columnType\":\""+columnType+"\""+","+"\"sourceView_sourceViewId\":\""+sourceView_sourceViewId+"\""+","+"\"sourceView_guid\":\""+sourceView_guid+"\""+","+"\"sourceView_insertedRowDate\":\""+sourceView_insertedRowDate+"\""+","+"\"sourceView_lastUpdatedDate\":\""+sourceView_lastUpdatedDate+"\""+","+"\"sourceView_sourceInstanceId\":\""+sourceView_sourceInstanceId+"\""+","+"\"sourceView_sourceViewTypeId\":\""+sourceView_sourceViewTypeId+"\""+","+"\"sourceView_sourceViewFormatId\":\""+sourceView_sourceViewFormatId+"\""+","+"\"sourceView_sourceViewName\":\""+sourceView_sourceViewName+"\""+","+"\"sourceView_sourceViewDefinition\":\""+sourceView_sourceViewDefinition+"\""+","+"\"sourceView_isExisting\":\""+sourceView_isExisting+"\"" + "}"   }  
+ def toFullString() : String = {    "sourceViewColumnId:'"+sourceViewColumnId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"sourceViewId:'"+sourceViewId+"'"+","+"columnName:'"+columnName+"'"+","+"columnType:'"+columnType+"'"+","+"sourceView_sourceViewId:'"+sourceView_sourceViewId+"'"+","+"sourceView_guid:'"+sourceView_guid+"'"+","+"sourceView_insertedRowDate:'"+sourceView_insertedRowDate+"'"+","+"sourceView_lastUpdatedDate:'"+sourceView_lastUpdatedDate+"'"+","+"sourceView_sourceInstanceId:'"+sourceView_sourceInstanceId+"'"+","+"sourceView_sourceViewTypeId:'"+sourceView_sourceViewTypeId+"'"+","+"sourceView_sourceViewFormatId:'"+sourceView_sourceViewFormatId+"'"+","+"sourceView_sourceViewName:'"+sourceView_sourceViewName+"'"+","+"sourceView_sourceViewDefinition:'"+sourceView_sourceViewDefinition+"'"+","+"sourceView_isExisting:'"+sourceView_isExisting+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "sourceViewColumnId" => sourceViewColumnId  
@@ -52,6 +53,7 @@ case class VSourceViewColumnDto (
      case "sourceView_lastUpdatedDate" => sourceView_lastUpdatedDate  
      case "sourceView_sourceInstanceId" => sourceView_sourceInstanceId  
      case "sourceView_sourceViewTypeId" => sourceView_sourceViewTypeId  
+     case "sourceView_sourceViewFormatId" => sourceView_sourceViewFormatId  
      case "sourceView_sourceViewName" => sourceView_sourceViewName  
      case "sourceView_sourceViewDefinition" => sourceView_sourceViewDefinition  
      case "sourceView_isExisting" => sourceView_isExisting   
@@ -74,6 +76,7 @@ case class VSourceViewColumnDto (
      case "sourceView_lastUpdatedDate" => "java.util.Date"  
      case "sourceView_sourceInstanceId" => "Long"  
      case "sourceView_sourceViewTypeId" => "Long"  
+     case "sourceView_sourceViewFormatId" => "Long"  
      case "sourceView_sourceViewName" => "String"  
      case "sourceView_sourceViewDefinition" => "String"  
      case "sourceView_isExisting" => "Int"   
@@ -97,6 +100,7 @@ object VSourceViewColumnDto {
    val FIELD_sourceView_lastUpdatedDate = "sourceView_lastUpdatedDate";
    val FIELD_sourceView_sourceInstanceId = "sourceView_sourceInstanceId";
    val FIELD_sourceView_sourceViewTypeId = "sourceView_sourceViewTypeId";
+   val FIELD_sourceView_sourceViewFormatId = "sourceView_sourceViewFormatId";
    val FIELD_sourceView_sourceViewName = "sourceView_sourceViewName";
    val FIELD_sourceView_sourceViewDefinition = "sourceView_sourceViewDefinition";
    val FIELD_sourceView_isExisting = "sourceView_isExisting";

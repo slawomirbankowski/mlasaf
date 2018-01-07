@@ -84,9 +84,15 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
- def getDtosByAlgorithmTypeVersionId(colValue : Long) : List[VAlgorithmImplementationSummaryDto] = { 
+ def getDtosByAlgorithmTypeId(colValue : Long) : List[VAlgorithmImplementationSummaryDto] = { 
    implicit val connection = getConnection();  
-   val dtos : List[VAlgorithmImplementationSummaryDto] = SQL("select * from vAlgorithmImplementationSummary where algorithmTypeVersionId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationSummaryDto].*);  
+   val dtos : List[VAlgorithmImplementationSummaryDto] = SQL("select * from vAlgorithmImplementationSummary where algorithmTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationSummaryDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByAlgorithmVersionId(colValue : Long) : List[VAlgorithmImplementationSummaryDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmImplementationSummaryDto] = SQL("select * from vAlgorithmImplementationSummary where algorithmVersionId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationSummaryDto].*);  
    releaseConnection(connection);  
    dtos  
  }  
@@ -105,6 +111,12 @@ import java.util.Date
  def getDtosByAlgorithmImplementationClass(colValue : String) : List[VAlgorithmImplementationSummaryDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VAlgorithmImplementationSummaryDto] = SQL("select * from vAlgorithmImplementationSummary where algorithmImplementationClass = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationSummaryDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByAlgorithmImplementationDescription(colValue : String) : List[VAlgorithmImplementationSummaryDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmImplementationSummaryDto] = SQL("select * from vAlgorithmImplementationSummary where algorithmImplementationDescription = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationSummaryDto].*);  
    releaseConnection(connection);  
    dtos  
  }  

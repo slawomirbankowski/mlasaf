@@ -90,6 +90,18 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
+ def getDtosByDownloadTransformGroupDescription(colValue : String) : List[VDownloadTransformGroupSummaryDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VDownloadTransformGroupSummaryDto] = SQL("select * from vDownloadTransformGroupSummary where downloadTransformGroupDescription = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VDownloadTransformGroupSummaryDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByDownloadTransformAlgorithmSchedule_count(colValue : Int) : List[VDownloadTransformGroupSummaryDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VDownloadTransformGroupSummaryDto] = SQL("select * from vDownloadTransformGroupSummary where downloadTransformAlgorithmSchedule_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VDownloadTransformGroupSummaryDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
  def getDtosByDownloadTransformExecutorStorage_count(colValue : Int) : List[VDownloadTransformGroupSummaryDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VDownloadTransformGroupSummaryDto] = SQL("select * from vDownloadTransformGroupSummary where downloadTransformExecutorStorage_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VDownloadTransformGroupSummaryDto].*);  
@@ -99,12 +111,6 @@ import java.util.Date
  def getDtosByDownloadTransform_count(colValue : Int) : List[VDownloadTransformGroupSummaryDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VDownloadTransformGroupSummaryDto] = SQL("select * from vDownloadTransformGroupSummary where downloadTransform_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VDownloadTransformGroupSummaryDto].*);  
-   releaseConnection(connection);  
-   dtos  
- }  
- def getDtosByDownloadTransformAlgorithmSchedule_count(colValue : Int) : List[VDownloadTransformGroupSummaryDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VDownloadTransformGroupSummaryDto] = SQL("select * from vDownloadTransformGroupSummary where downloadTransformAlgorithmSchedule_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VDownloadTransformGroupSummaryDto].*);  
    releaseConnection(connection);  
    dtos  
  }  

@@ -15,17 +15,19 @@ case class VExecutorInstanceSummaryDto (
      , val executorHostId : Long
      , val executorContextId : Long
      , val executorInstanceName : String
+     , val executorDefinition : String
+     , val executorParameters : String
      , val isRunning : Int
      , val isFinished : Int
      , val portNumber : Int
      , val endDate : java.util.Date
-     , val resourceManagerAllocation_count : Int
      , val algorithmRun_count : Int
      , val executorInstanceState_count : Int
-     , val executorStorageSnapshot_count : Int 
+     , val executorStorageSnapshot_count : Int
+     , val resourceManagerAllocation_count : Int 
      ) extends BaseReadOnlyDto {  
    def tableName : String = {    "vExecutorInstanceSummary";    }  
-   def fields : String = {    "executorInstanceId,guid,insertedRowDate,lastUpdatedDate,executorTypeId,executorHostId,executorContextId,executorInstanceName,isRunning,isFinished,portNumber,endDate,resourceManagerAllocation_count,algorithmRun_count,executorInstanceState_count,executorStorageSnapshot_count";    }  
+   def fields : String = {    "executorInstanceId,guid,insertedRowDate,lastUpdatedDate,executorTypeId,executorHostId,executorContextId,executorInstanceName,executorDefinition,executorParameters,isRunning,isFinished,portNumber,endDate,algorithmRun_count,executorInstanceState_count,executorStorageSnapshot_count,resourceManagerAllocation_count";    }  
    def pkFields : String = {    "";    }  
    def fkFields : String = {    "";    }  
    def nameField : String = {    "";    }  
@@ -33,10 +35,10 @@ case class VExecutorInstanceSummaryDto (
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(executorInstanceId,guid,insertedRowDate,lastUpdatedDate,executorTypeId,executorHostId,executorContextId,executorInstanceName,isRunning,isFinished,portNumber,endDate,resourceManagerAllocation_count,algorithmRun_count,executorInstanceState_count,executorStorageSnapshot_count)  }  
- def toStringArray() : Array[String] = {    Array(""+executorInstanceId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorTypeId,""+executorHostId,""+executorContextId,""+executorInstanceName,""+isRunning,""+isFinished,""+portNumber,""+endDate,""+resourceManagerAllocation_count,""+algorithmRun_count,""+executorInstanceState_count,""+executorStorageSnapshot_count)   }  
- def toJson() : String = {   "{" + "\"executorInstanceId\":\""+executorInstanceId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"executorTypeId\":\""+executorTypeId+"\""+","+"\"executorHostId\":\""+executorHostId+"\""+","+"\"executorContextId\":\""+executorContextId+"\""+","+"\"executorInstanceName\":\""+executorInstanceName+"\""+","+"\"isRunning\":\""+isRunning+"\""+","+"\"isFinished\":\""+isFinished+"\""+","+"\"portNumber\":\""+portNumber+"\""+","+"\"endDate\":\""+endDate+"\""+","+"\"resourceManagerAllocation_count\":\""+resourceManagerAllocation_count+"\""+","+"\"algorithmRun_count\":\""+algorithmRun_count+"\""+","+"\"executorInstanceState_count\":\""+executorInstanceState_count+"\""+","+"\"executorStorageSnapshot_count\":\""+executorStorageSnapshot_count+"\"" + "}"   }  
- def toFullString() : String = {    "executorInstanceId:'"+executorInstanceId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorTypeId:'"+executorTypeId+"'"+","+"executorHostId:'"+executorHostId+"'"+","+"executorContextId:'"+executorContextId+"'"+","+"executorInstanceName:'"+executorInstanceName+"'"+","+"isRunning:'"+isRunning+"'"+","+"isFinished:'"+isFinished+"'"+","+"portNumber:'"+portNumber+"'"+","+"endDate:'"+endDate+"'"+","+"resourceManagerAllocation_count:'"+resourceManagerAllocation_count+"'"+","+"algorithmRun_count:'"+algorithmRun_count+"'"+","+"executorInstanceState_count:'"+executorInstanceState_count+"'"+","+"executorStorageSnapshot_count:'"+executorStorageSnapshot_count+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(executorInstanceId,guid,insertedRowDate,lastUpdatedDate,executorTypeId,executorHostId,executorContextId,executorInstanceName,executorDefinition,executorParameters,isRunning,isFinished,portNumber,endDate,algorithmRun_count,executorInstanceState_count,executorStorageSnapshot_count,resourceManagerAllocation_count)  }  
+ def toStringArray() : Array[String] = {    Array(""+executorInstanceId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorTypeId,""+executorHostId,""+executorContextId,""+executorInstanceName,""+executorDefinition,""+executorParameters,""+isRunning,""+isFinished,""+portNumber,""+endDate,""+algorithmRun_count,""+executorInstanceState_count,""+executorStorageSnapshot_count,""+resourceManagerAllocation_count)   }  
+ def toJson() : String = {   "{" + "\"executorInstanceId\":\""+executorInstanceId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"executorTypeId\":\""+executorTypeId+"\""+","+"\"executorHostId\":\""+executorHostId+"\""+","+"\"executorContextId\":\""+executorContextId+"\""+","+"\"executorInstanceName\":\""+executorInstanceName+"\""+","+"\"executorDefinition\":\""+executorDefinition+"\""+","+"\"executorParameters\":\""+executorParameters+"\""+","+"\"isRunning\":\""+isRunning+"\""+","+"\"isFinished\":\""+isFinished+"\""+","+"\"portNumber\":\""+portNumber+"\""+","+"\"endDate\":\""+endDate+"\""+","+"\"algorithmRun_count\":\""+algorithmRun_count+"\""+","+"\"executorInstanceState_count\":\""+executorInstanceState_count+"\""+","+"\"executorStorageSnapshot_count\":\""+executorStorageSnapshot_count+"\""+","+"\"resourceManagerAllocation_count\":\""+resourceManagerAllocation_count+"\"" + "}"   }  
+ def toFullString() : String = {    "executorInstanceId:'"+executorInstanceId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorTypeId:'"+executorTypeId+"'"+","+"executorHostId:'"+executorHostId+"'"+","+"executorContextId:'"+executorContextId+"'"+","+"executorInstanceName:'"+executorInstanceName+"'"+","+"executorDefinition:'"+executorDefinition+"'"+","+"executorParameters:'"+executorParameters+"'"+","+"isRunning:'"+isRunning+"'"+","+"isFinished:'"+isFinished+"'"+","+"portNumber:'"+portNumber+"'"+","+"endDate:'"+endDate+"'"+","+"algorithmRun_count:'"+algorithmRun_count+"'"+","+"executorInstanceState_count:'"+executorInstanceState_count+"'"+","+"executorStorageSnapshot_count:'"+executorStorageSnapshot_count+"'"+","+"resourceManagerAllocation_count:'"+resourceManagerAllocation_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "executorInstanceId" => executorInstanceId  
@@ -47,14 +49,16 @@ case class VExecutorInstanceSummaryDto (
      case "executorHostId" => executorHostId  
      case "executorContextId" => executorContextId  
      case "executorInstanceName" => executorInstanceName  
+     case "executorDefinition" => executorDefinition  
+     case "executorParameters" => executorParameters  
      case "isRunning" => isRunning  
      case "isFinished" => isFinished  
      case "portNumber" => portNumber  
      case "endDate" => endDate  
-     case "resourceManagerAllocation_count" => resourceManagerAllocation_count  
      case "algorithmRun_count" => algorithmRun_count  
      case "executorInstanceState_count" => executorInstanceState_count  
-     case "executorStorageSnapshot_count" => executorStorageSnapshot_count   
+     case "executorStorageSnapshot_count" => executorStorageSnapshot_count  
+     case "resourceManagerAllocation_count" => resourceManagerAllocation_count   
     case _ => null 
     } 
     ret 
@@ -69,14 +73,16 @@ case class VExecutorInstanceSummaryDto (
      case "executorHostId" => "Long"  
      case "executorContextId" => "Long"  
      case "executorInstanceName" => "String"  
+     case "executorDefinition" => "String"  
+     case "executorParameters" => "String"  
      case "isRunning" => "Int"  
      case "isFinished" => "Int"  
      case "portNumber" => "Int"  
      case "endDate" => "java.util.Date"  
-     case "resourceManagerAllocation_count" => "Int"  
      case "algorithmRun_count" => "Int"  
      case "executorInstanceState_count" => "Int"  
-     case "executorStorageSnapshot_count" => "Int"   
+     case "executorStorageSnapshot_count" => "Int"  
+     case "resourceManagerAllocation_count" => "Int"   
     case _ => "Object" 
     } 
     ret 
@@ -92,14 +98,16 @@ object VExecutorInstanceSummaryDto {
    val FIELD_executorHostId = "executorHostId";
    val FIELD_executorContextId = "executorContextId";
    val FIELD_executorInstanceName = "executorInstanceName";
+   val FIELD_executorDefinition = "executorDefinition";
+   val FIELD_executorParameters = "executorParameters";
    val FIELD_isRunning = "isRunning";
    val FIELD_isFinished = "isFinished";
    val FIELD_portNumber = "portNumber";
    val FIELD_endDate = "endDate";
-   val FIELD_resourceManagerAllocation_count = "resourceManagerAllocation_count";
    val FIELD_algorithmRun_count = "algorithmRun_count";
    val FIELD_executorInstanceState_count = "executorInstanceState_count";
    val FIELD_executorStorageSnapshot_count = "executorStorageSnapshot_count";
+   val FIELD_resourceManagerAllocation_count = "resourceManagerAllocation_count";
 
 }
 

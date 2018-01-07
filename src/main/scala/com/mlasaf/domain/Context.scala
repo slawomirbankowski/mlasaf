@@ -72,21 +72,12 @@ class Context extends ThreadBase {
     hostDto = daoFactory.daoCustom.registerHost();
     logger.info("---> Registered host: " + hostDto);
     // register context
-    contextDto = daoFactory.daos.executorContextDao.createAndInsertExecutorContextDto(hostDto.executorHostId, 1, javaProperties.substring(0, 3999), "", "", "");
+    val javaProp2 = ""; // if (javaProperties.length > 4000) javaProperties.substring(4000)  else "";
+    val javaProp3 = ""; // if (javaProp2.length > 4000) javaProp2.substring(4000)  else "";
+    contextDto = daoFactory.daos.executorContextDao.createAndInsertExecutorContextDto(hostDto.executorHostId, 1, javaProperties.substring(0, 3999), javaProp2, javaProp3, "");
     logger.info("---> Registered context: " + contextDto);
-    // initialization of ALL sources - each source has own thread to run refresh methods
-    val allSourcesInDb = daoFactory.daos.vSourceInstanceDao.getVSourceInstancesList();
-    logger.info("Number of all sources: " + allSourcesInDb.size + ", types: " + allSourcesInDb.map(x => x.sourceType_sourceTypeName).mkString(", "));
-    allSourcesInDb.foreach(siDto => {
-      logger.info("Creating SourceInstance for DTO: " + siDto);
-      val srcObj = Class.forName(siDto.sourceType_sourceTypeClass).newInstance().asInstanceOf[Source];
-      val sourceParams = daoFactory.daos.vSourceParamValueDao.getDtosBySourceInstance_sourceInstanceId(siDto.sourceInstanceId);
-      srcObj.initialize(this, siDto, sourceParams);
-      srcObj.start();
-      threads += srcObj;
-      sources += srcObj;
-    });
-    logger.info("All initialized sources: " + sources.size + ", sources: " + sources.map(s => "{id:" + s.vSourceDto.sourceInstanceId + ",type:" + s.vSourceDto.sourceType_sourceTypeName + ",name:" + s.vSourceDto.sourceInstanceName).mkString(", "));
+    // refresh sources from DB
+    refreshSources();
     // initialize SIMPLE storage - each storage has own thread to download data
     val storagesInHost = daoFactory.daos.executorStorageDao.getExecutorStorageByFkExecutorHostId(hostDto.executorHostId);
     logger.info("Number of storages in host: " + storagesInHost.size + ", paths: " + storagesInHost.map(s => "{id:" + s.executorStorageId + ",typeId:" + s.executorStorageTypeId + ",path:" + s.storageFulllPath + "}").mkString(", ") );
@@ -115,29 +106,46 @@ class Context extends ThreadBase {
     checker.setParentContext(this);
     checker.start();
     threads += checker;
+    runInterval = 20000L;
     // BEGIN info
     logger.info("BEGIN CONTEXT INFO => Total executors running: " + executors.size + ", total threads: " + threads.size + ", total storages: " + storages.size + ", total sources: " + sources.size);
   }
+  def refreshSources() : Unit = {
+    // initialization of ALL sources - each source has own thread to run refresh methods
+    val allSourcesInDb = daoFactory.daos.vSourceInstanceDao.getVSourceInstancesList();
+    logger.info("Number of all sources: " + allSourcesInDb.size + ", types: " + allSourcesInDb.map(x => x.sourceType_sourceTypeName).mkString(", "));
+    val newSources = allSourcesInDb.filter(newSrc => !sources.map(s => s.vSourceDto.sourceInstanceId).contains(newSrc.sourceInstanceId))
+    logger.info("Already registered sources: " + sources.map(s => s.vSourceDto.sourceInstanceId).mkString(",") + ", new sources count: " + newSources.size + ", IDs: " + newSources.map(s => s.sourceInstanceId).mkString(","));
+    newSources.foreach(siDto => {
+      logger.info("Creating SourceInstance for DTO: " + siDto);
+      val srcObj = Class.forName(siDto.sourceType_sourceTypeClass).newInstance().asInstanceOf[Source];
+      val sourceParams = daoFactory.daos.vSourceParamValueDao.getDtosBySourceInstance_sourceInstanceId(siDto.sourceInstanceId);
+      srcObj.initialize(this, siDto, sourceParams);
+      srcObj.start();
+      threads += srcObj;
+      sources += srcObj;
+    });
+    logger.info("All initialized sources: " + sources.size + ", sources: " + sources.map(s => "{id:" + s.vSourceDto.sourceInstanceId + ",type:" + s.vSourceDto.sourceType_sourceTypeName + ",name:" + s.vSourceDto.sourceInstanceName).mkString(", "));
+  }
   /** run in case of invoke start() method */
   override def onStart() : Unit = {
-
-
   };
   def delayedStop() : Unit = {
-
   }
-
   /** */
   def onRun() : Unit = {
     // change updated date for context
-    daoFactory.daos.executorContextDao.changeUpdatedDate(contextDto);
-    // check if context should be stopped because of end of time
+    daoFactory.daos.executorContextDao.changeUpdatedDate(contextDto);    // check if context should be stopped because of end of time
+    // TODO: check new sources
     if (actualWorkingTimeSeconds() > runOptions.maxWorkingTimeSeconds.getOrElse(DEFAULT_MAX_WORKING_TIME)) {
       isStopped = true;
       logger.info("Time is UP - stopping context, actualWorkingTime: " + actualWorkingTime() + ", maxWorkingTime: " + runOptions.maxWorkingTimeSeconds.getOrElse(DEFAULT_MAX_WORKING_TIME));
     }
     // check commands for context
-    readExecuteCommands()
+    readExecuteCommands();
+    // refresh sources
+    refreshSources();
+    daoFactory.daos.executorContextStateDao.createAndInsertExecutorContextStateDto(contextDto.executorContextId, "RUNNING", getPartialInfoJson(), "")
   }
   def onRunEnd() : Unit = {
     logger.info("STOPPING context: " + contextDto);
@@ -229,6 +237,11 @@ class Context extends ThreadBase {
   def actualWorkingTime() : Long = (new java.util.Date().getTime) - startTime.getTime;
   /** */
   def actualWorkingTimeSeconds() : Long = actualWorkingTime / 1000;
+
+  def getPartialInfoJson() : String = {
+    " { \"actualWorkingTime\":" + actualWorkingTime() + ", \"isStopped\":" + this.isStopped + ", \"threadsCount\":" + this.threads.size+ ", \"sourcesCount\":" + this.sources.size + ", \"storagesCount\":" + this.storages.size + ", \"executorsCount\":" + this.executors.size + " }"
+  }
+
   def getInfoJson() : String = {
     " { \"guid\":" + this.guid + ",\"startTime\":\"" + this.startTime + "\",\"actualWorkingTime\":" + actualWorkingTime() + ", \"isStopped\":" + this.isStopped + ", \"threadsCount\":" + this.threads.size+ ", \"sourcesCount\":" + this.sources.size + ", \"storagesCount\":" + this.storages.size + ", \"executorsCount\":" + this.executors.size + ", \"contextDto\":" + this.contextDto.toJson() + ", \"hostDto\":" + this.hostDto.toJson() + " }"
   }

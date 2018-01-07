@@ -11,8 +11,9 @@ object MlasafEntryTest {
 
   /** main entry point to run all services for MLASAF, initialization from command line arguments or from xml file */
   def main(args : Array[String]) = {
+
     val newargs = Array(
-      "--jdbcString", "jdbc:mysql://localhost:3307/mlasaf32"
+      "--jdbcString", "jdbc:mysql://localhost:3307/mlasaf34"
       , "--jdbcUser" , System.getenv("MLASAF_USER")
       , "--jdbcPass" , System.getenv("MLASAF_PASS")
       , "--jdbcDriver", System.getenv("MLASAF_DRIVER")

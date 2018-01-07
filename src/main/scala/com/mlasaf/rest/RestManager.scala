@@ -8,14 +8,18 @@ import com.mlasaf.base.ThreadBase
 import com.mlasaf.loaders.CreateAlgorithmSchedule.logger
 import org.apache.http.{HttpRequest, HttpResponse}
 import spark.Spark._;
+import com.mlasaf.dto._
 
 /** manager for all REST methods */
 class RestManager extends ThreadBase  {
 
+  val REST_VERSION = "1.0";
   /** default PORT number for REST */
   var restDefaultPort : Int = 8301;
-  /** */
+  /**  */
   var restAlternativePort : Int = 8305;
+  /** DTO object for REST */
+  var executorRestDto : ExecutorRestDto = null;
   /** all RESTs for DAO methods - automatically generated */
   val daoRest : DaoRests = new DaoRests();
   /** all RESTs for context methods */
@@ -38,7 +42,10 @@ class RestManager extends ThreadBase  {
     /** START ALL RESTs */
     def onRunBegin() : Unit = {
       logger.info("Start REST for Context on port " + restDefaultPort);
+      executorRestDto = parentContext.daoFactory.daos.executorRestDao.createAndInsertExecutorRestDto(parentContext.hostDto.executorHostId, restDefaultPort, REST_VERSION, "CREATED");
+      logger.info("REST DTO: " + executorRestDto);
       spark.Spark.port(restDefaultPort);
+      parentContext.daoFactory.daos.executorRestDao.updateField(executorRestDto, ExecutorRestDto.FIELD_restStatus, "STARTING");
       spark.Spark.get("/ping", (req: spark.Request, resp: spark.Response) => {
         "pong"
       } );
@@ -80,6 +87,7 @@ class RestManager extends ThreadBase  {
       daoRest.setParentRest(this);
       daoRest.initialize();
       spark.Spark.init();
+      parentContext.daoFactory.daos.executorRestDao.updateField(executorRestDto, ExecutorRestDto.FIELD_restStatus, "STARTED");
       logger.info("All REST methods for RestManager have been initialized");
     }
     def onRun() : Unit = {
@@ -89,6 +97,7 @@ class RestManager extends ThreadBase  {
     def getName() : String = "CONTEXT_REST";
     def onStop() : Unit = {
       spark.Spark.stop();
+      parentContext.daoFactory.daos.executorRestDao.updateField(executorRestDto, ExecutorRestDto.FIELD_restStatus, "FINISHED");
       logger.info("All REST methods for Context have been stopped");
     }
     def getInfoJson() : String = {

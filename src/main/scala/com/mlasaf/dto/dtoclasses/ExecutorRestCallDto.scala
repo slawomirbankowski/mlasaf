@@ -16,10 +16,16 @@ case class ExecutorRestCallDto (
      , val requestMethod : String
      , val requestHeader : String
      , val requestBody : String
-     , val responseBody : String 
+     , val responseBody : String
+     , val runTime : Long
+     , val headers : String
+     , val cookies : String
+     , val clientHost : String
+     , val protocol : String
+     , val session : String 
      ) extends BaseDto {  
    def tableName : String = {    "executorRestCall";    }  
-   def fields : String = {    "executorRestCallId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorRestId,requestMethod,requestHeader,requestBody,responseBody";    }  
+   def fields : String = {    "executorRestCallId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorRestId,requestMethod,requestHeader,requestBody,responseBody,runTime,headers,cookies,clientHost,protocol,session";    }  
    def pkFields : String = {    "executorRestCallId";    }  
    def fkFields : String = {    "executorHostId,executorRestId";    }  
    def nameField : String = {    "";    }  
@@ -27,10 +33,10 @@ case class ExecutorRestCallDto (
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(executorRestCallId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorRestId,requestMethod,requestHeader,requestBody,responseBody)  }  
- def toStringArray() : Array[String] = {    Array(""+executorRestCallId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+executorRestId,""+requestMethod,""+requestHeader,""+requestBody,""+responseBody)   }  
- def toJson() : String = {   "{" + "\"executorRestCallId\":\""+executorRestCallId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"executorHostId\":\""+executorHostId+"\""+","+"\"executorRestId\":\""+executorRestId+"\""+","+"\"requestMethod\":\""+requestMethod+"\""+","+"\"requestHeader\":\""+requestHeader+"\""+","+"\"requestBody\":\""+requestBody+"\""+","+"\"responseBody\":\""+responseBody+"\"" + "}"   }  
- def toFullString() : String = {    "executorRestCallId:'"+executorRestCallId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorHostId:'"+executorHostId+"'"+","+"executorRestId:'"+executorRestId+"'"+","+"requestMethod:'"+requestMethod+"'"+","+"requestHeader:'"+requestHeader+"'"+","+"requestBody:'"+requestBody+"'"+","+"responseBody:'"+responseBody+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(executorRestCallId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorRestId,requestMethod,requestHeader,requestBody,responseBody,runTime,headers,cookies,clientHost,protocol,session)  }  
+ def toStringArray() : Array[String] = {    Array(""+executorRestCallId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+executorRestId,""+requestMethod,""+requestHeader,""+requestBody,""+responseBody,""+runTime,""+headers,""+cookies,""+clientHost,""+protocol,""+session)   }  
+ def toJson() : String = {   "{" + "\"executorRestCallId\":\""+executorRestCallId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"executorHostId\":\""+executorHostId+"\""+","+"\"executorRestId\":\""+executorRestId+"\""+","+"\"requestMethod\":\""+requestMethod+"\""+","+"\"requestHeader\":\""+requestHeader+"\""+","+"\"requestBody\":\""+requestBody+"\""+","+"\"responseBody\":\""+responseBody+"\""+","+"\"runTime\":\""+runTime+"\""+","+"\"headers\":\""+headers+"\""+","+"\"cookies\":\""+cookies+"\""+","+"\"clientHost\":\""+clientHost+"\""+","+"\"protocol\":\""+protocol+"\""+","+"\"session\":\""+session+"\"" + "}"   }  
+ def toFullString() : String = {    "executorRestCallId:'"+executorRestCallId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorHostId:'"+executorHostId+"'"+","+"executorRestId:'"+executorRestId+"'"+","+"requestMethod:'"+requestMethod+"'"+","+"requestHeader:'"+requestHeader+"'"+","+"requestBody:'"+requestBody+"'"+","+"responseBody:'"+responseBody+"'"+","+"runTime:'"+runTime+"'"+","+"headers:'"+headers+"'"+","+"cookies:'"+cookies+"'"+","+"clientHost:'"+clientHost+"'"+","+"protocol:'"+protocol+"'"+","+"session:'"+session+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "executorRestCallId" => executorRestCallId  
@@ -42,7 +48,13 @@ case class ExecutorRestCallDto (
      case "requestMethod" => requestMethod  
      case "requestHeader" => requestHeader  
      case "requestBody" => requestBody  
-     case "responseBody" => responseBody   
+     case "responseBody" => responseBody  
+     case "runTime" => runTime  
+     case "headers" => headers  
+     case "cookies" => cookies  
+     case "clientHost" => clientHost  
+     case "protocol" => protocol  
+     case "session" => session   
     case _ => null 
     } 
     ret 
@@ -58,13 +70,19 @@ case class ExecutorRestCallDto (
      case "requestMethod" => "String"  
      case "requestHeader" => "String"  
      case "requestBody" => "String"  
-     case "responseBody" => "String"   
+     case "responseBody" => "String"  
+     case "runTime" => "Long"  
+     case "headers" => "String"  
+     case "cookies" => "String"  
+     case "clientHost" => "String"  
+     case "protocol" => "String"  
+     case "session" => "String"   
     case _ => "Object" 
     } 
     ret 
   } 
    def prepareInsert(connection : java.sql.Connection) : java.sql.PreparedStatement = {
-     val stat = connection.prepareStatement("insert into executorRestCall(guid,executorHostId,executorRestId,requestMethod,requestHeader,requestBody,responseBody) values (?,?,?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
+     val stat = connection.prepareStatement("insert into executorRestCall(guid,executorHostId,executorRestId,requestMethod,requestHeader,requestBody,responseBody,runTime,headers,cookies,clientHost,protocol,session) values (?,?,?,?,?,?,?,?,?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
     stat.setObject(1, guid);
     stat.setObject(2, executorHostId);
     stat.setObject(3, executorRestId);
@@ -72,10 +90,16 @@ case class ExecutorRestCallDto (
     stat.setObject(5, requestHeader);
     stat.setObject(6, requestBody);
     stat.setObject(7, responseBody);
+    stat.setObject(8, runTime);
+    stat.setObject(9, headers);
+    stat.setObject(10, cookies);
+    stat.setObject(11, clientHost);
+    stat.setObject(12, protocol);
+    stat.setObject(13, session);
     return stat; 
    } 
-   def modify(executorHostId : Long, executorRestId : Long, requestMethod : String, requestHeader : String, requestBody : String, responseBody : String) : ExecutorRestCallDto = {
-    val dtoModified = new ExecutorRestCallDto(this.executorRestCallId,this.guid,this.insertedRowDate,new java.util.Date(),executorHostId,executorRestId,requestMethod,requestHeader,requestBody,responseBody);
+   def modify(executorHostId : Long, executorRestId : Long, requestMethod : String, requestHeader : String, requestBody : String, responseBody : String, runTime : Long, headers : String, cookies : String, clientHost : String, protocol : String, session : String) : ExecutorRestCallDto = {
+    val dtoModified = new ExecutorRestCallDto(this.executorRestCallId,this.guid,this.insertedRowDate,new java.util.Date(),executorHostId,executorRestId,requestMethod,requestHeader,requestBody,responseBody,runTime,headers,cookies,clientHost,protocol,session);
     dtoModified
   }
  } 
@@ -91,9 +115,15 @@ object ExecutorRestCallDto {
    val FIELD_requestHeader = "requestHeader";
    val FIELD_requestBody = "requestBody";
    val FIELD_responseBody = "responseBody";
+   val FIELD_runTime = "runTime";
+   val FIELD_headers = "headers";
+   val FIELD_cookies = "cookies";
+   val FIELD_clientHost = "clientHost";
+   val FIELD_protocol = "protocol";
+   val FIELD_session = "session";
 
-  def createNewExecutorRestCallDto(executorHostId : Long, executorRestId : Long, requestMethod : String, requestHeader : String, requestBody : String, responseBody : String) : ExecutorRestCallDto = {  
-     val dto = new ExecutorRestCallDto(0,0,new java.util.Date(),new java.util.Date(),executorHostId,executorRestId,requestMethod,requestHeader,requestBody,responseBody)   
+  def createNewExecutorRestCallDto(executorHostId : Long, executorRestId : Long, requestMethod : String, requestHeader : String, requestBody : String, responseBody : String, runTime : Long, headers : String, cookies : String, clientHost : String, protocol : String, session : String) : ExecutorRestCallDto = {  
+     val dto = new ExecutorRestCallDto(0,0,new java.util.Date(),new java.util.Date(),executorHostId,executorRestId,requestMethod,requestHeader,requestBody,responseBody,runTime,headers,cookies,clientHost,protocol,session)   
     dto 
   } 
 

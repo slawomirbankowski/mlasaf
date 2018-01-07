@@ -66,7 +66,7 @@ object DaoTests {
 
     //daoFactory.daos.executorCommandDao.
 
-    daoFactory.daos.executorContextCommandDao.createAndInsertExecutorContextCommandDto(1, 1, 0, 0, "", "", "", "", "");
+    //daoFactory.daos.executorContextCommandDao.createAndInsertExecutorContextCommandDto(1, 1, 0, 0, "", "", "", "", "");
 
 
 

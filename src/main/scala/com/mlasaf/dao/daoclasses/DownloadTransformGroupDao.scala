@@ -86,7 +86,7 @@ import java.util.Date
  }  
  def insertDownloadTransformGroupDto(dto : DownloadTransformGroupDto): DownloadTransformGroupDto = { 
     implicit val connection = getConnection(); 
-    val stat = dto.prepareInsert(getConnection()); 
+    val stat = dto.prepareInsert(connection); 
     val resCnt = stat.executeUpdate(); 
     val rs = stat.getGeneratedKeys(); 
     if (rs.next()) { 
@@ -99,14 +99,14 @@ import java.util.Date
       null; 
     } 
  } 
-  def createAndInsertDownloadTransformGroupDto(downloadTransformGroupName : String) : DownloadTransformGroupDto = {
-    val dto = new DownloadTransformGroupDto(0,0,new Date(),new Date(),downloadTransformGroupName)
+  def createAndInsertDownloadTransformGroupDto(downloadTransformGroupName : String, downloadTransformGroupDescription : String) : DownloadTransformGroupDto = {
+    val dto = new DownloadTransformGroupDto(0,0,new Date(),new Date(),downloadTransformGroupName,downloadTransformGroupDescription)
     insertDownloadTransformGroupDto(dto);   
   }   
   def updateDownloadTransformGroupDto(dto : DownloadTransformGroupDto): DownloadTransformGroupDto = {  
     implicit val connection = getConnection();  
-      val resCnt = SQL("update downloadTransformGroup set  lastUpdatedDate = {lastUpdatedDate} ,  downloadTransformGroupName = {downloadTransformGroupName}  where  downloadTransformGroupId = {downloadTransformGroupId}  ")
-      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "downloadTransformGroupName" -> dto.downloadTransformGroupName, "downloadTransformGroupId" -> dto.downloadTransformGroupId ).executeInsert() 
+      val resCnt = SQL("update downloadTransformGroup set  lastUpdatedDate = {lastUpdatedDate} ,  downloadTransformGroupName = {downloadTransformGroupName} ,  downloadTransformGroupDescription = {downloadTransformGroupDescription}  where  downloadTransformGroupId = {downloadTransformGroupId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "downloadTransformGroupName" -> dto.downloadTransformGroupName , "downloadTransformGroupDescription" -> dto.downloadTransformGroupDescription, "downloadTransformGroupId" -> dto.downloadTransformGroupId ).executeInsert() 
    releaseConnection(connection);  
      getDownloadTransformGroupByPk(dto.downloadTransformGroupId) 
     } 

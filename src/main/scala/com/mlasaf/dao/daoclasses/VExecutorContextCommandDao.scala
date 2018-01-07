@@ -138,6 +138,12 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
+ def getDtosByResultStatus(colValue : String) : List[VExecutorContextCommandDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorContextCommandDto] = SQL("select * from vExecutorContextCommand where resultStatus = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextCommandDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
  def getDtosByExecutorContext_executorContextId(colValue : Long) : List[VExecutorContextCommandDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VExecutorContextCommandDto] = SQL("select * from vExecutorContextCommand where executorContext_executorContextId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextCommandDto].*);  

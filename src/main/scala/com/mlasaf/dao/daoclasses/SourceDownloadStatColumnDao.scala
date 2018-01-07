@@ -86,7 +86,7 @@ import java.util.Date
  }  
  def insertSourceDownloadStatColumnDto(dto : SourceDownloadStatColumnDto): SourceDownloadStatColumnDto = { 
     implicit val connection = getConnection(); 
-    val stat = dto.prepareInsert(getConnection()); 
+    val stat = dto.prepareInsert(connection); 
     val resCnt = stat.executeUpdate(); 
     val rs = stat.getGeneratedKeys(); 
     if (rs.next()) { 

@@ -120,6 +120,42 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
+ def getDtosByRunTime(colValue : Long) : List[VExecutorRestCallDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorRestCallDto] = SQL("select * from vExecutorRestCall where runTime = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorRestCallDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByHeaders(colValue : String) : List[VExecutorRestCallDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorRestCallDto] = SQL("select * from vExecutorRestCall where headers = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorRestCallDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByCookies(colValue : String) : List[VExecutorRestCallDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorRestCallDto] = SQL("select * from vExecutorRestCall where cookies = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorRestCallDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByClientHost(colValue : String) : List[VExecutorRestCallDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorRestCallDto] = SQL("select * from vExecutorRestCall where clientHost = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorRestCallDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByProtocol(colValue : String) : List[VExecutorRestCallDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorRestCallDto] = SQL("select * from vExecutorRestCall where protocol = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorRestCallDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosBySession(colValue : String) : List[VExecutorRestCallDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorRestCallDto] = SQL("select * from vExecutorRestCall where session = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorRestCallDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
  def getDtosByExecutorHost_executorHostId(colValue : Long) : List[VExecutorRestCallDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VExecutorRestCallDto] = SQL("select * from vExecutorRestCall where executorHost_executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorRestCallDto].*);  

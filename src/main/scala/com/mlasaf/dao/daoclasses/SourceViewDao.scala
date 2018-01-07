@@ -78,6 +78,12 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
+ def getSourceViewByFkSourceViewFormatId(fkColValue : Long) : List[SourceViewDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[SourceViewDto] = SQL("select * from sourceView where sourceViewFormatId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[SourceViewDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
  def getSourceViewByFkSourceViewTypeId(fkColValue : Long) : List[SourceViewDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[SourceViewDto] = SQL("select * from sourceView where sourceViewTypeId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[SourceViewDto].*);  
@@ -98,7 +104,7 @@ import java.util.Date
  }  
  def insertSourceViewDto(dto : SourceViewDto): SourceViewDto = { 
     implicit val connection = getConnection(); 
-    val stat = dto.prepareInsert(getConnection()); 
+    val stat = dto.prepareInsert(connection); 
     val resCnt = stat.executeUpdate(); 
     val rs = stat.getGeneratedKeys(); 
     if (rs.next()) { 
@@ -111,14 +117,14 @@ import java.util.Date
       null; 
     } 
  } 
-  def createAndInsertSourceViewDto(sourceInstanceId : Long, sourceViewTypeId : Long, sourceViewName : String, sourceViewDefinition : String, isExisting : Int) : SourceViewDto = {
-    val dto = new SourceViewDto(0,0,new Date(),new Date(),sourceInstanceId,sourceViewTypeId,sourceViewName,sourceViewDefinition,isExisting)
+  def createAndInsertSourceViewDto(sourceInstanceId : Long, sourceViewTypeId : Long, sourceViewFormatId : Long, sourceViewName : String, sourceViewDefinition : String, isExisting : Int) : SourceViewDto = {
+    val dto = new SourceViewDto(0,0,new Date(),new Date(),sourceInstanceId,sourceViewTypeId,sourceViewFormatId,sourceViewName,sourceViewDefinition,isExisting)
     insertSourceViewDto(dto);   
   }   
   def updateSourceViewDto(dto : SourceViewDto): SourceViewDto = {  
     implicit val connection = getConnection();  
-      val resCnt = SQL("update sourceView set  lastUpdatedDate = {lastUpdatedDate} ,  sourceInstanceId = {sourceInstanceId} ,  sourceViewTypeId = {sourceViewTypeId} ,  sourceViewName = {sourceViewName} ,  sourceViewDefinition = {sourceViewDefinition} ,  isExisting = {isExisting}  where  sourceViewId = {sourceViewId}  ")
-      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "sourceInstanceId" -> dto.sourceInstanceId , "sourceViewTypeId" -> dto.sourceViewTypeId , "sourceViewName" -> dto.sourceViewName , "sourceViewDefinition" -> dto.sourceViewDefinition , "isExisting" -> dto.isExisting, "sourceViewId" -> dto.sourceViewId ).executeInsert() 
+      val resCnt = SQL("update sourceView set  lastUpdatedDate = {lastUpdatedDate} ,  sourceInstanceId = {sourceInstanceId} ,  sourceViewTypeId = {sourceViewTypeId} ,  sourceViewFormatId = {sourceViewFormatId} ,  sourceViewName = {sourceViewName} ,  sourceViewDefinition = {sourceViewDefinition} ,  isExisting = {isExisting}  where  sourceViewId = {sourceViewId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "sourceInstanceId" -> dto.sourceInstanceId , "sourceViewTypeId" -> dto.sourceViewTypeId , "sourceViewFormatId" -> dto.sourceViewFormatId , "sourceViewName" -> dto.sourceViewName , "sourceViewDefinition" -> dto.sourceViewDefinition , "isExisting" -> dto.isExisting, "sourceViewId" -> dto.sourceViewId ).executeInsert() 
    releaseConnection(connection);  
      getSourceViewByPk(dto.sourceViewId) 
     } 

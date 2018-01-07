@@ -84,9 +84,15 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
- def getDtosByAlgorithmTypeVersionId(colValue : Long) : List[VAlgorithmImplementationDto] = { 
+ def getDtosByAlgorithmTypeId(colValue : Long) : List[VAlgorithmImplementationDto] = { 
    implicit val connection = getConnection();  
-   val dtos : List[VAlgorithmImplementationDto] = SQL("select * from vAlgorithmImplementation where algorithmTypeVersionId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationDto].*);  
+   val dtos : List[VAlgorithmImplementationDto] = SQL("select * from vAlgorithmImplementation where algorithmTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByAlgorithmVersionId(colValue : Long) : List[VAlgorithmImplementationDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmImplementationDto] = SQL("select * from vAlgorithmImplementation where algorithmVersionId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationDto].*);  
    releaseConnection(connection);  
    dtos  
  }  
@@ -108,39 +114,81 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
- def getDtosByAlgorithmTypeVersion_algorithmTypeVersionId(colValue : Long) : List[VAlgorithmImplementationDto] = { 
+ def getDtosByAlgorithmImplementationDescription(colValue : String) : List[VAlgorithmImplementationDto] = { 
    implicit val connection = getConnection();  
-   val dtos : List[VAlgorithmImplementationDto] = SQL("select * from vAlgorithmImplementation where algorithmTypeVersion_algorithmTypeVersionId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationDto].*);  
+   val dtos : List[VAlgorithmImplementationDto] = SQL("select * from vAlgorithmImplementation where algorithmImplementationDescription = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationDto].*);  
    releaseConnection(connection);  
    dtos  
  }  
- def getDtosByAlgorithmTypeVersion_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmImplementationDto] = { 
+ def getDtosByAlgorithmType_algorithmTypeId(colValue : Long) : List[VAlgorithmImplementationDto] = { 
    implicit val connection = getConnection();  
-   val dtos : List[VAlgorithmImplementationDto] = SQL("select * from vAlgorithmImplementation where algorithmTypeVersion_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationDto].*);  
+   val dtos : List[VAlgorithmImplementationDto] = SQL("select * from vAlgorithmImplementation where algorithmType_algorithmTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationDto].*);  
    releaseConnection(connection);  
    dtos  
  }  
- def getDtosByAlgorithmTypeVersion_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmImplementationDto] = { 
+ def getDtosByAlgorithmType_guid(colValue : Long) : List[VAlgorithmImplementationDto] = { 
    implicit val connection = getConnection();  
-   val dtos : List[VAlgorithmImplementationDto] = SQL("select * from vAlgorithmImplementation where algorithmTypeVersion_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationDto].*);  
+   val dtos : List[VAlgorithmImplementationDto] = SQL("select * from vAlgorithmImplementation where algorithmType_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationDto].*);  
    releaseConnection(connection);  
    dtos  
  }  
- def getDtosByAlgorithmTypeVersion_guid(colValue : Long) : List[VAlgorithmImplementationDto] = { 
+ def getDtosByAlgorithmType_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmImplementationDto] = { 
    implicit val connection = getConnection();  
-   val dtos : List[VAlgorithmImplementationDto] = SQL("select * from vAlgorithmImplementation where algorithmTypeVersion_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationDto].*);  
+   val dtos : List[VAlgorithmImplementationDto] = SQL("select * from vAlgorithmImplementation where algorithmType_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationDto].*);  
    releaseConnection(connection);  
    dtos  
  }  
- def getDtosByAlgorithmTypeVersion_algorithmTypeId(colValue : Long) : List[VAlgorithmImplementationDto] = { 
+ def getDtosByAlgorithmType_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmImplementationDto] = { 
    implicit val connection = getConnection();  
-   val dtos : List[VAlgorithmImplementationDto] = SQL("select * from vAlgorithmImplementation where algorithmTypeVersion_algorithmTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationDto].*);  
+   val dtos : List[VAlgorithmImplementationDto] = SQL("select * from vAlgorithmImplementation where algorithmType_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationDto].*);  
    releaseConnection(connection);  
    dtos  
  }  
- def getDtosByAlgorithmTypeVersion_algorithmTypeVersionName(colValue : String) : List[VAlgorithmImplementationDto] = { 
+ def getDtosByAlgorithmType_algorithmTypeName(colValue : String) : List[VAlgorithmImplementationDto] = { 
    implicit val connection = getConnection();  
-   val dtos : List[VAlgorithmImplementationDto] = SQL("select * from vAlgorithmImplementation where algorithmTypeVersion_algorithmTypeVersionName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationDto].*);  
+   val dtos : List[VAlgorithmImplementationDto] = SQL("select * from vAlgorithmImplementation where algorithmType_algorithmTypeName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByAlgorithmType_algorithmTypeDescription(colValue : String) : List[VAlgorithmImplementationDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmImplementationDto] = SQL("select * from vAlgorithmImplementation where algorithmType_algorithmTypeDescription = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByAlgorithmVersion_algorithmVersionId(colValue : Long) : List[VAlgorithmImplementationDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmImplementationDto] = SQL("select * from vAlgorithmImplementation where algorithmVersion_algorithmVersionId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByAlgorithmVersion_insertedRowDate(colValue : java.util.Date) : List[VAlgorithmImplementationDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmImplementationDto] = SQL("select * from vAlgorithmImplementation where algorithmVersion_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByAlgorithmVersion_lastUpdatedDate(colValue : java.util.Date) : List[VAlgorithmImplementationDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmImplementationDto] = SQL("select * from vAlgorithmImplementation where algorithmVersion_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByAlgorithmVersion_guid(colValue : Long) : List[VAlgorithmImplementationDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmImplementationDto] = SQL("select * from vAlgorithmImplementation where algorithmVersion_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByAlgorithmVersion_algorithmTypeId(colValue : Long) : List[VAlgorithmImplementationDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmImplementationDto] = SQL("select * from vAlgorithmImplementation where algorithmVersion_algorithmTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByAlgorithmVersion_algorithmVersionName(colValue : String) : List[VAlgorithmImplementationDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmImplementationDto] = SQL("select * from vAlgorithmImplementation where algorithmVersion_algorithmVersionName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmImplementationDto].*);  
    releaseConnection(connection);  
    dtos  
  }  

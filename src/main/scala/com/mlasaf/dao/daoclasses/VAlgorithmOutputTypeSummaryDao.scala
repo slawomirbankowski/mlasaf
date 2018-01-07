@@ -90,9 +90,9 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
- def getDtosByAlgorithmTypeOutputType_count(colValue : Int) : List[VAlgorithmOutputTypeSummaryDto] = { 
+ def getDtosByAlgorithmVersionOutputType_count(colValue : Int) : List[VAlgorithmOutputTypeSummaryDto] = { 
    implicit val connection = getConnection();  
-   val dtos : List[VAlgorithmOutputTypeSummaryDto] = SQL("select * from vAlgorithmOutputTypeSummary where algorithmTypeOutputType_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputTypeSummaryDto].*);  
+   val dtos : List[VAlgorithmOutputTypeSummaryDto] = SQL("select * from vAlgorithmOutputTypeSummary where algorithmVersionOutputType_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmOutputTypeSummaryDto].*);  
    releaseConnection(connection);  
    dtos  
  }  

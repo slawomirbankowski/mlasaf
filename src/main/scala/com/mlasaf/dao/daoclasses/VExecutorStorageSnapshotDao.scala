@@ -138,6 +138,18 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
+ def getDtosByExecutorInstance_executorDefinition(colValue : String) : List[VExecutorStorageSnapshotDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorStorageSnapshotDto] = SQL("select * from vExecutorStorageSnapshot where executorInstance_executorDefinition = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSnapshotDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByExecutorInstance_executorParameters(colValue : String) : List[VExecutorStorageSnapshotDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorStorageSnapshotDto] = SQL("select * from vExecutorStorageSnapshot where executorInstance_executorParameters = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSnapshotDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
  def getDtosByExecutorInstance_isRunning(colValue : Int) : List[VExecutorStorageSnapshotDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VExecutorStorageSnapshotDto] = SQL("select * from vExecutorStorageSnapshot where executorInstance_isRunning = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSnapshotDto].*);  

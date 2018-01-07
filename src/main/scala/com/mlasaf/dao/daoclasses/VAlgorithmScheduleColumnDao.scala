@@ -300,6 +300,12 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
+ def getDtosBySourceView_sourceViewFormatId(colValue : Long) : List[VAlgorithmScheduleColumnDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where sourceView_sourceViewFormatId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
  def getDtosBySourceView_sourceViewName(colValue : String) : List[VAlgorithmScheduleColumnDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where sourceView_sourceViewName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);  

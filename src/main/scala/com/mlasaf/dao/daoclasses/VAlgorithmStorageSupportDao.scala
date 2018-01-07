@@ -126,9 +126,15 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
- def getDtosByAlgorithmImplementation_algorithmTypeVersionId(colValue : Long) : List[VAlgorithmStorageSupportDto] = { 
+ def getDtosByAlgorithmImplementation_algorithmTypeId(colValue : Long) : List[VAlgorithmStorageSupportDto] = { 
    implicit val connection = getConnection();  
-   val dtos : List[VAlgorithmStorageSupportDto] = SQL("select * from vAlgorithmStorageSupport where algorithmImplementation_algorithmTypeVersionId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmStorageSupportDto].*);  
+   val dtos : List[VAlgorithmStorageSupportDto] = SQL("select * from vAlgorithmStorageSupport where algorithmImplementation_algorithmTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmStorageSupportDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByAlgorithmImplementation_algorithmVersionId(colValue : Long) : List[VAlgorithmStorageSupportDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmStorageSupportDto] = SQL("select * from vAlgorithmStorageSupport where algorithmImplementation_algorithmVersionId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmStorageSupportDto].*);  
    releaseConnection(connection);  
    dtos  
  }  
@@ -147,6 +153,12 @@ import java.util.Date
  def getDtosByAlgorithmImplementation_algorithmImplementationClass(colValue : String) : List[VAlgorithmStorageSupportDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VAlgorithmStorageSupportDto] = SQL("select * from vAlgorithmStorageSupport where algorithmImplementation_algorithmImplementationClass = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmStorageSupportDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByAlgorithmImplementation_algorithmImplementationDescription(colValue : String) : List[VAlgorithmStorageSupportDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmStorageSupportDto] = SQL("select * from vAlgorithmStorageSupport where algorithmImplementation_algorithmImplementationDescription = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmStorageSupportDto].*);  
    releaseConnection(connection);  
    dtos  
  }  

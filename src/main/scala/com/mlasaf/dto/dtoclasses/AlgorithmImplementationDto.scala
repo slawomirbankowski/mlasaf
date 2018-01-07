@@ -11,34 +11,38 @@ case class AlgorithmImplementationDto (
      , val guid : Long
      , val insertedRowDate : java.util.Date
      , val lastUpdatedDate : java.util.Date
-     , val algorithmTypeVersionId : Long
+     , val algorithmTypeId : Long
+     , val algorithmVersionId : Long
      , val executorTypeId : Long
      , val algorithmImplementationName : String
-     , val algorithmImplementationClass : String 
+     , val algorithmImplementationClass : String
+     , val algorithmImplementationDescription : String 
      ) extends BaseDto {  
    def tableName : String = {    "algorithmImplementation";    }  
-   def fields : String = {    "algorithmImplementationId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,executorTypeId,algorithmImplementationName,algorithmImplementationClass";    }  
+   def fields : String = {    "algorithmImplementationId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeId,algorithmVersionId,executorTypeId,algorithmImplementationName,algorithmImplementationClass,algorithmImplementationDescription";    }  
    def pkFields : String = {    "algorithmImplementationId";    }  
-   def fkFields : String = {    "algorithmTypeVersionId,executorTypeId";    }  
+   def fkFields : String = {    "algorithmTypeId,algorithmVersionId,executorTypeId";    }  
    def nameField : String = {    "algorithmImplementationName";    }  
  def getPk() : Long = {    algorithmImplementationId  }  
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(algorithmImplementationId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeVersionId,executorTypeId,algorithmImplementationName,algorithmImplementationClass)  }  
- def toStringArray() : Array[String] = {    Array(""+algorithmImplementationId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmTypeVersionId,""+executorTypeId,""+algorithmImplementationName,""+algorithmImplementationClass)   }  
- def toJson() : String = {   "{" + "\"algorithmImplementationId\":\""+algorithmImplementationId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"algorithmTypeVersionId\":\""+algorithmTypeVersionId+"\""+","+"\"executorTypeId\":\""+executorTypeId+"\""+","+"\"algorithmImplementationName\":\""+algorithmImplementationName+"\""+","+"\"algorithmImplementationClass\":\""+algorithmImplementationClass+"\"" + "}"   }  
- def toFullString() : String = {    "algorithmImplementationId:'"+algorithmImplementationId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmTypeVersionId:'"+algorithmTypeVersionId+"'"+","+"executorTypeId:'"+executorTypeId+"'"+","+"algorithmImplementationName:'"+algorithmImplementationName+"'"+","+"algorithmImplementationClass:'"+algorithmImplementationClass+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(algorithmImplementationId,guid,insertedRowDate,lastUpdatedDate,algorithmTypeId,algorithmVersionId,executorTypeId,algorithmImplementationName,algorithmImplementationClass,algorithmImplementationDescription)  }  
+ def toStringArray() : Array[String] = {    Array(""+algorithmImplementationId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmTypeId,""+algorithmVersionId,""+executorTypeId,""+algorithmImplementationName,""+algorithmImplementationClass,""+algorithmImplementationDescription)   }  
+ def toJson() : String = {   "{" + "\"algorithmImplementationId\":\""+algorithmImplementationId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"algorithmTypeId\":\""+algorithmTypeId+"\""+","+"\"algorithmVersionId\":\""+algorithmVersionId+"\""+","+"\"executorTypeId\":\""+executorTypeId+"\""+","+"\"algorithmImplementationName\":\""+algorithmImplementationName+"\""+","+"\"algorithmImplementationClass\":\""+algorithmImplementationClass+"\""+","+"\"algorithmImplementationDescription\":\""+algorithmImplementationDescription+"\"" + "}"   }  
+ def toFullString() : String = {    "algorithmImplementationId:'"+algorithmImplementationId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmTypeId:'"+algorithmTypeId+"'"+","+"algorithmVersionId:'"+algorithmVersionId+"'"+","+"executorTypeId:'"+executorTypeId+"'"+","+"algorithmImplementationName:'"+algorithmImplementationName+"'"+","+"algorithmImplementationClass:'"+algorithmImplementationClass+"'"+","+"algorithmImplementationDescription:'"+algorithmImplementationDescription+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "algorithmImplementationId" => algorithmImplementationId  
      case "guid" => guid  
      case "insertedRowDate" => insertedRowDate  
      case "lastUpdatedDate" => lastUpdatedDate  
-     case "algorithmTypeVersionId" => algorithmTypeVersionId  
+     case "algorithmTypeId" => algorithmTypeId  
+     case "algorithmVersionId" => algorithmVersionId  
      case "executorTypeId" => executorTypeId  
      case "algorithmImplementationName" => algorithmImplementationName  
-     case "algorithmImplementationClass" => algorithmImplementationClass   
+     case "algorithmImplementationClass" => algorithmImplementationClass  
+     case "algorithmImplementationDescription" => algorithmImplementationDescription   
     case _ => null 
     } 
     ret 
@@ -49,25 +53,29 @@ case class AlgorithmImplementationDto (
      case "guid" => "Long"  
      case "insertedRowDate" => "java.util.Date"  
      case "lastUpdatedDate" => "java.util.Date"  
-     case "algorithmTypeVersionId" => "Long"  
+     case "algorithmTypeId" => "Long"  
+     case "algorithmVersionId" => "Long"  
      case "executorTypeId" => "Long"  
      case "algorithmImplementationName" => "String"  
-     case "algorithmImplementationClass" => "String"   
+     case "algorithmImplementationClass" => "String"  
+     case "algorithmImplementationDescription" => "String"   
     case _ => "Object" 
     } 
     ret 
   } 
    def prepareInsert(connection : java.sql.Connection) : java.sql.PreparedStatement = {
-     val stat = connection.prepareStatement("insert into algorithmImplementation(guid,algorithmTypeVersionId,executorTypeId,algorithmImplementationName,algorithmImplementationClass) values (?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
+     val stat = connection.prepareStatement("insert into algorithmImplementation(guid,algorithmTypeId,algorithmVersionId,executorTypeId,algorithmImplementationName,algorithmImplementationClass,algorithmImplementationDescription) values (?,?,?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
     stat.setObject(1, guid);
-    stat.setObject(2, algorithmTypeVersionId);
-    stat.setObject(3, executorTypeId);
-    stat.setObject(4, algorithmImplementationName);
-    stat.setObject(5, algorithmImplementationClass);
+    stat.setObject(2, algorithmTypeId);
+    stat.setObject(3, algorithmVersionId);
+    stat.setObject(4, executorTypeId);
+    stat.setObject(5, algorithmImplementationName);
+    stat.setObject(6, algorithmImplementationClass);
+    stat.setObject(7, algorithmImplementationDescription);
     return stat; 
    } 
-   def modify(algorithmTypeVersionId : Long, executorTypeId : Long, algorithmImplementationName : String, algorithmImplementationClass : String) : AlgorithmImplementationDto = {
-    val dtoModified = new AlgorithmImplementationDto(this.algorithmImplementationId,this.guid,this.insertedRowDate,new java.util.Date(),algorithmTypeVersionId,executorTypeId,algorithmImplementationName,algorithmImplementationClass);
+   def modify(algorithmTypeId : Long, algorithmVersionId : Long, executorTypeId : Long, algorithmImplementationName : String, algorithmImplementationClass : String, algorithmImplementationDescription : String) : AlgorithmImplementationDto = {
+    val dtoModified = new AlgorithmImplementationDto(this.algorithmImplementationId,this.guid,this.insertedRowDate,new java.util.Date(),algorithmTypeId,algorithmVersionId,executorTypeId,algorithmImplementationName,algorithmImplementationClass,algorithmImplementationDescription);
     dtoModified
   }
  } 
@@ -77,13 +85,15 @@ object AlgorithmImplementationDto {
    val FIELD_guid = "guid";
    val FIELD_insertedRowDate = "insertedRowDate";
    val FIELD_lastUpdatedDate = "lastUpdatedDate";
-   val FIELD_algorithmTypeVersionId = "algorithmTypeVersionId";
+   val FIELD_algorithmTypeId = "algorithmTypeId";
+   val FIELD_algorithmVersionId = "algorithmVersionId";
    val FIELD_executorTypeId = "executorTypeId";
    val FIELD_algorithmImplementationName = "algorithmImplementationName";
    val FIELD_algorithmImplementationClass = "algorithmImplementationClass";
+   val FIELD_algorithmImplementationDescription = "algorithmImplementationDescription";
 
-  def createNewAlgorithmImplementationDto(algorithmTypeVersionId : Long, executorTypeId : Long, algorithmImplementationName : String, algorithmImplementationClass : String) : AlgorithmImplementationDto = {  
-     val dto = new AlgorithmImplementationDto(0,0,new java.util.Date(),new java.util.Date(),algorithmTypeVersionId,executorTypeId,algorithmImplementationName,algorithmImplementationClass)   
+  def createNewAlgorithmImplementationDto(algorithmTypeId : Long, algorithmVersionId : Long, executorTypeId : Long, algorithmImplementationName : String, algorithmImplementationClass : String, algorithmImplementationDescription : String) : AlgorithmImplementationDto = {  
+     val dto = new AlgorithmImplementationDto(0,0,new java.util.Date(),new java.util.Date(),algorithmTypeId,algorithmVersionId,executorTypeId,algorithmImplementationName,algorithmImplementationClass,algorithmImplementationDescription)   
     dto 
   } 
 

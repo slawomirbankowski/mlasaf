@@ -25,6 +25,7 @@ object CreateAlgorithmImplementation {
     val algorithmVersion = entryOptions.algorithmVersion.getOrElse("")
     val algorithmImplementationName = entryOptions.algorithmImplementationName.getOrElse("")
     val algorithmImplementationClass = entryOptions.algorithmImplementationClass.getOrElse("")
+    val algorithmImplementationDesc = ""
     //val algorithmColumns = entryOptions.algorithmColumns.getOrElse("")
    // val algorithmParameters = entryOptions.algorithmParameters.getOrElse("")
     //val outputTypes = entryOptions.outputType.getOrElse("")
@@ -36,9 +37,9 @@ object CreateAlgorithmImplementation {
     logger.info("execTypeId: " + execTypeId);
     val algTypeId = daoFactory.daos.algorithmTypeDao.getAlgorithmTypeByName(algorithmType).head.algorithmTypeId;
     logger.info("algTypeId: " + algTypeId);
-    val algTypeVerId = daoFactory.daos.algorithmTypeVersionDao.getAlgorithmTypeVersionsList().filter(a => (a.algorithmTypeVersionName.equals(algorithmVersion) && a.algorithmTypeId == algTypeId)).head.algorithmTypeVersionId;
-    logger.info("algTypeVerId: " + algTypeVerId);
-    val algImplDto = daoFactory.daos.algorithmImplementationDao.createAndInsertAlgorithmImplementationDto(algTypeVerId, execTypeId, algorithmImplementationName, algorithmImplementationClass);
+    val algVerId = daoFactory.daos.algorithmVersionDao.getAlgorithmVersionsList().filter(a => (a.algorithmVersionName.equals(algorithmVersion) && a.algorithmTypeId == algTypeId)).head.algorithmVersionId;
+    logger.info("algVerId: " + algVerId);
+    val algImplDto = daoFactory.daos.algorithmImplementationDao.createAndInsertAlgorithmImplementationDto(algTypeId, algVerId, execTypeId, algorithmImplementationName, algorithmImplementationClass, algorithmImplementationDesc);
     logger.info("algImplDto: " + algImplDto);
 
     /*

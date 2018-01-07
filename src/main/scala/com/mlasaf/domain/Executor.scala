@@ -25,10 +25,15 @@ trait Executor extends ThreadBase {
   def onRunBegin() = {
     val exeTypeId = parentContext.daoFactory.daos.executorTypeDao.getExecutorTypeFirstByName(getTypeName()).get.executorTypeId
     executorInstanceDto = parentContext.daoFactory.daoCustom.registerExecutorInstance(exeTypeId , parentContext.contextDto.executorContextId);
-    logger.info("Start executor: " + executorInstanceDto)
+    logger.info("Start executor: " + executorInstanceDto);
+    runInterval = 10000L;
   }
   def onRun() = {
     logger.info("Executor run in thread: " + executorInstanceDto + ", searching for schedules");
+    val infoContent = ""
+    val errorDescription = ""
+    parentContext.daoFactory.daos.executorInstanceStateDao.createAndInsertExecutorInstanceStateDto(executorInstanceDto.executorInstanceId, "WORKING", infoContent, errorDescription);
+    parentContext.daoFactory.daos.executorInstanceDao.changeUpdatedDate(executorInstanceDto);
     searchForSchedules();
     algorithmRuns();
     onRunExecutor();
@@ -76,7 +81,7 @@ trait Executor extends ThreadBase {
         algoRun.storage = storageObj;
         algoRun.algorithmRunDto = runDto;
         algoRun.algorithmScheduleDto = sch;
-        val outputTypeDtos = parentContext.daoFactory.daos.vAlgorithmTypeOutputTypeDao.getDtosByAlgorithmTypeVersion_algorithmTypeVersionId(sch.algorithmImplementation_algorithmTypeVersionId);
+        val outputTypeDtos = parentContext.daoFactory.daos.vAlgorithmVersionOutputTypeDao.getDtosByAlgorithmVersion_algorithmVersionId(sch.algorithmImplementation_algorithmVersionId);
         outputTypeDtos.foreach(ot => {
           val outputPath = storageObj.generateOutputPath();
           logger.info("For AlgorthmRun created path on storage: " + storageObj.storageDto.executorStorageId + ", path: " + outputPath);
