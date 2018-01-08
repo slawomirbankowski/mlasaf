@@ -12,6 +12,7 @@ class ExecutorCommandStop extends ExecutorCommand {
 
   /** run given command for context and params */
   def runCommand(ctx : Context, params : Array[String]) : Unit = {
+    // TODO: log result of this command
     ctx.isStopped = true;
   }
 

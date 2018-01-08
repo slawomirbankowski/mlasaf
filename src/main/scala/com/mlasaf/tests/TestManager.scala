@@ -16,6 +16,8 @@ object TestManager {
 
   def main(args : Array[String]) : Unit = {
     // get all TESTS to be run
+
+
     val testList = "com.mlasaf.tests.scenario.EmptyScenarioTest,com.mlasaf.tests.scenario.RestCheckScenarioTest"
     val jdbcStringTemplate = "jdbc:mysql://localhost:3307/DBTEMPLATENAME"
     val jdbcUser = System.getenv("MLASAF_USER")
@@ -23,8 +25,6 @@ object TestManager {
     val jdbcDriver = System.getenv("MLASAF_DRIVER");
     var jdbcJarPath = "./libstatic/mysql-connector-java-5.1.45-bin.jar";
     val changeLogFile = "./src/main/resources/db/db_1.0.xml";
-
-
 
     val totalTestsCount = testList.split(",").size
     var runTestsCount = 0;

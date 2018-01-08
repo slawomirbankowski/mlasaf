@@ -7,6 +7,7 @@ package com.mlasaf.transform
 import com.mlasaf.base.ThreadBase
 import com.mlasaf.dto.ExecutorInstanceDto
 
+/** manager for transformations */
 class TransformManager extends ThreadBase {
 
   /** */

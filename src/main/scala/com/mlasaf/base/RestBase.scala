@@ -32,12 +32,10 @@ trait RestBase {
           val cookiesStr = "" + request.cookies().keySet().toArray.map(c => c + ":'" + request.cookie("" + c) + "'").mkString(",");
           val sessionStr = "" + request.session();
           val requestMethod = request.requestMethod();
-          val requestBody = "";
-          val responseBody = "";
+          val requestBody = ""; // TODO: use simple cutter for String to get first 2000 chars for body
+          val responseBody = ""; // TODO: use simple curtter for String to get first 2000 chars for body from ret
           val clientHost = request.host();
           val protocol = request.protocol();
-          // + request.body()
-          // + request.protocol()
           parentRest.parentContext.daoFactory.daos.executorRestCallDao.createAndInsertExecutorRestCallDto(parentRest.parentContext.hostDto.executorHostId, parentRest.executorRestDto.executorRestId, requestMethod, requestHeader , requestBody , responseBody, executeTime, headersStr, cookiesStr, clientHost, protocol, sessionStr);
         } catch {
           case ex : Exception => {

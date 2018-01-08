@@ -6,7 +6,9 @@ package com.mlasaf.rest
 
 import java.io.{BufferedReader, BufferedWriter, InputStreamReader, OutputStreamWriter}
 
+/** client for REST servers */
 class RestClient(address : String) {
+
 
   def sendRequest(reqMethod : String, reqBody : String, timeout : Int) : String = {
     var url : java.net.URL = new java.net.URL(address);

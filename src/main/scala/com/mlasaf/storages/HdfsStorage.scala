@@ -16,7 +16,6 @@ class HdfsStorage extends Storage {
   def generateOutputPath() : String = {
     ""
   }
-
   /** actions after initializations */
   def onInitialize(): Unit = {
   }

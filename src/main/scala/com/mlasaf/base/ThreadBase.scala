@@ -49,6 +49,7 @@ trait ThreadBase extends Runnable {
   def stop() = {
     stopTime = new java.util.Date();
     logger.info("Stop thread: " + this);
+    // pack with try ... catch to log all errors while onStop()
     onStop();
     isStopped = true;
     Thread.sleep(2500L);
@@ -102,15 +103,15 @@ trait ThreadBase extends Runnable {
   def getName() : String;
   /** run at the begin of working in thread */
   def onRunBegin() : Unit;
-  /** */
+  /** to override - method to run in cycle */
   def onRun() : Unit;
-  /** */
+  /** to override - method to run on end of working */
   def onRunEnd() : Unit;
-  /** */
+  /** to override - method to run in case of error */
   def onRunError(ex : Exception) : Unit = {  }
   /** run in case of invoke stop() method */
   def onStop() : Unit;
-  /** run in case of invoke start() method */
+  /** to override - run in case of invoke start() method */
   def onStart() : Unit = {
   };
 

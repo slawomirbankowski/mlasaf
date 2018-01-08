@@ -29,6 +29,8 @@ trait BaseReadOnlyDto {
   def getFieldTypeName(name : String) : String;
   def toAnyArray() : Array[Any];
   def toStringArray() : Array[String];
+  def toJson() : String;
+  def toFullString() : String;
 
   override def toString: String = toStringArray().mkString(",");
 }

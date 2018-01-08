@@ -30,7 +30,7 @@ class DaoCustom {
       .executeInsert()(connection)
     daoFactory.daoConn.releaseConnection(connection);
   }
-  /**  */
+  /** check if executorHost is in database - if not add new one, if there is such host - just get it from DB */
   def registerHost() : ExecutorHostDto = {
     val hostName = MlUtils.getHostName
     logger.info("Try to register CURRENT host for name: " + hostName)

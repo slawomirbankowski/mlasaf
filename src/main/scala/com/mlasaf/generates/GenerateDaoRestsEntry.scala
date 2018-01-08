@@ -50,7 +50,7 @@ object GenerateDaoRestsEntry {
       outputContent.write("\n");
     });
     //GETs with parameters
-
+    // TODO: write code to generage GETs with parameters - by PK, by Name, by insertedRowDate
     // POSTS
     outputContent.write("\n");
     outputContent.write("  } ");

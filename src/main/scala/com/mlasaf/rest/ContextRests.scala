@@ -9,6 +9,7 @@ import com.mlasaf.base.RestBase
 /** all RESTs for context */
 class ContextRests extends RestBase  {
 
+  /** define all Context RESTs methods */
   def initialize() : Unit = {
     spark.Spark.get("/context-info", (req: spark.Request, resp: spark.Response) => {
       resp.raw().setContentType("application/json");

@@ -12,6 +12,7 @@ import spark.Spark._;
 /** DAO RESTs */
 class DaoRests extends RestBase {
 
+  /** define all RESTs methods for get lists of objects */
   def initialize() : Unit = {
     spark.Spark.get("/algorithmColumnType", (req: spark.Request, resp: spark.Response) => " [ " + parentRest.parentContext.daoFactory.daos.algorithmColumnTypeDao.getAlgorithmColumnTypesList().map(a => a.toJson()).mkString(",") + " ] " );
     spark.Spark.get("/algorithmColumnType-count", (req: spark.Request, resp: spark.Response) => " { \"count\":" + parentRest.parentContext.daoFactory.daos.algorithmColumnTypeDao.getAlgorithmColumnTypesCount() + " } " );

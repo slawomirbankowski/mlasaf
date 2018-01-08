@@ -11,15 +11,19 @@ import com.mlasaf.rest.ExecutorRests
 /** Executor to run any external or internal ML algorithm */
 trait Executor extends ThreadBase {
 
+  /** DTO object for current Executor */
   var executorInstanceDto : ExecutorInstanceDto = null
-  var executorRest : ExecutorRests = null
+  /** all algorithms that are running now */
   val algoRunObjs : scala.collection.mutable.ListBuffer[AlgorithmRun] = new scala.collection.mutable.ListBuffer();
 
+  /** executor constructor */
   def Executor() = {
   }
+  /** to override for given Executor subclass */
   def onRunExecutor() : Unit;
+  /** get name of thread */
   def getName() : String = "EXECUTOR";
-  /**  */
+  /** to override - get name of Executor type */
   def getTypeName() : String;
   /** run for executor */
   def onRunBegin() = {
@@ -28,23 +32,27 @@ trait Executor extends ThreadBase {
     logger.info("Start executor: " + executorInstanceDto);
     runInterval = 10000L;
   }
+  /** running executor in separate thread */
   def onRun() = {
     logger.info("Executor run in thread: " + executorInstanceDto + ", searching for schedules");
-    val infoContent = ""
-    val errorDescription = ""
-    parentContext.daoFactory.daos.executorInstanceStateDao.createAndInsertExecutorInstanceStateDto(executorInstanceDto.executorInstanceId, "WORKING", infoContent, errorDescription);
-    parentContext.daoFactory.daos.executorInstanceDao.changeUpdatedDate(executorInstanceDto);
+
     searchForSchedules();
     algorithmRuns();
     onRunExecutor();
+
+    val infoContent = ""; // TODO: fill info content with useful information about executor
+    val errorDescription = ""; // pack onRun in trz... catch and fill errorDescription
+    parentContext.daoFactory.daos.executorInstanceStateDao.createAndInsertExecutorInstanceStateDto(executorInstanceDto.executorInstanceId, "WORKING", infoContent, errorDescription);
+    parentContext.daoFactory.daos.executorInstanceDao.changeUpdatedDate(executorInstanceDto);
   }
+  //**  */
   def onRunEnd() = {
     isWorking = false;
     logger.info("End of working, try to unregister Executor: " + executorInstanceDto)
     parentContext.daoFactory.daos.executorInstanceDao.updateField(executorInstanceDto, ExecutorInstanceDto.FIELD_isRunning, 0);
     parentContext.daoFactory.daos.executorInstanceDao.updateField(executorInstanceDto, ExecutorInstanceDto.FIELD_isFinished, 1);
     parentContext.daoFactory.daos.executorInstanceDao.changeUpdatedDate(executorInstanceDto);
-    logger.info("End executor " + executorInstanceDto)
+    logger.info("End Executor " + executorInstanceDto)
   }
   def onStop() : Unit = {
     logger.info("Stopping EXECUTOR...");
@@ -107,7 +115,11 @@ trait Executor extends ThreadBase {
             algoRun.algorithmRunViewDtos += algoRunViewDto;
           } else {
             // view not downloaded - need to schedule
-            var srcSchedule = parentContext.daoFactory.daos.sourceScheduleDao.createAndInsertSourceScheduleDto(schView.sourceViewId, storageId, 1, new java.util.Date(), 0, 1, 0);
+            val onDemand = 1;
+            val isScheduled = 1;
+            val deleteOldCopied = 0;
+            val intervalValue = 0;
+            var srcSchedule = parentContext.daoFactory.daos.sourceScheduleDao.createAndInsertSourceScheduleDto(schView.sourceViewId, storageId, onDemand, new java.util.Date(), intervalValue, isScheduled, deleteOldCopied);
             logger.info("==>For algorithmRun: " + runDto.algorithmRunId + ", viewId: " + schView.sourceViewId  + " create schedule to download view for viewId: " + schView.sourceViewId + ", NEW schedule: " + srcSchedule.sourceScheduleId);
             algoRun.algorithmScheduleViewDtos += schView;
           }

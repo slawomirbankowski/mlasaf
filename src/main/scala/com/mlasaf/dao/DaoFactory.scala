@@ -36,17 +36,21 @@ class DaoFactory extends ThreadBase {
       runInterval = 10000L;
       daoCustom.initialize(this);
     }
+    /** get name of thread */
     def getName() : String = "DAO_FACTORY";
     def onRunBegin() = {
     }
+    /** */
     def onRun() = {
       logger.info("Connections free: " + daoConn.connectionsFree.size + ", inUse: " + daoConn.connectionsInUse.size + ", isInitialized: " + daoConn.isInitialized + ", connTotalCounter: " + daoConn.connTotalCounter + ", connReleaseCounter: " + daoConn.connReleaseCounter + ", connsInUseCount: " + daoConn.connInUse.size())
+      // TODO: check and manage connections
     }
     def onRunEnd() = {
     }
     def onStop() : Unit = {
       logger.info("Stopping DAO Factory...");
     }
+    /** get number of rows in table for given DTO */
     def selectCount(d : BaseDto) : Long = {
       implicit val conn = daoConn.getConnection();
       val sql = "select count(*) as cnt from " + d.tableName
@@ -56,6 +60,7 @@ class DaoFactory extends ThreadBase {
       daoConn.releaseConnection(conn);
       queryRes
     }
+  /** */
     def selectCount(d : java.lang.Class[BaseDto]) : Long = {
       implicit val conn = daoConn.getConnection();
       val sql = "select count(*) as cnt from " + d.getName
@@ -66,6 +71,7 @@ class DaoFactory extends ThreadBase {
       queryRes
     }
     def executeQuery(sql : String, params : Seq[Object]) = {
+      // TODO: finish implementation for execute any query with params
     }
     def getInfoJson() : String = {
       " { \"connectionCounter\":" + daoConn.connTotalCounter + ",\"daoCount\":" + daos.getClass.getFields.size + ",\"connectionsInUseCount\":" + daoConn.connInUse.size() + ", \"jdbcString\":\"" + daoConn.jdbcString + "\", \"jdbcUser\":\"" + daoConn.jdbcUser + "\",\"jdbcDriverClass\":\"" + daoConn.jdbcDriverClass + "\" } "

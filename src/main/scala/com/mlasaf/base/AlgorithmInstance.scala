@@ -15,6 +15,7 @@ trait AlgorithmInstance {
     // TODO: implement basic checks for input/output parameters for all algorithms
     // run algorithm
     onAlgorithmRun(run);
+    // implement basic output from algorithm
 
   }
   /** to override for all algorithms */

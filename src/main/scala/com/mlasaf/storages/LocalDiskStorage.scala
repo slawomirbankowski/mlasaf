@@ -11,6 +11,7 @@ import com.mlasaf.domain._
 import com.mlasaf.dto._
 import com.mlasaf.common._
 
+/** storage - local disk / folder */
 class LocalDiskStorage extends Storage {
 
   /** actions after initializations */

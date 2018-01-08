@@ -57,25 +57,38 @@ object CustomUtils {
   def cutString(s : String, maxPartLen : Int, minParts : Int) : Array[String] = {
     val partsNum = Math.max(minParts, s.length / maxPartLen);
     val resParts = new Array[String](partsNum)
+    // TODO: finish implementation of cutString method - change return type to Structure/Class
     (0 to partsNum-1).foreach(partNum => {
-      resParts(partNum) = ""
+      val start = partNum * maxPartLen;
+      val end = (partNum + 1) * maxPartLen -1;
+      val cutStart = if (s.length > start) start else s.length-1;
+      val cutEnd = if (s.length > end) end else s.length-1;
+      resParts(partNum) = s.substring(cutStart, cutEnd)
     });
     resParts
   }
   def executeQuery(conn : java.sql.Connection, sql : String) = {
-
+    // TODO: finish implementation
   }
   def executeQuery(conn : java.sql.Connection, sql : String, pars : Array[AnyRef]) = {
     val stat = conn.prepareStatement(sql)
     pars.zipWithIndex.foreach(par => {
       stat.setObject(par._2+1, par._1);
     });
+    // TODO: finish implementation
     val rs = stat.executeQuery(sql);
     while (rs.next()) {
 
 
     }
     stat.close();
+  }
+
+  def main(args : Array[String]) : Unit = {
+    println("TEST");
+    val res = cutString("123456789012345678901234567890", 12, 10);
+    println("CUT: " + res.zipWithIndex.map(x => x._2 +":" + x._1).mkString(","));
+
   }
 
 }

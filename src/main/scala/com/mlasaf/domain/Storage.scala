@@ -11,14 +11,16 @@ import com.mlasaf.dto._
 /** storage base class */
 trait Storage extends ThreadBase {
 
-  /** */
+  /** DTO object for storage */
   var storageDto : ExecutorStorageDto = null;
-  /** */
+
+  /** initialization of storage*/
   def initialize(ctx : Context, dto : ExecutorStorageDto): Unit = {
     logger.info("Initialization of Storage: " + dto);
     parentContext = ctx;
     storageDto = dto;
     runInterval = 20000L;
+    // TODO: pack with try..catch.. and notify error
     onInitialize()
   }
   /** actions after initializations */
@@ -27,23 +29,23 @@ trait Storage extends ThreadBase {
   def onRunBegin() = {
     logger.info("Start THREAD for Storage: " + storageDto.executorStorageId);
   }
+  /** to override - on Storage run */
   def onRunStorage() : Unit;
-
-  /** */
+  /** run storage in cycle */
   def onRun() = {
+    // TODO: pack in try..catch.. and save error
     downloadSourceSchedules();
   }
   /**  */
   def onRunEnd() = {
     logger.info("End THREAD for Storage: " + storageDto.executorStorageId);
   }
-  /**  */
+  /** stop storage */
   def onStop(): Unit = {
-    isStopped = true;
   }
   /** get name of thread */
   def getName() : String = "STORAGE";
-
+  /** generate new path for storage - this could be local path on disk or path in HDFS or new empty storage in database */
   def generateOutputPath() : String;
   /** download all schedules for given source instance */
   def downloadSourceSchedules() : Unit = {

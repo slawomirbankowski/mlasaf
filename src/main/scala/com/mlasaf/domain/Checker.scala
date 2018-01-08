@@ -11,6 +11,7 @@ class Checker extends ThreadBase {
 
   var checkCounter : Long = 0;
 
+  /** get thread name */
   def getName() : String = "CHECKER";
   /** run for executor */
   def onRunBegin() = {

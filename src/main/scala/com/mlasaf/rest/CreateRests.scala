@@ -19,6 +19,7 @@ import com.mlasaf.structures._
 /** class with RESTs */
 class CreateRests extends RestBase  {
 
+  /** define all RESTs methods for create objects */
   def initialize() : Unit = {
     spark.Spark.post("/algorithm-schedule", (req: spark.Request, resp: spark.Response) => {
       resp.`type`("application/json");

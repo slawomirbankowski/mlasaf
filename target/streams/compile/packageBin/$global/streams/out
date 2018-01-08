@@ -86,6 +86,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VAlgorithmVersionParamTypeDao$$anonfun$27.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VAlgorithmScheduleParamDao$$anonfun$13.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VAlgorithmScheduleParamDao$$anonfun$13.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\domain\Context$$anonfun$refreshSources$4.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\domain\Context$$anonfun$refreshSources$4.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VAlgorithmRunSummaryDao$$anonfun$7.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VAlgorithmRunSummaryDao$$anonfun$7.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VAlgorithmRunDao$$anonfun$102.class[0m
@@ -802,6 +804,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VAlgorithmVersionColumnTypeDao$$anonfun$8.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VDownloadTransformColumnDao$$anonfun$79.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VDownloadTransformColumnDao$$anonfun$79.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\base\AlgorithmInstance$class.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\base\AlgorithmInstance$class.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VExecutorRestDao$$anonfun$23.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VExecutorRestDao$$anonfun$23.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VExecutorRestDao$$anonfun$11.class[0m
@@ -1344,6 +1348,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VDownloadTransformColumnDao$$anonfun$72.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\SourceViewDao$$anonfun$28.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\SourceViewDao$$anonfun$28.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\algorithms\local\PredictionLocalRandom$$anonfun$4.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\algorithms\local\PredictionLocalRandom$$anonfun$4.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VAlgorithmStorageSupportDao$$anonfun$24.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VAlgorithmStorageSupportDao$$anonfun$24.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VSourceViewFormatSummaryDao$$anonfun$20.class[0m
@@ -1424,8 +1430,6 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dto\BaseReadOnlyDto$class.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VAlgorithmOutputDao$$anonfun$15.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VAlgorithmOutputDao$$anonfun$15.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\algorithms\local\PredictionLocalSma5$$anonfun$run$2.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\algorithms\local\PredictionLocalSma5$$anonfun$run$2.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\DownloadTransformDao$$anonfun$9.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\DownloadTransformDao$$anonfun$9.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VExecutorHostSummaryDao$$anonfun$5.class[0m
@@ -2070,8 +2074,6 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VResourceManagerAllocationDao$$anonfun$1.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\SourceParamValueDao$$anonfun$18.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\SourceParamValueDao$$anonfun$18.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dto\Dtos$.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dto\Dtos$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VSourceViewColumnDao$$anonfun$19.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VSourceViewColumnDao$$anonfun$19.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VSourceViewSummaryDao.class[0m
@@ -2636,6 +2638,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\loaders\DatabaseDrop$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\generates\GenerateDtoClassesEntry$$anonfun$main$2$$anonfun$31.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\generates\GenerateDtoClassesEntry$$anonfun$main$2$$anonfun$31.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\algorithms\local\PredictionLocalSma5$$anonfun$onAlgorithmRun$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\algorithms\local\PredictionLocalSma5$$anonfun$onAlgorithmRun$1.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VResourceManagerDao$$anonfun$50.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VResourceManagerDao$$anonfun$50.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\AlgorithmScheduleColumnDao$$anonfun$22.class[0m
@@ -3328,6 +3332,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VExecutorRestCallDao$$anonfun$41.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\rest\DaoRests$$anonfun$initialize$71$$anonfun$apply$36.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\rest\DaoRests$$anonfun$initialize$71$$anonfun$apply$36.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\domain\Context$$anonfun$refreshSources$5.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\domain\Context$$anonfun$refreshSources$5.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VSourceDownloadStatDao$$anonfun$16.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VSourceDownloadStatDao$$anonfun$16.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VSourceDownloadDao$$anonfun$1.class[0m
@@ -3410,6 +3416,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\SourceParamValueDao$$anonfun$7.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VSourceDownloadStatDao$$anonfun$44.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VSourceDownloadStatDao$$anonfun$44.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\algorithms\local\PredictionLocalRandom$$anonfun$5.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\algorithms\local\PredictionLocalRandom$$anonfun$5.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VExecutorContextRuntimeDao$$anonfun$70.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VExecutorContextRuntimeDao$$anonfun$70.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VAlgorithmVersionOutputTypeDao$$anonfun$8.class[0m
@@ -3444,6 +3452,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\rest\DaoRests$$anonfun$initialize$3$$anonfun$apply$2.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VSourceInstanceDao$$anonfun$21.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VSourceInstanceDao$$anonfun$21.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\algorithms\local\PredictionLocalRandom$$anonfun$6.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\algorithms\local\PredictionLocalRandom$$anonfun$6.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VExecutorStorageResourceDao$$anonfun$36.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VExecutorStorageResourceDao$$anonfun$36.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VSourceDownloadStatDao$$anonfun$3.class[0m
@@ -3966,8 +3976,6 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VAlgorithmScheduleParamDao$$anonfun$53.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\AlgorithmRunTypeDao$$anonfun$9.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\AlgorithmRunTypeDao$$anonfun$9.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\domain\Context$$anonfun$onRunBegin$11.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\domain\Context$$anonfun$onRunBegin$11.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\DownloadTransformGroupDao$$anonfun$5.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\DownloadTransformGroupDao$$anonfun$5.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\loaders\CreateAlgorithmVersionTypeEntryOptions$$anonfun$13.class[0m
@@ -4158,6 +4166,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VExecutorTypeSummaryDao.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\tests\generate\GenerateScalaTest$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\tests\generate\GenerateScalaTest$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\algorithms\local\PredictionLocalRandom.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\algorithms\local\PredictionLocalRandom.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VAlgorithmImplementationSummaryDao$$anonfun$2.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VAlgorithmImplementationSummaryDao$$anonfun$2.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\generates\GenerateDaoRestsEntry$$anonfun$main$2.class[0m
@@ -4358,6 +4368,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VExecutorStorageSnapshotDao$$anonfun$7.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VExecutorContextStateDao$$anonfun$22.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VExecutorContextStateDao$$anonfun$22.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\algorithms\local\PredictionLocalRandom$$anonfun$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\algorithms\local\PredictionLocalRandom$$anonfun$1.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VAlgorithmTypeVersionDao$$anonfun$2.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VAlgorithmTypeVersionDao$$anonfun$2.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\SourceInstanceDao$$anonfun$15.class[0m
@@ -4640,6 +4652,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VSourceViewSummaryDao$$anonfun$6.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VExecutorStorageTypeSummaryDao$$anonfun$7.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VExecutorStorageTypeSummaryDao$$anonfun$7.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\tests\standalone\H2DatabaseTest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\tests\standalone\H2DatabaseTest.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\ExecutorRestCallDao$$anonfun$26.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\ExecutorRestCallDao$$anonfun$26.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\loaders\DatabaseCreateNewEntryOptions$$anonfun$8.class[0m
@@ -4818,6 +4832,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\SourceScheduleDao$$anonfun$10.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VAlgorithmTypeColumnTypeDao$$anonfun$1.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VAlgorithmTypeColumnTypeDao$$anonfun$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\algorithms\local\PredictionLocalRandom$$anonfun$onAlgorithmRun$2.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\algorithms\local\PredictionLocalRandom$$anonfun$onAlgorithmRun$2.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\DownloadTransformTypeDao$$anonfun$17.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\DownloadTransformTypeDao$$anonfun$17.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\AlgorithmTypeDao$$anonfun$9.class[0m
@@ -5714,6 +5730,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\generates\GenerateViewsSummaryEntry$$anonfun$9.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VSourceDownloadDao$$anonfun$70.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VSourceDownloadDao$$anonfun$70.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\domain\Context$$anonfun$5.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\domain\Context$$anonfun$5.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\rest\DaoRests$$anonfun$initialize$251.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\rest\DaoRests$$anonfun$initialize$251.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VAlgorithmTypeColumnTypeDao$$anonfun$42.class[0m
@@ -6560,6 +6578,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VExecutorContextCommandDao$$anonfun$31.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dto\VAlgorithmScheduleSummaryDto$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dto\VAlgorithmScheduleSummaryDto$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\algorithms\local\PredictionLocalSma5$$anonfun$onAlgorithmRun$2.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\algorithms\local\PredictionLocalSma5$$anonfun$onAlgorithmRun$2.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\rest\DaoRests$$anonfun$initialize$125$$anonfun$apply$63.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\rest\DaoRests$$anonfun$initialize$125$$anonfun$apply$63.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VDownloadTransformSummaryDao$$anonfun$4.class[0m
@@ -6778,6 +6798,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VAlgorithmVersionSummaryDao$$anonfun$6.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\ExecutorInstanceDao$$anonfun$28.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\ExecutorInstanceDao$$anonfun$28.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\common\CustomUtils$$anonfun$main$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\common\CustomUtils$$anonfun$main$1.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dto\VSourceDownloadDto.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dto\VSourceDownloadDto.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VSourceDownloadStatColumnDao$$anonfun$50.class[0m
@@ -7414,6 +7436,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VSourceViewDao$$anonfun$22.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VSourceParamSummaryDao$$anonfun$12.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VSourceParamSummaryDao$$anonfun$12.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\domain\Context$$anonfun$refreshSources$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\domain\Context$$anonfun$refreshSources$1.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VResourceManagerDao$$anonfun$44.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VResourceManagerDao$$anonfun$44.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VAlgorithmScheduleDao$$anonfun$21.class[0m
@@ -7576,6 +7600,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\SourceInstanceDao$$anonfun$2.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VAlgorithmTypeVersionSummaryDao$$anonfun$24.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VAlgorithmTypeVersionSummaryDao$$anonfun$24.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\utils\CsvParser.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\utils\CsvParser.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VSourceScheduleSummaryDao$$anonfun$28.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VSourceScheduleSummaryDao$$anonfun$28.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VSourceInstanceDao$$anonfun$32.class[0m
@@ -7980,6 +8006,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VDownloadTransformColumnDao$$anonfun$9.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\ExecutorContextStateDao$$anonfun$18.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\ExecutorContextStateDao$$anonfun$18.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\common\CustomUtils$$anonfun$cutString$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\common\CustomUtils$$anonfun$cutString$1.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\sample\CreateSampleData$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\sample\CreateSampleData$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VResourceManagerMeasureDao$$anonfun$12.class[0m
@@ -8092,8 +8120,6 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VExecutorRestCallDao$$anonfun$69.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\SourceInstanceDao$$anonfun$11.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\SourceInstanceDao$$anonfun$11.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\domain\Context$$anonfun$onRunBegin$13.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\domain\Context$$anonfun$onRunBegin$13.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VSourceDownloadSummaryDao$$anonfun$34.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VSourceDownloadSummaryDao$$anonfun$34.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VExecutorRestCallDao$$anonfun$26.class[0m
@@ -8430,6 +8456,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VSourceDownloadDao$$anonfun$38.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\SourceDownloadStatColumnDao$$anonfun$17.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\SourceDownloadStatColumnDao$$anonfun$17.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\tests\standalone\H2DatabaseSelectTest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\tests\standalone\H2DatabaseSelectTest.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VDownloadTransformColumnDao$$anonfun$60.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VDownloadTransformColumnDao$$anonfun$60.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VExecutorStorageTypeSummaryDao$$anonfun$9.class[0m
@@ -8874,6 +8902,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\AlgorithmParamDao$$anonfun$16.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VExecutorStorageDao$$anonfun$5.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VExecutorStorageDao$$anonfun$5.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\algorithms\local\PredictionLocalSma5$$anonfun$onAlgorithmRun$3.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\algorithms\local\PredictionLocalSma5$$anonfun$onAlgorithmRun$3.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VSourceDownloadStatColumnDao$$anonfun$8.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VSourceDownloadStatColumnDao$$anonfun$8.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VAlgorithmRunViewDao$$anonfun$16.class[0m
@@ -9156,6 +9186,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VAlgorithmScheduleParamDao$$anonfun$31.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VResourceManagerMeasureDao$$anonfun$4.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VResourceManagerMeasureDao$$anonfun$4.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\tests\standalone\H2DatabaseSelectTest$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\tests\standalone\H2DatabaseSelectTest$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VExecutorStorageViewDao$$anonfun$2.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VExecutorStorageViewDao$$anonfun$2.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VAlgorithmVersionColumnTypeDao$$anonfun$13.class[0m
@@ -9454,8 +9486,6 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VExecutorStorageViewDao$$anonfun$49.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\ExecutorRestCallDao$$anonfun$28.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\ExecutorRestCallDao$$anonfun$28.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\algorithms\local\PredictionLocalSma5$$anonfun$run$3.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\algorithms\local\PredictionLocalSma5$$anonfun$run$3.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VResourceManagerSummaryDao$$anonfun$22.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VResourceManagerSummaryDao$$anonfun$22.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dto\AlgorithmVersionColumnTypeDto.class[0m
@@ -9476,6 +9506,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\MlasafEntry$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VExecutorStorageViewSummaryDao$$anonfun$27.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VExecutorStorageViewSummaryDao$$anonfun$27.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\domain\Context$$anonfun$refreshSources$2.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\domain\Context$$anonfun$refreshSources$2.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VResourceManagerAllocationDao$$anonfun$4.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VResourceManagerAllocationDao$$anonfun$4.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VExecutorContextCommandDao$$anonfun$50.class[0m
@@ -9530,6 +9562,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VAlgorithmScheduleViewDao$$anonfun$27.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\rest\ContextRests$$anonfun$initialize$11.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\rest\ContextRests$$anonfun$initialize$11.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\domain\Context$$anonfun$3$$anonfun$apply$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\domain\Context$$anonfun$3$$anonfun$apply$1.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\rest\DaoRests$$anonfun$initialize$104.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\rest\DaoRests$$anonfun$initialize$104.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\rest\DaoRests$$anonfun$initialize$232.class[0m
@@ -9570,6 +9604,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dto\VExecutorRestCallDto$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dto\VExecutorStorageResourceDto$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dto\VExecutorStorageResourceDto$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\tests\standalone\H2DatabaseTest$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\tests\standalone\H2DatabaseTest$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VAlgorithmImplementationDao$$anonfun$59.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VAlgorithmImplementationDao$$anonfun$59.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VResourceManagerDao.class[0m
@@ -10238,6 +10274,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VAlgorithmScheduleColumnDao$$anonfun$96.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VExecutorRestCallDao$$anonfun$71.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VExecutorRestCallDao$$anonfun$71.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\algorithms\local\PredictionLocalRandom$$anonfun$3.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\algorithms\local\PredictionLocalRandom$$anonfun$3.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VExecutorStorageResourceDao$$anonfun$29.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VExecutorStorageResourceDao$$anonfun$29.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VSourceScheduleSummaryDao$$anonfun$29.class[0m
@@ -11116,6 +11154,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VSourceDownloadStatDao$$anonfun$13.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\ExecutorContextRuntimeDao$$anonfun$1.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\ExecutorContextRuntimeDao$$anonfun$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\utils\CsvParser$$anonfun$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\utils\CsvParser$$anonfun$1.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\ResourceMeasureDao$$anonfun$11.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\ResourceMeasureDao$$anonfun$11.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VAlgorithmImplementationSummaryDao$$anonfun$24.class[0m
@@ -11560,8 +11600,6 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VAlgorithmTypeOutputTypeDao$$anonfun$35.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VAlgorithmImplementationDao$$anonfun$2.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VAlgorithmImplementationDao$$anonfun$2.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\algorithms\local\PredictionLocalSma5$$anonfun$run$1.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\algorithms\local\PredictionLocalSma5$$anonfun$run$1.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\AlgorithmVersionDao$$anonfun$1.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\AlgorithmVersionDao$$anonfun$1.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\rest\DaoRests$$anonfun$initialize$220$$anonfun$apply$110.class[0m
@@ -11758,8 +11796,6 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\SourceViewFormatDao$$anonfun$19.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VSourceViewFormatSummaryDao$$anonfun$5.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VSourceViewFormatSummaryDao$$anonfun$5.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dto\Dtos.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dto\Dtos.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\AlgorithmTypeColumnTypeDao$$anonfun$5.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\AlgorithmTypeColumnTypeDao$$anonfun$5.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\rest\DaoRests$$anonfun$initialize$12.class[0m
@@ -12556,6 +12592,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VExecutorInstanceSummaryDao$$anonfun$27.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VAlgorithmScheduleViewDao$$anonfun$35.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VAlgorithmScheduleViewDao$$anonfun$35.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\domain\Context$$anonfun$refreshSources$3.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\domain\Context$$anonfun$refreshSources$3.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VExecutorTypeHostParamDao$$anonfun$42.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VExecutorTypeHostParamDao$$anonfun$42.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VAlgorithmScheduleSummaryDao$$anonfun$13.class[0m
@@ -13262,6 +13300,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VDownloadTransformExecutorStorageDao$$anonfun$11.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\AlgorithmRunDao$$anonfun$6.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\AlgorithmRunDao$$anonfun$6.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\algorithms\local\PredictionLocalRandom$$anonfun$onAlgorithmRun$3.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\algorithms\local\PredictionLocalRandom$$anonfun$onAlgorithmRun$3.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VExecutorRestCallDao$$anonfun$14.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VExecutorRestCallDao$$anonfun$14.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VSourceScheduleSummaryDao$$anonfun$1.class[0m
@@ -13626,6 +13666,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VAlgorithmImplementationDao$$anonfun$5.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VAlgorithmRunViewDao$$anonfun$83.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VAlgorithmRunViewDao$$anonfun$83.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\algorithms\local\PredictionLocalRandom$$anonfun$2.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\algorithms\local\PredictionLocalRandom$$anonfun$2.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VExecutorStorageDao$$anonfun$57.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VExecutorStorageDao$$anonfun$57.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\utils[0m
@@ -13938,8 +13980,6 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\ResourceMeasureDao$$anonfun$2.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VAlgorithmScheduleColumnDao$$anonfun$18.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VAlgorithmScheduleColumnDao$$anonfun$18.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\domain\Context$$anonfun$onRunBegin$12.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\domain\Context$$anonfun$onRunBegin$12.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VAlgorithmScheduleColumnDao$$anonfun$90.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VAlgorithmScheduleColumnDao$$anonfun$90.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VAlgorithmScheduleSummaryDao.class[0m
@@ -14046,6 +14086,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\SourceInstanceDao$$anonfun$1.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VExecutorRestCallDao$$anonfun$33.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VExecutorRestCallDao$$anonfun$33.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\algorithms\local\PredictionLocalRandom$$anonfun$onAlgorithmRun$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\algorithms\local\PredictionLocalRandom$$anonfun$onAlgorithmRun$1.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VAlgorithmVersionColumnTypeDao$$anonfun$40.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  C:\Project\mlasaf\src\mlasaf\target\classes\com\mlasaf\dao\VAlgorithmVersionColumnTypeDao$$anonfun$40.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	com\mlasaf\dao\VAlgorithmRunDao$$anonfun$75.class[0m

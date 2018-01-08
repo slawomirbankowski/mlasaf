@@ -31,8 +31,8 @@ class PredictionLocalRandom extends AlgorithmInstance {
       val valueColName = run.algorithmScheduleColumnDtos.filter(c => c.algorithmColumnType_algorithmColumnTypeName.equals("NumericValue")).head.sourceViewColumn_columnName;
       val inputFileFullPath = run.executorStorageViewDtos.head.executorStorageResource_resourcePath;
 
+      // TODO: finish random algorithm to run full flow and tests
       //val inputFile
-
       val outputPath = run.outputs.head.executorStorageResource_resourcePath;
 
 

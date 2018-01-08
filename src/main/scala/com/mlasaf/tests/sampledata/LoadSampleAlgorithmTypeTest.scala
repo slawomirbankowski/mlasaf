@@ -1,3 +1,7 @@
+/*
+  Author(s): Slawomir Bankowski
+  Project: mlasaf
+*/
 package com.mlasaf.tests.sampledata
 
 import com.mlasaf.loaders._

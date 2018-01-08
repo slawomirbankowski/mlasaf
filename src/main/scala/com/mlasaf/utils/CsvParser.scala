@@ -11,10 +11,10 @@ class CsvParser {
 
   var reader : java.io.BufferedReader = null;
   var headerLine : String = null;
-  var headerColumns : Array[String];
+  var headerColumns : Array[String] = null;
 
   def open(filePath : String) : Unit = {
-    reader = new BufferedReader(new FileReader(new File(filePath))();
+    reader = new BufferedReader(new FileReader(new File(filePath)));
     headerLine = reader.readLine();
     headerColumns = headerLine.split("\t");
     val headerColMap = headerColumns.zipWithIndex.map(x => (x._2, x._1)).toMap[Int, String];

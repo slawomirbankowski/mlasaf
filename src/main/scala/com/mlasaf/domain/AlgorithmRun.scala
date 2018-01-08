@@ -96,7 +96,7 @@ class AlgorithmRun {
         isFinished = true;
       }
       case "_" => {
-        logger.info("")
+        logger.error("There is no such status like: " + status);
       }
     }
     parentExecutor.parentContext.daoFactory.daos.algorithmRunDao.updateField(algorithmRunDto, AlgorithmRunDto.FIELD_runStatus, status);

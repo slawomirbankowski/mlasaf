@@ -24,6 +24,7 @@ class JdbcSource extends Source {
     val connection = java.sql.DriverManager.getConnection(jdbcString, jdbcUser, jdbcPass);
     connection
   }
+  /**get all views from source  */
   override def getSourceViews() : Array[SourceViewDto] = {
     val existingViews = parentContext.daoFactory.daos.sourceViewDao.getSourceViewByFkSourceInstanceId(vSourceDto.sourceInstanceId);
     logger.info("Got previous source views for source: " + vSourceDto + ", views: " + existingViews.size);
@@ -54,12 +55,14 @@ class JdbcSource extends Source {
           parentContext.daoFactory.daos.sourceViewColumnDao.createAndInsertSourceViewColumnDto(insertedSourceViewDto.sourceViewId, cName.COLUMN_NAME, cName.DATA_TYPE);
         });
       });
-    } catch {
+      connection.close()
+            } catch {
       case ex : Exception => { println("Exception while getting views for source !!!" + ex.getMessage); }
     }
     views = checkedSourceViewsDtos.toArray(new Array[SourceViewDto](0));
     views
   }
+  /** */
   def onInitialize() : Unit = {
     // get tables
     logger.info("Initialize JDBC source")
@@ -76,7 +79,7 @@ class JdbcSource extends Source {
   }
 
 }
-
+/** downloader to download view */
 class JdbcSouceViewDownloader extends SouceViewDownloader {
 
   var connection : java.sql.Connection = null;

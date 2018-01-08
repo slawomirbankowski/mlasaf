@@ -50,7 +50,7 @@ class DaoBase {
     releaseConnection(connection);
     resCnt
   }
-  /** */
+  /** get value of field for given DTO for given field - this is reading data from DB */
   def getFieldValue(dto: BaseDto, fieldName : String) : Any = {
     implicit val connection = getConnection();
     val sql = "select  " + fieldName + " from " + dto.tableName + " where " + dto.pkFields + " = {id} ";
@@ -60,7 +60,7 @@ class DaoBase {
     releaseConnection(connection);
     retValue
   }
-  /** */
+  /** get value of field for given table name, ID (PK) for given field - this is reading data from DB */
   def getFieldValue(tableName : String, id : Long , fieldName : String) : String = {
     implicit val connection = getConnection();
     val pkName = DtoMetadata.getPkNameForTable(tableName);
@@ -71,6 +71,7 @@ class DaoBase {
     releaseConnection(connection);
     retValue
   }
+  /** get all values for given field/column for given table */
   def getFieldValues(tableName : String, fieldName : String) : List[String] = {
     implicit val connection = getConnection();
     val pkName =  DtoMetadata.getPkNameForTable(tableName);
@@ -81,6 +82,7 @@ class DaoBase {
     releaseConnection(connection);
     retValue
   }
+  /** update given field to given value in database for DTO object */
   def updateField(dto : BaseDto, fieldName : String, newValue : Any) : Int = {
     implicit val connection = getConnection();
     val sql = "update " + dto.tableName + " set " + fieldName + " = {fieldName} where " + dto.pkFields + " = {id} ";
@@ -91,6 +93,7 @@ class DaoBase {
     releaseConnection(connection);
     resCnt
   }
+  /** update given field in table for ID (PK) to given value */
   def updateField(tableName : String, id: Long, fieldName : String, newValue : Any) : Int = {
     implicit val connection = getConnection();
     val pkName = "id";

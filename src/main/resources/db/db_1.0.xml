@@ -69,7 +69,6 @@
         <addForeignKeyConstraint baseTableName="executorContext" baseColumnNames="executorHostId" referencedTableName="executorHost" referencedColumnNames="executorHostId"  constraintName="fk_ec_ehId"  />
 
 
-
         <createTable tableName="executorContextState" remarks="status of context over time" >
             <column name="executorContextStateId" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -88,8 +87,35 @@
         <addForeignKeyConstraint baseTableName="executorContextState" baseColumnNames="executorContextId" referencedTableName="executorContext" referencedColumnNames="executorContextId"  constraintName="fk_ecs_ecId"  />
 
 
+        <createTable tableName="executorContextThread" remarks="thread of context" >
+            <column name="executorContextThreadId" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="guid" type="bigint" defaultValue="${seqvalue}" remarks="globally unique ID of single row" />
+            <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" remarks="date and time of insertion given row to database" />
+            <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" remarks="date and time of change this row" />
+            <column name="executorContextId" type="bigint"/>
+            <column name="threadId" type="int"/>
+            <column name="threadName" type="nvarchar(200)"/>
+            <column name="threadPriority" type="int"/>
+            <column name="threadStatus" type="nvarchar(2000)" remarks="" />
+            <column name="isRunning" type="int" remarks="" />
+            <column name="isInitialized" type="int" remarks="" />
+            <column name="isWorking" type="int" remarks="" />
+            <column name="isStopped" type="int" remarks="" />
+            <column name="isDaemon" type="int" remarks="" />
+            <column name="runInterval" type="int"/>
+            <column name="startTime" type="timestamp"/>
+            <column name="stopTime" type="timestamp"/>
+            <column name="endTime" type="timestamp"/>
+        </createTable>
+        <createIndex indexName="idx_ect_executorContextId" tableName="executorContextThread" unique="false">
+            <column name="executorContextId" />
+        </createIndex>
+        <addForeignKeyConstraint baseTableName="executorContextThread" baseColumnNames="executorContextId" referencedTableName="executorContext" referencedColumnNames="executorContextId"  constraintName="fk_ect_ecId"  />
 
-    <createTable tableName="executorCommand" remarks="commands for context" >
+
+        <createTable tableName="executorCommand" remarks="commands for context" >
             <column name="executorCommandId" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -841,6 +867,7 @@
             <column name="sourceViewName" type="nvarchar(2000)"/>
             <column name="sourceViewDefinition" type="nvarchar(2000)"/>
             <column name="isExisting" type="int"/>
+            <column name="isCustom" type="int"/>
         </createTable>
         <createIndex indexName="idx_sv_sourceInstanceId" tableName="sourceView" unique="false">
             <column name="sourceInstanceId" />

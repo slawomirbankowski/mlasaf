@@ -7,6 +7,7 @@ package com.mlasaf.loaders
 import com.mlasaf.dao.DaoFactory
 import org.rogach.scallop.ScallopConf
 
+/** LOADER class for creating algorithm implementation */
 object CreateAlgorithmImplementation {
 
   /** logger for DAO */
