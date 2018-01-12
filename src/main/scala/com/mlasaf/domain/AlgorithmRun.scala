@@ -16,22 +16,30 @@ class AlgorithmRun {
   var status : String = "CREATED";
   /** parent EXECUTOR */
   var parentExecutor : Executor = null;
+  /** if this run is finished */
   var isFinished : Boolean = false;
   /** storage for all materialized views */
   var storage : Storage = null;
   /** instance of algorithm */
   var algorithmInstance : AlgorithmInstance = null;
+  /** all configuration parameters for instance of algorithm - this could contain path to R.exe or spark commit path or spark API port or SAS user/password */
+  var paramsForHostExecutorType : scala.collection.mutable.ListBuffer[VExecutorTypeHostParamDto] = new scala.collection.mutable.ListBuffer();
   /** schedule of algorithm to be run - DTO object */
   var algorithmScheduleDto : VAlgorithmScheduleDto = null;
   /** run of algorithm to be run - DTO object */
   var algorithmRunDto : AlgorithmRunDto = null;
+  /** all views as runs */
   var algorithmRunViewDtos : scala.collection.mutable.ListBuffer[AlgorithmRunViewDto] = new scala.collection.mutable.ListBuffer();
+  /** all input views downloaded for this algorithm */
   var algorithmScheduleViewDtos : scala.collection.mutable.ListBuffer[AlgorithmScheduleViewDto] = new scala.collection.mutable.ListBuffer();
+  /** all columns for all views downloaded for this algorithm */
   var algorithmScheduleColumnDtos : scala.collection.mutable.ListBuffer[VAlgorithmScheduleColumnDto] = new scala.collection.mutable.ListBuffer();
-  //var sourceScheduleDtos : scala.collection.mutable.ListBuffer[SourceScheduleDto] = new scala.collection.mutable.ListBuffer();
+  /** all input storage views downloaded for this algorithm  */
   var executorStorageViewDtos : scala.collection.mutable.ListBuffer[VExecutorStorageViewDto] = new scala.collection.mutable.ListBuffer();
   /** all outputs to be created for this run of algorithm */
   var outputs : scala.collection.mutable.ListBuffer[VAlgorithmOutputDto] = new scala.collection.mutable.ListBuffer();
+  /** parameters set to this schedule */
+  var parameters :  scala.collection.mutable.ListBuffer[VAlgorithmScheduleParamDto] = new scala.collection.mutable.ListBuffer();
 
   /** RUN algorithm */
   def runAlgorithm() = {

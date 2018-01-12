@@ -23,9 +23,7 @@
 
     <changeSet id="1" author="slawomirbankowski">
 
-
         <createSequence cycle="false" incrementBy="1"  sequenceName="seq_id" />
-
 
         <createTable tableName="executorHost" remarks="host on which executor can execute" >
             <column name="executorHostId" type="bigint" autoIncrement="true">
@@ -1850,6 +1848,14 @@
             ,  executorContext1.executorContextId as executorContext_executorContextId ,  executorContext1.guid as executorContext_guid ,  executorContext1.insertedRowDate as executorContext_insertedRowDate ,  executorContext1.lastUpdatedDate as executorContext_lastUpdatedDate ,  executorContext1.executorHostId as executorContext_executorHostId ,  executorContext1.isWorking as executorContext_isWorking ,  executorContext1.properties as executorContext_properties ,  executorContext1.properties2 as executorContext_properties2 ,  executorContext1.properties3 as executorContext_properties3 ,  executorContext1.entryParams as executorContext_entryParams
             from executorContextState executorContextState1
             join executorContext executorContext1 on executorContextState1.executorContextId = executorContext1.executorContextId
+        </createView>
+
+
+        <createView  viewName="vExecutorContextThread">
+            select executorContextThread1.executorContextThreadId, executorContextThread1.guid, executorContextThread1.insertedRowDate, executorContextThread1.lastUpdatedDate, executorContextThread1.executorContextId, executorContextThread1.threadId, executorContextThread1.threadName, executorContextThread1.threadPriority, executorContextThread1.threadStatus, executorContextThread1.isRunning, executorContextThread1.isInitialized, executorContextThread1.isWorking, executorContextThread1.isStopped, executorContextThread1.isDaemon, executorContextThread1.runInterval, executorContextThread1.startTime, executorContextThread1.stopTime, executorContextThread1.endTime
+            ,  executorContext1.executorContextId as executorContext_executorContextId ,  executorContext1.guid as executorContext_guid ,  executorContext1.insertedRowDate as executorContext_insertedRowDate ,  executorContext1.lastUpdatedDate as executorContext_lastUpdatedDate ,  executorContext1.executorHostId as executorContext_executorHostId ,  executorContext1.isWorking as executorContext_isWorking ,  executorContext1.properties as executorContext_properties ,  executorContext1.properties2 as executorContext_properties2 ,  executorContext1.properties3 as executorContext_properties3 ,  executorContext1.entryParams as executorContext_entryParams
+            from executorContextThread executorContextThread1
+            join executorContext executorContext1 on executorContextThread1.executorContextId = executorContext1.executorContextId;
         </createView>
 
 

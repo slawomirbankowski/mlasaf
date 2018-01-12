@@ -39,6 +39,11 @@ object CustomUtils {
   def yyyyMMDDHHmmss : String = {
     identifierDateFormat.format(new java.util.Date());
   }
+  def getDateEnd : java.util.Date = {
+    val c = java.util.Calendar.getInstance();
+    c.set(2035, 12, 31);
+    c.getTime;
+  }
   def diskSpaces : String = {
     "[" + java.io.File.listRoots().map(rd =>  "{'path':'" + rd.getPath + "','name':'" + rd.getName + "','total':'" + rd.getTotalSpace + "','usable':'" +  rd.getUsableSpace + "','free':'" + rd.getFreeSpace + "'}").mkString(",") + "]"
   }
@@ -78,7 +83,6 @@ object CustomUtils {
     // TODO: finish implementation
     val rs = stat.executeQuery(sql);
     while (rs.next()) {
-
 
     }
     stat.close();

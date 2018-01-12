@@ -12,7 +12,7 @@ class PredictionLocalSma5 extends AlgorithmInstance {
 
   /** logger */
   val logger = org.slf4j.LoggerFactory.getLogger("DaoCustom");
-  /** */
+  /**  */
   def onAlgorithmRun(run : AlgorithmRun) : String = {
     logger.info("")
     logger.info(" ===================== RUNNING LOCAL PREDICTION ALGORITHM FOR RUN: " + run.algorithmRunDto.algorithmRunId + ", input files: " + run.executorStorageViewDtos.map(sv => sv.executorStorageResource_resourcePath).mkString(","));

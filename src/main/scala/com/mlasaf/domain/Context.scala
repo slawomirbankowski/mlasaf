@@ -53,8 +53,9 @@ class Context extends ThreadBase {
   }
   /** get name for threadable object */
   def getName() : String = "CONTEXT"
-  /** run at the begin of working in thread */
-  def onRunBegin() : Unit = {
+
+  /** run in case of invoke start() method */
+  override def onBeforeStart() : Unit = {
     //runOptions = opts;
     logger.info("Start context for guid: " + guid);
     // add CONTEXT to threads
@@ -65,6 +66,7 @@ class Context extends ThreadBase {
     // initialize DAO to read data from DB - creates new factory with all DAOs
     daoFactory = new DaoFactory();
     //context.daoFactory.registerExecutorInstance();
+    daoFactory.setParentContext(this);
     daoFactory.initialize(runOptions.jdbcString.toOption.getOrElse(""), runOptions.jdbcUser.toOption.getOrElse(""), runOptions.jdbcPass.toOption.getOrElse(""), runOptions.jdbcDriver.toOption.getOrElse(""));
     daoFactory.start();
     threads += daoFactory;
@@ -76,6 +78,9 @@ class Context extends ThreadBase {
     val javaProp3 = ""; // if (javaProp2.length > 4000) javaProp2.substring(4000)  else "";
     contextDto = daoFactory.daos.executorContextDao.createAndInsertExecutorContextDto(hostDto.executorHostId, 1, javaProperties.substring(0, 3999), javaProp2, javaProp3, "");
     logger.info("---> Registered context: " + contextDto);
+  };
+  /** run at the begin of working in thread */
+  def onRunBegin() : Unit = {
     // refresh sources from DB
     refreshSources();
     // initialize SIMPLE storage - each storage has own thread to download data
@@ -125,11 +130,9 @@ class Context extends ThreadBase {
       threads += srcObj;
       sources += srcObj;
     });
-    logger.info("All initialized sources: " + sources.size + ", sources: " + sources.map(s => "{id:" + s.vSourceDto.sourceInstanceId + ",type:" + s.vSourceDto.sourceType_sourceTypeName + ",name:" + s.vSourceDto.sourceInstanceName).mkString(", "));
+    logger.info("All initialized sources: " + sources.size + ", sources: " + sources.map(s => "{id:" + s.vSourceDto.sourceInstanceId + ",type:" + s.vSourceDto.sourceType_sourceTypeName + ",name:" + s.vSourceDto.sourceInstanceName + "}").mkString(", "));
   }
-  /** run in case of invoke start() method */
-  override def onStart() : Unit = {
-  };
+
   def delayedStop() : Unit = {
   }
   /** */

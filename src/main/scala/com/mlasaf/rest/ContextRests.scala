@@ -35,7 +35,7 @@ class ContextRests extends RestBase  {
     });
     spark.Spark.get("/context-sources", (req: spark.Request, resp: spark.Response) => {
       resp.raw().setContentType("application/json");
-      "[" + this.parentRest.parentContext.sources.map(s => " { \"viewsCount\":" + s.views.size + ",\"runInterval\":" + s.runInterval + "\"params\":[" + s.vSourceParamsDtos.map(p => p.toJson()).mkString(",") + "] } ").mkString(",") + "]"
+      "[" + this.parentRest.parentContext.sources.map(s => " { \"viewsCount\":" + s.views.size + ",\"runInterval\":" + s.runInterval + ",\"params\":[" + s.vSourceParamsDtos.map(p => p.toJson()).mkString(",") + "] } ").mkString(",") + "]"
     });
     spark.Spark.get("/context-daos", (req: spark.Request, resp: spark.Response) => {
       resp.raw().setContentType("application/json");

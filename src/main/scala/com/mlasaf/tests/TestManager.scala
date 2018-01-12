@@ -12,12 +12,12 @@ import com.mlasaf.structures.MlasafEntryOptions
 /** main manager for scenario tests */
 object TestManager {
 
+  /** logger */
   val logger = org.slf4j.LoggerFactory.getLogger("TestManager");
 
+  /** main entry for test manager */
   def main(args : Array[String]) : Unit = {
     // get all TESTS to be run
-
-
     val testList = "com.mlasaf.tests.scenario.EmptyScenarioTest,com.mlasaf.tests.scenario.RestCheckScenarioTest"
     val jdbcStringTemplate = "jdbc:mysql://localhost:3307/DBTEMPLATENAME"
     val jdbcUser = System.getenv("MLASAF_USER")
@@ -61,7 +61,6 @@ object TestManager {
         , "--newDbName", dbTestName
       ));
       val createDbEndTime = new java.util.Date();
-
       val jdbcString = jdbcStringTemplate.replace("DBTEMPLATENAME", dbTestName);
       // insert schema
       logger.info("Got ChangeLog file for Liquibase: " + changeLogFile)

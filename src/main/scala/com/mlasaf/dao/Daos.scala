@@ -45,7 +45,8 @@ class Daos {
   val executorContextDao : ExecutorContextDao = new ExecutorContextDao(); 
   val executorContextCommandDao : ExecutorContextCommandDao = new ExecutorContextCommandDao(); 
   val executorContextRuntimeDao : ExecutorContextRuntimeDao = new ExecutorContextRuntimeDao(); 
-  val executorContextStateDao : ExecutorContextStateDao = new ExecutorContextStateDao(); 
+  val executorContextStateDao : ExecutorContextStateDao = new ExecutorContextStateDao();
+  val executorContextThreadDao : ExecutorContextThreadDao = new ExecutorContextThreadDao();
   val executorHostDao : ExecutorHostDao = new ExecutorHostDao(); 
   val executorInstanceDao : ExecutorInstanceDao = new ExecutorInstanceDao(); 
   val executorInstanceStateDao : ExecutorInstanceStateDao = new ExecutorInstanceStateDao(); 
@@ -115,7 +116,8 @@ class Daos {
   val vExecutorContextCommandDao : VExecutorContextCommandDao = new VExecutorContextCommandDao(); 
   val vExecutorContextRuntimeDao : VExecutorContextRuntimeDao = new VExecutorContextRuntimeDao(); 
   val vExecutorContextStateDao : VExecutorContextStateDao = new VExecutorContextStateDao(); 
-  val vExecutorContextSummaryDao : VExecutorContextSummaryDao = new VExecutorContextSummaryDao(); 
+  val vExecutorContextSummaryDao : VExecutorContextSummaryDao = new VExecutorContextSummaryDao();
+  val vExecutorContextThreadDao : VExecutorContextThreadDao = new VExecutorContextThreadDao();
   val vExecutorHostSummaryDao : VExecutorHostSummaryDao = new VExecutorHostSummaryDao(); 
   val vExecutorInstanceDao : VExecutorInstanceDao = new VExecutorInstanceDao(); 
   val vExecutorInstanceStateDao : VExecutorInstanceStateDao = new VExecutorInstanceStateDao(); 
@@ -190,7 +192,8 @@ class Daos {
     executorContextDao.initialize(daoConn) 
     executorContextCommandDao.initialize(daoConn) 
     executorContextRuntimeDao.initialize(daoConn) 
-    executorContextStateDao.initialize(daoConn) 
+    executorContextStateDao.initialize(daoConn)
+    executorContextThreadDao.initialize(daoConn)
     executorHostDao.initialize(daoConn) 
     executorInstanceDao.initialize(daoConn) 
     executorInstanceStateDao.initialize(daoConn) 
@@ -260,7 +263,8 @@ class Daos {
     vExecutorContextCommandDao.initialize(daoConn) 
     vExecutorContextRuntimeDao.initialize(daoConn) 
     vExecutorContextStateDao.initialize(daoConn) 
-    vExecutorContextSummaryDao.initialize(daoConn) 
+    vExecutorContextSummaryDao.initialize(daoConn)
+    vExecutorContextThreadDao.initialize(daoConn)
     vExecutorHostSummaryDao.initialize(daoConn) 
     vExecutorInstanceDao.initialize(daoConn) 
     vExecutorInstanceStateDao.initialize(daoConn) 

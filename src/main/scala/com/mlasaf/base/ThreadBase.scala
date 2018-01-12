@@ -5,6 +5,8 @@
 package com.mlasaf.base
 
 import com.mlasaf.domain.Context
+import com.mlasaf.dto._
+import com.mlasaf.common._
 
 /** base class for all object with Thread assigned */
 trait ThreadBase extends Runnable {
@@ -27,16 +29,18 @@ trait ThreadBase extends Runnable {
   /** start time of context */
   val startTime : java.util.Date = new java.util.Date();
   /** start time of context */
-  var stopTime : java.util.Date = null;
+  var stopTime : java.util.Date = CustomUtils.getDateEnd;
   /** start time of context */
-  var endTime : java.util.Date = null;
-
+  var endTime : java.util.Date = CustomUtils.getDateEnd;
+  /** DTO for Thread of Context */
+  var contextThreadDto : ExecutorContextThreadDto = null;
   /** set parent context object */
   def setParentContext(pc : Context): Unit = {
     parentContext = pc;
   }
   /** */
   def start() : Unit = {
+    onBeforeStart();
     val th : Thread = new Thread(this);
     thread = th;
     th.setDaemon(true);
@@ -48,16 +52,26 @@ trait ThreadBase extends Runnable {
   /** stop method to be invoked by external classes */
   def stop() = {
     stopTime = new java.util.Date();
+    //parentContext.daoFactory.daos.executorContextThreadDao.updateField(contextThreadDto, ExecutorContextThreadDto.FIELD_stopTime, stopTime);
     logger.info("Stop thread: " + this);
     // pack with try ... catch to log all errors while onStop()
     onStop();
     isStopped = true;
+    if (contextThreadDto != null) {
+      parentContext.daoFactory.daos.executorContextThreadDao.updateField(contextThreadDto, ExecutorContextThreadDto.FIELD_isStopped, 1);
+    }
     Thread.sleep(2500L);
   }
   /** run method for thread */
   def run() : Unit = {
+    logger.info("Start running in Thread: " + thread.getId + ", name: " + thread.getName + ", class: " + this.getClass.getName + ", waiting for parent Context");
+    while (parentContext == null || parentContext.contextDto == null || parentContext.daoFactory == null || parentContext.daoFactory.daoConn == null) {
+      Thread.sleep(500L);
+      logger.info("Waiting for full initialization in class: " + this.getClass.getName);
+    }
+    contextThreadDto = parentContext.daoFactory.daos.executorContextThreadDao.createAndInsertExecutorContextThreadDto(parentContext.contextDto.executorContextId, thread.getId.asInstanceOf[Int], thread.getName, thread.getPriority, "", (if (thread.isAlive) 1 else 0), (if (isInitialized) 1 else 0), (if (isWorking) 1 else 0), (if (isStopped) 1 else 0), (if (thread.isDaemon) 1 else 0), runInterval.asInstanceOf[Int], startTime, stopTime, endTime);
+    logger.info("Context Thread DTO: " + contextThreadDto.toFullString());
     isRunning = true;
-    logger.info("Start running in Thread: " + thread.getId + ", name: " + thread.getName + ", class: " + this.getClass.getName);
     if (!isInitialized) {
       logger.info("Run onRunBegin in Thread: " + thread.getId + ", name: " + thread.getName + ", class: " + this.getClass.getName);
       onRunBegin();
@@ -68,6 +82,7 @@ trait ThreadBase extends Runnable {
     var totalRunCount = 0;
     var lastRunDate = System.currentTimeMillis()
     isInitialized = true;
+    parentContext.daoFactory.daos.executorContextThreadDao.updateField(contextThreadDto, ExecutorContextThreadDto.FIELD_isInitialized, 1);
     while (!isStopped) {
       if (System.currentTimeMillis() - lastRunDate >= runInterval) {
         logger.info("Run in thread: " + thread.getId + ", class: " + this.getClass.getName + ", totalSleepCount: " + totalSleepCount + ", totalRunCount: " + totalRunCount + ", runInterval: " + this.runInterval + ", startTime: " + this.startTime + ", name: " + this.getName() + ", daemon: " + this.thread.isDaemon + ", thread.priority: " + this.thread.getPriority);
@@ -89,7 +104,10 @@ trait ThreadBase extends Runnable {
     onRunEnd();
     logger.info("Run stopped: " + thread.getId + ", name: " + thread.getName + ", class: " + this.getClass.getName);
     isRunning = false;
+    parentContext.daoFactory.daos.executorContextThreadDao.updateField(contextThreadDto, ExecutorContextThreadDto.FIELD_isRunning, 0);
     endTime = new java.util.Date();
+    parentContext.daoFactory.daos.executorContextThreadDao.updateField(contextThreadDto, ExecutorContextThreadDto.FIELD_endTime, endTime);
+    onAfterEnd();
   }
   /** wait in this thread till end of service execution */
   def waitTillEnd(maxWaitingTimeMilliseconds : Long) : Unit = {
@@ -114,5 +132,8 @@ trait ThreadBase extends Runnable {
   /** to override - run in case of invoke start() method */
   def onStart() : Unit = {
   };
-
+  def onBeforeStart() : Unit = {
+  };
+  def onAfterEnd() : Unit = {
+  };
 }

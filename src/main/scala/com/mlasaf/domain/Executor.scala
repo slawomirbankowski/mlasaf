@@ -15,6 +15,7 @@ trait Executor extends ThreadBase {
   var executorInstanceDto : ExecutorInstanceDto = null
   /** all algorithms that are running now */
   val algoRunObjs : scala.collection.mutable.ListBuffer[AlgorithmRun] = new scala.collection.mutable.ListBuffer();
+  val paramsForHostExecutorType : scala.collection.mutable.ListBuffer[VExecutorTypeHostParamDto] = new scala.collection.mutable.ListBuffer();
 
   /** executor constructor */
   def Executor() = {
@@ -35,11 +36,10 @@ trait Executor extends ThreadBase {
   /** running executor in separate thread */
   def onRun() = {
     logger.info("Executor run in thread: " + executorInstanceDto + ", searching for schedules");
-
+    readExecutorTypeHostParams();
     searchForSchedules();
     algorithmRuns();
     onRunExecutor();
-
     val infoContent = ""; // TODO: fill info content with useful information about executor
     val errorDescription = ""; // pack onRun in trz... catch and fill errorDescription
     parentContext.daoFactory.daos.executorInstanceStateDao.createAndInsertExecutorInstanceStateDto(executorInstanceDto.executorInstanceId, "WORKING", infoContent, errorDescription);
@@ -56,6 +56,12 @@ trait Executor extends ThreadBase {
   }
   def onStop() : Unit = {
     logger.info("Stopping EXECUTOR...");
+  }
+  def readExecutorTypeHostParams() = {
+    val params = parentContext.daoFactory.daos.vExecutorTypeHostParamDao.getDtosByExecutorHost_executorHostId(parentContext.hostDto.executorHostId).filter(p => p.executorTypeId == this.executorInstanceDto.executorTypeId);
+    paramsForHostExecutorType.clear();
+    params.foreach(p => { paramsForHostExecutorType += p; });
+    logger.info("Read EXECUTOR parameters for host: " + parentContext.hostDto.hostName + ", executorTypeId: " + executorInstanceDto.executorTypeId + ", params: " + params.map(p => p.paramName + "=" + p.paramValue).mkString(",") );
   }
   /** search for schedules to create algorithm runs */
   def searchForSchedules() {
@@ -83,12 +89,23 @@ trait Executor extends ThreadBase {
         // get all views needed for this run
         val algSchView = parentContext.daoFactory.daos.algorithmScheduleViewDao.getAlgorithmScheduleViewByFkAlgorithmScheduleId(runDto.algorithmScheduleId);
         logger.info("==>For AlgorithmRun all viewIds: " +algSchView.map(a => a.sourceViewId).mkString(","))
-        var algoRun : AlgorithmRun = new AlgorithmRun();
+        var algoRun : AlgorithmRun = new AlgorithmRun(); // create new ALGORITHM in CREATED state
         algoRunObjs += algoRun;
         algoRun.parentExecutor = this;
         algoRun.storage = storageObj;
         algoRun.algorithmRunDto = runDto;
         algoRun.algorithmScheduleDto = sch;
+        // get all parameters for executor type for given host
+        val paramsForHostExecutorType = parentContext.daoFactory.daos.vExecutorTypeHostParamDao.getDtosByExecutorHost_executorHostId(parentContext.hostDto.executorHostId).filter(p => p.executorTypeId == sch.algorithmImplementation_executorTypeId);
+        paramsForHostExecutorType.foreach(p => { algoRun.paramsForHostExecutorType += p; } );
+        logger.info("Read parameters for schedule: " + sch.algorithmScheduleId + ", executorTypeId: " + sch.algorithmImplementation_executorTypeId + ", parameters: " + paramsForHostExecutorType.map(p => p.paramName + "=" + p.paramValue).mkString(","));
+        // parentContext.daoFactory.daos.executorTypeHostParamDao.getExecutorTypeHostParamByFkExecutorHostId()
+        // create new instance for algorithm to be run
+        logger.info("Create new AlgorithmInstance for class: " + sch.algorithmImplementation_algorithmImplementationClass);
+        algoRun.algorithmInstance = Class.forName(sch.algorithmImplementation_algorithmImplementationClass).newInstance().asInstanceOf[AlgorithmInstance];
+        paramsForHostExecutorType.foreach(p => { algoRun.algorithmInstance.paramsForHostExecutorType += p; } );
+        algoRun.algorithmInstance.initialize();
+        parentContext.daoFactory.daos.vAlgorithmScheduleParamDao.getDtosByAlgorithmSchedule_algorithmScheduleId(sch.algorithmScheduleId).foreach(x => {algoRun.parameters += x;} );
         val outputTypeDtos = parentContext.daoFactory.daos.vAlgorithmVersionOutputTypeDao.getDtosByAlgorithmVersion_algorithmVersionId(sch.algorithmImplementation_algorithmVersionId);
         outputTypeDtos.foreach(ot => {
           val outputPath = storageObj.generateOutputPath();
@@ -99,7 +116,6 @@ trait Executor extends ThreadBase {
           algoRun.outputs += vOutputDto;
         });
         logger.info("==>For AlgorithmRun all outputs: " + algoRun.outputs.map(o => "{id:" + o.algorithmOutputId + ",typeId:" + o.algorithmOutputTypeId + ",executorStorageResourceId:" + o.executorStorageResourceId + "}").mkString(","));
-        algoRun.algorithmInstance = Class.forName(sch.algorithmImplementation_algorithmImplementationClass).newInstance().asInstanceOf[AlgorithmInstance];
         // create runViews for existing views in storage
         algSchView.foreach(schView => {
           val allStorageViews = parentContext.daoFactory.daos.vExecutorStorageViewDao.getDtosBySourceView_sourceViewId(schView.sourceViewId);
