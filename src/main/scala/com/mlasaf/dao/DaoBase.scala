@@ -34,8 +34,10 @@ class DaoBase {
   }
   /** insert DTO to DB with new PK value */
   def insertDto(dto : BaseDto): Int = {
-    val stat = dto.prepareInsert(getConnection());
+    val connection = getConnection();
+    val stat = dto.prepareInsert(connection);
     val resCnt = stat.executeUpdate();
+    releaseConnection(connection);
     resCnt
   }
   /** update all fields of DTO based on PK value */
@@ -76,7 +78,7 @@ class DaoBase {
     implicit val connection = getConnection();
     val pkName =  DtoMetadata.getPkNameForTable(tableName);
     val sql = "select  cast(" + fieldName + " as char(2000)) as " + fieldName + " from " + tableName;
-    println("EXECUTING: " + sql)
+    logger.info("EXECUTING: " + sql)
     val retValue = SQL(sql)
       .executeQuery().as[List[String]](SqlParser.str(fieldName).*)(connection);
     releaseConnection(connection);

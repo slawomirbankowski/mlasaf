@@ -10,6 +10,6 @@ import com.mlasaf.domain._
 trait ExecutorCommand {
 
   /** run given command for context and params */
-  def runCommand(ctx : Context, params : Array[String]) : Unit;
+  def runCommand(ctx : Context, params : Array[String]) : String;
 
 }

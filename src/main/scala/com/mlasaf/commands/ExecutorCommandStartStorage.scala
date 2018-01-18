@@ -6,8 +6,9 @@ import com.mlasaf.base._
 class ExecutorCommandStartStorage extends ExecutorCommand {
 
   /** run given command for context and params */
-  def runCommand(ctx : Context, params : Array[String]) : Unit = {
+  def runCommand(ctx : Context, params : Array[String]) : String = {
     // TODO: implement start storage for this context
+    "EMPTY"
   }
 
 }

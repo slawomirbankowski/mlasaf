@@ -11,9 +11,10 @@ import com.mlasaf.base._
 class ExecutorCommandStartExecutor extends ExecutorCommand {
 
   /** run given command for context and params */
-  def runCommand(ctx : Context, params : Array[String]) : Unit = {
+  def runCommand(ctx : Context, params : Array[String]) : String = {
     // TODO - log result of this command
     ctx.defineExecutor(params(0), params(1).asInstanceOf[Int]);
+    "OK"
   }
 
 }

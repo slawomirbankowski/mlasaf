@@ -11,9 +11,10 @@ import com.mlasaf.domain.Context
 class ExecutorCommandStop extends ExecutorCommand {
 
   /** run given command for context and params */
-  def runCommand(ctx : Context, params : Array[String]) : Unit = {
+  def runCommand(ctx : Context, params : Array[String]) : String = {
     // TODO: log result of this command
     ctx.isStopped = true;
+    "OK"
   }
 
 

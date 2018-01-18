@@ -74,11 +74,15 @@ class DaoConnection {
     //connectionsInUse += conn;
     conn;
   }
+  /** release or close connection */
   def releaseConnection(conn : Connection): Unit = {
     //connectionsInUse -= conn;
-    connReleaseCounter = connReleaseCounter + 1;
-    connInUse.remove(conn);
-    conn.close();
+    if (conn != null) {
+      connReleaseCounter = connReleaseCounter + 1;
+      connInUse.remove(conn);
+      conn.close();
+
+    }
     //connectionsFree += conn;
   }
   /** */

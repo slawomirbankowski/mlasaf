@@ -44,6 +44,8 @@ class DaoFactory extends ThreadBase {
     def onRun() = {
       logger.info("Connections free: " + daoConn.connectionsFree.size + ", inUse: " + daoConn.connectionsInUse.size + ", isInitialized: " + daoConn.isInitialized + ", connTotalCounter: " + daoConn.connTotalCounter + ", connReleaseCounter: " + daoConn.connReleaseCounter + ", connsInUseCount: " + daoConn.connInUse.size())
       // TODO: check and manage connections
+
+
     }
     def onRunEnd() = {
     }
@@ -60,7 +62,7 @@ class DaoFactory extends ThreadBase {
       daoConn.releaseConnection(conn);
       queryRes
     }
-  /** */
+    /** */
     def selectCount(d : java.lang.Class[BaseDto]) : Long = {
       implicit val conn = daoConn.getConnection();
       val sql = "select count(*) as cnt from " + d.getName
@@ -72,6 +74,8 @@ class DaoFactory extends ThreadBase {
     }
     def executeQuery(sql : String, params : Seq[Object]) = {
       // TODO: finish implementation for execute any query with params
+
+
     }
     def getInfoJson() : String = {
       " { \"connectionCounter\":" + daoConn.connTotalCounter + ",\"daoCount\":" + daos.getClass.getFields.size + ",\"connectionsInUseCount\":" + daoConn.connInUse.size() + ", \"jdbcString\":\"" + daoConn.jdbcString + "\", \"jdbcUser\":\"" + daoConn.jdbcUser + "\",\"jdbcDriverClass\":\"" + daoConn.jdbcDriverClass + "\" } "

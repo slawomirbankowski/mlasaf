@@ -65,10 +65,14 @@ object CustomUtils {
     // TODO: finish implementation of cutString method - change return type to Structure/Class
     (0 to partsNum-1).foreach(partNum => {
       val start = partNum * maxPartLen;
-      val end = (partNum + 1) * maxPartLen -1;
+      val end = (partNum + 1) * maxPartLen;
       val cutStart = if (s.length > start) start else s.length-1;
-      val cutEnd = if (s.length > end) end else s.length-1;
-      resParts(partNum) = s.substring(cutStart, cutEnd)
+      val cutEnd = if (s.length > end) end else s.length;
+      if (cutEnd > cutStart+1 && cutEnd > 0) {
+        resParts(partNum) = s.substring(cutStart, cutEnd)
+      } else {
+        resParts(partNum) = ""
+      }
     });
     resParts
   }
@@ -90,8 +94,9 @@ object CustomUtils {
 
   def main(args : Array[String]) : Unit = {
     println("TEST");
-    val res = cutString("123456789012345678901234567890", 12, 10);
-    println("CUT: " + res.zipWithIndex.map(x => x._2 +":" + x._1).mkString(","));
+    println("CUT 123456789012345678901234567890: " + cutString("123456789012345678901234567890", 12, 10).zipWithIndex.map(x => x._2 +":" + x._1).mkString(","));
+    println("CUT 123: " + cutString("123", 12, 10).zipWithIndex.map(x => x._2 +":" + x._1).mkString(","));
+    println("CUT : " + cutString("", 12, 10).zipWithIndex.map(x => x._2 +":" + x._1).mkString(","));
 
   }
 

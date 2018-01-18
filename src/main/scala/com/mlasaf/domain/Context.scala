@@ -70,13 +70,14 @@ class Context extends ThreadBase {
     daoFactory.initialize(runOptions.jdbcString.toOption.getOrElse(""), runOptions.jdbcUser.toOption.getOrElse(""), runOptions.jdbcPass.toOption.getOrElse(""), runOptions.jdbcDriver.toOption.getOrElse(""));
     daoFactory.start();
     threads += daoFactory;
+    val entryOptionsSerialized = runOptions.args.mkString(",");
+    val entryOptionsCut = com.mlasaf.common.CustomUtils.cutString(entryOptionsSerialized, 1999, 10);
     // register current HOST
     hostDto = daoFactory.daoCustom.registerHost();
     logger.info("---> Registered host: " + hostDto);
     // register context
-    val javaProp2 = ""; // if (javaProperties.length > 4000) javaProperties.substring(4000)  else "";
-    val javaProp3 = ""; // if (javaProp2.length > 4000) javaProp2.substring(4000)  else "";
-    contextDto = daoFactory.daos.executorContextDao.createAndInsertExecutorContextDto(hostDto.executorHostId, 1, javaProperties.substring(0, 3999), javaProp2, javaProp3, "");
+    val javaProps = com.mlasaf.common.CustomUtils.cutString(javaProperties, 1999, 10);
+    contextDto = daoFactory.daos.executorContextDao.createAndInsertExecutorContextDto(hostDto.executorHostId, 1, javaProps(0), javaProps(1), javaProps(2), entryOptionsCut(0));
     logger.info("---> Registered context: " + contextDto);
   };
   /** run at the begin of working in thread */
@@ -182,8 +183,9 @@ class Context extends ThreadBase {
     try {
       val commandObj = Class.forName(vcommandDto.executorCommand_executorCommandClass).newInstance().asInstanceOf[ExecutorCommand];
       daoFactory.daos.executorContextCommandDao.updateField(commandDto, ExecutorContextCommandDto.FIELD_isRunning, 1);
-      commandObj.runCommand(this, Array(vcommandDto.commandParam1, vcommandDto.commandParam2, vcommandDto.commandParam3, vcommandDto.commandParam4, vcommandDto.commandParam5));
+      val commandStatus= commandObj.runCommand(this, Array(vcommandDto.commandParam1, vcommandDto.commandParam2, vcommandDto.commandParam3, vcommandDto.commandParam4, vcommandDto.commandParam5));
       daoFactory.daos.executorContextCommandDao.changeUpdatedDate(commandDto);
+      daoFactory.daos.executorContextCommandDao.updateField(commandDto, ExecutorContextCommandDto.FIELD_resultStatus, commandStatus);
       daoFactory.daos.executorContextCommandDao.updateField(commandDto, ExecutorContextCommandDto.FIELD_isExecuted, 1);
     } catch {
       case ex : Exception => {
