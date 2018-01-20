@@ -27,8 +27,9 @@ class TransformManager extends ThreadBase {
     //logger.info("Stopping EXECUTOR...");
   }
 
-  def readTransformGroup() : Unit = {
+  def readTransformGroup() : TransformGroup = {
+    // TODO: finish reading for transform group
+    null
   }
-
 
 }

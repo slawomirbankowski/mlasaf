@@ -6,7 +6,7 @@ package com.mlasaf.domain
 
 import com.mlasaf.base.{AlgorithmInstance, ThreadBase}
 import com.mlasaf.dto._
-import com.mlasaf.rest.ExecutorRests
+import com.mlasaf.rest.instances.ExecutorRests
 
 /** Executor to run any external or internal ML algorithm */
 trait Executor extends ThreadBase {
@@ -15,6 +15,7 @@ trait Executor extends ThreadBase {
   var executorInstanceDto : ExecutorInstanceDto = null
   /** all algorithms that are running now */
   val algoRunObjs : scala.collection.mutable.ListBuffer[AlgorithmRun] = new scala.collection.mutable.ListBuffer();
+  /** parameters for given executor type and host */
   val paramsForHostExecutorType : scala.collection.mutable.ListBuffer[VExecutorTypeHostParamDto] = new scala.collection.mutable.ListBuffer();
 
   /** executor constructor */
@@ -30,7 +31,7 @@ trait Executor extends ThreadBase {
   def onRunBegin() = {
     val exeTypeId = parentContext.daoFactory.daos.executorTypeDao.getExecutorTypeFirstByName(getTypeName()).get.executorTypeId
     executorInstanceDto = parentContext.daoFactory.daoCustom.registerExecutorInstance(exeTypeId , parentContext.contextDto.executorContextId);
-    logger.info("Start executor: " + executorInstanceDto);
+    logger.info("Start executor: " + executorInstanceDto + ", parameters: " + paramsForHostExecutorType.map(p => p.paramValue).mkString(","));
     runInterval = 10000L;
   }
   /** running executor in separate thread */
@@ -61,7 +62,7 @@ trait Executor extends ThreadBase {
     val params = parentContext.daoFactory.daos.vExecutorTypeHostParamDao.getDtosByExecutorHost_executorHostId(parentContext.hostDto.executorHostId).filter(p => p.executorTypeId == this.executorInstanceDto.executorTypeId);
     paramsForHostExecutorType.clear();
     params.foreach(p => { paramsForHostExecutorType += p; });
-    logger.info("Read EXECUTOR parameters for host: " + parentContext.hostDto.hostName + ", executorTypeId: " + executorInstanceDto.executorTypeId + ", params: " + params.map(p => p.paramName + "=" + p.paramValue).mkString(",") );
+    logger.info("Read EXECUTOR parameters for host: " + parentContext.hostDto.hostName + ", executorTypeId: " + executorInstanceDto.executorTypeId + ", params: " + params.map(p => p.executorParam_executorParamName + "=" + p.paramValue).mkString(",") );
   }
   /** search for schedules to create algorithm runs */
   def searchForSchedules() {
@@ -95,10 +96,20 @@ trait Executor extends ThreadBase {
         algoRun.storage = storageObj;
         algoRun.algorithmRunDto = runDto;
         algoRun.algorithmScheduleDto = sch;
+        val infoTypes = parentContext.daoFactory.daos.algorithmInfoTypeDao.getAlgorithmInfoTypesList();
+        logger.info("==>For AlgorithmRun infoTypes: " +infoTypes.map(x => x.algorithmInfoTypeName).mkString(","));
+        infoTypes.foreach(ait => {
+          val resPath = storageObj.generateOutputPath();
+          val storIsValid : Int = 0;
+          val storResDto = parentContext.daoFactory.daos.executorStorageResourceDao.createAndInsertExecutorStorageResourceDto(runDto.executorStorageId, resPath, 0L, 0, storIsValid);
+          val algRunInfoDto = parentContext.daoFactory.daos.algorithmRunInfoDao.createAndInsertAlgorithmRunInfoDto(runDto.algorithmScheduleId, runDto.algorithmRunId, runDto.executorStorageId, ait.algorithmInfoTypeId, storResDto.executorStorageResourceId, storIsValid);
+          val vAlgRunInfoDto = parentContext.daoFactory.daos.vAlgorithmRunInfoDao.getDtosByAlgorithmRunInfoId(algRunInfoDto.algorithmRunInfoId);
+          algoRun.runInfos ++= vAlgRunInfoDto;
+        });
         // get all parameters for executor type for given host
         val paramsForHostExecutorType = parentContext.daoFactory.daos.vExecutorTypeHostParamDao.getDtosByExecutorHost_executorHostId(parentContext.hostDto.executorHostId).filter(p => p.executorTypeId == sch.algorithmImplementation_executorTypeId);
         paramsForHostExecutorType.foreach(p => { algoRun.paramsForHostExecutorType += p; } );
-        logger.info("Read parameters for schedule: " + sch.algorithmScheduleId + ", executorTypeId: " + sch.algorithmImplementation_executorTypeId + ", parameters: " + paramsForHostExecutorType.map(p => p.paramName + "=" + p.paramValue).mkString(","));
+        logger.info("Read parameters for schedule: " + sch.algorithmScheduleId + ", executorTypeId: " + sch.algorithmImplementation_executorTypeId + ", parameters: " + paramsForHostExecutorType.map(p => p.executorParam_executorParamName + "=" + p.paramValue).mkString(","));
         // parentContext.daoFactory.daos.executorTypeHostParamDao.getExecutorTypeHostParamByFkExecutorHostId()
         // create new instance for algorithm to be run
         logger.info("Create new AlgorithmInstance for class: " + sch.algorithmImplementation_algorithmImplementationClass);

@@ -15,12 +15,12 @@ case class VAlgorithmScheduleViewSummaryDto (
      , val algorithmScheduleId : Long
      , val sourceViewId : Long
      , val joinOnDefinition : String
+     , val downloadTransformAlgorithmSchedule_count : Int
      , val algorithmScheduleColumn_count : Int
-     , val algorithmRunView_count : Int
-     , val downloadTransformAlgorithmSchedule_count : Int 
+     , val algorithmRunView_count : Int 
      ) extends BaseReadOnlyDto {  
    def tableName : String = {    "vAlgorithmScheduleViewSummary";    }  
-   def fields : String = {    "algorithmScheduleViewId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleViewTypeId,algorithmScheduleId,sourceViewId,joinOnDefinition,algorithmScheduleColumn_count,algorithmRunView_count,downloadTransformAlgorithmSchedule_count";    }  
+   def fields : String = {    "algorithmScheduleViewId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleViewTypeId,algorithmScheduleId,sourceViewId,joinOnDefinition,downloadTransformAlgorithmSchedule_count,algorithmScheduleColumn_count,algorithmRunView_count";    }  
    def pkFields : String = {    "";    }  
    def fkFields : String = {    "";    }  
    def nameField : String = {    "";    }  
@@ -28,10 +28,10 @@ case class VAlgorithmScheduleViewSummaryDto (
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(algorithmScheduleViewId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleViewTypeId,algorithmScheduleId,sourceViewId,joinOnDefinition,algorithmScheduleColumn_count,algorithmRunView_count,downloadTransformAlgorithmSchedule_count)  }  
- def toStringArray() : Array[String] = {    Array(""+algorithmScheduleViewId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmScheduleViewTypeId,""+algorithmScheduleId,""+sourceViewId,""+joinOnDefinition,""+algorithmScheduleColumn_count,""+algorithmRunView_count,""+downloadTransformAlgorithmSchedule_count)   }  
- def toJson() : String = {   "{" + "\"algorithmScheduleViewId\":\""+algorithmScheduleViewId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"algorithmScheduleViewTypeId\":\""+algorithmScheduleViewTypeId+"\""+","+"\"algorithmScheduleId\":\""+algorithmScheduleId+"\""+","+"\"sourceViewId\":\""+sourceViewId+"\""+","+"\"joinOnDefinition\":\""+joinOnDefinition+"\""+","+"\"algorithmScheduleColumn_count\":\""+algorithmScheduleColumn_count+"\""+","+"\"algorithmRunView_count\":\""+algorithmRunView_count+"\""+","+"\"downloadTransformAlgorithmSchedule_count\":\""+downloadTransformAlgorithmSchedule_count+"\"" + "}"   }  
- def toFullString() : String = {    "algorithmScheduleViewId:'"+algorithmScheduleViewId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmScheduleViewTypeId:'"+algorithmScheduleViewTypeId+"'"+","+"algorithmScheduleId:'"+algorithmScheduleId+"'"+","+"sourceViewId:'"+sourceViewId+"'"+","+"joinOnDefinition:'"+joinOnDefinition+"'"+","+"algorithmScheduleColumn_count:'"+algorithmScheduleColumn_count+"'"+","+"algorithmRunView_count:'"+algorithmRunView_count+"'"+","+"downloadTransformAlgorithmSchedule_count:'"+downloadTransformAlgorithmSchedule_count+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(algorithmScheduleViewId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleViewTypeId,algorithmScheduleId,sourceViewId,joinOnDefinition,downloadTransformAlgorithmSchedule_count,algorithmScheduleColumn_count,algorithmRunView_count)  }  
+ def toStringArray() : Array[String] = {    Array(""+algorithmScheduleViewId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmScheduleViewTypeId,""+algorithmScheduleId,""+sourceViewId,""+joinOnDefinition,""+downloadTransformAlgorithmSchedule_count,""+algorithmScheduleColumn_count,""+algorithmRunView_count)   }  
+ def toJson() : String = {   "{" + "\"algorithmScheduleViewId\":\""+algorithmScheduleViewId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"algorithmScheduleViewTypeId\":\""+algorithmScheduleViewTypeId+"\""+","+"\"algorithmScheduleId\":\""+algorithmScheduleId+"\""+","+"\"sourceViewId\":\""+sourceViewId+"\""+","+"\"joinOnDefinition\":\""+joinOnDefinition+"\""+","+"\"downloadTransformAlgorithmSchedule_count\":\""+downloadTransformAlgorithmSchedule_count+"\""+","+"\"algorithmScheduleColumn_count\":\""+algorithmScheduleColumn_count+"\""+","+"\"algorithmRunView_count\":\""+algorithmRunView_count+"\"" + "}"   }  
+ def toFullString() : String = {    "algorithmScheduleViewId:'"+algorithmScheduleViewId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmScheduleViewTypeId:'"+algorithmScheduleViewTypeId+"'"+","+"algorithmScheduleId:'"+algorithmScheduleId+"'"+","+"sourceViewId:'"+sourceViewId+"'"+","+"joinOnDefinition:'"+joinOnDefinition+"'"+","+"downloadTransformAlgorithmSchedule_count:'"+downloadTransformAlgorithmSchedule_count+"'"+","+"algorithmScheduleColumn_count:'"+algorithmScheduleColumn_count+"'"+","+"algorithmRunView_count:'"+algorithmRunView_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "algorithmScheduleViewId" => algorithmScheduleViewId  
@@ -42,9 +42,9 @@ case class VAlgorithmScheduleViewSummaryDto (
      case "algorithmScheduleId" => algorithmScheduleId  
      case "sourceViewId" => sourceViewId  
      case "joinOnDefinition" => joinOnDefinition  
+     case "downloadTransformAlgorithmSchedule_count" => downloadTransformAlgorithmSchedule_count  
      case "algorithmScheduleColumn_count" => algorithmScheduleColumn_count  
-     case "algorithmRunView_count" => algorithmRunView_count  
-     case "downloadTransformAlgorithmSchedule_count" => downloadTransformAlgorithmSchedule_count   
+     case "algorithmRunView_count" => algorithmRunView_count   
     case _ => null 
     } 
     ret 
@@ -59,9 +59,9 @@ case class VAlgorithmScheduleViewSummaryDto (
      case "algorithmScheduleId" => "Long"  
      case "sourceViewId" => "Long"  
      case "joinOnDefinition" => "String"  
+     case "downloadTransformAlgorithmSchedule_count" => "Int"  
      case "algorithmScheduleColumn_count" => "Int"  
-     case "algorithmRunView_count" => "Int"  
-     case "downloadTransformAlgorithmSchedule_count" => "Int"   
+     case "algorithmRunView_count" => "Int"   
     case _ => "Object" 
     } 
     ret 
@@ -77,9 +77,9 @@ object VAlgorithmScheduleViewSummaryDto {
    val FIELD_algorithmScheduleId = "algorithmScheduleId";
    val FIELD_sourceViewId = "sourceViewId";
    val FIELD_joinOnDefinition = "joinOnDefinition";
+   val FIELD_downloadTransformAlgorithmSchedule_count = "downloadTransformAlgorithmSchedule_count";
    val FIELD_algorithmScheduleColumn_count = "algorithmScheduleColumn_count";
    val FIELD_algorithmRunView_count = "algorithmRunView_count";
-   val FIELD_downloadTransformAlgorithmSchedule_count = "downloadTransformAlgorithmSchedule_count";
 
 }
 

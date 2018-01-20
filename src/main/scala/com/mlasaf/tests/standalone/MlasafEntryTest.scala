@@ -13,7 +13,7 @@ object MlasafEntryTest {
   def main(args : Array[String]) = {
 
     val newargs = Array(
-      "--jdbcString", "jdbc:mysql://localhost:3307/mlasaf35"
+      "--jdbcString", "jdbc:mysql://localhost:3307/mlasaf40?useSSL=false"
       , "--jdbcUser" , System.getenv("MLASAF_USER")
       , "--jdbcPass" , System.getenv("MLASAF_PASS")
       , "--jdbcDriver", System.getenv("MLASAF_DRIVER")
@@ -23,7 +23,7 @@ object MlasafEntryTest {
       , "--storageDefinition", """ [ {"storageType":"LOCAL_DISK", "storageSimplePath":"../data2/", "storageFullPath":"", "storagePort":8815 }, {"storageType":"LOCAL_DISK", "storageSimplePath":"../data3/", "storageFullPath":"", "storagePort":8817 } ] """
       , "--executorClasses", System.getenv("MLASAF_EXECUTOR_CLASSES")
       , "--simpleStorage", System.getenv("MLASAF_SIMPLE_STORAGE")
-      , "--maxWorkingTimeSeconds", "1000" // only 60 seconds of run
+      , "--maxWorkingTimeSeconds", "100000" // only 60 seconds of run
     );
     MlasafEntry.main(newargs);
   }

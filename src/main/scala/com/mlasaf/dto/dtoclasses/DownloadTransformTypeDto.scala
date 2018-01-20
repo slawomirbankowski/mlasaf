@@ -11,10 +11,11 @@ case class DownloadTransformTypeDto (
      , val guid : Long
      , val insertedRowDate : java.util.Date
      , val lastUpdatedDate : java.util.Date
-     , val downloadTransformTypeName : String 
+     , val downloadTransformTypeName : String
+     , val downloadTransformTypeClass : String 
      ) extends BaseDto {  
    def tableName : String = {    "downloadTransformType";    }  
-   def fields : String = {    "downloadTransformTypeId,guid,insertedRowDate,lastUpdatedDate,downloadTransformTypeName";    }  
+   def fields : String = {    "downloadTransformTypeId,guid,insertedRowDate,lastUpdatedDate,downloadTransformTypeName,downloadTransformTypeClass";    }  
    def pkFields : String = {    "downloadTransformTypeId";    }  
    def fkFields : String = {    "";    }  
    def nameField : String = {    "downloadTransformTypeName";    }  
@@ -22,17 +23,18 @@ case class DownloadTransformTypeDto (
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(downloadTransformTypeId,guid,insertedRowDate,lastUpdatedDate,downloadTransformTypeName)  }  
- def toStringArray() : Array[String] = {    Array(""+downloadTransformTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+downloadTransformTypeName)   }  
- def toJson() : String = {   "{" + "\"downloadTransformTypeId\":\""+downloadTransformTypeId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"downloadTransformTypeName\":\""+downloadTransformTypeName+"\"" + "}"   }  
- def toFullString() : String = {    "downloadTransformTypeId:'"+downloadTransformTypeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"downloadTransformTypeName:'"+downloadTransformTypeName+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(downloadTransformTypeId,guid,insertedRowDate,lastUpdatedDate,downloadTransformTypeName,downloadTransformTypeClass)  }  
+ def toStringArray() : Array[String] = {    Array(""+downloadTransformTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+downloadTransformTypeName,""+downloadTransformTypeClass)   }  
+ def toJson() : String = {   "{" + "\"downloadTransformTypeId\":\""+downloadTransformTypeId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"downloadTransformTypeName\":\""+downloadTransformTypeName+"\""+","+"\"downloadTransformTypeClass\":\""+downloadTransformTypeClass+"\"" + "}"   }  
+ def toFullString() : String = {    "downloadTransformTypeId:'"+downloadTransformTypeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"downloadTransformTypeName:'"+downloadTransformTypeName+"'"+","+"downloadTransformTypeClass:'"+downloadTransformTypeClass+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "downloadTransformTypeId" => downloadTransformTypeId  
      case "guid" => guid  
      case "insertedRowDate" => insertedRowDate  
      case "lastUpdatedDate" => lastUpdatedDate  
-     case "downloadTransformTypeName" => downloadTransformTypeName   
+     case "downloadTransformTypeName" => downloadTransformTypeName  
+     case "downloadTransformTypeClass" => downloadTransformTypeClass   
     case _ => null 
     } 
     ret 
@@ -43,19 +45,21 @@ case class DownloadTransformTypeDto (
      case "guid" => "Long"  
      case "insertedRowDate" => "java.util.Date"  
      case "lastUpdatedDate" => "java.util.Date"  
-     case "downloadTransformTypeName" => "String"   
+     case "downloadTransformTypeName" => "String"  
+     case "downloadTransformTypeClass" => "String"   
     case _ => "Object" 
     } 
     ret 
   } 
    def prepareInsert(connection : java.sql.Connection) : java.sql.PreparedStatement = {
-     val stat = connection.prepareStatement("insert into downloadTransformType(guid,downloadTransformTypeName) values (?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
+     val stat = connection.prepareStatement("insert into downloadTransformType(guid,downloadTransformTypeName,downloadTransformTypeClass) values (?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
     stat.setObject(1, guid);
     stat.setObject(2, downloadTransformTypeName);
+    stat.setObject(3, downloadTransformTypeClass);
     return stat; 
    } 
-   def modify(downloadTransformTypeName : String) : DownloadTransformTypeDto = {
-    val dtoModified = new DownloadTransformTypeDto(this.downloadTransformTypeId,this.guid,this.insertedRowDate,new java.util.Date(),downloadTransformTypeName);
+   def modify(downloadTransformTypeName : String, downloadTransformTypeClass : String) : DownloadTransformTypeDto = {
+    val dtoModified = new DownloadTransformTypeDto(this.downloadTransformTypeId,this.guid,this.insertedRowDate,new java.util.Date(),downloadTransformTypeName,downloadTransformTypeClass);
     dtoModified
   }
  } 
@@ -66,9 +70,10 @@ object DownloadTransformTypeDto {
    val FIELD_insertedRowDate = "insertedRowDate";
    val FIELD_lastUpdatedDate = "lastUpdatedDate";
    val FIELD_downloadTransformTypeName = "downloadTransformTypeName";
+   val FIELD_downloadTransformTypeClass = "downloadTransformTypeClass";
 
-  def createNewDownloadTransformTypeDto(downloadTransformTypeName : String) : DownloadTransformTypeDto = {  
-     val dto = new DownloadTransformTypeDto(0,0,new java.util.Date(),new java.util.Date(),downloadTransformTypeName)   
+  def createNewDownloadTransformTypeDto(downloadTransformTypeName : String, downloadTransformTypeClass : String) : DownloadTransformTypeDto = {  
+     val dto = new DownloadTransformTypeDto(0,0,new java.util.Date(),new java.util.Date(),downloadTransformTypeName,downloadTransformTypeClass)   
     dto 
   } 
 

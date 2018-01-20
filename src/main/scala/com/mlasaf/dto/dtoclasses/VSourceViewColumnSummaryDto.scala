@@ -14,12 +14,12 @@ case class VSourceViewColumnSummaryDto (
      , val sourceViewId : Long
      , val columnName : String
      , val columnType : String
+     , val downloadTransformColumn_count : Int
      , val algorithmScheduleColumn_count : Int
-     , val sourceDownloadStatColumn_count : Int
-     , val downloadTransformColumn_count : Int 
+     , val sourceDownloadStatColumn_count : Int 
      ) extends BaseReadOnlyDto {  
    def tableName : String = {    "vSourceViewColumnSummary";    }  
-   def fields : String = {    "sourceViewColumnId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,columnName,columnType,algorithmScheduleColumn_count,sourceDownloadStatColumn_count,downloadTransformColumn_count";    }  
+   def fields : String = {    "sourceViewColumnId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,columnName,columnType,downloadTransformColumn_count,algorithmScheduleColumn_count,sourceDownloadStatColumn_count";    }  
    def pkFields : String = {    "";    }  
    def fkFields : String = {    "";    }  
    def nameField : String = {    "";    }  
@@ -27,10 +27,10 @@ case class VSourceViewColumnSummaryDto (
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(sourceViewColumnId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,columnName,columnType,algorithmScheduleColumn_count,sourceDownloadStatColumn_count,downloadTransformColumn_count)  }  
- def toStringArray() : Array[String] = {    Array(""+sourceViewColumnId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceViewId,""+columnName,""+columnType,""+algorithmScheduleColumn_count,""+sourceDownloadStatColumn_count,""+downloadTransformColumn_count)   }  
- def toJson() : String = {   "{" + "\"sourceViewColumnId\":\""+sourceViewColumnId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"sourceViewId\":\""+sourceViewId+"\""+","+"\"columnName\":\""+columnName+"\""+","+"\"columnType\":\""+columnType+"\""+","+"\"algorithmScheduleColumn_count\":\""+algorithmScheduleColumn_count+"\""+","+"\"sourceDownloadStatColumn_count\":\""+sourceDownloadStatColumn_count+"\""+","+"\"downloadTransformColumn_count\":\""+downloadTransformColumn_count+"\"" + "}"   }  
- def toFullString() : String = {    "sourceViewColumnId:'"+sourceViewColumnId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"sourceViewId:'"+sourceViewId+"'"+","+"columnName:'"+columnName+"'"+","+"columnType:'"+columnType+"'"+","+"algorithmScheduleColumn_count:'"+algorithmScheduleColumn_count+"'"+","+"sourceDownloadStatColumn_count:'"+sourceDownloadStatColumn_count+"'"+","+"downloadTransformColumn_count:'"+downloadTransformColumn_count+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(sourceViewColumnId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,columnName,columnType,downloadTransformColumn_count,algorithmScheduleColumn_count,sourceDownloadStatColumn_count)  }  
+ def toStringArray() : Array[String] = {    Array(""+sourceViewColumnId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceViewId,""+columnName,""+columnType,""+downloadTransformColumn_count,""+algorithmScheduleColumn_count,""+sourceDownloadStatColumn_count)   }  
+ def toJson() : String = {   "{" + "\"sourceViewColumnId\":\""+sourceViewColumnId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"sourceViewId\":\""+sourceViewId+"\""+","+"\"columnName\":\""+columnName+"\""+","+"\"columnType\":\""+columnType+"\""+","+"\"downloadTransformColumn_count\":\""+downloadTransformColumn_count+"\""+","+"\"algorithmScheduleColumn_count\":\""+algorithmScheduleColumn_count+"\""+","+"\"sourceDownloadStatColumn_count\":\""+sourceDownloadStatColumn_count+"\"" + "}"   }  
+ def toFullString() : String = {    "sourceViewColumnId:'"+sourceViewColumnId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"sourceViewId:'"+sourceViewId+"'"+","+"columnName:'"+columnName+"'"+","+"columnType:'"+columnType+"'"+","+"downloadTransformColumn_count:'"+downloadTransformColumn_count+"'"+","+"algorithmScheduleColumn_count:'"+algorithmScheduleColumn_count+"'"+","+"sourceDownloadStatColumn_count:'"+sourceDownloadStatColumn_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "sourceViewColumnId" => sourceViewColumnId  
@@ -40,9 +40,9 @@ case class VSourceViewColumnSummaryDto (
      case "sourceViewId" => sourceViewId  
      case "columnName" => columnName  
      case "columnType" => columnType  
+     case "downloadTransformColumn_count" => downloadTransformColumn_count  
      case "algorithmScheduleColumn_count" => algorithmScheduleColumn_count  
-     case "sourceDownloadStatColumn_count" => sourceDownloadStatColumn_count  
-     case "downloadTransformColumn_count" => downloadTransformColumn_count   
+     case "sourceDownloadStatColumn_count" => sourceDownloadStatColumn_count   
     case _ => null 
     } 
     ret 
@@ -56,9 +56,9 @@ case class VSourceViewColumnSummaryDto (
      case "sourceViewId" => "Long"  
      case "columnName" => "String"  
      case "columnType" => "String"  
+     case "downloadTransformColumn_count" => "Int"  
      case "algorithmScheduleColumn_count" => "Int"  
-     case "sourceDownloadStatColumn_count" => "Int"  
-     case "downloadTransformColumn_count" => "Int"   
+     case "sourceDownloadStatColumn_count" => "Int"   
     case _ => "Object" 
     } 
     ret 
@@ -73,9 +73,9 @@ object VSourceViewColumnSummaryDto {
    val FIELD_sourceViewId = "sourceViewId";
    val FIELD_columnName = "columnName";
    val FIELD_columnType = "columnType";
+   val FIELD_downloadTransformColumn_count = "downloadTransformColumn_count";
    val FIELD_algorithmScheduleColumn_count = "algorithmScheduleColumn_count";
    val FIELD_sourceDownloadStatColumn_count = "sourceDownloadStatColumn_count";
-   val FIELD_downloadTransformColumn_count = "downloadTransformColumn_count";
 
 }
 

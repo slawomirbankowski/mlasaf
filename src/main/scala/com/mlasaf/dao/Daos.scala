@@ -17,10 +17,12 @@ import java.sql.Connection
 class Daos { 
   val algorithmColumnTypeDao : AlgorithmColumnTypeDao = new AlgorithmColumnTypeDao(); 
   val algorithmImplementationDao : AlgorithmImplementationDao = new AlgorithmImplementationDao(); 
+  val algorithmInfoTypeDao : AlgorithmInfoTypeDao = new AlgorithmInfoTypeDao(); 
   val algorithmOutputDao : AlgorithmOutputDao = new AlgorithmOutputDao(); 
   val algorithmOutputTypeDao : AlgorithmOutputTypeDao = new AlgorithmOutputTypeDao(); 
   val algorithmParamDao : AlgorithmParamDao = new AlgorithmParamDao(); 
   val algorithmRunDao : AlgorithmRunDao = new AlgorithmRunDao(); 
+  val algorithmRunInfoDao : AlgorithmRunInfoDao = new AlgorithmRunInfoDao(); 
   val algorithmRunTypeDao : AlgorithmRunTypeDao = new AlgorithmRunTypeDao(); 
   val algorithmRunViewDao : AlgorithmRunViewDao = new AlgorithmRunViewDao(); 
   val algorithmScheduleDao : AlgorithmScheduleDao = new AlgorithmScheduleDao(); 
@@ -45,11 +47,12 @@ class Daos {
   val executorContextDao : ExecutorContextDao = new ExecutorContextDao(); 
   val executorContextCommandDao : ExecutorContextCommandDao = new ExecutorContextCommandDao(); 
   val executorContextRuntimeDao : ExecutorContextRuntimeDao = new ExecutorContextRuntimeDao(); 
-  val executorContextStateDao : ExecutorContextStateDao = new ExecutorContextStateDao();
-  val executorContextThreadDao : ExecutorContextThreadDao = new ExecutorContextThreadDao();
+  val executorContextStateDao : ExecutorContextStateDao = new ExecutorContextStateDao(); 
+  val executorContextThreadDao : ExecutorContextThreadDao = new ExecutorContextThreadDao(); 
   val executorHostDao : ExecutorHostDao = new ExecutorHostDao(); 
   val executorInstanceDao : ExecutorInstanceDao = new ExecutorInstanceDao(); 
   val executorInstanceStateDao : ExecutorInstanceStateDao = new ExecutorInstanceStateDao(); 
+  val executorParamDao : ExecutorParamDao = new ExecutorParamDao(); 
   val executorRestDao : ExecutorRestDao = new ExecutorRestDao(); 
   val executorRestCallDao : ExecutorRestCallDao = new ExecutorRestCallDao(); 
   val executorStorageDao : ExecutorStorageDao = new ExecutorStorageDao(); 
@@ -59,6 +62,7 @@ class Daos {
   val executorStorageViewDao : ExecutorStorageViewDao = new ExecutorStorageViewDao(); 
   val executorTypeDao : ExecutorTypeDao = new ExecutorTypeDao(); 
   val executorTypeHostParamDao : ExecutorTypeHostParamDao = new ExecutorTypeHostParamDao(); 
+  val executorTypeParamDao : ExecutorTypeParamDao = new ExecutorTypeParamDao(); 
   val resourceManagerDao : ResourceManagerDao = new ResourceManagerDao(); 
   val resourceManagerAllocationDao : ResourceManagerAllocationDao = new ResourceManagerAllocationDao(); 
   val resourceManagerCheckDao : ResourceManagerCheckDao = new ResourceManagerCheckDao(); 
@@ -81,10 +85,12 @@ class Daos {
   val vAlgorithmColumnTypeSummaryDao : VAlgorithmColumnTypeSummaryDao = new VAlgorithmColumnTypeSummaryDao(); 
   val vAlgorithmImplementationDao : VAlgorithmImplementationDao = new VAlgorithmImplementationDao(); 
   val vAlgorithmImplementationSummaryDao : VAlgorithmImplementationSummaryDao = new VAlgorithmImplementationSummaryDao(); 
+  val vAlgorithmInfoTypeSummaryDao : VAlgorithmInfoTypeSummaryDao = new VAlgorithmInfoTypeSummaryDao(); 
   val vAlgorithmOutputDao : VAlgorithmOutputDao = new VAlgorithmOutputDao(); 
   val vAlgorithmOutputTypeSummaryDao : VAlgorithmOutputTypeSummaryDao = new VAlgorithmOutputTypeSummaryDao(); 
   val vAlgorithmParamSummaryDao : VAlgorithmParamSummaryDao = new VAlgorithmParamSummaryDao(); 
   val vAlgorithmRunDao : VAlgorithmRunDao = new VAlgorithmRunDao(); 
+  val vAlgorithmRunInfoDao : VAlgorithmRunInfoDao = new VAlgorithmRunInfoDao(); 
   val vAlgorithmRunSummaryDao : VAlgorithmRunSummaryDao = new VAlgorithmRunSummaryDao(); 
   val vAlgorithmRunTypeSummaryDao : VAlgorithmRunTypeSummaryDao = new VAlgorithmRunTypeSummaryDao(); 
   val vAlgorithmRunViewDao : VAlgorithmRunViewDao = new VAlgorithmRunViewDao(); 
@@ -116,12 +122,13 @@ class Daos {
   val vExecutorContextCommandDao : VExecutorContextCommandDao = new VExecutorContextCommandDao(); 
   val vExecutorContextRuntimeDao : VExecutorContextRuntimeDao = new VExecutorContextRuntimeDao(); 
   val vExecutorContextStateDao : VExecutorContextStateDao = new VExecutorContextStateDao(); 
-  val vExecutorContextSummaryDao : VExecutorContextSummaryDao = new VExecutorContextSummaryDao();
-  val vExecutorContextThreadDao : VExecutorContextThreadDao = new VExecutorContextThreadDao();
+  val vExecutorContextSummaryDao : VExecutorContextSummaryDao = new VExecutorContextSummaryDao(); 
+  val vExecutorContextThreadDao : VExecutorContextThreadDao = new VExecutorContextThreadDao(); 
   val vExecutorHostSummaryDao : VExecutorHostSummaryDao = new VExecutorHostSummaryDao(); 
   val vExecutorInstanceDao : VExecutorInstanceDao = new VExecutorInstanceDao(); 
   val vExecutorInstanceStateDao : VExecutorInstanceStateDao = new VExecutorInstanceStateDao(); 
   val vExecutorInstanceSummaryDao : VExecutorInstanceSummaryDao = new VExecutorInstanceSummaryDao(); 
+  val vExecutorParamSummaryDao : VExecutorParamSummaryDao = new VExecutorParamSummaryDao(); 
   val vExecutorRestDao : VExecutorRestDao = new VExecutorRestDao(); 
   val vExecutorRestCallDao : VExecutorRestCallDao = new VExecutorRestCallDao(); 
   val vExecutorRestSummaryDao : VExecutorRestSummaryDao = new VExecutorRestSummaryDao(); 
@@ -135,6 +142,7 @@ class Daos {
   val vExecutorStorageViewDao : VExecutorStorageViewDao = new VExecutorStorageViewDao(); 
   val vExecutorStorageViewSummaryDao : VExecutorStorageViewSummaryDao = new VExecutorStorageViewSummaryDao(); 
   val vExecutorTypeHostParamDao : VExecutorTypeHostParamDao = new VExecutorTypeHostParamDao(); 
+  val vExecutorTypeParamDao : VExecutorTypeParamDao = new VExecutorTypeParamDao(); 
   val vExecutorTypeSummaryDao : VExecutorTypeSummaryDao = new VExecutorTypeSummaryDao(); 
   val vResourceManagerDao : VResourceManagerDao = new VResourceManagerDao(); 
   val vResourceManagerAllocationDao : VResourceManagerAllocationDao = new VResourceManagerAllocationDao(); 
@@ -164,10 +172,12 @@ class Daos {
   def initialize(daoConn : DaoConnection ): Unit = { 
     algorithmColumnTypeDao.initialize(daoConn) 
     algorithmImplementationDao.initialize(daoConn) 
+    algorithmInfoTypeDao.initialize(daoConn) 
     algorithmOutputDao.initialize(daoConn) 
     algorithmOutputTypeDao.initialize(daoConn) 
     algorithmParamDao.initialize(daoConn) 
     algorithmRunDao.initialize(daoConn) 
+    algorithmRunInfoDao.initialize(daoConn) 
     algorithmRunTypeDao.initialize(daoConn) 
     algorithmRunViewDao.initialize(daoConn) 
     algorithmScheduleDao.initialize(daoConn) 
@@ -192,11 +202,12 @@ class Daos {
     executorContextDao.initialize(daoConn) 
     executorContextCommandDao.initialize(daoConn) 
     executorContextRuntimeDao.initialize(daoConn) 
-    executorContextStateDao.initialize(daoConn)
-    executorContextThreadDao.initialize(daoConn)
+    executorContextStateDao.initialize(daoConn) 
+    executorContextThreadDao.initialize(daoConn) 
     executorHostDao.initialize(daoConn) 
     executorInstanceDao.initialize(daoConn) 
     executorInstanceStateDao.initialize(daoConn) 
+    executorParamDao.initialize(daoConn) 
     executorRestDao.initialize(daoConn) 
     executorRestCallDao.initialize(daoConn) 
     executorStorageDao.initialize(daoConn) 
@@ -206,6 +217,7 @@ class Daos {
     executorStorageViewDao.initialize(daoConn) 
     executorTypeDao.initialize(daoConn) 
     executorTypeHostParamDao.initialize(daoConn) 
+    executorTypeParamDao.initialize(daoConn) 
     resourceManagerDao.initialize(daoConn) 
     resourceManagerAllocationDao.initialize(daoConn) 
     resourceManagerCheckDao.initialize(daoConn) 
@@ -228,10 +240,12 @@ class Daos {
     vAlgorithmColumnTypeSummaryDao.initialize(daoConn) 
     vAlgorithmImplementationDao.initialize(daoConn) 
     vAlgorithmImplementationSummaryDao.initialize(daoConn) 
+    vAlgorithmInfoTypeSummaryDao.initialize(daoConn) 
     vAlgorithmOutputDao.initialize(daoConn) 
     vAlgorithmOutputTypeSummaryDao.initialize(daoConn) 
     vAlgorithmParamSummaryDao.initialize(daoConn) 
     vAlgorithmRunDao.initialize(daoConn) 
+    vAlgorithmRunInfoDao.initialize(daoConn) 
     vAlgorithmRunSummaryDao.initialize(daoConn) 
     vAlgorithmRunTypeSummaryDao.initialize(daoConn) 
     vAlgorithmRunViewDao.initialize(daoConn) 
@@ -263,12 +277,13 @@ class Daos {
     vExecutorContextCommandDao.initialize(daoConn) 
     vExecutorContextRuntimeDao.initialize(daoConn) 
     vExecutorContextStateDao.initialize(daoConn) 
-    vExecutorContextSummaryDao.initialize(daoConn)
-    vExecutorContextThreadDao.initialize(daoConn)
+    vExecutorContextSummaryDao.initialize(daoConn) 
+    vExecutorContextThreadDao.initialize(daoConn) 
     vExecutorHostSummaryDao.initialize(daoConn) 
     vExecutorInstanceDao.initialize(daoConn) 
     vExecutorInstanceStateDao.initialize(daoConn) 
     vExecutorInstanceSummaryDao.initialize(daoConn) 
+    vExecutorParamSummaryDao.initialize(daoConn) 
     vExecutorRestDao.initialize(daoConn) 
     vExecutorRestCallDao.initialize(daoConn) 
     vExecutorRestSummaryDao.initialize(daoConn) 
@@ -282,6 +297,7 @@ class Daos {
     vExecutorStorageViewDao.initialize(daoConn) 
     vExecutorStorageViewSummaryDao.initialize(daoConn) 
     vExecutorTypeHostParamDao.initialize(daoConn) 
+    vExecutorTypeParamDao.initialize(daoConn) 
     vExecutorTypeSummaryDao.initialize(daoConn) 
     vResourceManagerDao.initialize(daoConn) 
     vResourceManagerAllocationDao.initialize(daoConn) 

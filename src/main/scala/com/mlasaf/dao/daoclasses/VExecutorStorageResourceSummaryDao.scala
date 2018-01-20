@@ -120,6 +120,12 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
+ def getDtosByAlgorithmRunInfo_count(colValue : Int) : List[VExecutorStorageResourceSummaryDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorStorageResourceSummaryDto] = SQL("select * from vExecutorStorageResourceSummary where algorithmRunInfo_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageResourceSummaryDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
  def getDtosByExecutorStorageView_count(colValue : Int) : List[VExecutorStorageResourceSummaryDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VExecutorStorageResourceSummaryDto] = SQL("select * from vExecutorStorageResourceSummary where executorStorageView_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageResourceSummaryDto].*);  

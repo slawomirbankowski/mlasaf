@@ -120,6 +120,12 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
+ def getDtosByIsCustom(colValue : Int) : List[VSourceViewSummaryDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VSourceViewSummaryDto] = SQL("select * from vSourceViewSummary where isCustom = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewSummaryDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
  def getDtosByAlgorithmScheduleView_count(colValue : Int) : List[VSourceViewSummaryDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VSourceViewSummaryDto] = SQL("select * from vSourceViewSummary where algorithmScheduleView_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewSummaryDto].*);  

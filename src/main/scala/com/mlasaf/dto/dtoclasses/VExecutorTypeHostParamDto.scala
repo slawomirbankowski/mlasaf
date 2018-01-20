@@ -13,7 +13,7 @@ case class VExecutorTypeHostParamDto (
      , val lastUpdatedDate : java.util.Date
      , val executorHostId : Long
      , val executorTypeId : Long
-     , val paramName : String
+     , val executorParamId : Long
      , val paramValue : String
      , val executorHost_executorHostId : Long
      , val executorHost_guid : Long
@@ -25,6 +25,12 @@ case class VExecutorTypeHostParamDto (
      , val executorHost_hostOsType : String
      , val executorHost_hostOsVersion : String
      , val executorHost_isWorking : Int
+     , val executorParam_executorParamId : Long
+     , val executorParam_guid : Long
+     , val executorParam_insertedRowDate : java.util.Date
+     , val executorParam_lastUpdatedDate : java.util.Date
+     , val executorParam_executorParamName : String
+     , val executorParam_executorParamDescription : String
      , val executorType_executorTypeId : Long
      , val executorType_guid : Long
      , val executorType_insertedRowDate : java.util.Date
@@ -33,7 +39,7 @@ case class VExecutorTypeHostParamDto (
      , val executorType_executorTypeClass : String 
      ) extends BaseReadOnlyDto {  
    def tableName : String = {    "vExecutorTypeHostParam";    }  
-   def fields : String = {    "executorTypeHostParamId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorTypeId,paramName,paramValue,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking,executorType_executorTypeId,executorType_guid,executorType_insertedRowDate,executorType_lastUpdatedDate,executorType_executorTypeName,executorType_executorTypeClass";    }  
+   def fields : String = {    "executorTypeHostParamId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorTypeId,executorParamId,paramValue,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking,executorParam_executorParamId,executorParam_guid,executorParam_insertedRowDate,executorParam_lastUpdatedDate,executorParam_executorParamName,executorParam_executorParamDescription,executorType_executorTypeId,executorType_guid,executorType_insertedRowDate,executorType_lastUpdatedDate,executorType_executorTypeName,executorType_executorTypeClass";    }  
    def pkFields : String = {    "";    }  
    def fkFields : String = {    "";    }  
    def nameField : String = {    "";    }  
@@ -41,10 +47,10 @@ case class VExecutorTypeHostParamDto (
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(executorTypeHostParamId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorTypeId,paramName,paramValue,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking,executorType_executorTypeId,executorType_guid,executorType_insertedRowDate,executorType_lastUpdatedDate,executorType_executorTypeName,executorType_executorTypeClass)  }  
- def toStringArray() : Array[String] = {    Array(""+executorTypeHostParamId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+executorTypeId,""+paramName,""+paramValue,""+executorHost_executorHostId,""+executorHost_guid,""+executorHost_insertedRowDate,""+executorHost_lastUpdatedDate,""+executorHost_hostName,""+executorHost_hostIp,""+executorHost_hostDomain,""+executorHost_hostOsType,""+executorHost_hostOsVersion,""+executorHost_isWorking,""+executorType_executorTypeId,""+executorType_guid,""+executorType_insertedRowDate,""+executorType_lastUpdatedDate,""+executorType_executorTypeName,""+executorType_executorTypeClass)   }  
- def toJson() : String = {   "{" + "\"executorTypeHostParamId\":\""+executorTypeHostParamId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"executorHostId\":\""+executorHostId+"\""+","+"\"executorTypeId\":\""+executorTypeId+"\""+","+"\"paramName\":\""+paramName+"\""+","+"\"paramValue\":\""+paramValue+"\""+","+"\"executorHost_executorHostId\":\""+executorHost_executorHostId+"\""+","+"\"executorHost_guid\":\""+executorHost_guid+"\""+","+"\"executorHost_insertedRowDate\":\""+executorHost_insertedRowDate+"\""+","+"\"executorHost_lastUpdatedDate\":\""+executorHost_lastUpdatedDate+"\""+","+"\"executorHost_hostName\":\""+executorHost_hostName+"\""+","+"\"executorHost_hostIp\":\""+executorHost_hostIp+"\""+","+"\"executorHost_hostDomain\":\""+executorHost_hostDomain+"\""+","+"\"executorHost_hostOsType\":\""+executorHost_hostOsType+"\""+","+"\"executorHost_hostOsVersion\":\""+executorHost_hostOsVersion+"\""+","+"\"executorHost_isWorking\":\""+executorHost_isWorking+"\""+","+"\"executorType_executorTypeId\":\""+executorType_executorTypeId+"\""+","+"\"executorType_guid\":\""+executorType_guid+"\""+","+"\"executorType_insertedRowDate\":\""+executorType_insertedRowDate+"\""+","+"\"executorType_lastUpdatedDate\":\""+executorType_lastUpdatedDate+"\""+","+"\"executorType_executorTypeName\":\""+executorType_executorTypeName+"\""+","+"\"executorType_executorTypeClass\":\""+executorType_executorTypeClass+"\"" + "}"   }  
- def toFullString() : String = {    "executorTypeHostParamId:'"+executorTypeHostParamId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorHostId:'"+executorHostId+"'"+","+"executorTypeId:'"+executorTypeId+"'"+","+"paramName:'"+paramName+"'"+","+"paramValue:'"+paramValue+"'"+","+"executorHost_executorHostId:'"+executorHost_executorHostId+"'"+","+"executorHost_guid:'"+executorHost_guid+"'"+","+"executorHost_insertedRowDate:'"+executorHost_insertedRowDate+"'"+","+"executorHost_lastUpdatedDate:'"+executorHost_lastUpdatedDate+"'"+","+"executorHost_hostName:'"+executorHost_hostName+"'"+","+"executorHost_hostIp:'"+executorHost_hostIp+"'"+","+"executorHost_hostDomain:'"+executorHost_hostDomain+"'"+","+"executorHost_hostOsType:'"+executorHost_hostOsType+"'"+","+"executorHost_hostOsVersion:'"+executorHost_hostOsVersion+"'"+","+"executorHost_isWorking:'"+executorHost_isWorking+"'"+","+"executorType_executorTypeId:'"+executorType_executorTypeId+"'"+","+"executorType_guid:'"+executorType_guid+"'"+","+"executorType_insertedRowDate:'"+executorType_insertedRowDate+"'"+","+"executorType_lastUpdatedDate:'"+executorType_lastUpdatedDate+"'"+","+"executorType_executorTypeName:'"+executorType_executorTypeName+"'"+","+"executorType_executorTypeClass:'"+executorType_executorTypeClass+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(executorTypeHostParamId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorTypeId,executorParamId,paramValue,executorHost_executorHostId,executorHost_guid,executorHost_insertedRowDate,executorHost_lastUpdatedDate,executorHost_hostName,executorHost_hostIp,executorHost_hostDomain,executorHost_hostOsType,executorHost_hostOsVersion,executorHost_isWorking,executorParam_executorParamId,executorParam_guid,executorParam_insertedRowDate,executorParam_lastUpdatedDate,executorParam_executorParamName,executorParam_executorParamDescription,executorType_executorTypeId,executorType_guid,executorType_insertedRowDate,executorType_lastUpdatedDate,executorType_executorTypeName,executorType_executorTypeClass)  }  
+ def toStringArray() : Array[String] = {    Array(""+executorTypeHostParamId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+executorTypeId,""+executorParamId,""+paramValue,""+executorHost_executorHostId,""+executorHost_guid,""+executorHost_insertedRowDate,""+executorHost_lastUpdatedDate,""+executorHost_hostName,""+executorHost_hostIp,""+executorHost_hostDomain,""+executorHost_hostOsType,""+executorHost_hostOsVersion,""+executorHost_isWorking,""+executorParam_executorParamId,""+executorParam_guid,""+executorParam_insertedRowDate,""+executorParam_lastUpdatedDate,""+executorParam_executorParamName,""+executorParam_executorParamDescription,""+executorType_executorTypeId,""+executorType_guid,""+executorType_insertedRowDate,""+executorType_lastUpdatedDate,""+executorType_executorTypeName,""+executorType_executorTypeClass)   }  
+ def toJson() : String = {   "{" + "\"executorTypeHostParamId\":\""+executorTypeHostParamId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"executorHostId\":\""+executorHostId+"\""+","+"\"executorTypeId\":\""+executorTypeId+"\""+","+"\"executorParamId\":\""+executorParamId+"\""+","+"\"paramValue\":\""+paramValue+"\""+","+"\"executorHost_executorHostId\":\""+executorHost_executorHostId+"\""+","+"\"executorHost_guid\":\""+executorHost_guid+"\""+","+"\"executorHost_insertedRowDate\":\""+executorHost_insertedRowDate+"\""+","+"\"executorHost_lastUpdatedDate\":\""+executorHost_lastUpdatedDate+"\""+","+"\"executorHost_hostName\":\""+executorHost_hostName+"\""+","+"\"executorHost_hostIp\":\""+executorHost_hostIp+"\""+","+"\"executorHost_hostDomain\":\""+executorHost_hostDomain+"\""+","+"\"executorHost_hostOsType\":\""+executorHost_hostOsType+"\""+","+"\"executorHost_hostOsVersion\":\""+executorHost_hostOsVersion+"\""+","+"\"executorHost_isWorking\":\""+executorHost_isWorking+"\""+","+"\"executorParam_executorParamId\":\""+executorParam_executorParamId+"\""+","+"\"executorParam_guid\":\""+executorParam_guid+"\""+","+"\"executorParam_insertedRowDate\":\""+executorParam_insertedRowDate+"\""+","+"\"executorParam_lastUpdatedDate\":\""+executorParam_lastUpdatedDate+"\""+","+"\"executorParam_executorParamName\":\""+executorParam_executorParamName+"\""+","+"\"executorParam_executorParamDescription\":\""+executorParam_executorParamDescription+"\""+","+"\"executorType_executorTypeId\":\""+executorType_executorTypeId+"\""+","+"\"executorType_guid\":\""+executorType_guid+"\""+","+"\"executorType_insertedRowDate\":\""+executorType_insertedRowDate+"\""+","+"\"executorType_lastUpdatedDate\":\""+executorType_lastUpdatedDate+"\""+","+"\"executorType_executorTypeName\":\""+executorType_executorTypeName+"\""+","+"\"executorType_executorTypeClass\":\""+executorType_executorTypeClass+"\"" + "}"   }  
+ def toFullString() : String = {    "executorTypeHostParamId:'"+executorTypeHostParamId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorHostId:'"+executorHostId+"'"+","+"executorTypeId:'"+executorTypeId+"'"+","+"executorParamId:'"+executorParamId+"'"+","+"paramValue:'"+paramValue+"'"+","+"executorHost_executorHostId:'"+executorHost_executorHostId+"'"+","+"executorHost_guid:'"+executorHost_guid+"'"+","+"executorHost_insertedRowDate:'"+executorHost_insertedRowDate+"'"+","+"executorHost_lastUpdatedDate:'"+executorHost_lastUpdatedDate+"'"+","+"executorHost_hostName:'"+executorHost_hostName+"'"+","+"executorHost_hostIp:'"+executorHost_hostIp+"'"+","+"executorHost_hostDomain:'"+executorHost_hostDomain+"'"+","+"executorHost_hostOsType:'"+executorHost_hostOsType+"'"+","+"executorHost_hostOsVersion:'"+executorHost_hostOsVersion+"'"+","+"executorHost_isWorking:'"+executorHost_isWorking+"'"+","+"executorParam_executorParamId:'"+executorParam_executorParamId+"'"+","+"executorParam_guid:'"+executorParam_guid+"'"+","+"executorParam_insertedRowDate:'"+executorParam_insertedRowDate+"'"+","+"executorParam_lastUpdatedDate:'"+executorParam_lastUpdatedDate+"'"+","+"executorParam_executorParamName:'"+executorParam_executorParamName+"'"+","+"executorParam_executorParamDescription:'"+executorParam_executorParamDescription+"'"+","+"executorType_executorTypeId:'"+executorType_executorTypeId+"'"+","+"executorType_guid:'"+executorType_guid+"'"+","+"executorType_insertedRowDate:'"+executorType_insertedRowDate+"'"+","+"executorType_lastUpdatedDate:'"+executorType_lastUpdatedDate+"'"+","+"executorType_executorTypeName:'"+executorType_executorTypeName+"'"+","+"executorType_executorTypeClass:'"+executorType_executorTypeClass+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "executorTypeHostParamId" => executorTypeHostParamId  
@@ -53,7 +59,7 @@ case class VExecutorTypeHostParamDto (
      case "lastUpdatedDate" => lastUpdatedDate  
      case "executorHostId" => executorHostId  
      case "executorTypeId" => executorTypeId  
-     case "paramName" => paramName  
+     case "executorParamId" => executorParamId  
      case "paramValue" => paramValue  
      case "executorHost_executorHostId" => executorHost_executorHostId  
      case "executorHost_guid" => executorHost_guid  
@@ -65,6 +71,12 @@ case class VExecutorTypeHostParamDto (
      case "executorHost_hostOsType" => executorHost_hostOsType  
      case "executorHost_hostOsVersion" => executorHost_hostOsVersion  
      case "executorHost_isWorking" => executorHost_isWorking  
+     case "executorParam_executorParamId" => executorParam_executorParamId  
+     case "executorParam_guid" => executorParam_guid  
+     case "executorParam_insertedRowDate" => executorParam_insertedRowDate  
+     case "executorParam_lastUpdatedDate" => executorParam_lastUpdatedDate  
+     case "executorParam_executorParamName" => executorParam_executorParamName  
+     case "executorParam_executorParamDescription" => executorParam_executorParamDescription  
      case "executorType_executorTypeId" => executorType_executorTypeId  
      case "executorType_guid" => executorType_guid  
      case "executorType_insertedRowDate" => executorType_insertedRowDate  
@@ -83,7 +95,7 @@ case class VExecutorTypeHostParamDto (
      case "lastUpdatedDate" => "java.util.Date"  
      case "executorHostId" => "Long"  
      case "executorTypeId" => "Long"  
-     case "paramName" => "String"  
+     case "executorParamId" => "Long"  
      case "paramValue" => "String"  
      case "executorHost_executorHostId" => "Long"  
      case "executorHost_guid" => "Long"  
@@ -95,6 +107,12 @@ case class VExecutorTypeHostParamDto (
      case "executorHost_hostOsType" => "String"  
      case "executorHost_hostOsVersion" => "String"  
      case "executorHost_isWorking" => "Int"  
+     case "executorParam_executorParamId" => "Long"  
+     case "executorParam_guid" => "Long"  
+     case "executorParam_insertedRowDate" => "java.util.Date"  
+     case "executorParam_lastUpdatedDate" => "java.util.Date"  
+     case "executorParam_executorParamName" => "String"  
+     case "executorParam_executorParamDescription" => "String"  
      case "executorType_executorTypeId" => "Long"  
      case "executorType_guid" => "Long"  
      case "executorType_insertedRowDate" => "java.util.Date"  
@@ -114,7 +132,7 @@ object VExecutorTypeHostParamDto {
    val FIELD_lastUpdatedDate = "lastUpdatedDate";
    val FIELD_executorHostId = "executorHostId";
    val FIELD_executorTypeId = "executorTypeId";
-   val FIELD_paramName = "paramName";
+   val FIELD_executorParamId = "executorParamId";
    val FIELD_paramValue = "paramValue";
    val FIELD_executorHost_executorHostId = "executorHost_executorHostId";
    val FIELD_executorHost_guid = "executorHost_guid";
@@ -126,6 +144,12 @@ object VExecutorTypeHostParamDto {
    val FIELD_executorHost_hostOsType = "executorHost_hostOsType";
    val FIELD_executorHost_hostOsVersion = "executorHost_hostOsVersion";
    val FIELD_executorHost_isWorking = "executorHost_isWorking";
+   val FIELD_executorParam_executorParamId = "executorParam_executorParamId";
+   val FIELD_executorParam_guid = "executorParam_guid";
+   val FIELD_executorParam_insertedRowDate = "executorParam_insertedRowDate";
+   val FIELD_executorParam_lastUpdatedDate = "executorParam_lastUpdatedDate";
+   val FIELD_executorParam_executorParamName = "executorParam_executorParamName";
+   val FIELD_executorParam_executorParamDescription = "executorParam_executorParamDescription";
    val FIELD_executorType_executorTypeId = "executorType_executorTypeId";
    val FIELD_executorType_guid = "executorType_guid";
    val FIELD_executorType_insertedRowDate = "executorType_insertedRowDate";

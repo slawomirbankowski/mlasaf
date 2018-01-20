@@ -106,7 +106,8 @@ trait ThreadBase extends Runnable {
     isRunning = false;
     parentContext.daoFactory.daos.executorContextThreadDao.updateField(contextThreadDto, ExecutorContextThreadDto.FIELD_isRunning, 0);
     endTime = new java.util.Date();
-    parentContext.daoFactory.daos.executorContextThreadDao.updateField(contextThreadDto, ExecutorContextThreadDto.FIELD_endTime, endTime);
+    val endTimeDb = new java.sql.Timestamp(endTime.getTime);
+    parentContext.daoFactory.daos.executorContextThreadDao.updateField(contextThreadDto, ExecutorContextThreadDto.FIELD_endTime, endTimeDb);
     onAfterEnd();
   }
   /** wait in this thread till end of service execution */

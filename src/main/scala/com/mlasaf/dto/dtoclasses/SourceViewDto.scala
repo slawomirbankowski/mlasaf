@@ -16,10 +16,11 @@ case class SourceViewDto (
      , val sourceViewFormatId : Long
      , val sourceViewName : String
      , val sourceViewDefinition : String
-     , val isExisting : Int 
+     , val isExisting : Int
+     , val isCustom : Int 
      ) extends BaseDto {  
    def tableName : String = {    "sourceView";    }  
-   def fields : String = {    "sourceViewId,guid,insertedRowDate,lastUpdatedDate,sourceInstanceId,sourceViewTypeId,sourceViewFormatId,sourceViewName,sourceViewDefinition,isExisting";    }  
+   def fields : String = {    "sourceViewId,guid,insertedRowDate,lastUpdatedDate,sourceInstanceId,sourceViewTypeId,sourceViewFormatId,sourceViewName,sourceViewDefinition,isExisting,isCustom";    }  
    def pkFields : String = {    "sourceViewId";    }  
    def fkFields : String = {    "sourceInstanceId,sourceViewFormatId,sourceViewTypeId";    }  
    def nameField : String = {    "sourceViewName";    }  
@@ -27,10 +28,10 @@ case class SourceViewDto (
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(sourceViewId,guid,insertedRowDate,lastUpdatedDate,sourceInstanceId,sourceViewTypeId,sourceViewFormatId,sourceViewName,sourceViewDefinition,isExisting)  }  
- def toStringArray() : Array[String] = {    Array(""+sourceViewId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceInstanceId,""+sourceViewTypeId,""+sourceViewFormatId,""+sourceViewName,""+sourceViewDefinition,""+isExisting)   }  
- def toJson() : String = {   "{" + "\"sourceViewId\":\""+sourceViewId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"sourceInstanceId\":\""+sourceInstanceId+"\""+","+"\"sourceViewTypeId\":\""+sourceViewTypeId+"\""+","+"\"sourceViewFormatId\":\""+sourceViewFormatId+"\""+","+"\"sourceViewName\":\""+sourceViewName+"\""+","+"\"sourceViewDefinition\":\""+sourceViewDefinition+"\""+","+"\"isExisting\":\""+isExisting+"\"" + "}"   }  
- def toFullString() : String = {    "sourceViewId:'"+sourceViewId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"sourceInstanceId:'"+sourceInstanceId+"'"+","+"sourceViewTypeId:'"+sourceViewTypeId+"'"+","+"sourceViewFormatId:'"+sourceViewFormatId+"'"+","+"sourceViewName:'"+sourceViewName+"'"+","+"sourceViewDefinition:'"+sourceViewDefinition+"'"+","+"isExisting:'"+isExisting+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(sourceViewId,guid,insertedRowDate,lastUpdatedDate,sourceInstanceId,sourceViewTypeId,sourceViewFormatId,sourceViewName,sourceViewDefinition,isExisting,isCustom)  }  
+ def toStringArray() : Array[String] = {    Array(""+sourceViewId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceInstanceId,""+sourceViewTypeId,""+sourceViewFormatId,""+sourceViewName,""+sourceViewDefinition,""+isExisting,""+isCustom)   }  
+ def toJson() : String = {   "{" + "\"sourceViewId\":\""+sourceViewId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"sourceInstanceId\":\""+sourceInstanceId+"\""+","+"\"sourceViewTypeId\":\""+sourceViewTypeId+"\""+","+"\"sourceViewFormatId\":\""+sourceViewFormatId+"\""+","+"\"sourceViewName\":\""+sourceViewName+"\""+","+"\"sourceViewDefinition\":\""+sourceViewDefinition+"\""+","+"\"isExisting\":\""+isExisting+"\""+","+"\"isCustom\":\""+isCustom+"\"" + "}"   }  
+ def toFullString() : String = {    "sourceViewId:'"+sourceViewId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"sourceInstanceId:'"+sourceInstanceId+"'"+","+"sourceViewTypeId:'"+sourceViewTypeId+"'"+","+"sourceViewFormatId:'"+sourceViewFormatId+"'"+","+"sourceViewName:'"+sourceViewName+"'"+","+"sourceViewDefinition:'"+sourceViewDefinition+"'"+","+"isExisting:'"+isExisting+"'"+","+"isCustom:'"+isCustom+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "sourceViewId" => sourceViewId  
@@ -42,7 +43,8 @@ case class SourceViewDto (
      case "sourceViewFormatId" => sourceViewFormatId  
      case "sourceViewName" => sourceViewName  
      case "sourceViewDefinition" => sourceViewDefinition  
-     case "isExisting" => isExisting   
+     case "isExisting" => isExisting  
+     case "isCustom" => isCustom   
     case _ => null 
     } 
     ret 
@@ -58,13 +60,14 @@ case class SourceViewDto (
      case "sourceViewFormatId" => "Long"  
      case "sourceViewName" => "String"  
      case "sourceViewDefinition" => "String"  
-     case "isExisting" => "Int"   
+     case "isExisting" => "Int"  
+     case "isCustom" => "Int"   
     case _ => "Object" 
     } 
     ret 
   } 
    def prepareInsert(connection : java.sql.Connection) : java.sql.PreparedStatement = {
-     val stat = connection.prepareStatement("insert into sourceView(guid,sourceInstanceId,sourceViewTypeId,sourceViewFormatId,sourceViewName,sourceViewDefinition,isExisting) values (?,?,?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
+     val stat = connection.prepareStatement("insert into sourceView(guid,sourceInstanceId,sourceViewTypeId,sourceViewFormatId,sourceViewName,sourceViewDefinition,isExisting,isCustom) values (?,?,?,?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
     stat.setObject(1, guid);
     stat.setObject(2, sourceInstanceId);
     stat.setObject(3, sourceViewTypeId);
@@ -72,10 +75,11 @@ case class SourceViewDto (
     stat.setObject(5, sourceViewName);
     stat.setObject(6, sourceViewDefinition);
     stat.setObject(7, isExisting);
+    stat.setObject(8, isCustom);
     return stat; 
    } 
-   def modify(sourceInstanceId : Long, sourceViewTypeId : Long, sourceViewFormatId : Long, sourceViewName : String, sourceViewDefinition : String, isExisting : Int) : SourceViewDto = {
-    val dtoModified = new SourceViewDto(this.sourceViewId,this.guid,this.insertedRowDate,new java.util.Date(),sourceInstanceId,sourceViewTypeId,sourceViewFormatId,sourceViewName,sourceViewDefinition,isExisting);
+   def modify(sourceInstanceId : Long, sourceViewTypeId : Long, sourceViewFormatId : Long, sourceViewName : String, sourceViewDefinition : String, isExisting : Int, isCustom : Int) : SourceViewDto = {
+    val dtoModified = new SourceViewDto(this.sourceViewId,this.guid,this.insertedRowDate,new java.util.Date(),sourceInstanceId,sourceViewTypeId,sourceViewFormatId,sourceViewName,sourceViewDefinition,isExisting,isCustom);
     dtoModified
   }
  } 
@@ -91,9 +95,10 @@ object SourceViewDto {
    val FIELD_sourceViewName = "sourceViewName";
    val FIELD_sourceViewDefinition = "sourceViewDefinition";
    val FIELD_isExisting = "isExisting";
+   val FIELD_isCustom = "isCustom";
 
-  def createNewSourceViewDto(sourceInstanceId : Long, sourceViewTypeId : Long, sourceViewFormatId : Long, sourceViewName : String, sourceViewDefinition : String, isExisting : Int) : SourceViewDto = {  
-     val dto = new SourceViewDto(0,0,new java.util.Date(),new java.util.Date(),sourceInstanceId,sourceViewTypeId,sourceViewFormatId,sourceViewName,sourceViewDefinition,isExisting)   
+  def createNewSourceViewDto(sourceInstanceId : Long, sourceViewTypeId : Long, sourceViewFormatId : Long, sourceViewName : String, sourceViewDefinition : String, isExisting : Int, isCustom : Int) : SourceViewDto = {  
+     val dto = new SourceViewDto(0,0,new java.util.Date(),new java.util.Date(),sourceInstanceId,sourceViewTypeId,sourceViewFormatId,sourceViewName,sourceViewDefinition,isExisting,isCustom)   
     dto 
   } 
 

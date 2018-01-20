@@ -38,6 +38,8 @@ class Context extends ThreadBase {
   var sources : scala.collection.mutable.ListBuffer[Source] = new scala.collection.mutable.ListBuffer();
   /** REST for configurational database and Context */
   var restManager : RestManager = new RestManager();
+  /** resource manager for Context */
+  var resourceManager : ResourceManager = new ResourceManager();
   /** internal checker for controlling context */
   var checker : Checker = new Checker();
   /** Factory for all DAO objects to read/write data from/to configurational database */
@@ -112,6 +114,9 @@ class Context extends ThreadBase {
     checker.setParentContext(this);
     checker.start();
     threads += checker;
+    resourceManager.setParentContext(this);
+    resourceManager.start();
+    threads += resourceManager;
     runInterval = 20000L;
     // BEGIN info
     logger.info("BEGIN CONTEXT INFO => Total executors running: " + executors.size + ", total threads: " + threads.size + ", total storages: " + storages.size + ", total sources: " + sources.size);
@@ -155,6 +160,7 @@ class Context extends ThreadBase {
     logger.info("STOPPING context: " + contextDto);
     daoFactory.daos.executorContextDao.updateField(contextDto, ExecutorContextDto.FIELD_isWorking, 0);
     daoFactory.daos.executorContextDao.changeUpdatedDate(contextDto);
+    resourceManager.stop();
     restManager.stop();
     executors.foreach(x => x.stop());
     sources.foreach(x => { x.stop(); });

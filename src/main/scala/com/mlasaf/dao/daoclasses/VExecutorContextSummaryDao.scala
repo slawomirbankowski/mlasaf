@@ -120,21 +120,15 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
- def getDtosByExecutorInstance_count(colValue : Int) : List[VExecutorContextSummaryDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VExecutorContextSummaryDto] = SQL("select * from vExecutorContextSummary where executorInstance_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextSummaryDto].*);  
-   releaseConnection(connection);  
-   dtos  
- }  
- def getDtosBySourceDownload_count(colValue : Int) : List[VExecutorContextSummaryDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VExecutorContextSummaryDto] = SQL("select * from vExecutorContextSummary where sourceDownload_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextSummaryDto].*);  
-   releaseConnection(connection);  
-   dtos  
- }  
  def getDtosByExecutorContextState_count(colValue : Int) : List[VExecutorContextSummaryDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VExecutorContextSummaryDto] = SQL("select * from vExecutorContextSummary where executorContextState_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextSummaryDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByExecutorContextThread_count(colValue : Int) : List[VExecutorContextSummaryDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorContextSummaryDto] = SQL("select * from vExecutorContextSummary where executorContextThread_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextSummaryDto].*);  
    releaseConnection(connection);  
    dtos  
  }  
@@ -147,6 +141,18 @@ import java.util.Date
  def getDtosByExecutorContextRuntime_count(colValue : Int) : List[VExecutorContextSummaryDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VExecutorContextSummaryDto] = SQL("select * from vExecutorContextSummary where executorContextRuntime_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextSummaryDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByExecutorInstance_count(colValue : Int) : List[VExecutorContextSummaryDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorContextSummaryDto] = SQL("select * from vExecutorContextSummary where executorInstance_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextSummaryDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosBySourceDownload_count(colValue : Int) : List[VExecutorContextSummaryDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorContextSummaryDto] = SQL("select * from vExecutorContextSummary where sourceDownload_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorContextSummaryDto].*);  
    releaseConnection(connection);  
    dtos  
  }  

@@ -7,8 +7,9 @@ package com.mlasaf.rest
 import com.mlasaf.base.ThreadBase
 import com.mlasaf.loaders.CreateAlgorithmSchedule.logger
 import org.apache.http.{HttpRequest, HttpResponse}
-import spark.Spark._;
+import spark.Spark._
 import com.mlasaf.dto._
+import com.mlasaf.rest.instances._
 
 /** manager for all REST methods */
 class RestManager extends ThreadBase  {

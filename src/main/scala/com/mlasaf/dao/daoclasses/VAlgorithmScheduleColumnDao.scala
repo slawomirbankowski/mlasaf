@@ -324,6 +324,12 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
+ def getDtosBySourceView_isCustom(colValue : Int) : List[VAlgorithmScheduleColumnDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where sourceView_isCustom = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
  def getDtosBySourceViewColumn_sourceViewColumnId(colValue : Long) : List[VAlgorithmScheduleColumnDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where sourceViewColumn_sourceViewColumnId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);  

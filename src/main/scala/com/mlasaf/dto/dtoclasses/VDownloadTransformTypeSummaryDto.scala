@@ -12,11 +12,12 @@ case class VDownloadTransformTypeSummaryDto (
      , val insertedRowDate : java.util.Date
      , val lastUpdatedDate : java.util.Date
      , val downloadTransformTypeName : String
+     , val downloadTransformTypeClass : String
      , val downloadTransform_count : Int
      , val downloadTransformColumn_count : Int 
      ) extends BaseReadOnlyDto {  
    def tableName : String = {    "vDownloadTransformTypeSummary";    }  
-   def fields : String = {    "downloadTransformTypeId,guid,insertedRowDate,lastUpdatedDate,downloadTransformTypeName,downloadTransform_count,downloadTransformColumn_count";    }  
+   def fields : String = {    "downloadTransformTypeId,guid,insertedRowDate,lastUpdatedDate,downloadTransformTypeName,downloadTransformTypeClass,downloadTransform_count,downloadTransformColumn_count";    }  
    def pkFields : String = {    "";    }  
    def fkFields : String = {    "";    }  
    def nameField : String = {    "";    }  
@@ -24,10 +25,10 @@ case class VDownloadTransformTypeSummaryDto (
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(downloadTransformTypeId,guid,insertedRowDate,lastUpdatedDate,downloadTransformTypeName,downloadTransform_count,downloadTransformColumn_count)  }  
- def toStringArray() : Array[String] = {    Array(""+downloadTransformTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+downloadTransformTypeName,""+downloadTransform_count,""+downloadTransformColumn_count)   }  
- def toJson() : String = {   "{" + "\"downloadTransformTypeId\":\""+downloadTransformTypeId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"downloadTransformTypeName\":\""+downloadTransformTypeName+"\""+","+"\"downloadTransform_count\":\""+downloadTransform_count+"\""+","+"\"downloadTransformColumn_count\":\""+downloadTransformColumn_count+"\"" + "}"   }  
- def toFullString() : String = {    "downloadTransformTypeId:'"+downloadTransformTypeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"downloadTransformTypeName:'"+downloadTransformTypeName+"'"+","+"downloadTransform_count:'"+downloadTransform_count+"'"+","+"downloadTransformColumn_count:'"+downloadTransformColumn_count+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(downloadTransformTypeId,guid,insertedRowDate,lastUpdatedDate,downloadTransformTypeName,downloadTransformTypeClass,downloadTransform_count,downloadTransformColumn_count)  }  
+ def toStringArray() : Array[String] = {    Array(""+downloadTransformTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+downloadTransformTypeName,""+downloadTransformTypeClass,""+downloadTransform_count,""+downloadTransformColumn_count)   }  
+ def toJson() : String = {   "{" + "\"downloadTransformTypeId\":\""+downloadTransformTypeId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"downloadTransformTypeName\":\""+downloadTransformTypeName+"\""+","+"\"downloadTransformTypeClass\":\""+downloadTransformTypeClass+"\""+","+"\"downloadTransform_count\":\""+downloadTransform_count+"\""+","+"\"downloadTransformColumn_count\":\""+downloadTransformColumn_count+"\"" + "}"   }  
+ def toFullString() : String = {    "downloadTransformTypeId:'"+downloadTransformTypeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"downloadTransformTypeName:'"+downloadTransformTypeName+"'"+","+"downloadTransformTypeClass:'"+downloadTransformTypeClass+"'"+","+"downloadTransform_count:'"+downloadTransform_count+"'"+","+"downloadTransformColumn_count:'"+downloadTransformColumn_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "downloadTransformTypeId" => downloadTransformTypeId  
@@ -35,6 +36,7 @@ case class VDownloadTransformTypeSummaryDto (
      case "insertedRowDate" => insertedRowDate  
      case "lastUpdatedDate" => lastUpdatedDate  
      case "downloadTransformTypeName" => downloadTransformTypeName  
+     case "downloadTransformTypeClass" => downloadTransformTypeClass  
      case "downloadTransform_count" => downloadTransform_count  
      case "downloadTransformColumn_count" => downloadTransformColumn_count   
     case _ => null 
@@ -48,6 +50,7 @@ case class VDownloadTransformTypeSummaryDto (
      case "insertedRowDate" => "java.util.Date"  
      case "lastUpdatedDate" => "java.util.Date"  
      case "downloadTransformTypeName" => "String"  
+     case "downloadTransformTypeClass" => "String"  
      case "downloadTransform_count" => "Int"  
      case "downloadTransformColumn_count" => "Int"   
     case _ => "Object" 
@@ -62,6 +65,7 @@ object VDownloadTransformTypeSummaryDto {
    val FIELD_insertedRowDate = "insertedRowDate";
    val FIELD_lastUpdatedDate = "lastUpdatedDate";
    val FIELD_downloadTransformTypeName = "downloadTransformTypeName";
+   val FIELD_downloadTransformTypeClass = "downloadTransformTypeClass";
    val FIELD_downloadTransform_count = "downloadTransform_count";
    val FIELD_downloadTransformColumn_count = "downloadTransformColumn_count";
 

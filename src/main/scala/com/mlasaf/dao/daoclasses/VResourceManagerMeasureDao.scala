@@ -180,5 +180,11 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
+ def getDtosByResourceMeasure_resourceMeasureClass(colValue : String) : List[VResourceManagerMeasureDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VResourceManagerMeasureDto] = SQL("select * from vResourceManagerMeasure where resourceMeasure_resourceMeasureClass = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerMeasureDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
 
 } 

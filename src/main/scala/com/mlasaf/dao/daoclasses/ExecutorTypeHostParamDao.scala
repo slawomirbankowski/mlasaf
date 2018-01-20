@@ -78,6 +78,12 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
+ def getExecutorTypeHostParamByFkExecutorParamId(fkColValue : Long) : List[ExecutorTypeHostParamDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[ExecutorTypeHostParamDto] = SQL("select * from executorTypeHostParam where executorParamId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[ExecutorTypeHostParamDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
  def getExecutorTypeHostParamByFkExecutorTypeId(fkColValue : Long) : List[ExecutorTypeHostParamDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[ExecutorTypeHostParamDto] = SQL("select * from executorTypeHostParam where executorTypeId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[ExecutorTypeHostParamDto].*);  
@@ -99,14 +105,14 @@ import java.util.Date
       null; 
     } 
  } 
-  def createAndInsertExecutorTypeHostParamDto(executorHostId : Long, executorTypeId : Long, paramName : String, paramValue : String) : ExecutorTypeHostParamDto = {
-    val dto = new ExecutorTypeHostParamDto(0,0,new Date(),new Date(),executorHostId,executorTypeId,paramName,paramValue)
+  def createAndInsertExecutorTypeHostParamDto(executorHostId : Long, executorTypeId : Long, executorParamId : Long, paramValue : String) : ExecutorTypeHostParamDto = {
+    val dto = new ExecutorTypeHostParamDto(0,0,new Date(),new Date(),executorHostId,executorTypeId,executorParamId,paramValue)
     insertExecutorTypeHostParamDto(dto);   
   }   
   def updateExecutorTypeHostParamDto(dto : ExecutorTypeHostParamDto): ExecutorTypeHostParamDto = {  
     implicit val connection = getConnection();  
-      val resCnt = SQL("update executorTypeHostParam set  lastUpdatedDate = {lastUpdatedDate} ,  executorHostId = {executorHostId} ,  executorTypeId = {executorTypeId} ,  paramName = {paramName} ,  paramValue = {paramValue}  where  executorTypeHostParamId = {executorTypeHostParamId}  ")
-      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "executorHostId" -> dto.executorHostId , "executorTypeId" -> dto.executorTypeId , "paramName" -> dto.paramName , "paramValue" -> dto.paramValue, "executorTypeHostParamId" -> dto.executorTypeHostParamId ).executeInsert() 
+      val resCnt = SQL("update executorTypeHostParam set  lastUpdatedDate = {lastUpdatedDate} ,  executorHostId = {executorHostId} ,  executorTypeId = {executorTypeId} ,  executorParamId = {executorParamId} ,  paramValue = {paramValue}  where  executorTypeHostParamId = {executorTypeHostParamId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "executorHostId" -> dto.executorHostId , "executorTypeId" -> dto.executorTypeId , "executorParamId" -> dto.executorParamId , "paramValue" -> dto.paramValue, "executorTypeHostParamId" -> dto.executorTypeHostParamId ).executeInsert() 
    releaseConnection(connection);  
      getExecutorTypeHostParamByPk(dto.executorTypeHostParamId) 
     } 

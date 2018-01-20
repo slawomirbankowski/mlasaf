@@ -53,7 +53,7 @@ object GenerateViewsEntry {
       val colListDefinition = fieldWithAliasList + fkTablesFieldList.toString();
       val joinDefinition = joinFkTableColumnList.map(c => "\n   join " + c._1 + " " + c._1 + "1 on " + tableAliasName + "." + c._2 + " = " +c._1 + "1." + c._2 ).mkString(" ");
       val selectDefinition = "select " + colListDefinition + fromDefinition + " " + joinDefinition ;
-      val viewFullDefinition = "\n\n <createView  viewName=\"" + viewName + "\"> \n " + selectDefinition + "; \n </createView> ";
+      val viewFullDefinition = "\n\n <createView  viewName=\"" + viewName + "\"> \n " + selectDefinition + " \n </createView> ";
        if  (fkList.size > 0) {
          outputContent.write(viewFullDefinition);
          outputContent.write(" \n");

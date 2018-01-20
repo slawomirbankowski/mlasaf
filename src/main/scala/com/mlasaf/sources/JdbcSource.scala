@@ -41,7 +41,7 @@ class JdbcSource extends Source {
         val sourceViewFormatId = 1; // TODO: change this to search for proper viewFormat or set Unknown format
         val sourceViewTypeId = 1; // TODO: change this to search for proper viewType
         val sourceViewDefinition = "SOURCE_TYPE='" + vSourceDto.sourceType_sourceTypeName + "',TABLE_SCHEMA='" + tab.TABLE_SCHEMA + "',TABLE_NAME='" + tab.TABLE_NAME + "',TABLE_CATALOG=" + tab.TABLE_CATALOG + ",TABLE_TYPE='" + tab.TABLE_TYPE + ";";
-        val srcViewDto = com.mlasaf.dto.SourceViewDto.createNewSourceViewDto(vSourceDto.sourceInstanceId, sourceViewTypeId, sourceViewFormatId, fullViewName, sourceViewDefinition, 1);
+        val srcViewDto = com.mlasaf.dto.SourceViewDto.createNewSourceViewDto(vSourceDto.sourceInstanceId, sourceViewTypeId, sourceViewFormatId, fullViewName, sourceViewDefinition, 1, 0);
         //val srcViewDto = parentContext.daoFactory.daos.sourceViewDao.createAndInsertSourceViewDto(vSourceDto.sourceInstanceId, 1, fullViewName, sourceViewDefinition);
         checkedSourceViewsDtos.add(srcViewDto);
       });

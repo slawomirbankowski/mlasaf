@@ -24,7 +24,7 @@ class LocalDiskStorage extends Storage {
     storageDto =parentContext.daoFactory.daos.executorStorageDao.getExecutorStorageByPk(storageDto.executorStorageId);
   }
   def generateOutputPath() : String = {
-    val storageViewFolderPath = storageDto.storageFulllPath + java.io.File.separator + CustomUtils.randomLong();
+    val storageViewFolderPath = storageDto.storageFulllPath + java.io.File.separator + CustomUtils.dateTimeLomgSequenceId();
     logger.info("Creating folders in LOCAL storage: " + storageViewFolderPath);
     new java.io.File(storageViewFolderPath).mkdirs();
     val storageViewFilePath = storageViewFolderPath + java.io.File.separator + "data.csv";
@@ -32,7 +32,7 @@ class LocalDiskStorage extends Storage {
   }
   /** download view to local storage */
   def downloadView(sourceView : VSourceViewDto, sourceSchedule : VSourceScheduleDto, sourceDownloadDto : SourceDownloadDto, source : Source, downloader : SouceViewDownloader) : ExecutorStorageViewDto = {
-    val storageViewFolderPath = this.storageDto.storageFulllPath + java.io.File.separator + CustomUtils.randomLong();
+    val storageViewFolderPath = this.storageDto.storageFulllPath + java.io.File.separator + CustomUtils.dateTimeLomgSequenceId();
     logger.info("Download view to LOCAL storage to path: " + storageViewFolderPath)
     new java.io.File(storageViewFolderPath).mkdirs();
     val storageViewFilePath = storageViewFolderPath + java.io.File.separator + "data.csv";

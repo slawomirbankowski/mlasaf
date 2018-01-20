@@ -90,6 +90,12 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
+ def getDtosByResourceMeasureClass(colValue : String) : List[VResourceMeasureSummaryDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VResourceMeasureSummaryDto] = SQL("select * from vResourceMeasureSummary where resourceMeasureClass = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceMeasureSummaryDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
  def getDtosByResourceManagerMeasure_count(colValue : Int) : List[VResourceMeasureSummaryDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VResourceMeasureSummaryDto] = SQL("select * from vResourceMeasureSummary where resourceManagerMeasure_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceMeasureSummaryDto].*);  

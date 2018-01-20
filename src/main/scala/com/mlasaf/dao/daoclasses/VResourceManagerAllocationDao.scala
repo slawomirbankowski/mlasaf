@@ -348,6 +348,12 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
+ def getDtosByResourceMeasure_resourceMeasureClass(colValue : String) : List[VResourceManagerAllocationDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where resourceMeasure_resourceMeasureClass = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
  def getDtosByResourceManagerType_resourceManagerTypeId(colValue : Long) : List[VResourceManagerAllocationDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VResourceManagerAllocationDto] = SQL("select * from vResourceManagerAllocation where resourceManagerType_resourceManagerTypeId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VResourceManagerAllocationDto].*);  

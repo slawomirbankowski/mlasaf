@@ -17,6 +17,7 @@ case class VSourceViewSummaryDto (
      , val sourceViewName : String
      , val sourceViewDefinition : String
      , val isExisting : Int
+     , val isCustom : Int
      , val algorithmScheduleView_count : Int
      , val algorithmScheduleColumn_count : Int
      , val sourceViewColumn_count : Int
@@ -25,7 +26,7 @@ case class VSourceViewSummaryDto (
      , val executorStorageView_count : Int 
      ) extends BaseReadOnlyDto {  
    def tableName : String = {    "vSourceViewSummary";    }  
-   def fields : String = {    "sourceViewId,guid,insertedRowDate,lastUpdatedDate,sourceInstanceId,sourceViewTypeId,sourceViewFormatId,sourceViewName,sourceViewDefinition,isExisting,algorithmScheduleView_count,algorithmScheduleColumn_count,sourceViewColumn_count,sourceSchedule_count,sourceDownload_count,executorStorageView_count";    }  
+   def fields : String = {    "sourceViewId,guid,insertedRowDate,lastUpdatedDate,sourceInstanceId,sourceViewTypeId,sourceViewFormatId,sourceViewName,sourceViewDefinition,isExisting,isCustom,algorithmScheduleView_count,algorithmScheduleColumn_count,sourceViewColumn_count,sourceSchedule_count,sourceDownload_count,executorStorageView_count";    }  
    def pkFields : String = {    "";    }  
    def fkFields : String = {    "";    }  
    def nameField : String = {    "";    }  
@@ -33,10 +34,10 @@ case class VSourceViewSummaryDto (
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(sourceViewId,guid,insertedRowDate,lastUpdatedDate,sourceInstanceId,sourceViewTypeId,sourceViewFormatId,sourceViewName,sourceViewDefinition,isExisting,algorithmScheduleView_count,algorithmScheduleColumn_count,sourceViewColumn_count,sourceSchedule_count,sourceDownload_count,executorStorageView_count)  }  
- def toStringArray() : Array[String] = {    Array(""+sourceViewId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceInstanceId,""+sourceViewTypeId,""+sourceViewFormatId,""+sourceViewName,""+sourceViewDefinition,""+isExisting,""+algorithmScheduleView_count,""+algorithmScheduleColumn_count,""+sourceViewColumn_count,""+sourceSchedule_count,""+sourceDownload_count,""+executorStorageView_count)   }  
- def toJson() : String = {   "{" + "\"sourceViewId\":\""+sourceViewId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"sourceInstanceId\":\""+sourceInstanceId+"\""+","+"\"sourceViewTypeId\":\""+sourceViewTypeId+"\""+","+"\"sourceViewFormatId\":\""+sourceViewFormatId+"\""+","+"\"sourceViewName\":\""+sourceViewName+"\""+","+"\"sourceViewDefinition\":\""+sourceViewDefinition+"\""+","+"\"isExisting\":\""+isExisting+"\""+","+"\"algorithmScheduleView_count\":\""+algorithmScheduleView_count+"\""+","+"\"algorithmScheduleColumn_count\":\""+algorithmScheduleColumn_count+"\""+","+"\"sourceViewColumn_count\":\""+sourceViewColumn_count+"\""+","+"\"sourceSchedule_count\":\""+sourceSchedule_count+"\""+","+"\"sourceDownload_count\":\""+sourceDownload_count+"\""+","+"\"executorStorageView_count\":\""+executorStorageView_count+"\"" + "}"   }  
- def toFullString() : String = {    "sourceViewId:'"+sourceViewId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"sourceInstanceId:'"+sourceInstanceId+"'"+","+"sourceViewTypeId:'"+sourceViewTypeId+"'"+","+"sourceViewFormatId:'"+sourceViewFormatId+"'"+","+"sourceViewName:'"+sourceViewName+"'"+","+"sourceViewDefinition:'"+sourceViewDefinition+"'"+","+"isExisting:'"+isExisting+"'"+","+"algorithmScheduleView_count:'"+algorithmScheduleView_count+"'"+","+"algorithmScheduleColumn_count:'"+algorithmScheduleColumn_count+"'"+","+"sourceViewColumn_count:'"+sourceViewColumn_count+"'"+","+"sourceSchedule_count:'"+sourceSchedule_count+"'"+","+"sourceDownload_count:'"+sourceDownload_count+"'"+","+"executorStorageView_count:'"+executorStorageView_count+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(sourceViewId,guid,insertedRowDate,lastUpdatedDate,sourceInstanceId,sourceViewTypeId,sourceViewFormatId,sourceViewName,sourceViewDefinition,isExisting,isCustom,algorithmScheduleView_count,algorithmScheduleColumn_count,sourceViewColumn_count,sourceSchedule_count,sourceDownload_count,executorStorageView_count)  }  
+ def toStringArray() : Array[String] = {    Array(""+sourceViewId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceInstanceId,""+sourceViewTypeId,""+sourceViewFormatId,""+sourceViewName,""+sourceViewDefinition,""+isExisting,""+isCustom,""+algorithmScheduleView_count,""+algorithmScheduleColumn_count,""+sourceViewColumn_count,""+sourceSchedule_count,""+sourceDownload_count,""+executorStorageView_count)   }  
+ def toJson() : String = {   "{" + "\"sourceViewId\":\""+sourceViewId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"sourceInstanceId\":\""+sourceInstanceId+"\""+","+"\"sourceViewTypeId\":\""+sourceViewTypeId+"\""+","+"\"sourceViewFormatId\":\""+sourceViewFormatId+"\""+","+"\"sourceViewName\":\""+sourceViewName+"\""+","+"\"sourceViewDefinition\":\""+sourceViewDefinition+"\""+","+"\"isExisting\":\""+isExisting+"\""+","+"\"isCustom\":\""+isCustom+"\""+","+"\"algorithmScheduleView_count\":\""+algorithmScheduleView_count+"\""+","+"\"algorithmScheduleColumn_count\":\""+algorithmScheduleColumn_count+"\""+","+"\"sourceViewColumn_count\":\""+sourceViewColumn_count+"\""+","+"\"sourceSchedule_count\":\""+sourceSchedule_count+"\""+","+"\"sourceDownload_count\":\""+sourceDownload_count+"\""+","+"\"executorStorageView_count\":\""+executorStorageView_count+"\"" + "}"   }  
+ def toFullString() : String = {    "sourceViewId:'"+sourceViewId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"sourceInstanceId:'"+sourceInstanceId+"'"+","+"sourceViewTypeId:'"+sourceViewTypeId+"'"+","+"sourceViewFormatId:'"+sourceViewFormatId+"'"+","+"sourceViewName:'"+sourceViewName+"'"+","+"sourceViewDefinition:'"+sourceViewDefinition+"'"+","+"isExisting:'"+isExisting+"'"+","+"isCustom:'"+isCustom+"'"+","+"algorithmScheduleView_count:'"+algorithmScheduleView_count+"'"+","+"algorithmScheduleColumn_count:'"+algorithmScheduleColumn_count+"'"+","+"sourceViewColumn_count:'"+sourceViewColumn_count+"'"+","+"sourceSchedule_count:'"+sourceSchedule_count+"'"+","+"sourceDownload_count:'"+sourceDownload_count+"'"+","+"executorStorageView_count:'"+executorStorageView_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "sourceViewId" => sourceViewId  
@@ -49,6 +50,7 @@ case class VSourceViewSummaryDto (
      case "sourceViewName" => sourceViewName  
      case "sourceViewDefinition" => sourceViewDefinition  
      case "isExisting" => isExisting  
+     case "isCustom" => isCustom  
      case "algorithmScheduleView_count" => algorithmScheduleView_count  
      case "algorithmScheduleColumn_count" => algorithmScheduleColumn_count  
      case "sourceViewColumn_count" => sourceViewColumn_count  
@@ -71,6 +73,7 @@ case class VSourceViewSummaryDto (
      case "sourceViewName" => "String"  
      case "sourceViewDefinition" => "String"  
      case "isExisting" => "Int"  
+     case "isCustom" => "Int"  
      case "algorithmScheduleView_count" => "Int"  
      case "algorithmScheduleColumn_count" => "Int"  
      case "sourceViewColumn_count" => "Int"  
@@ -94,6 +97,7 @@ object VSourceViewSummaryDto {
    val FIELD_sourceViewName = "sourceViewName";
    val FIELD_sourceViewDefinition = "sourceViewDefinition";
    val FIELD_isExisting = "isExisting";
+   val FIELD_isCustom = "isCustom";
    val FIELD_algorithmScheduleView_count = "algorithmScheduleView_count";
    val FIELD_algorithmScheduleColumn_count = "algorithmScheduleColumn_count";
    val FIELD_sourceViewColumn_count = "sourceViewColumn_count";

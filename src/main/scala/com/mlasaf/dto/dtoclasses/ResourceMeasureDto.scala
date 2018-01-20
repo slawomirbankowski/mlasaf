@@ -11,10 +11,11 @@ case class ResourceMeasureDto (
      , val guid : Long
      , val insertedRowDate : java.util.Date
      , val lastUpdatedDate : java.util.Date
-     , val resourceMeasureName : String 
+     , val resourceMeasureName : String
+     , val resourceMeasureClass : String 
      ) extends BaseDto {  
    def tableName : String = {    "resourceMeasure";    }  
-   def fields : String = {    "resourceMeasureId,guid,insertedRowDate,lastUpdatedDate,resourceMeasureName";    }  
+   def fields : String = {    "resourceMeasureId,guid,insertedRowDate,lastUpdatedDate,resourceMeasureName,resourceMeasureClass";    }  
    def pkFields : String = {    "resourceMeasureId";    }  
    def fkFields : String = {    "";    }  
    def nameField : String = {    "resourceMeasureName";    }  
@@ -22,17 +23,18 @@ case class ResourceMeasureDto (
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(resourceMeasureId,guid,insertedRowDate,lastUpdatedDate,resourceMeasureName)  }  
- def toStringArray() : Array[String] = {    Array(""+resourceMeasureId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+resourceMeasureName)   }  
- def toJson() : String = {   "{" + "\"resourceMeasureId\":\""+resourceMeasureId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"resourceMeasureName\":\""+resourceMeasureName+"\"" + "}"   }  
- def toFullString() : String = {    "resourceMeasureId:'"+resourceMeasureId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"resourceMeasureName:'"+resourceMeasureName+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(resourceMeasureId,guid,insertedRowDate,lastUpdatedDate,resourceMeasureName,resourceMeasureClass)  }  
+ def toStringArray() : Array[String] = {    Array(""+resourceMeasureId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+resourceMeasureName,""+resourceMeasureClass)   }  
+ def toJson() : String = {   "{" + "\"resourceMeasureId\":\""+resourceMeasureId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"resourceMeasureName\":\""+resourceMeasureName+"\""+","+"\"resourceMeasureClass\":\""+resourceMeasureClass+"\"" + "}"   }  
+ def toFullString() : String = {    "resourceMeasureId:'"+resourceMeasureId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"resourceMeasureName:'"+resourceMeasureName+"'"+","+"resourceMeasureClass:'"+resourceMeasureClass+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "resourceMeasureId" => resourceMeasureId  
      case "guid" => guid  
      case "insertedRowDate" => insertedRowDate  
      case "lastUpdatedDate" => lastUpdatedDate  
-     case "resourceMeasureName" => resourceMeasureName   
+     case "resourceMeasureName" => resourceMeasureName  
+     case "resourceMeasureClass" => resourceMeasureClass   
     case _ => null 
     } 
     ret 
@@ -43,19 +45,21 @@ case class ResourceMeasureDto (
      case "guid" => "Long"  
      case "insertedRowDate" => "java.util.Date"  
      case "lastUpdatedDate" => "java.util.Date"  
-     case "resourceMeasureName" => "String"   
+     case "resourceMeasureName" => "String"  
+     case "resourceMeasureClass" => "String"   
     case _ => "Object" 
     } 
     ret 
   } 
    def prepareInsert(connection : java.sql.Connection) : java.sql.PreparedStatement = {
-     val stat = connection.prepareStatement("insert into resourceMeasure(guid,resourceMeasureName) values (?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
+     val stat = connection.prepareStatement("insert into resourceMeasure(guid,resourceMeasureName,resourceMeasureClass) values (?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
     stat.setObject(1, guid);
     stat.setObject(2, resourceMeasureName);
+    stat.setObject(3, resourceMeasureClass);
     return stat; 
    } 
-   def modify(resourceMeasureName : String) : ResourceMeasureDto = {
-    val dtoModified = new ResourceMeasureDto(this.resourceMeasureId,this.guid,this.insertedRowDate,new java.util.Date(),resourceMeasureName);
+   def modify(resourceMeasureName : String, resourceMeasureClass : String) : ResourceMeasureDto = {
+    val dtoModified = new ResourceMeasureDto(this.resourceMeasureId,this.guid,this.insertedRowDate,new java.util.Date(),resourceMeasureName,resourceMeasureClass);
     dtoModified
   }
  } 
@@ -66,9 +70,10 @@ object ResourceMeasureDto {
    val FIELD_insertedRowDate = "insertedRowDate";
    val FIELD_lastUpdatedDate = "lastUpdatedDate";
    val FIELD_resourceMeasureName = "resourceMeasureName";
+   val FIELD_resourceMeasureClass = "resourceMeasureClass";
 
-  def createNewResourceMeasureDto(resourceMeasureName : String) : ResourceMeasureDto = {  
-     val dto = new ResourceMeasureDto(0,0,new java.util.Date(),new java.util.Date(),resourceMeasureName)   
+  def createNewResourceMeasureDto(resourceMeasureName : String, resourceMeasureClass : String) : ResourceMeasureDto = {  
+     val dto = new ResourceMeasureDto(0,0,new java.util.Date(),new java.util.Date(),resourceMeasureName,resourceMeasureClass)   
     dto 
   } 
 

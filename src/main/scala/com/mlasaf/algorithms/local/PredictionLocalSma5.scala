@@ -10,15 +10,9 @@ import com.mlasaf.domain._
 /** */
 class PredictionLocalSma5 extends AlgorithmInstance {
 
-  /** logger */
-  val logger = org.slf4j.LoggerFactory.getLogger("DaoCustom");
   /**  */
   def onAlgorithmRun(run : AlgorithmRun) : String = {
-    logger.info("")
-    logger.info(" ===================== RUNNING LOCAL PREDICTION ALGORITHM FOR RUN: " + run.algorithmRunDto.algorithmRunId + ", input files: " + run.executorStorageViewDtos.map(sv => sv.executorStorageResource_resourcePath).mkString(","));
-    logger.info("======================     Parent ExecutorType: " + run.parentExecutor.getTypeName())
-    logger.info("======================     algorithmScheduleDto: " + run.algorithmScheduleDto);
-    logger.info("======================     algorithmScheduleColumnDtos: " + run.algorithmScheduleColumnDtos.map(c => "{asvcId:" + c.algorithmScheduleViewId + ",columnName:" + c.sourceViewColumn_columnName + ",sourceViewId:" + c.algorithmScheduleView_sourceViewId + ",type:" +  c.algorithmColumnType_algorithmColumnTypeName + "}").mkString(","));
+
     val timeColsCount : Int = run.algorithmScheduleColumnDtos.filter(c => c.algorithmColumnType_algorithmColumnTypeName.equals("Time")).size;
     val groupColsCount : Int = run.algorithmScheduleColumnDtos.filter(c => c.algorithmColumnType_algorithmColumnTypeName.equals("SingleGroup")).size;
     val valueColsCount : Int = run.algorithmScheduleColumnDtos.filter(c => c.algorithmColumnType_algorithmColumnTypeName.equals("NumericValue")).size;

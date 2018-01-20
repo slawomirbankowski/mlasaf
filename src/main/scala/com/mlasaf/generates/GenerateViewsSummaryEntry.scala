@@ -48,7 +48,7 @@ object GenerateViewsSummaryEntry {
       val joinDefinition =  summaryTablesList.map(st => "left join (select " + st.COLUMN_NAME + ", count(*) as " + st.TABLE_NAME + "_count from " + st.TABLE_NAME + " group by " + st.COLUMN_NAME + ") " + st.TABLE_NAME + "1 on " + st.TABLE_NAME + "1." + st.COLUMN_NAME + " = " + tableAliasName + "." + st.COLUMN_NAME + " ").mkString("\n    ");
 
       val selectDefinition = "select " + colListDefinition + fromDefinition + " \n    " + joinDefinition ;
-      val viewFullDefinition = "\n\n <createView  viewName=\"" + viewName + "\"> \n " + selectDefinition + "; \n </createView> ";
+      val viewFullDefinition = "\n\n <createView  viewName=\"" + viewName + "\"> \n " + selectDefinition + " \n </createView> ";
        if  (summaryTablesList.size > 0) {
          outputContent.write(viewFullDefinition);
          outputContent.write(" \n");

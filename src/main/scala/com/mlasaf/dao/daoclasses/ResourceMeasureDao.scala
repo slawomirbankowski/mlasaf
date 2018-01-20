@@ -99,14 +99,14 @@ import java.util.Date
       null; 
     } 
  } 
-  def createAndInsertResourceMeasureDto(resourceMeasureName : String) : ResourceMeasureDto = {
-    val dto = new ResourceMeasureDto(0,0,new Date(),new Date(),resourceMeasureName)
+  def createAndInsertResourceMeasureDto(resourceMeasureName : String, resourceMeasureClass : String) : ResourceMeasureDto = {
+    val dto = new ResourceMeasureDto(0,0,new Date(),new Date(),resourceMeasureName,resourceMeasureClass)
     insertResourceMeasureDto(dto);   
   }   
   def updateResourceMeasureDto(dto : ResourceMeasureDto): ResourceMeasureDto = {  
     implicit val connection = getConnection();  
-      val resCnt = SQL("update resourceMeasure set  lastUpdatedDate = {lastUpdatedDate} ,  resourceMeasureName = {resourceMeasureName}  where  resourceMeasureId = {resourceMeasureId}  ")
-      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "resourceMeasureName" -> dto.resourceMeasureName, "resourceMeasureId" -> dto.resourceMeasureId ).executeInsert() 
+      val resCnt = SQL("update resourceMeasure set  lastUpdatedDate = {lastUpdatedDate} ,  resourceMeasureName = {resourceMeasureName} ,  resourceMeasureClass = {resourceMeasureClass}  where  resourceMeasureId = {resourceMeasureId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "resourceMeasureName" -> dto.resourceMeasureName , "resourceMeasureClass" -> dto.resourceMeasureClass, "resourceMeasureId" -> dto.resourceMeasureId ).executeInsert() 
    releaseConnection(connection);  
      getResourceMeasureByPk(dto.resourceMeasureId) 
     } 

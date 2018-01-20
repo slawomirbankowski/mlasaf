@@ -16,11 +16,11 @@ case class VExecutorStorageViewSummaryDto (
      , val sourceDownloadId : Long
      , val sourceViewId : Long
      , val executorStorageResourceId : Long
-     , val algorithmRunView_count : Int
-     , val downloadTransformExecutorStorage_count : Int 
+     , val downloadTransformExecutorStorage_count : Int
+     , val algorithmRunView_count : Int 
      ) extends BaseReadOnlyDto {  
    def tableName : String = {    "vExecutorStorageViewSummary";    }  
-   def fields : String = {    "executorStorageViewId,guid,insertedRowDate,lastUpdatedDate,executorStorageSnapshotId,executorStorageId,sourceDownloadId,sourceViewId,executorStorageResourceId,algorithmRunView_count,downloadTransformExecutorStorage_count";    }  
+   def fields : String = {    "executorStorageViewId,guid,insertedRowDate,lastUpdatedDate,executorStorageSnapshotId,executorStorageId,sourceDownloadId,sourceViewId,executorStorageResourceId,downloadTransformExecutorStorage_count,algorithmRunView_count";    }  
    def pkFields : String = {    "";    }  
    def fkFields : String = {    "";    }  
    def nameField : String = {    "";    }  
@@ -28,10 +28,10 @@ case class VExecutorStorageViewSummaryDto (
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(executorStorageViewId,guid,insertedRowDate,lastUpdatedDate,executorStorageSnapshotId,executorStorageId,sourceDownloadId,sourceViewId,executorStorageResourceId,algorithmRunView_count,downloadTransformExecutorStorage_count)  }  
- def toStringArray() : Array[String] = {    Array(""+executorStorageViewId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorStorageSnapshotId,""+executorStorageId,""+sourceDownloadId,""+sourceViewId,""+executorStorageResourceId,""+algorithmRunView_count,""+downloadTransformExecutorStorage_count)   }  
- def toJson() : String = {   "{" + "\"executorStorageViewId\":\""+executorStorageViewId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"executorStorageSnapshotId\":\""+executorStorageSnapshotId+"\""+","+"\"executorStorageId\":\""+executorStorageId+"\""+","+"\"sourceDownloadId\":\""+sourceDownloadId+"\""+","+"\"sourceViewId\":\""+sourceViewId+"\""+","+"\"executorStorageResourceId\":\""+executorStorageResourceId+"\""+","+"\"algorithmRunView_count\":\""+algorithmRunView_count+"\""+","+"\"downloadTransformExecutorStorage_count\":\""+downloadTransformExecutorStorage_count+"\"" + "}"   }  
- def toFullString() : String = {    "executorStorageViewId:'"+executorStorageViewId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorStorageSnapshotId:'"+executorStorageSnapshotId+"'"+","+"executorStorageId:'"+executorStorageId+"'"+","+"sourceDownloadId:'"+sourceDownloadId+"'"+","+"sourceViewId:'"+sourceViewId+"'"+","+"executorStorageResourceId:'"+executorStorageResourceId+"'"+","+"algorithmRunView_count:'"+algorithmRunView_count+"'"+","+"downloadTransformExecutorStorage_count:'"+downloadTransformExecutorStorage_count+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(executorStorageViewId,guid,insertedRowDate,lastUpdatedDate,executorStorageSnapshotId,executorStorageId,sourceDownloadId,sourceViewId,executorStorageResourceId,downloadTransformExecutorStorage_count,algorithmRunView_count)  }  
+ def toStringArray() : Array[String] = {    Array(""+executorStorageViewId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorStorageSnapshotId,""+executorStorageId,""+sourceDownloadId,""+sourceViewId,""+executorStorageResourceId,""+downloadTransformExecutorStorage_count,""+algorithmRunView_count)   }  
+ def toJson() : String = {   "{" + "\"executorStorageViewId\":\""+executorStorageViewId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"executorStorageSnapshotId\":\""+executorStorageSnapshotId+"\""+","+"\"executorStorageId\":\""+executorStorageId+"\""+","+"\"sourceDownloadId\":\""+sourceDownloadId+"\""+","+"\"sourceViewId\":\""+sourceViewId+"\""+","+"\"executorStorageResourceId\":\""+executorStorageResourceId+"\""+","+"\"downloadTransformExecutorStorage_count\":\""+downloadTransformExecutorStorage_count+"\""+","+"\"algorithmRunView_count\":\""+algorithmRunView_count+"\"" + "}"   }  
+ def toFullString() : String = {    "executorStorageViewId:'"+executorStorageViewId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorStorageSnapshotId:'"+executorStorageSnapshotId+"'"+","+"executorStorageId:'"+executorStorageId+"'"+","+"sourceDownloadId:'"+sourceDownloadId+"'"+","+"sourceViewId:'"+sourceViewId+"'"+","+"executorStorageResourceId:'"+executorStorageResourceId+"'"+","+"downloadTransformExecutorStorage_count:'"+downloadTransformExecutorStorage_count+"'"+","+"algorithmRunView_count:'"+algorithmRunView_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "executorStorageViewId" => executorStorageViewId  
@@ -43,8 +43,8 @@ case class VExecutorStorageViewSummaryDto (
      case "sourceDownloadId" => sourceDownloadId  
      case "sourceViewId" => sourceViewId  
      case "executorStorageResourceId" => executorStorageResourceId  
-     case "algorithmRunView_count" => algorithmRunView_count  
-     case "downloadTransformExecutorStorage_count" => downloadTransformExecutorStorage_count   
+     case "downloadTransformExecutorStorage_count" => downloadTransformExecutorStorage_count  
+     case "algorithmRunView_count" => algorithmRunView_count   
     case _ => null 
     } 
     ret 
@@ -60,8 +60,8 @@ case class VExecutorStorageViewSummaryDto (
      case "sourceDownloadId" => "Long"  
      case "sourceViewId" => "Long"  
      case "executorStorageResourceId" => "Long"  
-     case "algorithmRunView_count" => "Int"  
-     case "downloadTransformExecutorStorage_count" => "Int"   
+     case "downloadTransformExecutorStorage_count" => "Int"  
+     case "algorithmRunView_count" => "Int"   
     case _ => "Object" 
     } 
     ret 
@@ -78,8 +78,8 @@ object VExecutorStorageViewSummaryDto {
    val FIELD_sourceDownloadId = "sourceDownloadId";
    val FIELD_sourceViewId = "sourceViewId";
    val FIELD_executorStorageResourceId = "executorStorageResourceId";
-   val FIELD_algorithmRunView_count = "algorithmRunView_count";
    val FIELD_downloadTransformExecutorStorage_count = "downloadTransformExecutorStorage_count";
+   val FIELD_algorithmRunView_count = "algorithmRunView_count";
 
 }
 

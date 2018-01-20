@@ -99,14 +99,14 @@ import java.util.Date
       null; 
     } 
  } 
-  def createAndInsertDownloadTransformTypeDto(downloadTransformTypeName : String) : DownloadTransformTypeDto = {
-    val dto = new DownloadTransformTypeDto(0,0,new Date(),new Date(),downloadTransformTypeName)
+  def createAndInsertDownloadTransformTypeDto(downloadTransformTypeName : String, downloadTransformTypeClass : String) : DownloadTransformTypeDto = {
+    val dto = new DownloadTransformTypeDto(0,0,new Date(),new Date(),downloadTransformTypeName,downloadTransformTypeClass)
     insertDownloadTransformTypeDto(dto);   
   }   
   def updateDownloadTransformTypeDto(dto : DownloadTransformTypeDto): DownloadTransformTypeDto = {  
     implicit val connection = getConnection();  
-      val resCnt = SQL("update downloadTransformType set  lastUpdatedDate = {lastUpdatedDate} ,  downloadTransformTypeName = {downloadTransformTypeName}  where  downloadTransformTypeId = {downloadTransformTypeId}  ")
-      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "downloadTransformTypeName" -> dto.downloadTransformTypeName, "downloadTransformTypeId" -> dto.downloadTransformTypeId ).executeInsert() 
+      val resCnt = SQL("update downloadTransformType set  lastUpdatedDate = {lastUpdatedDate} ,  downloadTransformTypeName = {downloadTransformTypeName} ,  downloadTransformTypeClass = {downloadTransformTypeClass}  where  downloadTransformTypeId = {downloadTransformTypeId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "downloadTransformTypeName" -> dto.downloadTransformTypeName , "downloadTransformTypeClass" -> dto.downloadTransformTypeClass, "downloadTransformTypeId" -> dto.downloadTransformTypeId ).executeInsert() 
    releaseConnection(connection);  
      getDownloadTransformTypeByPk(dto.downloadTransformTypeId) 
     } 

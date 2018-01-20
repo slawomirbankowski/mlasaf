@@ -102,15 +102,15 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
- def getDtosBySourceParamValue_count(colValue : Int) : List[VSourceParamSummaryDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VSourceParamSummaryDto] = SQL("select * from vSourceParamSummary where sourceParamValue_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceParamSummaryDto].*);  
-   releaseConnection(connection);  
-   dtos  
- }  
  def getDtosBySourceTypeParam_count(colValue : Int) : List[VSourceParamSummaryDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VSourceParamSummaryDto] = SQL("select * from vSourceParamSummary where sourceTypeParam_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceParamSummaryDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosBySourceParamValue_count(colValue : Int) : List[VSourceParamSummaryDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VSourceParamSummaryDto] = SQL("select * from vSourceParamSummary where sourceParamValue_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceParamSummaryDto].*);  
    releaseConnection(connection);  
    dtos  
  }  

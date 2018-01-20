@@ -246,6 +246,12 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
+ def getDtosByDownloadTransformType_downloadTransformTypeClass(colValue : String) : List[VDownloadTransformColumnDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VDownloadTransformColumnDto] = SQL("select * from vDownloadTransformColumn where downloadTransformType_downloadTransformTypeClass = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VDownloadTransformColumnDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
  def getDtosBySourceViewColumn_sourceViewColumnId(colValue : Long) : List[VDownloadTransformColumnDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VDownloadTransformColumnDto] = SQL("select * from vDownloadTransformColumn where sourceViewColumn_sourceViewColumnId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VDownloadTransformColumnDto].*);  

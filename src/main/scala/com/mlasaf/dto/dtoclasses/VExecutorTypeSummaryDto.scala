@@ -13,12 +13,13 @@ case class VExecutorTypeSummaryDto (
      , val lastUpdatedDate : java.util.Date
      , val executorTypeName : String
      , val executorTypeClass : String
-     , val executorInstance_count : Int
      , val algorithmImplementation_count : Int
-     , val executorTypeHostParam_count : Int 
+     , val executorTypeParam_count : Int
+     , val executorTypeHostParam_count : Int
+     , val executorInstance_count : Int 
      ) extends BaseReadOnlyDto {  
    def tableName : String = {    "vExecutorTypeSummary";    }  
-   def fields : String = {    "executorTypeId,guid,insertedRowDate,lastUpdatedDate,executorTypeName,executorTypeClass,executorInstance_count,algorithmImplementation_count,executorTypeHostParam_count";    }  
+   def fields : String = {    "executorTypeId,guid,insertedRowDate,lastUpdatedDate,executorTypeName,executorTypeClass,algorithmImplementation_count,executorTypeParam_count,executorTypeHostParam_count,executorInstance_count";    }  
    def pkFields : String = {    "";    }  
    def fkFields : String = {    "";    }  
    def nameField : String = {    "";    }  
@@ -26,10 +27,10 @@ case class VExecutorTypeSummaryDto (
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(executorTypeId,guid,insertedRowDate,lastUpdatedDate,executorTypeName,executorTypeClass,executorInstance_count,algorithmImplementation_count,executorTypeHostParam_count)  }  
- def toStringArray() : Array[String] = {    Array(""+executorTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorTypeName,""+executorTypeClass,""+executorInstance_count,""+algorithmImplementation_count,""+executorTypeHostParam_count)   }  
- def toJson() : String = {   "{" + "\"executorTypeId\":\""+executorTypeId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"executorTypeName\":\""+executorTypeName+"\""+","+"\"executorTypeClass\":\""+executorTypeClass+"\""+","+"\"executorInstance_count\":\""+executorInstance_count+"\""+","+"\"algorithmImplementation_count\":\""+algorithmImplementation_count+"\""+","+"\"executorTypeHostParam_count\":\""+executorTypeHostParam_count+"\"" + "}"   }  
- def toFullString() : String = {    "executorTypeId:'"+executorTypeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorTypeName:'"+executorTypeName+"'"+","+"executorTypeClass:'"+executorTypeClass+"'"+","+"executorInstance_count:'"+executorInstance_count+"'"+","+"algorithmImplementation_count:'"+algorithmImplementation_count+"'"+","+"executorTypeHostParam_count:'"+executorTypeHostParam_count+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(executorTypeId,guid,insertedRowDate,lastUpdatedDate,executorTypeName,executorTypeClass,algorithmImplementation_count,executorTypeParam_count,executorTypeHostParam_count,executorInstance_count)  }  
+ def toStringArray() : Array[String] = {    Array(""+executorTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorTypeName,""+executorTypeClass,""+algorithmImplementation_count,""+executorTypeParam_count,""+executorTypeHostParam_count,""+executorInstance_count)   }  
+ def toJson() : String = {   "{" + "\"executorTypeId\":\""+executorTypeId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"executorTypeName\":\""+executorTypeName+"\""+","+"\"executorTypeClass\":\""+executorTypeClass+"\""+","+"\"algorithmImplementation_count\":\""+algorithmImplementation_count+"\""+","+"\"executorTypeParam_count\":\""+executorTypeParam_count+"\""+","+"\"executorTypeHostParam_count\":\""+executorTypeHostParam_count+"\""+","+"\"executorInstance_count\":\""+executorInstance_count+"\"" + "}"   }  
+ def toFullString() : String = {    "executorTypeId:'"+executorTypeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorTypeName:'"+executorTypeName+"'"+","+"executorTypeClass:'"+executorTypeClass+"'"+","+"algorithmImplementation_count:'"+algorithmImplementation_count+"'"+","+"executorTypeParam_count:'"+executorTypeParam_count+"'"+","+"executorTypeHostParam_count:'"+executorTypeHostParam_count+"'"+","+"executorInstance_count:'"+executorInstance_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "executorTypeId" => executorTypeId  
@@ -38,9 +39,10 @@ case class VExecutorTypeSummaryDto (
      case "lastUpdatedDate" => lastUpdatedDate  
      case "executorTypeName" => executorTypeName  
      case "executorTypeClass" => executorTypeClass  
-     case "executorInstance_count" => executorInstance_count  
      case "algorithmImplementation_count" => algorithmImplementation_count  
-     case "executorTypeHostParam_count" => executorTypeHostParam_count   
+     case "executorTypeParam_count" => executorTypeParam_count  
+     case "executorTypeHostParam_count" => executorTypeHostParam_count  
+     case "executorInstance_count" => executorInstance_count   
     case _ => null 
     } 
     ret 
@@ -53,9 +55,10 @@ case class VExecutorTypeSummaryDto (
      case "lastUpdatedDate" => "java.util.Date"  
      case "executorTypeName" => "String"  
      case "executorTypeClass" => "String"  
-     case "executorInstance_count" => "Int"  
      case "algorithmImplementation_count" => "Int"  
-     case "executorTypeHostParam_count" => "Int"   
+     case "executorTypeParam_count" => "Int"  
+     case "executorTypeHostParam_count" => "Int"  
+     case "executorInstance_count" => "Int"   
     case _ => "Object" 
     } 
     ret 
@@ -69,9 +72,10 @@ object VExecutorTypeSummaryDto {
    val FIELD_lastUpdatedDate = "lastUpdatedDate";
    val FIELD_executorTypeName = "executorTypeName";
    val FIELD_executorTypeClass = "executorTypeClass";
-   val FIELD_executorInstance_count = "executorInstance_count";
    val FIELD_algorithmImplementation_count = "algorithmImplementation_count";
+   val FIELD_executorTypeParam_count = "executorTypeParam_count";
    val FIELD_executorTypeHostParam_count = "executorTypeHostParam_count";
+   val FIELD_executorInstance_count = "executorInstance_count";
 
 }
 

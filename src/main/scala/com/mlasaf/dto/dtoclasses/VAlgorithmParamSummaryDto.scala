@@ -14,11 +14,11 @@ case class VAlgorithmParamSummaryDto (
      , val algorithmParamName : String
      , val algorithmParamDescription : String
      , val algorithmParamType : String
-     , val algorithmScheduleParam_count : Int
-     , val algorithmVersionParamType_count : Int 
+     , val algorithmVersionParamType_count : Int
+     , val algorithmScheduleParam_count : Int 
      ) extends BaseReadOnlyDto {  
    def tableName : String = {    "vAlgorithmParamSummary";    }  
-   def fields : String = {    "algorithmParamId,guid,insertedRowDate,lastUpdatedDate,algorithmParamName,algorithmParamDescription,algorithmParamType,algorithmScheduleParam_count,algorithmVersionParamType_count";    }  
+   def fields : String = {    "algorithmParamId,guid,insertedRowDate,lastUpdatedDate,algorithmParamName,algorithmParamDescription,algorithmParamType,algorithmVersionParamType_count,algorithmScheduleParam_count";    }  
    def pkFields : String = {    "";    }  
    def fkFields : String = {    "";    }  
    def nameField : String = {    "";    }  
@@ -26,10 +26,10 @@ case class VAlgorithmParamSummaryDto (
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(algorithmParamId,guid,insertedRowDate,lastUpdatedDate,algorithmParamName,algorithmParamDescription,algorithmParamType,algorithmScheduleParam_count,algorithmVersionParamType_count)  }  
- def toStringArray() : Array[String] = {    Array(""+algorithmParamId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmParamName,""+algorithmParamDescription,""+algorithmParamType,""+algorithmScheduleParam_count,""+algorithmVersionParamType_count)   }  
- def toJson() : String = {   "{" + "\"algorithmParamId\":\""+algorithmParamId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"algorithmParamName\":\""+algorithmParamName+"\""+","+"\"algorithmParamDescription\":\""+algorithmParamDescription+"\""+","+"\"algorithmParamType\":\""+algorithmParamType+"\""+","+"\"algorithmScheduleParam_count\":\""+algorithmScheduleParam_count+"\""+","+"\"algorithmVersionParamType_count\":\""+algorithmVersionParamType_count+"\"" + "}"   }  
- def toFullString() : String = {    "algorithmParamId:'"+algorithmParamId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmParamName:'"+algorithmParamName+"'"+","+"algorithmParamDescription:'"+algorithmParamDescription+"'"+","+"algorithmParamType:'"+algorithmParamType+"'"+","+"algorithmScheduleParam_count:'"+algorithmScheduleParam_count+"'"+","+"algorithmVersionParamType_count:'"+algorithmVersionParamType_count+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(algorithmParamId,guid,insertedRowDate,lastUpdatedDate,algorithmParamName,algorithmParamDescription,algorithmParamType,algorithmVersionParamType_count,algorithmScheduleParam_count)  }  
+ def toStringArray() : Array[String] = {    Array(""+algorithmParamId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmParamName,""+algorithmParamDescription,""+algorithmParamType,""+algorithmVersionParamType_count,""+algorithmScheduleParam_count)   }  
+ def toJson() : String = {   "{" + "\"algorithmParamId\":\""+algorithmParamId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"algorithmParamName\":\""+algorithmParamName+"\""+","+"\"algorithmParamDescription\":\""+algorithmParamDescription+"\""+","+"\"algorithmParamType\":\""+algorithmParamType+"\""+","+"\"algorithmVersionParamType_count\":\""+algorithmVersionParamType_count+"\""+","+"\"algorithmScheduleParam_count\":\""+algorithmScheduleParam_count+"\"" + "}"   }  
+ def toFullString() : String = {    "algorithmParamId:'"+algorithmParamId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmParamName:'"+algorithmParamName+"'"+","+"algorithmParamDescription:'"+algorithmParamDescription+"'"+","+"algorithmParamType:'"+algorithmParamType+"'"+","+"algorithmVersionParamType_count:'"+algorithmVersionParamType_count+"'"+","+"algorithmScheduleParam_count:'"+algorithmScheduleParam_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "algorithmParamId" => algorithmParamId  
@@ -39,8 +39,8 @@ case class VAlgorithmParamSummaryDto (
      case "algorithmParamName" => algorithmParamName  
      case "algorithmParamDescription" => algorithmParamDescription  
      case "algorithmParamType" => algorithmParamType  
-     case "algorithmScheduleParam_count" => algorithmScheduleParam_count  
-     case "algorithmVersionParamType_count" => algorithmVersionParamType_count   
+     case "algorithmVersionParamType_count" => algorithmVersionParamType_count  
+     case "algorithmScheduleParam_count" => algorithmScheduleParam_count   
     case _ => null 
     } 
     ret 
@@ -54,8 +54,8 @@ case class VAlgorithmParamSummaryDto (
      case "algorithmParamName" => "String"  
      case "algorithmParamDescription" => "String"  
      case "algorithmParamType" => "String"  
-     case "algorithmScheduleParam_count" => "Int"  
-     case "algorithmVersionParamType_count" => "Int"   
+     case "algorithmVersionParamType_count" => "Int"  
+     case "algorithmScheduleParam_count" => "Int"   
     case _ => "Object" 
     } 
     ret 
@@ -70,8 +70,8 @@ object VAlgorithmParamSummaryDto {
    val FIELD_algorithmParamName = "algorithmParamName";
    val FIELD_algorithmParamDescription = "algorithmParamDescription";
    val FIELD_algorithmParamType = "algorithmParamType";
-   val FIELD_algorithmScheduleParam_count = "algorithmScheduleParam_count";
    val FIELD_algorithmVersionParamType_count = "algorithmVersionParamType_count";
+   val FIELD_algorithmScheduleParam_count = "algorithmScheduleParam_count";
 
 }
 

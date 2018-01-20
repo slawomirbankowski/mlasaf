@@ -144,5 +144,11 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
+ def getDtosByAlgorithmRunInfo_count(colValue : Int) : List[VAlgorithmScheduleSummaryDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmScheduleSummaryDto] = SQL("select * from vAlgorithmScheduleSummary where algorithmRunInfo_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleSummaryDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
 
 } 

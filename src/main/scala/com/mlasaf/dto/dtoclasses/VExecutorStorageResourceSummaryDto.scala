@@ -17,10 +17,11 @@ case class VExecutorStorageResourceSummaryDto (
      , val resourceRowsCount : Long
      , val isValid : Int
      , val algorithmOutput_count : Int
+     , val algorithmRunInfo_count : Int
      , val executorStorageView_count : Int 
      ) extends BaseReadOnlyDto {  
    def tableName : String = {    "vExecutorStorageResourceSummary";    }  
-   def fields : String = {    "executorStorageResourceId,guid,insertedRowDate,lastUpdatedDate,executorStorageId,resourcePath,resourceSize,resourceRowsCount,isValid,algorithmOutput_count,executorStorageView_count";    }  
+   def fields : String = {    "executorStorageResourceId,guid,insertedRowDate,lastUpdatedDate,executorStorageId,resourcePath,resourceSize,resourceRowsCount,isValid,algorithmOutput_count,algorithmRunInfo_count,executorStorageView_count";    }  
    def pkFields : String = {    "";    }  
    def fkFields : String = {    "";    }  
    def nameField : String = {    "";    }  
@@ -28,10 +29,10 @@ case class VExecutorStorageResourceSummaryDto (
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(executorStorageResourceId,guid,insertedRowDate,lastUpdatedDate,executorStorageId,resourcePath,resourceSize,resourceRowsCount,isValid,algorithmOutput_count,executorStorageView_count)  }  
- def toStringArray() : Array[String] = {    Array(""+executorStorageResourceId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorStorageId,""+resourcePath,""+resourceSize,""+resourceRowsCount,""+isValid,""+algorithmOutput_count,""+executorStorageView_count)   }  
- def toJson() : String = {   "{" + "\"executorStorageResourceId\":\""+executorStorageResourceId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"executorStorageId\":\""+executorStorageId+"\""+","+"\"resourcePath\":\""+resourcePath+"\""+","+"\"resourceSize\":\""+resourceSize+"\""+","+"\"resourceRowsCount\":\""+resourceRowsCount+"\""+","+"\"isValid\":\""+isValid+"\""+","+"\"algorithmOutput_count\":\""+algorithmOutput_count+"\""+","+"\"executorStorageView_count\":\""+executorStorageView_count+"\"" + "}"   }  
- def toFullString() : String = {    "executorStorageResourceId:'"+executorStorageResourceId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorStorageId:'"+executorStorageId+"'"+","+"resourcePath:'"+resourcePath+"'"+","+"resourceSize:'"+resourceSize+"'"+","+"resourceRowsCount:'"+resourceRowsCount+"'"+","+"isValid:'"+isValid+"'"+","+"algorithmOutput_count:'"+algorithmOutput_count+"'"+","+"executorStorageView_count:'"+executorStorageView_count+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(executorStorageResourceId,guid,insertedRowDate,lastUpdatedDate,executorStorageId,resourcePath,resourceSize,resourceRowsCount,isValid,algorithmOutput_count,algorithmRunInfo_count,executorStorageView_count)  }  
+ def toStringArray() : Array[String] = {    Array(""+executorStorageResourceId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorStorageId,""+resourcePath,""+resourceSize,""+resourceRowsCount,""+isValid,""+algorithmOutput_count,""+algorithmRunInfo_count,""+executorStorageView_count)   }  
+ def toJson() : String = {   "{" + "\"executorStorageResourceId\":\""+executorStorageResourceId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"executorStorageId\":\""+executorStorageId+"\""+","+"\"resourcePath\":\""+resourcePath+"\""+","+"\"resourceSize\":\""+resourceSize+"\""+","+"\"resourceRowsCount\":\""+resourceRowsCount+"\""+","+"\"isValid\":\""+isValid+"\""+","+"\"algorithmOutput_count\":\""+algorithmOutput_count+"\""+","+"\"algorithmRunInfo_count\":\""+algorithmRunInfo_count+"\""+","+"\"executorStorageView_count\":\""+executorStorageView_count+"\"" + "}"   }  
+ def toFullString() : String = {    "executorStorageResourceId:'"+executorStorageResourceId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorStorageId:'"+executorStorageId+"'"+","+"resourcePath:'"+resourcePath+"'"+","+"resourceSize:'"+resourceSize+"'"+","+"resourceRowsCount:'"+resourceRowsCount+"'"+","+"isValid:'"+isValid+"'"+","+"algorithmOutput_count:'"+algorithmOutput_count+"'"+","+"algorithmRunInfo_count:'"+algorithmRunInfo_count+"'"+","+"executorStorageView_count:'"+executorStorageView_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "executorStorageResourceId" => executorStorageResourceId  
@@ -44,6 +45,7 @@ case class VExecutorStorageResourceSummaryDto (
      case "resourceRowsCount" => resourceRowsCount  
      case "isValid" => isValid  
      case "algorithmOutput_count" => algorithmOutput_count  
+     case "algorithmRunInfo_count" => algorithmRunInfo_count  
      case "executorStorageView_count" => executorStorageView_count   
     case _ => null 
     } 
@@ -61,6 +63,7 @@ case class VExecutorStorageResourceSummaryDto (
      case "resourceRowsCount" => "Long"  
      case "isValid" => "Int"  
      case "algorithmOutput_count" => "Int"  
+     case "algorithmRunInfo_count" => "Int"  
      case "executorStorageView_count" => "Int"   
     case _ => "Object" 
     } 
@@ -79,6 +82,7 @@ object VExecutorStorageResourceSummaryDto {
    val FIELD_resourceRowsCount = "resourceRowsCount";
    val FIELD_isValid = "isValid";
    val FIELD_algorithmOutput_count = "algorithmOutput_count";
+   val FIELD_algorithmRunInfo_count = "algorithmRunInfo_count";
    val FIELD_executorStorageView_count = "executorStorageView_count";
 
 }

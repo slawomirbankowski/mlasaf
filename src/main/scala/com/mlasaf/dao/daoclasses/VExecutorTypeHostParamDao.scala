@@ -96,9 +96,9 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
- def getDtosByParamName(colValue : String) : List[VExecutorTypeHostParamDto] = { 
+ def getDtosByExecutorParamId(colValue : Long) : List[VExecutorTypeHostParamDto] = { 
    implicit val connection = getConnection();  
-   val dtos : List[VExecutorTypeHostParamDto] = SQL("select * from vExecutorTypeHostParam where paramName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorTypeHostParamDto].*);  
+   val dtos : List[VExecutorTypeHostParamDto] = SQL("select * from vExecutorTypeHostParam where executorParamId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorTypeHostParamDto].*);  
    releaseConnection(connection);  
    dtos  
  }  
@@ -165,6 +165,42 @@ import java.util.Date
  def getDtosByExecutorHost_isWorking(colValue : Int) : List[VExecutorTypeHostParamDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VExecutorTypeHostParamDto] = SQL("select * from vExecutorTypeHostParam where executorHost_isWorking = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorTypeHostParamDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByExecutorParam_executorParamId(colValue : Long) : List[VExecutorTypeHostParamDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorTypeHostParamDto] = SQL("select * from vExecutorTypeHostParam where executorParam_executorParamId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorTypeHostParamDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByExecutorParam_guid(colValue : Long) : List[VExecutorTypeHostParamDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorTypeHostParamDto] = SQL("select * from vExecutorTypeHostParam where executorParam_guid = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorTypeHostParamDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByExecutorParam_insertedRowDate(colValue : java.util.Date) : List[VExecutorTypeHostParamDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorTypeHostParamDto] = SQL("select * from vExecutorTypeHostParam where executorParam_insertedRowDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorTypeHostParamDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByExecutorParam_lastUpdatedDate(colValue : java.util.Date) : List[VExecutorTypeHostParamDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorTypeHostParamDto] = SQL("select * from vExecutorTypeHostParam where executorParam_lastUpdatedDate = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorTypeHostParamDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByExecutorParam_executorParamName(colValue : String) : List[VExecutorTypeHostParamDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorTypeHostParamDto] = SQL("select * from vExecutorTypeHostParam where executorParam_executorParamName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorTypeHostParamDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByExecutorParam_executorParamDescription(colValue : String) : List[VExecutorTypeHostParamDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorTypeHostParamDto] = SQL("select * from vExecutorTypeHostParam where executorParam_executorParamDescription = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorTypeHostParamDto].*);  
    releaseConnection(connection);  
    dtos  
  }  

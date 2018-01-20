@@ -20,7 +20,6 @@ class CsvParser {
     val headerColMap = headerColumns.zipWithIndex.map(x => (x._2, x._1)).toMap[Int, String];
   }
   def nextRow() : Unit = {
-
   }
   def getValue(colPos : Int) : Any = {
     ""

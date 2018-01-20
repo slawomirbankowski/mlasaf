@@ -25,12 +25,13 @@ trait RestBase {
       override def handle(request: spark.Request, response: spark.Response): AnyRef = {
         val startTime = System.currentTimeMillis();
         val ret = fun(request, response);
+        response.raw().setContentType("application/json");
         val executeTime : Long = System.currentTimeMillis() - startTime;
         try {
-          val requestHeader = request.queryString()
+          val requestHeader = request.servletPath();
           val headersStr = request.headers().toArray.mkString(",")
           val cookiesStr = "" + request.cookies().keySet().toArray.map(c => c + ":'" + request.cookie("" + c) + "'").mkString(",");
-          val sessionStr = "" + request.session();
+          val sessionStr = "" + request.session().id();
           val requestMethod = request.requestMethod();
           val reqBodyArray = com.mlasaf.common.CustomUtils.cutString(request.body(), 2000, 2);
           val responseArray = com.mlasaf.common.CustomUtils.cutString("" + ret, 2000, 2);

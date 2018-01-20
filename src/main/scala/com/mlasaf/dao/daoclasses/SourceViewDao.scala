@@ -117,14 +117,14 @@ import java.util.Date
       null; 
     } 
  } 
-  def createAndInsertSourceViewDto(sourceInstanceId : Long, sourceViewTypeId : Long, sourceViewFormatId : Long, sourceViewName : String, sourceViewDefinition : String, isExisting : Int) : SourceViewDto = {
-    val dto = new SourceViewDto(0,0,new Date(),new Date(),sourceInstanceId,sourceViewTypeId,sourceViewFormatId,sourceViewName,sourceViewDefinition,isExisting)
+  def createAndInsertSourceViewDto(sourceInstanceId : Long, sourceViewTypeId : Long, sourceViewFormatId : Long, sourceViewName : String, sourceViewDefinition : String, isExisting : Int, isCustom : Int) : SourceViewDto = {
+    val dto = new SourceViewDto(0,0,new Date(),new Date(),sourceInstanceId,sourceViewTypeId,sourceViewFormatId,sourceViewName,sourceViewDefinition,isExisting,isCustom)
     insertSourceViewDto(dto);   
   }   
   def updateSourceViewDto(dto : SourceViewDto): SourceViewDto = {  
     implicit val connection = getConnection();  
-      val resCnt = SQL("update sourceView set  lastUpdatedDate = {lastUpdatedDate} ,  sourceInstanceId = {sourceInstanceId} ,  sourceViewTypeId = {sourceViewTypeId} ,  sourceViewFormatId = {sourceViewFormatId} ,  sourceViewName = {sourceViewName} ,  sourceViewDefinition = {sourceViewDefinition} ,  isExisting = {isExisting}  where  sourceViewId = {sourceViewId}  ")
-      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "sourceInstanceId" -> dto.sourceInstanceId , "sourceViewTypeId" -> dto.sourceViewTypeId , "sourceViewFormatId" -> dto.sourceViewFormatId , "sourceViewName" -> dto.sourceViewName , "sourceViewDefinition" -> dto.sourceViewDefinition , "isExisting" -> dto.isExisting, "sourceViewId" -> dto.sourceViewId ).executeInsert() 
+      val resCnt = SQL("update sourceView set  lastUpdatedDate = {lastUpdatedDate} ,  sourceInstanceId = {sourceInstanceId} ,  sourceViewTypeId = {sourceViewTypeId} ,  sourceViewFormatId = {sourceViewFormatId} ,  sourceViewName = {sourceViewName} ,  sourceViewDefinition = {sourceViewDefinition} ,  isExisting = {isExisting} ,  isCustom = {isCustom}  where  sourceViewId = {sourceViewId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "sourceInstanceId" -> dto.sourceInstanceId , "sourceViewTypeId" -> dto.sourceViewTypeId , "sourceViewFormatId" -> dto.sourceViewFormatId , "sourceViewName" -> dto.sourceViewName , "sourceViewDefinition" -> dto.sourceViewDefinition , "isExisting" -> dto.isExisting , "isCustom" -> dto.isCustom, "sourceViewId" -> dto.sourceViewId ).executeInsert() 
    releaseConnection(connection);  
      getSourceViewByPk(dto.sourceViewId) 
     } 

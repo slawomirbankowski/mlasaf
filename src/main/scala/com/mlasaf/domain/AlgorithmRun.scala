@@ -13,7 +13,7 @@ class AlgorithmRun {
   /** logger */
   val logger = org.slf4j.LoggerFactory.getLogger("DaoCustom");
   /** current status of RUN */
-  var status : String = "CREATED";
+  var status : String = AlgorithmRun.STATUS_CREATED;
   /** parent EXECUTOR */
   var parentExecutor : Executor = null;
   /** if this run is finished */
@@ -40,24 +40,28 @@ class AlgorithmRun {
   var outputs : scala.collection.mutable.ListBuffer[VAlgorithmOutputDto] = new scala.collection.mutable.ListBuffer();
   /** parameters set to this schedule */
   var parameters :  scala.collection.mutable.ListBuffer[VAlgorithmScheduleParamDto] = new scala.collection.mutable.ListBuffer();
+  /** parameters set to this schedule */
+  var runInfos :  scala.collection.mutable.ListBuffer[VAlgorithmRunInfoDto] = new scala.collection.mutable.ListBuffer();
 
   /** RUN algorithm */
   def runAlgorithm() = {
     logger.info(" +++++++++++++++++++++++ AlgorithmRun status: " + status + ", algorithmRunId: " + algorithmRunDto.algorithmRunId + ", algorithmRunViews: " + algorithmRunViewDtos.size + ", algorithmScheduleViews: " + algorithmScheduleViewDtos.size + ", executorStorageVies: " + executorStorageViewDtos.size)
     // TODO: finish proper flow for AlgorithmRun
+    //com.mlasaf.dto.VAlgorithmRunInfoDto
+
     status match {
-      case "CREATED" => {
+      case AlgorithmRun.STATUS_CREATED => {
         val neededViewIds = algorithmScheduleViewDtos.map(sv => sv.sourceViewId).distinct;
         val allDownloadedViewIds = executorStorageViewDtos.map(s => s.sourceViewId).distinct;
         val viewsToBeDownloaded = neededViewIds.filter(svid => !allDownloadedViewIds.contains(svid));
         logger.info("AlgorithmRun - All needed viewIds: " + neededViewIds.mkString(",") + "; downloaded views: " + allDownloadedViewIds.distinct.mkString(",") + "; left views: " + viewsToBeDownloaded.mkString(","));
         if (viewsToBeDownloaded.size > 0) {
-          status = "DOWNLOADING"
+          status = AlgorithmRun.STATUS_DOWNLOADING
         } else {
-          status = "RUNNING"
+          status = AlgorithmRun.STATUS_RUNNING
         }
       }
-      case "DOWNLOADING" => {
+      case AlgorithmRun.STATUS_DOWNLOADING => {
         val allDownloadedViewIds = executorStorageViewDtos.map(s => s.sourceViewId).distinct;
         val viewsToBeDownloaded = algorithmScheduleViewDtos.filter(svid => !allDownloadedViewIds.contains(svid.sourceViewId));
         viewsToBeDownloaded.foreach(asvDto => {
@@ -72,12 +76,12 @@ class AlgorithmRun {
           }
         });
         if (algorithmRunViewDtos.size >= algorithmScheduleViewDtos.size) {
-          status = "RUNNING"
+          status = AlgorithmRun.STATUS_RUNNING
         } else {
-          status = "DOWNLOADING"
+          status = AlgorithmRun.STATUS_DOWNLOADING
         }
       }
-      case "RUNNING" => {
+      case AlgorithmRun.STATUS_RUNNING => {
         // create algorithmRunViews
         val allDownloadedViews : scala.collection.mutable.ListBuffer[VSourceDownloadDto] = new scala.collection.mutable.ListBuffer();
         executorStorageViewDtos.foreach(sd => {
@@ -86,10 +90,10 @@ class AlgorithmRun {
         logger.info("AlgorithmRun - Collected all views: " + executorStorageViewDtos.map(e => "{executorStorageViewId:" + e.executorStorageViewId + ",sourceViewId:" + e.sourceViewId + ",path:" + e.executorStorageResource_resourcePath + ",rows:" + e.executorStorageResource_resourceRowsCount + "}").mkString(", "))
         try {
           algorithmInstance.run(this);
-          status = "DONE"
+          status = AlgorithmRun.STATUS_DONE
         } catch {
           case ex : Exception => {
-            status = "EXCEPTION";
+            status = AlgorithmRun.STATUS_EXCEPTION;
             logger.error("Exception while run algorithm instance, algorithmRunId: " + algorithmRunDto.algorithmRunId, ex);
             parentExecutor.parentContext.daoFactory.daos.algorithmRunDao.updateField(algorithmRunDto, AlgorithmRunDto.FIELD_errorDescription, ex.getMessage);
             parentExecutor.parentContext.daoFactory.daos.algorithmRunDao.updateField(algorithmRunDto, AlgorithmRunDto.FIELD_isRunning, 0);
@@ -97,7 +101,7 @@ class AlgorithmRun {
           }
         }
       }
-      case "DONE" => {
+      case AlgorithmRun.STATUS_DONE => {
         logger.info("End of run algorithm RUN: " + algorithmRunDto.algorithmRunId);
         parentExecutor.parentContext.daoFactory.daos.algorithmRunDao.updateField(algorithmRunDto, AlgorithmRunDto.FIELD_isFinished, 1);
         parentExecutor.parentContext.daoFactory.daos.algorithmRunDao.updateField(algorithmRunDto, AlgorithmRunDto.FIELD_isRunning, 0);
@@ -112,4 +116,12 @@ class AlgorithmRun {
   override def toString: String = {
     "AlgorithmRun(status=" + status + ",algorithmScheduleId=" + algorithmScheduleDto.algorithmScheduleId + ",algorithmRunId=" + algorithmRunDto.algorithmRunId + ",scheduleViews.cnt=" + algorithmScheduleViewDtos.size + ",storages.cnt=" + executorStorageViewDtos.size + ")"
   }
+}
+object AlgorithmRun {
+  val STATUS_CREATED = "CREATED";
+  val STATUS_DOWNLOADING = "DOWNLOADING";
+  val STATUS_DONE = "DONE";
+  val STATUS_RUNNING = "RUNNING";
+  val STATUS_EXCEPTION = "EXCEPTION";
+
 }

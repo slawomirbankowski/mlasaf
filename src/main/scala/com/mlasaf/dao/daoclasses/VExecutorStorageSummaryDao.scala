@@ -126,6 +126,12 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
+ def getDtosByAlgorithmOutput_count(colValue : Int) : List[VExecutorStorageSummaryDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorStorageSummaryDto] = SQL("select * from vExecutorStorageSummary where algorithmOutput_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSummaryDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
  def getDtosBySourceSchedule_count(colValue : Int) : List[VExecutorStorageSummaryDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VExecutorStorageSummaryDto] = SQL("select * from vExecutorStorageSummary where sourceSchedule_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSummaryDto].*);  
@@ -138,15 +144,15 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
- def getDtosByExecutorStorageResource_count(colValue : Int) : List[VExecutorStorageSummaryDto] = { 
+ def getDtosByAlgorithmRunInfo_count(colValue : Int) : List[VExecutorStorageSummaryDto] = { 
    implicit val connection = getConnection();  
-   val dtos : List[VExecutorStorageSummaryDto] = SQL("select * from vExecutorStorageSummary where executorStorageResource_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSummaryDto].*);  
+   val dtos : List[VExecutorStorageSummaryDto] = SQL("select * from vExecutorStorageSummary where algorithmRunInfo_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSummaryDto].*);  
    releaseConnection(connection);  
    dtos  
  }  
- def getDtosByAlgorithmOutput_count(colValue : Int) : List[VExecutorStorageSummaryDto] = { 
+ def getDtosByExecutorStorageResource_count(colValue : Int) : List[VExecutorStorageSummaryDto] = { 
    implicit val connection = getConnection();  
-   val dtos : List[VExecutorStorageSummaryDto] = SQL("select * from vExecutorStorageSummary where algorithmOutput_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSummaryDto].*);  
+   val dtos : List[VExecutorStorageSummaryDto] = SQL("select * from vExecutorStorageSummary where executorStorageResource_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageSummaryDto].*);  
    releaseConnection(connection);  
    dtos  
  }  

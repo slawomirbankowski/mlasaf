@@ -13,22 +13,22 @@ case class ExecutorTypeHostParamDto (
      , val lastUpdatedDate : java.util.Date
      , val executorHostId : Long
      , val executorTypeId : Long
-     , val paramName : String
+     , val executorParamId : Long
      , val paramValue : String 
      ) extends BaseDto {  
    def tableName : String = {    "executorTypeHostParam";    }  
-   def fields : String = {    "executorTypeHostParamId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorTypeId,paramName,paramValue";    }  
+   def fields : String = {    "executorTypeHostParamId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorTypeId,executorParamId,paramValue";    }  
    def pkFields : String = {    "executorTypeHostParamId";    }  
-   def fkFields : String = {    "executorHostId,executorTypeId";    }  
+   def fkFields : String = {    "executorHostId,executorParamId,executorTypeId";    }  
    def nameField : String = {    "";    }  
  def getPk() : Long = {    executorTypeHostParamId  }  
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(executorTypeHostParamId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorTypeId,paramName,paramValue)  }  
- def toStringArray() : Array[String] = {    Array(""+executorTypeHostParamId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+executorTypeId,""+paramName,""+paramValue)   }  
- def toJson() : String = {   "{" + "\"executorTypeHostParamId\":\""+executorTypeHostParamId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"executorHostId\":\""+executorHostId+"\""+","+"\"executorTypeId\":\""+executorTypeId+"\""+","+"\"paramName\":\""+paramName+"\""+","+"\"paramValue\":\""+paramValue+"\"" + "}"   }  
- def toFullString() : String = {    "executorTypeHostParamId:'"+executorTypeHostParamId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorHostId:'"+executorHostId+"'"+","+"executorTypeId:'"+executorTypeId+"'"+","+"paramName:'"+paramName+"'"+","+"paramValue:'"+paramValue+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(executorTypeHostParamId,guid,insertedRowDate,lastUpdatedDate,executorHostId,executorTypeId,executorParamId,paramValue)  }  
+ def toStringArray() : Array[String] = {    Array(""+executorTypeHostParamId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+executorHostId,""+executorTypeId,""+executorParamId,""+paramValue)   }  
+ def toJson() : String = {   "{" + "\"executorTypeHostParamId\":\""+executorTypeHostParamId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"executorHostId\":\""+executorHostId+"\""+","+"\"executorTypeId\":\""+executorTypeId+"\""+","+"\"executorParamId\":\""+executorParamId+"\""+","+"\"paramValue\":\""+paramValue+"\"" + "}"   }  
+ def toFullString() : String = {    "executorTypeHostParamId:'"+executorTypeHostParamId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"executorHostId:'"+executorHostId+"'"+","+"executorTypeId:'"+executorTypeId+"'"+","+"executorParamId:'"+executorParamId+"'"+","+"paramValue:'"+paramValue+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "executorTypeHostParamId" => executorTypeHostParamId  
@@ -37,7 +37,7 @@ case class ExecutorTypeHostParamDto (
      case "lastUpdatedDate" => lastUpdatedDate  
      case "executorHostId" => executorHostId  
      case "executorTypeId" => executorTypeId  
-     case "paramName" => paramName  
+     case "executorParamId" => executorParamId  
      case "paramValue" => paramValue   
     case _ => null 
     } 
@@ -51,23 +51,23 @@ case class ExecutorTypeHostParamDto (
      case "lastUpdatedDate" => "java.util.Date"  
      case "executorHostId" => "Long"  
      case "executorTypeId" => "Long"  
-     case "paramName" => "String"  
+     case "executorParamId" => "Long"  
      case "paramValue" => "String"   
     case _ => "Object" 
     } 
     ret 
   } 
    def prepareInsert(connection : java.sql.Connection) : java.sql.PreparedStatement = {
-     val stat = connection.prepareStatement("insert into executorTypeHostParam(guid,executorHostId,executorTypeId,paramName,paramValue) values (?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
+     val stat = connection.prepareStatement("insert into executorTypeHostParam(guid,executorHostId,executorTypeId,executorParamId,paramValue) values (?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
     stat.setObject(1, guid);
     stat.setObject(2, executorHostId);
     stat.setObject(3, executorTypeId);
-    stat.setObject(4, paramName);
+    stat.setObject(4, executorParamId);
     stat.setObject(5, paramValue);
     return stat; 
    } 
-   def modify(executorHostId : Long, executorTypeId : Long, paramName : String, paramValue : String) : ExecutorTypeHostParamDto = {
-    val dtoModified = new ExecutorTypeHostParamDto(this.executorTypeHostParamId,this.guid,this.insertedRowDate,new java.util.Date(),executorHostId,executorTypeId,paramName,paramValue);
+   def modify(executorHostId : Long, executorTypeId : Long, executorParamId : Long, paramValue : String) : ExecutorTypeHostParamDto = {
+    val dtoModified = new ExecutorTypeHostParamDto(this.executorTypeHostParamId,this.guid,this.insertedRowDate,new java.util.Date(),executorHostId,executorTypeId,executorParamId,paramValue);
     dtoModified
   }
  } 
@@ -79,11 +79,11 @@ object ExecutorTypeHostParamDto {
    val FIELD_lastUpdatedDate = "lastUpdatedDate";
    val FIELD_executorHostId = "executorHostId";
    val FIELD_executorTypeId = "executorTypeId";
-   val FIELD_paramName = "paramName";
+   val FIELD_executorParamId = "executorParamId";
    val FIELD_paramValue = "paramValue";
 
-  def createNewExecutorTypeHostParamDto(executorHostId : Long, executorTypeId : Long, paramName : String, paramValue : String) : ExecutorTypeHostParamDto = {  
-     val dto = new ExecutorTypeHostParamDto(0,0,new java.util.Date(),new java.util.Date(),executorHostId,executorTypeId,paramName,paramValue)   
+  def createNewExecutorTypeHostParamDto(executorHostId : Long, executorTypeId : Long, executorParamId : Long, paramValue : String) : ExecutorTypeHostParamDto = {  
+     val dto = new ExecutorTypeHostParamDto(0,0,new java.util.Date(),new java.util.Date(),executorHostId,executorTypeId,executorParamId,paramValue)   
     dto 
   } 
 

@@ -162,5 +162,11 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
+ def getDtosBySourceView_isCustom(colValue : Int) : List[VSourceViewColumnDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VSourceViewColumnDto] = SQL("select * from vSourceViewColumn where sourceView_isCustom = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewColumnDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
 
 } 

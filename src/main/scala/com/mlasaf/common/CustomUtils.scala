@@ -24,6 +24,9 @@ object CustomUtils {
   def getIp = {
     java.net.InetAddress.getLocalHost.getAddress.mkString(".")
   }
+  def dateTimeLomgSequenceId() : String = {
+    yyyyMMDDHHmmss + "_" + Math.abs(random.nextInt(1000000));
+  }
   def randomLong() : Long = {
     Math.abs(random.nextLong())
   }
