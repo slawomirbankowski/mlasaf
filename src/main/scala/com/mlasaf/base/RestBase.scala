@@ -28,7 +28,7 @@ trait RestBase {
         response.raw().setContentType("application/json");
         val executeTime : Long = System.currentTimeMillis() - startTime;
         try {
-          val requestHeader = request.servletPath();
+          val requestHeader = request.servletPath() + " " + request.contextPath();
           val headersStr = request.headers().toArray.mkString(",")
           val cookiesStr = "" + request.cookies().keySet().toArray.map(c => c + ":'" + request.cookie("" + c) + "'").mkString(",");
           val sessionStr = "" + request.session().id();

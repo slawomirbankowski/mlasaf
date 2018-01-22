@@ -246,6 +246,10 @@
             <column name="executorTypeName" value="Mahout"/>
             <column name="executorTypeClass" value="com.mlasaf.executors.MahoutExecutor"/>
         </insert>
+        <insert tableName="executorType">
+            <column name="executorTypeName" value="Python"/>
+            <column name="executorTypeClass" value="com.mlasaf.executors.PythonExecutor"/>
+        </insert>
 
 
         <createTable tableName="executorParam" remarks="DICTIONARY - paramerters for executors">

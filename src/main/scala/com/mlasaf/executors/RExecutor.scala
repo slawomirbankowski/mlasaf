@@ -10,6 +10,7 @@ import java.util
 import com.mlasaf.domain._
 import com.mlasaf.structures._
 import com.mlasaf.domain.Executor
+import com.mlasaf.common._
 
 /** executor using R scripts */
 class RExecutor extends Executor {
@@ -33,7 +34,11 @@ class RExecutor extends Executor {
     val params : java.util.List[String] = new util.LinkedList[String]();
     params.add(rScriptPathName);
     params.add("--vanilla");
+
     args.foreach(a => params.add(a));
+    val process = new ProcessRunner();
+    process.initialize(params);
+
     val startTime = System.currentTimeMillis();
     val outputContent = new StringBuilder();
     try {
@@ -61,7 +66,7 @@ class RExecutor extends Executor {
         new ExternalExitParams(params.toArray.mkString("\t"), ExecutorExternalStatus.STATUS_OK, exitValue, outputContent.toString(), totalExecutionTime, "");
     } catch {
       case ex : Exception => {
-        logger.error("Exception while running R script", ex);
+        logger.error("Exception while running script", ex);
         new ExternalExitParams(params.toArray.mkString("\t"), ExecutorExternalStatus.STATUS_EXCEPTION, -1, outputContent.toString(), System.currentTimeMillis() - startTime, "" + ex.getMessage);
       }
     }

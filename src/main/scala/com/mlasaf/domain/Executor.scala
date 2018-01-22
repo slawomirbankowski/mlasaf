@@ -58,6 +58,9 @@ trait Executor extends ThreadBase {
   }
   def onStop() : Unit = {
     logger.info("Stopping EXECUTOR...");
+    parentContext.daoFactory.daos.executorInstanceDao.updateField(executorInstanceDto, ExecutorInstanceDto.FIELD_isRunning, 0);
+    parentContext.daoFactory.daos.executorInstanceDao.updateField(executorInstanceDto, ExecutorInstanceDto.FIELD_isFinished, 1);
+    parentContext.daoFactory.daos.executorInstanceDao.changeUpdatedDate(executorInstanceDto);
   }
   def readExecutorTypeHostParams() = {
     val params = parentContext.daoFactory.daos.vExecutorTypeHostParamDao.getDtosByExecutorHost_executorHostId(parentContext.hostDto.executorHostId).filter(p => p.executorTypeId == this.executorInstanceDto.executorTypeId);

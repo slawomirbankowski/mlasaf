@@ -75,6 +75,15 @@ trait AlgorithmInstance {
   }
   def validateRunInput(run : AlgorithmRun) : Boolean = {
       // TODO: implement basic checks for input parameters for all algorithms
+      // check inputs
+      val neededColumnTypes = run.parentExecutor.parentContext.daoFactory.daos.vAlgorithmVersionColumnTypeDao.getDtosByAlgorithmVersion_algorithmVersionId(run.algorithmScheduleDto.algorithmImplementation_algorithmVersionId).map(x => x.algorithmColumnType_algorithmColumnTypeId);
+      val existingColumnTypes = run.parentExecutor.parentContext.daoFactory.daos.vAlgorithmScheduleColumnDao.getDtosByAlgorithmScheduleView_algorithmScheduleId(run.algorithmScheduleDto.algorithmScheduleId).map(x => x.algorithmColumnType_algorithmColumnTypeId);
+      // check parameters
+      val neededParams = run.parentExecutor.parentContext.daoFactory.daos.vAlgorithmVersionParamTypeDao.getDtosByAlgorithmVersion_algorithmVersionId(run.algorithmScheduleDto.algorithmImplementation_algorithmVersionId).map(x => x.algorithmParam_algorithmParamId)
+      val existingParams = run.parentExecutor.parentContext.daoFactory.daos.vAlgorithmScheduleParamDao.getDtosByAlgorithmSchedule_algorithmScheduleId(run.algorithmScheduleDto.algorithmScheduleId).map(x => x.algorithmParam_algorithmParamId);
+      // check outputs
+      val neededOutputs = run.parentExecutor.parentContext.daoFactory.daos.vAlgorithmVersionOutputTypeDao.getDtosByAlgorithmVersion_algorithmVersionId(run.algorithmScheduleDto.algorithmImplementation_algorithmVersionId).map(x => x.algorithmOutputType_algorithmOutputTypeId);
+      val existingOutputs = run.parentExecutor.parentContext.daoFactory.daos.vAlgorithmOutputDao.getDtosByAlgorithmRun_algorithmRunId(run.algorithmRunDto.algorithmRunId).map(x => x.algorithmOutputType_algorithmOutputTypeId);
 
       true
   }
