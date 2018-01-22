@@ -19,7 +19,7 @@ object MlasafEntryTest {
       , "--jdbcDriver", System.getenv("MLASAF_DRIVER")
       , "--restPort" , System.getenv("MLASAF_PORT")
       , "--restAlternativePort", System.getenv("MLASAF_PORT_ALTERNATIVE")
-      , "--executorDefinition", """[ {"executorType":"R", "portNumber":"8806"}, {"executorType":"LOCAL", "portNumber":"8808" }, {"executorType":"WEKA", "portNumber":"8810" } ] """
+      , "--executorDefinition", """[ {"executorType":"R", "portNumber":8806}, {"executorType":"WEKA", "portNumber":8810 } ] """
       , "--storageDefinition", """ [ {"storageType":"LOCAL_DISK", "storageSimplePath":"../data2/", "storageFullPath":"", "storagePort":8815 }, {"storageType":"LOCAL_DISK", "storageSimplePath":"../data3/", "storageFullPath":"", "storagePort":8817 } ] """
       , "--executorClasses", System.getenv("MLASAF_EXECUTOR_CLASSES")
       , "--simpleStorage", System.getenv("MLASAF_SIMPLE_STORAGE")

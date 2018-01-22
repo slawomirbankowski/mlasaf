@@ -4,6 +4,7 @@
 */
 package com.mlasaf.rest.instances
 
+import com.mlasaf.dto._
 import com.mlasaf.base.RestBase
 import com.mlasaf.structures._
 import org.json4s.native.JsonMethods._
@@ -130,6 +131,24 @@ class CreateRests extends RestBase  {
       val sourceScheduleDto = parentRest.parentContext.daoFactory.daos.sourceScheduleDao.createAndInsertSourceScheduleDto(srcViewId, execStorageId, 0, new java.util.Date(), 0, 1, 0);
       sourceScheduleDto.toJson();
     });
+    spark.Spark.post("/executor", (req: spark.Request, resp: spark.Response) => {
+      implicit val formats = org.json4s.DefaultFormats
+      val executorParams = parse(req.body()).extract[CreateExecutorParams];
+      val executorDto = this.parentRest.parentContext.defineExecutor(executorParams.executorType, executorParams.portNumber);
+      executorDto.executorInstanceDto.toJson();
+    });
+    spark.Spark.post("/type-host-param", (req: spark.Request, resp: spark.Response) => {
+      implicit val formats = org.json4s.DefaultFormats
+      val typeHostParam = parse(req.body()).extract[CreateTypeHostParams];
+      val execTypeId = parentRest.parentContext.daoFactory.daos.executorTypeDao.getExecutorTypeFirstByName(typeHostParam.executorType).get.executorTypeId
+      val hostId = parentRest.parentContext.daoFactory.daos.executorHostDao.getExecutorHostsByField(ExecutorHostDto.FIELD_hostIp, typeHostParam.hostIp).head.executorHostId;
+      val paramId = parentRest.parentContext.daoFactory.daos.executorParamDao.getExecutorParamFirstByName(typeHostParam.paramName).get.executorParamId;
+      logger.info("Adding host-type-param, execTypeId: " + execTypeId + ", hostId: " + hostId + ", paramId: " + paramId);
+      val execTypeHostParamDto = parentRest.parentContext.daoFactory.daos.executorTypeHostParamDao.createAndInsertExecutorTypeHostParamDto(hostId, execTypeId, paramId, typeHostParam.paramValue);
+      execTypeHostParamDto.toJson();
+    });
+
+
   }
 
 }

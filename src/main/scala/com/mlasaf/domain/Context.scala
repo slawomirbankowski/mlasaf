@@ -104,6 +104,9 @@ class Context extends ThreadBase {
     runOptions.executorClasses.getOrElse("").split(",").foreach(exeClass => {
       defineExecutor(exeClass, 0);
     });
+    runOptions.getExecutorDefinitions().foreach(ed => {
+      defineExecutor(ed.executorType, ed.portNumber);
+    })
     // initialize REST service for context
     restManager.setParentContext(this);
     restManager.restDefaultPort = runOptions.restPort.getOrElse(8301);

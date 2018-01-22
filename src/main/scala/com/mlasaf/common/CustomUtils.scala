@@ -80,14 +80,14 @@ object CustomUtils {
     resParts
   }
   def executeQuery(conn : java.sql.Connection, sql : String) = {
-    // TODO: finish implementation
+    // TODO: finish implementation and move do DAO classes
   }
   def executeQuery(conn : java.sql.Connection, sql : String, pars : Array[AnyRef]) = {
     val stat = conn.prepareStatement(sql)
     pars.zipWithIndex.foreach(par => {
       stat.setObject(par._2+1, par._1);
     });
-    // TODO: finish implementation
+    // TODO: finish implementation and move do DAO classes
     val rs = stat.executeQuery(sql);
     while (rs.next()) {
 

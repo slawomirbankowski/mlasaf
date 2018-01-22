@@ -1,3 +1,7 @@
+/*
+  Author(s): Slawomir Bankowski
+  Project: mlasaf
+*/
 package com.mlasaf.resource.measures
 
 import com.mlasaf.resource.ResourceMeasureBase

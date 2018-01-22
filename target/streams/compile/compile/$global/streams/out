@@ -1,2 +1,4 @@
-[0m[[0m[33mwarn[0m] [0m[0mthere were two feature warnings; re-run with -feature for details[0m
-[0m[[0m[33mwarn[0m] [0m[0mone warning found[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Project\mlasaf\src\mlasaf\src\main\scala\com\mlasaf\executors\RExecutor.scala:46:61: value ł is not a member of Unit[0m
+[0m[[0m[31merror[0m] [0m[0m        logger.error("Exception while running R script", ex)ł[0m
+[0m[[0m[31merror[0m] [0m[0m                                                            ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m

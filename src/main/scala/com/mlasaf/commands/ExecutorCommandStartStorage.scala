@@ -1,3 +1,7 @@
+/*
+  Author(s): Slawomir Bankowski
+  Project: mlasaf
+*/
 package com.mlasaf.commands
 
 import com.mlasaf.domain._

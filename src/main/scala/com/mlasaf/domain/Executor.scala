@@ -7,6 +7,7 @@ package com.mlasaf.domain
 import com.mlasaf.base.{AlgorithmInstance, ThreadBase}
 import com.mlasaf.dto._
 import com.mlasaf.rest.instances.ExecutorRests
+import com.mlasaf.structures.ExternalExitParams
 
 /** Executor to run any external or internal ML algorithm */
 trait Executor extends ThreadBase {
@@ -46,7 +47,7 @@ trait Executor extends ThreadBase {
     parentContext.daoFactory.daos.executorInstanceStateDao.createAndInsertExecutorInstanceStateDto(executorInstanceDto.executorInstanceId, "WORKING", infoContent, errorDescription);
     parentContext.daoFactory.daos.executorInstanceDao.changeUpdatedDate(executorInstanceDto);
   }
-  //**  */
+  /**  */
   def onRunEnd() = {
     isWorking = false;
     logger.info("End of working, try to unregister Executor: " + executorInstanceDto)
@@ -69,7 +70,7 @@ trait Executor extends ThreadBase {
     val schedulesForExecutorDto = parentContext.daoFactory.daos.vAlgorithmScheduleDao
       .getDtosByAlgorithmImplementation_executorTypeId(executorInstanceDto.executorTypeId)
       .filter(s => s.isScheduled == 1);
-    logger.info("Schedules: " + schedulesForExecutorDto.size + ", current algorithm runs: " + algoRunObjs.size);
+    logger.info("Schedules: " + schedulesForExecutorDto.size + ", executorTypeId: " + this.executorInstanceDto.executorTypeId + ", current algorithm runs: " + algoRunObjs.size);
     schedulesForExecutorDto.foreach(sch => {
       val allRunsForSchedule = parentContext.daoFactory.daos.algorithmRunDao
         .getAlgorithmRunByFkAlgorithmScheduleId(sch.algorithmScheduleId);
@@ -167,5 +168,10 @@ trait Executor extends ThreadBase {
   }
   /** run given instance of algorithm */
   def runAlgorithmInstance(run : AlgorithmRun) : Unit;
-
+  /** execute external script */
+  def executeExternal(args : Array[String]) : ExternalExitParams = {
+    onExecuteExternal(args);
+  }
+  /** to override for executor */
+  def onExecuteExternal(args : Array[String]) : ExternalExitParams;
 }

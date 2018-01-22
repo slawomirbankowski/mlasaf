@@ -56,8 +56,10 @@ trait AlgorithmInstance {
     logger.info("============================================================================================================================== ");
     retStatus
   }
+
   /** to override for all algorithms */
   def onAlgorithmRun(run : AlgorithmRun) : String;
+
 }
 object AlgorithmInstance {
   val STATUS_OK = "OK";

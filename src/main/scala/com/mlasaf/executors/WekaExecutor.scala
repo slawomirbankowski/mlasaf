@@ -5,6 +5,7 @@
 package com.mlasaf.executors
 
 import com.mlasaf.domain.{AlgorithmRun, Executor}
+import com.mlasaf.structures.ExternalExitParams
 
 class WekaExecutor extends Executor {
 
@@ -19,6 +20,10 @@ class WekaExecutor extends Executor {
   }
   /** run given instance of algorithm */
   def runAlgorithmInstance(run : AlgorithmRun) : Unit = {
+  }
+  /** execute external script */
+  def onExecuteExternal(args : Array[String]) : ExternalExitParams = {
+    new ExternalExitParams(-1, "NOT_IMPLEMENTED");
   }
 
 }

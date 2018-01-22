@@ -5,6 +5,7 @@
 package com.mlasaf.executors
 
 import com.mlasaf.domain._
+import com.mlasaf.structures.ExternalExitParams
 
 /** local executor that is using current disk space in specified path */
 class LocalExecutor extends Executor {
@@ -20,6 +21,10 @@ class LocalExecutor extends Executor {
   }
   /** run given instance of algorithm */
   def runAlgorithmInstance(run : AlgorithmRun) : Unit = {
+  }
+  /** execute external script */
+  def onExecuteExternal(args : Array[String]) : ExternalExitParams = {
+    new ExternalExitParams(-1, "NOT_IMPLEMENTED");
   }
 
 
