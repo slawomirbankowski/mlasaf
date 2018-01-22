@@ -175,3 +175,10 @@ trait Executor extends ThreadBase {
   /** to override for executor */
   def onExecuteExternal(args : Array[String]) : ExternalExitParams;
 }
+object ExecutorExternalStatus {
+  val STATUS_OK = "OK";
+  val STATUS_EXCEPTION = "EXCEPTION";
+  val STATUS_NOT_IMPLEMENTED = "NOT_IMPLEMENTED";
+  val STATUS_TIMEOUT = "TIMEOUT";
+  val STATUS_UNREACHABLE = "UNREACHABLE";
+}

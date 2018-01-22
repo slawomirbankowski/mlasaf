@@ -94,6 +94,31 @@ object CustomUtils {
     }
     stat.close();
   }
+  def getHandleForProcess(pr : java.lang.Process) : Long = {
+    try {
+      if (pr.getClass.getName.eq("java.lang.UNIXProcess")) {
+        val f : java.lang.reflect.Field = pr.getClass.getDeclaredField("pid");
+        f.setAccessible(true);
+        val pid = f.getLong(pr);
+        f.setAccessible(false);
+        pid;
+      } else if (pr.getClass.getName.eq("java.lang.ProcessImpl")) {
+        val f : java.lang.reflect.Field = pr.getClass.getDeclaredField("handle");
+        f.setAccessible(true);
+        val pid = f.getLong(pr);
+        f.setAccessible(false);
+        pid;
+      }
+      -1L;
+    } catch {
+      case ex : Exception => {
+        -1;
+      }
+    }
+
+
+
+  }
 
   def main(args : Array[String]) : Unit = {
     println("TEST");

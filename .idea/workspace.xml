@@ -5,33 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="58bd0337-119c-4b09-9759-5bc3f99f0d1e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/scala/com/mlasaf/structures/CreateExecutorParams.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/scala/com/mlasaf/structures/CreateTypeHostParams.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/scala/com/mlasaf/structures/ExternalExitParams.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/mlasaf/algorithms/local/PredictionR.class" afterPath="$PROJECT_DIR$/target/classes/com/mlasaf/algorithms/local/PredictionR.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/mlasaf/common/CustomUtils$$anonfun$diskSpaces$1.class" afterPath="$PROJECT_DIR$/target/classes/com/mlasaf/common/CustomUtils$$anonfun$diskSpaces$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/mlasaf/common/CustomUtils$$anonfun$executeQuery$1.class" afterPath="$PROJECT_DIR$/target/classes/com/mlasaf/common/CustomUtils$$anonfun$executeQuery$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/mlasaf/common/CustomUtils$.class" afterPath="$PROJECT_DIR$/target/classes/com/mlasaf/common/CustomUtils$.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/mlasaf/common/CustomUtils.class" afterPath="$PROJECT_DIR$/target/classes/com/mlasaf/common/CustomUtils.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/mlasaf/domain/Context$$anonfun$3.class" afterPath="$PROJECT_DIR$/target/classes/com/mlasaf/domain/Context$$anonfun$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/mlasaf/domain/Context.class" afterPath="$PROJECT_DIR$/target/classes/com/mlasaf/domain/Context.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/mlasaf/domain/Executor$$anonfun$1.class" afterPath="$PROJECT_DIR$/target/classes/com/mlasaf/domain/Executor$$anonfun$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/mlasaf/domain/Executor$$anonfun$algorithmRuns$1.class" afterPath="$PROJECT_DIR$/target/classes/com/mlasaf/domain/Executor$$anonfun$algorithmRuns$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/mlasaf/domain/Executor$$anonfun$algorithmRuns$2.class" afterPath="$PROJECT_DIR$/target/classes/com/mlasaf/domain/Executor$$anonfun$algorithmRuns$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/mlasaf/domain/Executor$$anonfun$searchForSchedules$1$$anonfun$apply$1.class" afterPath="$PROJECT_DIR$/target/classes/com/mlasaf/domain/Executor$$anonfun$searchForSchedules$1$$anonfun$apply$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/mlasaf/domain/Executor$$anonfun$searchForSchedules$1.class" afterPath="$PROJECT_DIR$/target/classes/com/mlasaf/domain/Executor$$anonfun$searchForSchedules$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/mlasaf/domain/Executor$class.class" afterPath="$PROJECT_DIR$/target/classes/com/mlasaf/domain/Executor$class.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/mlasaf/domain/Executor.class" afterPath="$PROJECT_DIR$/target/classes/com/mlasaf/domain/Executor.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/scala/com/mlasaf/structures/AlgorithmExitParams.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/mlasaf/executors/LocalExecutor.class" afterPath="$PROJECT_DIR$/target/classes/com/mlasaf/executors/LocalExecutor.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/mlasaf/executors/RExecutor.class" afterPath="$PROJECT_DIR$/target/classes/com/mlasaf/executors/RExecutor.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/streams/compile/compileIncSetup/$global/streams/inc_compile.zip" afterPath="$PROJECT_DIR$/target/streams/compile/compileIncSetup/$global/streams/inc_compile.zip" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/target/streams/$global/update/$global/streams/update_cache_2.12/output" afterPath="$PROJECT_DIR$/project/target/streams/$global/update/$global/streams/update_cache_2.12/output" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/mlasaf_ddl_dbdesigner4.xml" afterPath="$PROJECT_DIR$/doc/mlasaf_ddl_dbdesigner4.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/r/PredictionR.r" afterPath="$PROJECT_DIR$/scripts/r/PredictionR.r" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/com/mlasaf/algorithms/local/PredictionLocalRandom.scala" afterPath="$PROJECT_DIR$/src/main/scala/com/mlasaf/algorithms/local/PredictionLocalRandom.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/com/mlasaf/algorithms/local/PredictionLocalSma5.scala" afterPath="$PROJECT_DIR$/src/main/scala/com/mlasaf/algorithms/local/PredictionLocalSma5.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/com/mlasaf/algorithms/r/PredictionR.scala" afterPath="$PROJECT_DIR$/src/main/scala/com/mlasaf/algorithms/r/PredictionR.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/com/mlasaf/base/AlgorithmInstance.scala" afterPath="$PROJECT_DIR$/src/main/scala/com/mlasaf/base/AlgorithmInstance.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/com/mlasaf/commands/ExecutorCommandStartStorage.scala" afterPath="$PROJECT_DIR$/src/main/scala/com/mlasaf/commands/ExecutorCommandStartStorage.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/com/mlasaf/common/CustomUtils.scala" afterPath="$PROJECT_DIR$/src/main/scala/com/mlasaf/common/CustomUtils.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/com/mlasaf/domain/Context.scala" afterPath="$PROJECT_DIR$/src/main/scala/com/mlasaf/domain/Context.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/com/mlasaf/domain/AlgorithmRun.scala" afterPath="$PROJECT_DIR$/src/main/scala/com/mlasaf/domain/AlgorithmRun.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/com/mlasaf/domain/Executor.scala" afterPath="$PROJECT_DIR$/src/main/scala/com/mlasaf/domain/Executor.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/KnimeExecutor.scala" afterPath="$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/KnimeExecutor.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/LocalExecutor.scala" afterPath="$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/LocalExecutor.scala" />
@@ -43,15 +30,10 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/SsasExecutor.scala" afterPath="$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/SsasExecutor.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/TensorFlowExecutor.scala" afterPath="$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/TensorFlowExecutor.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/WekaExecutor.scala" afterPath="$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/WekaExecutor.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/com/mlasaf/resource/measures/MeasureCpu.scala" afterPath="$PROJECT_DIR$/src/main/scala/com/mlasaf/resource/measures/MeasureCpu.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/com/mlasaf/resource/measures/MeasureDisk.scala" afterPath="$PROJECT_DIR$/src/main/scala/com/mlasaf/resource/measures/MeasureDisk.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/com/mlasaf/resource/measures/MeasureGpu.scala" afterPath="$PROJECT_DIR$/src/main/scala/com/mlasaf/resource/measures/MeasureGpu.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/com/mlasaf/resource/measures/MeasureRam.scala" afterPath="$PROJECT_DIR$/src/main/scala/com/mlasaf/resource/measures/MeasureRam.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/com/mlasaf/resource/measures/MeasureSdd.scala" afterPath="$PROJECT_DIR$/src/main/scala/com/mlasaf/resource/measures/MeasureSdd.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/com/mlasaf/resource/measures/MeasureTpu.scala" afterPath="$PROJECT_DIR$/src/main/scala/com/mlasaf/resource/measures/MeasureTpu.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/com/mlasaf/rest/instances/CreateRests.scala" afterPath="$PROJECT_DIR$/src/main/scala/com/mlasaf/rest/instances/CreateRests.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/com/mlasaf/tests/standalone/MlasafEntryTest.scala" afterPath="$PROJECT_DIR$/src/main/scala/com/mlasaf/tests/standalone/MlasafEntryTest.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/com/mlasaf/transform/TransformGroup.scala" afterPath="$PROJECT_DIR$/src/main/scala/com/mlasaf/transform/TransformGroup.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/com/mlasaf/structures/CreateAlgorithmScheduleParams.scala" afterPath="$PROJECT_DIR$/src/main/scala/com/mlasaf/structures/CreateAlgorithmScheduleParams.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/com/mlasaf/structures/ExternalExitParams.scala" afterPath="$PROJECT_DIR$/src/main/scala/com/mlasaf/structures/ExternalExitParams.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/streams/compile/$global/$global/discoveredMainClasses/data" afterPath="$PROJECT_DIR$/target/streams/compile/$global/$global/discoveredMainClasses/data" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/streams/compile/compile/$global/streams/out" afterPath="$PROJECT_DIR$/target/streams/compile/compile/$global/streams/out" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/streams/compile/compileIncremental/$global/streams/export" afterPath="$PROJECT_DIR$/target/streams/compile/compileIncremental/$global/streams/export" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/streams/compile/compileIncremental/$global/streams/out" afterPath="$PROJECT_DIR$/target/streams/compile/compileIncremental/$global/streams/out" />
@@ -91,61 +73,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="RestBase.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/base/RestBase.scala">
+      <file leaf-file-name="AlgorithmRun.scala" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/domain/AlgorithmRun.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-267">
-              <caret line="11" column="6" lean-forward="false" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+            <state relative-caret-position="-1066">
+              <caret line="44" column="0" lean-forward="true" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SouceViewDownloader.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/base/SouceViewDownloader.scala">
+      <file leaf-file-name="Checker.scala" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/domain/Checker.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="7" column="6" lean-forward="false" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ThreadBase.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/base/ThreadBase.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1870">
-              <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DaoBase.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/dao/DaoBase.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="26" column="3" lean-forward="true" selection-start-line="26" selection-start-column="3" selection-end-line="26" selection-end-column="3" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DaoFactory.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/dao/DaoFactory.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="18" column="6" lean-forward="false" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Daos.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/dao/Daos.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-391">
-              <caret line="16" column="6" lean-forward="false" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
+            <state relative-caret-position="-63">
+              <caret line="49" column="22" lean-forward="false" selection-start-line="49" selection-start-column="6" selection-end-line="49" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -154,8 +96,8 @@
       <file leaf-file-name="Context.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/domain/Context.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="131">
-              <caret line="185" column="20" lean-forward="false" selection-start-line="185" selection-start-column="6" selection-end-line="185" selection-end-column="20" />
+            <state relative-caret-position="-1564">
+              <caret line="153" column="17" lean-forward="false" selection-start-line="153" selection-start-column="17" selection-end-line="153" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -164,8 +106,8 @@
       <file leaf-file-name="Executor.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/domain/Executor.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="48" column="3" lean-forward="true" selection-start-line="48" selection-start-column="3" selection-end-line="48" selection-end-column="3" />
+            <state relative-caret-position="249">
+              <caret line="87" column="34" lean-forward="false" selection-start-line="87" selection-start-column="24" selection-end-line="87" selection-end-column="34" />
               <folding>
                 <element signature="e#83#137#0" expanded="true" />
               </folding>
@@ -176,22 +118,59 @@
       <file leaf-file-name="ResourceManager.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/domain/ResourceManager.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
+            <state relative-caret-position="221">
+              <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Source.scala" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/domain/Source.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-508">
               <caret line="10" column="6" lean-forward="false" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PredictionR.scala" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/algorithms/r/PredictionR.scala">
+      <file leaf-file-name="Storage.scala" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/domain/Storage.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-                <element signature="e#93#133#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-1066">
+              <caret line="11" column="6" lean-forward="false" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="KnimeExecutor.scala" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/KnimeExecutor.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="229">
+              <caret line="25" column="26" lean-forward="false" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MahoutExecutor.scala" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/MahoutExecutor.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="25" column="109" lean-forward="false" selection-start-line="25" selection-start-column="109" selection-end-line="25" selection-end-column="109" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LocalExecutor.scala" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/LocalExecutor.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="23" column="3" lean-forward="true" selection-start-line="23" selection-start-column="3" selection-end-line="23" selection-end-column="3" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -229,8 +208,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/generates/GenerateViewsEntry.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/generates/GenerateViewsSummaryEntry.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/transform/instances/TransformColumnToDate.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/transform/instances/TransformColumnDateToSeq.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/transform/instances/TransformFilterOnRow.scala" />
@@ -240,9 +217,6 @@
         <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/dto/dtoclasses/VDownloadTransformAlgorithmScheduleSummaryDto.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/sources/JdbcSource.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/base/ThreadBase.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/domain/AlgorithmRun.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/algorithms/local/PredictionLocalSma5.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/algorithms/local/PredictionLocalRandom.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/domain/ResourceManager.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/transform/TransformManager.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/utils/CsvParser.scala" />
@@ -251,26 +225,10 @@
         <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/rest/instances/DaoRests.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/base/RestBase.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/storages/LocalDiskStorage.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/KnimeExecutor.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/MahoutExecutor.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/MoaExecutor.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/SasExecutor.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/SparkExecutor.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/SsasExecutor.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/TensorFlowExecutor.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/resource/measures/MeasureGpu.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/transform/TransformGroup.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/commands/ExecutorCommandStartStorage.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/common/CustomUtils.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/base/AlgorithmInstance.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/structures/ExternalExitParams.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/tests/standalone/MlasafEntryTest.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/domain/Context.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/RExecutor.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/WekaExecutor.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/LocalExecutor.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/domain/Executor.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/algorithms/r/PredictionR.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/structures/CreateTypeHostParams.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/rest/instances/ContextRests.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/resource/measures/MeasureCpu.scala" />
@@ -279,7 +237,28 @@
         <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/resource/measures/MeasureSdd.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/resource/measures/MeasureTpu.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/structures/CreateExecutorParams.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/domain/Executor.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/KnimeExecutor.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/MahoutExecutor.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/MoaExecutor.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/SasExecutor.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/SparkExecutor.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/SsasExecutor.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/TensorFlowExecutor.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/WekaExecutor.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/common/CustomUtils.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/LocalExecutor.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/structures/CreateAlgorithmScheduleParams.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/rest/instances/CreateRests.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/algorithms/r/PredictionR.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/algorithms/local/PredictionLocalSma5.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/algorithms/local/PredictionLocalRandom.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/structures/ExternalExitParams.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/structures/AlgorithmExitParams.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/RExecutor.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/base/AlgorithmInstance.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/commands/ExecutorCommandStartStorage.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/com/mlasaf/domain/AlgorithmRun.scala" />
       </list>
     </option>
   </component>
@@ -305,8 +284,8 @@
     </navigator>
     <panes>
       <pane id="AndroidView" />
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -484,6 +463,15 @@
               <item name="scala" type="462c0819:PsiDirectoryNode" />
               <item name="mlasaf" type="462c0819:PsiDirectoryNode" />
               <item name="domain" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mlasaf" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mlasaf" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="scala" type="462c0819:PsiDirectoryNode" />
+              <item name="mlasaf" type="462c0819:PsiDirectoryNode" />
+              <item name="dto" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="mlasaf" type="b2602c69:ProjectViewProjectNode" />
@@ -745,14 +733,14 @@
       <module name="mlasaf" />
       <envs />
     </configuration>
-    <configuration name="H2DatabaseSelectTest" type="Application" factoryName="Application" temporary="true">
+    <configuration name="MlasafEntryTest" type="Application" factoryName="Application" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="com.mlasaf.tests.standalone.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="MAIN_CLASS_NAME" value="com.mlasaf.tests.standalone.H2DatabaseSelectTest" />
+      <option name="MAIN_CLASS_NAME" value="com.mlasaf.tests.standalone.MlasafEntryTest" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -764,14 +752,14 @@
       <module name="mlasaf" />
       <envs />
     </configuration>
-    <configuration name="MlasafEntryTest" type="Application" factoryName="Application" temporary="true">
+    <configuration name="RExecutor" type="Application" factoryName="Application" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="com.mlasaf.tests.standalone.*" />
+          <option name="PATTERN" value="com.mlasaf.executors.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="MAIN_CLASS_NAME" value="com.mlasaf.tests.standalone.MlasafEntryTest" />
+      <option name="MAIN_CLASS_NAME" value="com.mlasaf.executors.RExecutor" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -867,17 +855,17 @@
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Application.GenerateScalaTest" />
       <item index="1" class="java.lang.String" itemvalue="Application.MlasafEntryTest" />
-      <item index="2" class="java.lang.String" itemvalue="Application.H2DatabaseSelectTest" />
-      <item index="3" class="java.lang.String" itemvalue="Application.GenerateViewsTest" />
-      <item index="4" class="java.lang.String" itemvalue="Application.CustomUtils" />
+      <item index="2" class="java.lang.String" itemvalue="Application.GenerateViewsTest" />
+      <item index="3" class="java.lang.String" itemvalue="Application.CustomUtils" />
+      <item index="4" class="java.lang.String" itemvalue="Application.RExecutor" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Application.MlasafEntryTest" />
-        <item index="1" class="java.lang.String" itemvalue="Application.GenerateScalaTest" />
-        <item index="2" class="java.lang.String" itemvalue="Application.GenerateViewsTest" />
-        <item index="3" class="java.lang.String" itemvalue="Application.CustomUtils" />
-        <item index="4" class="java.lang.String" itemvalue="Application.H2DatabaseSelectTest" />
+        <item index="1" class="java.lang.String" itemvalue="Application.RExecutor" />
+        <item index="2" class="java.lang.String" itemvalue="Application.GenerateScalaTest" />
+        <item index="3" class="java.lang.String" itemvalue="Application.GenerateViewsTest" />
+        <item index="4" class="java.lang.String" itemvalue="Application.CustomUtils" />
       </list>
     </recent_temporary>
   </component>
@@ -938,7 +926,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1272" y="-64" width="1936" height="1096" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32949308" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -948,18 +935,18 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38692945" sideWeight="0.5021322" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5394191" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5394191" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32987553" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32987553" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22761194" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23027718" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="sbt-shell-toolwindow" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5435685" sideWeight="0.4978678" order="11" side_tool="false" content_ui="tabs" x="1300" y="461" width="1876" height="546" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3986175" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39834026" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1009,339 +996,17 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="scala-line">
-          <url>file://$PROJECT_DIR$/src/main/scala/com/mlasaf/base/ThreadBase.scala</url>
-          <line>47</line>
-          <properties />
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="scala-line">
-          <url>file://$PROJECT_DIR$/src/main/scala/com/mlasaf/base/ThreadBase.scala</url>
-          <line>42</line>
-          <properties />
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="scala-line">
           <url>file://$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/RExecutor.scala</url>
-          <line>25</line>
+          <line>40</line>
           <properties />
-          <option name="timeStamp" value="7" />
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="8" />
+      <option name="time" value="11" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/tests/TestManager.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="444">
-          <caret line="102" column="7" lean-forward="true" selection-start-line="102" selection-start-column="7" selection-end-line="102" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/tests/TestBase.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/structures/MlasafEntryOptions.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="48" column="58" lean-forward="false" selection-start-line="48" selection-start-column="58" selection-end-line="48" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/LocalExecutor.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="25" column="23" lean-forward="false" selection-start-line="25" selection-start-column="23" selection-end-line="25" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/WekaExecutor.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="24" column="23" lean-forward="false" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/structures/CreateSourceScheduleParams.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="6" column="4" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/structures/CreateTypeHostParams.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="102" lean-forward="false" selection-start-line="2" selection-start-column="92" selection-end-line="2" selection-end-column="102" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/tests/generate/GenerateViewsTest.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="8" column="7" lean-forward="false" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/algorithms/local/PredictionLocalRandom.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="9" column="6" lean-forward="false" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/algorithms/local/PredictionLocalSma5.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="10" column="6" lean-forward="false" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.ivy2/cache/com.sparkjava/spark-core/srcs/spark-core-2.6.0-sources.jar!/spark/Service.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="112" column="37" lean-forward="false" selection-start-line="112" selection-start-column="26" selection-end-line="112" selection-end-column="37" />
-          <folding>
-            <element signature="e#3852#3853#0" expanded="false" />
-            <element signature="e#3888#3889#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.ivy2/cache/com.sparkjava/spark-core/srcs/spark-core-2.6.0-sources.jar!/spark/Spark.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2113">
-          <caret line="53" column="38" lean-forward="false" selection-start-line="53" selection-start-column="27" selection-end-line="53" selection-end-column="38" />
-          <folding>
-            <element signature="e#1563#1564#0" expanded="false" />
-            <element signature="e#1610#1611#0" expanded="false" />
-            <element signature="e#2940#2941#0" expanded="false" />
-            <element signature="e#2986#2987#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/RExecutor.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-270">
-          <caret line="19" column="3" lean-forward="true" selection-start-line="19" selection-start-column="3" selection-end-line="19" selection-end-column="3" />
-          <folding>
-            <element signature="e#86#102#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/dao/DaoConnection.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="86" column="3" lean-forward="true" selection-start-line="86" selection-start-column="3" selection-end-line="86" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/dao/DaoCustom.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-493">
-          <caret line="23" column="3" lean-forward="true" selection-start-line="23" selection-start-column="3" selection-end-line="23" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/domain/Checker.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-646">
-          <caret line="9" column="6" lean-forward="false" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/generates/GenerateDaoClassesEntry.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-884">
-          <caret line="11" column="7" lean-forward="false" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/loaders/DatabaseDrop.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="5" column="7" lean-forward="false" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/loaders/DatabaseRefreshSchema.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-153">
-          <caret line="6" column="7" lean-forward="true" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
-          <folding>
-            <element signature="e#84#121#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/resource/measures/MeasureCpu.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="12" column="34" lean-forward="false" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/resource/measures/MeasureDisk.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="12" column="35" lean-forward="true" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/resource/measures/MeasureRam.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="12" column="34" lean-forward="false" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/resource/measures/MeasureSdd.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="12" column="26" lean-forward="false" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/resource/measures/MeasureTpu.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="12" column="27" lean-forward="false" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/resource/ResourceMeasureBase.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="6" column="6" lean-forward="false" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/rest/instances/DaoRests.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="9" column="6" lean-forward="false" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/rest/RestClient.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="9" column="6" lean-forward="false" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/rest/RestManager.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-510">
-          <caret line="14" column="6" lean-forward="false" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/sample/CreateSampleData.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="6" column="7" lean-forward="false" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/storages/LocalDiskStorage.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="14" column="6" lean-forward="false" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/storages/HdfsStorage.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="26" column="4" lean-forward="true" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/structures/CreateAlgorithmImplementationParams.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="6" column="11" lean-forward="false" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/structures/CreateExecutorParams.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="31" lean-forward="false" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/tests/standalone/MlasafEntryTest.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/rest/instances/ContextRests.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="42" column="34" lean-forward="false" selection-start-line="42" selection-start-column="30" selection-end-line="42" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/rest/instances/CreateRests.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="132" column="7" lean-forward="true" selection-start-line="132" selection-start-column="7" selection-end-line="132" selection-end-column="7" />
-          <folding>
-            <element signature="e#91#114#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/rest/instances/ExecutorRests.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="8" column="6" lean-forward="false" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/rest/instances/StorageRests.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -1358,11 +1023,233 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/tests/TestBase.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/src.zip!/java/io/ByteArrayInputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1167">
+          <caret line="43" column="6" lean-forward="false" selection-start-line="43" selection-start-column="6" selection-end-line="43" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/src.zip!/java/io/DataInputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="482" column="27" lean-forward="false" selection-start-line="482" selection-start-column="13" selection-end-line="482" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/src.zip!/java/io/BufferedReader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-45">
+          <caret line="69" column="42" lean-forward="false" selection-start-line="69" selection-start-column="36" selection-end-line="69" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/src.zip!/java/io/ObjectInputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3789">
+          <caret line="994" column="16" lean-forward="false" selection-start-line="994" selection-start-column="16" selection-end-line="994" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/SasExecutor.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="25" column="109" lean-forward="false" selection-start-line="25" selection-start-column="109" selection-end-line="25" selection-end-column="109" />
+          <folding>
+            <element signature="e#86#159#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/SparkExecutor.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="25" column="109" lean-forward="false" selection-start-line="25" selection-start-column="109" selection-end-line="25" selection-end-column="109" />
+          <folding>
+            <element signature="e#86#159#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/SsasExecutor.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="25" column="109" lean-forward="false" selection-start-line="25" selection-start-column="109" selection-end-line="25" selection-end-column="109" />
+          <folding>
+            <element signature="e#86#159#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/WekaExecutor.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="359">
+          <caret line="25" column="109" lean-forward="false" selection-start-line="25" selection-start-column="109" selection-end-line="25" selection-end-column="109" />
+          <folding>
+            <element signature="e#86#159#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/src.zip!/java/lang/Process.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2786">
+          <caret line="76" column="22" lean-forward="false" selection-start-line="76" selection-start-column="22" selection-end-line="76" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/src.zip!/java/lang/ProcessBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-219">
+          <caret line="1011" column="44" lean-forward="true" selection-start-line="1011" selection-start-column="44" selection-end-line="1011" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/src.zip!/java/lang/ProcessImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="308" column="23" lean-forward="false" selection-start-line="308" selection-start-column="17" selection-end-line="308" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/rest/instances/CreateRests.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="430">
+          <caret line="148" column="38" lean-forward="false" selection-start-line="148" selection-start-column="33" selection-end-line="148" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/MoaExecutor.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="25" column="109" lean-forward="false" selection-start-line="25" selection-start-column="109" selection-end-line="25" selection-end-column="109" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/algorithms/local/PredictionLocalSma5.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-50">
+          <caret line="20" column="63" lean-forward="false" selection-start-line="20" selection-start-column="63" selection-end-line="20" selection-end-column="63" />
+          <folding>
+            <element signature="e#93#133#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/TensorFlowExecutor.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="25" column="109" lean-forward="false" selection-start-line="25" selection-start-column="109" selection-end-line="25" selection-end-column="109" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/structures/ExternalExitParams.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="11" lean-forward="false" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/structures/CreateAlgorithmScheduleParams.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="6" column="255" lean-forward="false" selection-start-line="6" selection-start-column="245" selection-end-line="6" selection-end-column="255" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/structures/AlgorithmExitParams.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="30" lean-forward="false" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="30" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/RExecutor.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="750">
+          <caret line="52" column="34" lean-forward="true" selection-start-line="52" selection-start-column="34" selection-end-line="52" selection-end-column="34" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#86#138#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/tests/standalone/MlasafEntryTest.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/tests/standalone/LoggerTest.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/tests/standalone/H2DatabaseTest.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="12" column="7" lean-forward="false" selection-start-line="12" selection-start-column="7" selection-end-line="12" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/algorithms/local/PredictionLocalRandom.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="61">
+          <caret line="10" column="41" lean-forward="false" selection-start-line="10" selection-start-column="41" selection-end-line="10" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/base/AlgorithmInstance.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-148">
-          <caret line="45" column="51" lean-forward="false" selection-start-line="45" selection-start-column="44" selection-end-line="45" selection-end-column="51" />
-          <folding />
+        <state relative-caret-position="-697">
+          <caret line="34" column="36" lean-forward="false" selection-start-line="34" selection-start-column="22" selection-end-line="34" selection-end-column="36" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#81#118#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/algorithms/r/PredictionR.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="12" column="8" lean-forward="true" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="8" />
+          <folding>
+            <element signature="e#93#133#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1376,8 +1263,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/base/RestBase.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-267">
-          <caret line="11" column="6" lean-forward="false" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+        <state relative-caret-position="-216">
+          <caret line="20" column="3" lean-forward="true" selection-start-line="20" selection-start-column="3" selection-end-line="20" selection-end-column="3" />
           <folding />
         </state>
       </provider>
@@ -1392,48 +1279,112 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/base/ThreadBase.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1870">
-          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+        <state relative-caret-position="-131">
+          <caret line="56" column="20" lean-forward="false" selection-start-line="56" selection-start-column="17" selection-end-line="56" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/commands/ExecutorCommandStartExecutor.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/commands/ExecutorCommandStartStorage.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="14" column="21" lean-forward="false" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/commands/ExecutorCommandStop.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/common/CustomUtils.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="44" column="16" lean-forward="false" selection-start-line="44" selection-start-column="6" selection-end-line="44" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/dao/DaoBase.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="26" column="3" lean-forward="true" selection-start-line="26" selection-start-column="3" selection-end-line="26" selection-end-column="3" />
+        <state relative-caret-position="-1154">
+          <caret line="26" column="3" lean-forward="false" selection-start-line="26" selection-start-column="3" selection-end-line="26" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/dao/DaoConnection.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1511">
+          <caret line="11" column="6" lean-forward="false" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/dao/DaoCustom.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-811">
+          <caret line="11" column="6" lean-forward="false" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/dao/DaoFactory.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="18" column="6" lean-forward="false" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
+        <state relative-caret-position="221">
+          <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/dao/Daos.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-391">
+        <state relative-caret-position="-1258">
           <caret line="16" column="6" lean-forward="false" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/domain/AlgorithmRun.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1066">
+          <caret line="44" column="0" lean-forward="true" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/domain/Checker.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-63">
+          <caret line="49" column="22" lean-forward="false" selection-start-line="49" selection-start-column="6" selection-end-line="49" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/domain/Context.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="185" column="20" lean-forward="false" selection-start-line="185" selection-start-column="6" selection-end-line="185" selection-end-column="20" />
+        <state relative-caret-position="-1564">
+          <caret line="153" column="17" lean-forward="false" selection-start-line="153" selection-start-column="17" selection-end-line="153" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/domain/Executor.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="48" column="3" lean-forward="true" selection-start-line="48" selection-start-column="3" selection-end-line="48" selection-end-column="3" />
+        <state relative-caret-position="249">
+          <caret line="87" column="34" lean-forward="false" selection-start-line="87" selection-start-column="24" selection-end-line="87" selection-end-column="34" />
           <folding>
             <element signature="e#83#137#0" expanded="true" />
           </folding>
@@ -1442,20 +1393,49 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/domain/ResourceManager.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
+        <state relative-caret-position="221">
+          <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/domain/Source.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-508">
           <caret line="10" column="6" lean-forward="false" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/algorithms/r/PredictionR.scala">
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/domain/Storage.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#93#133#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-1066">
+          <caret line="11" column="6" lean-forward="false" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/KnimeExecutor.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="25" column="26" lean-forward="false" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/MahoutExecutor.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="25" column="109" lean-forward="false" selection-start-line="25" selection-start-column="109" selection-end-line="25" selection-end-column="109" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/com/mlasaf/executors/LocalExecutor.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="23" column="3" lean-forward="true" selection-start-line="23" selection-start-column="3" selection-end-line="23" selection-end-column="3" />
+          <folding />
         </state>
       </provider>
     </entry>

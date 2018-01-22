@@ -6,6 +6,7 @@ package com.mlasaf.base
 
 import com.mlasaf.domain.AlgorithmRun
 import com.mlasaf.dto.VExecutorTypeHostParamDto
+import com.mlasaf.structures.AlgorithmExitParams
 
 /** base class for any implementation of ML algorithm */
 trait AlgorithmInstance {
@@ -23,12 +24,33 @@ trait AlgorithmInstance {
   }
   /** run of algorithm to produce outputs */
   def run(run : AlgorithmRun) : String = {
-    // basic check
-    // TODO: implement basic checks for input/output parameters for all algorithms
-    // run algorithm
     logger.info("============================================================================================================================== ");
     logger.info("==========================> RUNNING ALGORITHM FOR SCHEDULE: " + run.algorithmScheduleDto);
     Thread.sleep(500L);
+    printInfo(run);
+    logger.info("============================= STARTING ... ");
+    val scheduleValidationInputResult = validateRunInput(run);
+    if (scheduleValidationInputResult) {
+      logger.info("============================= INPUT VALIDATION OK ... ");
+      val retStatus = onAlgorithmRun(run);
+      logger.info("============================= FINISHED ALGORITHM FOR SCHEDULE: " + run.algorithmScheduleDto + ", STATUS: " + retStatus.toJson + "");
+      logger.info("============================================================================================================================== ");
+      val validationOutput = validateRunOutput(run);
+      if (validationOutput) {
+        retStatus.endStatus
+      } else {
+        logger.error("============================= INCORRECT OUTPUT FOR ALGORITHM SCHEDULE: " + run.algorithmScheduleDto);
+        logger.info("============================================================================================================================== ");
+        AlgorithmInstance.STATUS_ERROR_INCORRECT_OUTPUT
+      }
+    } else {
+      logger.error("============================= INCORRECT INPUT FOR ALGORITHM SCHEDULE: " + run.algorithmScheduleDto);
+      logger.info("============================================================================================================================== ");
+      AlgorithmInstance.STATUS_ERROR_INCORRECT_INPUT
+    }
+  }
+  /** print information to logger about AlgorithmRun object */
+  def printInfo(run : AlgorithmRun) : Unit = {
     logger.info("======================>    algorithmRunDto: " + run.algorithmRunDto);
     logger.info("======================>    run.status: " + run.status);
     logger.info("======================>    algorithmInstance: " + run.algorithmInstance);
@@ -50,16 +72,20 @@ trait AlgorithmInstance {
     logger.info("======================>    paramsForHostExecutorType: " + run.paramsForHostExecutorType.map(p => p.executorParam_executorParamName + "=" + p.paramValue).mkString(","));
     logger.info("======================>    runInfos.size: " + run.runInfos.size);
     logger.info("======================>    runInfos: " + run.runInfos.map(p => p.algorithmInfoType_algorithmInfoTypeName + "=" + p.executorStorageResource_resourcePath).mkString(","));
-    logger.info("============================= STARTING ... ");
-    val retStatus = onAlgorithmRun(run);
-    logger.info("============================= FINISHED ALGORITHM FOR SCHEDULE: " + run.algorithmScheduleDto + ", STATUS: " + retStatus);
-    logger.info("============================================================================================================================== ");
-    retStatus
   }
+  def validateRunInput(run : AlgorithmRun) : Boolean = {
+      // TODO: implement basic checks for input parameters for all algorithms
 
+      true
+  }
+  def validateRunOutput(run : AlgorithmRun) : Boolean = {
+    // TODO: implement basic checks for output parameters for all algorithms
+
+
+    true
+  }
   /** to override for all algorithms */
-  def onAlgorithmRun(run : AlgorithmRun) : String;
-
+  def onAlgorithmRun(run : AlgorithmRun) : AlgorithmExitParams;
 }
 object AlgorithmInstance {
   val STATUS_OK = "OK";

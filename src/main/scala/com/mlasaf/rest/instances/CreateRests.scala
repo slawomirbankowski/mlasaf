@@ -41,8 +41,17 @@ class CreateRests extends RestBase  {
         val asc = parentRest.parentContext.daoFactory.daos.algorithmScheduleColumnDao.createAndInsertAlgorithmScheduleColumnDto(algScheduleDto.algorithmScheduleId, colTypeId, algSchViewDto.algorithmScheduleViewId, algSchViewDto.sourceViewId, viewColumnId, "")
         logger.info("asc: " + asc);
       });
+      algoScheduleParams.parameters.split(",").foreach(p => {
+        val equalSignPos = p.indexOf('=')
+        val paramName = p.substring(0, equalSignPos);
+        val paramValue = p.substring(equalSignPos);
+        val paramNameDto = parentRest.parentContext.daoFactory.daos.algorithmParamDao.getAlgorithmParamFirstByName(paramName);
+        if (!paramNameDto.isEmpty) {
+          parentRest.parentContext.daoFactory.daos.algorithmScheduleParamDao.createAndInsertAlgorithmScheduleParamDto(algScheduleDto.algorithmScheduleId, paramNameDto.get.algorithmParamId, paramValue);
+        }
+      })
       algScheduleDto.toJson();
-    } );
+    });
     spark.Spark.post("/algorithm-implementation", (req: spark.Request, resp: spark.Response) => {
       logger.info("Executing algorithm-schedule CREATE (POST) with body: " + req.body());
       implicit val formats = org.json4s.DefaultFormats

@@ -46,9 +46,6 @@ class AlgorithmRun {
   /** RUN algorithm */
   def runAlgorithm() = {
     logger.info(" +++++++++++++++++++++++ AlgorithmRun status: " + status + ", algorithmRunId: " + algorithmRunDto.algorithmRunId + ", algorithmRunViews: " + algorithmRunViewDtos.size + ", algorithmScheduleViews: " + algorithmScheduleViewDtos.size + ", executorStorageVies: " + executorStorageViewDtos.size)
-    // TODO: finish proper flow for AlgorithmRun
-    //com.mlasaf.dto.VAlgorithmRunInfoDto
-
     status match {
       case AlgorithmRun.STATUS_CREATED => {
         val neededViewIds = algorithmScheduleViewDtos.map(sv => sv.sourceViewId).distinct;

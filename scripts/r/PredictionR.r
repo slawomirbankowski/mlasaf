@@ -30,13 +30,14 @@ allProductsCount <- levels(prodF)
 distProductsCount <- length(allProducts)
 "distProductsCount"
 distProductsCount
-#for (prodNum in 1:distProductsCount) {
- "ITER"
- #currProd <- allProducts[prodNum]
- #prodNum
- #currProd
- #currTransactions <- inData[which(inData$product == currProd),]
- #linearModel <- lm(formula = currTransactions$sale_units ~ currTransactions$yearmonth)
- #currProd
- #linearModel
-#}
+for (prodIter in 1:distProductsCount) {
+ print("ITER")
+ currProd <- allProducts[prodIter]
+ print(prodIter)
+ print(currProd)
+ currTransactions <- inData[which(inData$product == currProd),]
+ linearModel <- lm(formula = currTransactions$sale_units ~ currTransactions$yearmonth)
+ print(linearModel)
+ 
+}
+
