@@ -11,7 +11,7 @@ class SsasExecutor extends Executor {
 
   /** */
   def onRunExecutor(): Unit = {
-    logger.info("Weka Executor run  ");
+    logger.info("SSAS Executor run  ");
     // check algorithms for LOCAL to be run
   }
   /** */

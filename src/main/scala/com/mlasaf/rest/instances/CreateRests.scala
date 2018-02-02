@@ -136,8 +136,9 @@ class CreateRests extends RestBase  {
       logger.info("hostId: " + hostId);
       val execStorageId = parentRest.parentContext.daoFactory.daos.executorStorageDao.getExecutorStorageByFkExecutorHostId(hostId).filter(s => s.executorStorageTypeId == storageTypeId).head.executorStorageId;
       logger.info("execStorageId: " + execStorageId);
+      val downloadTransformGroupId = parentRest.parentContext.daoFactory.daos.downloadTransformGroupDao.getDownloadTransformGroupFirstByName("DEFAULT").get.downloadTransformGroupId;
       logger.info("Creating SourceSchedule for view: " + srcViewId + ", storage: " + execStorageId)
-      val sourceScheduleDto = parentRest.parentContext.daoFactory.daos.sourceScheduleDao.createAndInsertSourceScheduleDto(srcViewId, execStorageId, 0, new java.util.Date(), 0, 1, 0);
+      val sourceScheduleDto = parentRest.parentContext.daoFactory.daos.sourceScheduleDao.createAndInsertSourceScheduleDto(srcViewId, execStorageId, downloadTransformGroupId, 0, new java.util.Date(), 0, 1, 0);
       sourceScheduleDto.toJson();
     });
     spark.Spark.post("/executor", (req: spark.Request, resp: spark.Response) => {

@@ -144,6 +144,12 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
+ def getDtosBySourceDownload_downloadTransformGroupId(colValue : Long) : List[VSourceDownloadStatDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VSourceDownloadStatDto] = SQL("select * from vSourceDownloadStat where sourceDownload_downloadTransformGroupId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadStatDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
  def getDtosBySourceDownload_executorHostId(colValue : Long) : List[VSourceDownloadStatDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VSourceDownloadStatDto] = SQL("select * from vSourceDownloadStat where sourceDownload_executorHostId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceDownloadStatDto].*);  

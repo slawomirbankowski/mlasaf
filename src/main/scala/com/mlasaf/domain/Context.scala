@@ -141,7 +141,6 @@ class Context extends ThreadBase {
     });
     logger.info("All initialized sources: " + sources.size + ", sources: " + sources.map(s => "{id:" + s.vSourceDto.sourceInstanceId + ",type:" + s.vSourceDto.sourceType_sourceTypeName + ",name:" + s.vSourceDto.sourceInstanceName + "}").mkString(", "));
   }
-
   def delayedStop() : Unit = {
   }
   /** */

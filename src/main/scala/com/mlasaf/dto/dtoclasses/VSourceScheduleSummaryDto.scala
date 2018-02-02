@@ -13,6 +13,7 @@ case class VSourceScheduleSummaryDto (
      , val lastUpdatedDate : java.util.Date
      , val sourceViewId : Long
      , val executorStorageId : Long
+     , val downloadTransformGroupId : Long
      , val onDemand : Int
      , val startTime : java.util.Date
      , val intervalValue : Long
@@ -21,7 +22,7 @@ case class VSourceScheduleSummaryDto (
      , val sourceDownload_count : Int 
      ) extends BaseReadOnlyDto {  
    def tableName : String = {    "vSourceScheduleSummary";    }  
-   def fields : String = {    "sourceScheduleId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,executorStorageId,onDemand,startTime,intervalValue,isScheduled,deleteOldCopies,sourceDownload_count";    }  
+   def fields : String = {    "sourceScheduleId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,executorStorageId,downloadTransformGroupId,onDemand,startTime,intervalValue,isScheduled,deleteOldCopies,sourceDownload_count";    }  
    def pkFields : String = {    "";    }  
    def fkFields : String = {    "";    }  
    def nameField : String = {    "";    }  
@@ -29,10 +30,10 @@ case class VSourceScheduleSummaryDto (
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(sourceScheduleId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,executorStorageId,onDemand,startTime,intervalValue,isScheduled,deleteOldCopies,sourceDownload_count)  }  
- def toStringArray() : Array[String] = {    Array(""+sourceScheduleId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceViewId,""+executorStorageId,""+onDemand,""+startTime,""+intervalValue,""+isScheduled,""+deleteOldCopies,""+sourceDownload_count)   }  
- def toJson() : String = {   "{" + "\"sourceScheduleId\":\""+sourceScheduleId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"sourceViewId\":\""+sourceViewId+"\""+","+"\"executorStorageId\":\""+executorStorageId+"\""+","+"\"onDemand\":\""+onDemand+"\""+","+"\"startTime\":\""+startTime+"\""+","+"\"intervalValue\":\""+intervalValue+"\""+","+"\"isScheduled\":\""+isScheduled+"\""+","+"\"deleteOldCopies\":\""+deleteOldCopies+"\""+","+"\"sourceDownload_count\":\""+sourceDownload_count+"\"" + "}"   }  
- def toFullString() : String = {    "sourceScheduleId:'"+sourceScheduleId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"sourceViewId:'"+sourceViewId+"'"+","+"executorStorageId:'"+executorStorageId+"'"+","+"onDemand:'"+onDemand+"'"+","+"startTime:'"+startTime+"'"+","+"intervalValue:'"+intervalValue+"'"+","+"isScheduled:'"+isScheduled+"'"+","+"deleteOldCopies:'"+deleteOldCopies+"'"+","+"sourceDownload_count:'"+sourceDownload_count+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(sourceScheduleId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,executorStorageId,downloadTransformGroupId,onDemand,startTime,intervalValue,isScheduled,deleteOldCopies,sourceDownload_count)  }  
+ def toStringArray() : Array[String] = {    Array(""+sourceScheduleId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceViewId,""+executorStorageId,""+downloadTransformGroupId,""+onDemand,""+startTime,""+intervalValue,""+isScheduled,""+deleteOldCopies,""+sourceDownload_count)   }  
+ def toJson() : String = {   "{" + "\"sourceScheduleId\":\""+sourceScheduleId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"sourceViewId\":\""+sourceViewId+"\""+","+"\"executorStorageId\":\""+executorStorageId+"\""+","+"\"downloadTransformGroupId\":\""+downloadTransformGroupId+"\""+","+"\"onDemand\":\""+onDemand+"\""+","+"\"startTime\":\""+startTime+"\""+","+"\"intervalValue\":\""+intervalValue+"\""+","+"\"isScheduled\":\""+isScheduled+"\""+","+"\"deleteOldCopies\":\""+deleteOldCopies+"\""+","+"\"sourceDownload_count\":\""+sourceDownload_count+"\"" + "}"   }  
+ def toFullString() : String = {    "sourceScheduleId:'"+sourceScheduleId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"sourceViewId:'"+sourceViewId+"'"+","+"executorStorageId:'"+executorStorageId+"'"+","+"downloadTransformGroupId:'"+downloadTransformGroupId+"'"+","+"onDemand:'"+onDemand+"'"+","+"startTime:'"+startTime+"'"+","+"intervalValue:'"+intervalValue+"'"+","+"isScheduled:'"+isScheduled+"'"+","+"deleteOldCopies:'"+deleteOldCopies+"'"+","+"sourceDownload_count:'"+sourceDownload_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "sourceScheduleId" => sourceScheduleId  
@@ -41,6 +42,7 @@ case class VSourceScheduleSummaryDto (
      case "lastUpdatedDate" => lastUpdatedDate  
      case "sourceViewId" => sourceViewId  
      case "executorStorageId" => executorStorageId  
+     case "downloadTransformGroupId" => downloadTransformGroupId  
      case "onDemand" => onDemand  
      case "startTime" => startTime  
      case "intervalValue" => intervalValue  
@@ -59,6 +61,7 @@ case class VSourceScheduleSummaryDto (
      case "lastUpdatedDate" => "java.util.Date"  
      case "sourceViewId" => "Long"  
      case "executorStorageId" => "Long"  
+     case "downloadTransformGroupId" => "Long"  
      case "onDemand" => "Int"  
      case "startTime" => "java.util.Date"  
      case "intervalValue" => "Long"  
@@ -78,6 +81,7 @@ object VSourceScheduleSummaryDto {
    val FIELD_lastUpdatedDate = "lastUpdatedDate";
    val FIELD_sourceViewId = "sourceViewId";
    val FIELD_executorStorageId = "executorStorageId";
+   val FIELD_downloadTransformGroupId = "downloadTransformGroupId";
    val FIELD_onDemand = "onDemand";
    val FIELD_startTime = "startTime";
    val FIELD_intervalValue = "intervalValue";

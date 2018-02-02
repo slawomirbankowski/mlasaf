@@ -12,10 +12,12 @@ case class AlgorithmColumnTypeDto (
      , val insertedRowDate : java.util.Date
      , val lastUpdatedDate : java.util.Date
      , val algorithmColumnTypeName : String
-     , val algorithmColumnTypeDescription : String 
+     , val algorithmColumnTypeDescription : String
+     , val verificationClassName : String
+     , val verificationDefinition : String 
      ) extends BaseDto {  
    def tableName : String = {    "algorithmColumnType";    }  
-   def fields : String = {    "algorithmColumnTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmColumnTypeName,algorithmColumnTypeDescription";    }  
+   def fields : String = {    "algorithmColumnTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmColumnTypeName,algorithmColumnTypeDescription,verificationClassName,verificationDefinition";    }  
    def pkFields : String = {    "algorithmColumnTypeId";    }  
    def fkFields : String = {    "";    }  
    def nameField : String = {    "algorithmColumnTypeName";    }  
@@ -23,10 +25,10 @@ case class AlgorithmColumnTypeDto (
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(algorithmColumnTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmColumnTypeName,algorithmColumnTypeDescription)  }  
- def toStringArray() : Array[String] = {    Array(""+algorithmColumnTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmColumnTypeName,""+algorithmColumnTypeDescription)   }  
- def toJson() : String = {   "{" + "\"algorithmColumnTypeId\":\""+algorithmColumnTypeId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"algorithmColumnTypeName\":\""+algorithmColumnTypeName+"\""+","+"\"algorithmColumnTypeDescription\":\""+algorithmColumnTypeDescription+"\"" + "}"   }  
- def toFullString() : String = {    "algorithmColumnTypeId:'"+algorithmColumnTypeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmColumnTypeName:'"+algorithmColumnTypeName+"'"+","+"algorithmColumnTypeDescription:'"+algorithmColumnTypeDescription+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(algorithmColumnTypeId,guid,insertedRowDate,lastUpdatedDate,algorithmColumnTypeName,algorithmColumnTypeDescription,verificationClassName,verificationDefinition)  }  
+ def toStringArray() : Array[String] = {    Array(""+algorithmColumnTypeId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmColumnTypeName,""+algorithmColumnTypeDescription,""+verificationClassName,""+verificationDefinition)   }  
+ def toJson() : String = {   "{" + "\"algorithmColumnTypeId\":\""+algorithmColumnTypeId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"algorithmColumnTypeName\":\""+algorithmColumnTypeName+"\""+","+"\"algorithmColumnTypeDescription\":\""+algorithmColumnTypeDescription+"\""+","+"\"verificationClassName\":\""+verificationClassName+"\""+","+"\"verificationDefinition\":\""+verificationDefinition+"\"" + "}"   }  
+ def toFullString() : String = {    "algorithmColumnTypeId:'"+algorithmColumnTypeId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmColumnTypeName:'"+algorithmColumnTypeName+"'"+","+"algorithmColumnTypeDescription:'"+algorithmColumnTypeDescription+"'"+","+"verificationClassName:'"+verificationClassName+"'"+","+"verificationDefinition:'"+verificationDefinition+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "algorithmColumnTypeId" => algorithmColumnTypeId  
@@ -34,7 +36,9 @@ case class AlgorithmColumnTypeDto (
      case "insertedRowDate" => insertedRowDate  
      case "lastUpdatedDate" => lastUpdatedDate  
      case "algorithmColumnTypeName" => algorithmColumnTypeName  
-     case "algorithmColumnTypeDescription" => algorithmColumnTypeDescription   
+     case "algorithmColumnTypeDescription" => algorithmColumnTypeDescription  
+     case "verificationClassName" => verificationClassName  
+     case "verificationDefinition" => verificationDefinition   
     case _ => null 
     } 
     ret 
@@ -46,20 +50,24 @@ case class AlgorithmColumnTypeDto (
      case "insertedRowDate" => "java.util.Date"  
      case "lastUpdatedDate" => "java.util.Date"  
      case "algorithmColumnTypeName" => "String"  
-     case "algorithmColumnTypeDescription" => "String"   
+     case "algorithmColumnTypeDescription" => "String"  
+     case "verificationClassName" => "String"  
+     case "verificationDefinition" => "String"   
     case _ => "Object" 
     } 
     ret 
   } 
    def prepareInsert(connection : java.sql.Connection) : java.sql.PreparedStatement = {
-     val stat = connection.prepareStatement("insert into algorithmColumnType(guid,algorithmColumnTypeName,algorithmColumnTypeDescription) values (?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
+     val stat = connection.prepareStatement("insert into algorithmColumnType(guid,algorithmColumnTypeName,algorithmColumnTypeDescription,verificationClassName,verificationDefinition) values (?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
     stat.setObject(1, guid);
     stat.setObject(2, algorithmColumnTypeName);
     stat.setObject(3, algorithmColumnTypeDescription);
+    stat.setObject(4, verificationClassName);
+    stat.setObject(5, verificationDefinition);
     return stat; 
    } 
-   def modify(algorithmColumnTypeName : String, algorithmColumnTypeDescription : String) : AlgorithmColumnTypeDto = {
-    val dtoModified = new AlgorithmColumnTypeDto(this.algorithmColumnTypeId,this.guid,this.insertedRowDate,new java.util.Date(),algorithmColumnTypeName,algorithmColumnTypeDescription);
+   def modify(algorithmColumnTypeName : String, algorithmColumnTypeDescription : String, verificationClassName : String, verificationDefinition : String) : AlgorithmColumnTypeDto = {
+    val dtoModified = new AlgorithmColumnTypeDto(this.algorithmColumnTypeId,this.guid,this.insertedRowDate,new java.util.Date(),algorithmColumnTypeName,algorithmColumnTypeDescription,verificationClassName,verificationDefinition);
     dtoModified
   }
  } 
@@ -71,9 +79,11 @@ object AlgorithmColumnTypeDto {
    val FIELD_lastUpdatedDate = "lastUpdatedDate";
    val FIELD_algorithmColumnTypeName = "algorithmColumnTypeName";
    val FIELD_algorithmColumnTypeDescription = "algorithmColumnTypeDescription";
+   val FIELD_verificationClassName = "verificationClassName";
+   val FIELD_verificationDefinition = "verificationDefinition";
 
-  def createNewAlgorithmColumnTypeDto(algorithmColumnTypeName : String, algorithmColumnTypeDescription : String) : AlgorithmColumnTypeDto = {  
-     val dto = new AlgorithmColumnTypeDto(0,0,new java.util.Date(),new java.util.Date(),algorithmColumnTypeName,algorithmColumnTypeDescription)   
+  def createNewAlgorithmColumnTypeDto(algorithmColumnTypeName : String, algorithmColumnTypeDescription : String, verificationClassName : String, verificationDefinition : String) : AlgorithmColumnTypeDto = {  
+     val dto = new AlgorithmColumnTypeDto(0,0,new java.util.Date(),new java.util.Date(),algorithmColumnTypeName,algorithmColumnTypeDescription,verificationClassName,verificationDefinition)   
     dto 
   } 
 

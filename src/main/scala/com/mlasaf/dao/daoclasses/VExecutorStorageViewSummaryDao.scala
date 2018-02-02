@@ -102,6 +102,12 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
+ def getDtosByDownloadTransformGroupId(colValue : Long) : List[VExecutorStorageViewSummaryDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorStorageViewSummaryDto] = SQL("select * from vExecutorStorageViewSummary where downloadTransformGroupId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewSummaryDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
  def getDtosBySourceViewId(colValue : Long) : List[VExecutorStorageViewSummaryDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VExecutorStorageViewSummaryDto] = SQL("select * from vExecutorStorageViewSummary where sourceViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewSummaryDto].*);  
@@ -114,15 +120,15 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
- def getDtosByDownloadTransformExecutorStorage_count(colValue : Int) : List[VExecutorStorageViewSummaryDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VExecutorStorageViewSummaryDto] = SQL("select * from vExecutorStorageViewSummary where downloadTransformExecutorStorage_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewSummaryDto].*);  
-   releaseConnection(connection);  
-   dtos  
- }  
  def getDtosByAlgorithmRunView_count(colValue : Int) : List[VExecutorStorageViewSummaryDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VExecutorStorageViewSummaryDto] = SQL("select * from vExecutorStorageViewSummary where algorithmRunView_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewSummaryDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByDownloadTransformExecutorStorage_count(colValue : Int) : List[VExecutorStorageViewSummaryDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VExecutorStorageViewSummaryDto] = SQL("select * from vExecutorStorageViewSummary where downloadTransformExecutorStorage_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VExecutorStorageViewSummaryDto].*);  
    releaseConnection(connection);  
    dtos  
  }  

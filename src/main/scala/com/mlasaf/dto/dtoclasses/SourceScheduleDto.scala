@@ -13,6 +13,7 @@ case class SourceScheduleDto (
      , val lastUpdatedDate : java.util.Date
      , val sourceViewId : Long
      , val executorStorageId : Long
+     , val downloadTransformGroupId : Long
      , val onDemand : Int
      , val startTime : java.util.Date
      , val intervalValue : Long
@@ -20,18 +21,18 @@ case class SourceScheduleDto (
      , val deleteOldCopies : Int 
      ) extends BaseDto {  
    def tableName : String = {    "sourceSchedule";    }  
-   def fields : String = {    "sourceScheduleId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,executorStorageId,onDemand,startTime,intervalValue,isScheduled,deleteOldCopies";    }  
+   def fields : String = {    "sourceScheduleId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,executorStorageId,downloadTransformGroupId,onDemand,startTime,intervalValue,isScheduled,deleteOldCopies";    }  
    def pkFields : String = {    "sourceScheduleId";    }  
-   def fkFields : String = {    "executorStorageId,sourceViewId";    }  
+   def fkFields : String = {    "downloadTransformGroupId,executorStorageId,sourceViewId";    }  
    def nameField : String = {    "";    }  
  def getPk() : Long = {    sourceScheduleId  }  
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(sourceScheduleId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,executorStorageId,onDemand,startTime,intervalValue,isScheduled,deleteOldCopies)  }  
- def toStringArray() : Array[String] = {    Array(""+sourceScheduleId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceViewId,""+executorStorageId,""+onDemand,""+startTime,""+intervalValue,""+isScheduled,""+deleteOldCopies)   }  
- def toJson() : String = {   "{" + "\"sourceScheduleId\":\""+sourceScheduleId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"sourceViewId\":\""+sourceViewId+"\""+","+"\"executorStorageId\":\""+executorStorageId+"\""+","+"\"onDemand\":\""+onDemand+"\""+","+"\"startTime\":\""+startTime+"\""+","+"\"intervalValue\":\""+intervalValue+"\""+","+"\"isScheduled\":\""+isScheduled+"\""+","+"\"deleteOldCopies\":\""+deleteOldCopies+"\"" + "}"   }  
- def toFullString() : String = {    "sourceScheduleId:'"+sourceScheduleId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"sourceViewId:'"+sourceViewId+"'"+","+"executorStorageId:'"+executorStorageId+"'"+","+"onDemand:'"+onDemand+"'"+","+"startTime:'"+startTime+"'"+","+"intervalValue:'"+intervalValue+"'"+","+"isScheduled:'"+isScheduled+"'"+","+"deleteOldCopies:'"+deleteOldCopies+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(sourceScheduleId,guid,insertedRowDate,lastUpdatedDate,sourceViewId,executorStorageId,downloadTransformGroupId,onDemand,startTime,intervalValue,isScheduled,deleteOldCopies)  }  
+ def toStringArray() : Array[String] = {    Array(""+sourceScheduleId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceViewId,""+executorStorageId,""+downloadTransformGroupId,""+onDemand,""+startTime,""+intervalValue,""+isScheduled,""+deleteOldCopies)   }  
+ def toJson() : String = {   "{" + "\"sourceScheduleId\":\""+sourceScheduleId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"sourceViewId\":\""+sourceViewId+"\""+","+"\"executorStorageId\":\""+executorStorageId+"\""+","+"\"downloadTransformGroupId\":\""+downloadTransformGroupId+"\""+","+"\"onDemand\":\""+onDemand+"\""+","+"\"startTime\":\""+startTime+"\""+","+"\"intervalValue\":\""+intervalValue+"\""+","+"\"isScheduled\":\""+isScheduled+"\""+","+"\"deleteOldCopies\":\""+deleteOldCopies+"\"" + "}"   }  
+ def toFullString() : String = {    "sourceScheduleId:'"+sourceScheduleId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"sourceViewId:'"+sourceViewId+"'"+","+"executorStorageId:'"+executorStorageId+"'"+","+"downloadTransformGroupId:'"+downloadTransformGroupId+"'"+","+"onDemand:'"+onDemand+"'"+","+"startTime:'"+startTime+"'"+","+"intervalValue:'"+intervalValue+"'"+","+"isScheduled:'"+isScheduled+"'"+","+"deleteOldCopies:'"+deleteOldCopies+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "sourceScheduleId" => sourceScheduleId  
@@ -40,6 +41,7 @@ case class SourceScheduleDto (
      case "lastUpdatedDate" => lastUpdatedDate  
      case "sourceViewId" => sourceViewId  
      case "executorStorageId" => executorStorageId  
+     case "downloadTransformGroupId" => downloadTransformGroupId  
      case "onDemand" => onDemand  
      case "startTime" => startTime  
      case "intervalValue" => intervalValue  
@@ -57,6 +59,7 @@ case class SourceScheduleDto (
      case "lastUpdatedDate" => "java.util.Date"  
      case "sourceViewId" => "Long"  
      case "executorStorageId" => "Long"  
+     case "downloadTransformGroupId" => "Long"  
      case "onDemand" => "Int"  
      case "startTime" => "java.util.Date"  
      case "intervalValue" => "Long"  
@@ -67,19 +70,20 @@ case class SourceScheduleDto (
     ret 
   } 
    def prepareInsert(connection : java.sql.Connection) : java.sql.PreparedStatement = {
-     val stat = connection.prepareStatement("insert into sourceSchedule(guid,sourceViewId,executorStorageId,onDemand,startTime,intervalValue,isScheduled,deleteOldCopies) values (?,?,?,?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
+     val stat = connection.prepareStatement("insert into sourceSchedule(guid,sourceViewId,executorStorageId,downloadTransformGroupId,onDemand,startTime,intervalValue,isScheduled,deleteOldCopies) values (?,?,?,?,?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
     stat.setObject(1, guid);
     stat.setObject(2, sourceViewId);
     stat.setObject(3, executorStorageId);
-    stat.setObject(4, onDemand);
-    stat.setObject(5, startTime);
-    stat.setObject(6, intervalValue);
-    stat.setObject(7, isScheduled);
-    stat.setObject(8, deleteOldCopies);
+    stat.setObject(4, downloadTransformGroupId);
+    stat.setObject(5, onDemand);
+    stat.setObject(6, startTime);
+    stat.setObject(7, intervalValue);
+    stat.setObject(8, isScheduled);
+    stat.setObject(9, deleteOldCopies);
     return stat; 
    } 
-   def modify(sourceViewId : Long, executorStorageId : Long, onDemand : Int, startTime : java.util.Date, intervalValue : Long, isScheduled : Int, deleteOldCopies : Int) : SourceScheduleDto = {
-    val dtoModified = new SourceScheduleDto(this.sourceScheduleId,this.guid,this.insertedRowDate,new java.util.Date(),sourceViewId,executorStorageId,onDemand,startTime,intervalValue,isScheduled,deleteOldCopies);
+   def modify(sourceViewId : Long, executorStorageId : Long, downloadTransformGroupId : Long, onDemand : Int, startTime : java.util.Date, intervalValue : Long, isScheduled : Int, deleteOldCopies : Int) : SourceScheduleDto = {
+    val dtoModified = new SourceScheduleDto(this.sourceScheduleId,this.guid,this.insertedRowDate,new java.util.Date(),sourceViewId,executorStorageId,downloadTransformGroupId,onDemand,startTime,intervalValue,isScheduled,deleteOldCopies);
     dtoModified
   }
  } 
@@ -91,14 +95,15 @@ object SourceScheduleDto {
    val FIELD_lastUpdatedDate = "lastUpdatedDate";
    val FIELD_sourceViewId = "sourceViewId";
    val FIELD_executorStorageId = "executorStorageId";
+   val FIELD_downloadTransformGroupId = "downloadTransformGroupId";
    val FIELD_onDemand = "onDemand";
    val FIELD_startTime = "startTime";
    val FIELD_intervalValue = "intervalValue";
    val FIELD_isScheduled = "isScheduled";
    val FIELD_deleteOldCopies = "deleteOldCopies";
 
-  def createNewSourceScheduleDto(sourceViewId : Long, executorStorageId : Long, onDemand : Int, startTime : java.util.Date, intervalValue : Long, isScheduled : Int, deleteOldCopies : Int) : SourceScheduleDto = {  
-     val dto = new SourceScheduleDto(0,0,new java.util.Date(),new java.util.Date(),sourceViewId,executorStorageId,onDemand,startTime,intervalValue,isScheduled,deleteOldCopies)   
+  def createNewSourceScheduleDto(sourceViewId : Long, executorStorageId : Long, downloadTransformGroupId : Long, onDemand : Int, startTime : java.util.Date, intervalValue : Long, isScheduled : Int, deleteOldCopies : Int) : SourceScheduleDto = {  
+     val dto = new SourceScheduleDto(0,0,new java.util.Date(),new java.util.Date(),sourceViewId,executorStorageId,downloadTransformGroupId,onDemand,startTime,intervalValue,isScheduled,deleteOldCopies)   
     dto 
   } 
 

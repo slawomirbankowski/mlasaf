@@ -288,6 +288,12 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
+ def getDtosByExecutorStorageView_downloadTransformGroupId(colValue : Long) : List[VAlgorithmRunViewDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmRunViewDto] = SQL("select * from vAlgorithmRunView where executorStorageView_downloadTransformGroupId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunViewDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
  def getDtosByExecutorStorageView_sourceViewId(colValue : Long) : List[VAlgorithmRunViewDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VAlgorithmRunViewDto] = SQL("select * from vAlgorithmRunView where executorStorageView_sourceViewId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmRunViewDto].*);  

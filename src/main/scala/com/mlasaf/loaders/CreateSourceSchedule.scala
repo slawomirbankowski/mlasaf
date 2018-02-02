@@ -35,8 +35,9 @@ object CreateSourceSchedule {
     logger.info("hostId: " + hostId);
     val execStorageId = daoFactory.daos.executorStorageDao.getExecutorStorageByFkExecutorHostId(hostId).filter(s => s.executorStorageTypeId == storageTypeId).head.executorStorageId;
     logger.info("execStorageId: " + execStorageId);
-    logger.info("Creating SourceSchedule for view: " + srcViewId + ", storage: " + execStorageId)
-    daoFactory.daos.sourceScheduleDao.createAndInsertSourceScheduleDto(srcViewId, execStorageId, 0, new java.util.Date(), 0, 1, 0);
+    logger.info("Creating SourceSchedule for view: " + srcViewId + ", storage: " + execStorageId);
+    val downloadTransformGroupId = daoFactory.daos.downloadTransformGroupDao.getDownloadTransformGroupFirstByName("DEFAULT").get.downloadTransformGroupId;
+    daoFactory.daos.sourceScheduleDao.createAndInsertSourceScheduleDto(srcViewId, execStorageId, downloadTransformGroupId, 0, new java.util.Date(), 0, 1, 0);
 
   }
 }

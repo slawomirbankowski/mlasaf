@@ -96,6 +96,18 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
+ def getDtosByVerificationClassName(colValue : String) : List[VAlgorithmColumnTypeSummaryDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmColumnTypeSummaryDto] = SQL("select * from vAlgorithmColumnTypeSummary where verificationClassName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmColumnTypeSummaryDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByVerificationDefinition(colValue : String) : List[VAlgorithmColumnTypeSummaryDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmColumnTypeSummaryDto] = SQL("select * from vAlgorithmColumnTypeSummary where verificationDefinition = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmColumnTypeSummaryDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
  def getDtosByAlgorithmVersionColumnType_count(colValue : Int) : List[VAlgorithmColumnTypeSummaryDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VAlgorithmColumnTypeSummaryDto] = SQL("select * from vAlgorithmColumnTypeSummary where algorithmVersionColumnType_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmColumnTypeSummaryDto].*);  

@@ -72,6 +72,12 @@ import java.util.Date
    releaseConnection(connection);  
    maxid  
  }  
+ def getSourceDownloadByFkDownloadTransformGroupId(fkColValue : Long) : List[SourceDownloadDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[SourceDownloadDto] = SQL("select * from sourceDownload where downloadTransformGroupId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[SourceDownloadDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
  def getSourceDownloadByFkExecutorContextId(fkColValue : Long) : List[SourceDownloadDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[SourceDownloadDto] = SQL("select * from sourceDownload where executorContextId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[SourceDownloadDto].*);  
@@ -111,14 +117,14 @@ import java.util.Date
       null; 
     } 
  } 
-  def createAndInsertSourceDownloadDto(sourceScheduleId : Long, executorHostId : Long, executorContextId : Long, sourceViewId : Long, retryNumber : Int, isRunning : Int, isFinished : Int, isExcecption : Int, excecptionDescription : String) : SourceDownloadDto = {
-    val dto = new SourceDownloadDto(0,0,new Date(),new Date(),sourceScheduleId,executorHostId,executorContextId,sourceViewId,retryNumber,isRunning,isFinished,isExcecption,excecptionDescription)
+  def createAndInsertSourceDownloadDto(sourceScheduleId : Long, downloadTransformGroupId : Long, executorHostId : Long, executorContextId : Long, sourceViewId : Long, retryNumber : Int, isRunning : Int, isFinished : Int, isExcecption : Int, excecptionDescription : String) : SourceDownloadDto = {
+    val dto = new SourceDownloadDto(0,0,new Date(),new Date(),sourceScheduleId,downloadTransformGroupId,executorHostId,executorContextId,sourceViewId,retryNumber,isRunning,isFinished,isExcecption,excecptionDescription)
     insertSourceDownloadDto(dto);   
   }   
   def updateSourceDownloadDto(dto : SourceDownloadDto): SourceDownloadDto = {  
     implicit val connection = getConnection();  
-      val resCnt = SQL("update sourceDownload set  lastUpdatedDate = {lastUpdatedDate} ,  sourceScheduleId = {sourceScheduleId} ,  executorHostId = {executorHostId} ,  executorContextId = {executorContextId} ,  sourceViewId = {sourceViewId} ,  retryNumber = {retryNumber} ,  isRunning = {isRunning} ,  isFinished = {isFinished} ,  isExcecption = {isExcecption} ,  excecptionDescription = {excecptionDescription}  where  sourceDownloadId = {sourceDownloadId}  ")
-      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "sourceScheduleId" -> dto.sourceScheduleId , "executorHostId" -> dto.executorHostId , "executorContextId" -> dto.executorContextId , "sourceViewId" -> dto.sourceViewId , "retryNumber" -> dto.retryNumber , "isRunning" -> dto.isRunning , "isFinished" -> dto.isFinished , "isExcecption" -> dto.isExcecption , "excecptionDescription" -> dto.excecptionDescription, "sourceDownloadId" -> dto.sourceDownloadId ).executeInsert() 
+      val resCnt = SQL("update sourceDownload set  lastUpdatedDate = {lastUpdatedDate} ,  sourceScheduleId = {sourceScheduleId} ,  downloadTransformGroupId = {downloadTransformGroupId} ,  executorHostId = {executorHostId} ,  executorContextId = {executorContextId} ,  sourceViewId = {sourceViewId} ,  retryNumber = {retryNumber} ,  isRunning = {isRunning} ,  isFinished = {isFinished} ,  isExcecption = {isExcecption} ,  excecptionDescription = {excecptionDescription}  where  sourceDownloadId = {sourceDownloadId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "sourceScheduleId" -> dto.sourceScheduleId , "downloadTransformGroupId" -> dto.downloadTransformGroupId , "executorHostId" -> dto.executorHostId , "executorContextId" -> dto.executorContextId , "sourceViewId" -> dto.sourceViewId , "retryNumber" -> dto.retryNumber , "isRunning" -> dto.isRunning , "isFinished" -> dto.isFinished , "isExcecption" -> dto.isExcecption , "excecptionDescription" -> dto.excecptionDescription, "sourceDownloadId" -> dto.sourceDownloadId ).executeInsert() 
    releaseConnection(connection);  
      getSourceDownloadByPk(dto.sourceDownloadId) 
     } 

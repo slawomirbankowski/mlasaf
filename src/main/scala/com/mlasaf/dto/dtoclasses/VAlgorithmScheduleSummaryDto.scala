@@ -17,14 +17,14 @@ case class VAlgorithmScheduleSummaryDto (
      , val isScheduled : Int
      , val intervalValue : Long
      , val isRunning : Int
+     , val algorithmRunInfo_count : Int
      , val algorithmScheduleView_count : Int
      , val algorithmScheduleParam_count : Int
      , val algorithmScheduleColumn_count : Int
-     , val algorithmRun_count : Int
-     , val algorithmRunInfo_count : Int 
+     , val algorithmRun_count : Int 
      ) extends BaseReadOnlyDto {  
    def tableName : String = {    "vAlgorithmScheduleSummary";    }  
-   def fields : String = {    "algorithmScheduleId,guid,insertedRowDate,lastUpdatedDate,algorithmImplementationId,algorithmScheduleTypeId,algorithmScheduleName,isScheduled,intervalValue,isRunning,algorithmScheduleView_count,algorithmScheduleParam_count,algorithmScheduleColumn_count,algorithmRun_count,algorithmRunInfo_count";    }  
+   def fields : String = {    "algorithmScheduleId,guid,insertedRowDate,lastUpdatedDate,algorithmImplementationId,algorithmScheduleTypeId,algorithmScheduleName,isScheduled,intervalValue,isRunning,algorithmRunInfo_count,algorithmScheduleView_count,algorithmScheduleParam_count,algorithmScheduleColumn_count,algorithmRun_count";    }  
    def pkFields : String = {    "";    }  
    def fkFields : String = {    "";    }  
    def nameField : String = {    "";    }  
@@ -32,10 +32,10 @@ case class VAlgorithmScheduleSummaryDto (
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(algorithmScheduleId,guid,insertedRowDate,lastUpdatedDate,algorithmImplementationId,algorithmScheduleTypeId,algorithmScheduleName,isScheduled,intervalValue,isRunning,algorithmScheduleView_count,algorithmScheduleParam_count,algorithmScheduleColumn_count,algorithmRun_count,algorithmRunInfo_count)  }  
- def toStringArray() : Array[String] = {    Array(""+algorithmScheduleId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmImplementationId,""+algorithmScheduleTypeId,""+algorithmScheduleName,""+isScheduled,""+intervalValue,""+isRunning,""+algorithmScheduleView_count,""+algorithmScheduleParam_count,""+algorithmScheduleColumn_count,""+algorithmRun_count,""+algorithmRunInfo_count)   }  
- def toJson() : String = {   "{" + "\"algorithmScheduleId\":\""+algorithmScheduleId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"algorithmImplementationId\":\""+algorithmImplementationId+"\""+","+"\"algorithmScheduleTypeId\":\""+algorithmScheduleTypeId+"\""+","+"\"algorithmScheduleName\":\""+algorithmScheduleName+"\""+","+"\"isScheduled\":\""+isScheduled+"\""+","+"\"intervalValue\":\""+intervalValue+"\""+","+"\"isRunning\":\""+isRunning+"\""+","+"\"algorithmScheduleView_count\":\""+algorithmScheduleView_count+"\""+","+"\"algorithmScheduleParam_count\":\""+algorithmScheduleParam_count+"\""+","+"\"algorithmScheduleColumn_count\":\""+algorithmScheduleColumn_count+"\""+","+"\"algorithmRun_count\":\""+algorithmRun_count+"\""+","+"\"algorithmRunInfo_count\":\""+algorithmRunInfo_count+"\"" + "}"   }  
- def toFullString() : String = {    "algorithmScheduleId:'"+algorithmScheduleId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmImplementationId:'"+algorithmImplementationId+"'"+","+"algorithmScheduleTypeId:'"+algorithmScheduleTypeId+"'"+","+"algorithmScheduleName:'"+algorithmScheduleName+"'"+","+"isScheduled:'"+isScheduled+"'"+","+"intervalValue:'"+intervalValue+"'"+","+"isRunning:'"+isRunning+"'"+","+"algorithmScheduleView_count:'"+algorithmScheduleView_count+"'"+","+"algorithmScheduleParam_count:'"+algorithmScheduleParam_count+"'"+","+"algorithmScheduleColumn_count:'"+algorithmScheduleColumn_count+"'"+","+"algorithmRun_count:'"+algorithmRun_count+"'"+","+"algorithmRunInfo_count:'"+algorithmRunInfo_count+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(algorithmScheduleId,guid,insertedRowDate,lastUpdatedDate,algorithmImplementationId,algorithmScheduleTypeId,algorithmScheduleName,isScheduled,intervalValue,isRunning,algorithmRunInfo_count,algorithmScheduleView_count,algorithmScheduleParam_count,algorithmScheduleColumn_count,algorithmRun_count)  }  
+ def toStringArray() : Array[String] = {    Array(""+algorithmScheduleId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmImplementationId,""+algorithmScheduleTypeId,""+algorithmScheduleName,""+isScheduled,""+intervalValue,""+isRunning,""+algorithmRunInfo_count,""+algorithmScheduleView_count,""+algorithmScheduleParam_count,""+algorithmScheduleColumn_count,""+algorithmRun_count)   }  
+ def toJson() : String = {   "{" + "\"algorithmScheduleId\":\""+algorithmScheduleId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"algorithmImplementationId\":\""+algorithmImplementationId+"\""+","+"\"algorithmScheduleTypeId\":\""+algorithmScheduleTypeId+"\""+","+"\"algorithmScheduleName\":\""+algorithmScheduleName+"\""+","+"\"isScheduled\":\""+isScheduled+"\""+","+"\"intervalValue\":\""+intervalValue+"\""+","+"\"isRunning\":\""+isRunning+"\""+","+"\"algorithmRunInfo_count\":\""+algorithmRunInfo_count+"\""+","+"\"algorithmScheduleView_count\":\""+algorithmScheduleView_count+"\""+","+"\"algorithmScheduleParam_count\":\""+algorithmScheduleParam_count+"\""+","+"\"algorithmScheduleColumn_count\":\""+algorithmScheduleColumn_count+"\""+","+"\"algorithmRun_count\":\""+algorithmRun_count+"\"" + "}"   }  
+ def toFullString() : String = {    "algorithmScheduleId:'"+algorithmScheduleId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmImplementationId:'"+algorithmImplementationId+"'"+","+"algorithmScheduleTypeId:'"+algorithmScheduleTypeId+"'"+","+"algorithmScheduleName:'"+algorithmScheduleName+"'"+","+"isScheduled:'"+isScheduled+"'"+","+"intervalValue:'"+intervalValue+"'"+","+"isRunning:'"+isRunning+"'"+","+"algorithmRunInfo_count:'"+algorithmRunInfo_count+"'"+","+"algorithmScheduleView_count:'"+algorithmScheduleView_count+"'"+","+"algorithmScheduleParam_count:'"+algorithmScheduleParam_count+"'"+","+"algorithmScheduleColumn_count:'"+algorithmScheduleColumn_count+"'"+","+"algorithmRun_count:'"+algorithmRun_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "algorithmScheduleId" => algorithmScheduleId  
@@ -48,11 +48,11 @@ case class VAlgorithmScheduleSummaryDto (
      case "isScheduled" => isScheduled  
      case "intervalValue" => intervalValue  
      case "isRunning" => isRunning  
+     case "algorithmRunInfo_count" => algorithmRunInfo_count  
      case "algorithmScheduleView_count" => algorithmScheduleView_count  
      case "algorithmScheduleParam_count" => algorithmScheduleParam_count  
      case "algorithmScheduleColumn_count" => algorithmScheduleColumn_count  
-     case "algorithmRun_count" => algorithmRun_count  
-     case "algorithmRunInfo_count" => algorithmRunInfo_count   
+     case "algorithmRun_count" => algorithmRun_count   
     case _ => null 
     } 
     ret 
@@ -69,11 +69,11 @@ case class VAlgorithmScheduleSummaryDto (
      case "isScheduled" => "Int"  
      case "intervalValue" => "Long"  
      case "isRunning" => "Int"  
+     case "algorithmRunInfo_count" => "Int"  
      case "algorithmScheduleView_count" => "Int"  
      case "algorithmScheduleParam_count" => "Int"  
      case "algorithmScheduleColumn_count" => "Int"  
-     case "algorithmRun_count" => "Int"  
-     case "algorithmRunInfo_count" => "Int"   
+     case "algorithmRun_count" => "Int"   
     case _ => "Object" 
     } 
     ret 
@@ -91,11 +91,11 @@ object VAlgorithmScheduleSummaryDto {
    val FIELD_isScheduled = "isScheduled";
    val FIELD_intervalValue = "intervalValue";
    val FIELD_isRunning = "isRunning";
+   val FIELD_algorithmRunInfo_count = "algorithmRunInfo_count";
    val FIELD_algorithmScheduleView_count = "algorithmScheduleView_count";
    val FIELD_algorithmScheduleParam_count = "algorithmScheduleParam_count";
    val FIELD_algorithmScheduleColumn_count = "algorithmScheduleColumn_count";
    val FIELD_algorithmRun_count = "algorithmRun_count";
-   val FIELD_algorithmRunInfo_count = "algorithmRunInfo_count";
 
 }
 

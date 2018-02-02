@@ -1,4 +1,13 @@
-[0m[[0m[31merror[0m] [0m[0mC:\Project\mlasaf\src\mlasaf\src\main\scala\com\mlasaf\structures\AlgorithmExitParams.scala:9:132: ';' expected but string literal found.[0m
-[0m[[0m[31merror[0m] [0m[0m    " { endStatus: " + endStatus + ", validationOk : " + validationOk + (if (externalExit.isEmpty) "" else externalExit.get.toJson)" } "[0m
-[0m[[0m[31merror[0m] [0m[0m                                                                                                                                   ^[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Project\mlasaf\src\mlasaf\src\main\scala\com\mlasaf\loaders\CreateSourceSchedule.scala:39:71: not enough arguments for method createAndInsertSourceScheduleDto: (sourceViewId: Long, executorStorageId: Long, downloadTransformGroupId: Long, onDemand: Int, startTime: java.util.Date, intervalValue: Long, isScheduled: Int, deleteOldCopies: Int)com.mlasaf.dto.SourceScheduleDto.[0m
+[0m[[0m[31merror[0m] [0m[0mUnspecified value parameter deleteOldCopies.[0m
+[0m[[0m[31merror[0m] [0m[0m    daoFactory.daos.sourceScheduleDao.createAndInsertSourceScheduleDto(srcViewId, execStorageId, 0, new java.util.Date(), 0, 1, 0);[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                      ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Project\mlasaf\src\mlasaf\src\main\scala\com\mlasaf\rest\instances\CreateRests.scala:140:122: not enough arguments for method createAndInsertSourceScheduleDto: (sourceViewId: Long, executorStorageId: Long, downloadTransformGroupId: Long, onDemand: Int, startTime: java.util.Date, intervalValue: Long, isScheduled: Int, deleteOldCopies: Int)com.mlasaf.dto.SourceScheduleDto.[0m
+[0m[[0m[31merror[0m] [0m[0mUnspecified value parameter deleteOldCopies.[0m
+[0m[[0m[31merror[0m] [0m[0m      val sourceScheduleDto = parentRest.parentContext.daoFactory.daos.sourceScheduleDao.createAndInsertSourceScheduleDto(srcViewId, execStorageId, 0, new java.util.Date(), 0, 1, 0);[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                                                                         ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Project\mlasaf\src\mlasaf\src\main\scala\com\mlasaf\storages\LocalDiskStorage.scala:64:116: not enough arguments for method createAndInsertExecutorStorageViewDto: (executorStorageSnapshotId: Long, executorStorageId: Long, sourceDownloadId: Long, downloadTransformGroupId: Long, sourceViewId: Long, executorStorageResourceId: Long)com.mlasaf.dto.ExecutorStorageViewDto.[0m
+[0m[[0m[31merror[0m] [0m[0mUnspecified value parameter executorStorageResourceId.[0m
+[0m[[0m[31merror[0m] [0m[0m    val storageViewDto = parentContext.daoFactory.daos.executorStorageViewDao.createAndInsertExecutorStorageViewDto(storageSnapshotDto.executorStorageSnapshotId, this.storageDto.executorStorageId, sourceDownloadDto.sourceDownloadId, sourceView.sourceViewId, storageResourceDto.executorStorageResourceId);[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                                                                   ^[0m
+[0m[[0m[31merror[0m] [0m[0mthree errors found[0m

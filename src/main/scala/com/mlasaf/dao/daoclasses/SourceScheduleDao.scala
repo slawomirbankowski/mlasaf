@@ -72,6 +72,12 @@ import java.util.Date
    releaseConnection(connection);  
    maxid  
  }  
+ def getSourceScheduleByFkDownloadTransformGroupId(fkColValue : Long) : List[SourceScheduleDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[SourceScheduleDto] = SQL("select * from sourceSchedule where downloadTransformGroupId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[SourceScheduleDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
  def getSourceScheduleByFkExecutorStorageId(fkColValue : Long) : List[SourceScheduleDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[SourceScheduleDto] = SQL("select * from sourceSchedule where executorStorageId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[SourceScheduleDto].*);  
@@ -99,14 +105,14 @@ import java.util.Date
       null; 
     } 
  } 
-  def createAndInsertSourceScheduleDto(sourceViewId : Long, executorStorageId : Long, onDemand : Int, startTime : java.util.Date, intervalValue : Long, isScheduled : Int, deleteOldCopies : Int) : SourceScheduleDto = {
-    val dto = new SourceScheduleDto(0,0,new Date(),new Date(),sourceViewId,executorStorageId,onDemand,startTime,intervalValue,isScheduled,deleteOldCopies)
+  def createAndInsertSourceScheduleDto(sourceViewId : Long, executorStorageId : Long, downloadTransformGroupId : Long, onDemand : Int, startTime : java.util.Date, intervalValue : Long, isScheduled : Int, deleteOldCopies : Int) : SourceScheduleDto = {
+    val dto = new SourceScheduleDto(0,0,new Date(),new Date(),sourceViewId,executorStorageId,downloadTransformGroupId,onDemand,startTime,intervalValue,isScheduled,deleteOldCopies)
     insertSourceScheduleDto(dto);   
   }   
   def updateSourceScheduleDto(dto : SourceScheduleDto): SourceScheduleDto = {  
     implicit val connection = getConnection();  
-      val resCnt = SQL("update sourceSchedule set  lastUpdatedDate = {lastUpdatedDate} ,  sourceViewId = {sourceViewId} ,  executorStorageId = {executorStorageId} ,  onDemand = {onDemand} ,  startTime = {startTime} ,  intervalValue = {intervalValue} ,  isScheduled = {isScheduled} ,  deleteOldCopies = {deleteOldCopies}  where  sourceScheduleId = {sourceScheduleId}  ")
-      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "sourceViewId" -> dto.sourceViewId , "executorStorageId" -> dto.executorStorageId , "onDemand" -> dto.onDemand , "startTime" -> dto.startTime , "intervalValue" -> dto.intervalValue , "isScheduled" -> dto.isScheduled , "deleteOldCopies" -> dto.deleteOldCopies, "sourceScheduleId" -> dto.sourceScheduleId ).executeInsert() 
+      val resCnt = SQL("update sourceSchedule set  lastUpdatedDate = {lastUpdatedDate} ,  sourceViewId = {sourceViewId} ,  executorStorageId = {executorStorageId} ,  downloadTransformGroupId = {downloadTransformGroupId} ,  onDemand = {onDemand} ,  startTime = {startTime} ,  intervalValue = {intervalValue} ,  isScheduled = {isScheduled} ,  deleteOldCopies = {deleteOldCopies}  where  sourceScheduleId = {sourceScheduleId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "sourceViewId" -> dto.sourceViewId , "executorStorageId" -> dto.executorStorageId , "downloadTransformGroupId" -> dto.downloadTransformGroupId , "onDemand" -> dto.onDemand , "startTime" -> dto.startTime , "intervalValue" -> dto.intervalValue , "isScheduled" -> dto.isScheduled , "deleteOldCopies" -> dto.deleteOldCopies, "sourceScheduleId" -> dto.sourceScheduleId ).executeInsert() 
    releaseConnection(connection);  
      getSourceScheduleByPk(dto.sourceScheduleId) 
     } 

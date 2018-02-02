@@ -11,7 +11,7 @@ class SparkExecutor extends Executor {
 
   /** */
   def onRunExecutor(): Unit = {
-    logger.info("Weka Executor run  ");
+    logger.info("Spark Executor run  ");
     // check algorithms for LOCAL to be run
   }
   /** */

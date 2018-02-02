@@ -144,6 +144,18 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
+ def getDtosByAlgorithmColumnType_verificationClassName(colValue : String) : List[VAlgorithmVersionColumnTypeDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmVersionColumnTypeDto] = SQL("select * from vAlgorithmVersionColumnType where algorithmColumnType_verificationClassName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmVersionColumnTypeDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByAlgorithmColumnType_verificationDefinition(colValue : String) : List[VAlgorithmVersionColumnTypeDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmVersionColumnTypeDto] = SQL("select * from vAlgorithmVersionColumnType where algorithmColumnType_verificationDefinition = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmVersionColumnTypeDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
  def getDtosByAlgorithmVersion_algorithmVersionId(colValue : Long) : List[VAlgorithmVersionColumnTypeDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VAlgorithmVersionColumnTypeDto] = SQL("select * from vAlgorithmVersionColumnType where algorithmVersion_algorithmVersionId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmVersionColumnTypeDto].*);  

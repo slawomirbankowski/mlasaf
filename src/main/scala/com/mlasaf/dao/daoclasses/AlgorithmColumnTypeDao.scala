@@ -99,14 +99,14 @@ import java.util.Date
       null; 
     } 
  } 
-  def createAndInsertAlgorithmColumnTypeDto(algorithmColumnTypeName : String, algorithmColumnTypeDescription : String) : AlgorithmColumnTypeDto = {
-    val dto = new AlgorithmColumnTypeDto(0,0,new Date(),new Date(),algorithmColumnTypeName,algorithmColumnTypeDescription)
+  def createAndInsertAlgorithmColumnTypeDto(algorithmColumnTypeName : String, algorithmColumnTypeDescription : String, verificationClassName : String, verificationDefinition : String) : AlgorithmColumnTypeDto = {
+    val dto = new AlgorithmColumnTypeDto(0,0,new Date(),new Date(),algorithmColumnTypeName,algorithmColumnTypeDescription,verificationClassName,verificationDefinition)
     insertAlgorithmColumnTypeDto(dto);   
   }   
   def updateAlgorithmColumnTypeDto(dto : AlgorithmColumnTypeDto): AlgorithmColumnTypeDto = {  
     implicit val connection = getConnection();  
-      val resCnt = SQL("update algorithmColumnType set  lastUpdatedDate = {lastUpdatedDate} ,  algorithmColumnTypeName = {algorithmColumnTypeName} ,  algorithmColumnTypeDescription = {algorithmColumnTypeDescription}  where  algorithmColumnTypeId = {algorithmColumnTypeId}  ")
-      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "algorithmColumnTypeName" -> dto.algorithmColumnTypeName , "algorithmColumnTypeDescription" -> dto.algorithmColumnTypeDescription, "algorithmColumnTypeId" -> dto.algorithmColumnTypeId ).executeInsert() 
+      val resCnt = SQL("update algorithmColumnType set  lastUpdatedDate = {lastUpdatedDate} ,  algorithmColumnTypeName = {algorithmColumnTypeName} ,  algorithmColumnTypeDescription = {algorithmColumnTypeDescription} ,  verificationClassName = {verificationClassName} ,  verificationDefinition = {verificationDefinition}  where  algorithmColumnTypeId = {algorithmColumnTypeId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "algorithmColumnTypeName" -> dto.algorithmColumnTypeName , "algorithmColumnTypeDescription" -> dto.algorithmColumnTypeDescription , "verificationClassName" -> dto.verificationClassName , "verificationDefinition" -> dto.verificationDefinition, "algorithmColumnTypeId" -> dto.algorithmColumnTypeId ).executeInsert() 
    releaseConnection(connection);  
      getAlgorithmColumnTypeByPk(dto.algorithmColumnTypeId) 
     } 

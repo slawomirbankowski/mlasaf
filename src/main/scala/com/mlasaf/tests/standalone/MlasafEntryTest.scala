@@ -13,7 +13,7 @@ object MlasafEntryTest {
   def main(args : Array[String]) = {
 
     val newargs = Array(
-      "--jdbcString", "jdbc:mysql://localhost:3307/mlasaf40?useSSL=false"
+      "--jdbcString", "jdbc:mysql://localhost:3307/mlasaf41?useSSL=false"
       , "--jdbcUser" , System.getenv("MLASAF_USER")
       , "--jdbcPass" , System.getenv("MLASAF_PASS")
       , "--jdbcDriver", System.getenv("MLASAF_DRIVER")

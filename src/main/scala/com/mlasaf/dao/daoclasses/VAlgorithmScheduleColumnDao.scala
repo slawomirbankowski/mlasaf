@@ -156,6 +156,18 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
+ def getDtosByAlgorithmColumnType_verificationClassName(colValue : String) : List[VAlgorithmScheduleColumnDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where algorithmColumnType_verificationClassName = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByAlgorithmColumnType_verificationDefinition(colValue : String) : List[VAlgorithmScheduleColumnDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where algorithmColumnType_verificationDefinition = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
  def getDtosByAlgorithmSchedule_algorithmScheduleId(colValue : Long) : List[VAlgorithmScheduleColumnDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VAlgorithmScheduleColumnDto] = SQL("select * from vAlgorithmScheduleColumn where algorithmSchedule_algorithmScheduleId = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VAlgorithmScheduleColumnDto].*);  

@@ -25,10 +25,10 @@ case class VDownloadTransformAlgorithmScheduleSummaryDto (
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
  def toAnyArray() : Array[Any] = {    Array(downloadTransformAlgorithmScheduleId,guid,insertedRowDate,lastUpdatedDate,downloadTransformGroupId,algorithmScheduleViewId,downloadTransformExecutorStorage_count)  }  
- def toStringArray() : Array[String] = {    Array(""+downloadTransformAlgorithmScheduleId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+downloadTransformGroupId,""+algorithmScheduleViewId,""+downloadTransformExecutorStorage_count)   }  
- def toFullString() : String = {    "downloadTransformAlgorithmScheduleId:'"+downloadTransformAlgorithmScheduleId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"downloadTransformGroupId:'"+downloadTransformGroupId+"'"+","+"algorithmScheduleViewId:'"+algorithmScheduleViewId+"'"+","+"downloadTransformExecutorStorage_count:'"+downloadTransformExecutorStorage_count+"'"   }
+ def toStringArray() : Array[String] = {    Array(""+downloadTransformAlgorithmScheduleId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+downloadTransformGroupId,""+algorithmScheduleViewId,""+downloadTransformExecutorStorage_count)   }
  def toJson() : String = { "" }
-  def getFieldValue(name : String) : Any = {
+ def toFullString() : String = {    "downloadTransformAlgorithmScheduleId:'"+downloadTransformAlgorithmScheduleId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"downloadTransformGroupId:'"+downloadTransformGroupId+"'"+","+"algorithmScheduleViewId:'"+algorithmScheduleViewId+"'"+","+"downloadTransformExecutorStorage_count:'"+downloadTransformExecutorStorage_count+"'"   }
+   def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "downloadTransformAlgorithmScheduleId" => downloadTransformAlgorithmScheduleId  
      case "guid" => guid  

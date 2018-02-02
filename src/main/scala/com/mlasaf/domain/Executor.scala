@@ -150,7 +150,11 @@ trait Executor extends ThreadBase {
             val isScheduled = 1;
             val deleteOldCopied = 0;
             val intervalValue = 0;
-            var srcSchedule = parentContext.daoFactory.daos.sourceScheduleDao.createAndInsertSourceScheduleDto(schView.sourceViewId, storageId, onDemand, new java.util.Date(), intervalValue, isScheduled, deleteOldCopied);
+            val transformGroups = parentContext.daoFactory.daos.downloadTransformAlgorithmScheduleDao.getDownloadTransformAlgorithmScheduleByFkAlgorithmScheduleViewId(schView.algorithmScheduleViewId);
+            val transfGroupId = if (transformGroups.size > 0) { transformGroups.head.downloadTransformGroupId } else {  parentContext.daoFactory.daos.downloadTransformGroupDao.getDownloadTransformGroupFirstByName("DEFAULT").head.downloadTransformGroupId }
+            // ADD TRANSFORM GROUP ID to sourceSchedule
+            //parentContext.daoFactory.daos.sourceScheduleDao.createAndInsertSourceScheduleDto()
+            var srcSchedule = parentContext.daoFactory.daos.sourceScheduleDao.createAndInsertSourceScheduleDto(schView.sourceViewId, storageId, transfGroupId, onDemand, new java.util.Date(), intervalValue, isScheduled, deleteOldCopied);
             logger.info("==>For algorithmRun: " + runDto.algorithmRunId + ", viewId: " + schView.sourceViewId  + " create schedule to download view for viewId: " + schView.sourceViewId + ", NEW schedule: " + srcSchedule.sourceScheduleId);
             algoRun.algorithmScheduleViewDtos += schView;
           }

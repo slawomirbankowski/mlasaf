@@ -72,6 +72,12 @@ import java.util.Date
    releaseConnection(connection);  
    maxid  
  }  
+ def getExecutorStorageViewByFkDownloadTransformGroupId(fkColValue : Long) : List[ExecutorStorageViewDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[ExecutorStorageViewDto] = SQL("select * from executorStorageView where downloadTransformGroupId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[ExecutorStorageViewDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
  def getExecutorStorageViewByFkExecutorStorageId(fkColValue : Long) : List[ExecutorStorageViewDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[ExecutorStorageViewDto] = SQL("select * from executorStorageView where executorStorageId = {fkColValue} ").on("fkColValue" -> fkColValue).as(anorm.Macro.namedParser[ExecutorStorageViewDto].*);  
@@ -117,14 +123,14 @@ import java.util.Date
       null; 
     } 
  } 
-  def createAndInsertExecutorStorageViewDto(executorStorageSnapshotId : Long, executorStorageId : Long, sourceDownloadId : Long, sourceViewId : Long, executorStorageResourceId : Long) : ExecutorStorageViewDto = {
-    val dto = new ExecutorStorageViewDto(0,0,new Date(),new Date(),executorStorageSnapshotId,executorStorageId,sourceDownloadId,sourceViewId,executorStorageResourceId)
+  def createAndInsertExecutorStorageViewDto(executorStorageSnapshotId : Long, executorStorageId : Long, sourceDownloadId : Long, downloadTransformGroupId : Long, sourceViewId : Long, executorStorageResourceId : Long) : ExecutorStorageViewDto = {
+    val dto = new ExecutorStorageViewDto(0,0,new Date(),new Date(),executorStorageSnapshotId,executorStorageId,sourceDownloadId,downloadTransformGroupId,sourceViewId,executorStorageResourceId)
     insertExecutorStorageViewDto(dto);   
   }   
   def updateExecutorStorageViewDto(dto : ExecutorStorageViewDto): ExecutorStorageViewDto = {  
     implicit val connection = getConnection();  
-      val resCnt = SQL("update executorStorageView set  lastUpdatedDate = {lastUpdatedDate} ,  executorStorageSnapshotId = {executorStorageSnapshotId} ,  executorStorageId = {executorStorageId} ,  sourceDownloadId = {sourceDownloadId} ,  sourceViewId = {sourceViewId} ,  executorStorageResourceId = {executorStorageResourceId}  where  executorStorageViewId = {executorStorageViewId}  ")
-      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "executorStorageSnapshotId" -> dto.executorStorageSnapshotId , "executorStorageId" -> dto.executorStorageId , "sourceDownloadId" -> dto.sourceDownloadId , "sourceViewId" -> dto.sourceViewId , "executorStorageResourceId" -> dto.executorStorageResourceId, "executorStorageViewId" -> dto.executorStorageViewId ).executeInsert() 
+      val resCnt = SQL("update executorStorageView set  lastUpdatedDate = {lastUpdatedDate} ,  executorStorageSnapshotId = {executorStorageSnapshotId} ,  executorStorageId = {executorStorageId} ,  sourceDownloadId = {sourceDownloadId} ,  downloadTransformGroupId = {downloadTransformGroupId} ,  sourceViewId = {sourceViewId} ,  executorStorageResourceId = {executorStorageResourceId}  where  executorStorageViewId = {executorStorageViewId}  ")
+      .on("lastUpdatedDate" -> dto.lastUpdatedDate , "executorStorageSnapshotId" -> dto.executorStorageSnapshotId , "executorStorageId" -> dto.executorStorageId , "sourceDownloadId" -> dto.sourceDownloadId , "downloadTransformGroupId" -> dto.downloadTransformGroupId , "sourceViewId" -> dto.sourceViewId , "executorStorageResourceId" -> dto.executorStorageResourceId, "executorStorageViewId" -> dto.executorStorageViewId ).executeInsert() 
    releaseConnection(connection);  
      getExecutorStorageViewByPk(dto.executorStorageViewId) 
     } 

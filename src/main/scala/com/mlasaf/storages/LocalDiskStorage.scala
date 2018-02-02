@@ -61,7 +61,8 @@ class LocalDiskStorage extends Storage {
     logger.info("File downloaded from view to path: " + storageViewFilePath + ", rows: " + viewRowsCount + ", size: " + viewSize);
     val storageSnapshotDto = parentContext.daoFactory.daos.executorStorageSnapshotDao.createAndInsertExecutorStorageSnapshotDto(1);
     val storageResourceDto = parentContext.daoFactory.daos.executorStorageResourceDao.createAndInsertExecutorStorageResourceDto(this.storageDto.executorStorageId, storageViewFilePath, viewSize, viewRowsCount, 1);
-    val storageViewDto = parentContext.daoFactory.daos.executorStorageViewDao.createAndInsertExecutorStorageViewDto(storageSnapshotDto.executorStorageSnapshotId, this.storageDto.executorStorageId, sourceDownloadDto.sourceDownloadId, sourceView.sourceViewId, storageResourceDto.executorStorageResourceId);
+    val downloadTransformGroupId = sourceSchedule.downloadTransformGroup_downloadTransformGroupId;
+    val storageViewDto = parentContext.daoFactory.daos.executorStorageViewDao.createAndInsertExecutorStorageViewDto(storageSnapshotDto.executorStorageSnapshotId, this.storageDto.executorStorageId, sourceDownloadDto.sourceDownloadId, downloadTransformGroupId, sourceView.sourceViewId, storageResourceDto.executorStorageResourceId);
     storageViewDto
   }
   def onRunStorage() = {

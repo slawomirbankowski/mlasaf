@@ -11,7 +11,7 @@ class KnimeExecutor extends Executor {
 
   /** */
   def onRunExecutor(): Unit = {
-    logger.info("Weka Executor run  ");
+    logger.info("Knime Executor run  ");
     // check algorithms for LOCAL to be run
   }
   /** */

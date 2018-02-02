@@ -22,12 +22,12 @@ case class VAlgorithmRunSummaryDto (
      , val errorDescription : String
      , val isRunning : Int
      , val isFinished : Int
-     , val algorithmOutput_count : Int
      , val algorithmRunInfo_count : Int
-     , val algorithmRunView_count : Int 
+     , val algorithmRunView_count : Int
+     , val algorithmOutput_count : Int 
      ) extends BaseReadOnlyDto {  
    def tableName : String = {    "vAlgorithmRunSummary";    }  
-   def fields : String = {    "algorithmRunId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleId,executorInstanceId,executorStorageId,algorithmRunTypeId,algorithmRunName,runDate,runStatus,isError,errorDescription,isRunning,isFinished,algorithmOutput_count,algorithmRunInfo_count,algorithmRunView_count";    }  
+   def fields : String = {    "algorithmRunId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleId,executorInstanceId,executorStorageId,algorithmRunTypeId,algorithmRunName,runDate,runStatus,isError,errorDescription,isRunning,isFinished,algorithmRunInfo_count,algorithmRunView_count,algorithmOutput_count";    }  
    def pkFields : String = {    "";    }  
    def fkFields : String = {    "";    }  
    def nameField : String = {    "";    }  
@@ -35,10 +35,10 @@ case class VAlgorithmRunSummaryDto (
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(algorithmRunId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleId,executorInstanceId,executorStorageId,algorithmRunTypeId,algorithmRunName,runDate,runStatus,isError,errorDescription,isRunning,isFinished,algorithmOutput_count,algorithmRunInfo_count,algorithmRunView_count)  }  
- def toStringArray() : Array[String] = {    Array(""+algorithmRunId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmScheduleId,""+executorInstanceId,""+executorStorageId,""+algorithmRunTypeId,""+algorithmRunName,""+runDate,""+runStatus,""+isError,""+errorDescription,""+isRunning,""+isFinished,""+algorithmOutput_count,""+algorithmRunInfo_count,""+algorithmRunView_count)   }  
- def toJson() : String = {   "{" + "\"algorithmRunId\":\""+algorithmRunId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"algorithmScheduleId\":\""+algorithmScheduleId+"\""+","+"\"executorInstanceId\":\""+executorInstanceId+"\""+","+"\"executorStorageId\":\""+executorStorageId+"\""+","+"\"algorithmRunTypeId\":\""+algorithmRunTypeId+"\""+","+"\"algorithmRunName\":\""+algorithmRunName+"\""+","+"\"runDate\":\""+runDate+"\""+","+"\"runStatus\":\""+runStatus+"\""+","+"\"isError\":\""+isError+"\""+","+"\"errorDescription\":\""+errorDescription+"\""+","+"\"isRunning\":\""+isRunning+"\""+","+"\"isFinished\":\""+isFinished+"\""+","+"\"algorithmOutput_count\":\""+algorithmOutput_count+"\""+","+"\"algorithmRunInfo_count\":\""+algorithmRunInfo_count+"\""+","+"\"algorithmRunView_count\":\""+algorithmRunView_count+"\"" + "}"   }  
- def toFullString() : String = {    "algorithmRunId:'"+algorithmRunId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmScheduleId:'"+algorithmScheduleId+"'"+","+"executorInstanceId:'"+executorInstanceId+"'"+","+"executorStorageId:'"+executorStorageId+"'"+","+"algorithmRunTypeId:'"+algorithmRunTypeId+"'"+","+"algorithmRunName:'"+algorithmRunName+"'"+","+"runDate:'"+runDate+"'"+","+"runStatus:'"+runStatus+"'"+","+"isError:'"+isError+"'"+","+"errorDescription:'"+errorDescription+"'"+","+"isRunning:'"+isRunning+"'"+","+"isFinished:'"+isFinished+"'"+","+"algorithmOutput_count:'"+algorithmOutput_count+"'"+","+"algorithmRunInfo_count:'"+algorithmRunInfo_count+"'"+","+"algorithmRunView_count:'"+algorithmRunView_count+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(algorithmRunId,guid,insertedRowDate,lastUpdatedDate,algorithmScheduleId,executorInstanceId,executorStorageId,algorithmRunTypeId,algorithmRunName,runDate,runStatus,isError,errorDescription,isRunning,isFinished,algorithmRunInfo_count,algorithmRunView_count,algorithmOutput_count)  }  
+ def toStringArray() : Array[String] = {    Array(""+algorithmRunId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+algorithmScheduleId,""+executorInstanceId,""+executorStorageId,""+algorithmRunTypeId,""+algorithmRunName,""+runDate,""+runStatus,""+isError,""+errorDescription,""+isRunning,""+isFinished,""+algorithmRunInfo_count,""+algorithmRunView_count,""+algorithmOutput_count)   }  
+ def toJson() : String = {   "{" + "\"algorithmRunId\":\""+algorithmRunId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"algorithmScheduleId\":\""+algorithmScheduleId+"\""+","+"\"executorInstanceId\":\""+executorInstanceId+"\""+","+"\"executorStorageId\":\""+executorStorageId+"\""+","+"\"algorithmRunTypeId\":\""+algorithmRunTypeId+"\""+","+"\"algorithmRunName\":\""+algorithmRunName+"\""+","+"\"runDate\":\""+runDate+"\""+","+"\"runStatus\":\""+runStatus+"\""+","+"\"isError\":\""+isError+"\""+","+"\"errorDescription\":\""+errorDescription+"\""+","+"\"isRunning\":\""+isRunning+"\""+","+"\"isFinished\":\""+isFinished+"\""+","+"\"algorithmRunInfo_count\":\""+algorithmRunInfo_count+"\""+","+"\"algorithmRunView_count\":\""+algorithmRunView_count+"\""+","+"\"algorithmOutput_count\":\""+algorithmOutput_count+"\"" + "}"   }  
+ def toFullString() : String = {    "algorithmRunId:'"+algorithmRunId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"algorithmScheduleId:'"+algorithmScheduleId+"'"+","+"executorInstanceId:'"+executorInstanceId+"'"+","+"executorStorageId:'"+executorStorageId+"'"+","+"algorithmRunTypeId:'"+algorithmRunTypeId+"'"+","+"algorithmRunName:'"+algorithmRunName+"'"+","+"runDate:'"+runDate+"'"+","+"runStatus:'"+runStatus+"'"+","+"isError:'"+isError+"'"+","+"errorDescription:'"+errorDescription+"'"+","+"isRunning:'"+isRunning+"'"+","+"isFinished:'"+isFinished+"'"+","+"algorithmRunInfo_count:'"+algorithmRunInfo_count+"'"+","+"algorithmRunView_count:'"+algorithmRunView_count+"'"+","+"algorithmOutput_count:'"+algorithmOutput_count+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "algorithmRunId" => algorithmRunId  
@@ -56,9 +56,9 @@ case class VAlgorithmRunSummaryDto (
      case "errorDescription" => errorDescription  
      case "isRunning" => isRunning  
      case "isFinished" => isFinished  
-     case "algorithmOutput_count" => algorithmOutput_count  
      case "algorithmRunInfo_count" => algorithmRunInfo_count  
-     case "algorithmRunView_count" => algorithmRunView_count   
+     case "algorithmRunView_count" => algorithmRunView_count  
+     case "algorithmOutput_count" => algorithmOutput_count   
     case _ => null 
     } 
     ret 
@@ -80,9 +80,9 @@ case class VAlgorithmRunSummaryDto (
      case "errorDescription" => "String"  
      case "isRunning" => "Int"  
      case "isFinished" => "Int"  
-     case "algorithmOutput_count" => "Int"  
      case "algorithmRunInfo_count" => "Int"  
-     case "algorithmRunView_count" => "Int"   
+     case "algorithmRunView_count" => "Int"  
+     case "algorithmOutput_count" => "Int"   
     case _ => "Object" 
     } 
     ret 
@@ -105,9 +105,9 @@ object VAlgorithmRunSummaryDto {
    val FIELD_errorDescription = "errorDescription";
    val FIELD_isRunning = "isRunning";
    val FIELD_isFinished = "isFinished";
-   val FIELD_algorithmOutput_count = "algorithmOutput_count";
    val FIELD_algorithmRunInfo_count = "algorithmRunInfo_count";
    val FIELD_algorithmRunView_count = "algorithmRunView_count";
+   val FIELD_algorithmOutput_count = "algorithmOutput_count";
 
 }
 

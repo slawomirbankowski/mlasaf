@@ -12,6 +12,7 @@ case class SourceDownloadDto (
      , val insertedRowDate : java.util.Date
      , val lastUpdatedDate : java.util.Date
      , val sourceScheduleId : Long
+     , val downloadTransformGroupId : Long
      , val executorHostId : Long
      , val executorContextId : Long
      , val sourceViewId : Long
@@ -22,18 +23,18 @@ case class SourceDownloadDto (
      , val excecptionDescription : String 
      ) extends BaseDto {  
    def tableName : String = {    "sourceDownload";    }  
-   def fields : String = {    "sourceDownloadId,guid,insertedRowDate,lastUpdatedDate,sourceScheduleId,executorHostId,executorContextId,sourceViewId,retryNumber,isRunning,isFinished,isExcecption,excecptionDescription";    }  
+   def fields : String = {    "sourceDownloadId,guid,insertedRowDate,lastUpdatedDate,sourceScheduleId,downloadTransformGroupId,executorHostId,executorContextId,sourceViewId,retryNumber,isRunning,isFinished,isExcecption,excecptionDescription";    }  
    def pkFields : String = {    "sourceDownloadId";    }  
-   def fkFields : String = {    "executorContextId,executorHostId,sourceScheduleId,sourceViewId";    }  
+   def fkFields : String = {    "downloadTransformGroupId,executorContextId,executorHostId,sourceScheduleId,sourceViewId";    }  
    def nameField : String = {    "";    }  
  def getPk() : Long = {    sourceDownloadId  }  
  def getInsertedRowDate() : java.util.Date = {    insertedRowDate  }  
  def getLastUpdatedDate() : java.util.Date = {    lastUpdatedDate  }  
  def getGuid() : Long = {    guid  }  
- def toAnyArray() : Array[Any] = {    Array(sourceDownloadId,guid,insertedRowDate,lastUpdatedDate,sourceScheduleId,executorHostId,executorContextId,sourceViewId,retryNumber,isRunning,isFinished,isExcecption,excecptionDescription)  }  
- def toStringArray() : Array[String] = {    Array(""+sourceDownloadId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceScheduleId,""+executorHostId,""+executorContextId,""+sourceViewId,""+retryNumber,""+isRunning,""+isFinished,""+isExcecption,""+excecptionDescription)   }  
- def toJson() : String = {   "{" + "\"sourceDownloadId\":\""+sourceDownloadId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"sourceScheduleId\":\""+sourceScheduleId+"\""+","+"\"executorHostId\":\""+executorHostId+"\""+","+"\"executorContextId\":\""+executorContextId+"\""+","+"\"sourceViewId\":\""+sourceViewId+"\""+","+"\"retryNumber\":\""+retryNumber+"\""+","+"\"isRunning\":\""+isRunning+"\""+","+"\"isFinished\":\""+isFinished+"\""+","+"\"isExcecption\":\""+isExcecption+"\""+","+"\"excecptionDescription\":\""+excecptionDescription+"\"" + "}"   }  
- def toFullString() : String = {    "sourceDownloadId:'"+sourceDownloadId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"sourceScheduleId:'"+sourceScheduleId+"'"+","+"executorHostId:'"+executorHostId+"'"+","+"executorContextId:'"+executorContextId+"'"+","+"sourceViewId:'"+sourceViewId+"'"+","+"retryNumber:'"+retryNumber+"'"+","+"isRunning:'"+isRunning+"'"+","+"isFinished:'"+isFinished+"'"+","+"isExcecption:'"+isExcecption+"'"+","+"excecptionDescription:'"+excecptionDescription+"'"   } 
+ def toAnyArray() : Array[Any] = {    Array(sourceDownloadId,guid,insertedRowDate,lastUpdatedDate,sourceScheduleId,downloadTransformGroupId,executorHostId,executorContextId,sourceViewId,retryNumber,isRunning,isFinished,isExcecption,excecptionDescription)  }  
+ def toStringArray() : Array[String] = {    Array(""+sourceDownloadId,""+guid,""+insertedRowDate,""+lastUpdatedDate,""+sourceScheduleId,""+downloadTransformGroupId,""+executorHostId,""+executorContextId,""+sourceViewId,""+retryNumber,""+isRunning,""+isFinished,""+isExcecption,""+excecptionDescription)   }  
+ def toJson() : String = {   "{" + "\"sourceDownloadId\":\""+sourceDownloadId+"\""+","+"\"guid\":\""+guid+"\""+","+"\"insertedRowDate\":\""+insertedRowDate+"\""+","+"\"lastUpdatedDate\":\""+lastUpdatedDate+"\""+","+"\"sourceScheduleId\":\""+sourceScheduleId+"\""+","+"\"downloadTransformGroupId\":\""+downloadTransformGroupId+"\""+","+"\"executorHostId\":\""+executorHostId+"\""+","+"\"executorContextId\":\""+executorContextId+"\""+","+"\"sourceViewId\":\""+sourceViewId+"\""+","+"\"retryNumber\":\""+retryNumber+"\""+","+"\"isRunning\":\""+isRunning+"\""+","+"\"isFinished\":\""+isFinished+"\""+","+"\"isExcecption\":\""+isExcecption+"\""+","+"\"excecptionDescription\":\""+excecptionDescription+"\"" + "}"   }  
+ def toFullString() : String = {    "sourceDownloadId:'"+sourceDownloadId+"'"+","+"guid:'"+guid+"'"+","+"insertedRowDate:'"+insertedRowDate+"'"+","+"lastUpdatedDate:'"+lastUpdatedDate+"'"+","+"sourceScheduleId:'"+sourceScheduleId+"'"+","+"downloadTransformGroupId:'"+downloadTransformGroupId+"'"+","+"executorHostId:'"+executorHostId+"'"+","+"executorContextId:'"+executorContextId+"'"+","+"sourceViewId:'"+sourceViewId+"'"+","+"retryNumber:'"+retryNumber+"'"+","+"isRunning:'"+isRunning+"'"+","+"isFinished:'"+isFinished+"'"+","+"isExcecption:'"+isExcecption+"'"+","+"excecptionDescription:'"+excecptionDescription+"'"   } 
    def getFieldValue(name : String) : Any = { 
     val ret = name match { 
     case "sourceDownloadId" => sourceDownloadId  
@@ -41,6 +42,7 @@ case class SourceDownloadDto (
      case "insertedRowDate" => insertedRowDate  
      case "lastUpdatedDate" => lastUpdatedDate  
      case "sourceScheduleId" => sourceScheduleId  
+     case "downloadTransformGroupId" => downloadTransformGroupId  
      case "executorHostId" => executorHostId  
      case "executorContextId" => executorContextId  
      case "sourceViewId" => sourceViewId  
@@ -60,6 +62,7 @@ case class SourceDownloadDto (
      case "insertedRowDate" => "java.util.Date"  
      case "lastUpdatedDate" => "java.util.Date"  
      case "sourceScheduleId" => "Long"  
+     case "downloadTransformGroupId" => "Long"  
      case "executorHostId" => "Long"  
      case "executorContextId" => "Long"  
      case "sourceViewId" => "Long"  
@@ -73,21 +76,22 @@ case class SourceDownloadDto (
     ret 
   } 
    def prepareInsert(connection : java.sql.Connection) : java.sql.PreparedStatement = {
-     val stat = connection.prepareStatement("insert into sourceDownload(guid,sourceScheduleId,executorHostId,executorContextId,sourceViewId,retryNumber,isRunning,isFinished,isExcecption,excecptionDescription) values (?,?,?,?,?,?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
+     val stat = connection.prepareStatement("insert into sourceDownload(guid,sourceScheduleId,downloadTransformGroupId,executorHostId,executorContextId,sourceViewId,retryNumber,isRunning,isFinished,isExcecption,excecptionDescription) values (?,?,?,?,?,?,?,?,?,?,?)", java.sql.Statement.RETURN_GENERATED_KEYS);
     stat.setObject(1, guid);
     stat.setObject(2, sourceScheduleId);
-    stat.setObject(3, executorHostId);
-    stat.setObject(4, executorContextId);
-    stat.setObject(5, sourceViewId);
-    stat.setObject(6, retryNumber);
-    stat.setObject(7, isRunning);
-    stat.setObject(8, isFinished);
-    stat.setObject(9, isExcecption);
-    stat.setObject(10, excecptionDescription);
+    stat.setObject(3, downloadTransformGroupId);
+    stat.setObject(4, executorHostId);
+    stat.setObject(5, executorContextId);
+    stat.setObject(6, sourceViewId);
+    stat.setObject(7, retryNumber);
+    stat.setObject(8, isRunning);
+    stat.setObject(9, isFinished);
+    stat.setObject(10, isExcecption);
+    stat.setObject(11, excecptionDescription);
     return stat; 
    } 
-   def modify(sourceScheduleId : Long, executorHostId : Long, executorContextId : Long, sourceViewId : Long, retryNumber : Int, isRunning : Int, isFinished : Int, isExcecption : Int, excecptionDescription : String) : SourceDownloadDto = {
-    val dtoModified = new SourceDownloadDto(this.sourceDownloadId,this.guid,this.insertedRowDate,new java.util.Date(),sourceScheduleId,executorHostId,executorContextId,sourceViewId,retryNumber,isRunning,isFinished,isExcecption,excecptionDescription);
+   def modify(sourceScheduleId : Long, downloadTransformGroupId : Long, executorHostId : Long, executorContextId : Long, sourceViewId : Long, retryNumber : Int, isRunning : Int, isFinished : Int, isExcecption : Int, excecptionDescription : String) : SourceDownloadDto = {
+    val dtoModified = new SourceDownloadDto(this.sourceDownloadId,this.guid,this.insertedRowDate,new java.util.Date(),sourceScheduleId,downloadTransformGroupId,executorHostId,executorContextId,sourceViewId,retryNumber,isRunning,isFinished,isExcecption,excecptionDescription);
     dtoModified
   }
  } 
@@ -98,6 +102,7 @@ object SourceDownloadDto {
    val FIELD_insertedRowDate = "insertedRowDate";
    val FIELD_lastUpdatedDate = "lastUpdatedDate";
    val FIELD_sourceScheduleId = "sourceScheduleId";
+   val FIELD_downloadTransformGroupId = "downloadTransformGroupId";
    val FIELD_executorHostId = "executorHostId";
    val FIELD_executorContextId = "executorContextId";
    val FIELD_sourceViewId = "sourceViewId";
@@ -107,8 +112,8 @@ object SourceDownloadDto {
    val FIELD_isExcecption = "isExcecption";
    val FIELD_excecptionDescription = "excecptionDescription";
 
-  def createNewSourceDownloadDto(sourceScheduleId : Long, executorHostId : Long, executorContextId : Long, sourceViewId : Long, retryNumber : Int, isRunning : Int, isFinished : Int, isExcecption : Int, excecptionDescription : String) : SourceDownloadDto = {  
-     val dto = new SourceDownloadDto(0,0,new java.util.Date(),new java.util.Date(),sourceScheduleId,executorHostId,executorContextId,sourceViewId,retryNumber,isRunning,isFinished,isExcecption,excecptionDescription)   
+  def createNewSourceDownloadDto(sourceScheduleId : Long, downloadTransformGroupId : Long, executorHostId : Long, executorContextId : Long, sourceViewId : Long, retryNumber : Int, isRunning : Int, isFinished : Int, isExcecption : Int, excecptionDescription : String) : SourceDownloadDto = {  
+     val dto = new SourceDownloadDto(0,0,new java.util.Date(),new java.util.Date(),sourceScheduleId,downloadTransformGroupId,executorHostId,executorContextId,sourceViewId,retryNumber,isRunning,isFinished,isExcecption,excecptionDescription)   
     dto 
   } 
 

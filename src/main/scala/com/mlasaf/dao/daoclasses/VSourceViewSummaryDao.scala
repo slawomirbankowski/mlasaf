@@ -126,6 +126,18 @@ import java.util.Date
    releaseConnection(connection);  
    dtos  
  }  
+ def getDtosBySourceDownload_count(colValue : Int) : List[VSourceViewSummaryDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VSourceViewSummaryDto] = SQL("select * from vSourceViewSummary where sourceDownload_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewSummaryDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
+ def getDtosByExecutorStorageView_count(colValue : Int) : List[VSourceViewSummaryDto] = { 
+   implicit val connection = getConnection();  
+   val dtos : List[VSourceViewSummaryDto] = SQL("select * from vSourceViewSummary where executorStorageView_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewSummaryDto].*);  
+   releaseConnection(connection);  
+   dtos  
+ }  
  def getDtosByAlgorithmScheduleView_count(colValue : Int) : List[VSourceViewSummaryDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VSourceViewSummaryDto] = SQL("select * from vSourceViewSummary where algorithmScheduleView_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewSummaryDto].*);  
@@ -147,18 +159,6 @@ import java.util.Date
  def getDtosBySourceSchedule_count(colValue : Int) : List[VSourceViewSummaryDto] = { 
    implicit val connection = getConnection();  
    val dtos : List[VSourceViewSummaryDto] = SQL("select * from vSourceViewSummary where sourceSchedule_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewSummaryDto].*);  
-   releaseConnection(connection);  
-   dtos  
- }  
- def getDtosBySourceDownload_count(colValue : Int) : List[VSourceViewSummaryDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VSourceViewSummaryDto] = SQL("select * from vSourceViewSummary where sourceDownload_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewSummaryDto].*);  
-   releaseConnection(connection);  
-   dtos  
- }  
- def getDtosByExecutorStorageView_count(colValue : Int) : List[VSourceViewSummaryDto] = { 
-   implicit val connection = getConnection();  
-   val dtos : List[VSourceViewSummaryDto] = SQL("select * from vSourceViewSummary where executorStorageView_count = {colValue} ").on("colValue" -> colValue).as(anorm.Macro.namedParser[VSourceViewSummaryDto].*);  
    releaseConnection(connection);  
    dtos  
  }  

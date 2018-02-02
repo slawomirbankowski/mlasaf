@@ -328,7 +328,7 @@
         </createIndex>
 
 
-        <createTable tableName="executorRest">
+        <createTable tableName="executorRest" remarks="REST servcice registered on host on given port number">
             <column name="executorRestId" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -346,7 +346,7 @@
         <addForeignKeyConstraint baseTableName="executorRest" baseColumnNames="executorHostId" referencedTableName="executorHost" referencedColumnNames="executorHostId"  constraintName="fk_erest_ehId"  />
 
 
-        <createTable tableName="executorRestCall">
+        <createTable tableName="executorRestCall" remarks="single call to REST service">
             <column name="executorRestCallId" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -376,7 +376,7 @@
         <addForeignKeyConstraint baseTableName="executorRestCall" baseColumnNames="executorRestId" referencedTableName="executorRest" referencedColumnNames="executorRestId"  constraintName="fk_erc_er"  />
 
 
-        <createTable tableName="executorInstance">
+        <createTable tableName="executorInstance" remarks="instance of executor in context">
             <column name="executorInstanceId" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -405,7 +405,7 @@
         <addForeignKeyConstraint baseTableName="executorInstance" baseColumnNames="executorContextId" referencedTableName="executorContext" referencedColumnNames="executorContextId"  constraintName="fk_ei_ec"  />
 
 
-        <createTable tableName="executorInstanceState">
+        <createTable tableName="executorInstanceState" remarks="state of instance over time">
         <column name="executorInstanceStateId" type="bigint" autoIncrement="true">
             <constraints primaryKey="true" nullable="false"/>
         </column>
@@ -423,7 +423,7 @@
         <addForeignKeyConstraint baseTableName="executorInstanceState" baseColumnNames="executorInstanceId" referencedTableName="executorInstance" referencedColumnNames="executorInstanceId"  constraintName="fk_eis_ei"  />
 
 
-        <createTable tableName="executorStorageType">
+        <createTable tableName="executorStorageType" remarks="type of storage: disk, HDFS, database">
             <column name="executorStorageTypeId" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -516,6 +516,7 @@
             <column name="executorStorageSnapshotId" type="bigint" remarks="PARENT" />
             <column name="executorStorageId" type="bigint"/>
             <column name="sourceDownloadId" type="bigint"/>
+            <column name="downloadTransformGroupId" type="bigint" defaultValueNumeric="1"/>
             <column name="sourceViewId" type="bigint" />
             <column name="executorStorageResourceId" type="bigint" />
         </createTable>
@@ -555,7 +556,7 @@
         </insert>
 
 
-        <createTable tableName="resourceManager">
+        <createTable tableName="resourceManager" remarks="manager for resources">
             <column name="resourceManagerId" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -576,7 +577,7 @@
         <addForeignKeyConstraint baseTableName="resourceManager" baseColumnNames="executorHostId" referencedTableName="executorHost" referencedColumnNames="executorHostId"  constraintName="fk_rm_ehId"  />
 
 
-        <createTable tableName="resourceMeasure">
+        <createTable tableName="resourceMeasure" remarks="DICTIONARY - measures">
             <column name="resourceMeasureId" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -615,7 +616,7 @@
         </insert>
 
 
-        <createTable tableName="resourceManagerMeasure">
+        <createTable tableName="resourceManagerMeasure" remarks="">
             <column name="resourceManagerMeasureId" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -634,7 +635,7 @@
         <addForeignKeyConstraint baseTableName="resourceManagerMeasure" baseColumnNames="resourceMeasureId" referencedTableName="resourceMeasure" referencedColumnNames="resourceMeasureId"  constraintName="fk_rmm_rme"  />
 
 
-        <createTable tableName="resourceManagerCheck">
+        <createTable tableName="resourceManagerCheck" remarks="">
             <column name="resourceManagerCheckId" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -652,7 +653,7 @@
         <addForeignKeyConstraint baseTableName="resourceManagerCheck" baseColumnNames="executorHostId" referencedTableName="executorHost" referencedColumnNames="executorHostId"  constraintName="fk_rmc_ehId"  />
 
 
-        <createTable tableName="resourceManagerAllocation">
+        <createTable tableName="resourceManagerAllocation" remarks="">
             <column name="resourceManagerAllocationId" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -988,6 +989,7 @@
             <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" remarks="date and time of change this row" />
             <column name="sourceViewId" type="bigint"/>
             <column name="executorStorageId" type="bigint"/>
+            <column name="downloadTransformGroupId" type="bigint" defaultValueNumeric="1"/>
             <column name="onDemand" type="int" defaultValueNumeric="0"/>
             <column name="startTime" type="timestamp"/>
             <column name="intervalValue" type="bigint"/>
@@ -1012,6 +1014,7 @@
             <column name="insertedRowDate" type="timestamp" defaultValueDate="${now}" remarks="date and time of insertion given row to database" />
             <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" remarks="date and time of change this row" />
             <column name="sourceScheduleId" type="bigint" />
+            <column name="downloadTransformGroupId" type="bigint" defaultValueNumeric="1"/>
             <column name="executorHostId" type="bigint" remarks="FK to executorHost table" />
             <column name="executorContextId" type="bigint" remarks="FK to executorContext table" />
             <column name="sourceViewId" type="bigint" />
@@ -1227,6 +1230,8 @@
             <column name="lastUpdatedDate" type="timestamp" defaultValueDate="${now}" remarks="date and time of change this row" />
             <column name="algorithmColumnTypeName" type="nvarchar(200)"/>
             <column name="algorithmColumnTypeDescription" type="nvarchar(2000)"/>
+            <column name="verificationClassName" type="nvarchar(2000)" defaultValue=""/>
+            <column name="verificationDefinition" type="nvarchar(2000)" defaultValue=""/>
         </createTable>
         <createIndex indexName="idx_act_actName" tableName="algorithmColumnType" unique="false">
             <column name="algorithmColumnTypeName" />
@@ -1234,38 +1239,52 @@
         <insert tableName="algorithmColumnType">
             <column name="algorithmColumnTypeName" value="Group"/>
             <column name="algorithmColumnTypeDescription" value=""/>
+            <column name="verificationClassName" value="com.mlasaf.verification.VerificationAny"/>
         </insert>
         <insert tableName="algorithmColumnType">
             <column name="algorithmColumnTypeName" value="SingleGroup"/>
             <column name="algorithmColumnTypeDescription" value=""/>
+            <column name="verificationClassName" value="com.mlasaf.verification.VerificationAny"/>
         </insert>
         <insert tableName="algorithmColumnType">
             <column name="algorithmColumnTypeName" value="Time"/>
             <column name="algorithmColumnTypeDescription" value=""/>
+            <column name="verificationClassName" value="com.mlasaf.verification.VerificationTime"/>
         </insert>
         <insert tableName="algorithmColumnType">
             <column name="algorithmColumnTypeName" value="Date"/>
             <column name="algorithmColumnTypeDescription" value=""/>
+            <column name="verificationClassName" value="com.mlasaf.verification.VerificationDate"/>
         </insert>
         <insert tableName="algorithmColumnType">
             <column name="algorithmColumnTypeName" value="Identifier"/>
             <column name="algorithmColumnTypeDescription" value=""/>
+            <column name="verificationClassName" value="com.mlasaf.verification.VerificationIdentifier"/>
         </insert>
         <insert tableName="algorithmColumnType">
             <column name="algorithmColumnTypeName" value="PredictionValue"/>
             <column name="algorithmColumnTypeDescription" value=""/>
+            <column name="verificationClassName" value="com.mlasaf.verification.VerificationValue"/>
         </insert>
         <insert tableName="algorithmColumnType">
             <column name="algorithmColumnTypeName" value="Feature"/>
             <column name="algorithmColumnTypeDescription" value=""/>
+            <column name="verificationClassName" value="com.mlasaf.verification.VerificationAny"/>
         </insert>
         <insert tableName="algorithmColumnType">
             <column name="algorithmColumnTypeName" value="NumericValue"/>
             <column name="algorithmColumnTypeDescription" value=""/>
+            <column name="verificationClassName" value="com.mlasaf.verification.VerificationValue"/>
         </insert>
         <insert tableName="algorithmColumnType">
             <column name="algorithmColumnTypeName" value="Label"/>
             <column name="algorithmColumnTypeDescription" value=""/>
+            <column name="verificationClassName" value="com.mlasaf.verification.VerificationAny"/>
+        </insert>
+        <insert tableName="algorithmColumnType">
+            <column name="algorithmColumnTypeName" value="Sequence"/>
+            <column name="algorithmColumnTypeDescription" value=""/>
+            <column name="verificationClassName" value="com.mlasaf.verification.VerificationSequence"/>
         </insert>
 
 
@@ -1641,6 +1660,10 @@
         <createIndex indexName="idx_dtg_downloadTransformGroupName" tableName="downloadTransformGroup" unique="false">
             <column name="downloadTransformGroupName" />
         </createIndex>
+        <insert tableName="downloadTransformGroup">
+            <column name="downloadTransformGroupName" value="DEFAULT"/>
+            <column name="downloadTransformGroupDescription" value=""/>
+        </insert>
 
 
         <createTable tableName="downloadTransformAlgorithmSchedule" remarks="" >
@@ -1761,7 +1784,9 @@
 
         <addForeignKeyConstraint baseTableName="executorStorageView" baseColumnNames="sourceDownloadId" referencedTableName="sourceDownload" referencedColumnNames="sourceDownloadId"  constraintName="fk_esv_sd"  />
         <addForeignKeyConstraint baseTableName="executorStorageView" baseColumnNames="sourceViewId" referencedTableName="sourceView" referencedColumnNames="sourceViewId"  constraintName="fk_esv_sv"  />
-
+        <addForeignKeyConstraint baseTableName="executorStorageView" baseColumnNames="downloadTransformGroupId" referencedTableName="downloadTransformGroup" referencedColumnNames="downloadTransformGroupId"  constraintName="fk_esv_dtg"  />
+        <addForeignKeyConstraint baseTableName="sourceSchedule" baseColumnNames="downloadTransformGroupId" referencedTableName="downloadTransformGroup" referencedColumnNames="downloadTransformGroupId"  constraintName="fk_ss_dtg"  />
+        <addForeignKeyConstraint baseTableName="sourceDownload" baseColumnNames="downloadTransformGroupId" referencedTableName="downloadTransformGroup" referencedColumnNames="downloadTransformGroupId"  constraintName="fk_sd_dtg"  />
 
 
 
@@ -1828,7 +1853,7 @@
             select algorithmRunView1.algorithmRunViewId, algorithmRunView1.guid, algorithmRunView1.insertedRowDate, algorithmRunView1.lastUpdatedDate, algorithmRunView1.algorithmRunId, algorithmRunView1.executorStorageViewId, algorithmRunView1.algorithmScheduleViewId, algorithmRunView1.isDownloaded
             ,  algorithmRun1.algorithmRunId as algorithmRun_algorithmRunId ,  algorithmRun1.guid as algorithmRun_guid ,  algorithmRun1.insertedRowDate as algorithmRun_insertedRowDate ,  algorithmRun1.lastUpdatedDate as algorithmRun_lastUpdatedDate ,  algorithmRun1.algorithmScheduleId as algorithmRun_algorithmScheduleId ,  algorithmRun1.executorInstanceId as algorithmRun_executorInstanceId ,  algorithmRun1.executorStorageId as algorithmRun_executorStorageId ,  algorithmRun1.algorithmRunTypeId as algorithmRun_algorithmRunTypeId ,  algorithmRun1.algorithmRunName as algorithmRun_algorithmRunName ,  algorithmRun1.runDate as algorithmRun_runDate ,  algorithmRun1.runStatus as algorithmRun_runStatus ,  algorithmRun1.isError as algorithmRun_isError ,  algorithmRun1.errorDescription as algorithmRun_errorDescription ,  algorithmRun1.isRunning as algorithmRun_isRunning ,  algorithmRun1.isFinished as algorithmRun_isFinished
             ,  algorithmScheduleView1.algorithmScheduleViewId as algorithmScheduleView_algorithmScheduleViewId ,  algorithmScheduleView1.guid as algorithmScheduleView_guid ,  algorithmScheduleView1.insertedRowDate as algorithmScheduleView_insertedRowDate ,  algorithmScheduleView1.lastUpdatedDate as algorithmScheduleView_lastUpdatedDate ,  algorithmScheduleView1.algorithmScheduleViewTypeId as algorithmScheduleView_algorithmScheduleViewTypeId ,  algorithmScheduleView1.algorithmScheduleId as algorithmScheduleView_algorithmScheduleId ,  algorithmScheduleView1.sourceViewId as algorithmScheduleView_sourceViewId ,  algorithmScheduleView1.joinOnDefinition as algorithmScheduleView_joinOnDefinition
-            ,  executorStorageView1.executorStorageViewId as executorStorageView_executorStorageViewId ,  executorStorageView1.guid as executorStorageView_guid ,  executorStorageView1.insertedRowDate as executorStorageView_insertedRowDate ,  executorStorageView1.lastUpdatedDate as executorStorageView_lastUpdatedDate ,  executorStorageView1.executorStorageSnapshotId as executorStorageView_executorStorageSnapshotId ,  executorStorageView1.executorStorageId as executorStorageView_executorStorageId ,  executorStorageView1.sourceDownloadId as executorStorageView_sourceDownloadId ,  executorStorageView1.sourceViewId as executorStorageView_sourceViewId ,  executorStorageView1.executorStorageResourceId as executorStorageView_executorStorageResourceId
+            ,  executorStorageView1.executorStorageViewId as executorStorageView_executorStorageViewId ,  executorStorageView1.guid as executorStorageView_guid ,  executorStorageView1.insertedRowDate as executorStorageView_insertedRowDate ,  executorStorageView1.lastUpdatedDate as executorStorageView_lastUpdatedDate ,  executorStorageView1.executorStorageSnapshotId as executorStorageView_executorStorageSnapshotId ,  executorStorageView1.executorStorageId as executorStorageView_executorStorageId ,  executorStorageView1.sourceDownloadId as executorStorageView_sourceDownloadId ,  executorStorageView1.downloadTransformGroupId as executorStorageView_downloadTransformGroupId ,  executorStorageView1.sourceViewId as executorStorageView_sourceViewId ,  executorStorageView1.executorStorageResourceId as executorStorageView_executorStorageResourceId
             from algorithmRunView algorithmRunView1
             join algorithmRun algorithmRun1 on algorithmRunView1.algorithmRunId = algorithmRun1.algorithmRunId
             join algorithmScheduleView algorithmScheduleView1 on algorithmRunView1.algorithmScheduleViewId = algorithmScheduleView1.algorithmScheduleViewId
@@ -1848,7 +1873,7 @@
 
         <createView  viewName="vAlgorithmScheduleColumn">
             select algorithmScheduleColumn1.algorithmScheduleColumnId, algorithmScheduleColumn1.guid, algorithmScheduleColumn1.insertedRowDate, algorithmScheduleColumn1.lastUpdatedDate, algorithmScheduleColumn1.algorithmScheduleId, algorithmScheduleColumn1.algorithmColumnTypeId, algorithmScheduleColumn1.algorithmScheduleViewId, algorithmScheduleColumn1.sourceViewId, algorithmScheduleColumn1.sourceViewColumnId, algorithmScheduleColumn1.extendedProperties
-            ,  algorithmColumnType1.algorithmColumnTypeId as algorithmColumnType_algorithmColumnTypeId ,  algorithmColumnType1.guid as algorithmColumnType_guid ,  algorithmColumnType1.insertedRowDate as algorithmColumnType_insertedRowDate ,  algorithmColumnType1.lastUpdatedDate as algorithmColumnType_lastUpdatedDate ,  algorithmColumnType1.algorithmColumnTypeName as algorithmColumnType_algorithmColumnTypeName ,  algorithmColumnType1.algorithmColumnTypeDescription as algorithmColumnType_algorithmColumnTypeDescription
+            ,  algorithmColumnType1.algorithmColumnTypeId as algorithmColumnType_algorithmColumnTypeId ,  algorithmColumnType1.guid as algorithmColumnType_guid ,  algorithmColumnType1.insertedRowDate as algorithmColumnType_insertedRowDate ,  algorithmColumnType1.lastUpdatedDate as algorithmColumnType_lastUpdatedDate ,  algorithmColumnType1.algorithmColumnTypeName as algorithmColumnType_algorithmColumnTypeName ,  algorithmColumnType1.algorithmColumnTypeDescription as algorithmColumnType_algorithmColumnTypeDescription ,  algorithmColumnType1.verificationClassName as algorithmColumnType_verificationClassName ,  algorithmColumnType1.verificationDefinition as algorithmColumnType_verificationDefinition
             ,  algorithmSchedule1.algorithmScheduleId as algorithmSchedule_algorithmScheduleId ,  algorithmSchedule1.guid as algorithmSchedule_guid ,  algorithmSchedule1.insertedRowDate as algorithmSchedule_insertedRowDate ,  algorithmSchedule1.lastUpdatedDate as algorithmSchedule_lastUpdatedDate ,  algorithmSchedule1.algorithmImplementationId as algorithmSchedule_algorithmImplementationId ,  algorithmSchedule1.algorithmScheduleTypeId as algorithmSchedule_algorithmScheduleTypeId ,  algorithmSchedule1.algorithmScheduleName as algorithmSchedule_algorithmScheduleName ,  algorithmSchedule1.isScheduled as algorithmSchedule_isScheduled ,  algorithmSchedule1.intervalValue as algorithmSchedule_intervalValue ,  algorithmSchedule1.isRunning as algorithmSchedule_isRunning
             ,  algorithmScheduleView1.algorithmScheduleViewId as algorithmScheduleView_algorithmScheduleViewId ,  algorithmScheduleView1.guid as algorithmScheduleView_guid ,  algorithmScheduleView1.insertedRowDate as algorithmScheduleView_insertedRowDate ,  algorithmScheduleView1.lastUpdatedDate as algorithmScheduleView_lastUpdatedDate ,  algorithmScheduleView1.algorithmScheduleViewTypeId as algorithmScheduleView_algorithmScheduleViewTypeId ,  algorithmScheduleView1.algorithmScheduleId as algorithmScheduleView_algorithmScheduleId ,  algorithmScheduleView1.sourceViewId as algorithmScheduleView_sourceViewId ,  algorithmScheduleView1.joinOnDefinition as algorithmScheduleView_joinOnDefinition
             ,  sourceView1.sourceViewId as sourceView_sourceViewId ,  sourceView1.guid as sourceView_guid ,  sourceView1.insertedRowDate as sourceView_insertedRowDate ,  sourceView1.lastUpdatedDate as sourceView_lastUpdatedDate ,  sourceView1.sourceInstanceId as sourceView_sourceInstanceId ,  sourceView1.sourceViewTypeId as sourceView_sourceViewTypeId ,  sourceView1.sourceViewFormatId as sourceView_sourceViewFormatId ,  sourceView1.sourceViewName as sourceView_sourceViewName ,  sourceView1.sourceViewDefinition as sourceView_sourceViewDefinition ,  sourceView1.isExisting as sourceView_isExisting ,  sourceView1.isCustom as sourceView_isCustom
@@ -1904,7 +1929,7 @@
 
         <createView  viewName="vAlgorithmVersionColumnType">
             select algorithmVersionColumnType1.algorithmVersionColumnTypeId, algorithmVersionColumnType1.guid, algorithmVersionColumnType1.insertedRowDate, algorithmVersionColumnType1.lastUpdatedDate, algorithmVersionColumnType1.algorithmVersionId, algorithmVersionColumnType1.algorithmColumnTypeId, algorithmVersionColumnType1.allowMultiple, algorithmVersionColumnType1.allowEmpty
-            ,  algorithmColumnType1.algorithmColumnTypeId as algorithmColumnType_algorithmColumnTypeId ,  algorithmColumnType1.guid as algorithmColumnType_guid ,  algorithmColumnType1.insertedRowDate as algorithmColumnType_insertedRowDate ,  algorithmColumnType1.lastUpdatedDate as algorithmColumnType_lastUpdatedDate ,  algorithmColumnType1.algorithmColumnTypeName as algorithmColumnType_algorithmColumnTypeName ,  algorithmColumnType1.algorithmColumnTypeDescription as algorithmColumnType_algorithmColumnTypeDescription
+            ,  algorithmColumnType1.algorithmColumnTypeId as algorithmColumnType_algorithmColumnTypeId ,  algorithmColumnType1.guid as algorithmColumnType_guid ,  algorithmColumnType1.insertedRowDate as algorithmColumnType_insertedRowDate ,  algorithmColumnType1.lastUpdatedDate as algorithmColumnType_lastUpdatedDate ,  algorithmColumnType1.algorithmColumnTypeName as algorithmColumnType_algorithmColumnTypeName ,  algorithmColumnType1.algorithmColumnTypeDescription as algorithmColumnType_algorithmColumnTypeDescription ,  algorithmColumnType1.verificationClassName as algorithmColumnType_verificationClassName ,  algorithmColumnType1.verificationDefinition as algorithmColumnType_verificationDefinition
             ,  algorithmVersion1.algorithmVersionId as algorithmVersion_algorithmVersionId ,  algorithmVersion1.insertedRowDate as algorithmVersion_insertedRowDate ,  algorithmVersion1.lastUpdatedDate as algorithmVersion_lastUpdatedDate ,  algorithmVersion1.guid as algorithmVersion_guid ,  algorithmVersion1.algorithmTypeId as algorithmVersion_algorithmTypeId ,  algorithmVersion1.algorithmVersionName as algorithmVersion_algorithmVersionName
             from algorithmVersionColumnType algorithmVersionColumnType1
             join algorithmColumnType algorithmColumnType1 on algorithmVersionColumnType1.algorithmColumnTypeId = algorithmColumnType1.algorithmColumnTypeId
@@ -1971,7 +1996,7 @@
         <createView  viewName="vDownloadTransformExecutorStorage">
             select downloadTransformExecutorStorage1.downloadTransformExecutorStorageId, downloadTransformExecutorStorage1.guid, downloadTransformExecutorStorage1.insertedRowDate, downloadTransformExecutorStorage1.lastUpdatedDate, downloadTransformExecutorStorage1.downloadTransformGroupId, downloadTransformExecutorStorage1.executorStorageViewId
             ,  downloadTransformGroup1.downloadTransformGroupId as downloadTransformGroup_downloadTransformGroupId ,  downloadTransformGroup1.guid as downloadTransformGroup_guid ,  downloadTransformGroup1.insertedRowDate as downloadTransformGroup_insertedRowDate ,  downloadTransformGroup1.lastUpdatedDate as downloadTransformGroup_lastUpdatedDate ,  downloadTransformGroup1.downloadTransformGroupName as downloadTransformGroup_downloadTransformGroupName ,  downloadTransformGroup1.downloadTransformGroupDescription as downloadTransformGroup_downloadTransformGroupDescription
-            ,  executorStorageView1.executorStorageViewId as executorStorageView_executorStorageViewId ,  executorStorageView1.guid as executorStorageView_guid ,  executorStorageView1.insertedRowDate as executorStorageView_insertedRowDate ,  executorStorageView1.lastUpdatedDate as executorStorageView_lastUpdatedDate ,  executorStorageView1.executorStorageSnapshotId as executorStorageView_executorStorageSnapshotId ,  executorStorageView1.executorStorageId as executorStorageView_executorStorageId ,  executorStorageView1.sourceDownloadId as executorStorageView_sourceDownloadId ,  executorStorageView1.sourceViewId as executorStorageView_sourceViewId ,  executorStorageView1.executorStorageResourceId as executorStorageView_executorStorageResourceId
+            ,  executorStorageView1.executorStorageViewId as executorStorageView_executorStorageViewId ,  executorStorageView1.guid as executorStorageView_guid ,  executorStorageView1.insertedRowDate as executorStorageView_insertedRowDate ,  executorStorageView1.lastUpdatedDate as executorStorageView_lastUpdatedDate ,  executorStorageView1.executorStorageSnapshotId as executorStorageView_executorStorageSnapshotId ,  executorStorageView1.executorStorageId as executorStorageView_executorStorageId ,  executorStorageView1.sourceDownloadId as executorStorageView_sourceDownloadId ,  executorStorageView1.downloadTransformGroupId as executorStorageView_downloadTransformGroupId ,  executorStorageView1.sourceViewId as executorStorageView_sourceViewId ,  executorStorageView1.executorStorageResourceId as executorStorageView_executorStorageResourceId
             from downloadTransformExecutorStorage downloadTransformExecutorStorage1
             join downloadTransformGroup downloadTransformGroup1 on downloadTransformExecutorStorage1.downloadTransformGroupId = downloadTransformGroup1.downloadTransformGroupId
             join executorStorageView executorStorageView1 on downloadTransformExecutorStorage1.executorStorageViewId = executorStorageView1.executorStorageViewId
@@ -2087,13 +2112,15 @@
 
 
         <createView  viewName="vExecutorStorageView">
-            select executorStorageView1.executorStorageViewId, executorStorageView1.guid, executorStorageView1.insertedRowDate, executorStorageView1.lastUpdatedDate, executorStorageView1.executorStorageSnapshotId, executorStorageView1.executorStorageId, executorStorageView1.sourceDownloadId, executorStorageView1.sourceViewId, executorStorageView1.executorStorageResourceId
+            select executorStorageView1.executorStorageViewId, executorStorageView1.guid, executorStorageView1.insertedRowDate, executorStorageView1.lastUpdatedDate, executorStorageView1.executorStorageSnapshotId, executorStorageView1.executorStorageId, executorStorageView1.sourceDownloadId, executorStorageView1.downloadTransformGroupId, executorStorageView1.sourceViewId, executorStorageView1.executorStorageResourceId
+            ,  downloadTransformGroup1.downloadTransformGroupId as downloadTransformGroup_downloadTransformGroupId ,  downloadTransformGroup1.guid as downloadTransformGroup_guid ,  downloadTransformGroup1.insertedRowDate as downloadTransformGroup_insertedRowDate ,  downloadTransformGroup1.lastUpdatedDate as downloadTransformGroup_lastUpdatedDate ,  downloadTransformGroup1.downloadTransformGroupName as downloadTransformGroup_downloadTransformGroupName ,  downloadTransformGroup1.downloadTransformGroupDescription as downloadTransformGroup_downloadTransformGroupDescription
             ,  executorStorage1.executorStorageId as executorStorage_executorStorageId ,  executorStorage1.guid as executorStorage_guid ,  executorStorage1.insertedRowDate as executorStorage_insertedRowDate ,  executorStorage1.lastUpdatedDate as executorStorage_lastUpdatedDate ,  executorStorage1.executorHostId as executorStorage_executorHostId ,  executorStorage1.executorStorageTypeId as executorStorage_executorStorageTypeId ,  executorStorage1.storageDefinition as executorStorage_storageDefinition ,  executorStorage1.storageBasePath as executorStorage_storageBasePath ,  executorStorage1.storageFulllPath as executorStorage_storageFulllPath ,  executorStorage1.isRunning as executorStorage_isRunning ,  executorStorage1.portNumber as executorStorage_portNumber
             ,  executorStorageResource1.executorStorageResourceId as executorStorageResource_executorStorageResourceId ,  executorStorageResource1.guid as executorStorageResource_guid ,  executorStorageResource1.insertedRowDate as executorStorageResource_insertedRowDate ,  executorStorageResource1.lastUpdatedDate as executorStorageResource_lastUpdatedDate ,  executorStorageResource1.executorStorageId as executorStorageResource_executorStorageId ,  executorStorageResource1.resourcePath as executorStorageResource_resourcePath ,  executorStorageResource1.resourceSize as executorStorageResource_resourceSize ,  executorStorageResource1.resourceRowsCount as executorStorageResource_resourceRowsCount ,  executorStorageResource1.isValid as executorStorageResource_isValid
             ,  executorStorageSnapshot1.executorStorageSnapshotId as executorStorageSnapshot_executorStorageSnapshotId ,  executorStorageSnapshot1.guid as executorStorageSnapshot_guid ,  executorStorageSnapshot1.insertedRowDate as executorStorageSnapshot_insertedRowDate ,  executorStorageSnapshot1.lastUpdatedDate as executorStorageSnapshot_lastUpdatedDate ,  executorStorageSnapshot1.executorInstanceId as executorStorageSnapshot_executorInstanceId
-            ,  sourceDownload1.sourceDownloadId as sourceDownload_sourceDownloadId ,  sourceDownload1.guid as sourceDownload_guid ,  sourceDownload1.insertedRowDate as sourceDownload_insertedRowDate ,  sourceDownload1.lastUpdatedDate as sourceDownload_lastUpdatedDate ,  sourceDownload1.sourceScheduleId as sourceDownload_sourceScheduleId ,  sourceDownload1.executorHostId as sourceDownload_executorHostId ,  sourceDownload1.executorContextId as sourceDownload_executorContextId ,  sourceDownload1.sourceViewId as sourceDownload_sourceViewId ,  sourceDownload1.retryNumber as sourceDownload_retryNumber ,  sourceDownload1.isRunning as sourceDownload_isRunning ,  sourceDownload1.isFinished as sourceDownload_isFinished ,  sourceDownload1.isExcecption as sourceDownload_isExcecption ,  sourceDownload1.excecptionDescription as sourceDownload_excecptionDescription
+            ,  sourceDownload1.sourceDownloadId as sourceDownload_sourceDownloadId ,  sourceDownload1.guid as sourceDownload_guid ,  sourceDownload1.insertedRowDate as sourceDownload_insertedRowDate ,  sourceDownload1.lastUpdatedDate as sourceDownload_lastUpdatedDate ,  sourceDownload1.sourceScheduleId as sourceDownload_sourceScheduleId ,  sourceDownload1.downloadTransformGroupId as sourceDownload_downloadTransformGroupId ,  sourceDownload1.executorHostId as sourceDownload_executorHostId ,  sourceDownload1.executorContextId as sourceDownload_executorContextId ,  sourceDownload1.sourceViewId as sourceDownload_sourceViewId ,  sourceDownload1.retryNumber as sourceDownload_retryNumber ,  sourceDownload1.isRunning as sourceDownload_isRunning ,  sourceDownload1.isFinished as sourceDownload_isFinished ,  sourceDownload1.isExcecption as sourceDownload_isExcecption ,  sourceDownload1.excecptionDescription as sourceDownload_excecptionDescription
             ,  sourceView1.sourceViewId as sourceView_sourceViewId ,  sourceView1.guid as sourceView_guid ,  sourceView1.insertedRowDate as sourceView_insertedRowDate ,  sourceView1.lastUpdatedDate as sourceView_lastUpdatedDate ,  sourceView1.sourceInstanceId as sourceView_sourceInstanceId ,  sourceView1.sourceViewTypeId as sourceView_sourceViewTypeId ,  sourceView1.sourceViewFormatId as sourceView_sourceViewFormatId ,  sourceView1.sourceViewName as sourceView_sourceViewName ,  sourceView1.sourceViewDefinition as sourceView_sourceViewDefinition ,  sourceView1.isExisting as sourceView_isExisting ,  sourceView1.isCustom as sourceView_isCustom
             from executorStorageView executorStorageView1
+            join downloadTransformGroup downloadTransformGroup1 on executorStorageView1.downloadTransformGroupId = downloadTransformGroup1.downloadTransformGroupId
             join executorStorage executorStorage1 on executorStorageView1.executorStorageId = executorStorage1.executorStorageId
             join executorStorageResource executorStorageResource1 on executorStorageView1.executorStorageResourceId = executorStorageResource1.executorStorageResourceId
             join executorStorageSnapshot executorStorageSnapshot1 on executorStorageView1.executorStorageSnapshotId = executorStorageSnapshot1.executorStorageSnapshotId
@@ -2171,12 +2198,14 @@
 
 
         <createView  viewName="vSourceDownload">
-            select sourceDownload1.sourceDownloadId, sourceDownload1.guid, sourceDownload1.insertedRowDate, sourceDownload1.lastUpdatedDate, sourceDownload1.sourceScheduleId, sourceDownload1.executorHostId, sourceDownload1.executorContextId, sourceDownload1.sourceViewId, sourceDownload1.retryNumber, sourceDownload1.isRunning, sourceDownload1.isFinished, sourceDownload1.isExcecption, sourceDownload1.excecptionDescription
+            select sourceDownload1.sourceDownloadId, sourceDownload1.guid, sourceDownload1.insertedRowDate, sourceDownload1.lastUpdatedDate, sourceDownload1.sourceScheduleId, sourceDownload1.downloadTransformGroupId, sourceDownload1.executorHostId, sourceDownload1.executorContextId, sourceDownload1.sourceViewId, sourceDownload1.retryNumber, sourceDownload1.isRunning, sourceDownload1.isFinished, sourceDownload1.isExcecption, sourceDownload1.excecptionDescription
+            ,  downloadTransformGroup1.downloadTransformGroupId as downloadTransformGroup_downloadTransformGroupId ,  downloadTransformGroup1.guid as downloadTransformGroup_guid ,  downloadTransformGroup1.insertedRowDate as downloadTransformGroup_insertedRowDate ,  downloadTransformGroup1.lastUpdatedDate as downloadTransformGroup_lastUpdatedDate ,  downloadTransformGroup1.downloadTransformGroupName as downloadTransformGroup_downloadTransformGroupName ,  downloadTransformGroup1.downloadTransformGroupDescription as downloadTransformGroup_downloadTransformGroupDescription
             ,  executorContext1.executorContextId as executorContext_executorContextId ,  executorContext1.guid as executorContext_guid ,  executorContext1.insertedRowDate as executorContext_insertedRowDate ,  executorContext1.lastUpdatedDate as executorContext_lastUpdatedDate ,  executorContext1.executorHostId as executorContext_executorHostId ,  executorContext1.isWorking as executorContext_isWorking ,  executorContext1.properties as executorContext_properties ,  executorContext1.properties2 as executorContext_properties2 ,  executorContext1.properties3 as executorContext_properties3 ,  executorContext1.entryParams as executorContext_entryParams
             ,  executorHost1.executorHostId as executorHost_executorHostId ,  executorHost1.guid as executorHost_guid ,  executorHost1.insertedRowDate as executorHost_insertedRowDate ,  executorHost1.lastUpdatedDate as executorHost_lastUpdatedDate ,  executorHost1.hostName as executorHost_hostName ,  executorHost1.hostIp as executorHost_hostIp ,  executorHost1.hostDomain as executorHost_hostDomain ,  executorHost1.hostOsType as executorHost_hostOsType ,  executorHost1.hostOsVersion as executorHost_hostOsVersion ,  executorHost1.isWorking as executorHost_isWorking
-            ,  sourceSchedule1.sourceScheduleId as sourceSchedule_sourceScheduleId ,  sourceSchedule1.guid as sourceSchedule_guid ,  sourceSchedule1.insertedRowDate as sourceSchedule_insertedRowDate ,  sourceSchedule1.lastUpdatedDate as sourceSchedule_lastUpdatedDate ,  sourceSchedule1.sourceViewId as sourceSchedule_sourceViewId ,  sourceSchedule1.executorStorageId as sourceSchedule_executorStorageId ,  sourceSchedule1.onDemand as sourceSchedule_onDemand ,  sourceSchedule1.startTime as sourceSchedule_startTime ,  sourceSchedule1.intervalValue as sourceSchedule_intervalValue ,  sourceSchedule1.isScheduled as sourceSchedule_isScheduled ,  sourceSchedule1.deleteOldCopies as sourceSchedule_deleteOldCopies
+            ,  sourceSchedule1.sourceScheduleId as sourceSchedule_sourceScheduleId ,  sourceSchedule1.guid as sourceSchedule_guid ,  sourceSchedule1.insertedRowDate as sourceSchedule_insertedRowDate ,  sourceSchedule1.lastUpdatedDate as sourceSchedule_lastUpdatedDate ,  sourceSchedule1.sourceViewId as sourceSchedule_sourceViewId ,  sourceSchedule1.executorStorageId as sourceSchedule_executorStorageId ,  sourceSchedule1.downloadTransformGroupId as sourceSchedule_downloadTransformGroupId ,  sourceSchedule1.onDemand as sourceSchedule_onDemand ,  sourceSchedule1.startTime as sourceSchedule_startTime ,  sourceSchedule1.intervalValue as sourceSchedule_intervalValue ,  sourceSchedule1.isScheduled as sourceSchedule_isScheduled ,  sourceSchedule1.deleteOldCopies as sourceSchedule_deleteOldCopies
             ,  sourceView1.sourceViewId as sourceView_sourceViewId ,  sourceView1.guid as sourceView_guid ,  sourceView1.insertedRowDate as sourceView_insertedRowDate ,  sourceView1.lastUpdatedDate as sourceView_lastUpdatedDate ,  sourceView1.sourceInstanceId as sourceView_sourceInstanceId ,  sourceView1.sourceViewTypeId as sourceView_sourceViewTypeId ,  sourceView1.sourceViewFormatId as sourceView_sourceViewFormatId ,  sourceView1.sourceViewName as sourceView_sourceViewName ,  sourceView1.sourceViewDefinition as sourceView_sourceViewDefinition ,  sourceView1.isExisting as sourceView_isExisting ,  sourceView1.isCustom as sourceView_isCustom
             from sourceDownload sourceDownload1
+            join downloadTransformGroup downloadTransformGroup1 on sourceDownload1.downloadTransformGroupId = downloadTransformGroup1.downloadTransformGroupId
             join executorContext executorContext1 on sourceDownload1.executorContextId = executorContext1.executorContextId
             join executorHost executorHost1 on sourceDownload1.executorHostId = executorHost1.executorHostId
             join sourceSchedule sourceSchedule1 on sourceDownload1.sourceScheduleId = sourceSchedule1.sourceScheduleId
@@ -2186,7 +2215,7 @@
 
         <createView  viewName="vSourceDownloadStat">
             select sourceDownloadStat1.sourceDownloadStatId, sourceDownloadStat1.guid, sourceDownloadStat1.sourceDownloadId, sourceDownloadStat1.insertedRowDate, sourceDownloadStat1.lastUpdatedDate, sourceDownloadStat1.rowsCount, sourceDownloadStat1.errorRowsCount, sourceDownloadStat1.totalBytesCount, sourceDownloadStat1.empryRowsCount
-            ,  sourceDownload1.sourceDownloadId as sourceDownload_sourceDownloadId ,  sourceDownload1.guid as sourceDownload_guid ,  sourceDownload1.insertedRowDate as sourceDownload_insertedRowDate ,  sourceDownload1.lastUpdatedDate as sourceDownload_lastUpdatedDate ,  sourceDownload1.sourceScheduleId as sourceDownload_sourceScheduleId ,  sourceDownload1.executorHostId as sourceDownload_executorHostId ,  sourceDownload1.executorContextId as sourceDownload_executorContextId ,  sourceDownload1.sourceViewId as sourceDownload_sourceViewId ,  sourceDownload1.retryNumber as sourceDownload_retryNumber ,  sourceDownload1.isRunning as sourceDownload_isRunning ,  sourceDownload1.isFinished as sourceDownload_isFinished ,  sourceDownload1.isExcecption as sourceDownload_isExcecption ,  sourceDownload1.excecptionDescription as sourceDownload_excecptionDescription
+            ,  sourceDownload1.sourceDownloadId as sourceDownload_sourceDownloadId ,  sourceDownload1.guid as sourceDownload_guid ,  sourceDownload1.insertedRowDate as sourceDownload_insertedRowDate ,  sourceDownload1.lastUpdatedDate as sourceDownload_lastUpdatedDate ,  sourceDownload1.sourceScheduleId as sourceDownload_sourceScheduleId ,  sourceDownload1.downloadTransformGroupId as sourceDownload_downloadTransformGroupId ,  sourceDownload1.executorHostId as sourceDownload_executorHostId ,  sourceDownload1.executorContextId as sourceDownload_executorContextId ,  sourceDownload1.sourceViewId as sourceDownload_sourceViewId ,  sourceDownload1.retryNumber as sourceDownload_retryNumber ,  sourceDownload1.isRunning as sourceDownload_isRunning ,  sourceDownload1.isFinished as sourceDownload_isFinished ,  sourceDownload1.isExcecption as sourceDownload_isExcecption ,  sourceDownload1.excecptionDescription as sourceDownload_excecptionDescription
             from sourceDownloadStat sourceDownloadStat1
             join sourceDownload sourceDownload1 on sourceDownloadStat1.sourceDownloadId = sourceDownload1.sourceDownloadId
         </createView>
@@ -2194,7 +2223,7 @@
 
         <createView  viewName="vSourceDownloadStatColumn">
             select sourceDownloadStatColumn1.sourceDownloadStatColumnId, sourceDownloadStatColumn1.guid, sourceDownloadStatColumn1.insertedRowDate, sourceDownloadStatColumn1.lastUpdatedDate, sourceDownloadStatColumn1.sourceDownloadId, sourceDownloadStatColumn1.sourceViewColumnId, sourceDownloadStatColumn1.columnMinNumber, sourceDownloadStatColumn1.columnMaxNumber, sourceDownloadStatColumn1.columnMinStr, sourceDownloadStatColumn1.columnMaxStr, sourceDownloadStatColumn1.columnNonemptyCount
-            ,  sourceDownload1.sourceDownloadId as sourceDownload_sourceDownloadId ,  sourceDownload1.guid as sourceDownload_guid ,  sourceDownload1.insertedRowDate as sourceDownload_insertedRowDate ,  sourceDownload1.lastUpdatedDate as sourceDownload_lastUpdatedDate ,  sourceDownload1.sourceScheduleId as sourceDownload_sourceScheduleId ,  sourceDownload1.executorHostId as sourceDownload_executorHostId ,  sourceDownload1.executorContextId as sourceDownload_executorContextId ,  sourceDownload1.sourceViewId as sourceDownload_sourceViewId ,  sourceDownload1.retryNumber as sourceDownload_retryNumber ,  sourceDownload1.isRunning as sourceDownload_isRunning ,  sourceDownload1.isFinished as sourceDownload_isFinished ,  sourceDownload1.isExcecption as sourceDownload_isExcecption ,  sourceDownload1.excecptionDescription as sourceDownload_excecptionDescription
+            ,  sourceDownload1.sourceDownloadId as sourceDownload_sourceDownloadId ,  sourceDownload1.guid as sourceDownload_guid ,  sourceDownload1.insertedRowDate as sourceDownload_insertedRowDate ,  sourceDownload1.lastUpdatedDate as sourceDownload_lastUpdatedDate ,  sourceDownload1.sourceScheduleId as sourceDownload_sourceScheduleId ,  sourceDownload1.downloadTransformGroupId as sourceDownload_downloadTransformGroupId ,  sourceDownload1.executorHostId as sourceDownload_executorHostId ,  sourceDownload1.executorContextId as sourceDownload_executorContextId ,  sourceDownload1.sourceViewId as sourceDownload_sourceViewId ,  sourceDownload1.retryNumber as sourceDownload_retryNumber ,  sourceDownload1.isRunning as sourceDownload_isRunning ,  sourceDownload1.isFinished as sourceDownload_isFinished ,  sourceDownload1.isExcecption as sourceDownload_isExcecption ,  sourceDownload1.excecptionDescription as sourceDownload_excecptionDescription
             ,  sourceViewColumn1.sourceViewColumnId as sourceViewColumn_sourceViewColumnId ,  sourceViewColumn1.guid as sourceViewColumn_guid ,  sourceViewColumn1.insertedRowDate as sourceViewColumn_insertedRowDate ,  sourceViewColumn1.lastUpdatedDate as sourceViewColumn_lastUpdatedDate ,  sourceViewColumn1.sourceViewId as sourceViewColumn_sourceViewId ,  sourceViewColumn1.columnName as sourceViewColumn_columnName ,  sourceViewColumn1.columnType as sourceViewColumn_columnType
             from sourceDownloadStatColumn sourceDownloadStatColumn1
             join sourceDownload sourceDownload1 on sourceDownloadStatColumn1.sourceDownloadId = sourceDownload1.sourceDownloadId
@@ -2221,10 +2250,12 @@
 
 
         <createView  viewName="vSourceSchedule">
-            select sourceSchedule1.sourceScheduleId, sourceSchedule1.guid, sourceSchedule1.insertedRowDate, sourceSchedule1.lastUpdatedDate, sourceSchedule1.sourceViewId, sourceSchedule1.executorStorageId, sourceSchedule1.onDemand, sourceSchedule1.startTime, sourceSchedule1.intervalValue, sourceSchedule1.isScheduled, sourceSchedule1.deleteOldCopies
+            select sourceSchedule1.sourceScheduleId, sourceSchedule1.guid, sourceSchedule1.insertedRowDate, sourceSchedule1.lastUpdatedDate, sourceSchedule1.sourceViewId, sourceSchedule1.executorStorageId, sourceSchedule1.downloadTransformGroupId, sourceSchedule1.onDemand, sourceSchedule1.startTime, sourceSchedule1.intervalValue, sourceSchedule1.isScheduled, sourceSchedule1.deleteOldCopies
+            ,  downloadTransformGroup1.downloadTransformGroupId as downloadTransformGroup_downloadTransformGroupId ,  downloadTransformGroup1.guid as downloadTransformGroup_guid ,  downloadTransformGroup1.insertedRowDate as downloadTransformGroup_insertedRowDate ,  downloadTransformGroup1.lastUpdatedDate as downloadTransformGroup_lastUpdatedDate ,  downloadTransformGroup1.downloadTransformGroupName as downloadTransformGroup_downloadTransformGroupName ,  downloadTransformGroup1.downloadTransformGroupDescription as downloadTransformGroup_downloadTransformGroupDescription
             ,  executorStorage1.executorStorageId as executorStorage_executorStorageId ,  executorStorage1.guid as executorStorage_guid ,  executorStorage1.insertedRowDate as executorStorage_insertedRowDate ,  executorStorage1.lastUpdatedDate as executorStorage_lastUpdatedDate ,  executorStorage1.executorHostId as executorStorage_executorHostId ,  executorStorage1.executorStorageTypeId as executorStorage_executorStorageTypeId ,  executorStorage1.storageDefinition as executorStorage_storageDefinition ,  executorStorage1.storageBasePath as executorStorage_storageBasePath ,  executorStorage1.storageFulllPath as executorStorage_storageFulllPath ,  executorStorage1.isRunning as executorStorage_isRunning ,  executorStorage1.portNumber as executorStorage_portNumber
             ,  sourceView1.sourceViewId as sourceView_sourceViewId ,  sourceView1.guid as sourceView_guid ,  sourceView1.insertedRowDate as sourceView_insertedRowDate ,  sourceView1.lastUpdatedDate as sourceView_lastUpdatedDate ,  sourceView1.sourceInstanceId as sourceView_sourceInstanceId ,  sourceView1.sourceViewTypeId as sourceView_sourceViewTypeId ,  sourceView1.sourceViewFormatId as sourceView_sourceViewFormatId ,  sourceView1.sourceViewName as sourceView_sourceViewName ,  sourceView1.sourceViewDefinition as sourceView_sourceViewDefinition ,  sourceView1.isExisting as sourceView_isExisting ,  sourceView1.isCustom as sourceView_isCustom
             from sourceSchedule sourceSchedule1
+            join downloadTransformGroup downloadTransformGroup1 on sourceSchedule1.downloadTransformGroupId = downloadTransformGroup1.downloadTransformGroupId
             join executorStorage executorStorage1 on sourceSchedule1.executorStorageId = executorStorage1.executorStorageId
             join sourceView sourceView1 on sourceSchedule1.sourceViewId = sourceView1.sourceViewId
         </createView>
@@ -2265,8 +2296,10 @@
 
 
 
+
+
         <createView  viewName="vAlgorithmColumnTypeSummary">
-            select algorithmColumnType1.algorithmColumnTypeId, algorithmColumnType1.guid, algorithmColumnType1.insertedRowDate, algorithmColumnType1.lastUpdatedDate, algorithmColumnType1.algorithmColumnTypeName, algorithmColumnType1.algorithmColumnTypeDescription
+            select algorithmColumnType1.algorithmColumnTypeId, algorithmColumnType1.guid, algorithmColumnType1.insertedRowDate, algorithmColumnType1.lastUpdatedDate, algorithmColumnType1.algorithmColumnTypeName, algorithmColumnType1.algorithmColumnTypeDescription, algorithmColumnType1.verificationClassName, algorithmColumnType1.verificationDefinition
             ,  coalesce(algorithmVersionColumnType1.algorithmVersionColumnType_count, 0) as algorithmVersionColumnType_count,  coalesce(algorithmScheduleColumn1.algorithmScheduleColumn_count, 0) as algorithmScheduleColumn_count
             from algorithmColumnType algorithmColumnType1
             left join (select algorithmColumnTypeId, count(*) as algorithmVersionColumnType_count from algorithmVersionColumnType group by algorithmColumnTypeId) algorithmVersionColumnType1 on algorithmVersionColumnType1.algorithmColumnTypeId = algorithmColumnType1.algorithmColumnTypeId
@@ -2293,10 +2326,10 @@
 
         <createView  viewName="vAlgorithmOutputTypeSummary">
             select algorithmOutputType1.algorithmOutputTypeId, algorithmOutputType1.guid, algorithmOutputType1.insertedRowDate, algorithmOutputType1.lastUpdatedDate, algorithmOutputType1.algorithmOutputTypeName
-            ,  coalesce(algorithmOutput1.algorithmOutput_count, 0) as algorithmOutput_count,  coalesce(algorithmVersionOutputType1.algorithmVersionOutputType_count, 0) as algorithmVersionOutputType_count
+            ,  coalesce(algorithmVersionOutputType1.algorithmVersionOutputType_count, 0) as algorithmVersionOutputType_count,  coalesce(algorithmOutput1.algorithmOutput_count, 0) as algorithmOutput_count
             from algorithmOutputType algorithmOutputType1
-            left join (select algorithmOutputTypeId, count(*) as algorithmOutput_count from algorithmOutput group by algorithmOutputTypeId) algorithmOutput1 on algorithmOutput1.algorithmOutputTypeId = algorithmOutputType1.algorithmOutputTypeId
             left join (select algorithmOutputTypeId, count(*) as algorithmVersionOutputType_count from algorithmVersionOutputType group by algorithmOutputTypeId) algorithmVersionOutputType1 on algorithmVersionOutputType1.algorithmOutputTypeId = algorithmOutputType1.algorithmOutputTypeId
+            left join (select algorithmOutputTypeId, count(*) as algorithmOutput_count from algorithmOutput group by algorithmOutputTypeId) algorithmOutput1 on algorithmOutput1.algorithmOutputTypeId = algorithmOutputType1.algorithmOutputTypeId
         </createView>
 
 
@@ -2311,11 +2344,11 @@
 
         <createView  viewName="vAlgorithmRunSummary">
             select algorithmRun1.algorithmRunId, algorithmRun1.guid, algorithmRun1.insertedRowDate, algorithmRun1.lastUpdatedDate, algorithmRun1.algorithmScheduleId, algorithmRun1.executorInstanceId, algorithmRun1.executorStorageId, algorithmRun1.algorithmRunTypeId, algorithmRun1.algorithmRunName, algorithmRun1.runDate, algorithmRun1.runStatus, algorithmRun1.isError, algorithmRun1.errorDescription, algorithmRun1.isRunning, algorithmRun1.isFinished
-            ,  coalesce(algorithmOutput1.algorithmOutput_count, 0) as algorithmOutput_count,  coalesce(algorithmRunInfo1.algorithmRunInfo_count, 0) as algorithmRunInfo_count,  coalesce(algorithmRunView1.algorithmRunView_count, 0) as algorithmRunView_count
+            ,  coalesce(algorithmRunInfo1.algorithmRunInfo_count, 0) as algorithmRunInfo_count,  coalesce(algorithmRunView1.algorithmRunView_count, 0) as algorithmRunView_count,  coalesce(algorithmOutput1.algorithmOutput_count, 0) as algorithmOutput_count
             from algorithmRun algorithmRun1
-            left join (select algorithmRunId, count(*) as algorithmOutput_count from algorithmOutput group by algorithmRunId) algorithmOutput1 on algorithmOutput1.algorithmRunId = algorithmRun1.algorithmRunId
             left join (select algorithmRunId, count(*) as algorithmRunInfo_count from algorithmRunInfo group by algorithmRunId) algorithmRunInfo1 on algorithmRunInfo1.algorithmRunId = algorithmRun1.algorithmRunId
             left join (select algorithmRunId, count(*) as algorithmRunView_count from algorithmRunView group by algorithmRunId) algorithmRunView1 on algorithmRunView1.algorithmRunId = algorithmRun1.algorithmRunId
+            left join (select algorithmRunId, count(*) as algorithmOutput_count from algorithmOutput group by algorithmRunId) algorithmOutput1 on algorithmOutput1.algorithmRunId = algorithmRun1.algorithmRunId
         </createView>
 
 
@@ -2329,13 +2362,13 @@
 
         <createView  viewName="vAlgorithmScheduleSummary">
             select algorithmSchedule1.algorithmScheduleId, algorithmSchedule1.guid, algorithmSchedule1.insertedRowDate, algorithmSchedule1.lastUpdatedDate, algorithmSchedule1.algorithmImplementationId, algorithmSchedule1.algorithmScheduleTypeId, algorithmSchedule1.algorithmScheduleName, algorithmSchedule1.isScheduled, algorithmSchedule1.intervalValue, algorithmSchedule1.isRunning
-            ,  coalesce(algorithmScheduleView1.algorithmScheduleView_count, 0) as algorithmScheduleView_count,  coalesce(algorithmScheduleParam1.algorithmScheduleParam_count, 0) as algorithmScheduleParam_count,  coalesce(algorithmScheduleColumn1.algorithmScheduleColumn_count, 0) as algorithmScheduleColumn_count,  coalesce(algorithmRun1.algorithmRun_count, 0) as algorithmRun_count,  coalesce(algorithmRunInfo1.algorithmRunInfo_count, 0) as algorithmRunInfo_count
+            ,  coalesce(algorithmRunInfo1.algorithmRunInfo_count, 0) as algorithmRunInfo_count,  coalesce(algorithmScheduleView1.algorithmScheduleView_count, 0) as algorithmScheduleView_count,  coalesce(algorithmScheduleParam1.algorithmScheduleParam_count, 0) as algorithmScheduleParam_count,  coalesce(algorithmScheduleColumn1.algorithmScheduleColumn_count, 0) as algorithmScheduleColumn_count,  coalesce(algorithmRun1.algorithmRun_count, 0) as algorithmRun_count
             from algorithmSchedule algorithmSchedule1
+            left join (select algorithmScheduleId, count(*) as algorithmRunInfo_count from algorithmRunInfo group by algorithmScheduleId) algorithmRunInfo1 on algorithmRunInfo1.algorithmScheduleId = algorithmSchedule1.algorithmScheduleId
             left join (select algorithmScheduleId, count(*) as algorithmScheduleView_count from algorithmScheduleView group by algorithmScheduleId) algorithmScheduleView1 on algorithmScheduleView1.algorithmScheduleId = algorithmSchedule1.algorithmScheduleId
             left join (select algorithmScheduleId, count(*) as algorithmScheduleParam_count from algorithmScheduleParam group by algorithmScheduleId) algorithmScheduleParam1 on algorithmScheduleParam1.algorithmScheduleId = algorithmSchedule1.algorithmScheduleId
             left join (select algorithmScheduleId, count(*) as algorithmScheduleColumn_count from algorithmScheduleColumn group by algorithmScheduleId) algorithmScheduleColumn1 on algorithmScheduleColumn1.algorithmScheduleId = algorithmSchedule1.algorithmScheduleId
             left join (select algorithmScheduleId, count(*) as algorithmRun_count from algorithmRun group by algorithmScheduleId) algorithmRun1 on algorithmRun1.algorithmScheduleId = algorithmSchedule1.algorithmScheduleId
-            left join (select algorithmScheduleId, count(*) as algorithmRunInfo_count from algorithmRunInfo group by algorithmScheduleId) algorithmRunInfo1 on algorithmRunInfo1.algorithmScheduleId = algorithmSchedule1.algorithmScheduleId
         </createView>
 
 
@@ -2357,11 +2390,11 @@
 
         <createView  viewName="vAlgorithmScheduleViewSummary">
             select algorithmScheduleView1.algorithmScheduleViewId, algorithmScheduleView1.guid, algorithmScheduleView1.insertedRowDate, algorithmScheduleView1.lastUpdatedDate, algorithmScheduleView1.algorithmScheduleViewTypeId, algorithmScheduleView1.algorithmScheduleId, algorithmScheduleView1.sourceViewId, algorithmScheduleView1.joinOnDefinition
-            ,  coalesce(downloadTransformAlgorithmSchedule1.downloadTransformAlgorithmSchedule_count, 0) as downloadTransformAlgorithmSchedule_count,  coalesce(algorithmScheduleColumn1.algorithmScheduleColumn_count, 0) as algorithmScheduleColumn_count,  coalesce(algorithmRunView1.algorithmRunView_count, 0) as algorithmRunView_count
+            ,  coalesce(algorithmRunView1.algorithmRunView_count, 0) as algorithmRunView_count,  coalesce(downloadTransformAlgorithmSchedule1.downloadTransformAlgorithmSchedule_count, 0) as downloadTransformAlgorithmSchedule_count,  coalesce(algorithmScheduleColumn1.algorithmScheduleColumn_count, 0) as algorithmScheduleColumn_count
             from algorithmScheduleView algorithmScheduleView1
+            left join (select algorithmScheduleViewId, count(*) as algorithmRunView_count from algorithmRunView group by algorithmScheduleViewId) algorithmRunView1 on algorithmRunView1.algorithmScheduleViewId = algorithmScheduleView1.algorithmScheduleViewId
             left join (select algorithmScheduleViewId, count(*) as downloadTransformAlgorithmSchedule_count from downloadTransformAlgorithmSchedule group by algorithmScheduleViewId) downloadTransformAlgorithmSchedule1 on downloadTransformAlgorithmSchedule1.algorithmScheduleViewId = algorithmScheduleView1.algorithmScheduleViewId
             left join (select algorithmScheduleViewId, count(*) as algorithmScheduleColumn_count from algorithmScheduleColumn group by algorithmScheduleViewId) algorithmScheduleColumn1 on algorithmScheduleColumn1.algorithmScheduleViewId = algorithmScheduleView1.algorithmScheduleViewId
-            left join (select algorithmScheduleViewId, count(*) as algorithmRunView_count from algorithmRunView group by algorithmScheduleViewId) algorithmRunView1 on algorithmRunView1.algorithmScheduleViewId = algorithmScheduleView1.algorithmScheduleViewId
         </createView>
 
 
@@ -2375,22 +2408,22 @@
 
         <createView  viewName="vAlgorithmTypeSummary">
             select algorithmType1.algorithmTypeId, algorithmType1.guid, algorithmType1.insertedRowDate, algorithmType1.lastUpdatedDate, algorithmType1.algorithmTypeName, algorithmType1.algorithmTypeDescription
-            ,  coalesce(algorithmImplementation1.algorithmImplementation_count, 0) as algorithmImplementation_count,  coalesce(algorithmVersionParamType1.algorithmVersionParamType_count, 0) as algorithmVersionParamType_count,  coalesce(algorithmVersion1.algorithmVersion_count, 0) as algorithmVersion_count
+            ,  coalesce(algorithmVersion1.algorithmVersion_count, 0) as algorithmVersion_count,  coalesce(algorithmImplementation1.algorithmImplementation_count, 0) as algorithmImplementation_count,  coalesce(algorithmVersionParamType1.algorithmVersionParamType_count, 0) as algorithmVersionParamType_count
             from algorithmType algorithmType1
+            left join (select algorithmTypeId, count(*) as algorithmVersion_count from algorithmVersion group by algorithmTypeId) algorithmVersion1 on algorithmVersion1.algorithmTypeId = algorithmType1.algorithmTypeId
             left join (select algorithmTypeId, count(*) as algorithmImplementation_count from algorithmImplementation group by algorithmTypeId) algorithmImplementation1 on algorithmImplementation1.algorithmTypeId = algorithmType1.algorithmTypeId
             left join (select algorithmTypeId, count(*) as algorithmVersionParamType_count from algorithmVersionParamType group by algorithmTypeId) algorithmVersionParamType1 on algorithmVersionParamType1.algorithmTypeId = algorithmType1.algorithmTypeId
-            left join (select algorithmTypeId, count(*) as algorithmVersion_count from algorithmVersion group by algorithmTypeId) algorithmVersion1 on algorithmVersion1.algorithmTypeId = algorithmType1.algorithmTypeId
         </createView>
 
 
         <createView  viewName="vAlgorithmVersionSummary">
             select algorithmVersion1.algorithmVersionId, algorithmVersion1.insertedRowDate, algorithmVersion1.lastUpdatedDate, algorithmVersion1.guid, algorithmVersion1.algorithmTypeId, algorithmVersion1.algorithmVersionName
-            ,  coalesce(algorithmImplementation1.algorithmImplementation_count, 0) as algorithmImplementation_count,  coalesce(algorithmVersionParamType1.algorithmVersionParamType_count, 0) as algorithmVersionParamType_count,  coalesce(algorithmVersionColumnType1.algorithmVersionColumnType_count, 0) as algorithmVersionColumnType_count,  coalesce(algorithmVersionOutputType1.algorithmVersionOutputType_count, 0) as algorithmVersionOutputType_count
+            ,  coalesce(algorithmVersionOutputType1.algorithmVersionOutputType_count, 0) as algorithmVersionOutputType_count,  coalesce(algorithmImplementation1.algorithmImplementation_count, 0) as algorithmImplementation_count,  coalesce(algorithmVersionParamType1.algorithmVersionParamType_count, 0) as algorithmVersionParamType_count,  coalesce(algorithmVersionColumnType1.algorithmVersionColumnType_count, 0) as algorithmVersionColumnType_count
             from algorithmVersion algorithmVersion1
+            left join (select algorithmVersionId, count(*) as algorithmVersionOutputType_count from algorithmVersionOutputType group by algorithmVersionId) algorithmVersionOutputType1 on algorithmVersionOutputType1.algorithmVersionId = algorithmVersion1.algorithmVersionId
             left join (select algorithmVersionId, count(*) as algorithmImplementation_count from algorithmImplementation group by algorithmVersionId) algorithmImplementation1 on algorithmImplementation1.algorithmVersionId = algorithmVersion1.algorithmVersionId
             left join (select algorithmVersionId, count(*) as algorithmVersionParamType_count from algorithmVersionParamType group by algorithmVersionId) algorithmVersionParamType1 on algorithmVersionParamType1.algorithmVersionId = algorithmVersion1.algorithmVersionId
             left join (select algorithmVersionId, count(*) as algorithmVersionColumnType_count from algorithmVersionColumnType group by algorithmVersionId) algorithmVersionColumnType1 on algorithmVersionColumnType1.algorithmVersionId = algorithmVersion1.algorithmVersionId
-            left join (select algorithmVersionId, count(*) as algorithmVersionOutputType_count from algorithmVersionOutputType group by algorithmVersionId) algorithmVersionOutputType1 on algorithmVersionOutputType1.algorithmVersionId = algorithmVersion1.algorithmVersionId
         </createView>
 
 
@@ -2404,11 +2437,14 @@
 
         <createView  viewName="vDownloadTransformGroupSummary">
             select downloadTransformGroup1.downloadTransformGroupId, downloadTransformGroup1.guid, downloadTransformGroup1.insertedRowDate, downloadTransformGroup1.lastUpdatedDate, downloadTransformGroup1.downloadTransformGroupName, downloadTransformGroup1.downloadTransformGroupDescription
-            ,  coalesce(downloadTransformAlgorithmSchedule1.downloadTransformAlgorithmSchedule_count, 0) as downloadTransformAlgorithmSchedule_count,  coalesce(downloadTransformExecutorStorage1.downloadTransformExecutorStorage_count, 0) as downloadTransformExecutorStorage_count,  coalesce(downloadTransform1.downloadTransform_count, 0) as downloadTransform_count
+            ,  coalesce(sourceDownload1.sourceDownload_count, 0) as sourceDownload_count,  coalesce(executorStorageView1.executorStorageView_count, 0) as executorStorageView_count,  coalesce(downloadTransformAlgorithmSchedule1.downloadTransformAlgorithmSchedule_count, 0) as downloadTransformAlgorithmSchedule_count,  coalesce(downloadTransformExecutorStorage1.downloadTransformExecutorStorage_count, 0) as downloadTransformExecutorStorage_count,  coalesce(downloadTransform1.downloadTransform_count, 0) as downloadTransform_count,  coalesce(sourceSchedule1.sourceSchedule_count, 0) as sourceSchedule_count
             from downloadTransformGroup downloadTransformGroup1
+            left join (select downloadTransformGroupId, count(*) as sourceDownload_count from sourceDownload group by downloadTransformGroupId) sourceDownload1 on sourceDownload1.downloadTransformGroupId = downloadTransformGroup1.downloadTransformGroupId
+            left join (select downloadTransformGroupId, count(*) as executorStorageView_count from executorStorageView group by downloadTransformGroupId) executorStorageView1 on executorStorageView1.downloadTransformGroupId = downloadTransformGroup1.downloadTransformGroupId
             left join (select downloadTransformGroupId, count(*) as downloadTransformAlgorithmSchedule_count from downloadTransformAlgorithmSchedule group by downloadTransformGroupId) downloadTransformAlgorithmSchedule1 on downloadTransformAlgorithmSchedule1.downloadTransformGroupId = downloadTransformGroup1.downloadTransformGroupId
             left join (select downloadTransformGroupId, count(*) as downloadTransformExecutorStorage_count from downloadTransformExecutorStorage group by downloadTransformGroupId) downloadTransformExecutorStorage1 on downloadTransformExecutorStorage1.downloadTransformGroupId = downloadTransformGroup1.downloadTransformGroupId
             left join (select downloadTransformGroupId, count(*) as downloadTransform_count from downloadTransform group by downloadTransformGroupId) downloadTransform1 on downloadTransform1.downloadTransformGroupId = downloadTransformGroup1.downloadTransformGroupId
+            left join (select downloadTransformGroupId, count(*) as sourceSchedule_count from sourceSchedule group by downloadTransformGroupId) sourceSchedule1 on sourceSchedule1.downloadTransformGroupId = downloadTransformGroup1.downloadTransformGroupId
         </createView>
 
 
@@ -2431,21 +2467,24 @@
 
         <createView  viewName="vExecutorContextSummary">
             select executorContext1.executorContextId, executorContext1.guid, executorContext1.insertedRowDate, executorContext1.lastUpdatedDate, executorContext1.executorHostId, executorContext1.isWorking, executorContext1.properties, executorContext1.properties2, executorContext1.properties3, executorContext1.entryParams
-            ,  coalesce(executorContextState1.executorContextState_count, 0) as executorContextState_count,  coalesce(executorContextThread1.executorContextThread_count, 0) as executorContextThread_count,  coalesce(executorContextCommand1.executorContextCommand_count, 0) as executorContextCommand_count,  coalesce(executorContextRuntime1.executorContextRuntime_count, 0) as executorContextRuntime_count,  coalesce(executorInstance1.executorInstance_count, 0) as executorInstance_count,  coalesce(sourceDownload1.sourceDownload_count, 0) as sourceDownload_count
+            ,  coalesce(sourceDownload1.sourceDownload_count, 0) as sourceDownload_count,  coalesce(executorContextState1.executorContextState_count, 0) as executorContextState_count,  coalesce(executorContextThread1.executorContextThread_count, 0) as executorContextThread_count,  coalesce(executorContextCommand1.executorContextCommand_count, 0) as executorContextCommand_count,  coalesce(executorContextRuntime1.executorContextRuntime_count, 0) as executorContextRuntime_count,  coalesce(executorInstance1.executorInstance_count, 0) as executorInstance_count
             from executorContext executorContext1
+            left join (select executorContextId, count(*) as sourceDownload_count from sourceDownload group by executorContextId) sourceDownload1 on sourceDownload1.executorContextId = executorContext1.executorContextId
             left join (select executorContextId, count(*) as executorContextState_count from executorContextState group by executorContextId) executorContextState1 on executorContextState1.executorContextId = executorContext1.executorContextId
             left join (select executorContextId, count(*) as executorContextThread_count from executorContextThread group by executorContextId) executorContextThread1 on executorContextThread1.executorContextId = executorContext1.executorContextId
             left join (select executorContextId, count(*) as executorContextCommand_count from executorContextCommand group by executorContextId) executorContextCommand1 on executorContextCommand1.executorContextId = executorContext1.executorContextId
             left join (select executorContextId, count(*) as executorContextRuntime_count from executorContextRuntime group by executorContextId) executorContextRuntime1 on executorContextRuntime1.executorContextId = executorContext1.executorContextId
             left join (select executorContextId, count(*) as executorInstance_count from executorInstance group by executorContextId) executorInstance1 on executorInstance1.executorContextId = executorContext1.executorContextId
-            left join (select executorContextId, count(*) as sourceDownload_count from sourceDownload group by executorContextId) sourceDownload1 on sourceDownload1.executorContextId = executorContext1.executorContextId
         </createView>
 
 
         <createView  viewName="vExecutorHostSummary">
             select executorHost1.executorHostId, executorHost1.guid, executorHost1.insertedRowDate, executorHost1.lastUpdatedDate, executorHost1.hostName, executorHost1.hostIp, executorHost1.hostDomain, executorHost1.hostOsType, executorHost1.hostOsVersion, executorHost1.isWorking
-            ,  coalesce(resourceManager1.resourceManager_count, 0) as resourceManager_count,  coalesce(resourceManagerCheck1.resourceManagerCheck_count, 0) as resourceManagerCheck_count,  coalesce(resourceManagerAllocation1.resourceManagerAllocation_count, 0) as resourceManagerAllocation_count,  coalesce(executorContextRuntime1.executorContextRuntime_count, 0) as executorContextRuntime_count,  coalesce(executorTypeHostParam1.executorTypeHostParam_count, 0) as executorTypeHostParam_count,  coalesce(executorRest1.executorRest_count, 0) as executorRest_count,  coalesce(executorRestCall1.executorRestCall_count, 0) as executorRestCall_count,  coalesce(executorInstance1.executorInstance_count, 0) as executorInstance_count,  coalesce(sourceDownload1.sourceDownload_count, 0) as sourceDownload_count,  coalesce(executorStorage1.executorStorage_count, 0) as executorStorage_count,  coalesce(executorContext1.executorContext_count, 0) as executorContext_count
+            ,  coalesce(sourceDownload1.sourceDownload_count, 0) as sourceDownload_count,  coalesce(executorStorage1.executorStorage_count, 0) as executorStorage_count,  coalesce(executorContext1.executorContext_count, 0) as executorContext_count,  coalesce(resourceManager1.resourceManager_count, 0) as resourceManager_count,  coalesce(resourceManagerCheck1.resourceManagerCheck_count, 0) as resourceManagerCheck_count,  coalesce(resourceManagerAllocation1.resourceManagerAllocation_count, 0) as resourceManagerAllocation_count,  coalesce(executorContextRuntime1.executorContextRuntime_count, 0) as executorContextRuntime_count,  coalesce(executorTypeHostParam1.executorTypeHostParam_count, 0) as executorTypeHostParam_count,  coalesce(executorRest1.executorRest_count, 0) as executorRest_count,  coalesce(executorRestCall1.executorRestCall_count, 0) as executorRestCall_count,  coalesce(executorInstance1.executorInstance_count, 0) as executorInstance_count
             from executorHost executorHost1
+            left join (select executorHostId, count(*) as sourceDownload_count from sourceDownload group by executorHostId) sourceDownload1 on sourceDownload1.executorHostId = executorHost1.executorHostId
+            left join (select executorHostId, count(*) as executorStorage_count from executorStorage group by executorHostId) executorStorage1 on executorStorage1.executorHostId = executorHost1.executorHostId
+            left join (select executorHostId, count(*) as executorContext_count from executorContext group by executorHostId) executorContext1 on executorContext1.executorHostId = executorHost1.executorHostId
             left join (select executorHostId, count(*) as resourceManager_count from resourceManager group by executorHostId) resourceManager1 on resourceManager1.executorHostId = executorHost1.executorHostId
             left join (select executorHostId, count(*) as resourceManagerCheck_count from resourceManagerCheck group by executorHostId) resourceManagerCheck1 on resourceManagerCheck1.executorHostId = executorHost1.executorHostId
             left join (select executorHostId, count(*) as resourceManagerAllocation_count from resourceManagerAllocation group by executorHostId) resourceManagerAllocation1 on resourceManagerAllocation1.executorHostId = executorHost1.executorHostId
@@ -2454,20 +2493,17 @@
             left join (select executorHostId, count(*) as executorRest_count from executorRest group by executorHostId) executorRest1 on executorRest1.executorHostId = executorHost1.executorHostId
             left join (select executorHostId, count(*) as executorRestCall_count from executorRestCall group by executorHostId) executorRestCall1 on executorRestCall1.executorHostId = executorHost1.executorHostId
             left join (select executorHostId, count(*) as executorInstance_count from executorInstance group by executorHostId) executorInstance1 on executorInstance1.executorHostId = executorHost1.executorHostId
-            left join (select executorHostId, count(*) as sourceDownload_count from sourceDownload group by executorHostId) sourceDownload1 on sourceDownload1.executorHostId = executorHost1.executorHostId
-            left join (select executorHostId, count(*) as executorStorage_count from executorStorage group by executorHostId) executorStorage1 on executorStorage1.executorHostId = executorHost1.executorHostId
-            left join (select executorHostId, count(*) as executorContext_count from executorContext group by executorHostId) executorContext1 on executorContext1.executorHostId = executorHost1.executorHostId
         </createView>
 
 
         <createView  viewName="vExecutorInstanceSummary">
             select executorInstance1.executorInstanceId, executorInstance1.guid, executorInstance1.insertedRowDate, executorInstance1.lastUpdatedDate, executorInstance1.executorTypeId, executorInstance1.executorHostId, executorInstance1.executorContextId, executorInstance1.executorInstanceName, executorInstance1.executorDefinition, executorInstance1.executorParameters, executorInstance1.isRunning, executorInstance1.isFinished, executorInstance1.portNumber, executorInstance1.endDate
-            ,  coalesce(resourceManagerAllocation1.resourceManagerAllocation_count, 0) as resourceManagerAllocation_count,  coalesce(algorithmRun1.algorithmRun_count, 0) as algorithmRun_count,  coalesce(executorInstanceState1.executorInstanceState_count, 0) as executorInstanceState_count,  coalesce(executorStorageSnapshot1.executorStorageSnapshot_count, 0) as executorStorageSnapshot_count
+            ,  coalesce(executorStorageSnapshot1.executorStorageSnapshot_count, 0) as executorStorageSnapshot_count,  coalesce(resourceManagerAllocation1.resourceManagerAllocation_count, 0) as resourceManagerAllocation_count,  coalesce(executorInstanceState1.executorInstanceState_count, 0) as executorInstanceState_count,  coalesce(algorithmRun1.algorithmRun_count, 0) as algorithmRun_count
             from executorInstance executorInstance1
-            left join (select executorInstanceId, count(*) as resourceManagerAllocation_count from resourceManagerAllocation group by executorInstanceId) resourceManagerAllocation1 on resourceManagerAllocation1.executorInstanceId = executorInstance1.executorInstanceId
-            left join (select executorInstanceId, count(*) as algorithmRun_count from algorithmRun group by executorInstanceId) algorithmRun1 on algorithmRun1.executorInstanceId = executorInstance1.executorInstanceId
-            left join (select executorInstanceId, count(*) as executorInstanceState_count from executorInstanceState group by executorInstanceId) executorInstanceState1 on executorInstanceState1.executorInstanceId = executorInstance1.executorInstanceId
             left join (select executorInstanceId, count(*) as executorStorageSnapshot_count from executorStorageSnapshot group by executorInstanceId) executorStorageSnapshot1 on executorStorageSnapshot1.executorInstanceId = executorInstance1.executorInstanceId
+            left join (select executorInstanceId, count(*) as resourceManagerAllocation_count from resourceManagerAllocation group by executorInstanceId) resourceManagerAllocation1 on resourceManagerAllocation1.executorInstanceId = executorInstance1.executorInstanceId
+            left join (select executorInstanceId, count(*) as executorInstanceState_count from executorInstanceState group by executorInstanceId) executorInstanceState1 on executorInstanceState1.executorInstanceId = executorInstance1.executorInstanceId
+            left join (select executorInstanceId, count(*) as algorithmRun_count from algorithmRun group by executorInstanceId) algorithmRun1 on algorithmRun1.executorInstanceId = executorInstance1.executorInstanceId
         </createView>
 
 
@@ -2490,24 +2526,24 @@
 
         <createView  viewName="vExecutorStorageSummary">
             select executorStorage1.executorStorageId, executorStorage1.guid, executorStorage1.insertedRowDate, executorStorage1.lastUpdatedDate, executorStorage1.executorHostId, executorStorage1.executorStorageTypeId, executorStorage1.storageDefinition, executorStorage1.storageBasePath, executorStorage1.storageFulllPath, executorStorage1.isRunning, executorStorage1.portNumber
-            ,  coalesce(algorithmOutput1.algorithmOutput_count, 0) as algorithmOutput_count,  coalesce(sourceSchedule1.sourceSchedule_count, 0) as sourceSchedule_count,  coalesce(algorithmRun1.algorithmRun_count, 0) as algorithmRun_count,  coalesce(algorithmRunInfo1.algorithmRunInfo_count, 0) as algorithmRunInfo_count,  coalesce(executorStorageResource1.executorStorageResource_count, 0) as executorStorageResource_count,  coalesce(executorStorageView1.executorStorageView_count, 0) as executorStorageView_count
+            ,  coalesce(algorithmRunInfo1.algorithmRunInfo_count, 0) as algorithmRunInfo_count,  coalesce(executorStorageResource1.executorStorageResource_count, 0) as executorStorageResource_count,  coalesce(executorStorageView1.executorStorageView_count, 0) as executorStorageView_count,  coalesce(algorithmOutput1.algorithmOutput_count, 0) as algorithmOutput_count,  coalesce(sourceSchedule1.sourceSchedule_count, 0) as sourceSchedule_count,  coalesce(algorithmRun1.algorithmRun_count, 0) as algorithmRun_count
             from executorStorage executorStorage1
-            left join (select executorStorageId, count(*) as algorithmOutput_count from algorithmOutput group by executorStorageId) algorithmOutput1 on algorithmOutput1.executorStorageId = executorStorage1.executorStorageId
-            left join (select executorStorageId, count(*) as sourceSchedule_count from sourceSchedule group by executorStorageId) sourceSchedule1 on sourceSchedule1.executorStorageId = executorStorage1.executorStorageId
-            left join (select executorStorageId, count(*) as algorithmRun_count from algorithmRun group by executorStorageId) algorithmRun1 on algorithmRun1.executorStorageId = executorStorage1.executorStorageId
             left join (select executorStorageId, count(*) as algorithmRunInfo_count from algorithmRunInfo group by executorStorageId) algorithmRunInfo1 on algorithmRunInfo1.executorStorageId = executorStorage1.executorStorageId
             left join (select executorStorageId, count(*) as executorStorageResource_count from executorStorageResource group by executorStorageId) executorStorageResource1 on executorStorageResource1.executorStorageId = executorStorage1.executorStorageId
             left join (select executorStorageId, count(*) as executorStorageView_count from executorStorageView group by executorStorageId) executorStorageView1 on executorStorageView1.executorStorageId = executorStorage1.executorStorageId
+            left join (select executorStorageId, count(*) as algorithmOutput_count from algorithmOutput group by executorStorageId) algorithmOutput1 on algorithmOutput1.executorStorageId = executorStorage1.executorStorageId
+            left join (select executorStorageId, count(*) as sourceSchedule_count from sourceSchedule group by executorStorageId) sourceSchedule1 on sourceSchedule1.executorStorageId = executorStorage1.executorStorageId
+            left join (select executorStorageId, count(*) as algorithmRun_count from algorithmRun group by executorStorageId) algorithmRun1 on algorithmRun1.executorStorageId = executorStorage1.executorStorageId
         </createView>
 
 
         <createView  viewName="vExecutorStorageResourceSummary">
             select executorStorageResource1.executorStorageResourceId, executorStorageResource1.guid, executorStorageResource1.insertedRowDate, executorStorageResource1.lastUpdatedDate, executorStorageResource1.executorStorageId, executorStorageResource1.resourcePath, executorStorageResource1.resourceSize, executorStorageResource1.resourceRowsCount, executorStorageResource1.isValid
-            ,  coalesce(algorithmOutput1.algorithmOutput_count, 0) as algorithmOutput_count,  coalesce(algorithmRunInfo1.algorithmRunInfo_count, 0) as algorithmRunInfo_count,  coalesce(executorStorageView1.executorStorageView_count, 0) as executorStorageView_count
+            ,  coalesce(algorithmRunInfo1.algorithmRunInfo_count, 0) as algorithmRunInfo_count,  coalesce(executorStorageView1.executorStorageView_count, 0) as executorStorageView_count,  coalesce(algorithmOutput1.algorithmOutput_count, 0) as algorithmOutput_count
             from executorStorageResource executorStorageResource1
-            left join (select executorStorageResourceId, count(*) as algorithmOutput_count from algorithmOutput group by executorStorageResourceId) algorithmOutput1 on algorithmOutput1.executorStorageResourceId = executorStorageResource1.executorStorageResourceId
             left join (select executorStorageResourceId, count(*) as algorithmRunInfo_count from algorithmRunInfo group by executorStorageResourceId) algorithmRunInfo1 on algorithmRunInfo1.executorStorageResourceId = executorStorageResource1.executorStorageResourceId
             left join (select executorStorageResourceId, count(*) as executorStorageView_count from executorStorageView group by executorStorageResourceId) executorStorageView1 on executorStorageView1.executorStorageResourceId = executorStorageResource1.executorStorageResourceId
+            left join (select executorStorageResourceId, count(*) as algorithmOutput_count from algorithmOutput group by executorStorageResourceId) algorithmOutput1 on algorithmOutput1.executorStorageResourceId = executorStorageResource1.executorStorageResourceId
         </createView>
 
 
@@ -2521,19 +2557,19 @@
 
         <createView  viewName="vExecutorStorageTypeSummary">
             select executorStorageType1.executorStorageTypeId, executorStorageType1.guid, executorStorageType1.insertedRowDate, executorStorageType1.lastUpdatedDate, executorStorageType1.executorStorageTypeName, executorStorageType1.executorStorageTypeClass
-            ,  coalesce(algorithmStorageSupport1.algorithmStorageSupport_count, 0) as algorithmStorageSupport_count,  coalesce(executorStorage1.executorStorage_count, 0) as executorStorage_count
+            ,  coalesce(executorStorage1.executorStorage_count, 0) as executorStorage_count,  coalesce(algorithmStorageSupport1.algorithmStorageSupport_count, 0) as algorithmStorageSupport_count
             from executorStorageType executorStorageType1
-            left join (select executorStorageTypeId, count(*) as algorithmStorageSupport_count from algorithmStorageSupport group by executorStorageTypeId) algorithmStorageSupport1 on algorithmStorageSupport1.executorStorageTypeId = executorStorageType1.executorStorageTypeId
             left join (select executorStorageTypeId, count(*) as executorStorage_count from executorStorage group by executorStorageTypeId) executorStorage1 on executorStorage1.executorStorageTypeId = executorStorageType1.executorStorageTypeId
+            left join (select executorStorageTypeId, count(*) as algorithmStorageSupport_count from algorithmStorageSupport group by executorStorageTypeId) algorithmStorageSupport1 on algorithmStorageSupport1.executorStorageTypeId = executorStorageType1.executorStorageTypeId
         </createView>
 
 
         <createView  viewName="vExecutorStorageViewSummary">
-            select executorStorageView1.executorStorageViewId, executorStorageView1.guid, executorStorageView1.insertedRowDate, executorStorageView1.lastUpdatedDate, executorStorageView1.executorStorageSnapshotId, executorStorageView1.executorStorageId, executorStorageView1.sourceDownloadId, executorStorageView1.sourceViewId, executorStorageView1.executorStorageResourceId
-            ,  coalesce(downloadTransformExecutorStorage1.downloadTransformExecutorStorage_count, 0) as downloadTransformExecutorStorage_count,  coalesce(algorithmRunView1.algorithmRunView_count, 0) as algorithmRunView_count
+            select executorStorageView1.executorStorageViewId, executorStorageView1.guid, executorStorageView1.insertedRowDate, executorStorageView1.lastUpdatedDate, executorStorageView1.executorStorageSnapshotId, executorStorageView1.executorStorageId, executorStorageView1.sourceDownloadId, executorStorageView1.downloadTransformGroupId, executorStorageView1.sourceViewId, executorStorageView1.executorStorageResourceId
+            ,  coalesce(algorithmRunView1.algorithmRunView_count, 0) as algorithmRunView_count,  coalesce(downloadTransformExecutorStorage1.downloadTransformExecutorStorage_count, 0) as downloadTransformExecutorStorage_count
             from executorStorageView executorStorageView1
-            left join (select executorStorageViewId, count(*) as downloadTransformExecutorStorage_count from downloadTransformExecutorStorage group by executorStorageViewId) downloadTransformExecutorStorage1 on downloadTransformExecutorStorage1.executorStorageViewId = executorStorageView1.executorStorageViewId
             left join (select executorStorageViewId, count(*) as algorithmRunView_count from algorithmRunView group by executorStorageViewId) algorithmRunView1 on algorithmRunView1.executorStorageViewId = executorStorageView1.executorStorageViewId
+            left join (select executorStorageViewId, count(*) as downloadTransformExecutorStorage_count from downloadTransformExecutorStorage group by executorStorageViewId) downloadTransformExecutorStorage1 on downloadTransformExecutorStorage1.executorStorageViewId = executorStorageView1.executorStorageViewId
         </createView>
 
 
@@ -2577,7 +2613,7 @@
 
 
         <createView  viewName="vSourceDownloadSummary">
-            select sourceDownload1.sourceDownloadId, sourceDownload1.guid, sourceDownload1.insertedRowDate, sourceDownload1.lastUpdatedDate, sourceDownload1.sourceScheduleId, sourceDownload1.executorHostId, sourceDownload1.executorContextId, sourceDownload1.sourceViewId, sourceDownload1.retryNumber, sourceDownload1.isRunning, sourceDownload1.isFinished, sourceDownload1.isExcecption, sourceDownload1.excecptionDescription
+            select sourceDownload1.sourceDownloadId, sourceDownload1.guid, sourceDownload1.insertedRowDate, sourceDownload1.lastUpdatedDate, sourceDownload1.sourceScheduleId, sourceDownload1.downloadTransformGroupId, sourceDownload1.executorHostId, sourceDownload1.executorContextId, sourceDownload1.sourceViewId, sourceDownload1.retryNumber, sourceDownload1.isRunning, sourceDownload1.isFinished, sourceDownload1.isExcecption, sourceDownload1.excecptionDescription
             ,  coalesce(sourceDownloadStat1.sourceDownloadStat_count, 0) as sourceDownloadStat_count,  coalesce(sourceDownloadStatColumn1.sourceDownloadStatColumn_count, 0) as sourceDownloadStatColumn_count,  coalesce(executorStorageView1.executorStorageView_count, 0) as executorStorageView_count
             from sourceDownload sourceDownload1
             left join (select sourceDownloadId, count(*) as sourceDownloadStat_count from sourceDownloadStat group by sourceDownloadId) sourceDownloadStat1 on sourceDownloadStat1.sourceDownloadId = sourceDownload1.sourceDownloadId
@@ -2605,7 +2641,7 @@
 
 
         <createView  viewName="vSourceScheduleSummary">
-            select sourceSchedule1.sourceScheduleId, sourceSchedule1.guid, sourceSchedule1.insertedRowDate, sourceSchedule1.lastUpdatedDate, sourceSchedule1.sourceViewId, sourceSchedule1.executorStorageId, sourceSchedule1.onDemand, sourceSchedule1.startTime, sourceSchedule1.intervalValue, sourceSchedule1.isScheduled, sourceSchedule1.deleteOldCopies
+            select sourceSchedule1.sourceScheduleId, sourceSchedule1.guid, sourceSchedule1.insertedRowDate, sourceSchedule1.lastUpdatedDate, sourceSchedule1.sourceViewId, sourceSchedule1.executorStorageId, sourceSchedule1.downloadTransformGroupId, sourceSchedule1.onDemand, sourceSchedule1.startTime, sourceSchedule1.intervalValue, sourceSchedule1.isScheduled, sourceSchedule1.deleteOldCopies
             ,  coalesce(sourceDownload1.sourceDownload_count, 0) as sourceDownload_count
             from sourceSchedule sourceSchedule1
             left join (select sourceScheduleId, count(*) as sourceDownload_count from sourceDownload group by sourceScheduleId) sourceDownload1 on sourceDownload1.sourceScheduleId = sourceSchedule1.sourceScheduleId
@@ -2623,24 +2659,24 @@
 
         <createView  viewName="vSourceViewSummary">
             select sourceView1.sourceViewId, sourceView1.guid, sourceView1.insertedRowDate, sourceView1.lastUpdatedDate, sourceView1.sourceInstanceId, sourceView1.sourceViewTypeId, sourceView1.sourceViewFormatId, sourceView1.sourceViewName, sourceView1.sourceViewDefinition, sourceView1.isExisting, sourceView1.isCustom
-            ,  coalesce(algorithmScheduleView1.algorithmScheduleView_count, 0) as algorithmScheduleView_count,  coalesce(algorithmScheduleColumn1.algorithmScheduleColumn_count, 0) as algorithmScheduleColumn_count,  coalesce(sourceViewColumn1.sourceViewColumn_count, 0) as sourceViewColumn_count,  coalesce(sourceSchedule1.sourceSchedule_count, 0) as sourceSchedule_count,  coalesce(sourceDownload1.sourceDownload_count, 0) as sourceDownload_count,  coalesce(executorStorageView1.executorStorageView_count, 0) as executorStorageView_count
+            ,  coalesce(sourceDownload1.sourceDownload_count, 0) as sourceDownload_count,  coalesce(executorStorageView1.executorStorageView_count, 0) as executorStorageView_count,  coalesce(algorithmScheduleView1.algorithmScheduleView_count, 0) as algorithmScheduleView_count,  coalesce(algorithmScheduleColumn1.algorithmScheduleColumn_count, 0) as algorithmScheduleColumn_count,  coalesce(sourceViewColumn1.sourceViewColumn_count, 0) as sourceViewColumn_count,  coalesce(sourceSchedule1.sourceSchedule_count, 0) as sourceSchedule_count
             from sourceView sourceView1
+            left join (select sourceViewId, count(*) as sourceDownload_count from sourceDownload group by sourceViewId) sourceDownload1 on sourceDownload1.sourceViewId = sourceView1.sourceViewId
+            left join (select sourceViewId, count(*) as executorStorageView_count from executorStorageView group by sourceViewId) executorStorageView1 on executorStorageView1.sourceViewId = sourceView1.sourceViewId
             left join (select sourceViewId, count(*) as algorithmScheduleView_count from algorithmScheduleView group by sourceViewId) algorithmScheduleView1 on algorithmScheduleView1.sourceViewId = sourceView1.sourceViewId
             left join (select sourceViewId, count(*) as algorithmScheduleColumn_count from algorithmScheduleColumn group by sourceViewId) algorithmScheduleColumn1 on algorithmScheduleColumn1.sourceViewId = sourceView1.sourceViewId
             left join (select sourceViewId, count(*) as sourceViewColumn_count from sourceViewColumn group by sourceViewId) sourceViewColumn1 on sourceViewColumn1.sourceViewId = sourceView1.sourceViewId
             left join (select sourceViewId, count(*) as sourceSchedule_count from sourceSchedule group by sourceViewId) sourceSchedule1 on sourceSchedule1.sourceViewId = sourceView1.sourceViewId
-            left join (select sourceViewId, count(*) as sourceDownload_count from sourceDownload group by sourceViewId) sourceDownload1 on sourceDownload1.sourceViewId = sourceView1.sourceViewId
-            left join (select sourceViewId, count(*) as executorStorageView_count from executorStorageView group by sourceViewId) executorStorageView1 on executorStorageView1.sourceViewId = sourceView1.sourceViewId
         </createView>
 
 
         <createView  viewName="vSourceViewColumnSummary">
             select sourceViewColumn1.sourceViewColumnId, sourceViewColumn1.guid, sourceViewColumn1.insertedRowDate, sourceViewColumn1.lastUpdatedDate, sourceViewColumn1.sourceViewId, sourceViewColumn1.columnName, sourceViewColumn1.columnType
-            ,  coalesce(downloadTransformColumn1.downloadTransformColumn_count, 0) as downloadTransformColumn_count,  coalesce(algorithmScheduleColumn1.algorithmScheduleColumn_count, 0) as algorithmScheduleColumn_count,  coalesce(sourceDownloadStatColumn1.sourceDownloadStatColumn_count, 0) as sourceDownloadStatColumn_count
+            ,  coalesce(sourceDownloadStatColumn1.sourceDownloadStatColumn_count, 0) as sourceDownloadStatColumn_count,  coalesce(downloadTransformColumn1.downloadTransformColumn_count, 0) as downloadTransformColumn_count,  coalesce(algorithmScheduleColumn1.algorithmScheduleColumn_count, 0) as algorithmScheduleColumn_count
             from sourceViewColumn sourceViewColumn1
+            left join (select sourceViewColumnId, count(*) as sourceDownloadStatColumn_count from sourceDownloadStatColumn group by sourceViewColumnId) sourceDownloadStatColumn1 on sourceDownloadStatColumn1.sourceViewColumnId = sourceViewColumn1.sourceViewColumnId
             left join (select sourceViewColumnId, count(*) as downloadTransformColumn_count from downloadTransformColumn group by sourceViewColumnId) downloadTransformColumn1 on downloadTransformColumn1.sourceViewColumnId = sourceViewColumn1.sourceViewColumnId
             left join (select sourceViewColumnId, count(*) as algorithmScheduleColumn_count from algorithmScheduleColumn group by sourceViewColumnId) algorithmScheduleColumn1 on algorithmScheduleColumn1.sourceViewColumnId = sourceViewColumn1.sourceViewColumnId
-            left join (select sourceViewColumnId, count(*) as sourceDownloadStatColumn_count from sourceDownloadStatColumn group by sourceViewColumnId) sourceDownloadStatColumn1 on sourceDownloadStatColumn1.sourceViewColumnId = sourceViewColumn1.sourceViewColumnId
         </createView>
 
 
@@ -2658,6 +2694,8 @@
             from sourceViewType sourceViewType1
             left join (select sourceViewTypeId, count(*) as sourceView_count from sourceView group by sourceViewTypeId) sourceView1 on sourceView1.sourceViewTypeId = sourceViewType1.sourceViewTypeId
         </createView>
+
+
 
 
 
